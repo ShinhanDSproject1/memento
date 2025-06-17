@@ -1,0 +1,64 @@
+# === Java build ===
+/bin/
+/target/
+/out/
+
+# === Eclipse project files ===
+.classpath
+.project
+.settings/
+
+# === Maven ===
+/log/
+/logs/
+*.log
+pom.xml.tag
+pom.xml.releaseBackup
+pom.xml.versionsBackup
+pom.xml.next
+release.properties
+dependency-reduced-pom.xml
+buildNumber.properties
+
+# === Gradle ===
+.gradle/
+build/
+!gradle-wrapper.jar
+
+# === IDE 관련 ===
+# Eclipse, IntelliJ, VSCode 등 공통적으로 무시해야 할 것들
+.idea/
+*.iml
+*.iws
+*.ipr
+.vscode/
+
+# === OS 별 임시파일 ===
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+._*
+
+# Windows
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+
+# === 기타 ===
+*.class
+*.war
+*.jar
+*.ear
+*.swp
+*.swo
+*.bak
+*.tmp
+*.log
+
+# === Git ===
+*.orig
+*.rej
+*.patch
+*.diff
