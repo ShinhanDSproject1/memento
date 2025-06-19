@@ -6,9 +6,14 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Controller
 public class MatchupController {
 	
-	@GetMapping("/matchuptest")
+	@GetMapping("/matchupDetail")
 	public String f1() {
 		return "matchupDetail";
+	}
+	
+	@GetMapping("/matchupDetailLeader")
+	public String f2() {
+		return "matchupDetailLeader";
 	}
 
 }
