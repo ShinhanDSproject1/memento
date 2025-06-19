@@ -2,6 +2,8 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <c:set var="cpath" value="${pageContext.servletContext.contextPath}" />
+<%-- <c:set var="needMento" value="true" /> --%> <%-- 이 부분 주석 처리 해제하면 멘토가 필요한 부분에 대한 화면 확인 가능 --%>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -13,6 +15,8 @@
 <link rel="stylesheet" href="${cpath}/resources/css/vars.css">
 </head>
 <body>
+	<jsp:include page="/WEB-INF/views/matchup/memberListModal.jsp" />
+	<jsp:include page="/WEB-INF/views/matchup/mentoListModal.jsp" />
 	<div class="div">
 		<div class="top-bar">
 			<div class="top-bar-tag">
@@ -45,7 +49,7 @@
 					<div class="div6">스터디 횟수</div>
 					<div class="_1">1회</div>
 				</div>
-				<img class="line" src="${cpath}/resources/images/line0.svg" />
+				<div class="top-info-line"></div>
 				<div class="price-and-buttons">
 					<div class="price-text">₩70,000</div>
 
@@ -55,6 +59,12 @@
 							<span class="rectangle-298"></span> <span class="div8">팀원
 								리스트 보기</span>
 						</button>
+						<c:if test="${needMento eq true}">
+							<button class="select-mentolist-btn" id="select-mentolist-btn" type="button">
+								<span class="rectangle-298"></span>
+								<span class="div8">요청중인 멘토 보기</span>
+							</button>
+						</c:if>
 						<button class="update-btn" id="update-btn" type="button">
 							<span class="rectangle-299"></span> <span class="div7">수정하기</span>
 						</button>
@@ -294,10 +304,6 @@
 
 	<script>
 		document.addEventListener('DOMContentLoaded', function() {
-			document.getElementById('select-memberlist-btn').addEventListener(
-					'click', function() {
-						alert('멤버 리스트보기 버튼이 클릭되었습니다!');
-					});
 			document.getElementById('update-btn').addEventListener('click',
 					function() {
 						alert('업데이트 버튼이 클릭되었습니다!');
@@ -307,6 +313,32 @@
 						alert('삭제하기 버튼이 클릭되었습니다!');
 					});
 		});
+		
+		function openMemberModal() {
+		    document.getElementById("member-modal").style.display = "flex";
+		  }
+
+		  function closeMemberModal() {
+		    document.getElementById("member-modal").style.display = "none";
+		  }
+		  function openMentoModal() {
+			    document.getElementById("mento-modal").style.display = "flex";
+			  }
+
+			  function closeMentoModal() {
+			    document.getElementById("mento-modal").style.display = "none";
+			  }
+
+		  document.addEventListener("DOMContentLoaded", () => {
+		    const openMemberBtn = document.getElementById("select-memberlist-btn");
+		    const openMentoBtn = document.getElementById("select-mentolist-btn");
+		    if (openMemberBtn) {
+		    	openMemberBtn.addEventListener("click", openMemberModal);
+		    }
+		    if(openMentoBtn){
+		    	openMentoBtn.addEventListener("click", openMentoModal);
+		    }
+		  });
 	</script>
 </body>
 </html>
