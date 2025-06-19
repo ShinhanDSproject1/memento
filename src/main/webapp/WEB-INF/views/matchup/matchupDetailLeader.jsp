@@ -18,7 +18,9 @@
 <body>
 	<jsp:include page="/WEB-INF/views/matchup/memberListModal.jsp" />
 	<jsp:include page="/WEB-INF/views/matchup/mentoListModal.jsp" />
-
+	<jsp:include page="/WEB-INF/views/matchup/deleteConfirmModal.jsp" />
+	<jsp:include page="/WEB-INF/views/matchup/deleteModal.jsp" />
+	<jsp:include page="/WEB-INF/views/matchup/deleteConfirmModal.jsp" />
 	<div class="div">
 		<div class="top-bar">
 			<div class="top-bar-tag">
@@ -62,15 +64,17 @@
 								리스트 보기</span>
 						</button>
 						<c:if test="${needMento eq true}">
-							<button class="select-mentolist-btn" id="select-mentolist-btn" type="button">
-								<span class="rectangle-298"></span>
-								<span class="div8">요청중인 멘토 보기</span>
+							<button class="select-mentolist-btn" id="select-mentolist-btn"
+								type="button">
+								<span class="rectangle-298"></span> <span class="div8">요청중인
+									멘토 보기</span>
 							</button>
 						</c:if>
 						<button class="update-btn" id="update-btn" type="button">
 							<span class="rectangle-299"></span> <span class="div7">수정하기</span>
 						</button>
-						<button class="delete-btn" id="delete-btn" type="button">
+						<button class="delete-btn" id="delete-btn" type="button"
+							onclick="showDeleteModal()">
 							<span class="rectangle-300"></span> <span class="div9">삭제하기</span>
 						</button>
 					</div>
@@ -310,10 +314,6 @@
 					function() {
 						alert('업데이트 버튼이 클릭되었습니다!');
 					});
-			document.getElementById('delete-btn').addEventListener('click',
-					function() {
-						alert('삭제하기 버튼이 클릭되었습니다!');
-					});
 		});
 		
 		function openMemberModal() {
@@ -327,9 +327,29 @@
 			    document.getElementById("mento-modal").style.display = "flex";
 			  }
 
-			  function closeMentoModal() {
-			    document.getElementById("mento-modal").style.display = "none";
-			  }
+		  function closeMentoModal() {
+		    document.getElementById("mento-modal").style.display = "none";
+		  }
+		  
+		  function showDeleteModal() {
+		    document.getElementById("delete-confirm-modal").style.display = "flex";
+		  }
+
+		  function hideDeleteModal() {
+		    document.getElementById("delete-confirm-modal").style.display = "none";
+		  }
+		  
+		  function showDeleteCompleteModal(){
+			  document.getElementById("delete-complete-modal").style.display="flex";
+		  }
+		  function hideDeleteCompleteModal(){
+			  document.getElementById("delete-complete-modal").style.display="none";
+		  }
+
+		  function confirmDelete() {
+		    hideDeleteModal();
+		    showDeleteCompleteModal();
+		  }
 
 		  document.addEventListener("DOMContentLoaded", () => {
 		    const openMemberBtn = document.getElementById("select-memberlist-btn");
