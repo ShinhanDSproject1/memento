@@ -2,7 +2,8 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <c:set var="cpath" value="${pageContext.servletContext.contextPath}" />
-<%-- <c:set var="needMento" value="true" /> --%> <%-- 이 부분 주석 처리 해제하면 멘토가 필요한 부분에 대한 화면 확인 가능 --%>
+<%-- 이 부분 주석 처리 해제하면 멘토가 필요한 부분에 대한 화면 확인 가능 --%>
+<c:set var="needMento" value="true" />
 
 <!DOCTYPE html>
 <html>
@@ -17,6 +18,7 @@
 <body>
 	<jsp:include page="/WEB-INF/views/matchup/memberListModal.jsp" />
 	<jsp:include page="/WEB-INF/views/matchup/mentoListModal.jsp" />
+
 	<div class="div">
 		<div class="top-bar">
 			<div class="top-bar-tag">

@@ -1079,6 +1079,8 @@
   width: 400px;
   box-shadow: 0 4px 20px rgba(0,0,0,0.2);
   box-sizing: border-box;
+  max-height: 500px;
+  overflow-y: auto;  
 }
 
 .modal-title {
