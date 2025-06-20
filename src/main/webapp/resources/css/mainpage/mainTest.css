@@ -1,768 +1,149 @@
-@charset "UTF-8";
-
-    * {
-      box-sizing: border-box;
-    }
-
-    body {
-      margin: 0;
-      padding: 0;
-      font-family: 'Inter', sans-serif;
-      background: #fff;
-    }
-
-    /* 슬라이더 스타일 */
-    #slider-container {
-      overflow: hidden;
-      width: 100%;
-    }
-
-    .slider-wrapper {
-      position: relative;
-      overflow: hidden;
-      width: 100%;
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 20px;
-      box-sizing: border-box;
-    }
-
-    .home-page-1 {
-      display: flex;
-      flex-direction: row;
-      gap: 45px;
-      transition: transform 0.5s ease-in-out;
-      width: fit-content;
-      will-change: transform;
-      user-select: none;
-    }
-
-    .slider-btn {
-      position: absolute;
-      top: 50%;
-      transform: translateY(-50%);
-      z-index: 10;
-      background-color: rgba(0, 0, 0, 0.4);
-      border: none;
-      color: white;
-      font-size: 24px;
-      width: 40px;
-      height: 60px;
-      cursor: pointer;
-      user-select: none;
-      border-radius: 5px;
-      transition: background-color 0.3s ease;
-    }
-
-    .slider-btn.left {
-      left: 10px;
-    }
-
-    .slider-btn.right {
-      right: 10px;
-    }
-
-    .slider-btn:hover {
-      background-color: rgba(0, 0, 0, 0.6);
-    }
-
-    .page-1-com-1, .page-1-com-12, .page-1-com-13 {
-      flex-shrink: 0;
-      width: 620px;
-      height: 350px;
-      border-radius: 10px;
-      box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
-      overflow: hidden;
-      position: relative;
-      transition: transform 0.3s ease;
-    }
-
-    .page-1-com-1:hover, .page-1-com-12:hover, .page-1-com-13:hover {
-      transform: translateY(-5px);
-    }
-
-    /* 첫 번째 슬라이드 - SPARK TEST */
-    .page-1-com-1 {
-      background: linear-gradient(90deg, rgba(239, 253, 203, 1) 0%, rgba(251, 255, 241, 1) 100%);
-      padding: 40px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-    }
-
-    .spark-icon {
-      font-size: 80px;
-      margin-bottom: 20px;
-      background: linear-gradient(45deg, #ff6b6b, #4ecdc4, #45b7d1);
-      -webkit-background-clip: text;
-      background-clip: text;
-      -webkit-text-fill-color: transparent;
-      animation: sparkle 2s ease-in-out infinite alternate;
-    }
-
-    @keyframes sparkle {
-      0% { transform: scale(1) rotate(0deg); }
-      100% { transform: scale(1.1) rotate(5deg); }
-    }
-
-    .spark-title {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 24px;
-      font-weight: 700;
-      color: #0e0d0d;
-      margin-bottom: 10px;
-      text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
-    }
-
-    .mbti-title {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 28px;
-      font-weight: 800;
-      margin-bottom: 15px;
-    }
-
-    .mbti-title .emoji {
-      color: #00b39e;
-    }
-
-    .mbti-subtitle {
-      color: #000000;
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 18px;
-      font-weight: 400;
-      margin-bottom: 20px;
-      line-height: 1.4;
-    }
-
-    .cta-button {
-      background: linear-gradient(45deg, #00b39e, #016bc7);
-      color: white;
-      border: none;
-      padding: 12px 24px;
-      border-radius: 25px;
-      font-size: 18px;
-      font-weight: 600;
-      cursor: pointer;
-      transition: all 0.3s ease;
-      text-decoration: none;
-      display: inline-block;
-    }
-
-    .cta-button:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 5px 15px rgba(0, 179, 158, 0.3);
-      color: white;
-    }
-
-    /* 두 번째, 세 번째 슬라이드 - Spring 멘토링 */
-    .page-1-com-12 {
-      background: linear-gradient(180deg, rgba(198, 218, 245, 0.4) 0%, rgba(89, 159, 253, 0.4) 100%);
-    }
-
-    .page-1-com-13 {
-      background: linear-gradient(180deg, rgba(199, 233, 229, 1) 0%, rgba(195, 255, 248, 1) 100%);
-    }
-
-    .spring-content {
-      padding: 40px;
-      height: 100%;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-    }
-
-    .spring-text {
-      flex: 1;
-    }
-
-    .spring-title {
-      font-family: 'Inter', sans-serif;
-      font-size: 28px;
-      font-weight: 800;
-      margin-bottom: 30px;
-      line-height: 1.3;
-    }
-
-    .spring-title .number {
-      color: #016bc7;
-      font-size: 35px;
-    }
-
-    .spring-title .highlight {
-      color: #016bc7;
-      font-size: 35px;
-    }
-
-    .spring-info {
-      display: flex;
-      flex-direction: column;
-      gap: 15px;
-    }
-
-    .info-row {
-      display: flex;
-      align-items: center;
-      gap: 15px;
-    }
-
-    .info-label {
-      font-size: 20px;
-      font-weight: 600;
-      color: #000;
-      min-width: 60px;
-    }
-
-    .info-value {
-      font-size: 18px;
-      font-weight: 500;
-      color: #352121;
-    }
-
-    .spring-image {
-      width: 200px;
-      height: 150px;
-      background: linear-gradient(45deg, #ff9a9e, #fecfef);
-      border-radius: 10px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 60px;
-      margin-left: 20px;
-    }
-    
-        /* Rankings Section - 시상대 스타일 */
-        .rankings {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            padding: 4rem 0;
-            color: white;
-        }
-
-        .rankings h2 {
-            text-align: center;
-            font-size: 2.5rem;
-            margin-bottom: 3rem;
-        }
-
-        .ranking-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 3rem;
-        }
-
-        .ranking-card {
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(10px);
-            border-radius: 15px;
-            padding: 2rem;
-        }
-
-        .ranking-title {
-            font-size: 1.3rem;
-            font-weight: bold;
-            margin-bottom: 2rem;
-            text-align: center;
-        }
-
-        /* 시상대 스타일 */
-        .podium {
-            display: flex;
-            align-items: end;
-            justify-content: center;
-            gap: 10px;
-            margin-bottom: 2rem;
-            height: 200px;
-        }
-
-        .podium-place {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            position: relative;
-        }
-
-        .podium-place.first {
-            order: 2;
-        }
-
-        .podium-place.second {
-            order: 1;
-        }
-
-        .podium-place.third {
-            order: 3;
-        }
-
-        .podium-step {
-            width: 80px;
-            background: linear-gradient(45deg, #ff6b6b, #ff8e53);
-            border-radius: 10px 10px 0 0;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: bold;
-            font-size: 1.2rem;
-            color: white;
-            position: relative;
-        }
-
-        .podium-place.first .podium-step {
-            height: 120px;
-            background: linear-gradient(45deg, #ffd700, #ffed4a);
-            color: #333;
-        }
-
-        .podium-place.second .podium-step {
-            height: 100px;
-            background: linear-gradient(45deg, #c0c0c0, #e8e8e8);
-            color: #333;
-        }
-
-        .podium-place.third .podium-step {
-            height: 80px;
-            background: linear-gradient(45deg, #cd7f32, #daa520);
-            color: white;
-        }
-
-        .podium-profile {
-            margin-bottom: 10px;
-            text-align: center;
-        }
-
-        .podium-avatar {
-            width: 60px;
-            height: 60px;
-            border-radius: 50%;
-            background: linear-gradient(45deg, #f093fb, #f5576c);
-            margin: 0 auto 10px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.5rem;
-            color: white;
-            font-weight: bold;
-        }
-
-        .podium-name {
-            font-weight: bold;
-            font-size: 0.9rem;
-            margin-bottom: 5px;
-        }
-
-        .podium-score {
-            font-size: 0.8rem;
-            opacity: 0.8;
-        }
-
-        .trophy {
-            position: absolute;
-            top: -20px;
-            left: 50%;
-            transform: translateX(-50%);
-            font-size: 1.5rem;
-        }
-
-        .medal {
-            position: absolute;
-            top: -15px;
-            left: 50%;
-            transform: translateX(-50%);
-            font-size: 1.2rem;
-        }
-
-        /* 4-7등 리스트 */
-        .ranking-list {
-            margin-top: 1rem;
-        }
-
-        .ranking-item {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-            padding: 0.8rem;
-            margin-bottom: 0.5rem;
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 10px;
-        }
-
-        .rank-number {
-            width: 30px;
-            height: 30px;
-            border-radius: 50%;
-            background: linear-gradient(45deg, #ff6b6b, #ff8e53);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: bold;
-            font-size: 0.9rem;
-        }
-
-        .profile-pic {
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            background: linear-gradient(45deg, #f093fb, #f5576c);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-size: 1.2rem;
-        }
-
-        .rank-info {
-            flex: 1;
-        }
-
-        .rank-name {
-            font-weight: bold;
-            margin-bottom: 0.2rem;
-        }
-
-        .rank-score {
-            font-size: 0.9rem;
-            opacity: 0.8;
-        }
-
-        /* Mentoring Section */
-        .mentoring {
-            background: white;
-            padding: 4rem 0;
-        }
-
-        .mentoring-card {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            padding: 3rem;
-            border-radius: 20px;
-            text-align: center;
-            margin: 2rem 0;
-        }
-
-        .mentoring-title {
-            font-size: 2rem;
-            margin-bottom: 1rem;
-        }
-
-        .mentoring-info {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 2rem;
-            margin-top: 2rem;
-        }
-
-        .info-item {
-            text-align: left;
-        }
-
-        .info-label {
-            font-weight: bold;
-            margin-bottom: 0.5rem;
-        }
-
-    /* 통계 섹션 */
-    .home-page-2 {
-      background: linear-gradient(180deg, rgba(168, 229, 255, 0.28) 0%, rgba(252, 253, 253, 0.28) 100%);
-      padding: 80px 20px;
-      text-align: center;
-    }
-
-    .stats-title {
-      font-size: 36px;
-      font-weight: 700;
-      margin-bottom: 60px;
-      color: #534b4b;
-    }
-
-    .stats-highlight {
-      color: #016bc7;
-    }
-
-    .stats-container {
-      display: flex;
-      justify-content: center;
-      gap: 40px;
-      flex-wrap: wrap;
-      max-width: 1200px;
-      margin: 0 auto;
-    }
-
-    .stat-item {
-      background: white;
-      border-radius: 15px;
-      padding: 30px 20px;
-      width: 185px;
-      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-      transition: transform 0.3s ease;
-    }
-
-    .stat-item:hover {
-      transform: translateY(-10px);
-    }
-
-    .stat-icon {
-      font-size: 60px;
-      margin-bottom: 15px;
-      background: linear-gradient(45deg, #00b39e, #016bc7);
-      -webkit-background-clip: text;
-      background-clip: text;
-      -webkit-text-fill-color: transparent;
-    }
-
-    .stat-label {
-      font-size: 18px;
-      font-weight: 600;
-      color: #000;
-      margin-bottom: 10px;
-    }
-
-    .stat-value {
-      font-size: 28px;
-      font-weight: 600;
-      color: #00b39e;
-    }
-    
-    
-    
-    
-    
-    
-    /* 서비스 소개 페이지 */
-    
-    .home-page-3,
+.home-page-3,
 .home-page-3 * {
   box-sizing: border-box;
 }
+
 .home-page-3 {
-  background: linear-gradient(
-    180deg,
-    rgba(255, 255, 255, 1) 93.2692289352417%,
-    rgba(236, 236, 236, 1) 100%
-  );
-  padding: 0px 40px 0px 40px;
-  align-self: stretch;
-  flex-shrink: 0;
-  height: 839px;
-  position: relative;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 1) 93.27%);
+  width: 100%;
+  padding: 50px 250px 70px; /* 상단 여백 + 양쪽 250px 패딩 + 하단 여백 */
   overflow: hidden;
+  font-family: 'Inter', sans-serif;
 }
-.group-389 {
-  position: absolute;
-  inset: 0;
+
+.home-page-3-inner {
+  max-width: 1400px;
+  margin: 0 auto;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 40px;
+  align-items: flex-start;
 }
-.div {
+
+.text-area {
+  flex: 1 1 400px;
+  min-width: 320px;
+  color: #000;
+}
+
+.title {
   color: #016bc7;
-  text-align: left;
   font-family: "Inter-ExtraBold", sans-serif;
   font-size: 35px;
   font-weight: 800;
-  position: absolute;
-  left: 37px;
-  top: 43px;
+  margin-bottom: 20px;
 }
+
 .me-mento {
-  text-align: left;
   font-family: "Inter-SemiBold", sans-serif;
   font-size: 60px;
   font-weight: 600;
-  position: absolute;
-  left: 37px;
-  top: 123px;
+  line-height: 1.1;
 }
-.me-mento-span {
-  color: #000000;
-}
-.me-mento-span2 {
+
+.me-mento span.me-mento-span2 {
   color: #00bba8;
+  margin-right: 0;
 }
-.me-mento-span3 {
+
+.me-mento span.me-mento-span3 {
   color: #0070d1;
 }
-.group-390 {
-  position: absolute;
-  inset: 0;
+
+/* 이미지 영역 */
+.image-area {
+  flex: 1 1 600px;
+  min-width: 300px;
+  position: relative;
 }
+
+/* 기존 맥북, 그림자 등 내부 요소들 절대 위치 조정 */
+
 .device-macbook-pro {
-  width: 1000px;
-  height: 510px;
-  position: static;
+  width: 100%;
+  max-width: 1000px;
+  height: auto;
+  position: relative;
+  margin-bottom: 20px;
 }
+
+/* 그림자 */
 .shadow {
-  background: var(--default-shade-black, #000000);
+  background: #000000;
   border-radius: 50%;
-  width: 897.82px;
-  height: 8.63px;
+  width: 80%;
+  height: 15px;
   position: absolute;
-  left: 271.59px;
-  top: 817.37px;
+  left: 10%;
+  bottom: 0;
   filter: blur(22px);
+  opacity: 0.2;
 }
+
+/* top (노트북 화면) */
 .top {
-  width: 809.52px;
-  height: 478.07px;
-  position: static;
-}
-.lid {
-  background: var(--default-gray-300, #e2e8f0);
+  width: 100%;
+  height: auto;
+  position: relative;
   border-radius: 28px 28px 4px 4px;
-  border-style: solid;
-  border-color: var(--default-gray-400, #cbd5e0);
-  border-width: 2px;
-  width: 809.52px;
-  height: 478.07px;
-  position: absolute;
-  left: 317.22px;
-  top: 316px;
+  border: 2px solid #cbd5e0;
+  background: #e2e8f0;
+  box-sizing: border-box;
+  padding-top: 60%; /* 비율 유지용 패딩 */
 }
+
+/* lid와 dark-screen는 top 안에 스타일로 통합함 */
+.lid,
 .dark-screen {
-  background: var(--default-gray-300, #e2e8f0);
-  border-radius: 22px 22px 0px 0px;
-  width: 799.6px;
-  height: 455.63px;
-  position: absolute;
-  left: 322.18px;
-  top: 320.31px;
+  display: none; /* 간단화 위해 숨김 처리 */
 }
+
+/* screen-wrap과 screen */
 .screen-wrap {
-  width: 763.89px;
-  height: 414.21px;
-  position: static;
-}
-.screen {
-  background: var(--default-shade-white, #ffffff);
-  width: 763.89px;
-  height: 414.21px;
   position: absolute;
-  left: 337.76px;
-  top: 348.11px;
+  top: 12%;
+  left: 5%;
+  width: 90%;
+  height: 75%;
+  background: white;
+  border-radius: 22px 22px 0 0;
+  overflow: hidden;
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
 }
+
+.screen {
+  width: 100%;
+  height: 100%;
+  background: white;
+  position: relative;
+}
+
+/* Insert Your Design Here 텍스트 */
 .insert-your-design-here {
-  color: var(--default-gray-800, #2d3748);
+  color: #2d3748;
   text-align: center;
   font-family: "Inter-Medium", sans-serif;
-  font-size: 24px;
-  line-height: 90%;
+  font-size: 18px;
+  line-height: 1;
   font-weight: 500;
-  position: absolute;
-  left: 585.08px;
-  top: 545.72px;
-  width: 270.83px;
-  height: 18.98px;
+  padding-top: 40%;
 }
+
+/* bottom 이미지 */
 .bottom {
-  width: 1000px;
-  height: 25.89px;
-  position: absolute;
-  left: 220px;
-  top: 790.62px;
-  overflow: visible;
+  width: 100%;
+  max-width: 1000px;
+  height: auto;
+  display: block;
+  margin: 0 auto;
 }
+
+/* 서비스 내부 이미지 */
 .image-55 {
-  width: 664.23px;
-  height: 412.44px;
-  position: absolute;
-  left: 387.42px;
-  top: 349.2px;
-  transform-origin: 0 0;
-  transform: rotate(0deg) scale(1, 1);
+  width: 100%;
+  max-width: 664px;
+  height: auto;
+  display: block;
+  margin: 0 auto;
   object-fit: cover;
-  aspect-ratio: 664.23/412.44;
 }
-    
-    
-    
-    
-    
-    
-    
-
-    /* 푸터 */
-    footer {
-      background-color: #FAFDFF;
-      color: #555;
-      padding: 40px 20px 20px;
-      font-size: 14px;
-      line-height: 1.6;
-    }
-
-    footer a {
-      color: #1a73e8;
-      text-decoration: none;
-      margin-right: 15px;
-      transition: color 0.3s ease;
-    }
-
-    footer a:hover {
-      color: #0c47b7;
-      text-decoration: underline;
-    }
-
-    .footer-links {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-      margin-top: 10px;
-    }
-
-    .footer-info strong {
-      font-weight: 700;
-      font-size: 16px;
-      color: #222;
-    }
-
-    .footer-bottom {
-      margin-top: 30px;
-      font-size: 13px;
-      color: #777;
-      border-top: 1px solid #ccc;
-      padding-top: 15px;
-      text-align: center;
-    }
-
-    /* 반응형 */
-    @media (max-width: 768px) {
-      .slider-wrapper {
-        padding: 15px;
-      }
-      
-      .page-1-com-1, .page-1-com-12, .page-1-com-13 {
-        width: 85vw;
-        height: 300px;
-      }
-
-      .spring-content {
-        flex-direction: column;
-        text-align: center;
-        padding: 30px 20px;
-      }
-
-      .spring-image {
-        margin: 20px 0 0 0;
-        width: 150px;
-        height: 120px;
-      }
-
-      .stats-container {
-        gap: 20px;
-      }
-
-      .stat-item {
-        width: 150px;
-        padding: 25px 15px;
-      }
-    }
-
-    @media (max-width: 480px) {
-      .page-1-com-1, .page-1-com-12, .page-1-com-13 {
-        width: 95vw;
-      }
-
-      .stats-title {
-        font-size: 28px;
-      }
-
-      .spring-title {
-        font-size: 24px;
-      }
-    }
-  </style>

@@ -1,28 +1,48 @@
- * {
-      box-sizing: border-box;
-    }
-
-    body {
-      margin: 0;
-      padding: 0;
-      font-family: 'Inter', sans-serif;
-      background: #fff;
-    }
+.layout-wrapper {
+  display: flex;
+  min-height: 100vh;
+}
+.page-container {
+  flex: 1;
+  padding: 40px;
+  box-sizing: border-box;
+  padding-top: 100px;
+}
+    
+ body {
+  margin: 0;
+  padding-left: 250px;
+  padding-right: 250px;
+  background: #fff;
+  box-sizing: border-box;
+  width: 100vw;
+  overflow-x: hidden;
+}
 
     /* 슬라이더 스타일 */
     #slider-container {
       overflow: hidden;
       width: 100%;
+      max-width: 1400px;   
+  	  margin: 0 auto;  
     }
 
     .slider-wrapper {
       position: relative;
       overflow: hidden;
       width: 100%;
-      max-width: 1200px;
+      max-width: 1400px;
       margin: 0 auto;
       padding: 20px;
       box-sizing: border-box;
+      background: linear-gradient(
+    to bottom, 
+    rgba(255, 255, 255, 0.49),
+    rgba(209, 242, 255, 0.49)
+  );
+     margin-bottom: 0;
+     margin: 0 auto;
+  	padding-left: 20px;
     }
 
     .home-page-1 {
@@ -30,7 +50,7 @@
       flex-direction: row;
       gap: 45px;
       transition: transform 0.5s ease-in-out;
-      width: fit-content;
+      width: 100%;
       will-change: transform;
       user-select: none;
     }
@@ -86,76 +106,94 @@
       transform: translateY(-5px);
     }
 
-    /* 첫 번째 슬라이드 - SPARK TEST */
-    .page-1-com-1 {
-      background: linear-gradient(90deg, rgba(239, 253, 203, 1) 0%, rgba(251, 255, 241, 1) 100%);
-      padding: 40px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-    }
+  /* 첫 번째 슬라이드 - SPARK TEST */
+.page-1-com-1 {
+  background: linear-gradient(90deg, rgba(239, 253, 203, 1) 0%, rgba(251, 255, 241, 1) 100%);
+  padding: 40px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  position: relative;
+}
 
-    .spark-icon {
-      font-size: 80px;
-      background: linear-gradient(45deg, #ff6b6b, #4ecdc4, #45b7d1);
-      -webkit-background-clip: text;
-      background-clip: text;
-      -webkit-text-fill-color: transparent;
-      animation: sparkle 2s ease-in-out infinite alternate;
-    }
+/* SPARK 이미지와 텍스트 포지셔닝 */
+.group-391 {
+  position: absolute;
+  bottom: -15px;
+  left: -20px;
+  width: 40%;
+  height: auto;
+  z-index: 0;
+  transform: rotate(-15deg);
+}
 
-    @keyframes sparkle {
-      0% { transform: scale(1) rotate(0deg); }
-      100% { transform: scale(1.1) rotate(5deg); }
-    }
+.spark-icon {
+  width: 100%; 
+  height: auto;
+  z-index: 0;
+  position: relative;
+  background: linear-gradient(45deg, #ff6b6b, #4ecdc4, #45b7d1);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: sparkle 2s ease-in-out infinite alternate;
+}
 
-    .spark-title {
-      font-size: 24px;
-      font-weight: 700;
-      color: #0e0d0d;
-      margin-bottom: 10px;
-      text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
-    }
+@keyframes sparkle {
+  0% { transform: scale(1) rotate(0deg); }
+  100% { transform: scale(1.1) rotate(5deg); }
+}
 
-    .mbti-title {
-      font-size: 28px;
-      font-weight: 800;
-      margin-bottom: 15px;
-    }
+/* 텍스트 z-index를 이미지보다 위로 */
+.mbti-title,
+.mbti-subtitle,
+.cta-button {
+  position: relative;
+  z-index: 10;
+}
 
-    .mbti-title .emoji {
-      color: #00b39e;
-    }
+.mbti-title {
+  font-size: 28px;
+  font-weight: 1000;
+  margin-bottom: 15px;
+}
 
-    .mbti-subtitle {
-      color: #000000;
-      font-size: 18px;
-      font-weight: 400;
-      margin-bottom: 20px;
-      line-height: 1.4;
-    }
+.mbti-title .emoji {
+  color: #00b39e;
+}
 
-    .cta-button {
-      background: linear-gradient(45deg, #00b39e, #016bc7);
-      color: white;
-      border: none;
-      padding: 12px 24px;
-      border-radius: 25px;
-      font-size: 18px;
-      font-weight: 600;
-      cursor: pointer;
-      transition: all 0.3s ease;
-      text-decoration: none;
-      display: inline-block;
-    }
+.mbti-subtitle {
+  color: #000000;
+  font-size: 18px;
+  font-weight: 500;
+  margin-bottom: 20px;
+  line-height: 1.4;
+  margin-top: 30px;
+}
 
-    .cta-button:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 5px 15px rgba(0, 179, 158, 0.3);
-      color: white;
-    }
+.cta-button {
+  background: linear-gradient(45deg, #00b39e, #016bc7);
+  color: white;
+  border: none;
+  padding: 12px 24px;
+  border-radius: 25px;
+  font-size: 18px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-decoration: none;
+  display: inline-block;
+  margin-top: 20px;
+}
+
+.cta-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(0, 179, 158, 0.3);
+  color: white;
+}
+  
 
     /* 두 번째, 세 번째 슬라이드 - Spring 멘토링 */
     .page-1-com-12 {
@@ -235,9 +273,12 @@
 
     /* 통계 섹션 */
     .home-page-2 {
-      background: linear-gradient(180deg, rgba(168, 229, 255, 0.28) 0%, rgba(252, 253, 253, 0.28) 100%);
+   background: linear-gradient(to bottom, rgba(180, 235, 255, 1), rgba(252, 253, 253, 1));
       padding: 80px 20px;
       text-align: center;
+      margin-top: 0; 
+      max-width: 1400px;
+	  margin: 0 auto;
     }
 
     .stats-title {
@@ -465,49 +506,56 @@
 /* ========================================
    3. 서비스 소개
    ======================================== */
- .home-page-3,
+home-page-3,
 .home-page-3 * {
   box-sizing: border-box;
 }
 .home-page-3 {
-  background: linear-gradient(
-    180deg,
-    rgba(255, 255, 255, 1) 93.2692289352417%,
-    rgba(236, 236, 236, 1) 100%
-  );
-  padding: 0px 40px 0px 40px;
-  align-self: stretch;
-  flex-shrink: 0;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 1) 93.27%);
+  overflow: hidden;
+  width: 100%;
+  padding-bottom: 50px;
+}
+
+.home-page-3-inner {
+  max-width: 1400px;
+  padding: 0 250px;
+  margin: 0 auto;
   height: 839px;
   position: relative;
-  overflow: hidden;
 }
+
+
 .group-389 {
   position: absolute;
   inset: 0;
 }
 .div {
   color: #016bc7;
-  text-align: left;
+  text-align: center;
   font-family: "Inter-ExtraBold", sans-serif;
   font-size: 35px;
   font-weight: 800;
   position: absolute;
-  left: 37px;
   top: 43px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100%;
 }
+
 .me-mento {
-  text-align: left;
+  text-align: center;
   font-family: "Inter-SemiBold", sans-serif;
   font-size: 60px;
   font-weight: 600;
   position: absolute;
-  left: 37px;
   top: 123px;
-}
-.me-mento-span {
-  color: #000000;
-}
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100%; 
+  }
+
+
 .me-mento-span2 {
   color: #00bba8;
 }
@@ -604,6 +652,310 @@
   object-fit: cover;
   aspect-ratio: 664.23/412.44;
 }
+
+
+/* ========================================
+   4. RANKING 페이지
+   ======================================== */
+
+       * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+		body {
+		  margin: 0;
+		  padding-left: 250px;
+		  padding-right: 250px;
+		  background: #fff;
+		  box-sizing: border-box;
+		  width: 100vw; 
+		  overflow-x: hidden; 
+		  z-index : 999;
+		}
+
+        .ranking-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            margin-top: 80px;
+        }
+
+        .ranking-section {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            padding: 50px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(10px);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .ranking-section:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 36px;
+            font-weight: bold;
+            margin-bottom: 25px;
+            color: #000000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .podium {
+            display: flex;
+            justify-content: center;
+            align-items: end;
+            margin-bottom: 30px;
+            margin-top: 150px;
+        }
+
+        .podium-place {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin: 0 10px;
+            position: relative;
+        }
+
+        .podium-place.first {
+            order: 2;
+        }
+
+        .podium-place.second {
+            order: 1;
+        }
+
+        .podium-place.third {
+            order: 3;
+        }
+
+        .podium-base {
+            width: 80px;
+            border-radius: 8px 8px 0 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 32px;
+            font-weight: bold;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            padding-bottom: 10px;
+            height: 120px;
+            align-items: flex-end;
+            font-family: 'Poppins', sans-serif;
+        }
+        
+
+        .podium-base.first {
+            height: 200px;
+           	background: linear-gradient(145deg, #ffd93b, #ffb700); 
+            color: #ffffff;
+        }
+
+        .podium-base.second {
+            height: 150px;
+            background: linear-gradient(145deg, #c0c0c0, #e8e8e8);
+            color: #ffffff;
+        }
+
+        .podium-base.third {
+            height: 130px;
+            background: linear-gradient(145deg, #cd7f32, #daa654);
+            color: #ffffff;
+        }
+
+        .winner-info {
+            position: absolute;
+            top: -80px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding-bottom: 20px;
+        }
+
+        .winner-avatar {
+            width: 55px;
+            height: 65px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            margin-bottom: 5px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+            overflow: hidden;
+            margin-top: -10px;
+        }
+
+        .winner-avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .winner-name {
+            font-size: 12px;
+            font-weight: bold;
+            color: #000000;
+            text-align: center;
+            margin-top: 0px;
+            margin-bottom: 40px;
+        }
+
+        .medal {
+            position: absolute;
+            top: -0px;
+            font-size: 40px;
+            filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
+        }
+
+        .ranking-table {
+            width: 100%;
+            margin-top: 20px;
+        }
+
+        .ranking-header {
+            display: grid;
+            grid-template-columns: 50px 1fr 80px;
+            gap: 15px;
+            padding: 15px 0;
+            border-bottom: 2px solid #eee;
+            font-weight: bold;
+            color: #666;
+        }
+
+        .ranking-item {
+            display: grid;
+            grid-template-columns: 50px 1fr 80px;
+            gap: 15px;
+            padding: 15px 0;
+            border-bottom: 1px solid #f0f0f0;
+            align-items: center;
+            transition: background-color 0.2s ease;
+        }
+
+        .ranking-item:hover {
+            background-color: rgba(102, 126, 234, 0.05);
+            border-radius: 8px;
+        }
+
+        .rank-number {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            color: #000000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 20px;
+        }
+
+        .participant-info {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .participant-avatar {
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            background: linear-gradient(145deg, #f1f1f1, #d1d1d1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            color: #666;
+            overflow: hidden;
+        }
+
+        .participant-avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .language-icon {
+            width: 30px;
+            height: 30px;
+            object-fit: contain;
+        }
+
+        .participant-name {
+            font-weight: 500;
+            color: #333;
+
+            
+        }
+
+        .rating {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            font-weight: bold;
+            color: #ff6b6b;
+        }
+
+.star {
+color: #ffd700;
+}
+
+@media (max-width: 768px) {
+.ranking-container {
+grid-template-columns: 1fr;
+gap: 20px;
+}
+            
+.podium {
+height: 180px;
+}
+            
+.podium-base {
+width: 60px;
+padding-top: 65px;
+align-items: center;
+}
+            
+.podium-base.first { height: 180px; }
+.podium-base.second { height: 120px; }
+ .podium-base.third { height: 100px; }
+}
+        
+.mentor-ranking {
+  background-color: rgba(240, 248, 255, 1);
+}
+
+.mentee-ranking {
+  background-color: #ffffff; 
+}
+
+.language-ranking {
+  background-color: rgba(240, 248, 255, 1); 
+}
+        .ranking-section {
+  padding: 60px 20px;
+  border-radius: 16px;
+  margin-bottom: 40px;
+}
+
+
+
+
+
+
+
+
+
 
 
 
