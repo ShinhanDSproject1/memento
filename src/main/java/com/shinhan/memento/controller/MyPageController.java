@@ -41,4 +41,9 @@ public class MyPageController {
 	public String myPageView7() {
 		return "mypage/mypage7";
 	}
+	
+	@RequestMapping("/page8")
+	public String myPageView8() {
+		return "mypage/mypage8";
+	}
 }

@@ -1,19 +1,18 @@
-.frame-3650 {
+.sidebar {
+  width: 305px;
   background: #ffffff;
-  border-style: solid;
-  border-color: rgba(117, 117, 117, 0.35);
-  border-width: 0px 1px 0px 0px;
-  padding: 50px 26px 50px 26px;
+  border-right: 1px solid rgba(117, 117, 117, 0.35);
   display: flex;
   flex-direction: column;
   gap: 30px;
   align-items: center;
   justify-content: flex-start;
-  width: 305px;
-  height: 1028px;
-  position: absolute;
-  left: 0px;
-  top: 0px;
+  padding: 50px 26px;
+  height: calc(100vh - 105px); /* header 높이 뺀 만큼 */
+  position: sticky;
+  top: 105px;
+  flex-shrink: 0;
+}
 }
 .group-497 {
   flex-shrink: 0;

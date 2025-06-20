@@ -1,439 +1,363 @@
-.div,
-.div * {
+.layout-wrapper {
+  display: flex;
+  min-height: 100vh;
+}
+
+.main-content-wrapper {
+  display: flex;
+  flex: 1;
+  min-height: calc(100vh - 100px); /* 헤더 높이만큼 빼주기 */
+}
+
+.page-container {
+  flex: 1;
+  padding: 40px;
   box-sizing: border-box;
 }
-.div {
-  background: #ffffff;
-  padding: 1px 0px 39px 0px;
-  display: flex;
-  flex-direction: column;
-  gap: 47px;
-  align-items: center;
-  justify-content: flex-start;
-  height: 1094px;
-  position: relative;
-  overflow: hidden;
-  margin-top: 150px;
-}
-.frame-3631 {
-  padding: 0px 51.5px 0px 51.5px;
-  align-self: stretch;
-  flex-shrink: 0;
-  height: 871px;
-  position: relative;
-}
-.frame-3625 {
-  background: #edf6ff;
-  border-radius: 10px;
-  border-style: solid;
-  border-color: #000000;
-  border-width: 1px;
-  padding: 29.5px 48px 120px 30px;
-  width: 980px;
-  height: 871px;
-  position: absolute;
-  left: 408.5px;
-  top: 0px;
-  overflow: hidden;
-}
-.div2 {
+
+body {
+  font-family: 'Inter', sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #ffffff; /* Derived from the outermost frame style_1 */
   color: #000000;
-  text-align: left;
-  font-family: "Inter-Regular", sans-serif;
-  font-size: 26px;
-  font-weight: 400;
-  position: absolute;
-  left: 30.5px;
-  top: 29.5px;
-  width: 901px;
 }
-.frame-3681 {
-  display: flex;
-  flex-direction: column;
-  gap: 40px;
-  align-items: flex-start;
-  justify-content: center;
-  width: 818.08px;
-  position: absolute;
-  left: 71.96px;
-  top: 90.5px;
-  overflow: hidden;
+
+.page-wrapper {
+  max-width: 1440px;
+  margin: 0 auto;
+  /* overflow: hidden; from style_1 on root, body handles this */
 }
-.frame-417 {
-  display: flex;
-  flex-direction: row;
-  gap: 40px;
-  align-items: center;
-  justify-content: flex-start;
-  align-self: stretch;
-  flex-shrink: 0;
-  position: relative;
-}
-.mentos-class {
-  background: #dcfffb;
-  border-radius: 20px;
-  border-style: solid;
-  border-color: #a6abbd;
-  border-width: 3px;
-  padding: 12px 11px 12px 11px;
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  align-items: center;
-  justify-content: center;
-  flex-shrink: 0;
-  width: 246.03px;
-  height: 310.25px;
-  position: relative;
-}
-.frame-416 {
-  display: flex;
-  flex-direction: column;
-  gap: 13px;
-  align-items: center;
-  justify-content: flex-start;
-  flex-shrink: 0;
-  width: 223.96px;
-  position: relative;
-}
-.image {
-  border-radius: 20px;
-  border-style: solid;
-  border-color: #a6abbd;
-  border-width: 3px;
-  align-self: stretch;
-  flex-shrink: 0;
-  height: 142.97px;
-  position: relative;
-  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
-  object-fit: cover;
-}
-.frame-4162 {
-  display: flex;
-  flex-direction: row;
-  gap: 10px;
-  align-items: center;
-  justify-content: center;
-  align-self: stretch;
-  flex-shrink: 0;
-  position: relative;
-}
-.div3 {
-  color: #005197;
-  text-align: left;
-  font-family: "Inter-Medium", sans-serif;
-  font-size: 18px;
-  line-height: 150%;
-  letter-spacing: -0.011000000000000001em;
-  font-weight: 500;
-  position: relative;
-  width: 223.96px;
-}
-.frame-4163 {
-  display: flex;
-  flex-direction: row;
-  gap: 20px;
-  align-items: center;
-  justify-content: flex-start;
-  flex-shrink: 0;
-  position: relative;
-}
-._13-00-17-00 {
-  color: #000000;
-  text-align: left;
-  font-family: "Inter-Medium", sans-serif;
-  font-size: 15px;
-  line-height: 150%;
-  letter-spacing: -0.011000000000000001em;
-  font-weight: 500;
-  position: relative;
-}
-.div4 {
-  color: #000000;
-  text-align: left;
-  font-family: "Inter-Medium", sans-serif;
-  font-size: 15px;
-  line-height: 150%;
-  letter-spacing: -0.011000000000000001em;
-  font-weight: 500;
-  position: relative;
-}
-.frame-4164 {
-  display: flex;
-  flex-direction: row;
-  gap: 43px;
-  align-items: center;
-  justify-content: center;
-  flex-shrink: 0;
-  position: relative;
-}
-.div5 {
-  color: #06ac9b;
-  text-align: left;
-  font-family: "Inter-Medium", sans-serif;
-  font-size: 15px;
-  line-height: 150%;
-  letter-spacing: -0.011000000000000001em;
-  font-weight: 500;
-  position: relative;
-}
-.frame-4165 {
-  display: flex;
-  flex-direction: row;
-  gap: 4px;
-  align-items: center;
-  justify-content: flex-start;
-  flex-shrink: 0;
-  position: relative;
-}
-.vuesax-linear-microphone {
-  flex-shrink: 0;
-  width: 20px;
-  height: 20px;
-  position: relative;
-  overflow: visible;
-}
-.mentos-class2 {
-  background: #ffffff;
-  border-radius: 20px;
-  border-style: solid;
-  border-color: #a6abbd;
-  border-width: 3px;
-  padding: 12px 11px 12px 11px;
-  display: flex;
-  flex-direction: row;
-  gap: 10px;
-  align-items: center;
-  justify-content: center;
-  flex-shrink: 0;
-  width: 246.03px;
-  height: 310.25px;
-  position: relative;
-}
-.image2 {
-  border-radius: 20px;
-  border-style: solid;
-  border-color: #a6abbd;
-  border-width: 3px;
-  flex-shrink: 0;
-  width: 219.91px;
-  height: 142.97px;
-  position: relative;
-  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
-  object-fit: cover;
-}
-.with-js {
-  color: #005197;
-  text-align: left;
-  font-family: "Inter-Medium", sans-serif;
-  font-size: 18px;
-  line-height: 150%;
-  letter-spacing: -0.011000000000000001em;
-  font-weight: 500;
-  position: relative;
-  width: 223.96px;
-}
-._16-00-18-00 {
-  color: #000000;
-  text-align: left;
-  font-family: "Inter-Medium", sans-serif;
-  font-size: 15px;
-  line-height: 150%;
-  letter-spacing: -0.011000000000000001em;
-  font-weight: 500;
-  position: relative;
-}
-._3-5 {
-  color: #000000;
-  text-align: left;
-  font-family: "Inter-Medium", sans-serif;
-  font-size: 15px;
-  line-height: 150%;
-  letter-spacing: -0.011000000000000001em;
-  font-weight: 500;
-  position: relative;
-}
-.vuesax-linear-microphone2 {
-  flex-shrink: 0;
-  width: 20px;
-  height: 20px;
-  position: relative;
-  overflow: visible;
-}
-.image3 {
-  border-radius: 20px;
-  border-style: solid;
-  border-color: #a6abbd;
-  border-width: 3px;
-  flex-shrink: 0;
-  width: 219.96px;
-  height: 142.97px;
-  position: relative;
-  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
-  object-fit: cover;
-}
-.aws {
-  color: #005197;
-  text-align: left;
-  font-family: "Inter-Medium", sans-serif;
-  font-size: 18px;
-  line-height: 150%;
-  letter-spacing: -0.011000000000000001em;
-  font-weight: 500;
-  position: relative;
-  width: 223.96px;
-}
-._18-00-30-00 {
-  color: #000000;
-  text-align: left;
-  font-family: "Inter-Medium", sans-serif;
-  font-size: 15px;
-  line-height: 150%;
-  letter-spacing: -0.011000000000000001em;
-  font-weight: 500;
-  position: relative;
-}
-._0-5 {
-  color: #000000;
-  text-align: left;
-  font-family: "Inter-Medium", sans-serif;
-  font-size: 15px;
-  line-height: 150%;
-  letter-spacing: -0.011000000000000001em;
-  font-weight: 500;
-  position: relative;
-}
-.vuesax-linear-microphone3 {
-  flex-shrink: 0;
-  width: 20px;
-  height: 20px;
-  position: relative;
-  overflow: visible;
-}
-.frame-4166 {
-  display: flex;
-  flex-direction: row;
-  gap: 40px;
-  align-items: center;
-  justify-content: flex-start;
-  align-self: stretch;
-  flex-shrink: 0;
-  position: relative;
-}
-.mentos-class3 {
-  background: #ffffff;
-  border-radius: 20px;
-  border-style: solid;
-  border-color: #a6abbd;
-  border-width: 3px;
-  padding: 12px 11px 12px 11px;
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  align-items: center;
-  justify-content: center;
-  flex-shrink: 0;
-  width: 246.03px;
-  height: 310.25px;
-  position: relative;
-}
-._19-00-21-00 {
-  color: #000000;
-  text-align: left;
-  font-family: "Inter-Medium", sans-serif;
-  font-size: 15px;
-  line-height: 150%;
-  letter-spacing: -0.011000000000000001em;
-  font-weight: 500;
-  position: relative;
-}
-._4-5 {
-  color: #000000;
-  text-align: left;
-  font-family: "Inter-Medium", sans-serif;
-  font-size: 15px;
-  line-height: 150%;
-  letter-spacing: -0.011000000000000001em;
-  font-weight: 500;
-  position: relative;
-}
-.vuesax-linear-microphone4 {
-  flex-shrink: 0;
-  width: 20px;
-  height: 20px;
-  position: relative;
-  overflow: visible;
-}
-.mentos-class4 {
-  background: #e4e2e2;
-  border-radius: 20px;
-  border-style: solid;
-  border-color: #a6abbd;
-  border-width: 3px;
-  padding: 12px 11px 12px 11px;
-  display: flex;
-  flex-direction: row;
-  gap: 10px;
-  align-items: center;
-  justify-content: center;
-  flex-shrink: 0;
-  width: 246.03px;
-  height: 310.25px;
-  position: relative;
-}
-.with-chat-gpt {
-  color: #005197;
-  text-align: left;
-  font-family: "Inter-Medium", sans-serif;
-  font-size: 18px;
-  line-height: 150%;
-  letter-spacing: -0.011000000000000001em;
-  font-weight: 500;
-  position: relative;
-  width: 223.96px;
-}
-.div6 {
-  color: #2798fa;
-  text-align: left;
-  font-family: "Inter-Medium", sans-serif;
-  font-size: 15px;
-  line-height: 150%;
-  letter-spacing: -0.011000000000000001em;
-  font-weight: 500;
-  position: relative;
-}
-.vuesax-linear-microphone5 {
-  flex-shrink: 0;
-  width: 20px;
-  height: 20px;
-  position: relative;
-  overflow: visible;
-}
-.ds {
-  color: #005197;
-  text-align: left;
-  font-family: "Inter-Medium", sans-serif;
-  font-size: 18px;
-  line-height: 150%;
-  letter-spacing: -0.011000000000000001em;
-  font-weight: 500;
-  position: relative;
-  width: 223.96px;
-}
-._3-7 {
-  color: #000000;
-  text-align: left;
-  font-family: "Inter-Medium", sans-serif;
-  font-size: 15px;
-  line-height: 150%;
-  letter-spacing: -0.011000000000000001em;
-  font-weight: 500;
-  position: relative;
-}
-.vuesax-linear-microphone6 {
-  flex-shrink: 0;
-  width: 20px;
-  height: 20px;
-  position: relative;
-  overflow: visible;
-}
+
+/* CSS from section:my-mentors */
+.my-mentors-section {
+    padding-top: 87px; /* Approx 10796 (title y) - 10709 (root y) */
+    padding-bottom: 87px; /* Symmetrical padding */
+  }
+
+  .page-title {
+    /* style_26 */
+    color: #666666;
+    font-family: 'D2Coding'; /* Fallback for D2Coding */
+    font-weight: 700;
+    font-size: 32px;
+    line-height: 37.12px; /* 37.119998931884766px */
+    text-align: center;
+    margin-bottom: 17px; /* Approx 10850 (container y) - (10796 (title y) + 37 (title height)) */
+  }
+
+  .mentors-outer-container {
+    /* style_2 */
+    max-width: 980px;
+    margin: 0 auto;
+    background-color: #ffffff;
+    border: 1px solid #c1c1c1;
+    border-radius: 10px;
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+    padding: 90px 72px; /* Approx (90.5px top, 71.96px left, 90px bottom, 89.963px right) */
+    overflow: hidden; /* style_2 */
+  }
+
+  .mentors-grid {
+    /* style_3 for parent Frame 3681, but this is the grid itself */
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 40px; /* Calculated from Figma */
+    background-color: rgba(0, 0, 0, 0); /* style_3 */
+    overflow: hidden; /* style_3 */
+  }
+
+  .mentor-card {
+    /* Base styles from style_5, style_13, style_20 */
+    border: 3px solid rgba(166, 171, 189, 0.3);
+    border-radius: 20px;
+    padding: 14px 11px; /* Approx 14.139px top/bottom, 11.031px left/right */
+    display: flex;
+    flex-direction: column;
+  }
+
+  .mentor-card--waiting { /* style_5 */
+    background-color: #dcfffb;
+  }
+  .mentor-card--default { /* style_13 */
+    background-color: #ffffff;
+  }
+  .mentor-card--completed { /* style_20 */
+    background-color: #e4e2e2;
+  }
+
+  .card-image {
+    /* Base styles from style_7, style_14, etc. */
+    width: 100%; /* Takes full width of padded card area */
+    height: 143px; /* 142.9708251953125px */
+    object-fit: cover;
+    border: 3px solid rgba(166, 171, 189, 0.3);
+    border-radius: 20px; /* Inner radius, matches card's outer */
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+    margin-bottom: 13px; /* Gap to title */
+  }
+  
+  .card-content-wrapper {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1; /* Allows content to fill card height if needed */
+  }
+
+  .card-title {
+    /* style_8 */
+    color: #005197;
+    font-family: 'Inter', sans-serif;
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 27px;
+    letter-spacing: -0.198px;
+    text-align: left;
+    margin: 0 0 13px 0; /* Gap to schedule */
+    min-height: 54px; /* To accommodate two lines typically */
+  }
+
+  .card-info-group {
+    margin-bottom: 13px; /* Gap to next group */
+  }
+  .card-info-group:last-child {
+    margin-bottom: 0;
+  }
+  
+  .schedule-group {
+    margin-left: 25px; /* Approx 25.48px */
+  }
+  .status-group {
+    margin-left: 21px; /* Approx 20.98px */
+    margin-top: auto; /* Pushes to bottom if card height varies */
+  }
+
+  .schedule-location-text,
+  .status-mentor-text {
+    /* Base font from style_9 */
+    font-family: 'Inter', sans-serif;
+    font-weight: 500;
+    font-size: 15px;
+    line-height: 22.5px;
+    letter-spacing: -0.165px;
+    color: #000000;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 0;
+  }
+
+  .status-text--waiting { /* style_10 */
+    color: #06ac9b;
+  }
+  .status-text--completed { /* style_22 */
+    color: #2798fa;
+  }
+
+  .mentor-details {
+    /* style_11 */
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 4px;
+  }
+
+  .mentor-icon {
+    width: 20px;
+    height: 20px;
+  }
+
+  /* Responsive adjustments */
+  @media (max-width: 1024px) { /* Adjust breakpoint as needed for 2 columns */
+    .mentors-outer-container {
+      padding: 60px 40px;
+    }
+    .mentors-grid {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 30px;
+    }
+  }
+  @media (max-width: 767px) { /* Adjust breakpoint as needed for 1 column */
+    .my-mentors-section {
+      padding-top: 40px;
+      padding-bottom: 40px;
+    }
+    .page-title {
+      font-size: 28px;
+      line-height: 1.2;
+      margin-bottom: 20px;
+    }
+    .mentors-outer-container {
+      padding: 30px 20px;
+    }
+    .mentors-grid {
+      grid-template-columns: 1fr;
+      gap: 20px;
+    }
+    .card-title {
+      font-size: 16px;
+      line-height: 24px;
+      min-height: 48px;
+    }
+    .schedule-location-text,
+    .status-mentor-text,
+    .mentor-name {
+      font-size: 14px;
+      line-height: 20px;
+    }
+    .schedule-group, .status-group {
+        margin-left: 10px;
+    }
+  }  .mentors-list-title {
+    color: #000000; /* style_3 */
+    font-family: 'Inter', sans-serif; /* style_3 */
+    font-weight: 400; /* style_3 */
+    font-size: 26px; /* style_3 */
+    line-height: 31.46590805053711px; /* style_3 */
+    text-align: left; /* style_3 */
+    margin-top: 0; /* Adjust as needed */
+    margin-bottom: 30px; /* Space between title and card grid */
+  }
+
+  .cards-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(246px, 1fr));
+    gap: 40px; /* Consistent gap horizontally and vertically */
+  }
+
+  .mentor-card {
+    width: 100%; /* Take full width of grid cell */
+    max-width: 246.025px; /* Max width from Figma */
+    height: 310.25px; /* Fixed height from Figma */
+    border: 3px solid #a6abbd; /* Common border style */
+    border-radius: 20px; /* Common border radius */
+    padding: 14px 11px;
+    display: flex;
+    flex-direction: column;
+    gap: 13px; /* Vertical spacing between elements inside card */
+    justify-self: center; /* Center card in grid cell if cell is wider */
+  }
+
+  .card-bg-teal { background-color: #dcfffb; /* style_6 */ }
+  .card-bg-white { background-color: #ffffff; /* style_14 */ }
+  .card-bg-grey { background-color: #e4e2e2; /* style_21 */ }
+
+  .card-image {
+    width: 100%; /* Make image responsive within its container part of the card */
+    height: 142.97px; /* Fixed height from Figma */
+    object-fit: cover; /* Ensure image covers the area */
+    border: 3px solid #a6abbd; /* style_8 */
+    border-radius: 20px; /* style_8 */
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25); /* style_8 */
+  }
+
+  .card-title-text {
+    color: #005197; /* style_9 */
+    font-family: 'Inter', sans-serif; /* style_9 */
+    font-weight: 500; /* style_9 */
+    font-size: 18px; /* style_9 */
+    line-height: 27px; /* style_9 */
+    letter-spacing: -0.20px; /* style_9 */
+    text-align: left; /* style_9 */
+    height: 54px; /* Allows for 2 lines */
+    margin: 0;
+    overflow: hidden; /* Prevents text overflow */
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+  }
+
+  .card-details,
+  .card-status-mentor {
+    display: flex;
+    align-items: center;
+    font-family: 'Inter', sans-serif; /* style_10 base */
+    font-weight: 500; /* style_10 base */
+    font-size: 15px; /* style_10 base */
+    line-height: 22.5px; /* style_10 base */
+    letter-spacing: -0.17px; /* style_10 base */
+    color: #000000; /* style_10 base */
+  }
+
+  .card-details {
+    justify-content: flex-start;
+    gap: 20px; /* Calculated gap */
+  }
+  
+  .detail-time, .detail-location {
+    white-space: nowrap;
+  }
+
+  .card-status-mentor {
+    justify-content: space-between;
+  }
+
+  .status-text {
+    /* Base style from .card-status-mentor */
+  }
+  .status-teal { color: #06ac9b; /* style_11 */ }
+  .status-blue { color: #2798fa; /* style_23 */ }
+
+  .mentor-info {
+    display: flex; /* style_12 */
+    flex-direction: row; /* style_12 */
+    align-items: center; /* style_12 */
+    gap: 4px; /* style_12 */
+  }
+
+  .mentor-icon {
+    width: 20px;
+    height: 20px;
+  }
+
+  .mentor-name {
+    /* Base style from .card-status-mentor */
+    white-space: nowrap;
+  }
+
+  /* Responsive adjustments */
+  @media (max-width: 1024px) { /* Adjust breakpoint as needed */
+    .cards-grid {
+      /* gap: 20px; If less space, reduce gap */
+    }
+    .mentor-card {
+       /* max-width can be removed or adjusted if cards need to be smaller */
+    }
+  }
+
+  @media (max-width: 768px) {
+    .mentors-list-container {
+      margin: 20px auto;
+      padding: 20px;
+    }
+    .cards-grid {
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); /* Allow cards to be a bit smaller */
+      gap: 20px;
+    }
+     .mentor-card {
+        height: auto; /* Allow height to adjust to content on smaller screens */
+     }
+  }
+
+  @media (max-width: 480px) {
+    .mentors-list-container {
+      padding: 15px;
+      margin: 10px auto;
+      border: none; /* Optional: remove border on very small screens */
+    }
+    .mentors-list-title {
+      font-size: 22px;
+      margin-bottom: 20px;
+    }
+    .cards-grid {
+      grid-template-columns: 1fr; /* Stack cards */
+      gap: 20px;
+    }
+    .mentor-card {
+        max-width: 100%; /* Allow card to take full width when stacked */
+    }
+    .card-details {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 5px;
+    }
+  }

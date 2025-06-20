@@ -5,7 +5,7 @@
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js">
 </script>
-<div class="frame-3650">
+<div class="sidebar">
 	<div class="group-497">
 		<div class="group-3780">
 			<div class="group-75">

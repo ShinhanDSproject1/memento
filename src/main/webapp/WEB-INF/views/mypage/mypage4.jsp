@@ -5,61 +5,105 @@
 <head>
 <meta charset="UTF-8">
 <title>마이페이지 결제내역 상세</title>
-<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/mypage/mypagePayDetailStyle.css" />
-<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/mypage/mypagePayDetailVars.css" />
-<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/mypage/sidebar.css" />
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath}/resources/css/mypage/mypagePayDetailStyle.css" />
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath}/resources/css/mypage/mypageVars.css" />
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath}/resources/css/mypage/sidebar.css" />
 </head>
 <body>
-<%@ include file="../common/header.jsp"%>
-	<div class="div">
-		<%@ include file="../common/sidebar.jsp"%>
-		<div class="div10">결제 / 사용 상세 내역</div>
-		<div class="rectangle-304"></div>
-		<div class="rectangle-305"></div>
-		<div class="frame-352">
-			<div class="_12345678">주문번호 : 12345678</div>
+	<div class="layout-wrapper">
+		<%@ include file="../common/header.jsp"%>
+		<div class="main-content-wrapper">
+			<%@ include file="../common/sidebar.jsp"%>
+			<div class="page-container">
+				<section id="order-details" class="order-details-page style_1_root">
+					<header class="order-header">
+						<h1 class="order-title style_2_text">결제 / 사용 상세 내역</h1>
+						<div class="order-meta">
+							<span class="order-number-tag style_4_frame"> <span
+								class="style_5_text">주문번호 : 12345678</span>
+							</span> <span class="mentor-tag style_11_frame"> <span
+								class="style_12_text">멘토스</span>
+							</span>
+						</div>
+					</header>
+
+					<div class="order-content-columns">
+						<div class="left-column">
+							<div class="product-list-container style_3_panel">
+								<p class="items-count style_10_text">구매한 상품 건수 : 2</p>
+								<article class="product-item style_6_item">
+									<div
+										class="product-image-placeholder style_9_image_placeholder"></div>
+									<div class="product-details">
+										<h2 class="product-name style_7_text">파이썬? 야 너두 할 수 있어</h2>
+										<p class="product-price style_8_text">20,000</p>
+									</div>
+								</article>
+								<article class="product-item style_6_item">
+									<div
+										class="product-image-placeholder style_9_image_placeholder"></div>
+									<div class="product-details">
+										<h2 class="product-name style_7_text">JSON? 나 없이 쉽지 않을걸?</h2>
+										<p class="product-price style_8_text">15,000</p>
+									</div>
+								</article>
+							</div>
+
+							<div class="action-buttons">
+								<div class="button-wrapper style_13_group" id="group_298_17560">
+									<img
+										src="${cpath}/resources/images/mypage/mypage4/rectangle-3051.svg"
+										alt="돌아가기 배경" class="button-background style_14_svg"> <span
+										class="button-text style_15_text">돌아가기</span>
+								</div>
+								<div class="button-wrapper style_13_group" id="group_298_17563">
+									<img
+										src="${cpath}/resources/images/mypage/mypage4/rectangle-3052.svg"
+										alt="환불 신청하기 배경" class="button-background style_16_svg">
+									<span class="button-text style_15_text">환불 신청하기</span>
+								</div>
+							</div>
+						</div>
+
+						<aside class="payment-summary-container style_3_panel">
+							<div class="summary-item">
+								<span class="summary-label style_2_text">총 결제 금액</span> <span
+									class="summary-value style_2_text">₩32,000</span>
+							</div>
+							<div class="summary-item">
+								<span class="summary-label style_20_text">상품 금액</span> <span
+									class="summary-value style_20_text">₩35,000</span>
+							</div>
+							<div class="summary-item">
+								<span class="summary-label style_20_text">할인 금액</span> <span
+									class="summary-value style_20_text">-₩3,000</span>
+							</div>
+							<div class="summary-item summary-item-indented">
+								<span class="summary-label style_20_text">포인트 할인</span> <span
+									class="summary-value style_20_text">-₩3,000</span>
+							</div>
+							<div class="summary-item summary-item-indented">
+								<span class="summary-label style_20_text">쿠폰 할인</span> <span
+									class="summary-value style_20_text">-₩0</span>
+							</div>
+							<hr class="summary-divider style_21_line">
+							<div class="summary-item">
+								<span class="summary-label style_17_text">결제 상태</span> <span
+									class="summary-value status-completed style_19_text">결제
+									완료</span>
+							</div>
+							<div class="summary-item">
+								<span class="summary-label style_17_text">결제 시간</span> <span
+									class="summary-value style_18_text">2025.06.16 17:20</span>
+							</div>
+						</aside>
+					</div>
+				</section>
+			</div>
 		</div>
-		<div class="frame-3606">
-			<div class="div11">파이썬? 야 너두 할 수 있어</div>
-			<div class="_20-000">20,000</div>
-			<div class="rectangle-293"></div>
-		</div>
-		<div class="_2">구매한 상품 건수 : 2</div>
-		<div class="frame-3651">
-			<div class="json">JSON? 나 없이 쉽지 않을걸?</div>
-			<div class="_15-000">15,000</div>
-			<div class="rectangle-293"></div>
-		</div>
-		<div class="frame-3522">
-			<div class="div12">멘토스</div>
-		</div>
-		<img class="rectangle-3052" src="${cpath}/resources/images/mypage/mypage4/rectangle-3051.svg" />
-		<div class="div13" onclick="location.href='page3'">돌아가기</div>
-		<img class="rectangle-3053" src="${cpath}/resources/images/mypage/mypage4/rectangle-3052.svg" />
-		<div class="div14" onclick="location.href='page5'">환불 신청하기</div>
-		<div class="div15">총 결제 금액</div>
-		<div class="div16">결제 상태</div>
-		<div class="_2025-06-16-17-20">2025.06.16 17:20</div>
-		<div class="div17">결제 시간</div>
-		<div class="div18">결제 완료</div>
-		<div class="div19">상품 금액</div>
-		<div class="div20">할인 금액</div>
-		<div class="div21">
-			<ul class="div-21-span">
-				<li>포인트 할인</li>
-			</ul>
-		</div>
-		<div class="div22">
-			<ul class="div-22-span">
-				<li>쿠폰 할인</li>
-			</ul>
-		</div>
-		<div class="_32-000">₩32,000</div>
-		<div class="_35-000">₩35,000</div>
-		<div class="_3-000">-₩3,000</div>
-		<div class="_3-0002">-₩3,000</div>
-		<div class="_0">-₩0</div>
-		<div class="line-52"></div>
 	</div>
 </body>
 </html>

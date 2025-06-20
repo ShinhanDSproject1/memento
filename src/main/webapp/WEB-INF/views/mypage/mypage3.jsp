@@ -8,146 +8,219 @@
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/resources/css/mypage/mypagePayStyle.css" />
 <link rel="stylesheet"
-	href="${pageContext.request.contextPath}/resources/css/mypage/mypagePayVars.css" />
+	href="${pageContext.request.contextPath}/resources/css/mypage/mypageVars.css" />
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/resources/css/mypage/sidebar.css" />
 </head>
 <body>
-	<%@ include file="../common/header.jsp"%>
-	<div class="div">
-	<%@ include file="../common/sidebar.jsp"%>
-		<div class="frame-3752">
-			<div class="rectangle-295"></div>
-			<div class="div10">결제 / 사용 내역</div>
-			<div class="frame-354">
-				<div class="_1">
-					<span> <span class="_1-span">파이썬? 야 너두 할 수 있어</span> <span
-						class="_1-span2"></span> <span class="_1-span3">외 1건</span>
-					</span>
-				</div>
-				<div class="frame-352">
-					<div class="_12345678">주문번호 : 12345678</div>
-				</div>
-				<div class="frame-3522">
-					<div class="div11">멘토스</div>
-				</div>
-				<div class="frame-3606">
-					<div class="frame-3523">
-						<div class="div12">금액:</div>
-						<div class="div13">포인트:</div>
-						<img class="line-41" src="line-410.svg" />
-						<div class="div14">합계:</div>
-						<div class="_35-000">35,000</div>
-						<div class="_2-000">2,000</div>
-						<div class="_33-000">33,000</div>
+	<div class="layout-wrapper">
+		<%@ include file="../common/header.jsp"%>
+		<div class="main-content-wrapper">
+			<%@ include file="../common/sidebar.jsp"%>
+			<div class="page-container">
+				<section id="payment-history" class="payment-history-section">
+					<div class="payment-history-container">
+						<h1 class="main-title">결제 / 사용 내역</h1>
+						<div class="payment-items-list">
+
+							<article class="payment-item">
+								<div class="item-main-info">
+									<div class="item-row-1">
+										<div class="order-number-wrapper">
+											<span class="order-number-text">주문번호 : 12345678</span>
+										</div>
+										<div class="tag-wrapper tag-mentos">
+											<span class="tag-text">멘토스</span>
+										</div>
+									</div>
+									<p class="item-name">
+										<span class="item-name-main style-6-variant">파이썬? 야 너두
+											할 수 있어</span> <span class="item-name-extra style-6-variant">
+											외 1건</span>
+									</p>
+								</div>
+								<div class="item-price-details">
+									<div class="price-breakdown">
+										<div class="price-line">
+											<span class="label amount">금액:</span> <span class="value">35,000</span>
+										</div>
+										<div class="price-line">
+											<span class="label points">포인트:</span> <span class="value">2,000</span>
+										</div>
+										<img
+											src="/page/fafed4a0-cb5b-4d18-828f-a087ba6477a6/images/298_17407.svg"
+											alt="price divider" class="price-divider-svg" />
+										<div class="price-line">
+											<span class="label total">합계:</span> <span class="value">33,000</span>
+										</div>
+									</div>
+									<a href="#" class="details-link">상세 내역 보기 ></a>
+								</div>
+							</article>
+
+							<article class="payment-item">
+								<div class="item-main-info">
+									<div class="item-row-1">
+										<div class="order-number-wrapper">
+											<span class="order-number-text">주문번호 : 12345678</span>
+										</div>
+										<div class="tag-wrapper tag-matchup-1">
+											<span class="tag-text">매치업</span>
+										</div>
+									</div>
+									<p class="item-name style-22">개발새발 코딩 스터디</p>
+								</div>
+								<div class="item-price-details">
+									<div class="price-breakdown">
+										<div class="price-line">
+											<span class="label amount">금액:</span> <span class="value">35,000</span>
+										</div>
+										<div class="price-line">
+											<span class="label points">포인트:</span> <span class="value">2,000</span>
+										</div>
+										<img
+											src="/page/fafed4a0-cb5b-4d18-828f-a087ba6477a6/images/298_17423.svg"
+											alt="price divider" class="price-divider-svg" />
+										<div class="price-line">
+											<span class="label total">합계:</span> <span class="value">33,000</span>
+										</div>
+									</div>
+									<a href="#" class="details-link">상세 내역 보기 ></a>
+								</div>
+							</article>
+
+							<article class="payment-item">
+								<div class="item-main-info">
+									<div class="item-row-1">
+										<div class="order-number-wrapper">
+											<span class="order-number-text">주문번호 : 12345678</span>
+										</div>
+										<div class="tag-wrapper tag-cancelled">
+											<span class="tag-text">주문취소</span>
+										</div>
+									</div>
+									<p class="item-name style-25">손쉬운 정보처리기사</p>
+								</div>
+								<div class="item-price-details">
+									<div class="price-breakdown">
+										<div class="price-line">
+											<span class="label amount">금액:</span> <span class="value">35,000</span>
+										</div>
+										<div class="price-line">
+											<span class="label points">포인트:</span> <span class="value">2,000</span>
+										</div>
+										<img
+											src="/page/fafed4a0-cb5b-4d18-828f-a087ba6477a6/images/298_17439.svg"
+											alt="price divider" class="price-divider-svg" />
+										<div class="price-line">
+											<span class="label total">합계:</span> <span class="value">33,000</span>
+										</div>
+									</div>
+									<a href="#" class="details-link">상세 내역 보기 ></a>
+								</div>
+							</article>
+
+							<article class="payment-item">
+								<div class="item-main-info">
+									<div class="item-row-1">
+										<div class="order-number-wrapper">
+											<span class="order-number-text">주문번호 : 12345678</span>
+										</div>
+										<div class="tag-wrapper tag-matchup-2">
+											<span class="tag-text">매치업</span>
+										</div>
+									</div>
+									<p class="item-name style-22">알고리즘 마스터반(교재)</p>
+								</div>
+								<div class="item-price-details">
+									<div class="price-breakdown">
+										<div class="price-line">
+											<span class="label amount">금액:</span> <span class="value">35,000</span>
+										</div>
+										<div class="price-line">
+											<span class="label points">포인트:</span> <span class="value">2,000</span>
+										</div>
+										<img
+											src="/page/fafed4a0-cb5b-4d18-828f-a087ba6477a6/images/298_17455.svg"
+											alt="price divider" class="price-divider-svg" />
+										<div class="price-line">
+											<span class="label total">합계:</span> <span class="value">33,000</span>
+										</div>
+									</div>
+									<a href="#" class="details-link">상세 내역 보기 ></a>
+								</div>
+							</article>
+
+							<article class="payment-item">
+								<div class="item-main-info">
+									<div class="item-row-1">
+										<div class="order-number-wrapper">
+											<span class="order-number-text">주문번호 : 12345678</span>
+										</div>
+										<div class="tag-wrapper tag-mentos">
+											<span class="tag-text">멘토스</span>
+										</div>
+									</div>
+									<p class="item-name style-25">봄이오겠냐? 스프링</p>
+								</div>
+								<div class="item-price-details">
+									<div class="price-breakdown">
+										<div class="price-line">
+											<span class="label amount">금액:</span> <span class="value">35,000</span>
+										</div>
+										<div class="price-line">
+											<span class="label points">포인트:</span> <span class="value">2,000</span>
+										</div>
+										<img
+											src="/page/fafed4a0-cb5b-4d18-828f-a087ba6477a6/images/298_17471.svg"
+											alt="price divider" class="price-divider-svg" />
+										<div class="price-line">
+											<span class="label total">합계:</span> <span class="value">33,000</span>
+										</div>
+									</div>
+									<a href="#" class="details-link">상세 내역 보기 ></a>
+								</div>
+							</article>
+
+							<article class="payment-item">
+								<div class="item-main-info">
+									<div class="item-row-1">
+										<div class="order-number-wrapper">
+											<span class="order-number-text">주문번호 : 12345678</span>
+										</div>
+										<div class="tag-wrapper tag-mentos">
+											<span class="tag-text">멘토스</span>
+										</div>
+									</div>
+									<p class="item-name style-25">봄이오겠냐? 스프링</p>
+								</div>
+								<div class="item-price-details">
+									<div class="price-breakdown">
+										<div class="price-line">
+											<span class="label amount">금액:</span> <span class="value">35,000</span>
+										</div>
+										<div class="price-line">
+											<span class="label points">포인트:</span> <span class="value">2,000</span>
+										</div>
+										<img
+											src="/page/fafed4a0-cb5b-4d18-828f-a087ba6477a6/images/298_17487.svg"
+											alt="price divider" class="price-divider-svg" />
+										<div class="price-line">
+											<span class="label total">합계:</span> <span class="value">33,000</span>
+										</div>
+									</div>
+									<a href="#" class="details-link">상세 내역 보기 ></a>
+								</div>
+							</article>
+
+						</div>
 					</div>
-					<div class="div15" onclick="location.href='page4'">상세 내역 보기 &gt;</div>
-				</div>
-			</div>
-			<div class="frame-3601">
-				<div class="div16">개발새발 코딩 스터디</div>
-				<div class="frame-352">
-					<div class="_12345678">주문번호 : 12345678</div>
-				</div>
-				<div class="frame-3524">
-					<div class="div11">매치업</div>
-				</div>
-				<div class="frame-3606">
-					<div class="frame-3523">
-						<div class="div12">금액:</div>
-						<div class="div13">포인트:</div>
-						<img class="line-412" src="line-411.svg" />
-						<div class="div14">합계:</div>
-						<div class="_35-000">35,000</div>
-						<div class="_2-000">2,000</div>
-						<div class="_33-000">33,000</div>
-					</div>
-					<div class="div15" onclick="location.href='page4'">상세 내역 보기 &gt;</div>
-				</div>
-			</div>
-			<div class="frame-3602">
-				<div class="div17">손쉬운 정보처리기사</div>
-				<div class="frame-352">
-					<div class="_12345678">주문번호 : 12345678</div>
-				</div>
-				<div class="frame-3525">
-					<div class="div11">주문취소</div>
-				</div>
-				<div class="frame-3606">
-					<div class="frame-3523">
-						<div class="div12">금액:</div>
-						<div class="div13">포인트:</div>
-						<img class="line-413" src="line-412.svg" />
-						<div class="div14">합계:</div>
-						<div class="_35-000">35,000</div>
-						<div class="_2-000">2,000</div>
-						<div class="_33-000">33,000</div>
-					</div>
-					<div class="div15" onclick="location.href='page4'">상세 내역 보기 &gt;</div>
-				</div>
-			</div>
-			<div class="frame-3603">
-				<div class="div16">알고리즘 마스터반(교재)</div>
-				<div class="frame-352">
-					<div class="_12345678">주문번호 : 12345678</div>
-				</div>
-				<div class="frame-3526">
-					<div class="div11">매치업</div>
-				</div>
-				<div class="frame-3606">
-					<div class="frame-3523">
-						<div class="div12">금액:</div>
-						<div class="div13">포인트:</div>
-						<img class="line-414" src="line-413.svg" />
-						<div class="div14">합계:</div>
-						<div class="_35-000">35,000</div>
-						<div class="_2-000">2,000</div>
-						<div class="_33-000">33,000</div>
-					</div>
-					<div class="div15" onclick="location.href='page4'">상세 내역 보기 &gt;</div>
-				</div>
-			</div>
-			<div class="frame-3604">
-				<div class="div17">봄이오겠냐? 스프링</div>
-				<div class="frame-352">
-					<div class="_12345678">주문번호 : 12345678</div>
-				</div>
-				<div class="frame-3522">
-					<div class="div11">멘토스</div>
-				</div>
-				<div class="frame-3606">
-					<div class="frame-3523">
-						<div class="div12">금액:</div>
-						<div class="div13">포인트:</div>
-						<img class="line-415" src="line-414.svg" />
-						<div class="div14">합계:</div>
-						<div class="_35-000">35,000</div>
-						<div class="_2-000">2,000</div>
-						<div class="_33-000">33,000</div>
-					</div>
-					<div class="div15" onclick="location.href='page4'">상세 내역 보기 &gt;</div>
-				</div>
-			</div>
-			<div class="frame-3605">
-				<div class="div17">봄이오겠냐? 스프링</div>
-				<div class="frame-352">
-					<div class="_12345678">주문번호 : 12345678</div>
-				</div>
-				<div class="frame-3522">
-					<div class="div11">멘토스</div>
-				</div>
-				<div class="frame-3606">
-					<div class="frame-3523">
-						<div class="div12">금액:</div>
-						<div class="div13">포인트:</div>
-						<img class="line-416" src="line-415.svg" />
-						<div class="div14">합계:</div>
-						<div class="_35-000">35,000</div>
-						<div class="_2-000">2,000</div>
-						<div class="_33-000">33,000</div>
-					</div>
-					<div class="div15" onclick="location.href='page4'">상세 내역 보기 &gt;</div>
-				</div>
+					<%--
+ 				<div class="load-more-container">
+					<img src="${cpath}/resources/images/mypage/mypage3/vuesax-linear-export0.svg" alt="더 보기" class="load-more-arrow-icon">
+				</div> 
+--%>
+				</section>
 			</div>
 		</div>
 	</div>

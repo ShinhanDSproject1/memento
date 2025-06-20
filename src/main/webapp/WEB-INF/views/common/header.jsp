@@ -22,18 +22,19 @@
 
 .frame-3600 {
   background: #ffffff;
-  padding: 16px 34px 16px 34px;
+  /* padding: 16px 34px 16px 34px; */
   display: flex;
   flex-direction: row;
   gap: 22px;
   align-items: center;
   justify-content: center;
   width: 100%;
-  min-width: 1440px;
-  height: 104px;
-  position: absolute;
-  left: 0px;
-  top: 0px;
+  min-width: 0;
+  height: 100px;
+  position: fixed;
+  left: 0;
+  top: 0;
+  z-index: 999;;
   box-shadow: 0px 4px 4px 0px rgba(118, 115, 115, 0.25);
   overflow-x: auto;
 }
@@ -257,11 +258,9 @@
 	<div class="frame-11">
 		<div class="div9">로그인</div>
 	</div>
-	<div class="vuesax-linear-profile-circle">
-		<img class="profile-circle" src="${cpath}/resources/images/header/profile-circle0.svg" />
-	</div>
+	<img class="vuesax-linear-coin" src="${cpath}/resources/images/header/vuesax-linear-coin0.svg" />
 	<img class="icon-alert-notification-bell-new" src="${cpath}/resources/images/header/icon-alert-notification-bell-new0.svg" />
-	<div class="vuesax-linear-profile-circle">
+	<div class="vuesax-linear-profile-circle" onclick="location.href='page1'">
     	<img class="profile-circle" src="${cpath}/resources/images/header/profile-circle0.svg" />
   	</div>
 </div>

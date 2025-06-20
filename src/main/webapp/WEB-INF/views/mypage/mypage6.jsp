@@ -8,122 +8,157 @@
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/resources/css/mypage/mypageMatchupListStyle.css" />
 <link rel="stylesheet"
-	href="${pageContext.request.contextPath}/resources/css/mypage/mypageMatchupListVars.css" />
+	href="${pageContext.request.contextPath}/resources/css/mypage/mypageVars.css" />
 </head>
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/resources/css/mypage/sidebar.css" />
 </head>
 <body>
-	<%@ include file="../common/header.jsp"%>
-	<div class="div">
-	<%@ include file="../common/sidebar.jsp"%>
-		<div class="frame-3625">
-			<div class="div7">나의 매치업 목록</div>
-			<div class="frame-3679">
-				<div class="group-413">
-					<div class="rectangle-181"></div>
-					<div class="leader">Leader</div>
-					<div class="frame-411">
-						<img class="microphone-2" src="${cpath}/resources/images/mypage/mypage6/microphone-20.svg" />
-						<div class="div8">조상호 멘토</div>
+	<div class="layout-wrapper">
+		<%@ include file="../common/header.jsp"%>
+		<div class="main-content-wrapper">
+			<%@ include file="../common/sidebar.jsp"%>
+			<div class="page-container">
+				<section id="matchup-list-section"
+					class="matchup-list-section style_1">
+					<div class="matchup-list-container">
+						<h2 class="page-title style_2">나의 매치업 목록</h2>
+						<div class="cards-list">
+							<article class="matchup-card style_4">
+								<div class="card-content-wrapper">
+									<img
+										src="${cpath}/resources/images/mypage/mypage6/vector0.svg"
+										alt="Avatar" class="avatar style_10">
+									<div class="details-column">
+										<div class="top-section">
+											<div class="tags-container style_11">
+												<span class="tag style_13"><span
+													class="tag-text style_14">#알고리즘 #C</span></span>
+											</div>
+											<span class="session-count style_9">3/5회</span>
+										</div>
+										<h3 class="study-title style_6">C언어로 운영체제 뜯어보는 스터디</h3>
+										<div class="bottom-section">
+											<div class="schedule-location-container style_15">
+												<span class="schedule style_16">화 17:00 - 19:00</span> <span
+													class="location style_17">마포구</span>
+											</div>
+											<div class="mentor-info">
+												<img
+													src="${cpath}/resources/images/mypage/mypage6/microphone-20.svg"
+													alt="Role Icon" class="mic-icon style_18"> <span
+													class="mentor-name style_7">조상호 멘토</span>
+											</div>
+											<span class="user-role style_8">방장</span>
+										</div>
+									</div>
+								</div>
+							</article>
+
+							<article class="matchup-card style_4">
+								<div class="card-content-wrapper">
+									<img
+										src="${cpath}/resources/images/mypage/mypage6/vector0.svg""
+										alt="Avatar" class="avatar style_20">
+									<div class="details-column">
+										<div class="top-section">
+											<div class="tags-container style_11">
+												<span class="tag style_13"><span
+													class="tag-text style_14">#알고리즘 #Java</span></span>
+											</div>
+											<span class="session-count style_9">1/7회</span>
+										</div>
+										<h3 class="study-title style_6">C언어로 운영체제 뜯어보는 스터디</h3>
+										<div class="bottom-section">
+											<div class="schedule-location-container style_15">
+												<span class="schedule style_16">화 17:00 - 19:00</span> <span
+													class="location style_17">마포구</span>
+											</div>
+											<div class="mentor-info"></div>
+											<span class="user-role style_19">팀원</span>
+										</div>
+									</div>
+								</div>
+							</article>
+
+							<article class="matchup-card style_4">
+								<div class="card-content-wrapper">
+									<img
+										src="${cpath}/resources/images/mypage/mypage6/vector0.svg"
+										alt="Avatar" class="avatar style_23">
+									<div class="details-column">
+										<div class="top-section">
+											<div class="tags-container style_11">
+												<span class="tag style_13"><span
+													class="tag-text style_14">#알고리즘 #C</span></span>
+											</div>
+											<span class="session-count style_22">대기중</span>
+										</div>
+										<h3 class="study-title style_6">C언어로 운영체제 뜯어보는 스터디</h3>
+										<div class="bottom-section">
+											<div class="schedule-location-container style_15">
+												<span class="schedule style_16">화 17:00 - 19:00</span> <span
+													class="location style_17">마포구</span>
+											</div>
+											<div class="mentor-info">
+												<img
+													src="${cpath}/resources/images/mypage/mypage6/microphone-20.svg"
+													alt="Role Icon" class="mic-icon style_24"> <span
+													class="mentor-name style_21">미확정</span>
+											</div>
+											<span class="user-role style_8">방장</span>
+										</div>
+									</div>
+								</div>
+							</article>
+
+							<article class="matchup-card style_4">
+								<div class="card-content-wrapper">
+									<img
+										src="${cpath}/resources/images/mypage/mypage6/vector0.svg"
+										alt="Avatar" class="avatar style_26">
+									<div class="details-column">
+										<div class="top-section">
+											<div class="tags-container style_11">
+												<span class="tag style_13"><span
+													class="tag-text style_14">#알고리즘 #C</span></span>
+											</div>
+											<span class="session-count style_25">수료</span>
+										</div>
+										<h3 class="study-title style_6">C언어로 운영체제 뜯어보는 스터디</h3>
+										<div class="bottom-section">
+											<div class="schedule-location-container style_15">
+												<span class="schedule style_16">화 17:00 - 19:00</span> <span
+													class="location style_17">마포구</span>
+											</div>
+											<div class="mentor-info">
+												<img
+													src="${cpath}/resources/images/mypage/mypage6/microphone-20.svg"
+													alt="Role Icon" class="mic-icon style_27"> <span
+													class="mentor-name style_7">정진 멘토</span>
+											</div>
+											<span class="user-role style_8">방장</span>
+										</div>
+									</div>
+								</div>
+							</article>
+						</div>
+						<div class="action-buttons-container style_28">
+							<button class="action-button style_28">
+								<img
+									src="${cpath}/resources/images/mypage/mypage6/rectangle-3050.svg"
+									alt="킵고잉 찬성 배경" class="button-background style_29"> <span
+									class="button-text style_30">킵고잉 찬성</span>
+							</button>
+							<button class="action-button style_28">
+								<img
+									src="${cpath}/resources/images/mypage/mypage6/rectangle-3051.svg"
+									alt="리뷰 쓰기 배경" class="button-background style_31"> <span
+									class="button-text style_30">리뷰 쓰기</span>
+							</button>
+						</div>
 					</div>
-					<div class="group-411">
-						<div class="c">C언어로 운영체제 뜯어보는 스터디</div>
-						<img class="vector" src="${cpath}/resources/images/mypage/mypage6/vector0.svg" />
-						<div class="frame-4112">
-							<div class="group-409">
-								<div class="rectangle-65"></div>
-								<div class="div9">운영체제</div>
-							</div>
-							<div class="group-410">
-								<div class="rectangle-67"></div>
-								<div class="c2">C</div>
-							</div>
-						</div>
-						<div class="frame-4113">
-							<div class="_17-00-19-00">화 17:00 - 19:00</div>
-							<div class="div10">마포구</div>
-						</div>
-					</div>
-					<div class="_3-5">3 / 5회</div>
-				</div>
-				<div class="group-412">
-					<div class="rectangle-1812"></div>
-					<div class="follower">Follower</div>
-					<div class="group-4112">
-						<div class="java">JAVA, 서로 손 꼭 자바</div>
-						<img class="vector2" src="${cpath}/resources/images/mypage/mypage6/vector1.svg" />
-						<div class="frame-4114">
-							<div class="group-409">
-								<div class="rectangle-65"></div>
-								<div class="div9">운영체제</div>
-							</div>
-							<div class="group-4102">
-								<div class="rectangle-672"></div>
-								<div class="java2">JAVA</div>
-							</div>
-						</div>
-						<div class="frame-4115">
-							<div class="_19-00-20-30">월, 목 19:00 - 20:30</div>
-							<div class="div10">광진구</div>
-						</div>
-					</div>
-					<div class="_1-7">1 / 7회</div>
-				</div>
-				<div class="group-414">
-					<div class="rectangle-1813"></div>
-					<div class="leader2">Leader</div>
-					<div class="frame-4116">
-						<img class="microphone-22" src="${cpath}/resources/images/mypage/mypage6/microphone-21.svg" />
-						<div class="div11">미확정</div>
-					</div>
-					<div class="group-411">
-						<div class="ai">AI 마스터 가보자고</div>
-						<img class="vector3" src="${cpath}/resources/images/mypage/mypage6/vector2.svg" />
-						<div class="frame-4117">
-							<div class="group-409">
-								<div class="rectangle-65"></div>
-								<div class="div9">운영체제</div>
-							</div>
-							<div class="group-410">
-								<div class="rectangle-67"></div>
-								<div class="c2">C</div>
-							</div>
-						</div>
-						<div class="frame-4118">
-							<div class="_17-00-19-00">화 17:00 - 19:00</div>
-							<div class="div10">강남구</div>
-						</div>
-					</div>
-					<div class="div12">대기중</div>
-				</div>
-				<div class="group-415">
-					<div class="rectangle-1814"></div>
-					<div class="leader3">Leader</div>
-					<div class="div13">수료</div>
-					<div class="frame-4119">
-						<img class="microphone-23" src="${cpath}/resources/images/mypage/mypage6/microphone-22.svg" />
-						<div class="div11">정진</div>
-					</div>
-					<div class="group-411">
-						<div class="ds-5">신한 DS 5기는 다 모여라~~</div>
-						<img class="vector4" src="${cpath}/resources/images/mypage/mypage6/vector3.svg" />
-						<div class="frame-41110">
-							<div class="group-409">
-								<div class="rectangle-65"></div>
-								<div class="div9">운영체제</div>
-							</div>
-							<div class="group-410">
-								<div class="rectangle-67"></div>
-								<div class="c2">C</div>
-							</div>
-						</div>
-						<div class="frame-41111">
-							<div class="_17-00-19-00">화 17:00 - 19:00</div>
-							<div class="div10">마포구</div>
-						</div>
-					</div>
-				</div>
+				</section>
 			</div>
 		</div>
 	</div>

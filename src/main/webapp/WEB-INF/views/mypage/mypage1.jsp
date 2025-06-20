@@ -6,235 +6,367 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>마이페이지 대시보드</title>
-
-<!-- 스타일 시트 -->
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/resources/css/mypage/mypageDashboardStyle.css" />
 <link rel="stylesheet"
-	href="${pageContext.request.contextPath}/resources/css/mypage/mypageDashboardVars.css" />
+	href="${pageContext.request.contextPath}/resources/css/mypage/mypageVars.css" />
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/resources/css/mypage/sidebar.css" />
 </head>
 <body>
-	<%@ include file="../common/header.jsp"%>
-	<div class="div">
-	<%@ include file="../common/sidebar.jsp"%>
-		<div class="frame-139">
-			<div class="rectangle-180"></div>
-			<div class="frame-372">
-				<div class="mentos">Mentos</div>
-			</div>
-			<div class="frame-3722">
-				<div class="div7">얄팍한 코딩사전</div>
-				<div class="icon-maps-01">
-					<img class="icon-maps-compass" src="${cpath}/resources/images/mypage/mypage1/icon-maps-compass0.svg" />
-				</div>
-				<div class="div8">파이썬? 야 너두 할 수 있어</div>
-				<div class="rectangle-138"></div>
-				<div class="div9">수강중</div>
-			</div>
-			<div class="frame-3723">
-				<div class="mentor">Mentor</div>
-				<img class="icon-fill-type-43" src="${cpath}/resources/images/mypage/mypage1/icon-fill-type-430.svg" />
-				<div class="div10">봄이 오겠냐? 스프링</div>
-				<div class="rectangle-139"></div>
-				<div class="div11">현재 진행중</div>
-			</div>
-			<div class="frame-3724">
-				<div class="div12">흥달쌤</div>
-				<div class="icon-maps-012">
-					<img class="icon-maps-compass2" src="${cpath}/resources/images/mypage/mypage1/icon-maps-compass1.svg" />
-				</div>
-				<div class="div13">손쉬운 정보처리기사</div>
-				<div class="rectangle-140"></div>
-				<div class="div14">수강중</div>
-			</div>
-			<div class="frame-3725">
-				<div class="div15">멘토스 목록</div>
-				<img class="vuesax-linear-logout" src="${cpath}/resources/images/mypage/mypage1/vuesax-linear-logout0.svg" />
-			</div>
-		</div>
-		<div class="frame-3726">
-			<div class="rectangle-183"></div>
-			<div class="frame-3727">
-				<div class="match-up">Match Up</div>
-			</div>
-			<div class="div16" onclick="location.href='page6'">매치업 목록</div>
-			<img class="vuesax-linear-logout2" src="${cpath}/resources/images/mypage/mypage1/vuesax-linear-logout1.svg" />
-			<div class="ellipse-5"></div>
-			<img class="avatar-man-01" src="${cpath}/resources/images/mypage/mypage1/avatar-man-010.svg" />
-			<div class="div17">개발새발 코딩 스터디</div>
-			<div class="icon-time-02">
-				<img class="icon-time-calendar-01" src="${cpath}/resources/images/mypage/mypage1/icon-time-calendar-010.svg" />
-			</div>
-			<div class="_2-3">2 / 3회 진행 중</div>
-			<div class="leader">(Leader)</div>
-			<img class="icon-fill-type-87" src="${cpath}/resources/images/mypage/mypage1/icon-fill-type-870.svg" />
-			<div class="icon-time-022">
-				<img class="icon-time-calendar-012" src="${cpath}/resources/images/mypage/mypage1/icon-time-calendar-011.svg" />
-			</div>
-			<div class="ellipse-6"></div>
-			<img class="avatar-man-04" src="${cpath}/resources/images/mypage/mypage1/avatar-man-040.svg" />
-			<div class="div18">쉽게 배우는 자바</div>
-			<div class="_4-5">4 / 5회 진행 중</div>
-			<div class="follower">(follower)</div>
-			<img class="icon-fill-type-88" src="${cpath}/resources/images/mypage/mypage1/icon-fill-type-880.svg" />
-			<div class="icon-time-023">
-				<img class="icon-time-calendar-013" src="${cpath}/resources/images/mypage/mypage1/icon-time-calendar-012.svg" />
-			</div>
-			<div class="ellipse-7"></div>
-			<img class="vector" src="vector0.svg" />
-			<div class="div19">알고리즘 마스터 반</div>
-			<div class="_2-32">2 / 3회 진행 중</div>
-			<div class="follower2">(follower)</div>
-			<img class="icon-fill-type-872" src="${cpath}/resources/images/mypage/mypage1/icon-fill-type-871.svg" />
-		</div>
-		<div class="frame-311">
-			<div class="frame-3649">
-				<div class="frame-373">
-					<div class="keep-going">Keep Going</div>
-				</div>
-				<div class="frame-3652">
-					<div class="frame-391">
-						<div class="div20">눈누입니다</div>
-						<div class="users">
-							<div class="user-icon-and-count">
-								<img class="vector2" src="${cpath}/resources/images/mypage/mypage1/vector1.svg" />
-								<div class="users-count-text">33</div>
+	<div class="layout-wrapper">
+		<%@ include file="../common/header.jsp"%>
+		<div class="main-content-wrapper">
+			<%@ include file="../common/sidebar.jsp"%>
+			<div class="page-container">
+				<section id="dashboard-row-1" class="dashboard-row-section">
+					<article id="matchup-card" class="card style_103">
+						<h2 class="style_135">Match Up</h2>
+						<hr class="style_7">
+						<div class="matchup-items">
+							<div class="card-list-item">
+								<img
+									src="${cpath}/resources/images/mypage/mypage1/avatar-man-010.svg"
+									alt="Avatar" class="avatar-img style_84">
+								<div class="item-details">
+									<span class="style_86">개발새발 코딩 스터디</span>
+									<div class="item-row">
+										<div class="merged-icon-container style_88"
+											style="width: 13px; height: 13px;">
+											<img
+												src="${cpath}/resources/images/mypage/mypage1/icon-time-calendar-010.svg"
+												alt="Calendar part"
+												style="left: 1.08px; top: 1.62px; width: 10.83px; height: 10.83px;">
+										</div>
+										<span class="style_134">2 / 3회 진행 중</span>
+									</div>
+								</div>
+								<span class="style_86 item-status">(Leader)</span> <img
+									src="${cpath}/resources/images/mypage/mypage1/vuesax-linear-logout1.svg"
+									alt="Icon" class="style_105">
+							</div>
+							<div class="card-list-item">
+								<img
+									src="${cpath}/resources/images/mypage/mypage1/avatar-man-010.svg"
+									alt="Avatar" class="avatar-img style_84">
+								<div class="item-details">
+									<span class="style_86">쉽게 배우는 자바</span>
+									<div class="item-row">
+										<div class="merged-icon-container style_88"
+											style="width: 13px; height: 13px;">
+											<img
+												src="${cpath}/resources/images/mypage/mypage1/icon-time-calendar-010.svg"
+												alt="Calendar part"
+												style="left: 1.08px; top: 1.62px; width: 10.83px; height: 10.83px;">
+
+										</div>
+										<span class="style_134">4 / 5회 진행 중</span>
+									</div>
+								</div>
+								<span class="style_86 item-status">(follower)</span> <img
+									src="${cpath}/resources/images/mypage/mypage1/vuesax-linear-logout1.svg"
+									alt="Icon" class="style_106">
+							</div>
+							<div class="card-list-item">
+								<img
+									src="${cpath}/resources/images/mypage/mypage1/avatar-man-010.svg"
+									alt="Avatar" class="avatar-img style_84">
+								<div class="item-details">
+									<span class="style_86">알고리즘 마스터반</span>
+									<div class="item-row">
+										<div class="merged-icon-container style_88"
+											style="width: 13px; height: 13px;">
+											<img
+												src="${cpath}/resources/images/mypage/mypage1/icon-time-calendar-010.svg"
+												alt="Calendar part"
+												style="left: 1.08px; top: 1.62px; width: 10.83px; height: 10.83px;">
+										</div>
+										<span class="style_134">2 / 3회 진행 중</span>
+									</div>
+								</div>
+								<span class="style_86 item-status">(Leader)</span> <img
+									src="${cpath}/resources/images/mypage/mypage1/vuesax-linear-logout1.svg"
+									alt="Icon" class="style_107">
 							</div>
 						</div>
-						<div class="_19-00-21-00">화, 목 (19:00 ~ 21:00)</div>
-					</div>
-					<div class="frame-383">
-						<div class="div21">채팅하기</div>
-					</div>
-				</div>
-				<div class="frame-3732">
-					<div class="div22">킵고잉 목록</div>
-					<img class="vuesax-linear-logout3" src="${cpath}/resources/images/mypage/mypage1/vuesax-linear-logout2.svg" />
-				</div>
-				<div class="frame-3653">
-					<div class="frame-3912">
-						<div class="div23">넌너입니다</div>
-						<div class="users2">
-							<div class="user-icon-and-count">
-								<img class="vector3" src="${cpath}/resources/images/mypage/mypage1/vector2.svg" />
-								<div class="users-count-text">33</div>
+						<a href="#" class="card-footer-link style_26"> 매치업 목록 <img
+							src="${cpath}/resources/images/mypage/mypage1/vuesax-linear-logout1.svg"
+							alt="Arrow" class="style_104">
+						</a>
+					</article>
+
+					<article id="mentos-card" class="card style_83">
+						<h2 class="style_85">Mentos</h2>
+						<hr class="style_7">
+						<div class="mentos-items">
+							<div class="card-list-item">
+								<img
+									src="${cpath}/resources/images/mypage/mypage1/avatar-man-010.svg"
+									alt="Avatar" class="avatar-img style_84">
+								<div class="item-details">
+									<span class="style_86">봄이 오겠냐? 스프링</span>
+									<div class="item-row">
+										<div class="merged-icon-container style_88"
+											style="width: 18px; height: 18px;">
+											<img
+												src="${cpath}/resources/images/mypage/mypage1/icon-maps-compass0.svg"
+												alt="Compass part"
+												style="left: 0.75px; top: 0.75px; width: 16.5px; height: 16.5px;">
+										</div>
+										<span class="style_94">얄팍한 코딩사전</span>
+									</div>
+								</div>
+								<span class="style_87 item-status">수강중</span>
+							</div>
+							<div class="card-list-item">
+								<img
+									src="${cpath}/resources/images/mypage/mypage1/avatar-man-010.svg"
+									alt="Avatar" class="avatar-img style_84">
+								<div class="item-details">
+									<span class="style_86">파이썬? 야 너두 할 수 있어</span>
+									<div class="item-row">
+										<img
+											src="${cpath}/resources/images/mypage/mypage1/icon-fill-type-430.svg"
+											alt="Mentor Icon" class="style_97"> <span
+											class="style_98">Mentor</span>
+									</div>
+								</div>
+								<span class="style_96 item-status">현재 진행중</span>
+							</div>
+							<div class="card-list-item">
+								<img
+									src="${cpath}/resources/images/mypage/mypage1/avatar-man-010.svg"
+									alt="Avatar" class="avatar-img style_84">
+								<div class="item-details">
+									<span class="style_86">손쉬운 정보처리기사</span>
+									<div class="item-row">
+										<div class="merged-icon-container style_88"
+											style="width: 18px; height: 18px;">
+											<img
+												src="${cpath}/resources/images/mypage/mypage1/icon-maps-compass0.svg"
+												alt="Compass part"
+												style="left: 0.75px; top: 0.75px; width: 16.5px; height: 16.5px;">
+										</div>
+										<span class="style_94">흥달쌤</span>
+									</div>
+								</div>
+								<span class="style_87 item-status">수강중</span>
 							</div>
 						</div>
-						<div class="_19-00-21-002">월, 수 (19:00 ~ 21:00)</div>
-					</div>
-					<div class="frame-3832">
-						<div class="div21">채팅하기</div>
-					</div>
-				</div>
-			</div>
-			<div class="frame-3651">
-				<div class="frame-4092">
-					<div class="frame-3632">
-						<img class="icon-fill-type-50" src="${cpath}/resources/images/mypage/mypage1/icon-fill-type-500.svg" />
-						<div class="div24">명예의 전당</div>
-						<img class="icon-fill-type-502" src="${cpath}/resources/images/mypage/mypage1/icon-fill-type-501.svg" />
-					</div>
-					<div class="frame-407">
-						<img class="frame" src="${cpath}/resources/images/mypage/mypage1/frame0.svg" />
-						<div class="ellipse-23"></div>
-						<div class="ellipse-27"></div>
-						<div class="ellipse-20"></div>
-						<div class="ellipse-24"></div>
-						<div class="ellipse-28"></div>
-					</div>
-					<div class="frame-408">
-						<div class="ellipse-21"></div>
-						<div class="ellipse-25"></div>
-						<div class="ellipse-29"></div>
-						<div class="ellipse-22"></div>
-						<div class="ellipse-26"></div>
-						<div class="ellipse-30"></div>
-					</div>
-				</div>
-			</div>
-			<div class="frame-381">
-				<div class="frame-3812">
-					<div class="div25">
-						<span> <span class="div-25-span"> 목표러 코취치 <br />
-						</span> <span class="div-25-span2">(목표지향 개발자)</span>
-						</span>
-					</div>
-				</div>
-				<div class="frame-380">
-					<div class="spark-type">Spark Type</div>
-				</div>
-			</div>
-			<div class="frame-3802">
-				<div class="frame-3813">
-					<img class="login" src="${cpath}/resources/images/mypage/mypage1/login0.svg" />
-					<div class="div26">Git을 활용한 프로젝트 생성해보기</div>
-					<div class="free">(Free)</div>
-				</div>
-				<div class="frame-3803">
-					<img class="login2" src="${cpath}/resources/images/mypage/mypage1/login1.svg" />
-					<div class="div26">리액트 한큐에 배우기</div>
-					<div class="_20-000">(20,000)</div>
-				</div>
-				<div class="frame-382">
-					<img class="login3" src="${cpath}/resources/images/mypage/mypage1/login2.svg" />
-					<div class="div26">Figma 어렵지 않아요</div>
-					<div class="_35-000">(35,000)</div>
-				</div>
-				<div class="frame-3804">
-					<div class="div27">내가 찜한 목록</div>
-					<div class="frame-3805">
-						<img class="vuesax-linear-import" src="${cpath}/resources/images/mypage/mypage1/vuesax-linear-import0.svg" />
-						<div class="more">More</div>
-					</div>
-				</div>
-			</div>
-			<div class="frame-3822">
-				<div class="_2025-6-2">2025년 6월 2주</div>
-				<div class="frame-406">
-					<img class="vuesax-linear-import2" src="${cpath}/resources/images/mypage/mypage1/vuesax-linear-import1.svg" />
-					<div class="div28">월간 달력 보기</div>
-				</div>
-				<div class="frame-3823">
-					<div class="frame-3806">
-						<div class="frame-4062">
-							<div class="div29">월</div>
+						<a href="#" class="card-footer-link style_26"> 멘토스 목록 <img
+							src="${cpath}/resources/images/mypage/mypage1/vuesax-linear-logout1.svg"
+							alt="Arrow" class="style_102">
+						</a>
+					</article>
+				</section>
+				<section id="dashboard-row-2" class="dashboard-row-section">
+					<article id="keepgoing-card" class="card style_3">
+						<div class="style_5">
+							<h2 class="style_6">Keep Going</h2>
+							<hr class="style_7">
 						</div>
-						<div class="frame-4063">
-							<div class="div30">화</div>
+						<div class="style_8">
+							<div class="style_10">
+								<div class="style_11">
+									<div class="style_12">
+										<span class="style_13">넌너입니다</span>
+										<div class="style_14">
+											<div class="style_15">
+												<img
+													src="${cpath}/resources/images/mypage/mypage1/vector0.svg"
+													alt="User icon" class="style_16"> <span
+													class="style_17">33</span>
+											</div>
+										</div>
+									</div>
+									<span class="style_18">화, 목 (19:00~21:00)</span>
+								</div>
+								<a href="#" class="style_19"><span class="style_20">채팅하기</span>
+								</a>
+							</div>
+							<div class="style_10">
+								<div class="style_11">
+									<div class="style_22">
+										<span class="style_13">넌너입니다</span>
+										<div class="style_14">
+											<div class="style_15">
+												<img
+													src="${cpath}/resources/images/mypage/mypage1/vector0.svg"
+													alt="User icon" class="style_23"> <span
+													class="style_17">33</span>
+											</div>
+										</div>
+									</div>
+									<span class="style_18">화, 목 (19:00~21:00)</span>
+								</div>
+								<a href="#" class="style_24"><span class="style_20">채팅하기</span>
+								</a>
+							</div>
 						</div>
-						<div class="frame-4064">
-							<div class="div31">수</div>
-							<div class="rectangle-162"></div>
+						<a href="#" class="card-footer-link style_25"> <span
+							class="style_26">킵고잉 목록</span> <img
+							src="${cpath}/resources/images/mypage/mypage1/vuesax-linear-logout1.svg"
+							alt="Arrow" class="style_28">
+						</a>
+					</article>
+
+					<article id="sparktest-card" class="card style_3">
+						<div class="style_30">
+							<h2 class="style_31">Spark Test</h2>
+							<hr class="style_7">
 						</div>
-						<div class="frame-4065">
-							<div class="div20">목</div>
+						<div class="style_32">
+							<h3 class="style_33">목표러 코취치</h3>
+							<p class="style_34">(목표지향 개발자)</p>
 						</div>
-						<div class="frame-4066">
-							<div class="rectangle-163"></div>
-							<div class="div32">금</div>
+					</article>
+				</section>
+				<section id="dashboard-row-3" class="dashboard-row-section">
+					<article id="halloffame-card" class="card style_52">
+						<div class="style_54">
+							<img
+								src="${cpath}/resources/images/mypage/mypage1/icon-fill-type-500.svg"
+								alt="Crown" class="style_55">
+							<h2 class="style_56">명예의 전당</h2>
+							<img
+								src="${cpath}/resources/images/mypage/mypage1/icon-fill-type-500.svg"
+								alt="Crown" class="style_57">
 						</div>
-						<div class="frame-4067">
-							<div class="div33">토</div>
+						<div class="style_58 hall-of-fame-avatars">
+							<div class="style_59">
+								<img src="${cpath}/resources/images/mypage/mypage1/frame0.svg"
+									alt="Avatar" class="style_61"> <img
+									src="${cpath}/resources/images/mypage/mypage1/frame0.svg"
+									alt="Avatar placeholder" class="style_62"> <img
+									src="${cpath}/resources/images/mypage/mypage1/frame0.svg"
+									alt="Avatar placeholder" class="style_63"> <img
+									src="${cpath}/resources/images/mypage/mypage1/frame0.svg"
+									alt="Avatar placeholder" class="style_64"> <img
+									src="${cpath}/resources/images/mypage/mypage1/frame0.svg"
+									alt="Avatar placeholder" class="style_65"> <img
+									src="${cpath}/resources/images/mypage/mypage1/frame0.svg"
+									alt="Avatar placeholder" class="style_66">
+							</div>
+							<div class="style_59">
+								<img src="${cpath}/resources/images/mypage/mypage1/frame0.svg"
+									alt="Avatar" class="style_61"> <img
+									src="${cpath}/resources/images/mypage/mypage1/frame0.svg"
+									alt="Avatar placeholder" class="style_62"> <img
+									src="${cpath}/resources/images/mypage/mypage1/frame0.svg"
+									alt="Avatar placeholder" class="style_63"> <img
+									src="${cpath}/resources/images/mypage/mypage1/frame0.svg"
+									alt="Avatar placeholder" class="style_64"> <img
+									src="${cpath}/resources/images/mypage/mypage1/frame0.svg"
+									alt="Avatar placeholder" class="style_65"> <img
+									src="${cpath}/resources/images/mypage/mypage1/frame0.svg"
+									alt="Avatar placeholder" class="style_66">
+							</div>
 						</div>
-						<div class="frame-4068">
-							<div class="div33">일</div>
+					</article>
+
+					<article id="mywishlist-card" class="card style_35">
+						<div class="style_37">
+							<h2 class="style_38">내가 찜한 목록</h2>
+							<hr class="style_7">
 						</div>
-					</div>
-					<div class="frame-3807">
-						<div class="rectangle-167"></div>
-						<div class="rectangle-168"></div>
-						<div class="rectangle-170"></div>
-						<div class="rectangle-171"></div>
-						<div class="rectangle-172"></div>
-						<div class="rectangle-173"></div>
-						<img class="icon-fill-type-08" src="${cpath}/resources/images/mypage/mypage1/icon-fill-type-080.svg" /> <img
-							class="icon-fill-type-082" src="${cpath}/resources/images/mypage/mypage1/icon-fill-type-081.svg" />
-						<div class="rectangle-169"></div>
-						<img class="icon-fill-type-95" src="${cpath}/resources/images/mypage/mypage1/icon-fill-type-950.svg" />
-					</div>
-				</div>
+						<div class="style_39">
+							<div class="style_40">
+								<div class="style_41">
+									<span class="style_34">리엑트 한큐에 배우기</span> <span
+										class="style_42">(20,000)</span>
+								</div>
+								<img src="${cpath}/resources/images/mypage/mypage1/login1.svg"
+									alt="Action icon" class="style_43">
+							</div>
+							<div class="style_44">
+								<div class="style_45">
+									<span class="style_34">Git을 활용한 프로젝트 생성해보기</span> <span
+										class="style_46">(Free)</span>
+								</div>
+								<img src="${cpath}/resources/images/mypage/mypage1/login1.svg"
+									alt="Action icon" class="style_47">
+							</div>
+							<div class="style_48">
+								<div class="style_49">
+									<span class="style_34">Figma 어렵지 않아요</span> <span
+										class="style_50">(35,000)</span>
+								</div>
+								<img src="${cpath}/resources/images/mypage/mypage1/login1.svg"
+									alt="Action icon" class="style_51">
+							</div>
+						</div>
+					</article>
+				</section>
+				<section id="dashboard-row-4" class="dashboard-row-section">
+					<article id="attendance-card" class="card style_68">
+						<div class="style_69">
+							<div class="style_70">
+								<h2 class="style_56">이번주 출석체크</h2>
+								<a href="#" class="style_71"> <img
+									src="${cpath}/resources/images/mypage/mypage1/vuesax-linear-import0.svg"
+									alt="Calendar icon" class="style_72"> <span
+									class="style_73">월간 달력 보기</span>
+								</a>
+							</div>
+							<div class="attendance-days style_2">
+								<div class="style_74">
+									<div class="style_75">
+										<span class="style_76">월</span>
+										<hr class="style_77">
+										<img
+											src="${cpath}/resources/images/mypage/mypage1/icon-fill-type-080.svg"
+											alt="Attendance status" class="style_78 attendance-day-icon">
+									</div>
+								</div>
+								<div class="style_74">
+									<div class="style_75">
+										<span class="style_76">화</span>
+										<hr class="style_77">
+										<img
+											src="${cpath}/resources/images/mypage/mypage1/icon-fill-type-080.svg"
+											alt="Attendance status" class="style_79 attendance-day-icon">
+									</div>
+								</div>
+								<div class="style_74">
+									<div class="style_75">
+										<span class="style_76">수</span>
+										<hr class="style_77">
+										<img
+											src="${cpath}/resources/images/mypage/mypage1/icon-fill-type-080.svg"
+											alt="Attendance status" class="style_80 attendance-day-icon">
+									</div>
+								</div>
+								<div class="style_74">
+									<div class="style_81">
+										<span class="style_76">목</span>
+										<hr class="style_77">
+										<img
+											src="${cpath}/resources/images/mypage/mypage1/vector2.svg"
+											alt="Attendance status" class="style_82 attendance-day-icon">
+									</div>
+								</div>
+								<div class="style_74">
+									<div class="style_75">
+										<span class="style_76">금</span>
+										<hr class="style_77">
+									</div>
+								</div>
+								<div class="style_74">
+									<div class="style_75">
+										<span class="style_76">토</span>
+										<hr class="style_77">
+									</div>
+								</div>
+								<div class="style_74">
+									<div class="style_75">
+										<span class="style_76">일</span>
+										<hr class="style_77">
+									</div>
+								</div>
+							</div>
+						</div>
+					</article>
+				</section>
 			</div>
 		</div>
 	</div>
