@@ -20,12 +20,14 @@
 		</div>
 		<div class="frame-3715"></div>
 		<div class="frame-3720">
-			<div class="button">
+			<button 
+ 				data-url="${cpath}/mypage/spark-test"
+			  class="button page-link" >
 				<div class="label">다시 테스트하기</div>
-			</div>
-			<div class="button">
+			</button >
+		<button class="button">
 				<div class="label">확정하기</div>
-			</div>
+			</button>
 		</div>
 		<div class="div">
 			<span> <span class="div-span">☕</span> <span class="div-span2">목표러

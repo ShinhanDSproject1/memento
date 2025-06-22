@@ -34,7 +34,13 @@
 	  		 </li>
 	      </ul>
 	      <ul class="div-3-span">
-	        <li>캐시 충전</li>
+	        <li>
+	        <button
+			 data-url="${cpath}/mypage/cash-recharge"
+			  class="page-link" >
+			  캐시충전
+	  		 </button>
+	  		 </li>
 	      </ul>
 	      <ul class="div-4-span">
 	        <li>결제내역</li>
@@ -49,7 +55,13 @@
 	        </li>
 	      </ul>
  			<ul class="div-5-span">
-	        <li>멘토 자격시험</li>
+	        <li>
+	         <button 
+	      	 data-url="${cpath}/mypage/mento-test"
+	      	 class="page-link">
+	 	     멘토 자격시험
+	  		 </button>
+	        </li>
 	      </ul>
 	  </div>
 </div>

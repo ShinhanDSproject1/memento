@@ -25,6 +25,28 @@ public class MyPageController {
 	    }
 	}
 	
+	@RequestMapping("/dashBoard/calender")
+	public String calender(HttpServletRequest request) {
+	    boolean isAjax = "XMLHttpRequest".equals(request.getHeader("X-Requested-With"));
+	    if (isAjax) {
+	        return "mypage/dash-board/attendance-calender"; // ✨ screen 전용 뷰
+	    } else {
+	        request.setAttribute("initialPage", "/memento/mypage/dashBoard/calender"); // 실제 경로 지정
+	        return "mypage/mypage-main"; // 전체 레이아웃에서 내부에서 AJAX 호출
+	    }
+	}
+	
+	@RequestMapping("/cash-recharge")
+	public String cashRecharge(HttpServletRequest request) {
+	    boolean isAjax = "XMLHttpRequest".equals(request.getHeader("X-Requested-With"));
+	    if (isAjax) {
+	        return "mypage/cash-recharge/cash-recharge-main"; // ✨ screen 전용 뷰
+	    } else {
+	        request.setAttribute("initialPage", "/memento/mypage/cash-recharge"); // 실제 경로 지정
+	        return "mypage/mypage-main"; // 전체 레이아웃에서 내부에서 AJAX 호출
+	    }
+	}
+	
 	@RequestMapping("/spark-test")
 	public String sparkTest(HttpServletRequest request) {
 	    boolean isAjax = "XMLHttpRequest".equals(request.getHeader("X-Requested-With"));
@@ -32,6 +54,17 @@ public class MyPageController {
 	        return "mypage/spark-test/spark-test-main"; // ✨ screen 전용 뷰
 	    } else {
 	        request.setAttribute("initialPage", "/memento/mypage/spark-test"); // 실제 경로 지정
+	        return "mypage/mypage-main"; // 전체 레이아웃에서 내부에서 AJAX 호출
+	    }
+	}
+
+	@RequestMapping("/mento-test")
+	public String metnoTest(HttpServletRequest request) {
+	    boolean isAjax = "XMLHttpRequest".equals(request.getHeader("X-Requested-With"));
+	    if (isAjax) {
+	        return "mypage/mento-test/mento-test-main"; // ✨ screen 전용 뷰
+	    } else {
+	        request.setAttribute("initialPage", "/memento/mypage/mento-test"); // 실제 경로 지정
 	        return "mypage/mypage-main"; // 전체 레이아웃에서 내부에서 AJAX 호출
 	    }
 	}
