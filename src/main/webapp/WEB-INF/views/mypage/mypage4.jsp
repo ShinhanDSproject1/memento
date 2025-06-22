@@ -53,13 +53,13 @@
 							</div>
 
 							<div class="action-buttons">
-								<div class="button-wrapper style_13_group" id="group_298_17560">
+								<div class="button-wrapper style_13_group" id="group_298_17560" onclick="location.href='${cpath}/mypage/page3'">
 									<img
 										src="${cpath}/resources/images/mypage/mypage4/rectangle-3051.svg"
 										alt="돌아가기 배경" class="button-background style_14_svg"> <span
 										class="button-text style_15_text">돌아가기</span>
 								</div>
-								<div class="button-wrapper style_13_group" id="group_298_17563">
+								<div class="button-wrapper style_13_group" id="group_298_17563" onclick="location.href='${cpath}/mypage/page5'">
 									<img
 										src="${cpath}/resources/images/mypage/mypage4/rectangle-3052.svg"
 										alt="환불 신청하기 배경" class="button-background style_16_svg">

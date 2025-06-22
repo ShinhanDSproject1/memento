@@ -22,7 +22,6 @@
 					<div class="payment-history-container">
 						<h1 class="main-title">결제 / 사용 내역</h1>
 						<div class="payment-items-list">
-
 							<article class="payment-item">
 								<div class="item-main-info">
 									<div class="item-row-1">
@@ -47,14 +46,16 @@
 										<div class="price-line">
 											<span class="label points">포인트:</span> <span class="value">2,000</span>
 										</div>
+										<div>
 										<img
 											src="/page/fafed4a0-cb5b-4d18-828f-a087ba6477a6/images/298_17407.svg"
 											alt="price divider" class="price-divider-svg" />
+										</div>
 										<div class="price-line">
 											<span class="label total">합계:</span> <span class="value">33,000</span>
 										</div>
 									</div>
-									<a href="#" class="details-link">상세 내역 보기 ></a>
+									<a href="${cpath}/mypage/page4" class="details-link">상세 내역 보기 ></a>
 								</div>
 							</article>
 
@@ -85,7 +86,7 @@
 											<span class="label total">합계:</span> <span class="value">33,000</span>
 										</div>
 									</div>
-									<a href="#" class="details-link">상세 내역 보기 ></a>
+									<a href="${cpath}/mypage/page4" class="details-link">상세 내역 보기 ></a>
 								</div>
 							</article>
 
@@ -116,7 +117,7 @@
 											<span class="label total">합계:</span> <span class="value">33,000</span>
 										</div>
 									</div>
-									<a href="#" class="details-link">상세 내역 보기 ></a>
+									<a href="${cpath}/mypage/page4" class="details-link">상세 내역 보기 ></a>
 								</div>
 							</article>
 
@@ -147,7 +148,7 @@
 											<span class="label total">합계:</span> <span class="value">33,000</span>
 										</div>
 									</div>
-									<a href="#" class="details-link">상세 내역 보기 ></a>
+									<a href="${cpath}/mypage/page4" class="details-link">상세 내역 보기 ></a>
 								</div>
 							</article>
 
@@ -178,7 +179,7 @@
 											<span class="label total">합계:</span> <span class="value">33,000</span>
 										</div>
 									</div>
-									<a href="#" class="details-link">상세 내역 보기 ></a>
+									<a href="${cpath}/mypage/page4" class="details-link">상세 내역 보기 ></a>
 								</div>
 							</article>
 
@@ -209,17 +210,12 @@
 											<span class="label total">합계:</span> <span class="value">33,000</span>
 										</div>
 									</div>
-									<a href="#" class="details-link">상세 내역 보기 ></a>
+									<a href="${cpath}/mypage/page4" class="details-link">상세 내역 보기 ></a>
 								</div>
 							</article>
 
 						</div>
 					</div>
-					<%--
- 				<div class="load-more-container">
-					<img src="${cpath}/resources/images/mypage/mypage3/vuesax-linear-export0.svg" alt="더 보기" class="load-more-arrow-icon">
-				</div> 
---%>
 				</section>
 			</div>
 		</div>

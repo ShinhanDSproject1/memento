@@ -13,8 +13,9 @@
 					<img class="avatar-default"
 						src="${cpath}/resources/images/mypage/sidebar/avatar-default0.svg" />
 					<div class="frame-497">
-						<img class="vuesax-linear-export"
-							src="${cpath}/resources/images/mypage/sidebar/vuesax-linear-export0.svg" />
+						<a class="vuesax-linear-export" href="${cpath}/mypage/page2">
+						<img src="${cpath}/resources/images/mypage/sidebar/vuesax-linear-export0.svg" />
+						</a>
 					</div>
 				</div>
 				<div class="div2">코딩하는 뭉뭉이</div>

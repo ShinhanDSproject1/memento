@@ -18,7 +18,7 @@
 		<div class="main-content-wrapper">
 			<%@ include file="../common/sidebar.jsp"%>
 			<div class="page-container">
-				<section id="profile-page">
+				<section id="profile-page" class="profile-row-section">
 					<main class="profile-edit-card">
 						<header class="profile-edit-header-content">
 							<h1 class="page-title">프로필 정보 수정</h1>

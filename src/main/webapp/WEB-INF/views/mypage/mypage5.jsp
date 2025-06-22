@@ -53,7 +53,7 @@
 							</div>
 
 							<div class="action-buttons">
-								<div class="button-wrapper style_13_group" id="group_298_17560">
+								<div class="button-wrapper style_13_group" id="group_298_17560" onclick="location.href='${cpath}/mypage/page3'">
 									<img
 										src="${cpath}/resources/images/mypage/mypage5/rectangle-3051.svg"
 										alt="돌아가기 배경" class="button-background style_14_svg"> <span

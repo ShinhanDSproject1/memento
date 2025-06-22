@@ -1,3 +1,4 @@
+/* 레이아웃 전체 wrapper */
 .layout-wrapper {
   display: flex;
   min-height: 100vh;
@@ -10,6 +11,8 @@
 }
 
 .page-container {
+  margin-top: 7%;
+  margin-right: 10%;
   flex: 1;
   padding: 40px;
   box-sizing: border-box;

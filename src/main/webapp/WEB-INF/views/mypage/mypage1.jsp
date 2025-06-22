@@ -41,9 +41,10 @@
 										<span class="style_134">2 / 3회 진행 중</span>
 									</div>
 								</div>
-								<span class="style_86 item-status">(Leader)</span> <img
-									src="${cpath}/resources/images/mypage/mypage1/vuesax-linear-logout1.svg"
-									alt="Icon" class="style_105">
+								<span class="style_86 item-status">(Leader)</span> 
+								<a href="#">
+									<img src="${cpath}/resources/images/mypage/mypage1/vuesax-linear-logout1.svg" alt="Icon" class="style_105">
+								</a>
 							</div>
 							<div class="card-list-item">
 								<img
@@ -58,14 +59,14 @@
 												src="${cpath}/resources/images/mypage/mypage1/icon-time-calendar-010.svg"
 												alt="Calendar part"
 												style="left: 1.08px; top: 1.62px; width: 10.83px; height: 10.83px;">
-
 										</div>
 										<span class="style_134">4 / 5회 진행 중</span>
 									</div>
 								</div>
-								<span class="style_86 item-status">(follower)</span> <img
-									src="${cpath}/resources/images/mypage/mypage1/vuesax-linear-logout1.svg"
-									alt="Icon" class="style_106">
+								<span class="style_86 item-status">(follower)</span> 
+								<a href="#">
+									<img src="${cpath}/resources/images/mypage/mypage1/vuesax-linear-logout1.svg" alt="Icon" class="style_105">
+								</a>
 							</div>
 							<div class="card-list-item">
 								<img
@@ -84,12 +85,13 @@
 										<span class="style_134">2 / 3회 진행 중</span>
 									</div>
 								</div>
-								<span class="style_86 item-status">(Leader)</span> <img
-									src="${cpath}/resources/images/mypage/mypage1/vuesax-linear-logout1.svg"
-									alt="Icon" class="style_107">
+								<span class="style_86 item-status">(Leader)</span> 
+								<a href="#">
+									<img src="${cpath}/resources/images/mypage/mypage1/vuesax-linear-logout1.svg" alt="Icon" class="style_105">
+								</a>
 							</div>
 						</div>
-						<a href="#" class="card-footer-link style_26"> 매치업 목록 <img
+						<a href="${cpath}/mypage/page6" class="card-footer-link style_26"> 매치업 목록 <img
 							src="${cpath}/resources/images/mypage/mypage1/vuesax-linear-logout1.svg"
 							alt="Arrow" class="style_104">
 						</a>
@@ -153,14 +155,14 @@
 								<span class="style_87 item-status">수강중</span>
 							</div>
 						</div>
-						<a href="#" class="card-footer-link style_26"> 멘토스 목록 <img
+						<a href="${cpath}/mypage/page7" class="card-footer-link style_26"> 멘토스 목록 <img
 							src="${cpath}/resources/images/mypage/mypage1/vuesax-linear-logout1.svg"
 							alt="Arrow" class="style_102">
 						</a>
 					</article>
 				</section>
 				<section id="dashboard-row-2" class="dashboard-row-section">
-					<article id="keepgoing-card" class="card style_3">
+					<article id="keepgoing-card" class="card style_103">
 						<div class="style_5">
 							<h2 class="style_6">Keep Going</h2>
 							<hr class="style_7">
@@ -203,15 +205,14 @@
 								</a>
 							</div>
 						</div>
-						<a href="#" class="card-footer-link style_25"> <span
-							class="style_26">킵고잉 목록</span> <img
+						<a href="${cpath}/mypage/page8" class="card-footer-link style_26"> 킵고잉 목록 <img
 							src="${cpath}/resources/images/mypage/mypage1/vuesax-linear-logout1.svg"
-							alt="Arrow" class="style_28">
+							alt="Arrow" class="style_102">
 						</a>
 					</article>
 
-					<article id="sparktest-card" class="card style_3">
-						<div class="style_30">
+					<article id="sparktest-card" class="card style_103">
+						<div class="style_5">
 							<h2 class="style_31">Spark Test</h2>
 							<hr class="style_7">
 						</div>
@@ -232,6 +233,7 @@
 								src="${cpath}/resources/images/mypage/mypage1/icon-fill-type-500.svg"
 								alt="Crown" class="style_57">
 						</div>
+						<hr class="style_7">
 						<div class="style_58 hall-of-fame-avatars">
 							<div class="style_59">
 								<img src="${cpath}/resources/images/mypage/mypage1/frame0.svg"
@@ -337,7 +339,7 @@
 									</div>
 								</div>
 								<div class="style_74">
-									<div class="style_81">
+									<div class="style_75">
 										<span class="style_76">목</span>
 										<hr class="style_77">
 										<img

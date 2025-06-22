@@ -261,6 +261,6 @@
 	<img class="vuesax-linear-coin" src="${cpath}/resources/images/header/vuesax-linear-coin0.svg" />
 	<img class="icon-alert-notification-bell-new" src="${cpath}/resources/images/header/icon-alert-notification-bell-new0.svg" />
 	<div class="vuesax-linear-profile-circle" onclick="location.href='page1'">
-    	<img class="profile-circle" src="${cpath}/resources/images/header/profile-circle0.svg" />
+    	<a class="profile-circle" href="${cpath}/mypage/page1"><img src="${cpath}/resources/images/header/profile-circle0.svg" /></a>
   	</div>
 </div>

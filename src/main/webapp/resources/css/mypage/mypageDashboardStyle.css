@@ -7,15 +7,16 @@
 .main-content-wrapper {
   display: flex;
   flex: 1;
-  min-height: calc(100vh - 100px); /* 헤더 높이만큼 빼주기 */
+  min-height: calc(100vh - 100px);
+  padding-top: 105px;
 }
 
 .page-container {
-  margin-top: 7%;
-  margin-right: 10%;
-  flex: 1;
+  margin: 0 auto;
   padding: 40px;
   box-sizing: border-box;
+  max-width: 1100px;
+  width: 100%;
 }
 
 body {
@@ -83,8 +84,8 @@ body {
 .style_29 { background-color: rgba(0, 0, 0, 0); display: flex; flex-direction: column; justify-content: center; align-items: center; padding: 0 16px; }
 .style_30 { background-color: rgba(0, 0, 0, 0); display: flex; flex-direction: column; gap: 17px; align-items:center; width: -webkit-fill-available;}
 .style_31 { color: #beaf0a; font-family: 'Fredericka the Great', cursive; font-weight: 400; font-size: 30px; line-height: 36.77px; text-align: left; }
-.style_32 { background-color: rgba(0, 0, 0, 0); display: flex; flex-direction: column; justify-content: center; align-items: center; gap: 12px; padding: 10px; }
-.style_33 { color: #000000; font-family: 'Inter', sans-serif; font-weight: 600; font-size: 24px; line-height: 29.05px; text-align: center; }
+.style_32 { background-color: rgba(0, 0, 0, 0); flex-direction: column; justify-content: center; align-items: center; gap: 12px; padding: 10px; }
+.style_33 { color: #000000; font-family: 'Inter', sans-serif; font-weight: 600; font-size: 27px; line-height: 29.05px; text-align: center; }
 .style_34 { color: #000000; font-family: 'Inter', sans-serif; font-weight: 500; font-size: 16px; line-height: 19.36px; text-align: center; }
 .style_35 { background-color: #ffffff; border: 1px solid rgba(0, 0, 0, 0.2); display: flex; flex-direction: column; justify-content: center; align-items: center; gap: 10px; padding: 17px 18px; border-radius: 10px; box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25); }
 .style_36 { background-color: rgba(0, 0, 0, 0); display: flex; flex-direction: column; justify-content: center; gap: 19px; width:100%; }
@@ -103,7 +104,7 @@ body {
 .style_49 { background-color: rgba(0, 0, 0, 0); display: flex; flex-direction: row; align-items: center; gap: 6px; }
 .style_50 { color: rgba(0, 0, 0, 0.38); font-family: 'Inter', sans-serif; font-weight: 500; font-size: 14px; line-height: 16.94px; text-align: center; }
 .style_51 { background-color: rgba(0, 0, 0, 0); border-radius: 10px; width: 34.4px; height: 19.67px; }
-.style_52 { background-color: #ffffff; border: 1px solid rgba(0, 0, 0, 0.2); display: flex; flex-direction: column; justify-content: center; align-items: center; gap: 10px; padding: 13px 19px; border-radius: 10px; box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25); }
+.style_52 { background-color: #ffffff; border: 1px solid rgba(0, 0, 0, 0.2); display: flex; flex-direction: column; align-items: center; gap: 10px; padding: 13px 19px; border-radius: 10px; box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25); }
 .style_53 { background-color: rgba(0, 0, 0, 0); display: flex; flex-direction: column; justify-content: center; align-items: center; gap: 12px; }
 .style_54 { background-color: rgba(0, 0, 0, 0); display: flex; flex-direction: row; justify-content: center; align-items:center; gap: 12px; }
 .style_55 { background-color: rgba(0, 0, 0, 0); border-radius: 10px; overflow: hidden; width: 24px; height: 24px; }
@@ -132,13 +133,13 @@ body {
 .style_84 { width: 50px; height: 50px; background-size: cover; background-repeat: no-repeat; background-position: center; border-radius:50%; } /* Applied to img */
 .style_85 { color: #2cb0a3; font-family: 'Fredericka the Great', cursive; font-weight: 400; font-size: 30px; line-height: 36.77px; text-align: left; }
 .style_86 { color: #000000; font-family: 'Inter', sans-serif; font-weight: 600; font-size: 16px; line-height: 19.36px; text-align: left; }
-.style_87 { color: #e37a7a; font-family: 'Inter', sans-serif; font-weight: 600; font-size: 14px; line-height: 16.94px; text-align: left; }
+.style_87 { color: #e37a7a; font-family: 'Inter', sans-serif; font-weight: 600; font-size: 16px; line-height: 16.94px; text-align: left; }
 .style_88 { background-color: rgba(0, 0, 0, 0); border-radius: 10px; overflow: hidden; display: inline-block; vertical-align: middle; } /* For icon instances */
 .style_89 { background-color: #111111; } /* Used inside merged SVGs, may not be directly applicable */
 .style_90 { background-color: #dadada; } /* Used inside merged SVGs */
 .style_94 { color: #000000; font-family: 'Inter', sans-serif; font-weight: 400; font-size: 16px; line-height: 19.36px; text-align: left; }
 .style_95 { background-color: rgba(0, 0, 0, 0); border-radius: 10px; width:15.21px; height:6.58px; }
-.style_96 { color: #01b2a0; font-family: 'Inter', sans-serif; font-weight: 600; font-size: 14px; line-height: 16.94px; text-align: left; }
+.style_96 { color: #01b2a0; font-family: 'Inter', sans-serif; font-weight: 600; font-size: 16px; line-height: 16.94px; text-align: left; }
 .style_97 { background-color: rgba(0, 0, 0, 0); border-radius: 10px; overflow: hidden; width:20px; height:20px; }
 .style_98 { color: #11b7a6; font-family: 'Inter', sans-serif; font-weight: 400; font-size: 16px; line-height: 19.36px; text-align: left; }
 .style_102 { background-color: rgba(0, 0, 0, 0); border-radius: 10px; width:15.2px; height:15px; }
@@ -214,7 +215,7 @@ hr.style_7 { height: 1px; border: none; border-top: 1px solid rgba(0,0,0,0.18); 
 /* CSS from section:dashboard_row2 */
 /* Section-specific styles for dashboard_row2 if any */
 #keepgoing-card .style_8 { width: 100%; } /* Ensure list container takes full width */
-#sparktest-card .style_32 { margin-top: 20px; } /* Add some space for content */
+#sparktest-card .style_32 { width: 100%; } /* Add some space for content */
 
 /* CSS from section:dashboard_row3 */
 /* Section-specific styles for dashboard_row3 if any */

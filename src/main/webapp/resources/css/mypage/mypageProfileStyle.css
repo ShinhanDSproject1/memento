@@ -1,3 +1,4 @@
+/* 레이아웃 전체 wrapper */
 .layout-wrapper {
   display: flex;
   min-height: 100vh;
@@ -6,13 +7,16 @@
 .main-content-wrapper {
   display: flex;
   flex: 1;
-  min-height: calc(100vh - 100px); /* 헤더 높이만큼 빼주기 */
+  min-height: calc(100vh - 100px);
+  padding-top: 105px;
 }
 
 .page-container {
-  flex: 1;
+  margin: 0 auto;
   padding: 40px;
   box-sizing: border-box;
+  max-width: 1100px;
+  width: 100%;
 }
 
 body {
@@ -26,6 +30,15 @@ body {
   min-height: 100vh;
   padding-bottom: 50px; /* Arbitrary bottom padding */
   box-sizing: border-box;
+}
+
+.profile-row-section {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px; /* Common gap between cards */
+  margin-bottom: 20px; /* Space between sections */
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .profile-edit-card { /* Corresponds to 298:17317 Frame 3592 */

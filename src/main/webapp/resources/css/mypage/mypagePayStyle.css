@@ -1,17 +1,21 @@
+/* 레이아웃 전체 wrapper */
 .layout-wrapper {
+  display: flex;
   min-height: 100vh;
 }
 
 .main-content-wrapper {
   display: flex;
   flex: 1;
-  min-height: calc(100vh - 100px); /* 헤더 높이만큼 빼주기 */
+  min-height: calc(100vh - 100px);
+  padding-top: 105px;
 }
 
 .page-container {
-  flex: 1;
-  padding: 40px;
+  margin: 0 auto;
   box-sizing: border-box;
+  max-width: 1100px;
+  width: 100%;
 }
 
 body {
@@ -24,17 +28,21 @@ body {
 }
 
 .payment-history-section {
-  max-width: 980px; /* Width of Frame 3752 (298:17394) / Rectangle 295 (298:17395) */
+  display: flex;
+  justify-content: center;
   width: 100%;
+  padding: 20px 0;
+  box-sizing: border-box;
 }
 
 .payment-history-container {
-  background-color: #ffffff; /* style_3 */
-  border-radius: 10px; /* style_3 */
-  padding: 35px 40px 16px 40px; /* Calculated padding */
+  background-color: #ffffff;
+  border-radius: 10px;
+  padding: 35px 40px 16px 40px;
   box-sizing: border-box;
-  margin-top: 20%;
-  margin-left: 10%;
+  margin: 0 auto;
+  max-width: 1100px;
+  width: 100%;
 }
 
 .main-title {
