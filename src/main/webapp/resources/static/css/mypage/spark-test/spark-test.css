@@ -1,0 +1,131 @@
+/* sparkTest.css */
+
+/* 스파크테스트 컨테이너 */
+.spark-test {
+  position: relative;
+  display: flex;
+  background: #fffef2;
+  flex-direction: column;     /* 세로 배치가 자연스럽다면 */
+  height: 100vh;
+  align-items: flex-start;
+  justify-content: flex-start;
+  overflow-y: auto;         /* 세로 스크롤만 허용 */
+  width: 100vw;
+}
+
+/* 스파크테스트 - 노란 디자인 띠 */
+.spark-test__designLavel {
+  background: #ffea41;
+  width: 100%;          /* 화면 전체 너비 채우기 */
+  height: 85.5px;
+  position: relative;   /* 필요 시 조절 */
+}
+
+/* 스파크테스트 - 타이틀 컨테이너 */
+.spark-test__container--title {
+  position: absolute;
+  padding: 246px 126px 246px 126px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  align-items: center;
+  justify-content: center;
+  width: 600px;
+  height: 600px;
+  left: 20vw;
+  top: 5vh;
+}
+
+/* 스파크테스트 - 타이틀 텍스트 */
+.spark-test__title--text {
+  position: absolute;
+  color: #0e0d0d;
+  text-align: center;
+  font-family: "D2Coding-Bold", sans-serif;
+  font-size: 64px;
+  font-weight: 700;
+  width: 320px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  -webkit-text-stroke: 1px #000000;
+}
+
+/* 스파크테스트 - 서브타이틀 텍스트 컨테이너 */
+.spark-test__contatiner--subtitle {
+  position: absolute;
+  padding: 10px;
+/*   display: flex; */
+  flex-direction: row;
+  gap: 10px;
+  align-items: center;
+  justify-content: center;
+  width: 500px;
+  left: 24vw;
+  top: 630px;
+}
+
+/* 스파크 테스트 - 서브타이틀 텍스트 */
+.spark-test__subtitle--text {
+  color: #3a3a3a;
+  text-align: center;
+  font-family: "Inter-SemiBold", sans-serif;
+  font-size: 42px;
+  font-weight: 600;
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* 스파크 테스트 - 버튼 컨테이너 */
+.spark-test__container--button {
+  display: flex;
+  flex-direction: row;
+  gap: 82px;
+  align-items: center;
+  justify-content: center;
+  width: 1136px;
+  height: 197px;
+  position: absolute;
+  left: 0vw;
+  top: 732.83px;
+}
+
+/* 스파크테스트 - 버튼 스타일 */
+.spark-test__button {
+  background-color: #ffea41;
+  border-radius: 20px;
+  padding: 8px 12px 8px 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 331px;
+  height: 115px;
+  position: relative;
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+  text-align: center;
+  font-family: "D2Coding-Bold", sans-serif;
+  font-size: 25px;
+  line-height: 16px;
+  letter-spacing: 0.6px;
+  font-weight: 700;
+  
+}
+.spark-test__button:hover{
+	cursor: pointer;
+	background-color: #D6BE00;
+}
+
+/* 스파크테스트 - 시작버튼 */
+.spark-test__button--teststart{
+	left : 7vw;
+}
+
+/* 스파크테스트 - 학습 유형 버튼 */
+.spark-test__button--showtype{
+	left : 7vw; 	
+}
