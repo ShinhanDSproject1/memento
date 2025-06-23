@@ -7,16 +7,16 @@
 <head>
 <meta charset="UTF-8">
 <title>me:mento</title>
-<link rel="stylesheet" href="${cpath}/resources/css/createMatchup.css">
+<link rel="stylesheet" href="${cpath}/resources/css/updateMatchup.css">
 <link rel="stylesheet" href="${cpath}/resources/css/vars.css">
 <script
 	src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 </head>
 <body>
-	<jsp:include page="/WEB-INF/views/matchup/createConfirmModal.jsp" />
+	<jsp:include page="/WEB-INF/views/matchup/updateConfirmModal.jsp" />
 	<div class="create-matchup-container">
 		<div class="top-area">
-			<div class="div">어떤 매치업을 만들까요?</div>
+			<div class="div">수정을 원하는 항목을 수정해주세요</div>
 		</div>
 		<div class="title-area">
 			<div class="title">
@@ -220,8 +220,10 @@
 							class="number-input" />
 					</div>
 				</div>
+
 			</div>
 		</div>
+
 		<div class="together-type-section">
 			<div class="label">함께 하고 싶은 유형</div>
 
@@ -267,8 +269,8 @@
 				</div>
 			</div>
 		</div>
-		<button type="submit" class="create-btn">
-			<div class="div10">개설하기</div>
+		<button type="submit" class="update-btn">
+			<div class="div10">수정하기</div>
 		</button>
 	</div>
 
@@ -402,14 +404,14 @@
 	    cntDropdown.classList.add("hidden");
 	  }
 	});
-	document.querySelector(".create-btn").addEventListener("click", () => {
-		  document.getElementById("createConfirmModal").classList.remove("hidden");
+	document.querySelector(".update-btn").addEventListener("click", () => {
+		  document.getElementById("editConfirmModal").classList.remove("hidden");
 		});
 	
 	document.querySelector(".modal-close-btn").addEventListener("click", () => {
-		  document.getElementById("createConfirmModal").classList.add("hidden");
+		  document.getElementById("editConfirmModal").classList.add("hidden");
 		});
-
+	
 	document.querySelectorAll('.dropdown-box').forEach(box => {
 		  const dropdown = box.querySelector('.type-dropdown');
 		  const label = box.querySelector('.dropdown-label');
@@ -453,6 +455,7 @@
 		    menu.classList.add('hidden');
 		  });
 		});
+
 </script>
 </body>
 </html>

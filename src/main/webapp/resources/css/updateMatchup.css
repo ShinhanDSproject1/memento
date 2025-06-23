@@ -817,7 +817,7 @@
 	justify-content: center;
 }
 
-.create-btn {
+.update-btn {
 	background: #0070d1;
 	border-radius: 10px;
 	border-style: solid;
@@ -1005,52 +1005,6 @@
 	color: #333;
 }
 
-/* 생성 확인 모달관련 css  */
-.modal {
-	position: fixed;
-	top: 0;
-	left: 0;
-	width: 100vw;
-	height: 100vh;
-	background: rgba(0, 0, 0, 0.5);
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	z-index: 999;
-}
-
-.modal.hidden {
-	display: none;
-}
-
-.modal-content {
-	background: white;
-	padding: 30px 40px;
-	border-radius: 12px;
-	text-align: center;
-	box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
-}
-
-.modal-image {
-	width: 80px;
-	margin-bottom: 20px;
-}
-
-.modal-text {
-	font-size: 20px;
-	margin-bottom: 25px;
-	font-weight: bold;
-}
-
-.modal-close-btn {
-	padding: 10px 25px;
-	background-color: #3f51b5;
-	color: white;
-	border: none;
-	border-radius: 6px;
-	font-size: 16px;
-	cursor: pointer;
-}
 .together-type-section {
 	display: flex;
 	flex-direction: column;
@@ -1059,7 +1013,13 @@
 	margin-bottom: 30px;
 	width: 100%;
 }
-
+/* 
+.together-type-section .label {
+  font-size: 18px;
+  font-weight: 600;
+  color: #1c1c1c;
+}
+ */
 .dropdown-row {
 	display: flex;
 	gap: 12px;
@@ -1101,3 +1061,60 @@
 .dropdown-box {
 	position: relative; 
 }
+
+/* 생성 확인 모달관련 css  */
+/* 기본 모달 공통 스타일 */
+.modal {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100vw;
+	height: 100vh;
+	background: rgba(0, 0, 0, 0.5);
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	z-index: 999;
+}
+
+.modal.hidden {
+	display: none;
+}
+
+.modal-content {
+	background: #ffffff;
+	padding: 30px 40px;
+	border-radius: 12px;
+	text-align: center;
+	box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+	max-width: 400px;
+	width: 90%;
+}
+
+.modal-image {
+	width: 80px;
+	height: auto;
+	margin-bottom: 20px;
+}
+
+.modal-text {
+	font-size: 20px;
+	font-weight: bold;
+	margin-bottom: 25px;
+	color: #333;
+}
+
+.modal-close-btn {
+	padding: 10px 25px;
+	background-color: #3f51b5;
+	color: white;
+	font-size: 16px;
+	border: none;
+	border-radius: 6px;
+	cursor: pointer;
+	transition: background-color 0.2s;
+}
+
+/* .modal-close-btn:hover {
+  background-color: #43a047;
+} */
