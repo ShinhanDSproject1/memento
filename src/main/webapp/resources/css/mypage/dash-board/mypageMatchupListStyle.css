@@ -1,0 +1,299 @@
+/* ==========================================================================
+   Base & Layout Styles
+   ========================================================================== */
+
+body {
+	font-family: 'Inter', sans-serif;
+	margin: 0;
+	padding: 0;
+	background-color: #ffffff;
+}
+
+.page-container {
+	flex: 1;
+	padding: 40px;
+	box-sizing: border-box;
+}
+
+/* ==========================================================================
+   Matchup List Section
+   ========================================================================== */
+
+.matchup-list {
+	box-sizing: border-box;
+}
+
+.matchup-list__container {
+	max-width: 964px;
+	margin: 0 auto;
+}
+
+.matchup-list__title {
+	color: rgba(0, 0, 0, 0.6);
+	font-family: 'Inter', sans-serif;
+	font-weight: 600;
+	font-size: 32px;
+	line-height: 1.2;
+	text-align: center;
+	margin-bottom: 46px;
+}
+
+.matchup-list__cards {
+	display: flex;
+	flex-direction: column;
+	gap: 32px;
+}
+
+/* ==========================================================================
+   Matchup Card Component
+   ========================================================================== */
+
+.matchup-card {
+	background-color: #ffffff;
+	border: 1px solid rgba(0, 0, 0, 0.3);
+	border-radius: 10px;
+	box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+	padding: 24px;
+	position: relative; /* For action buttons positioning */
+}
+
+.matchup-card__content {
+	display: flex;
+	gap: 30px;
+	width: 100%;
+	align-items: flex-start;
+}
+
+.matchup-card__avatar {
+	width: 90px;
+	height: 90px;
+	flex-shrink: 0;
+	border-radius: 50%; /* Make avatar image round */
+}
+
+.matchup-card__details {
+	flex-grow: 1;
+	display: flex;
+	flex-direction: column;
+}
+
+/* Card Header */
+.matchup-card__header {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	margin-bottom: 19px;
+}
+
+.matchup-card__tags {
+	display: flex;
+	align-items: center;
+	gap: 9px;
+}
+
+.tag {
+	background-color: #e6f0f6;
+	border-radius: 50px;
+	color: #717679;
+	font-family: 'Inter', sans-serif;
+	font-weight: 500;
+	font-size: 10px;
+	line-height: 1.5;
+	letter-spacing: -0.23px;
+	padding: 4px 12px;
+	display: inline-block;
+}
+
+.matchup-card__session-count {
+	color: #000000;
+	font-family: 'Inter', sans-serif;
+	font-weight: 600;
+	font-size: 24px;
+}
+
+/* Session Count Modifiers */
+.matchup-card__session-count--waiting {
+	color: rgba(0, 0, 0, 0.52);
+}
+
+.matchup-card__session-count--completed {
+	color: #f48888;
+}
+
+/* Card Body */
+.matchup-card__title {
+	color: #000000;
+	font-family: 'Inter', sans-serif;
+	font-weight: 400;
+	font-size: 24px;
+	margin-top: 0;
+	margin-bottom: 10px;
+}
+
+/* Card Footer */
+.matchup-card__footer {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	margin-top: auto;
+}
+
+.matchup-card__meta {
+	display: flex;
+	align-items: center;
+	gap: 19px;
+}
+
+.matchup-card__schedule {
+	color: #000000;
+	font-family: 'Inter', sans-serif;
+	font-weight: 400;
+	font-size: 16px;
+}
+
+.matchup-card__location {
+	color: #000000;
+	font-family: 'Inter', sans-serif;
+	font-weight: 500;
+	font-size: 20px;
+}
+
+.matchup-card__mentor {
+	display: flex;
+	align-items: center;
+	gap: 8px;
+}
+
+.matchup-card__mentor-icon {
+	width: 25px;
+	height: 26px;
+}
+
+.matchup-card__mentor-name {
+	color: #000000;
+	font-family: 'D2Coding';
+	font-weight: 700;
+	font-size: 24px;
+}
+
+/* Mentor Name Modifier */
+.matchup-card__mentor-name--unconfirmed {
+	color: rgba(0, 0, 0, 0.59);
+}
+
+.matchup-card__role {
+	font-family: 'D2Coding';
+	font-weight: 700;
+	font-size: 24px;
+}
+
+/* Role Modifiers */
+.matchup-card__role--leader {
+	color: #6f9792; /* Green */
+}
+
+.matchup-card__role--member {
+	color: #687bb0; /* Blue */
+}
+
+/* ==========================================================================
+   Action Buttons
+   ========================================================================== */
+
+.matchup-card__actions {
+	display: flex;
+	gap: 14px;
+	position: absolute;
+	bottom: 35%; /* Align with card padding */
+	right: 3%;  /* Adjust to align with the role text */
+}
+
+.action-button {
+	position: relative;
+	padding: 0;
+	border: none;
+	background: none;
+	cursor: pointer;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 131px;
+	height: 31px;
+}
+
+.action-button__background {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	z-index: 0;
+}
+
+.action-button__text {
+	position: relative;
+	z-index: 1;
+	color: #ffffff;
+	font-family: 'Inter', sans-serif;
+	font-weight: 500;
+	font-size: 16px;
+}
+
+/* ==========================================================================
+   Responsive Design
+   ========================================================================== */
+
+@media (max-width: 992px) {
+	.matchup-card__footer {
+		flex-direction: column;
+		align-items: flex-start;
+		gap: 10px;
+	}
+    .matchup-card__actions {
+        position: static; /* Remove absolute positioning */
+        margin-top: 20px; /* Add space from the footer */
+        justify-content: flex-end; /* Align to the right */
+    }
+}
+
+
+@media (max-width: 768px) {
+	.page-container {
+		margin-right: 0;
+		padding: 20px;
+	}
+
+	.matchup-list__title {
+		font-size: 28px;
+		margin-bottom: 30px;
+	}
+
+	.matchup-card__content {
+		flex-direction: column;
+		align-items: center; /* Center avatar when stacked */
+		gap: 15px;
+	}
+
+	.matchup-card__details {
+		width: 100%;
+        align-items: center;
+        text-align: center;
+	}
+
+	.matchup-card__header,
+	.matchup-card__footer {
+		flex-direction: column;
+		align-items: center;
+		gap: 12px;
+        width: 100%;
+	}
+    
+    .matchup-card__footer {
+        align-items: center;
+    }
+
+	.matchup-card__actions {
+		justify-content: center;
+        width: 100%;
+	}
+}

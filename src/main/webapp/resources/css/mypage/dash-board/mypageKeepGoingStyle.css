@@ -1,0 +1,222 @@
+/* ==========================================================================
+   Base & Layout Styles
+   ========================================================================== */
+body {
+	margin: 0;
+	padding: 0;
+	font-family: 'Inter', sans-serif;
+	background-color: #ffffff;
+	color: #000000;
+}
+
+.page-container {
+	flex: 1;
+	padding: 40px;
+	box-sizing: border-box;
+}
+
+/* ==========================================================================
+   Keepgoing List Section
+   ========================================================================== */
+.keepgoing-list {
+	padding-bottom: 100px;
+}
+
+.keepgoing-list__title {
+	color: rgba(0, 0, 0, 0.6);
+	font-family: 'Inter', sans-serif;
+	font-weight: 600;
+	font-size: 32px;
+	line-height: 1.2;
+	text-align: center;
+	margin: 0 auto 47px auto;
+}
+
+.keepgoing-list__items-wrapper {
+	max-width: 964px;
+	margin: 0 auto;
+	display: flex;
+	flex-direction: column;
+	gap: 49px;
+}
+
+/* ==========================================================================
+   Keepgoing Item Component
+   ========================================================================== */
+.keepgoing-item {
+	background-color: #ffffff;
+	border: 1px solid rgba(0, 0, 0, 0.3);
+	border-radius: 10px;
+	box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+	display: flex;
+	align-items: center;
+	padding: 28px;
+	gap: 35px;
+	box-sizing: border-box;
+}
+
+.keepgoing-item__icon {
+	width: 90px;
+	height: 90px;
+	border-radius: 50%;
+	border: 1px solid #000000;
+	object-fit: cover;
+	flex-shrink: 0;
+}
+
+.keepgoing-item__details {
+	flex-grow: 1;
+	display: flex;
+	flex-direction: column;
+}
+
+.keepgoing-item__badge {
+	background-color: #e8f6ff;
+	border-radius: 5px;
+	display: inline-flex;
+	align-items: center;
+	padding: 3px 6px;
+	gap: 7px;
+	margin-bottom: 4px;
+	align-self: flex-start; /* Ensure it doesn't stretch */
+}
+
+.keepgoing-item__badge-icon {
+	width: 11px;
+	height: 13px;
+}
+
+.keepgoing-item__badge-count {
+	color: #407cf4;
+	font-family: 'D2Coding', 'Courier New', monospace;
+	font-weight: 400;
+	font-size: 12px;
+	line-height: 1.16;
+}
+
+.keepgoing-item__title {
+	font-family: 'Inter', sans-serif;
+	font-weight: 400;
+	font-size: 24px;
+	line-height: 1.2;
+	margin: 0 0 10px 0;
+}
+
+.keepgoing-item__meta {
+	display: flex;
+	align-items: baseline;
+	gap: 19px;
+}
+
+.keepgoing-item__schedule,
+.keepgoing-item__location {
+	font-size: 18px;
+	margin: 0;
+}
+
+.keepgoing-item__schedule {
+	color: rgba(0, 0, 0, 0.5);
+	font-weight: 400;
+}
+
+.keepgoing-item__location {
+	color: #8f8f8f;
+	font-weight: 500;
+}
+
+.keepgoing-item__actions {
+	display: flex;
+	flex-direction: column;
+	gap: 15px;
+	margin-left: auto;
+	flex-shrink: 0;
+}
+
+/* ==========================================================================
+   Button Component
+   ========================================================================== */
+.btn {
+	width: 87px;
+	height: 35px;
+	border-radius: 5px;
+	border: none;
+	cursor: pointer;
+	color: #ffffff;
+	font-family: 'D2Coding';
+	font-weight: 700;
+	font-size: 16px;
+	line-height: 1.16;
+}
+
+.btn--chat {
+	background-color: #407cf4;
+}
+
+.btn--leave {
+	background-color: #d1615d;
+}
+
+/* ==========================================================================
+   Responsive Design
+   ========================================================================== */
+@media (max-width: 1024px) {
+	.keepgoing-list__items-wrapper {
+		max-width: 90%;
+	}
+	.keepgoing-list__title {
+		font-size: 28px;
+	}
+}
+
+@media (max-width: 768px) {
+	.keepgoing-list__title {
+		font-size: 24px;
+		margin-bottom: 30px;
+	}
+	.keepgoing-item {
+		flex-direction: column;
+		padding: 20px;
+		gap: 20px;
+		align-items: center;
+		text-align: center;
+	}
+	.keepgoing-item__icon {
+		margin-bottom: 0;
+	}
+	.keepgoing-item__details {
+		align-items: center; /* Center details content in column mode */
+	}
+	.keepgoing-item__meta {
+		flex-direction: column;
+		gap: 5px;
+	}
+	.keepgoing-item__actions {
+		margin-left: 0;
+		flex-direction: row;
+		width: 100%;
+		justify-content: center;
+	}
+	.btn {
+		flex-grow: 1;
+		max-width: 200px;
+	}
+}
+
+@media (max-width: 480px) {
+	.keepgoing-list__title {
+		font-size: 22px;
+	}
+	.keepgoing-item__title {
+		font-size: 20px;
+	}
+	.keepgoing-item__schedule,
+	.keepgoing-item__location {
+		font-size: 16px;
+	}
+	.keepgoing-item__actions {
+		flex-direction: column;
+	}
+    .btn {
+        max-width: 100%;
+    }
+}
