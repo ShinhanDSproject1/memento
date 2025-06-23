@@ -408,6 +408,7 @@
 	
 	document.querySelector(".modal-close-btn").addEventListener("click", () => {
 		  document.getElementById("createConfirmModal").classList.add("hidden");
+		  location.href = "${pageContext.request.contextPath}/matchupList";
 		});
 
 	document.querySelectorAll('.dropdown-box').forEach(box => {

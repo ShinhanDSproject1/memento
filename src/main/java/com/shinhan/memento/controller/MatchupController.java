@@ -27,4 +27,8 @@ public class MatchupController {
 		return "/matchup/updateMatchup";
 	}
 
+	@GetMapping("/matchupList")
+	public String f5() {
+		return "/matchup/matchupList";
+	}
 }

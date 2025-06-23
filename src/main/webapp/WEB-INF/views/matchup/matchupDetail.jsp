@@ -145,7 +145,7 @@
 			<div class="div9">비슷한 다른 매치업 둘러보기</div>
 			<div class="frame-3770">
 
-				<a href="/match-id=12" class="card-link">
+				<a href="${cpath}/matchupDetail" class="card-link">
 					<div class="frame-3769">
 						<div class="group-413">
 							<div class="rectangle-82"></div>
@@ -190,7 +190,7 @@
 							</div>
 						</div>
 					</div>
-				</a> <a href="/match-id=12" class="card-link">
+				</a> <a href="${cpath}/matchupDetail" class="card-link">
 					<div class="frame-37702">
 						<div class="group-413">
 							<div class="rectangle-82"></div>
@@ -235,7 +235,7 @@
 							</div>
 						</div>
 					</div>
-				</a> <a href="/match-id=12" class="card-link">
+				</a> <a href="${cpath}/matchupDetail" class="card-link">
 					<div class="frame-3771">
 						<div class="group-413">
 							<div class="rectangle-82"></div>
