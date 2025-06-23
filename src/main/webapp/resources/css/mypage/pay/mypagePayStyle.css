@@ -184,7 +184,7 @@ body {
 .price-divider-svg {
   width: 100%; /* To fit the 142px width of its parent .price-breakdown */
   height: 1px; /* Approximate */
-  object-fit: cover; /* If SVG is just a line */
+  border-bottom: dotted;
   display: block;
 }
 
