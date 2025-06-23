@@ -18,6 +18,7 @@
 </script>
 
 
+
 	<script src="${cpath}/resources/js/mypage/mypage.js"></script>
 	
 <title>me:mento mypage</title>
@@ -33,6 +34,5 @@
 			<div id = "screen" class="screen page-container"></div>
 			</div>
 			</div>
-
 </body>
 </html>
