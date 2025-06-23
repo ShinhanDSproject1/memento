@@ -338,14 +338,15 @@
 											alt="Attendance status" class="style_80 attendance-day-icon">
 									</div>
 								</div>
-								<div class="style_74">
-									<div class="style_75">
-										<span class="style_76">목</span>
-										<hr class="style_77">
-										<img
-											src="${cpath}/resources/images/mypage/mypage1/vector2.svg"
-											alt="Attendance status" class="style_82 attendance-day-icon">
-									</div>
+								<div class="style_74" id="attendance-check">
+								  	<div class="style_75">
+								    	<span class="style_76">목</span>
+								    	<hr class="style_77">
+								    	<img
+									      src="${cpath}/resources/images/mypage/mypage1/icon-fill-type-950.svg"
+									      alt="Attendance status"
+									      class="style_82 attendance-day-icon">
+								  </div>
 								</div>
 								<div class="style_74">
 									<div class="style_75">
@@ -373,4 +374,8 @@
 		</div>
 	</div>
 </body>
+<script>
+  const basePath = '${pageContext.request.contextPath}';
+</script>	
+<script src="${pageContext.request.contextPath}/resources/js/dash-board.js"></script>
 </html>
