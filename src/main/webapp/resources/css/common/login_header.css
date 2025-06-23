@@ -1,0 +1,167 @@
+@charset "UTF-8";
+
+.div {
+  background: #FFFFFF;
+  height: 1132px;
+  position: relative;
+  overflow: hidden;
+}
+
+.header {
+  background: #FFFFFF;
+  display: flex;
+  flex-direction: row;
+  gap: 22px;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 99px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1000;
+  box-shadow: 0px 4px 4px rgba(118, 115, 115, 0.25);
+  overflow-x: auto;
+  
+}
+
+.header-logo {
+  text-decoration: none;
+}
+
+.header-image-17 {
+  width: 51.67px;
+  height: 45.81px;
+  object-fit: cover;
+}
+
+.header-me-mento-2 {
+  width: 144px;
+  height: 19.73px;
+  object-fit: cover;
+}
+
+/* 메뉴 컨테이너 */
+.frame-6 {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+  justify-content: center;
+  height: 65px;
+  padding: 0 10px;
+  flex-shrink: 0;
+}
+
+/* 메뉴 항목들 */
+.match-up,
+.mentos,
+.keepgoing,
+.abovar,
+.QRCoding {
+  padding: 10px;
+  height: 47px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: "Inter-SemiBold", sans-serif;
+  font-size: 18px;
+  font-weight: 600;
+  white-space: nowrap;
+  cursor: pointer;
+  text-decoration: none;
+  color: inherit;
+}
+
+.search-bar {
+  border-radius: 6px;
+  border: 1px solid #CED4DA;
+  width: 437px;
+  height: 35px;
+  display: flex;
+  align-items: center;
+  position: relative;
+  overflow: hidden;
+}
+
+
+.search-input {
+  border: none;
+  outline: none;
+  flex: 1;
+  font-family: "Inter-Medium", sans-serif;
+  font-size: 15px;
+  font-weight: 500;
+  color: #333;
+  padding-left: 10px;
+  background-color: transparent;
+  border: none;
+  outline: none;
+}
+
+
+.search-icon {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 20px;
+  height: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  
+  background: none;
+  border: none;
+  outline: none;
+  padding: 0;
+  margin: 0;
+  cursor: pointer;
+  
+}
+
+
+
+.search-img {
+  width: 100%;
+  height: 100%;
+  object-fit : contain;
+}
+
+.login-button {
+  background: #FFFFFF;
+  border: 1px solid #CED4DA;
+  border-radius: 6px;
+  width: 100px;
+  height: 35px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.login-text {
+  color: #000000;
+  font-family: "Inter-Medium", sans-serif;
+  font-size: 15px;
+  font-weight: 500;
+  text-align: center;
+}
+
+/* 알림, 프로필 아이콘 */
+.icon-alert-notification-bell-new {
+  width: 25px;
+  height: 25px;
+}
+
+.vuesax-linear-profile-circle {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  width: 30px;
+  height: 30px;
+}
+
+.profile-circle {
+  width: 30px;
+  height: 30px;
+}
