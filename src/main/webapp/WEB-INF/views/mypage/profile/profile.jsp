@@ -6,17 +6,17 @@
 <meta charset="UTF-8">
 <title>마이페이지 프로필 수정</title>
 <link rel="stylesheet"
-	href="${pageContext.request.contextPath}/resources/css/mypage/mypageProfileStyle.css" />
+	href="${pageContext.request.contextPath}/resources/css/mypage/profile/mypageProfileStyle.css" />
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/resources/css/mypage/mypageVars.css" />
 <link rel="stylesheet"
-	href="${pageContext.request.contextPath}/resources/css/mypage/sidebar.css" />
+	href="${pageContext.request.contextPath}/resources/css/sidebar/sidebar.css" />
 </head>
 <body>
 	<div class="layout-wrapper">
-		<%@ include file="../common/header.jsp"%>
+		<%@ include file="../../header/header.jsp"%>
 		<div class="main-content-wrapper">
-			<%@ include file="../common/sidebar.jsp"%>
+			<%@ include file="../../sidebar/sidebar.jsp"%>
 			<div class="page-container">
 				<section id="profile-page" class="profile-row-section">
 					<main class="profile-edit-card">
@@ -34,9 +34,9 @@
 								<div class="form-value">
 									<div class="avatar-container">
 										<img
-											src="${cpath}/resources/images/mypage/mypage2/group-4500.svg"
+											src="${cpath}/resources/images/mypage/profile/group-4500.svg"
 											alt="Avatar border" class="avatar-svg-outer"> <img
-											src="${cpath}/resources/images/mypage/mypage2/avatar-default0.svg"
+											src="${cpath}/resources/images/mypage/profile/avatar-default0.svg"
 											alt="Avatar default" class="avatar-svg-inner"
 											id="profile-image-input">
 									</div>

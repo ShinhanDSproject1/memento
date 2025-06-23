@@ -6,18 +6,18 @@
 <meta charset="UTF-8">
 <title>킵고잉 목록</title>
 <link rel="stylesheet"
-	href="${pageContext.request.contextPath}/resources/css/mypage/mypageKeepGoingStyle.css" />
+	href="${pageContext.request.contextPath}/resources/css/mypage/dash-board/mypageKeepGoingStyle.css" />
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/resources/css/mypage/mypageVars.css" />
 </head>
 <link rel="stylesheet"
-	href="${pageContext.request.contextPath}/resources/css/mypage/sidebar.css" />
+	href="${pageContext.request.contextPath}/resources/css/sidebar/sidebar.css" />
 </head>
 <body>
 	<div class="layout-wrapper">
-		<%@ include file="../common/header.jsp"%>
+		<%@ include file="../../header/header.jsp"%>
 		<div class="main-content-wrapper">
-			<%@ include file="../common/sidebar.jsp"%>
+			<%@ include file="../../sidebar/sidebar.jsp"%>
 			<div class="page-container">
 				<section id="my-keepgoing-list" class="keepgoing-list-section">
 					<h2 class="keepgoing-list-section__title">나의 킵고잉 목록</h2>
@@ -26,14 +26,14 @@
 						<article class="keepgoing-item">
 							<div class="keepgoing-item__icon-container">
 								<img class="keepgoing-item__icon"
-									src="${cpath}/resources/images/mypage/mypage8/keepgoing-icon0.png"
+									src="${cpath}/resources/images/mypage/dash-board/keepgoing-list/keepgoing-icon0.png"
 									alt="Keepgoing Icon">
 							</div>
 							<div class="keepgoing-item__details">
 								<div class="keepgoing-item__user-stats">
 									<div class="keepgoing-item__user-stats-badge">
 										<img
-											src="${cpath}/resources/images/mypage/mypage8/vector0.svg"
+											src="${cpath}/resources/images/mypage/dash-board/keepgoing-list/vector0.svg"
 											alt="User Icon" class="keepgoing-item__user-stats-icon">
 										<span class="keepgoing-item__user-stats-count">33</span>
 									</div>
@@ -53,14 +53,14 @@
 						<article class="keepgoing-item">
 							<div class="keepgoing-item__icon-container">
 								<img class="keepgoing-item__icon"
-									src="${cpath}/resources/images/mypage/mypage8/keepgoing-icon0.png"
+									src="${cpath}/resources/images/mypage/dash-board/keepgoing-list/keepgoing-icon0.png"
 									alt="Keepgoing Icon">
 							</div>
 							<div class="keepgoing-item__details">
 								<div class="keepgoing-item__user-stats">
 									<div class="keepgoing-item__user-stats-badge">
 										<img
-											src="${cpath}/resources/images/mypage/mypage8/vector0.svg"
+											src="${cpath}/resources/images/mypage/dash-board/keepgoing-list/vector0.svg"
 											alt="User Icon" class="keepgoing-item__user-stats-icon">
 										<span class="keepgoing-item__user-stats-count">33</span>
 									</div>
@@ -80,14 +80,14 @@
 						<article class="keepgoing-item">
 							<div class="keepgoing-item__icon-container">
 								<img class="keepgoing-item__icon"
-									src="${cpath}/resources/images/mypage/mypage8/keepgoing-icon0.png"
+									src="${cpath}/resources/images/mypage/dash-board/keepgoing-list/keepgoing-icon0.png"
 									alt="Keepgoing Icon">
 							</div>
 							<div class="keepgoing-item__details">
 								<div class="keepgoing-item__user-stats">
 									<div class="keepgoing-item__user-stats-badge">
 										<img
-											src="${cpath}/resources/images/mypage/mypage8/vector0.svg"
+											src="${cpath}/resources/images/mypage/dash-board/keepgoing-list/vector0.svg"
 											alt="User Icon" class="keepgoing-item__user-stats-icon">
 										<span class="keepgoing-item__user-stats-count">33</span>
 									</div>
@@ -107,14 +107,14 @@
 						<article class="keepgoing-item">
 							<div class="keepgoing-item__icon-container">
 								<img class="keepgoing-item__icon"
-									src="${cpath}/resources/images/mypage/mypage8/keepgoing-icon0.png"
+									src="${cpath}/resources/images/mypage/dash-board/keepgoing-list/keepgoing-icon0.png"
 									alt="Keepgoing Icon">
 							</div>
 							<div class="keepgoing-item__details">
 								<div class="keepgoing-item__user-stats">
 									<div class="keepgoing-item__user-stats-badge">
 										<img
-											src="${cpath}/resources/images/mypage/mypage8/vector0.svg"
+											src="${cpath}/resources/images/mypage/dash-board/keepgoing-list/vector0.svg"
 											alt="User Icon" class="keepgoing-item__user-stats-icon">
 										<span class="keepgoing-item__user-stats-count">33</span>
 									</div>

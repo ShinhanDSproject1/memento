@@ -7,17 +7,17 @@
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>마이페이지 대시보드</title>
 <link rel="stylesheet"
-	href="${pageContext.request.contextPath}/resources/css/mypage/mypageDashboardStyle.css" />
+	href="${pageContext.request.contextPath}/resources/css/mypage/dash-board/mypageDashboardStyle.css" />
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/resources/css/mypage/mypageVars.css" />
 <link rel="stylesheet"
-	href="${pageContext.request.contextPath}/resources/css/mypage/sidebar.css" />
+	href="${pageContext.request.contextPath}/resources/css/sidebar/sidebar.css" />
 </head>
 <body>
 	<div class="layout-wrapper">
-		<%@ include file="../common/header.jsp"%>
+		<%@ include file="../../header/header.jsp"%>
 		<div class="main-content-wrapper">
-			<%@ include file="../common/sidebar.jsp"%>
+			<%@ include file="../../sidebar/sidebar.jsp"%>
 			<div class="page-container">
 				<section id="dashboard-row-1" class="dashboard-row-section">
 					<article id="matchup-card" class="card style_103">
@@ -26,7 +26,7 @@
 						<div class="matchup-items">
 							<div class="card-list-item">
 								<img
-									src="${cpath}/resources/images/mypage/mypage1/avatar-man-010.svg"
+									src="${cpath}/resources/images/mypage/dash-board/avatar-man-010.svg"
 									alt="Avatar" class="avatar-img style_84">
 								<div class="item-details">
 									<span class="style_86">개발새발 코딩 스터디</span>
@@ -34,7 +34,7 @@
 										<div class="merged-icon-container style_88"
 											style="width: 13px; height: 13px;">
 											<img
-												src="${cpath}/resources/images/mypage/mypage1/icon-time-calendar-010.svg"
+												src="${cpath}/resources/images/mypage/dash-board/icon-time-calendar-010.svg"
 												alt="Calendar part"
 												style="left: 1.08px; top: 1.62px; width: 10.83px; height: 10.83px;">
 										</div>
@@ -43,12 +43,12 @@
 								</div>
 								<span class="style_86 item-status">(Leader)</span> 
 								<a href="#">
-									<img src="${cpath}/resources/images/mypage/mypage1/vuesax-linear-logout1.svg" alt="Icon" class="style_105">
+									<img src="${cpath}/resources/images/mypage/dash-board/vuesax-linear-logout1.svg" alt="Icon" class="style_105">
 								</a>
 							</div>
 							<div class="card-list-item">
 								<img
-									src="${cpath}/resources/images/mypage/mypage1/avatar-man-010.svg"
+									src="${cpath}/resources/images/mypage/dash-board/avatar-man-010.svg"
 									alt="Avatar" class="avatar-img style_84">
 								<div class="item-details">
 									<span class="style_86">쉽게 배우는 자바</span>
@@ -56,7 +56,7 @@
 										<div class="merged-icon-container style_88"
 											style="width: 13px; height: 13px;">
 											<img
-												src="${cpath}/resources/images/mypage/mypage1/icon-time-calendar-010.svg"
+												src="${cpath}/resources/images/mypage/dash-board/icon-time-calendar-010.svg"
 												alt="Calendar part"
 												style="left: 1.08px; top: 1.62px; width: 10.83px; height: 10.83px;">
 										</div>
@@ -65,12 +65,12 @@
 								</div>
 								<span class="style_86 item-status">(follower)</span> 
 								<a href="#">
-									<img src="${cpath}/resources/images/mypage/mypage1/vuesax-linear-logout1.svg" alt="Icon" class="style_105">
+									<img src="${cpath}/resources/images/mypage/dash-board/vuesax-linear-logout1.svg" alt="Icon" class="style_105">
 								</a>
 							</div>
 							<div class="card-list-item">
 								<img
-									src="${cpath}/resources/images/mypage/mypage1/avatar-man-010.svg"
+									src="${cpath}/resources/images/mypage/dash-board/avatar-man-010.svg"
 									alt="Avatar" class="avatar-img style_84">
 								<div class="item-details">
 									<span class="style_86">알고리즘 마스터반</span>
@@ -78,7 +78,7 @@
 										<div class="merged-icon-container style_88"
 											style="width: 13px; height: 13px;">
 											<img
-												src="${cpath}/resources/images/mypage/mypage1/icon-time-calendar-010.svg"
+												src="${cpath}/resources/images/mypage/dash-board/icon-time-calendar-010.svg"
 												alt="Calendar part"
 												style="left: 1.08px; top: 1.62px; width: 10.83px; height: 10.83px;">
 										</div>
@@ -87,12 +87,12 @@
 								</div>
 								<span class="style_86 item-status">(Leader)</span> 
 								<a href="#">
-									<img src="${cpath}/resources/images/mypage/mypage1/vuesax-linear-logout1.svg" alt="Icon" class="style_105">
+									<img src="${cpath}/resources/images/mypage/dash-board/vuesax-linear-logout1.svg" alt="Icon" class="style_105">
 								</a>
 							</div>
 						</div>
 						<a href="${cpath}/mypage/page6" class="card-footer-link style_26"> 매치업 목록 <img
-							src="${cpath}/resources/images/mypage/mypage1/vuesax-linear-logout1.svg"
+							src="${cpath}/resources/images/mypage/dash-board/vuesax-linear-logout1.svg"
 							alt="Arrow" class="style_104">
 						</a>
 					</article>
@@ -103,7 +103,7 @@
 						<div class="mentos-items">
 							<div class="card-list-item">
 								<img
-									src="${cpath}/resources/images/mypage/mypage1/avatar-man-010.svg"
+									src="${cpath}/resources/images/mypage/dash-board/avatar-man-010.svg"
 									alt="Avatar" class="avatar-img style_84">
 								<div class="item-details">
 									<span class="style_86">봄이 오겠냐? 스프링</span>
@@ -111,7 +111,7 @@
 										<div class="merged-icon-container style_88"
 											style="width: 18px; height: 18px;">
 											<img
-												src="${cpath}/resources/images/mypage/mypage1/icon-maps-compass0.svg"
+												src="${cpath}/resources/images/mypage/dash-board/icon-maps-compass0.svg"
 												alt="Compass part"
 												style="left: 0.75px; top: 0.75px; width: 16.5px; height: 16.5px;">
 										</div>
@@ -122,13 +122,13 @@
 							</div>
 							<div class="card-list-item">
 								<img
-									src="${cpath}/resources/images/mypage/mypage1/avatar-man-010.svg"
+									src="${cpath}/resources/images/mypage/dash-board/avatar-man-010.svg"
 									alt="Avatar" class="avatar-img style_84">
 								<div class="item-details">
 									<span class="style_86">파이썬? 야 너두 할 수 있어</span>
 									<div class="item-row">
 										<img
-											src="${cpath}/resources/images/mypage/mypage1/icon-fill-type-430.svg"
+											src="${cpath}/resources/images/mypage/dash-board/icon-fill-type-430.svg"
 											alt="Mentor Icon" class="style_97"> <span
 											class="style_98">Mentor</span>
 									</div>
@@ -137,7 +137,7 @@
 							</div>
 							<div class="card-list-item">
 								<img
-									src="${cpath}/resources/images/mypage/mypage1/avatar-man-010.svg"
+									src="${cpath}/resources/images/mypage/dash-board/avatar-man-010.svg"
 									alt="Avatar" class="avatar-img style_84">
 								<div class="item-details">
 									<span class="style_86">손쉬운 정보처리기사</span>
@@ -145,7 +145,7 @@
 										<div class="merged-icon-container style_88"
 											style="width: 18px; height: 18px;">
 											<img
-												src="${cpath}/resources/images/mypage/mypage1/icon-maps-compass0.svg"
+												src="${cpath}/resources/images/mypage/dash-board/icon-maps-compass0.svg"
 												alt="Compass part"
 												style="left: 0.75px; top: 0.75px; width: 16.5px; height: 16.5px;">
 										</div>
@@ -156,7 +156,7 @@
 							</div>
 						</div>
 						<a href="${cpath}/mypage/page7" class="card-footer-link style_26"> 멘토스 목록 <img
-							src="${cpath}/resources/images/mypage/mypage1/vuesax-linear-logout1.svg"
+							src="${cpath}/resources/images/mypage/dash-board/vuesax-linear-logout1.svg"
 							alt="Arrow" class="style_102">
 						</a>
 					</article>
@@ -175,7 +175,7 @@
 										<div class="style_14">
 											<div class="style_15">
 												<img
-													src="${cpath}/resources/images/mypage/mypage1/vector0.svg"
+													src="${cpath}/resources/images/mypage/dash-board/vector0.svg"
 													alt="User icon" class="style_16"> <span
 													class="style_17">33</span>
 											</div>
@@ -193,7 +193,7 @@
 										<div class="style_14">
 											<div class="style_15">
 												<img
-													src="${cpath}/resources/images/mypage/mypage1/vector0.svg"
+													src="${cpath}/resources/images/mypage/dash-board/vector0.svg"
 													alt="User icon" class="style_23"> <span
 													class="style_17">33</span>
 											</div>
@@ -206,7 +206,7 @@
 							</div>
 						</div>
 						<a href="${cpath}/mypage/page8" class="card-footer-link style_26"> 킵고잉 목록 <img
-							src="${cpath}/resources/images/mypage/mypage1/vuesax-linear-logout1.svg"
+							src="${cpath}/resources/images/mypage/dash-board/vuesax-linear-logout1.svg"
 							alt="Arrow" class="style_102">
 						</a>
 					</article>
@@ -226,41 +226,41 @@
 					<article id="halloffame-card" class="card style_52">
 						<div class="style_54">
 							<img
-								src="${cpath}/resources/images/mypage/mypage1/icon-fill-type-500.svg"
+								src="${cpath}/resources/images/mypage/dash-board/icon-fill-type-500.svg"
 								alt="Crown" class="style_55">
 							<h2 class="style_56">명예의 전당</h2>
 							<img
-								src="${cpath}/resources/images/mypage/mypage1/icon-fill-type-500.svg"
+								src="${cpath}/resources/images/mypage/dash-board/icon-fill-type-500.svg"
 								alt="Crown" class="style_57">
 						</div>
 						<hr class="style_7">
 						<div class="style_58 hall-of-fame-avatars">
 							<div class="style_59">
-								<img src="${cpath}/resources/images/mypage/mypage1/frame0.svg"
+								<img src="${cpath}/resources/images/mypage/dash-board/frame0.svg"
 									alt="Avatar" class="style_61"> <img
-									src="${cpath}/resources/images/mypage/mypage1/frame0.svg"
+									src="${cpath}/resources/images/mypage/dash-board/frame0.svg"
 									alt="Avatar placeholder" class="style_62"> <img
-									src="${cpath}/resources/images/mypage/mypage1/frame0.svg"
+									src="${cpath}/resources/images/mypage/dash-board/frame0.svg"
 									alt="Avatar placeholder" class="style_63"> <img
-									src="${cpath}/resources/images/mypage/mypage1/frame0.svg"
+									src="${cpath}/resources/images/mypage/dash-board/frame0.svg"
 									alt="Avatar placeholder" class="style_64"> <img
-									src="${cpath}/resources/images/mypage/mypage1/frame0.svg"
+									src="${cpath}/resources/images/mypage/dash-board/frame0.svg"
 									alt="Avatar placeholder" class="style_65"> <img
-									src="${cpath}/resources/images/mypage/mypage1/frame0.svg"
+									src="${cpath}/resources/images/mypage/dash-board/frame0.svg"
 									alt="Avatar placeholder" class="style_66">
 							</div>
 							<div class="style_59">
-								<img src="${cpath}/resources/images/mypage/mypage1/frame0.svg"
+								<img src="${cpath}/resources/images/mypage/dash-board/frame0.svg"
 									alt="Avatar" class="style_61"> <img
-									src="${cpath}/resources/images/mypage/mypage1/frame0.svg"
+									src="${cpath}/resources/images/mypage/dash-board/frame0.svg"
 									alt="Avatar placeholder" class="style_62"> <img
-									src="${cpath}/resources/images/mypage/mypage1/frame0.svg"
+									src="${cpath}/resources/images/mypage/dash-board/frame0.svg"
 									alt="Avatar placeholder" class="style_63"> <img
-									src="${cpath}/resources/images/mypage/mypage1/frame0.svg"
+									src="${cpath}/resources/images/mypage/dash-board/frame0.svg"
 									alt="Avatar placeholder" class="style_64"> <img
-									src="${cpath}/resources/images/mypage/mypage1/frame0.svg"
+									src="${cpath}/resources/images/mypage/dash-board/frame0.svg"
 									alt="Avatar placeholder" class="style_65"> <img
-									src="${cpath}/resources/images/mypage/mypage1/frame0.svg"
+									src="${cpath}/resources/images/mypage/dash-board/frame0.svg"
 									alt="Avatar placeholder" class="style_66">
 							</div>
 						</div>
@@ -277,7 +277,7 @@
 									<span class="style_34">리엑트 한큐에 배우기</span> <span
 										class="style_42">(20,000)</span>
 								</div>
-								<img src="${cpath}/resources/images/mypage/mypage1/login1.svg"
+								<img src="${cpath}/resources/images/mypage/dash-board/login1.svg"
 									alt="Action icon" class="style_43">
 							</div>
 							<div class="style_44">
@@ -285,7 +285,7 @@
 									<span class="style_34">Git을 활용한 프로젝트 생성해보기</span> <span
 										class="style_46">(Free)</span>
 								</div>
-								<img src="${cpath}/resources/images/mypage/mypage1/login1.svg"
+								<img src="${cpath}/resources/images/mypage/dash-board/login1.svg"
 									alt="Action icon" class="style_47">
 							</div>
 							<div class="style_48">
@@ -293,7 +293,7 @@
 									<span class="style_34">Figma 어렵지 않아요</span> <span
 										class="style_50">(35,000)</span>
 								</div>
-								<img src="${cpath}/resources/images/mypage/mypage1/login1.svg"
+								<img src="${cpath}/resources/images/mypage/dash-board/login1.svg"
 									alt="Action icon" class="style_51">
 							</div>
 						</div>
@@ -305,7 +305,7 @@
 							<div class="style_70">
 								<h2 class="style_56">이번주 출석체크</h2>
 								<a href="#" class="style_71"> <img
-									src="${cpath}/resources/images/mypage/mypage1/vuesax-linear-import0.svg"
+									src="${cpath}/resources/images/mypage/dash-board/vuesax-linear-import0.svg"
 									alt="Calendar icon" class="style_72"> <span
 									class="style_73">월간 달력 보기</span>
 								</a>
@@ -316,7 +316,7 @@
 										<span class="style_76">월</span>
 										<hr class="style_77">
 										<img
-											src="${cpath}/resources/images/mypage/mypage1/icon-fill-type-080.svg"
+											src="${cpath}/resources/images/mypage/dash-board/icon-fill-type-080.svg"
 											alt="Attendance status" class="style_78 attendance-day-icon">
 									</div>
 								</div>
@@ -325,7 +325,7 @@
 										<span class="style_76">화</span>
 										<hr class="style_77">
 										<img
-											src="${cpath}/resources/images/mypage/mypage1/icon-fill-type-080.svg"
+											src="${cpath}/resources/images/mypage/dash-board/icon-fill-type-080.svg"
 											alt="Attendance status" class="style_79 attendance-day-icon">
 									</div>
 								</div>
@@ -334,7 +334,7 @@
 										<span class="style_76">수</span>
 										<hr class="style_77">
 										<img
-											src="${cpath}/resources/images/mypage/mypage1/icon-fill-type-080.svg"
+											src="${cpath}/resources/images/mypage/dash-board/icon-fill-type-080.svg"
 											alt="Attendance status" class="style_80 attendance-day-icon">
 									</div>
 								</div>
@@ -343,7 +343,7 @@
 								    	<span class="style_76">목</span>
 								    	<hr class="style_77">
 								    	<img
-									      src="${cpath}/resources/images/mypage/mypage1/icon-fill-type-950.svg"
+									      src="${cpath}/resources/images/mypage/dash-board/icon-fill-type-950.svg"
 									      alt="Attendance status"
 									      class="style_82 attendance-day-icon">
 								  </div>
@@ -377,5 +377,5 @@
 <script>
   const basePath = '${pageContext.request.contextPath}';
 </script>	
-<script src="${pageContext.request.contextPath}/resources/js/dash-board.js"></script>
+<script src="${pageContext.request.contextPath}/resources/js/dash-board/dash-board.js"></script>
 </html>

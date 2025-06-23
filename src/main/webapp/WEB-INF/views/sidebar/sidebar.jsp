@@ -8,7 +8,7 @@
 <script>
   	const basePath = '${cpath}';
 </script>
-<script src="${cpath}/resources/static/js/sidebar.js"></script>
+<script src="${cpath}/resources/js/sidebar/sidebar.js"></script>
 
 <div class="sidebar">
 	<div class="group-497">
@@ -16,10 +16,10 @@
 			<div class="group-75">
 				<div class="group-4972">
 					<img class="avatar-default"
-						src="${cpath}/resources/static/images/mypage/defualt-profile.svg" />
+						src="${cpath}/resources/images/sidebar/avatar-default0.svg" />
 					<div class="frame-497">
 						<a class="vuesax-linear-export" href="${cpath}/mypage/page2">
-						<img src="${cpath}/resources/static/images/mypage/sideLineBox.svg" />
+						<img src="${cpath}/resources/images/sidebar/vuesax-linear-export0.svg" />
 						</a>
 					</div>
 				</div>

@@ -6,17 +6,17 @@
 <meta charset="UTF-8">
 <title>마이페이지 결제내역</title>
 <link rel="stylesheet"
-	href="${pageContext.request.contextPath}/resources/css/mypage/mypagePayStyle.css" />
+	href="${pageContext.request.contextPath}/resources/css/mypage/pay/mypagePayStyle.css" />
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/resources/css/mypage/mypageVars.css" />
 <link rel="stylesheet"
-	href="${pageContext.request.contextPath}/resources/css/mypage/sidebar.css" />
+	href="${pageContext.request.contextPath}/resources/css/sidebar/sidebar.css" />
 </head>
 <body>
 	<div class="layout-wrapper">
-		<%@ include file="../common/header.jsp"%>
+		<%@ include file="../../header/header.jsp"%>
 		<div class="main-content-wrapper">
-			<%@ include file="../common/sidebar.jsp"%>
+			<%@ include file="../../sidebar/sidebar.jsp"%>
 			<div class="page-container">
 				<section id="payment-history" class="payment-history-section">
 					<div class="payment-history-container">
