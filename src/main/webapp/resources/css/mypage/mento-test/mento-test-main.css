@@ -7,6 +7,7 @@
   background: #ffffff;
   height: 1025px;
   position: relative;
+  top : -10px;
 }
 .frame-3705 {
   display: flex;
@@ -33,7 +34,7 @@
   object-fit: cover;
   aspect-ratio: 485/492.25;
 }
-.div {
+.div_mento {
   color: #ffffff;
   text-align: center;
   font-family: "Inter-SemiBold", sans-serif;
@@ -89,7 +90,7 @@
   left: 438px;
   top: 638px;
 }
-.div2 {
+.div2_mento {
   border : transparent;
   background : transparent;
   color: #000000;

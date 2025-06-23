@@ -299,7 +299,7 @@
       </span>
     </div>
     <div class="rectangle-312"></div>
-    <div class="div">제출하기</div>
+    <div class="div_mento_start">제출하기</div>
     <img class="photoroom-1" src="${ImgPath}/background.png" />
-    <div class="div2">멘토 자격시험</div>
+    <div class="div2_mento_start">멘토 자격시험</div>
   </div>

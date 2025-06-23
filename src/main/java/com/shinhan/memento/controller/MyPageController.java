@@ -94,7 +94,8 @@ public class MyPageController {
 	        request.setAttribute("initialPage", "/memento/mypage/page8");
 	        return "mypage/mypage-main"; // 전체 레이아웃 반환 (screen + sidebar + header 포함)
 	    }
-    
+	}
+	
 	@RequestMapping({"", "/", "/{section}", "/{section}/{sub}"})
 	public String mypageEntry() {
 	    return "mypage/mypage-main";

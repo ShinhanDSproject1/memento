@@ -1,4 +1,14 @@
 
+
+.spark-test-container{
+	margin: 0 auto;
+    box-sizing: border-box;
+    max-width: 1100px;
+    width: 100%;
+    position: relative;
+    top : -70px;
+}
+
 /* 스파크테스트 - 노란 디자인 띠 (상단 진행 바 또는 장식) */
 .spark-test__designLavel {
     background: #ffea41;

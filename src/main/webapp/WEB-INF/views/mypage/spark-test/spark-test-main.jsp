@@ -6,9 +6,8 @@
 <link rel="stylesheet"
 	href="${cpath}/resources/css/mypage/spark-test/spark-test.css" />
 
-<div class="layout-wrapper">
-	<div class="main-content-wrapper">
-		<div class="page-container">
+
+		<div class="spark-test-container">
 			
 			<!-- 	<article class="spark-test__designLavel"></article> -->
 				<div class="spark-test__container--title"
@@ -34,5 +33,4 @@
 
 
 		</div>
-	</div>
-</div>
+
