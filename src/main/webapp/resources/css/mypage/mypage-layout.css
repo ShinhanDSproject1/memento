@@ -1,28 +1,4 @@
 @charset "UTF-8";
-.container {
-  /* max-width: 1440px;       /* 원하는 전체 넓이 제한 */ */
-  margin: 0 auto;
-  padding: 0 10vw ;  /* ← 좌우 여백 */
-  width: 80vw;
-}
-
-@media (max-width: 1800px) {
-  .container {
-    padding: 0;
-  }
-}
-
-@media (max-width: 768px) {
-  .container {
-    padding: 0;
-  }
-}
-
-@media (max-width: 480px) {
-  .container {
-    padding: 0;
-  }
-}
 
   .mypage--layout {
     display: flex;
@@ -53,6 +29,7 @@
   min-height: calc(100vh - 100px);
   padding-top: 105px;
 }
+
 .page-container {
   margin: 0 auto;
   padding: 100px 40px;

@@ -15,9 +15,9 @@
 </head>
 <body>
 	<div class="layout-wrapper">
-		<%@ include file="../common/header.jsp"%>
+		<%@ include file="../../header/header.jsp"%>
 		<div class="main-content-wrapper">
-			<%@ include file="../common/sidebar.jsp"%>
+			<%@ include file="../../sidebar/sidebar.jsp"%>
 			<div class="page-container">
 				<section id="my-keepgoing-list" class="keepgoing-list-section">
 					<h2 class="keepgoing-list-section__title">나의 킵고잉 목록</h2>

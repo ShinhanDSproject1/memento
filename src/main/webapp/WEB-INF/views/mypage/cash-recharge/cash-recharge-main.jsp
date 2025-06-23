@@ -2,8 +2,8 @@
     pageEncoding="UTF-8"%>
     <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <c:set var="cpath" value="${pageContext.servletContext.contextPath}" />
-<c:url var="cashImgPath" value="/resources/static/images/mypage/cash-recharge" />
-<link rel="stylesheet" href="${cpath}/resources/static/css/mypage/cash-recharge/cash-recharge-main.css" />
+<c:url var="cashImgPath" value="/resources/images/mypage/cash-recharge" />
+<link rel="stylesheet" href="${cpath}/resources/css/mypage/cash-recharge/cash-recharge-main.css" />
 
 
  <section class="cash-recahrge">

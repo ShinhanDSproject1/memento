@@ -14,9 +14,9 @@
 </head>
 <body>
 	<div class="layout-wrapper">
-		<%@ include file="../common/header.jsp"%>
+		<%@ include file="../../header/header.jsp"%>
 		<div class="main-content-wrapper">
-			<%@ include file="../common/sidebar.jsp"%>
+			<%@ include file="../../sidebar/sidebar.jsp"%>
 			<div class="page-container">
 				<section id="order-details" class="order-details-page style_1_root">
 					<header class="order-header">

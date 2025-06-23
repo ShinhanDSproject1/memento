@@ -18,30 +18,21 @@
 </script>
 
 
-	<script src="${cpath}/resources/static/js/mypage/mypage.js"></script>
+	<script src="${cpath}/resources/js/mypage/mypage.js"></script>
 	
 <title>me:mento mypage</title>
-<link rel="stylesheet" href="${cpath}/resources/static/css/mypage/mypage-layout.css" />
-<link rel="stylesheet" href="${cpath}/resources/static/css/mypage/sideBar.css" />
+<link rel="stylesheet" href="${cpath}/resources/css/mypage/mypage-layout.css" />
+<link rel="stylesheet" href="${cpath}/resources/css/sidebar/sidebar.css" />
 	
 </head>
 <body>
 	<div class="layout-wrapper">
-		<%@ include file="../common/header.jsp"%>
+		<%@ include file="../header/header.jsp"%>
 		<div id="sceen" class="main-content-wrapper">
-			<%@ include file="../mypage/sideBar.jsp"%>
+			<%@ include file="../sidebar/sidebar.jsp"%>
 			<div id = "screen" class="screen page-container"></div>
 			</div>
 			</div>
-<%-- <body>
-	<%@ include file="../header/header.jsp" %>
-	
-	<div class="container">
-		<div class="mypage--layout">
-			<div id = "sidebar" class = "sidebar"> <%@ include file="../mypage/sideBar.jsp" %> </div>
-			<div id = "screen" class = "screen"></div>
-		</div>
-	</div> --%>
 
 </body>
 </html>

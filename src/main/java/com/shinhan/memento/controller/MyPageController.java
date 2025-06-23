@@ -10,7 +10,7 @@ public class MyPageController {
 	
 	@RequestMapping("/page1")
 	public String myPageView() {
-		return "mypage/mypage1";
+		return "mypage/dash-board/mypage1";
 	}
 	
 	@RequestMapping("/page2")
@@ -57,7 +57,7 @@ public class MyPageController {
 	public String dashBoard(HttpServletRequest request) {
 	    boolean isAjax = "XMLHttpRequest".equals(request.getHeader("X-Requested-With"));
 	    if (isAjax) {
-	        return "mypage/dashBoard"; // ✨ screen 전용 뷰
+	        return "mypage/dash-board/dashBoard"; // ✨ screen 전용 뷰
 	    } else {
 	        request.setAttribute("initialPage", "/memento/mypage/dashBoard"); // 실제 경로 지정
 	        return "mypage/mypage-main"; // 전체 레이아웃에서 내부에서 AJAX 호출

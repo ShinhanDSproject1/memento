@@ -2,8 +2,8 @@
     pageEncoding="UTF-8"%>
  <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <c:set var="cpath" value="${pageContext.servletContext.contextPath}" />
-<c:url var="ImgPath" value="/resources/static/images/mypage/dash-borad" />
-<link rel="stylesheet" href="${cpath}/resources/static/css/mypage/dash-board/attendance-calender.css" />
+<c:url var="ImgPath" value="/resources/images/mypage/dash-borad" />
+<link rel="stylesheet" href="${cpath}/resources/css/mypage/dash-board/attendance-calender.css" />
     
     
    <div class="frame-3707">
