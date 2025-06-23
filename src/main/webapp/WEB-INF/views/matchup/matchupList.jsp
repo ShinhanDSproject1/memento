@@ -145,7 +145,7 @@ request.setAttribute("matchupList", matchupList);
 			<div class="pagemove-list">
 				<div class="page-back-btn">
 					<img class="vuesax-linear-arrow-left"
-						src="vuesax-linear-arrow-left0.svg" />
+						src="${cpath}/resources/images/arrow-left.svg" />
 				</div>
 				<div class="page-li-btn-seleted-page">
 					<div class="d-2-b-12-white">1</div>
@@ -176,7 +176,7 @@ request.setAttribute("matchupList", matchupList);
 				</div>
 				<div class="page-after-btn">
 					<img class="vuesax-linear-arrow-right"
-						src="vuesax-linear-arrow-right0.svg" />
+						src="${cpath}/resources/images/arrow-right.svg" />
 				</div>
 			</div>
 		</div>
