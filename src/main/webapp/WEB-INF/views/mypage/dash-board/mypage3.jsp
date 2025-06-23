@@ -6,11 +6,11 @@
 <meta charset="UTF-8">
 <title>마이페이지 결제내역</title>
 <link rel="stylesheet"
-	href="${pageContext.request.contextPath}/resources/css/mypage/pay/mypagePayStyle.css" />
+	href="${pageContext.request.contextPath}/resources/css/mypage/mypagePayStyle.css" />
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/resources/css/mypage/mypageVars.css" />
 <link rel="stylesheet"
-	href="${pageContext.request.contextPath}/resources/css/sidebar/sidebar.css" />
+	href="${pageContext.request.contextPath}/resources/css/mypage/sidebar.css" />
 </head>
 <body>
 	<div class="layout-wrapper">

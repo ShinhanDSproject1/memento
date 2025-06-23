@@ -6,11 +6,11 @@
 <meta charset="UTF-8">
 <title>멘토스 목록</title>
 <link rel="stylesheet"
-	href="${pageContext.request.contextPath}/resources/css/mypage/dash-board/mypageMentosListStyle.css" />
+	href="${pageContext.request.contextPath}/resources/css/mypage/mypageMentosListStyle.css" />
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/resources/css/mypage/mypageVars.css" />
 <link rel="stylesheet"
-	href="${pageContext.request.contextPath}/resources/css/sidebar/sidebar.css" />
+	href="${pageContext.request.contextPath}/resources/css/mypage/sidebar.css" />
 </head>
 </head>
 <body>
@@ -26,7 +26,7 @@
 							<div class="mentors-grid">
 								<article class="mentor-card mentor-card--waiting">
 									<img
-										src="${cpath}/resources/images/mypage/dash-board/mentos-list/image0.png"
+										src="${cpath}/resources/images/mypage/mypage7/image0.png"
 										alt="국내는 기본, 해외까지 노리는 코딩 인터뷰 실전 패키지" class="card-image">
 									<div class="card-content-wrapper">
 										<h2 class="card-title">국내는 기본, 해외까지 노리는 코딩 인터뷰 실전 패키지</h2>
@@ -40,7 +40,7 @@
 											<p class="status-mentor-text">
 												<span class="status-text status-text--waiting">대기중</span> <span
 													class="mentor-details"> <img
-													src="${cpath}/resources/images/mypage/dash-board/mentos-list/vuesax-linear-microphone0.svg"
+													src="${cpath}/resources/images/mypage/mypage7/vuesax-linear-microphone0.svg"
 													alt="mentor icon" class="mentor-icon"> <span
 													class="mentor-name">최다희 멘토</span>
 												</span>
@@ -51,7 +51,7 @@
 
 								<article class="mentor-card mentor-card--default">
 									<img
-										src="${cpath}/resources/images/mypage/dash-board/mentos-list/image1.png"
+										src="${cpath}/resources/images/mypage/mypage7/image1.png"
 										alt="비전공자의 전공자 따라잡기 자료구조 (with JS)" class="card-image">
 									<div class="card-content-wrapper">
 										<h2 class="card-title">비전공자의 전공자 따라잡기 자료구조 (with JS)</h2>
@@ -65,7 +65,7 @@
 											<p class="status-mentor-text">
 												<span class="status-text">3회 / 5회</span> <span
 													class="mentor-details"> <img
-													src="${cpath}/resources/images/mypage/dash-board/mentos-list/vuesax-linear-microphone0.svg"
+													src="${cpath}/resources/images/mypage/mypage7/vuesax-linear-microphone0.svg"
 													alt="mentor icon" class="mentor-icon"> <span
 													class="mentor-name">홍길동 멘토</span>
 												</span>
@@ -76,7 +76,7 @@
 
 								<article class="mentor-card mentor-card--default">
 									<img
-										src="${cpath}/resources/images/mypage/dash-board/mentos-list/image2.png"
+										src="${cpath}/resources/images/mypage/mypage7/image2.png"
 										alt="비전공자도 이해할 수 있는 AWS 입문/실전" class="card-image">
 									<div class="card-content-wrapper">
 										<h2 class="card-title">비전공자도 이해할 수 있는 AWS 입문/실전</h2>
@@ -90,7 +90,7 @@
 											<p class="status-mentor-text">
 												<span class="status-text">0회 / 5회</span> <span
 													class="mentor-details"> <img
-													src="${cpath}/resources/images/mypage/dash-board/mentos-list/vuesax-linear-microphone0.svg"
+													src="${cpath}/resources/images/mypage/mypage7/vuesax-linear-microphone0.svg"
 													alt="mentor icon" class="mentor-icon"> <span
 													class="mentor-name">차민건 멘토</span>
 												</span>
@@ -101,7 +101,7 @@
 
 								<article class="mentor-card mentor-card--default">
 									<img
-										src="${cpath}/resources/images/mypage/dash-board/mentos-list/image3.png"
+										src="${cpath}/resources/images/mypage/mypage7/image3.png"
 										alt="스프링 부트와 리액트로 구현하는 소셜 로그인" class="card-image">
 									<div class="card-content-wrapper">
 										<h2 class="card-title">스프링 부트와 리액트로 구현하는 소셜 로그인</h2>
@@ -115,7 +115,7 @@
 											<p class="status-mentor-text">
 												<span class="status-text">4회 / 5회</span> <span
 													class="mentor-details"> <img
-													src="${cpath}/resources/images/mypage/dash-board/mentos-list/vuesax-linear-microphone0.svg"
+													src="${cpath}/resources/images/mypage/mypage7/vuesax-linear-microphone0.svg"
 													alt="mentor icon" class="mentor-icon"> <span
 													class="mentor-name">김대현 멘토</span>
 												</span>
@@ -126,7 +126,7 @@
 
 								<article class="mentor-card mentor-card--completed">
 									<img
-										src="${cpath}/resources/images/mypage/dash-board/mentos-list/image4.png"
+										src="${cpath}/resources/images/mypage/mypage7/image4.png"
 										alt="파이썬으로 봇 만들기 with ChatGPT" class="card-image">
 									<div class="card-content-wrapper">
 										<h2 class="card-title">파이썬으로 봇 만들기 with ChatGPT</h2>
@@ -140,7 +140,7 @@
 											<p class="status-mentor-text">
 												<span class="status-text status-text--completed">완료</span> <span
 													class="mentor-details"> <img
-													src="${cpath}/resources/images/mypage/dash-board/mentos-list/vuesax-linear-microphone0.svg"
+													src="${cpath}/resources/images/mypage/mypage7/vuesax-linear-microphone0.svg"
 													alt="mentor icon" class="mentor-icon"> <span
 													class="mentor-name">안가연 멘토</span>
 												</span>
@@ -151,7 +151,7 @@
 
 								<article class="mentor-card mentor-card--default">
 									<img
-										src="${cpath}/resources/images/mypage/dash-board/mentos-list/image5.png"
+										src="${cpath}/resources/images/mypage/mypage7/image5.png"
 										alt="신한 DS에서 배우는 스프링 부트 심화 버전" class="card-image">
 									<div class="card-content-wrapper">
 										<h2 class="card-title">신한 DS에서 배우는 스프링 부트 심화 버전</h2>
@@ -165,7 +165,7 @@
 											<p class="status-mentor-text">
 												<span class="status-text">3회 / 7회</span> <span
 													class="mentor-details"> <img
-													src="${cpath}/resources/images/mypage/dash-board/mentos-list/vuesax-linear-microphone0.svg"
+													src="${cpath}/resources/images/mypage/mypage7/vuesax-linear-microphone0.svg"
 													alt="mentor icon" class="mentor-icon"> <span
 													class="mentor-name">정진 멘토</span>
 												</span>

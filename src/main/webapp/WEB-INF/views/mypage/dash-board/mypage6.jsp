@@ -6,12 +6,12 @@
 <meta charset="UTF-8">
 <title>마이페이지 매치업 목록</title>
 <link rel="stylesheet"
-	href="${pageContext.request.contextPath}/resources/css/mypage/dash-board/mypageMatchupListStyle.css" />
+	href="${pageContext.request.contextPath}/resources/css/mypage/mypageMatchupListStyle.css" />
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/resources/css/mypage/mypageVars.css" />
 </head>
 <link rel="stylesheet"
-	href="${pageContext.request.contextPath}/resources/css/sidebar/sidebar.css" />
+	href="${pageContext.request.contextPath}/resources/css/mypage/sidebar.css" />
 </head>
 <body>
 	<div class="layout-wrapper">
@@ -27,7 +27,7 @@
 							<article class="matchup-card style_4">
 								<div class="card-content-wrapper">
 									<img
-										src="${cpath}/resources/images/mypage/dash-board/matchup-list/vector0.svg"
+										src="${cpath}/resources/images/mypage/mypage6/vector0.svg"
 										alt="Avatar" class="avatar style_10">
 									<div class="details-column">
 										<div class="top-section">
@@ -45,7 +45,7 @@
 											</div>
 											<div class="mentor-info">
 												<img
-													src="${cpath}/resources/images/mypage/dash-board/matchup-list/microphone-20.svg"
+													src="${cpath}/resources/images/mypage/mypage6/microphone-20.svg"
 													alt="Role Icon" class="mic-icon style_18"> <span
 													class="mentor-name style_7">조상호 멘토</span>
 											</div>
@@ -58,7 +58,7 @@
 							<article class="matchup-card style_4">
 								<div class="card-content-wrapper">
 									<img
-										src="${cpath}/resources/images/mypage/dash-board/matchup-list/vector0.svg"
+										src="${cpath}/resources/images/mypage/mypage6/vector0.svg""
 										alt="Avatar" class="avatar style_20">
 									<div class="details-column">
 										<div class="top-section">
@@ -84,7 +84,7 @@
 							<article class="matchup-card style_4">
 								<div class="card-content-wrapper">
 									<img
-										src="${cpath}/resources/images/mypage/dash-board/matchup-list/vector0.svg"
+										src="${cpath}/resources/images/mypage/mypage6/vector0.svg"
 										alt="Avatar" class="avatar style_23">
 									<div class="details-column">
 										<div class="top-section">
@@ -102,7 +102,7 @@
 											</div>
 											<div class="mentor-info">
 												<img
-													src="${cpath}/resources/images/mypage/dash-board/matchup-list/microphone-20.svg"
+													src="${cpath}/resources/images/mypage/mypage6/microphone-20.svg"
 													alt="Role Icon" class="mic-icon style_24"> <span
 													class="mentor-name style_21">미확정</span>
 											</div>
@@ -115,7 +115,7 @@
 							<article class="matchup-card style_4">
 								<div class="card-content-wrapper">
 									<img
-										src="${cpath}/resources/images/mypage/dash-board/matchup-list/vector0.svg"
+										src="${cpath}/resources/images/mypage/mypage6/vector0.svg"
 										alt="Avatar" class="avatar style_26">
 									<div class="details-column">
 										<div class="top-section">
@@ -133,7 +133,7 @@
 											</div>
 											<div class="mentor-info">
 												<img
-													src="${cpath}/resources/images/mypage/dash-board/matchup-list/microphone-20.svg"
+													src="${cpath}/resources/images/mypage/mypage6/microphone-20.svg"
 													alt="Role Icon" class="mic-icon style_27"> <span
 													class="mentor-name style_7">정진 멘토</span>
 											</div>
@@ -146,13 +146,13 @@
 						<div class="action-buttons-container style_28">
 							<button class="action-button style_28">
 								<img
-									src="${cpath}/resources/images/mypage/dash-board/matchup-list/rectangle-3050.svg"
+									src="${cpath}/resources/images/mypage/mypage6/rectangle-3050.svg"
 									alt="킵고잉 찬성 배경" class="button-background style_29"> <span
 									class="button-text style_30">킵고잉 찬성</span>
 							</button>
 							<button class="action-button style_28">
 								<img
-									src="${cpath}/resources/images/mypage/dash-board/matchup-list/rectangle-3051.svg"
+									src="${cpath}/resources/images/mypage/mypage6/rectangle-3051.svg"
 									alt="리뷰 쓰기 배경" class="button-background style_31"> <span
 									class="button-text style_30">리뷰 쓰기</span>
 							</button>

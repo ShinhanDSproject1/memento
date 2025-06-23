@@ -9,7 +9,7 @@
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/resources/css/mypage/dash-board/mypageDashboardStyle.css" />
 <link rel="stylesheet"
-	href="${pageContext.request.contextPath}/resources/css/mypage/mypageVars.css" />
+	href="${pageContext.request.contextPath}/resources/css/mypage/dash-board/mypageVars.css" />
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/resources/css/sidebar/sidebar.css" />
 </head>
@@ -377,5 +377,5 @@
 <script>
   const basePath = '${pageContext.request.contextPath}';
 </script>	
-<script src="${pageContext.request.contextPath}/resources/js/dash-board/dash-board.js"></script>
+<script src="${pageContext.request.contextPath}/resources/js/dash-board.js"></script>
 </html>

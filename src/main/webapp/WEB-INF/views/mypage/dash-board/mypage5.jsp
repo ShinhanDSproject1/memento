@@ -6,11 +6,11 @@
 <meta charset="UTF-8">
 <title>마이페이지 결제내역 상세</title>
 <link rel="stylesheet"
-	href="${pageContext.request.contextPath}/resources/css/mypage/pay/mypagePaybackStyle.css" />
+	href="${pageContext.request.contextPath}/resources/css/mypage/mypagePaybackStyle.css" />
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/resources/css/mypage/mypageVars.css" />
 <link rel="stylesheet"
-	href="${pageContext.request.contextPath}/resources/css/sidebar/sidebar.css" />
+	href="${pageContext.request.contextPath}/resources/css/mypage/sidebar.css" />
 </head>
 <body>
 	<div class="layout-wrapper">
@@ -55,7 +55,7 @@
 							<div class="action-buttons">
 								<div class="button-wrapper style_13_group" id="group_298_17560" onclick="location.href='${cpath}/mypage/page3'">
 									<img
-										src="${cpath}/resources/images/mypage/pay/pay-detail/rectangle-3051.svg"
+										src="${cpath}/resources/images/mypage/mypage5/rectangle-3051.svg"
 										alt="돌아가기 배경" class="button-background style_14_svg"> <span
 										class="button-text style_15_text">돌아가기</span>
 								</div>

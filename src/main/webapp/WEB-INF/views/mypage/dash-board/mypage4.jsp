@@ -6,11 +6,11 @@
 <meta charset="UTF-8">
 <title>마이페이지 결제내역 상세</title>
 <link rel="stylesheet"
-	href="${pageContext.request.contextPath}/resources/css/mypage/pay/mypagePaybackStyle.css" />
+	href="${pageContext.request.contextPath}/resources/css/mypage/mypagePayDetailStyle.css" />
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/resources/css/mypage/mypageVars.css" />
 <link rel="stylesheet"
-	href="${pageContext.request.contextPath}/resources/css/sidebar/sidebar.css" />
+	href="${pageContext.request.contextPath}/resources/css/mypage/sidebar.css" />
 </head>
 <body>
 	<div class="layout-wrapper">
@@ -55,9 +55,15 @@
 							<div class="action-buttons">
 								<div class="button-wrapper style_13_group" id="group_298_17560" onclick="location.href='${cpath}/mypage/page3'">
 									<img
-										src="${cpath}/resources/images/mypage/pay/pay-detail/rectangle-3051.svg"
+										src="${cpath}/resources/images/mypage/mypage4/rectangle-3051.svg"
 										alt="돌아가기 배경" class="button-background style_14_svg"> <span
 										class="button-text style_15_text">돌아가기</span>
+								</div>
+								<div class="button-wrapper style_13_group" id="group_298_17563" onclick="location.href='${cpath}/mypage/page5'">
+									<img
+										src="${cpath}/resources/images/mypage/mypage4/rectangle-3052.svg"
+										alt="환불 신청하기 배경" class="button-background style_16_svg">
+									<span class="button-text style_15_text">환불 신청하기</span>
 								</div>
 							</div>
 						</div>
@@ -86,7 +92,7 @@
 							<hr class="summary-divider style_21_line">
 							<div class="summary-item">
 								<span class="summary-label style_17_text">결제 상태</span> <span
-									class="summary-value status-completed style_19_text">환불
+									class="summary-value status-completed style_19_text">결제
 									완료</span>
 							</div>
 							<div class="summary-item">

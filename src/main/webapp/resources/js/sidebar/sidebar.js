@@ -10,7 +10,7 @@ function s_click(word) {
     case 'cash':
       $(".div4").addClass('active');
       localStorage.setItem('activeMenu', 'cash');
-      location.href = basePath + '/mypage/cash-recharge';
+      alert('캐시 충전 준비중');
       break;
     case 'pay':
       $(".div5").addClass('active');
@@ -20,12 +20,12 @@ function s_click(word) {
     case 'spark':
       $(".spark-test").addClass('active');
       localStorage.setItem('activeMenu', 'spark');
-      location.href = basePath + '/mypage/spark-test';
+      alert('Spark Test 준비중');
       break;
     case 'm_test':
       $(".div6").addClass('active');
       localStorage.setItem('activeMenu', 'm_test');
-      location.href = basePath + '/mypage/mento-test';
+      alert('멘토 자격시험 준비중');
       break;
   }
 }
