@@ -1,0 +1,270 @@
+/* 레이아웃 전체 wrapper */
+.layout-wrapper {
+  display: flex;
+  min-height: 100vh;
+}
+
+.main-content-wrapper {
+  display: flex;
+  flex: 1;
+  min-height: calc(100vh - 100px);
+  padding-top: 105px;
+}
+
+.page-container {
+  margin: 0 auto;
+  box-sizing: border-box;
+  max-width: 1100px;
+  width: 100%;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Inter', 'D2Coding', sans-serif;
+  background-color: #ffffff; /* From style_1 on root node 298:17347 */
+  justify-content: center;
+  padding-bottom: 50px;
+}
+
+.payment-history-section {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  padding: 20px 0;
+  box-sizing: border-box;
+}
+
+.payment-history-container {
+  background-color: #ffffff;
+  border-radius: 10px;
+  padding: 35px 40px 16px 40px;
+  box-sizing: border-box;
+  margin: 0 auto;
+  max-width: 1100px;
+  width: 100%;
+}
+
+.main-title {
+  color: rgba(0, 0, 0, 0.6); /* style_4 */
+  font-family: 'Inter', sans-serif;
+  font-weight: 600; /* style_4 */
+  font-size: 32px; /* style_4 */
+  line-height: 38.73px; /* style_4 */
+  text-align: center; /* Calculated from positioning */
+  margin: 0 auto 26px auto; /* Centered, bottom margin to list */
+}
+
+.payment-items-list {
+  display: flex;
+  flex-direction: column;
+  gap: 26px; /* Spacing between payment items */
+}
+
+.payment-item {
+  background-color: #ffffff; /* style_5 */
+  border: 1px solid rgba(0, 0, 0, 0.3); /* style_5 */
+  border-radius: 15px; /* style_5 */
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25); /* style_5 */
+  overflow: hidden; /* style_5 */
+  padding: 20px 25px; /* Approximate padding based on child element positions within 900px width */
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start; /* Align children to the top */
+  box-sizing: border-box;
+}
+
+.item-main-info {
+  display: flex;
+  flex-direction: column;
+  gap: 15px; /* Space between order info row and item name */
+  flex-grow: 1;
+}
+
+.item-row-1 {
+  display: flex;
+  align-items: center;
+  gap: 7px; /* Space between order number and tag */
+  flex-wrap: wrap;
+}
+
+.order-number-wrapper {
+  background-color: rgba(231, 231, 231, 0.42); /* style_10 */
+  padding: 5px 9px; /* style_10 */
+  border-radius: 10px; /* style_10 */
+  display: inline-flex; /* To fit content */
+  align-items: center;
+  justify-content: center;
+}
+
+.order-number-text {
+  color: rgba(0, 0, 0, 0.5); /* style_11 */
+  font-family: 'Inter', sans-serif;
+  font-weight: 400; /* style_11 */
+  font-size: 20px; /* style_11 */
+  line-height: 24.2px; /* style_11 */
+}
+
+.tag-wrapper {
+  padding: 4px 18px; /* Common for style_12, style_23, style_26, style_28 */
+  border-radius: 10px; /* Common */
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.tag-text {
+  color: #000000; /* style_13 */
+  font-family: 'Inter', sans-serif;
+  font-weight: 400; /* style_13 */
+  font-size: 16px; /* style_13 */
+  line-height: 19.36px; /* style_13 */
+}
+
+.tag-mentos { background-color: rgba(44, 176, 163, 0.33); /* style_12 */ }
+.tag-matchup-1 { background-color: rgba(141, 197, 246, 0.66); /* style_23 */ }
+.tag-cancelled { background-color: rgba(202, 130, 85, 0.46); /* style_26 */ }
+.tag-matchup-2 { background-color: #b4d9f9; /* style_28 */ }
+
+
+.item-name {
+  font-family: 'Inter', sans-serif;
+  font-weight: 400; /* Base from style_6 */
+  font-size: 20px; /* Base from style_6 */
+  line-height: 24.2px; /* Base from style_6 */
+  margin: 0;
+}
+.item-name-main.style-6-variant { color: rgb(102, 137, 133); font-weight: 600; } /* textStyle_8 for 298:17398 */
+.item-name-extra.style-6-variant { color: #000000; font-weight: 400; } /* textStyle_9 for 298:17398 */
+
+.item-name.style-22 { color: #49779f; font-weight: 600; } /* style_22 */
+.item-name.style-25 { color: #668985; font-weight: 600; } /* style_25 */
+
+
+.item-price-details {
+  display: flex;
+  align-items: flex-end; /* To align link to bottom */
+  gap: 30px; /* Adjusted from 62px for better fit, original was large */
+  margin-left: 20px; /* Ensure some space from left content */
+  flex-shrink: 0; /* Prevent shrinking */
+}
+
+.price-breakdown {
+  display: flex;
+  flex-direction: column;
+  gap: 8px; /* Adjusted from 11px */
+  width: 150px; /* Increased slightly from 142px for padding */
+}
+
+.price-line {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.price-line .label {
+  font-family: 'D2Coding', monospace;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 18.56px;
+}
+.price-line .label.amount { color: rgba(0, 0, 0, 0.57); /* style_16 */ }
+.price-line .label.points { color: rgba(0, 0, 0, 0.51); /* style_17 */ }
+.price-line .label.total { color: rgba(0, 0, 0, 0.56); /* style_19 */ }
+
+.price-line .value {
+  font-family: 'Abhaya Libre', serif; /* Abhaya Libre ExtraBold */
+  font-weight: 800; /* style_20 */
+  font-size: 16px; /* style_20 */
+  line-height: 18.88px; /* style_20 */
+  color: #000000; /* style_20 */
+  text-align: right;
+}
+
+.price-divider-svg {
+  width: 100%; /* To fit the 142px width of its parent .price-breakdown */
+  height: 1px; /* Approximate */
+  object-fit: cover; /* If SVG is just a line */
+  display: block;
+}
+
+.details-link {
+  color: #000000; /* style_21 */
+  font-family: 'Inter', sans-serif;
+  font-weight: 400; /* style_21 */
+  font-size: 14px; /* style_21 */
+  line-height: 16.94px; /* style_21 */
+  text-decoration: none;
+  white-space: nowrap;
+}
+.details-link:hover {
+  text-decoration: underline;
+}
+
+.load-more-container {
+  text-align: center;
+  margin-top: 46px; /* Space from container bottom to arrow top */
+}
+
+.load-more-arrow-icon {
+  /* style_32: box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25) */
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+  width: 32px; /* From bounding box */
+  height: 32px; /* From bounding box */
+  cursor: pointer;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .payment-history-container {
+    padding: 20px;
+  }
+  .main-title {
+    font-size: 28px;
+  }
+  .payment-item {
+    flex-direction: column;
+    align-items: stretch; /* Make children full width */
+    gap: 15px;
+    padding: 15px;
+  }
+  .item-price-details {
+    flex-direction: column; /* Stack price breakdown and link */
+    align-items: flex-start; /* Align to left */
+    gap: 10px;
+    margin-left: 0;
+    width: 100%;
+  }
+  .price-breakdown {
+    width: 100%; /* Full width on mobile */
+  }
+  .details-link {
+    align-self: flex-start; /* Align to left */
+  }
+  .item-row-1 {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 5px;
+  }
+}
+
+@media (max-width: 480px) {
+  .main-title {
+    font-size: 24px;
+    width: auto; /* Allow wrapping */
+  }
+  .order-number-text, .item-name {
+    font-size: 18px;
+  }
+  .tag-text, .price-line .label, .price-line .value {
+    font-size: 14px;
+  }
+  .details-link {
+    font-size: 13px;
+  }
+}
+
+</style>
+
+/* CSS from section:payment-history */
+/* Styles are in global.css block */
