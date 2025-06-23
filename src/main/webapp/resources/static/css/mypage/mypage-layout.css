@@ -2,8 +2,8 @@
 .container {
   /* max-width: 1440px;       /* 원하는 전체 넓이 제한 */ */
   margin: 0 auto;
-  padding: 0 200px ;  /* ← 좌우 여백 */
-  width: 100%;
+  padding: 0 10vw ;  /* ← 좌우 여백 */
+  width: 80vw;
 }
 
 @media (max-width: 1800px) {
@@ -28,8 +28,8 @@
     display: flex;
     flex-direction: row;
     width: 100%;
-    min-height: 100vh;
-   max-width: 100vw;
+	  /* margin-top: 100px; 여기서 레이아웃을 아래로 내릴 수 있습니다. */
+	 /*  min-height: 100vh; 화면 크기에 맞게 최소 높이 설정 */
    overflow: hidden;
   }
 
@@ -42,3 +42,21 @@
     flex-grow: 1;
       min-width: 0; /* ✅ flex item 내부 콘텐츠가 넘치지 않도록 */
   }
+  
+  .layout-wrapper {
+  display: flex;
+  min-height: 100vh;
+}
+.main-content-wrapper {
+  display: flex;
+  flex: 1;
+  min-height: calc(100vh - 100px);
+  padding-top: 105px;
+}
+.page-container {
+  margin: 0 auto;
+  padding: 100px 40px;
+  box-sizing: border-box;
+  max-width: 1100px;
+  width: 100%;
+}
