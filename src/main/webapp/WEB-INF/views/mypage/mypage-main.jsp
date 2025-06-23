@@ -17,20 +17,20 @@
 	  const initialPage = '${initialPage != null ? initialPage : cpath + "/mypage/dashBoard"}';
 </script>
 
-	<script src="${cpath}/resources/js/mypage/mypage.js"></script>
-	
-<title>me:mento mypage</title>
+<script src="${cpath}/resources/js/mypage/mypage.js"></script>
+<title>마이페이지 메인 화면</title>
 <link rel="stylesheet" href="${cpath}/resources/css/mypage/mypage-layout.css" />
+<link rel="stylesheet" href="${cpath}/resources/css/mypage/mypageVars.css" />
 <link rel="stylesheet" href="${cpath}/resources/css/sidebar/sidebar.css" />
 	
 </head>
 <body>
-	<div class="layout-wrapper">
-		<%@ include file="../header/header.jsp"%>
-		<div id="sceen" class="main-content-wrapper">
-			<%@ include file="../sidebar/sidebar.jsp"%>
-			<div id = "screen" class="screen"></div>
-			</div>
-			</div>
+<div class="layout-wrapper">
+	<%@ include file="../header/header.jsp"%>
+	<div class="main-content-wrapper">
+		<%@ include file="../sidebar/sidebar.jsp"%>
+		<div id="screen" class="screen page-container"></div>
+	</div>
+</div>
 </body>
 </html>

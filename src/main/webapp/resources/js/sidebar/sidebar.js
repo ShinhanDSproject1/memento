@@ -10,7 +10,7 @@ function s_click(word) {
     case 'cash':
       $(".div4").addClass('active');
       localStorage.setItem('activeMenu', 'cash');
-     location.href = basePath + '/mypage/cash-recharge';
+      location.href = basePath + '/mypage/cash-recharge';
       break;
     case 'pay':
       $(".div5").addClass('active');
@@ -18,7 +18,7 @@ function s_click(word) {
       location.href = basePath + '/mypage/page3';
       break;
     case 'spark':
-      $(".div7").addClass('active');
+      $(".spark-test").addClass('active');
       localStorage.setItem('activeMenu', 'spark');
       location.href = basePath + '/mypage/spark-test';
       break;
@@ -36,7 +36,7 @@ $(document).ready(function() {
     $('.menu-item').removeClass('active');
     switch (activeMenu) {
       case 'dashboard':
-        $(".div111").addClass('active');
+        $(".div3").addClass('active');
         break;
       case 'cash':
         $(".div4").addClass('active');
@@ -45,7 +45,7 @@ $(document).ready(function() {
         $(".div5").addClass('active');
         break;
       case 'spark':
-        $(".spark-test2").addClass('active');
+        $(".spark-test").addClass('active');
         break;
       case 'm_test':
         $(".div6").addClass('active');

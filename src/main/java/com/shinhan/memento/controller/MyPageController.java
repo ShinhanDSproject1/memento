@@ -9,54 +9,91 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class MyPageController {
 	
 	@RequestMapping("/page1")
-	public String myPageView(HttpServletRequest request) {
-		boolean isAjax = "XMLHttpRequest".equals(request.getHeader("X-Requested-With"));
+	public String myPageView1(HttpServletRequest request) {
+	    boolean isAjax = "XMLHttpRequest".equals(request.getHeader("X-Requested-With"));
 	    if (isAjax) {
-	        return "mypage/dash-board/mypage1"; // ✨ screen 전용 뷰
+	        return "mypage/dash-board/dashboard"; // 화면 컨텐츠만 반환
 	    } else {
-	        request.setAttribute("initialPage", "/memento/mypage/page1"); // 실제 경로 지정
-	        return "mypage/mypage-main"; // 전체 레이아웃에서 내부에서 AJAX 호출
+	        request.setAttribute("initialPage", "/memento/mypage/page1");
+	        return "mypage/mypage-main"; // 전체 레이아웃 반환 (screen + sidebar + header 포함)
 	    }
 	}
 	
 	@RequestMapping("/page2")
-	public String myPageView2() {
-		return "mypage/profile/profile";
+	public String myPageView2(HttpServletRequest request) {
+	    boolean isAjax = "XMLHttpRequest".equals(request.getHeader("X-Requested-With"));
+	    if (isAjax) {
+	        return "mypage/profile/profile"; // 화면 컨텐츠만 반환
+	    } else {
+	        request.setAttribute("initialPage", "/memento/mypage/page2");
+	        return "mypage/mypage-main"; // 전체 레이아웃 반환 (screen + sidebar + header 포함)
+	    }
 	}
 	
 	@RequestMapping("/page3")
-	public String myPageView3() {
-		return "mypage/pay/pay";
+	public String myPageView3(HttpServletRequest request) {
+	    boolean isAjax = "XMLHttpRequest".equals(request.getHeader("X-Requested-With"));
+	    if (isAjax) {
+	        return "mypage/pay/pay"; // 화면 컨텐츠만 반환
+	    } else {
+	        request.setAttribute("initialPage", "/memento/mypage/page3");
+	        return "mypage/mypage-main"; // 전체 레이아웃 반환 (screen + sidebar + header 포함)
+	    }
 	}
 	
 	@RequestMapping("/page4")
-	public String myPageView4() {
-		return "mypage/pay/paydetail";
+	public String myPageView4(HttpServletRequest request) {
+	    boolean isAjax = "XMLHttpRequest".equals(request.getHeader("X-Requested-With"));
+	    if (isAjax) {
+	        return "mypage/pay/paydetail"; // 화면 컨텐츠만 반환
+	    } else {
+	        request.setAttribute("initialPage", "/memento/mypage/page4");
+	        return "mypage/mypage-main"; // 전체 레이아웃 반환 (screen + sidebar + header 포함)
+	    }
 	}
 	
 	@RequestMapping("/page5")
-	public String myPageView5() {
-		return "mypage/pay/payback";
+	public String myPageView5(HttpServletRequest request) {
+	    boolean isAjax = "XMLHttpRequest".equals(request.getHeader("X-Requested-With"));
+	    if (isAjax) {
+	        return "mypage/pay/payback"; // 화면 컨텐츠만 반환
+	    } else {
+	        request.setAttribute("initialPage", "/memento/mypage/page5");
+	        return "mypage/mypage-main"; // 전체 레이아웃 반환 (screen + sidebar + header 포함)
+	    }
 	}
-	
+
 	@RequestMapping("/page6")
-	public String myPageView6() {
-		return "mypage/dash-board/matchuplist";
+	public String myPageView6(HttpServletRequest request) {
+	    boolean isAjax = "XMLHttpRequest".equals(request.getHeader("X-Requested-With"));
+	    if (isAjax) {
+	        return "mypage/dash-board/matchuplist"; // 화면 컨텐츠만 반환
+	    } else {
+	        request.setAttribute("initialPage", "/memento/mypage/page6");
+	        return "mypage/mypage-main"; // 전체 레이아웃 반환 (screen + sidebar + header 포함)
+	    }
 	}
 	
 	@RequestMapping("/page7")
-	public String myPageView7() {
-		return "mypage/dash-board/mentoslist";
+	public String myPageView7(HttpServletRequest request) {
+	    boolean isAjax = "XMLHttpRequest".equals(request.getHeader("X-Requested-With"));
+	    if (isAjax) {
+	        return "mypage/dash-board/mentoslist"; // 화면 컨텐츠만 반환
+	    } else {
+	        request.setAttribute("initialPage", "/memento/mypage/page7");
+	        return "mypage/mypage-main"; // 전체 레이아웃 반환 (screen + sidebar + header 포함)
+	    }
 	}
 	
 	@RequestMapping("/page8")
-	public String myPageView8() {
-		return "mypage/dash-board/keepgoinglist";
-	}
-	
-	@RequestMapping({"", "/", "/{section}", "/{section}/{sub}"})
-	public String mypageEntry() {
-	    return "mypage/mypage-main";
+	public String myPageView8(HttpServletRequest request) {
+	    boolean isAjax = "XMLHttpRequest".equals(request.getHeader("X-Requested-With"));
+	    if (isAjax) {
+	        return "mypage/dash-board/keepgoinglist"; // 화면 컨텐츠만 반환
+	    } else {
+	        request.setAttribute("initialPage", "/memento/mypage/page8");
+	        return "mypage/mypage-main"; // 전체 레이아웃 반환 (screen + sidebar + header 포함)
+	    }
 	}
 	
 	@RequestMapping("/dashBoard")
