@@ -2,8 +2,8 @@
     pageEncoding="UTF-8"%>
  <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <c:set var="cpath" value="${pageContext.servletContext.contextPath}" />
-<c:url var="ImgPath" value="/resources/static/images/mypage/mento-test" />
-<link rel="stylesheet" href="${cpath}/resources/static/css/mypage/mento-test/mento-test-description.css" />
+<c:url var="ImgPath" value="/resources/images/mypage/mento-test" />
+<link rel="stylesheet" href="${cpath}/resources/css/mypage/mento-test/mento-test-description.css" />
 
 <div class="frame-3706">
   <div class="frame-3705"></div>

@@ -2,10 +2,10 @@
     pageEncoding="UTF-8"%>
     <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <c:set var="cpath" value="${pageContext.servletContext.contextPath}" />
-<c:url var="sparkImgPath" value="/resources/static/images/mypage/spark-test" />
+<c:url var="sparkImgPath" value="/resources/images/mypage/spark-test" />
 
 
-	<link rel="stylesheet"  href="${cpath}/resources/static/css/mypage/spark-test/spark-test-type-check.css">
+	<link rel="stylesheet"  href="${cpath}/resources/css/mypage/spark-test/spark-test-type-check.css">
 <div class="frame-3767">
   <div class="rectangle-172"></div>
   <div class="spark-type">

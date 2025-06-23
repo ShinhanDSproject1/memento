@@ -1,0 +1,385 @@
+/* 레이아웃 전체 wrapper */
+.layout-wrapper {
+  display: flex;
+  min-height: 100vh;
+}
+
+.main-content-wrapper {
+  display: flex;
+  flex: 1;
+  min-height: calc(100vh - 100px);
+  padding-top: 105px;
+}
+
+.page-container {
+  margin: 0 auto;
+  flex: 1;
+  padding: 40px;
+  box-sizing: border-box;
+  max-width: 1011px;
+}
+
+body {
+  font-family: 'Inter', 'D2Coding', sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #ffffff;
+  display: block;
+  min-height: 100vh;
+  padding-bottom: 50px;
+  box-sizing: border-box;
+}
+
+/* Style mapping from css_summary.json */
+.style_1_root { /* Node 298:17497 - Main page container */
+  background-color: #ffffff;
+  overflow: hidden;
+}
+.style_2_text {
+  color: rgba(0, 0, 0, 0.63);
+  font-family: 'Inter', sans-serif;
+  font-weight: 600;
+  font-size: 20px;
+  line-height: 24.204544067382812px;
+  text-align: left;
+}
+.style_3_panel {
+  background-color: #ffffff;
+  border: 1px solid rgba(0, 0, 0, 0.3);
+  border-radius: 10px;
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+}
+.style_4_frame { /* Order number tag container */
+  background-color: rgba(231, 231, 231, 0.42);
+  display: inline-flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  padding: 5px 9px;
+  border-radius: 10px;
+}
+.style_5_text { /* Order number text */
+  color: rgba(0, 0, 0, 0.5);
+  font-family: 'Inter', sans-serif;
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 24.204544067382812px;
+  text-align: left;
+}
+.style_6_item { /* Product item container */
+  background-color: #ffffff;
+  border: 1px solid rgba(0, 0, 0, 0.3);
+  border-radius: 15px;
+  overflow: hidden;
+}
+.style_7_text { /* Product name */
+  color: #668985;
+  font-family: 'Inter', sans-serif;
+  font-weight: 600;
+  font-size: 20px;
+  line-height: 24.204544067382812px;
+  text-align: left;
+}
+.style_8_text { /* Product price */
+  color: #000000;
+  font-family: 'Abhaya Libre ExtraBold', serif;
+  font-weight: 800;
+  font-size: 16px;
+  line-height: 18.875px;
+  text-align: left;
+}
+.style_9_image_placeholder { /* Product image placeholder */
+  background-color: #dfdfdf;
+  border: 1px solid #696969;
+  border-radius: 10px;
+}
+.style_10_text { /* "구매한 상품 건수" */
+  color: rgba(0, 0, 0, 0.5);
+  font-family: 'Inter', sans-serif;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 19.363636016845703px;
+  text-align: left;
+}
+.style_11_frame { /* Mentor tag container */
+  background-color: rgba(44, 176, 163, 0.33);
+  display: inline-flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  padding: 4px 18px;
+  border-radius: 10px;
+}
+.style_12_text { /* Mentor tag text */
+  color: #000000;
+  font-family: 'Inter', sans-serif;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 19.363636016845703px;
+  text-align: left;
+}
+.style_13_group { /* Button wrapper (Group 453, 454) */
+  background-color: rgba(0, 0, 0, 0);
+  border-radius: 10px; /* From style_13 */
+}
+.style_14_svg { /* Button 1 SVG background image */
+  border-radius: 10px;
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+}
+.style_15_text { /* Button text */
+  color: #ffffff;
+  font-family: 'Inter', sans-serif;
+  font-weight: 600;
+  font-size: 20px;
+  line-height: 24.204544067382812px;
+  /* text-align: left; Centering handled by layout */
+}
+.style_16_svg { /* Button 2 SVG background image */
+  border-radius: 10px;
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+}
+.style_17_text { /* Summary labels "결제 상태", "결제 시간" */
+  color: #909294;
+  font-family: 'Inter', sans-serif;
+  font-weight: 600;
+  font-size: 20px;
+  line-height: 24.204544067382812px;
+  text-align: left;
+}
+.style_18_text { /* Summary value "2025.06.16 17:20" */
+  color: rgba(0, 0, 0, 0.63);
+  font-family: 'Inter', sans-serif;
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 24.204544067382812px;
+  text-align: left;
+}
+.style_19_text { /* Summary value "결제 완료" */
+  color: #00bba8;
+  font-family: 'Inter', sans-serif;
+  font-weight: 600;
+  font-size: 20px;
+  line-height: 24.204544067382812px;
+  text-align: left;
+}
+.style_20_text { /* Summary labels/values like "상품 금액", "₩35,000" */
+  color: #909294;
+  font-family: 'Inter', sans-serif;
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 24.204544067382812px;
+  text-align: left;
+}
+.style_21_line { /* Summary divider line */
+  border: none;
+  border-top: 1px solid rgba(0, 0, 0, 0.33);
+  height: 0;
+  margin: 0; /* Reset default hr margin */
+}
+
+/* Responsive adjustments */
+@media (max-width: 1024px) {
+  .page-container {
+    margin-left: 0;
+    margin-right: 0;
+    padding: 20px;
+  }
+
+  .order-details-page {
+     padding: 0;
+  	 margin-top: 0;
+  }
+}
+
+@media (max-width: 1200px) { /* Tablet and smaller */
+  .order-details-page {
+    padding: 100px 20px 100px 20px !important;
+  }
+  .order-header, .order-content-columns {
+    margin-left: 0 !important;
+  }
+  .order-content-columns {
+    flex-direction: column;
+    align-items: stretch; /* Make columns full width */
+  }
+  .left-column, .payment-summary-container {
+    width: 100% !important;
+    box-sizing: border-box; /* Ensure padding is included in width */
+  }
+}
+
+@media (max-width: 767px) { /* Mobile */
+  .order-details-page {
+    padding: 50px 15px 50px 15px !important;
+  }
+  .order-header {
+    align-items: flex-start;
+  }
+  .order-meta {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px !important;
+  }
+  .product-item {
+    flex-direction: column;
+    align-items: flex-start !important;
+    gap: 10px !important;
+    padding: 15px !important;
+  }
+  .product-image-placeholder {
+    margin-bottom: 10px;
+  }
+  .action-buttons {
+    flex-direction: column;
+    gap: 15px !important;
+  }
+  .button-wrapper {
+    width: 100% !important; /* Make buttons full width */
+  }
+  .summary-item-indented .summary-label {
+    margin-left: 20px !important;
+  }
+  .style_2_text, .style_5_text, .style_7_text, .style_15_text, .style_17_text, .style_18_text, .style_19_text, .style_20_text {
+    font-size: 18px; /* Adjust font sizes for mobile */
+  }
+  .style_8_text, .style_10_text, .style_12_text {
+    font-size: 14px; /* Adjust smaller font sizes */
+  }
+}
+
+/* CSS from section:order-details */
+.order-details-page {
+  width: 100%;
+  max-width: 1011px;
+  padding: 200px 0 213px 0;
+  margin: 0 auto;
+  box-sizing: border-box;
+}
+
+.order-header {
+  margin-left: 210px; /* (x_orderNoFrame 9861 - x_root 9651) */
+  margin-bottom: 28px; /* (y_leftPanelBG 9317 - (y_orderNoFrame 9255 + h_orderNoFrame 34)) */
+}
+.order-title {
+  margin-bottom: 9px; /* (y_orderNoFrame 9255 - (y_title 9222 + h_title 24)) */
+}
+.order-meta {
+  display: flex;
+  align-items: center;
+  gap: 12px; /* (x_mentorTagFrame 10077 - (x_orderNoFrame 9861 + w_orderNoFrame 204)) */
+}
+
+.order-content-columns {
+  display: flex;
+  gap: 32px;
+  align-items: flex-start;
+  margin: 0 auto;
+}
+
+.left-column {
+  display: flex;
+  flex-direction: column;
+  width: 545px; /* w_leftPanelBG 298:17545 */
+}
+.product-list-container {
+  padding: 19px 16px; /* Top: (y_itemCount 9336 - y_leftPanelBG 9317)=19. Left: (x_productFrame1 9890 - x_leftPanelBG 9874)=16 */
+  margin-bottom: 24px; /* (y_buttons 9618 - (y_leftPanelBG 9317 + h_leftPanelBG 277)) */
+}
+.items-count {
+  margin-bottom: 11px; /* (y_productFrame1 9366 - (y_itemCount 9336 + h_itemCount 19)) */
+}
+.product-item {
+  display: flex;
+  align-items: center;
+  padding: 22px 20px; /* Approx. Top: (y_image1 9388 - y_productFrame1 9366)=22. Left: (x_image1 9910 - x_productFrame1 9890)=20 */
+  gap: 32px; /* (x_productName1 10012 - (x_image1 9910 + w_image1 70)) */
+}
+.product-item + .product-item {
+  margin-top: 14px; /* (y_productFrame2 9477 - (y_productFrame1 9366 + h_productFrame1 97)) */
+}
+.product-image-placeholder {
+  width: 70px; /* w_image1 298:17552 */
+  height: 53px; /* h_image1 298:17552 */
+}
+.product-details {
+  display: flex;
+  flex-direction: column;
+}
+.product-name {
+  margin-bottom: 9px; /* (y_productPrice1 9422 - (y_productName1 9389 + h_productName1 24)) */
+}
+
+.action-buttons {
+  display: flex;
+  gap: 27px; /* (x_button2 10159.44 - (x_button1 9880.53 + w_button1 251.88)) */
+}
+.button-wrapper {
+  position: relative;
+  cursor: pointer;
+}
+#group_298_17560 { /* Button 1 Group 298:17560 */
+  width: 251.888671875px;
+  height: 60px;
+}
+#group_298_17563 { /* Button 2 Group 298:17563 */
+  width: 251.021484375px;
+  height: 60px;
+}
+.button-background {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+}
+.button-text {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  white-space: nowrap;
+  z-index: 2;
+}
+
+.payment-summary-container {
+  width: 430px; /* w_rightPanelBG 298:17546 */
+  padding: 38px 34px; /* Top: (y_totalPaymentLabel 9355 - y_rightPanelBG 9317)=38. Left: (x_totalPaymentLabel 10485 - x_rightPanelBG 10451)=34 */
+  box-sizing: border-box;
+}
+.summary-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+/* Vertical spacing for summary items */
+.payment-summary-container > .summary-item:nth-child(1) { /* 총 결제 금액 */
+  /* No margin-top needed for the first item */
+}
+.payment-summary-container > .summary-item:nth-child(2) { /* 상품 금액 */
+  margin-top: 23px; /* (y_상품금액 9402 - (y_총결제금액 9355 + h_총결제금액 24)) */
+}
+.payment-summary-container > .summary-item:nth-child(3) { /* 할인 금액 */
+  margin-top: 19px; /* (y_할인금액 9445 - (y_상품금액 9402 + h_상품금액 24)) */
+}
+.payment-summary-container > .summary-item:nth-child(4) { /* 포인트 할인 */
+  margin-top: 19px; /* (y_포인트할인 9488 - (y_할인금액 9445 + h_할인금액 24)) */
+}
+.payment-summary-container > .summary-item:nth-child(5) { /* 쿠폰 할인 */
+  margin-top: 11px; /* (y_쿠폰할인 9523 - (y_포인트할인 9488 + h_포인트할인 24)) */
+}
+.summary-item-indented .summary-label {
+  margin-left: 40px; /* (x_포인트할인Label 10525 - x_할인금액Label 10485) */
+}
+.summary-divider {
+  margin-top: 47px; /* (y_line 9594 - (y_쿠폰할인 9523 + h_쿠폰할인 24)) */
+  margin-bottom: 24px; /* (y_결제상태 9618 - y_line 9594) */
+}
+.payment-summary-container > .summary-item:nth-child(7) { /* 결제 상태 (after hr) */
+  /* margin-top handled by hr's margin-bottom */
+}
+.payment-summary-container > .summary-item:nth-child(8) { /* 결제 시간 */
+  margin-top: 17px; /* (y_결제시간 9659 - (y_결제상태 9618 + h_결제상태 24)) */
+}

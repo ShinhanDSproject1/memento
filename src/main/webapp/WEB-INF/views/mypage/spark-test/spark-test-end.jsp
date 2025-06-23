@@ -3,9 +3,9 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <c:set var="cpath" value="${pageContext.servletContext.contextPath}" />
 <c:url var="sparkImgPath"
-	value="/resources/static/images/mypage/spark-test" />
+	value="/resources/images/mypage/spark-test" />
 <c:set var="type" value="${param.type}" />
-<link rel="stylesheet" href="${cpath}/resources/static/css/mypage/spark-test/spark-test-end.css" />
+<link rel="stylesheet" href="${cpath}/resources/css/mypage/spark-test/spark-test-end.css" />
 
 
 <div class="frame-3780">
@@ -14,7 +14,7 @@
 			<div class="rectangle-172"></div>
 		</div>
 		<div class="frame-3710"
-			style="background: url('${cpath}/resources/static/images/mypage/spark-test/img-spark-test.png'); background-size: cover; background-repeat: no-repeat;">
+			style="background: url('${cpath}/resources/images/mypage/spark-test/img-spark-test.png'); background-size: cover; background-repeat: no-repeat;">
 			>
 			<div class="spark-test">SPARK TEST</div>
 		</div>

@@ -2,8 +2,8 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <c:set var="cpath" value="${pageContext.servletContext.contextPath}" />
-<c:url var="sparkImgPath" value="/resources/static/images/mypage/spark-test" />
-<link rel="stylesheet" href="${cpath}/resources/static/css/mypage/spark-test/spark-test-start.css" />
+<c:url var="sparkImgPath" value="/resources/images/mypage/spark-test" />
+<link rel="stylesheet" href="${cpath}/resources/css/mypage/spark-test/spark-test-start.css" />
 
 
   <div class="screen">
@@ -49,10 +49,10 @@
     </div>
 
     <div class="frame-3710"
-         style="background: url('${cpath}/resources/static/images/mypage/spark-test/img-spark-test.png'); background-size: cover; background-repeat: no-repeat;">
+         style="background: url('${cpath}/resources/images/mypage/spark-test/img-spark-test.png'); background-size: cover; background-repeat: no-repeat;">
       <div class="spark-test2">SPARK TEST</div>
     </div>
   </div>
 </div>
 
-  <script src="${cpath}/resources/static/js/mypage/spark-test/spark-test.js"></script>
+  <script src="${cpath}/resources/js/mypage/spark-test/spark-test.js"></script>

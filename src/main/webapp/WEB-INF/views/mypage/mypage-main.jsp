@@ -16,11 +16,15 @@
 	 const cpath = '${cpath}';
 	  const initialPage = '${initialPage != null ? initialPage : cpath + "/mypage/dashBoard"}';
 </script>
-<script src="${cpath}/resources/static/js/mypage/mypage.js"></script>
+
+
+
+	<script src="${cpath}/resources/js/mypage/mypage.js"></script>
 	
-<title>me:mento my page</title>
-<link rel="stylesheet" href="${cpath}/resources/static/css/mypage/mypage-layout.css" />
-<link rel="stylesheet" href="${cpath}/resources/static/css/mypage/sideBar.css" />
+<title>me:mento mypage</title>
+<link rel="stylesheet" href="${cpath}/resources/css/mypage/mypage-layout.css" />
+<link rel="stylesheet" href="${cpath}/resources/css/sidebar/sidebar.css" />
+	
 </head>
 <body>
 	<div class="layout-wrapper">
