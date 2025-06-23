@@ -5,10 +5,6 @@
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js">
 </script>
-<script>
-  	const basePath = '${cpath}';
-</script>
-<script src="${cpath}/resources/js/sidebar/sidebar.js"></script>
 
 <div class="sidebar">
 	<div class="group-497">
@@ -44,29 +40,59 @@
 		</div>
 	</div>
 	<div class="frame-409">
-		<div class="menu-item div3" onclick="s_click('dashboard')">
+		<div class="menu-item div111">
 			<ul class="div-3-span">
-				<li>대시보드</li>
+				<li>
+				<button
+				data-url="${cpath}/mypage/page1"
+	      	 	class="page-link">
+				대시보드
+				</button>
+				</li>
 			</ul>
 		</div>
-		<div class="menu-item div4" onclick="s_click('cash')">
+		<div class="menu-item div4">
 			<ul class="div-4-span">
-				<li>캐시 충전</li>
+				<li>
+				<button
+				data-url="${cpath}/mypage/cash-recharge"
+	      	 	class="page-link">
+				캐시 충전
+				</button>
+				</li>
 			</ul>
 		</div>
-		<div class="menu-item div5" onclick="s_click('pay')">
+		<div class="menu-item div5">
 			<ul class="div-5-span">
-				<li>결제내역</li>
+			<li>
+			<button
+				data-url="${cpath}/mypage/page3"
+	      	 	class="page-link">
+				결제내역
+				</button>
+				</li>
 			</ul>
 		</div>
-		<div class="menu-item spark-test" onclick="s_click('spark')">
-			<ul class="spark-test-span">
-				<li>Spark Test</li>
+		<div class="menu-item spark-test2">
+			<ul class="spark-test-span12">
+				<li>
+				<button
+				data-url="${cpath}/mypage/spark-test"
+	      	 	class="page-link">
+				Spark Test
+				</button>
+				</li>
 			</ul>
 		</div>
-		<div class="menu-item div6" onclick="s_click('m_test')">
+		<div class="menu-item div6">
 			<ul class="div-6-span">
-				<li>멘토 자격시험</li>
+				<li>
+				<button
+				data-url="${cpath}/mypage/mento-test"
+	      	 	class="page-link">
+				멘토 자격시험
+				</button>
+				</li>
 			</ul>
 		</div>
 	</div>

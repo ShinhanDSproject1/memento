@@ -13,7 +13,7 @@
 
 .frame-3600 {
   background: #ffffff;
-  /* padding: 16px 34px 16px 34px; */
+  padding: 16px 34px 16px 34px;
   display: flex;
   flex-direction: row;
   gap: 22px;
