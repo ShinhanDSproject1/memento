@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 @RequestMapping("/mypage")
 public class MyPageController {
-	
+
 	@RequestMapping("/page1")
 	public String myPageView1(HttpServletRequest request) {
 	    boolean isAjax = "XMLHttpRequest".equals(request.getHeader("X-Requested-With"));
@@ -94,6 +94,11 @@ public class MyPageController {
 	        request.setAttribute("initialPage", "/memento/mypage/page8");
 	        return "mypage/mypage-main"; // 전체 레이아웃 반환 (screen + sidebar + header 포함)
 	    }
+    
+	@RequestMapping({"", "/", "/{section}", "/{section}/{sub}"})
+	public String mypageEntry() {
+	    return "mypage/mypage-main";
+
 	}
 	
 	@RequestMapping("/dashBoard")
