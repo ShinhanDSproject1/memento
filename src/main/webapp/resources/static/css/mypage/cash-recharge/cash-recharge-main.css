@@ -1,9 +1,9 @@
 @charset "UTF-8";
-.frame-3774,
-.frame-3774 * {
+.cash-recahrge,
+.cash-recahrge * {
   box-sizing: border-box;
 }
-.frame-3774 {
+.cash-recahrge {
   background: #ffffff;
   border-style: solid;
   border-color: transparent;
@@ -135,7 +135,36 @@
   position: static;
   grid-column: NaN / span undefined;
   grid-row: NaN / span undefined;
+  
 }
+
+
+/* 도형에 클릭 시 색상이 변경될 수 있도록 스타일링 */
+.rectangle-224, .rectangle-225,
+.rectangle-2242, .rectangle-2252,
+.rectangle-2243, .rectangle-2253,
+.rectangle-2244, .rectangle-2254,
+.rectangle-2245, .rectangle-2255 {
+    transition: background-color 0.3s ease; /* 색상 변경에 애니메이션 추가 */
+    cursor: pointer; /* 클릭할 수 있음을 표시 */
+}
+
+/* 클릭 시 색상 변경 */
+.rectangle-224.clicked, .rectangle-225.clicked,
+.rectangle-2242.clicked, .rectangle-2252.clicked,
+.rectangle-2243.clicked, .rectangle-2253.clicked,
+.rectangle-2244.clicked, .rectangle-2254.clicked,
+.rectangle-2245.clicked, .rectangle-2255.clicked {
+    border-color: #024ADA;
+}
+
+
+
+.rectangle-226{
+	transition: background-color 0.3s ease; /* 색상 변경에 애니메이션 추가 */
+    cursor: pointer; /* 클릭할 수 있음을 표시 */
+}
+
 .rectangle-224 {
   border-radius: 35px;
   border-style: solid;
@@ -803,13 +832,13 @@
 }
 .me-me-mento-me-me-mento-me-me-me-7-me-7-i-os-me-080-333-4000-google-play-me-48-google-play-48-1-1-me-span3 {
   font-family: "Inter-Regular", sans-serif;
-}
+}/* 
 .me-me-mento-me-me-mento-me-me-me-7-me-7-i-os-me-080-333-4000-google-play-me-48-google-play-48-1-1-me-span4 {
   list-style-type: disc;
   padding-left: 1em;
   font-family: "Inter-Regular", sans-serif;
   text-decoration: underline;
-}
+} */
 .me-me-mento-me-me-mento-me-me-me-7-me-7-i-os-me-080-333-4000-google-play-me-48-google-play-48-1-1-me-span5 {
   font-family: "Inter-Bold", sans-serif;
   font-weight: 700;

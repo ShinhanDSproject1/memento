@@ -6,7 +6,7 @@
 <link rel="stylesheet" href="${cpath}/resources/static/css/mypage/cash-recharge/cash-recharge-main.css" />
 
 
- <div class="frame-3774">
+ <section class="cash-recahrge">
     <div class="group-200">
       <div class="me">
         <span>
@@ -25,7 +25,7 @@
         <img class="image-18" src="${cashImgPath}/logo.png" />
       </div>
       <div class="frame-423">
-        <div class="group-167">
+        <div class="group-167" onclick="changeRectangleColor(event)">
           <div class="rectangle-224"></div>
           <img
             class="vuesax-linear-money-recive"
@@ -39,7 +39,7 @@
             </ul>
           </div>
         </div>
-        <div class="group-168">
+        <div class="group-168" onclick="changeRectangleColor(event)">
           <div class="rectangle-2242"></div>
           <img
             class="vuesax-linear-money-recive2"
@@ -53,7 +53,7 @@
             </ul>
           </div>
         </div>
-        <div class="group-169">
+        <div class="group-169" onclick="changeRectangleColor(event)">
           <div class="rectangle-2243"></div>
           <img
             class="vuesax-linear-money-recive3"
@@ -67,7 +67,7 @@
             </ul>
           </div>
         </div>
-        <div class="group-170">
+        <div class="group-170" onclick="changeRectangleColor(event)">
           <div class="rectangle-2244"></div>
           <img
             class="vuesax-linear-money-recive4"
@@ -81,7 +81,7 @@
             </ul>
           </div>
         </div>
-        <div class="group-171">
+        <div class="group-171" onclick="changeRectangleColor(event)">
           <div class="rectangle-2245"></div>
           <img
             class="vuesax-linear-money-recive5"
@@ -133,7 +133,7 @@
         </div>
         <div class="group-173">
           <div class="rectangle-226"></div>
-          <div class="me8">
+          <div class="me8" onclick="changeButtonColor(event)">
             <span>
               <span class="me-8-span">me</span>
               <span class="me-8-span2">캐시 충전하기</span>
@@ -261,6 +261,6 @@
         </div>
       </div>
     </div>
-  </div>
+  </section>
   
     <script src="${cpath}/resources/static/js/mypage/cash-recharge/cash-recharge-main.js"></script>

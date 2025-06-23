@@ -26,6 +26,14 @@
 	
 </head>
 <body>
+	<div class="layout-wrapper">
+		<%@ include file="../header/header.jsp"%>
+		<div id="sceen" class="main-content-wrapper">
+			<%@ include file="../mypage/sideBar.jsp"%>
+			<div id = "screen" class="screen page-container"></div>
+			</div>
+			</div>
+<%-- <body>
 	<%@ include file="../header/header.jsp" %>
 	
 	<div class="container">
@@ -33,7 +41,7 @@
 			<div id = "sidebar" class = "sidebar"> <%@ include file="../mypage/sideBar.jsp" %> </div>
 			<div id = "screen" class = "screen"></div>
 		</div>
-	</div>
+	</div> --%>
 
 </body>
 </html>
