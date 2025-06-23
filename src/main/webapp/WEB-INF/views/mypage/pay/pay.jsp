@@ -2,6 +2,9 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <c:set var="cpath" value="${pageContext.servletContext.contextPath}" />	
+
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/mypage/pay/mypagePayStyle.css" />
+
 <div class="page-container">
 	<section id="payment-history" class="payment-history-section">
 		<div class="payment-history-container">

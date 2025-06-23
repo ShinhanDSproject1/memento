@@ -2,6 +2,9 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <c:set var="cpath" value="${pageContext.servletContext.contextPath}" />
+
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/mypage/dash-board/mypageKeepGoingStyle.css" />
+
 <div class="page-container">
 	<section class="keepgoing-list">
 		<h2 class="keepgoing-list__title">나의 킵고잉 목록</h2>

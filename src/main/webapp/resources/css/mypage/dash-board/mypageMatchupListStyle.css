@@ -10,8 +10,6 @@ body {
 }
 
 .page-container {
-	margin-top: 7%;
-	margin-right: 10%;
 	flex: 1;
 	padding: 40px;
 	box-sizing: border-box;
@@ -173,7 +171,7 @@ body {
 
 .matchup-card__mentor-name {
 	color: #000000;
-	font-family: 'D2Coding', monospace;
+	font-family: 'D2Coding';
 	font-weight: 700;
 	font-size: 24px;
 }
@@ -184,7 +182,7 @@ body {
 }
 
 .matchup-card__role {
-	font-family: 'D2Coding', monospace;
+	font-family: 'D2Coding';
 	font-weight: 700;
 	font-size: 24px;
 }
@@ -207,7 +205,7 @@ body {
 	gap: 14px;
 	position: absolute;
 	bottom: 35%; /* Align with card padding */
-	right: 5%;  /* Adjust to align with the role text */
+	right: 3%;  /* Adjust to align with the role text */
 }
 
 .action-button {

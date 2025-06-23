@@ -2,6 +2,8 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <c:set var="cpath" value="${pageContext.servletContext.contextPath}" />
 
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/mypage/dash-board/mypageMentosListStyle.css" />	
+
 <div class="page-container">
 	<section class="my-mentors">
 		<div class="my-mentors__wrapper">

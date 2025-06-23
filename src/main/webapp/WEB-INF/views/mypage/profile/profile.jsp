@@ -2,6 +2,9 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <c:set var="cpath" value="${pageContext.servletContext.contextPath}" />		
+
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/mypage/profile/mypageProfileStyle.css" />
+
 <div class="page-container">
 	<section id="profile-page" class="profile-row-section">
 		<main class="profile-edit-card">

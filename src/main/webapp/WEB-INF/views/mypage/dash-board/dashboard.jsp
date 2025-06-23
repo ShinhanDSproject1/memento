@@ -2,9 +2,9 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <c:set var="cpath" value="${pageContext.servletContext.contextPath}" />
 
-<div class="dashboard-container">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/mypage/dash-board/mypageDashboardStyle.css" />
 
-	<!-- Row 1 -->
+<div class="dashboard-container">
 	<div class="dashboard-row">
 		<!-- Match Up Card -->
 		<article class="dash-card dash-card--matchup">
@@ -64,7 +64,6 @@
 				</a>
 			</footer>
 		</article>
-
 		<!-- Mentos Card -->
 		<article class="dash-card dash-card--mentos">
 			<header class="dash-card__header">
@@ -115,8 +114,6 @@
 			</footer>
 		</article>
 	</div>
-
-	<!-- Row 2 -->
 	<div class="dashboard-row">
 		<!-- Keep Going Card -->
 		<article class="dash-card dash-card--keepgoing">
@@ -160,7 +157,6 @@
 				</a>
 			</footer>
 		</article>
-
 		<!-- Spark Test Card -->
 		<article class="dash-card dash-card--sparktest">
 			<header class="dash-card__header">
@@ -172,8 +168,6 @@
 			</div>
 		</article>
 	</div>
-
-	<!-- Row 3 -->
 	<div class="dashboard-row">
 		<!-- Hall of Fame Card -->
 		<article class="dash-card dash-card--fame">
@@ -184,7 +178,6 @@
 			</header>
 			<div class="dash-card__body">
 				<div class="fame__grid">
-					<!-- Repeat this block for each member -->
 					<img src="${cpath}/resources/images/mypage/dash-board/frame0.svg" alt="Avatar" class="fame__avatar">
 					<img src="${cpath}/resources/images/mypage/dash-board/frame0.svg" alt="Avatar" class="fame__avatar">
 					<img src="${cpath}/resources/images/mypage/dash-board/frame0.svg" alt="Avatar" class="fame__avatar">
@@ -200,7 +193,6 @@
 				</div>
 			</div>
 		</article>
-
 		<!-- My Wishlist Card -->
 		<article class="dash-card dash-card--wishlist">
 			<header class="dash-card__header">
@@ -233,8 +225,6 @@
 			</div>
 		</article>
 	</div>
-
-	<!-- Row 4 -->
 	<div class="dashboard-row">
 		<!-- Attendance Card -->
 		<article class="dash-card dash-card--attendance">
@@ -259,7 +249,7 @@
 						<span class="attendance__day-label">수</span>
 						<img src="${cpath}/resources/images/mypage/dash-board/icon-fill-type-080.svg" alt="Checked" class="attendance__day-status">
 					</div>
-					<div class="attendance__day attendance__day--today">
+					<div class="attendance__day attendance__day--today" id="attendance-check">
 						<span class="attendance__day-label">목</span>
 						<img src="${cpath}/resources/images/mypage/dash-board/icon-fill-type-950.svg" alt="Today Checked" class="attendance__day-status">
 					</div>
@@ -276,9 +266,8 @@
 			</div>
 		</article>
 	</div>
-
 </div>
 <script>
 	const basePath = '${cpath}';
 </script>
-<script src="${cpath}/resources/js/dash-board/dash-board.js"></script>
+<script src="${cpath}/resources/js/mypage/dash-board/dash-board.js"></script>

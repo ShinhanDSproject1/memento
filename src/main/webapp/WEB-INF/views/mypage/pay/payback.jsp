@@ -2,6 +2,9 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <c:set var="cpath" value="${pageContext.servletContext.contextPath}" />	
+
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/mypage/pay/mypagePaybackStyle.css" />
+
 <div class="page-container">
 	<section id="order-details" class="order-details-page style_1_root">
 		<header class="order-header">
