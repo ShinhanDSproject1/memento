@@ -46,7 +46,8 @@ public class MyPageController {
 	@RequestMapping("/page8")
 	public String myPageView8() {
 		return "mypage/mypage8";
-
+	}
+	
 	@RequestMapping({"", "/", "/{section}", "/{section}/{sub}"})
 	public String mypageEntry() {
 	    return "mypage/mypage-main";

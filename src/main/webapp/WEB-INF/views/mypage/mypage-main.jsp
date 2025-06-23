@@ -27,7 +27,7 @@
 </head>
 <body>
 	<div class="layout-wrapper">
-		<%@ include file="../header/header.jsp"%>
+		<%@ include file="../common/header.jsp"%>
 		<div id="sceen" class="main-content-wrapper">
 			<%@ include file="../mypage/sideBar.jsp"%>
 			<div id = "screen" class="screen page-container"></div>
