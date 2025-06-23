@@ -13,10 +13,16 @@ public class MainPageController {
 		return "mainpage/mainpage";
 	}
 	
-	@RequestMapping("/error")
+	@RequestMapping("/404error")
 	public String error() {
-		return "mainpage/error";
+		return "mainpage/404error";
 	}
+	
+	@RequestMapping("/500error")
+	public String error404() {
+	    return "mainpage/500error";
+	}
+
 		
 	@RequestMapping("/already")
 	public String already() {
@@ -40,5 +46,10 @@ public class MainPageController {
 	@RequestMapping("/mainTest")
 	public String mainTest() {
 		return "mainpage/mainTest";
+	}
+	
+	@RequestMapping("/")
+	public String home() {
+		return "mainpage/mainpage";
 	}
 }
