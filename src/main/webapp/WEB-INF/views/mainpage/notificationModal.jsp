@@ -1,6 +1,7 @@
-<div class="notify-frame" id="notificationModal" style="display:none; position: fixed; top: 60px; right: 20px; width: 350px; background: white; box-shadow: 0 2px 8px rgba(0,0,0,0.15); z-index: 3000; border-radius: 8px; padding: 15px;">
-  <img class="notify-before" src="${pageContext.request.contextPath}/resources/images/notify-before0.svg" />
-  <div class="notify">
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+
+<div class="notify" id="notificationModal" style="display:none; position: fixed; top: 110px; right: 8%; width: 300px; background: white; box-shadow: 0 2px 8px rgba(0,0,0,0.15); z-index: 3000; border-radius: 8px; padding: 15px;">
     <div class="notify-top">
       <div class="d-2-b-12-black">알림</div>
     </div>
@@ -33,6 +34,7 @@
         <br />
         매치업이 완료되었습니다
         <br />
+        
         킵고잉 전환 투표를 진행해 주세요!
       </div>
     </div>
@@ -54,4 +56,4 @@
     <img class="more3" src="${pageContext.request.contextPath}/resources/images/more2.svg" />
     <div class="line-56"></div>
   </div>
-</div>
+

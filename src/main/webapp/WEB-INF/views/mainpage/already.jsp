@@ -21,7 +21,7 @@
     <img src="${pageContext.request.contextPath}/resources/images/main1/logo.png" class="service-image" />
     
     <div class="service-title">
-      <span class="highlight">서비스 준비</span> 중입니다!
+      <span class="highlight">서비스 준비</span> 중입니다
     </div>
 
     <div class="service-description">
