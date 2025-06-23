@@ -17,8 +17,6 @@
 	  const initialPage = '${initialPage != null ? initialPage : cpath + "/mypage/dashBoard"}';
 </script>
 
-
-
 	<script src="${cpath}/resources/js/mypage/mypage.js"></script>
 	
 <title>me:mento mypage</title>
@@ -31,7 +29,7 @@
 		<%@ include file="../header/header.jsp"%>
 		<div id="sceen" class="main-content-wrapper">
 			<%@ include file="../sidebar/sidebar.jsp"%>
-			<div id = "screen" class="screen page-container"></div>
+			<div id = "screen" class="screen"></div>
 			</div>
 			</div>
 </body>

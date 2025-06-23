@@ -1,11 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>마이페이지 대시보드</title>
+	<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+	<c:set var="cpath" value="${pageContext.servletContext.contextPath}" />
+	
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/resources/css/mypage/dash-board/mypageDashboardStyle.css" />
 <link rel="stylesheet"
@@ -15,9 +12,7 @@
 </head>
 <body>
 	<div class="layout-wrapper">
-		<%@ include file="../../header/header.jsp"%>
 		<div class="main-content-wrapper">
-			<%@ include file="../../sidebar/sidebar.jsp"%>
 			<div class="page-container">
 				<section id="dashboard-row-1" class="dashboard-row-section">
 					<article id="matchup-card" class="card style_103">
@@ -377,5 +372,5 @@
 <script>
   const basePath = '${pageContext.request.contextPath}';
 </script>	
-<script src="${pageContext.request.contextPath}/resources/js/dash-board.js"></script>
+<script src="${pageContext.request.contextPath}/resources/js/mypage/dash-board/dash-board.js"></script>
 </html>

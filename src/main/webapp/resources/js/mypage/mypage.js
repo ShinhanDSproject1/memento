@@ -1,3 +1,4 @@
+
 // DOM 로딩 후 스크린에 initial page 로드
 $(function () {
   $('#screen').load(initialPage);
@@ -23,9 +24,10 @@ function loadPage(url) {
       // 히스토리 추가
       history.pushState(null, '', url);
 
+
       // spark-test 페이지일 경우 전용 스크립트 불러오기
       if (url.includes('spark-test')) {
-        $.getScript(`${cpath}/resources/static/js/mypage/spark-test/spark-test.js`)
+        $.getScript(`${cpath}/resources/js/mypage/spark-test/spark-test.js`)
           .done(function () {
             // 핵심: DOM 노드를 polling 방식으로 기다림
             const interval = setInterval(() => {
@@ -52,3 +54,5 @@ window.onpopstate = function () {
     // 페이지 로드 후 추가 작업 없음
   });
 };
+
+

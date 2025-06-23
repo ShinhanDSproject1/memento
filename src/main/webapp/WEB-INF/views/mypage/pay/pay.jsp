@@ -9,14 +9,10 @@
 	href="${pageContext.request.contextPath}/resources/css/mypage/pay/mypagePayStyle.css" />
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/resources/css/mypage/mypageVars.css" />
-<link rel="stylesheet"
-	href="${pageContext.request.contextPath}/resources/css/sidebar/sidebar.css" />
 </head>
 <body>
 	<div class="layout-wrapper">
-		<%@ include file="../../header/header.jsp"%>
 		<div class="main-content-wrapper">
-			<%@ include file="../../sidebar/sidebar.jsp"%>
 			<div class="page-container">
 				<section id="payment-history" class="payment-history-section">
 					<div class="payment-history-container">

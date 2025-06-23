@@ -10,7 +10,7 @@ function s_click(word) {
     case 'cash':
       $(".div4").addClass('active');
       localStorage.setItem('activeMenu', 'cash');
-      alert('캐시 충전 준비중');
+     location.href = basePath + '/mypage/cash-recharge';
       break;
     case 'pay':
       $(".div5").addClass('active');
@@ -18,14 +18,14 @@ function s_click(word) {
       location.href = basePath + '/mypage/page3';
       break;
     case 'spark':
-      $(".spark-test").addClass('active');
+      $(".div7").addClass('active');
       localStorage.setItem('activeMenu', 'spark');
-      alert('Spark Test 준비중');
+      location.href = basePath + '/mypage/spark-test';
       break;
     case 'm_test':
       $(".div6").addClass('active');
       localStorage.setItem('activeMenu', 'm_test');
-      alert('멘토 자격시험 준비중');
+      location.href = basePath + '/mypage/mento-test';
       break;
   }
 }
@@ -36,7 +36,7 @@ $(document).ready(function() {
     $('.menu-item').removeClass('active');
     switch (activeMenu) {
       case 'dashboard':
-        $(".div3").addClass('active');
+        $(".div111").addClass('active');
         break;
       case 'cash':
         $(".div4").addClass('active');
@@ -45,7 +45,7 @@ $(document).ready(function() {
         $(".div5").addClass('active');
         break;
       case 'spark':
-        $(".spark-test").addClass('active');
+        $(".spark-test2").addClass('active');
         break;
       case 'm_test':
         $(".div6").addClass('active');

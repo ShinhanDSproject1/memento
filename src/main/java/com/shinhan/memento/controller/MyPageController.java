@@ -9,8 +9,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class MyPageController {
 	
 	@RequestMapping("/page1")
-	public String myPageView() {
-		return "mypage/dash-board/mypage1";
+	public String myPageView(HttpServletRequest request) {
+		boolean isAjax = "XMLHttpRequest".equals(request.getHeader("X-Requested-With"));
+	    if (isAjax) {
+	        return "mypage/dash-board/mypage1"; // ✨ screen 전용 뷰
+	    } else {
+	        request.setAttribute("initialPage", "/memento/mypage/page1"); // 실제 경로 지정
+	        return "mypage/mypage-main"; // 전체 레이아웃에서 내부에서 AJAX 호출
+	    }
 	}
 	
 	@RequestMapping("/page2")

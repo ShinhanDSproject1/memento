@@ -5,7 +5,6 @@
 <c:url var="cashImgPath" value="/resources/images/mypage/cash-recharge" />
 <link rel="stylesheet" href="${cpath}/resources/css/mypage/cash-recharge/cash-recharge-main.css" />
 
-
  <section class="cash-recahrge">
     <div class="group-200">
       <div class="me">
@@ -263,4 +262,4 @@
     </div>
   </section>
   
-    <script src="${cpath}/resources/static/js/mypage/cash-recharge/cash-recharge-main.js"></script>
+    <script src="${cpath}/resources/js/mypage/cash-recharge/cash-recharge-main.js"></script>

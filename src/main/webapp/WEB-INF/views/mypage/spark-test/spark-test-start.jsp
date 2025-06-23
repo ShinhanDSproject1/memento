@@ -6,53 +6,51 @@
 <link rel="stylesheet" href="${cpath}/resources/css/mypage/spark-test/spark-test-start.css" />
 
 
-  <div class="screen">
-  <div class="frame-3712">
-    <div class="frame-3711">
-      <div class="frame-3700">
-        <div class="rectangle-172"></div>
+ <div class="spark-test-wrapper">
+  <div class="spark-test-main-content">
+    <div class="spark-test-question-section">
+      <div class="spark-test-progress-bar"></div>
+    </div>
+    <div id="question-text" class="spark-test-question-text">질문 로딩중...</div>
+
+<div class="spark-test-choice-button" onclick="selectChoice(0)">
+  <div class="spark-test-choice-label">
+    <div class="spark-test-choice-text" id="choice-0"></div>
+  </div>
+</div>
+
+<div class="spark-test-choice-button" onclick="selectChoice(1)">
+  <div class="spark-test-choice-label">
+    <div class="spark-test-choice-text" id="choice-1"></div>
+  </div>
+</div>
+
+<div class="spark-test-choice-button" onclick="selectChoice(2)">
+  <div class="spark-test-choice-label">
+    <div class="spark-test-choice-text" id="choice-2"></div>
+  </div>
+</div>
+
+<div class="spark-test-choice-button" onclick="selectChoice(3)">
+  <div class="spark-test-choice-label">
+    <div class="spark-test-choice-text" id="choice-3"></div>
+  </div>
+</div>
+    <div class="spark-test-navigation-buttons" style="display: flex; gap: 12px;">
+      <div class="spark-test-nav-button spark-test-nav-button--prev" id="prev-button" style="display: none;" onclick="prevQuestion()">
+        <div class="spark-test-nav-label">이전문제</div>
       </div>
-      <div id="question-text" class="q">질문 로딩중...</div>
-
-<div class="button" onclick="selectChoice(0)">
-  <div class="label">
-    <div class="label-span" id="choice-0"></div>
-  </div>
-</div>
-
-<div class="button" onclick="selectChoice(1)">
-  <div class="label">
-    <div class="label-span" id="choice-1"></div>
-  </div>
-</div>
-
-<div class="button" onclick="selectChoice(2)">
-  <div class="label">
-    <div class="label-span" id="choice-2"></div>
-  </div>
-</div>
-
-<div class="button" onclick="selectChoice(3)">
-  <div class="label">
-    <div class="label-span" id="choice-3"></div>
-  </div>
-</div>
-     <div class="button3-wrapper" style="display: flex; gap: 12px;">
-  <div class="button3" id="prev-button" style="display: none;" onclick="prevQuestion()">
-    <div class="label1">이전문제</div>
-  </div>
-  <div class="button3" id="next-button">
-    <div class="label2" >다음문제</div>
-  </div>
-</div>
-
+      <div class="spark-test-nav-button spark-test-nav-button--next" id="next-button">
+        <div class="spark-test-nav-label">다음문제</div>
+      </div>
     </div>
 
-    <div class="frame-3710"
-         style="background: url('${cpath}/resources/images/mypage/spark-test/img-spark-test.png'); background-size: cover; background-repeat: no-repeat;">
-      <div class="spark-test2">SPARK TEST</div>
-    </div>
   </div>
-</div>
 
-  <script src="${cpath}/resources/js/mypage/spark-test/spark-test.js"></script>
+  <div class="spark-test-sidebar"
+        style="background: url('${cpath}/resources/images/mypage/spark-test/img-spark-test.png'); background-size: cover; background-repeat: no-repeat;">
+    <div class="spark-test-title">SPARK TEST</div>
+  </div>
+ </div>
+
+ <script src="${cpath}/resources/js/mypage/spark-test/spark-test.js"></script>

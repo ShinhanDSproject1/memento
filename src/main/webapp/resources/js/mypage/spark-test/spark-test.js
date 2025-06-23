@@ -111,27 +111,33 @@ if (typeof window.sparkTestLoaded === 'undefined') {
 
   window.renderQuestion = function () {
     const q = questions[currentIndex];
-    document.getElementById("question-text").innerText = q.question;
+    // 질문 텍스트 업데이트
+    document.querySelector(".spark-test-question-text").innerText = q.question;
 
     for (let i = 0; i < q.choices.length; i++) {
       const choiceEl = document.getElementById(`choice-${i}`);
       choiceEl.innerText = q.choices[i];
-      const button = choiceEl.closest(".button");
+      // 선택 버튼 클래스 토글
+      const button = choiceEl.closest('.spark-test-choice-button');
       if (button) {
         button.classList.toggle("clicked", answers[currentIndex] === i);
       }
     }
 
+    // 이전 버튼 가시성 제어
     const prevBtn = document.getElementById("prev-button");
     if (prevBtn) {
       prevBtn.style.display = currentIndex === 0 ? "none" : "flex";
     }
 
-    const nextBtn = document.querySelector(".button3 .label2");
-    if (nextBtn) {
+    // 다음/결과보기 버튼 텍스트 및 클릭 이벤트 제어
+    const nextBtnLabel = document.querySelector(".spark-test-nav-button--next .spark-test-nav-label");
+    const nextBtnContainer = document.getElementById("next-button"); // 다음 버튼 컨테이너 자체
+    
+    if (nextBtnLabel && nextBtnContainer) {
       if (currentIndex === questions.length - 1) {
-        nextBtn.innerText = "결과보기";
-        nextBtn.onclick = function () {
+        nextBtnLabel.innerText = "결과보기";
+        nextBtnContainer.onclick = function () { // 컨테이너에 직접 이벤트 부여
           if (typeof answers[currentIndex] === 'undefined') {
             alert("선택을 해주세요!");
             return;
@@ -141,8 +147,8 @@ if (typeof window.sparkTestLoaded === 'undefined') {
           location.href = `spark-test-end?type=${encodeURIComponent(topType)}`;
         };
       } else {
-        nextBtn.innerText = "다음문제";
-        nextBtn.onclick = window.nextQuestion;
+        nextBtnLabel.innerText = "다음문제";
+        nextBtnContainer.onclick = window.nextQuestion; // 컨테이너에 직접 이벤트 부여
       }
     }
   };
@@ -158,9 +164,10 @@ if (typeof window.sparkTestLoaded === 'undefined') {
     const selectedType = typeMap[currentIndex][index];
     typeScore[selectedType]++;
 
-    for (let i = 0; i < 4; i++) {
-      const button = document.querySelectorAll('.button')[i];
-      button.classList.toggle('clicked', i === index);
+    // 모든 선택 버튼의 'clicked' 클래스 업데이트
+    const choiceButtons = document.querySelectorAll('.spark-test-choice-button');
+    for (let i = 0; i < choiceButtons.length; i++) {
+      choiceButtons[i].classList.toggle('clicked', i === index);
     }
   };
 
@@ -182,14 +189,19 @@ if (typeof window.sparkTestLoaded === 'undefined') {
     }
   };
 
+  // 문서 전체 클릭 이벤트 리스너 (선택 버튼 위임)
   document.addEventListener("click", function (e) {
-    for (let i = 0; i < 4; i++) {
-      const el = document.getElementById(`choice-${i}`);
-      if (el && (e.target === el || el.contains(e.target))) {
+    // 모든 선택 버튼 요소를 가져와서 이벤트를 처리
+    const choiceButtons = document.querySelectorAll('.spark-test-choice-button');
+    for (let i = 0; i < choiceButtons.length; i++) {
+      // 클릭된 요소 또는 그 부모 중에 해당 버튼이 있는지 확인
+      if (choiceButtons[i].contains(e.target)) {
         selectChoice(i);
+        break; // 올바른 버튼을 찾았으면 루프 종료
       }
     }
   });
+
 
   window.addEventListener("load", function () {
     setTimeout(renderQuestion, 0);

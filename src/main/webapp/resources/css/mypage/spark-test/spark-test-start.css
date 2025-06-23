@@ -1,18 +1,19 @@
 @charset "UTF-8";
 
-.frame-3712 {
+/* 전체 Spark Test 컨테이너 */
+.spark-test-wrapper {
   display: flex;
   flex-direction: row;
   gap: 10px;
   align-items: flex-start;
   justify-content: flex-end;
   width: 100%;
-  /* 기존 좌표 제거 */
-  position: relative; /* 부모 .screen을 기준으로 */
-  padding: 20px; /* 여백으로 대체 */
+  position: relative;
+  padding: 20px;
 }
 
-.frame-3711 {
+/* Spark Test의 메인 콘텐츠 영역 (질문, 답변 버튼 등) */
+.spark-test-main-content {
   background: #fffef2;
   display: flex;
   flex-direction: column;
@@ -27,7 +28,8 @@
   top: 0px;
 }
 
-.frame-3700 {
+/* 질문 섹션 컨테이너 (진행 바 포함) */
+.spark-test-question-section {
   display: flex;
   flex-direction: column;
   gap: 10px;
@@ -39,14 +41,16 @@
   position: relative;
 }
 
-.rectangle-172 {
+/* 질문 진행 바 */
+.spark-test-progress-bar {
   background: #ffea41;
   align-self: stretch;
   flex: 1;
   position: relative;
 }
 
-.q {
+/* 질문 텍스트 */
+.spark-test-question-text {
   color: #0e0d0d;
   text-align: center;
   font-family: "Inter-Bold", sans-serif;
@@ -60,7 +64,8 @@
   justify-content: center;
 }
 
-.button {
+/* 답변 선택 버튼 */
+.spark-test-choice-button {
   background: #ffea41;
   border-radius: 100px;
   padding: 8px 12px;
@@ -75,47 +80,16 @@
   position: relative;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
   overflow: hidden;
+  cursor: pointer; /* 클릭 가능한 요소임을 명시 */
 }
 
-.button.clicked {
+/* 답변 선택 버튼 클릭 시 스타일 */
+.spark-test-choice-button.clicked {
   background-color: #D6BE00 !important;
 }
 
-.button2 {
-  background: #ffea41;
-  border-radius: 100px;
-  border: 1.5px solid #000;
-  padding: 8px 12px;
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-  align-items: center;
-  justify-content: center;
-  flex-shrink: 0;
-  width: 331px;
-  height: 57px;
-  position: relative;
-  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-  overflow: hidden;
-}
-
-.button3 {
-  background: #c8dff4;
-  border-radius: 12px;
-  padding: 12px 16px;
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-  align-items: center;
-  justify-content: center;
-  flex-shrink: 0;
-  width: 168px;
-  position: relative;
-  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-  overflow: hidden;
-}
-
-.label {
+/* 답변 선택 버튼 내 라벨 (텍스트 컨테이너) */
+.spark-test-choice-label {
   color: #0a0a0a;
   text-align: center;
   font-family: "Inter-SemiBold", sans-serif;
@@ -129,9 +103,50 @@
   justify-content: center;
 }
 
-.label2 {
+/* 답변 선택 버튼 내 텍스트 */
+.spark-test-choice-text {
+  /* .spark-test-choice-label과 동일한 스타일을 상속받거나 필요에 따라 추가 */
+}
+
+
+/* 이전/다음 문제 버튼들을 감싸는 컨테이너 */
+.spark-test-navigation-buttons {
+  display: flex;
+  gap: 12px;
+}
+
+/* 이전/다음 문제 버튼 */
+.spark-test-nav-button {
+  background: #c8dff4;
+  border-radius: 12px;
+  padding: 12px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 168px;
+  position: relative;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  overflow: hidden;
+  cursor: pointer; /* 클릭 가능한 요소임을 명시 */
+}
+
+/* 이전 버튼에 대한 특정 스타일 (선택적) */
+.spark-test-nav-button--prev {
+  /* 추가 스타일이 필요하면 여기에 작성 */
+}
+
+/* 다음 버튼에 대한 특정 스타일 (선택적) */
+.spark-test-nav-button--next {
+  /* 추가 스타일이 필요하면 여기에 작성 */
+}
+
+/* 이전/다음 버튼 내 라벨 (텍스트) */
+.spark-test-nav-label {
   color: #0b0b0b;
-  text-align: left;
+  text-align: left; /* 원래 label2가 left 정렬이어서 유지 */
   font-family: "Inter-SemiBold", sans-serif;
   font-size: 14px;
   line-height: 20px;
@@ -143,7 +158,8 @@
   justify-content: flex-start;
 }
 
-.frame-3710 {
+/* Spark Test 사이드바 (이미지 배경) */
+.spark-test-sidebar {
   padding: 70px 23px;
   display: flex;
   flex-direction: row;
@@ -154,7 +170,8 @@
   position: relative;
 }
 
-.spark-test2 {
+/* Spark Test 타이틀 */
+.spark-test-title {
   color: #0e0d0d;
   text-align: center;
   font-family: "D2Coding-Bold", sans-serif;
@@ -167,5 +184,4 @@
   justify-content: center;
   -webkit-text-stroke: 1px #000;
   top: 10px;
-  
 }
