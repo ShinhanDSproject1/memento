@@ -11,12 +11,13 @@
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/resources/css/mainpage/main.css">
 	
-	<jsp:include page="notificationModal.jsp" />
-	<script src="${pageContext.request.contextPath}/resources/js/notificationModal.js"></script>
+		<script src="${pageContext.request.contextPath}/resources/js/maincount.js"></script>
+	<link rel="stylesheet"
+	href="${pageContext.request.contextPath}/resources/css/mainpage/login.css">
 	
+	<link rel="stylesheet"
+	href="${pageContext.request.contextPath}/resources/css/mainpage/notificationModal.css">
 	
-
-
 <!-- Bootstrap -->
 <link
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
@@ -28,10 +29,22 @@
 	rel="stylesheet" type="text/css">
 </head>
 <body>
-	<div class="layout-wrapper">
+	<div class="layout-wrapper" id="layoutWrapper">
+	<div class="left"></div>
 		<%@ include file="../common/header.jsp"%>
 		<div class="page-container">
 	<%@ include file="notificationModal.jsp" %>
+	
+	<div id="loginModal" style="display:none; position:fixed; top:20%; left:39%; transform:translateX(-50%);
+	   z-index:1000;">
+	 
+	  <%@ include file="login.jsp" %>
+	</div>
+	
+	<div id="modalBackdrop" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%;
+	  background:rgba(0,0,0,0.5); z-index:999;" onclick="closeModal()"></div>
+	
+	
 	
 	<script src="${pageContext.request.contextPath}/js/notification.js"></script>
 
@@ -122,27 +135,27 @@
 						<div class="stat-item">
 							<div class="stat-icon">📚</div>
 							<div class="stat-label">멘토링 수강 수</div>
-							<div class="stat-value">100만명</div>
+							<div class="stat-value" data-count="1000">0</div>
 						</div>
 						<div class="stat-item">
 							<div class="stat-icon">🤝</div>
 							<div class="stat-label">매칭 현황</div>
-							<div class="stat-value">100건+</div>
+							<div class="stat-value" data-count="1000">0</div>
 						</div>
 						<div class="stat-item">
 							<div class="stat-icon">🔥</div>
 							<div class="stat-label">누적 매치업</div>
-							<div class="stat-value">100건+</div>
+							<div class="stat-value" data-count="1000">0</div>
 						</div>
 						<div class="stat-item">
 							<div class="stat-icon">🏢</div>
 							<div class="stat-label">제휴업체</div>
-							<div class="stat-value">100개+</div>
+							<div class="stat-value" data-count="1000">0</div>
 						</div>
 						<div class="stat-item">
 							<div class="stat-icon">👥</div>
 							<div class="stat-label">누적 방문수</div>
-							<div class="stat-value">100만명</div>
+							<div class="stat-value" data-count="1000">0</div>
 						</div>
 					</div>
 				</div>
@@ -151,30 +164,24 @@
 			<!-- 서비스 소개 페이지 -->
 			<div class="home-page-3">
 				<div class="home-page-3-inner">
-					<div class="div">서비스 소개</div>
-					<div class="me-mento">
-						<span> <span class="me-mento-span2">me:</span><span
-							class="me-mento-span3">mento</span> <span class="me-mento-span">
+					<div class="main-div">서비스 소개</div>
+					<div class="service-me-mento">
+						<span> <span class="service-me-mento-span2">me:</span><span
+							class="service-me-mento-span3">mento</span> <span class="service-me-mento-span">
 								와 함께 <br /> 내게 꼭 맞는 교육을 선택하세요!
 						</span>
 						</span>
 					</div>
 					<div class="device-macbook-pro">
 						<div class="shadow"></div>
-						<div class="top">
 							<div class="lid"></div>
-							<div class="dark-screen"></div>
-							<div class="screen-wrap">
-								<div class="screen"></div>
-								<div class="insert-your-design-here">Insert Your Design
-									Here</div>
-							</div>
-						</div>
+							<div class="dark-screen"><img class="image-55"
+						src="${pageContext.request.contextPath}/resources/images/main1/serviceinner.png" /></div>
 						<img class="bottom"
 							src="${pageContext.request.contextPath}/resources/images/main1/bottom.svg" />
+					
 					</div>
-					<img class="image-55"
-						src="${pageContext.request.contextPath}/resources/images/main1/serviceinner.png" />
+					
 				</div>
 			</div>
 
@@ -194,9 +201,9 @@
 							alt="김신한">
 					</div>
 					<div class="winner-name">김신한</div>
+					<div class="winner-rating">⭐ 4.9</div>
 				</div>
 				<div class="medal">🥈</div>
-
 				<div class="podium-base second">2</div>
 			</div>
 			<!-- 1등 -->
@@ -208,6 +215,7 @@
 							alt="위치콤보">
 					</div>
 					<div class="winner-name">위치콤보</div>
+					<div class="winner-rating">⭐ 5.0</div>
 				</div>
 				<div class="medal">🥇</div>
 				<div class="podium-base first">1</div>
@@ -221,6 +229,7 @@
 							alt="길동햄">
 					</div>
 					<div class="winner-name">길동햄</div>
+					<div class="winner-rating">⭐ 4.8</div>
 				</div>
 				<div class="medal">🥉</div>
 				<div class="podium-base third">3</div>
@@ -297,6 +306,7 @@
 							alt="김핑구">
 					</div>
 					<div class="winner-name">김핑구</div>
+					<div class="winner-rating">🔥 4.8</div>
 				</div>
 				<div class="medal">🥈</div>
 				<div class="podium-base second">2</div>
@@ -309,6 +319,7 @@
 							alt="코딩개">
 					</div>
 					<div class="winner-name">코딩개</div>
+					<div class="winner-rating">🔥 5.0</div>
 				</div>
 				<div class="medal">🥇</div>
 				<div class="podium-base first">1</div>
@@ -321,6 +332,7 @@
 							alt="홍길동">
 					</div>
 					<div class="winner-name">홍길동</div>
+					<div class="winner-rating">🔥 4.5</div>
 				</div>
 				<div class="medal">🥉</div>
 				<div class="podium-base third">3</div>
@@ -396,6 +408,7 @@
 							alt="Python" class="language-icon">
 					</div>
 					<div class="winner-name">Python</div>
+					<div class="winner-rating">❤️ 4.7</div>
 				</div>
 				<div class="medal">🥈</div>
 				<div class="podium-base second">2</div>
@@ -408,6 +421,7 @@
 							alt="Java" class="language-icon">
 					</div>
 					<div class="winner-name">Java</div>
+					<div class="winner-rating">❤️ 5.0</div>
 				</div>
 				<div class="medal">🥇</div>
 				<div class="podium-base first">1</div>
@@ -420,6 +434,7 @@
 							alt="HTML" class="language-icon">
 					</div>
 					<div class="winner-name">HTML</div>
+					<div class="winner-rating">❤️ 4.5</div>
 				</div>
 				<div class="medal">🥉</div>
 				<div class="podium-base third">3</div>
@@ -486,41 +501,40 @@
 </div>
 
 
+	</div> <!-- page-container 닫기 -->
+	<div class="right"></div>
+</div> <!-- layout-wrapper 닫기 -->
 
+<script src="${pageContext.request.contextPath}/resources/js/header.js"></script>
 
-
+</body>
 
 <!-- 푸터 영역 -->
-<footer class="container mt-5">
+<footer class="container-fluid mt-5 px-5">
 	<div class="row mb-4">
 		<div class="col-md-3 mb-3">
 			<div class="footer-links mt-2">
-				<a href="#" class="footer-link">개인정보처리방침</a> <a href="#"
-					class="footer-link">이용약관</a>
+				<a href="#" class="footer-link">개인정보처리방침</a>
+				<a href="#" class="footer-link">이용약관</a>
 			</div>
 		</div>
 		<div class="col-md-5 footer-info">
-			<strong>(주)me:mento</strong><br> 대표자: 김신한<br> 사업자번호:
-			123-45-67890 <a href="#" class="business-link">사업자 정보 확인</a><br>
-			통신판매업: 2025-서울마포-0001<br> 개인정보보호책임자: 신한DS<br> 이메일:
-			info@mentormentee.com
+			<strong>(주)me:mento</strong><br>
+			대표자: 김신한<br>
+			사업자번호: 123-45-67890 <a href="#" class="business-link">사업자 정보 확인</a><br>
+			통신판매업: 2025-서울마포-0001<br>
+			개인정보보호책임자: 신한DS<br>
+			이메일: info@mentormentee.com
 		</div>
 		<div class="col-md-4 footer-contact">
-			전화번호: 070-1234-5678<br> 주소: 서울특별시 중구 남대문로10길 29<br> 고객센터:
-			평일 10:00 ~ 18:00 (점심시간 12:00 ~ 13:00)
+			전화번호: 070-1234-5678<br>
+			주소: 서울특별시 중구 남대문로10길 29<br>
+			고객센터: 평일 10:00 ~ 18:00 (점심시간 12:00 ~ 13:00)
 		</div>
 	</div>
-	<div class="footer-bottom text-center">© 2025 MENTORMENTEE LAB.
-		ALL RIGHTS RESERVED.</div>
+	<div class="footer-bottom text-center">© 2025 MENTORMENTEE LAB. ALL RIGHTS RESERVED.</div>
 </footer>
 
-	</div> <!-- page-container 닫기 -->
-</div> <!-- layout-wrapper 닫기 -->
-
-</body>
 <!-- 슬라이더 JavaScript -->
-<script
-	src="${pageContext.request.contextPath}/resources/js/mainslider.js">
-	
-</script>
+<script src="${pageContext.request.contextPath}/resources/js/mainslider.js"></script>
 </html>

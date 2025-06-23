@@ -1,4 +1,67 @@
+function closeModal() {
+	      document.getElementById("loginModal").style.display = "none";
+	      document.getElementById("modalBackdrop").style.display = "none";
+		  document.getElementById("notificationModal").style.display = "none";
+	    }
+
 document.addEventListener("DOMContentLoaded", function () {
+	
+	notiFlag = 0;
+	
+	const notiModal = document.getElementById("notificationModal");
+	const layoutWrapper = document.getElementById("layoutWrapper");
+	
+	const notiBtn = document.getElementById("notification-icon");
+	
+	function openLoginModal() {
+	    const modal = document.getElementById("loginModal");
+		closeNotiModal();
+	    const backdrop = document.getElementById("modalBackdrop");
+		modal.style.display = "block";
+		backdrop.style.display = "block";
+	    
+	  }
+	  
+	 function closeNotiModal() {
+		if(notiFlag == 1) {
+			notiFlag = 0;
+			notiModal.style.display = "none";
+		}
+	 }
+	 
+	 function openNotiModal() {
+	 		if(notiFlag==1) {
+	 			notiModal.style.display = "none";
+	 			notiFlag = 0;	
+	 		} else {
+	 			notiModal.style.display = "block";
+	 			notiFlag = 1;	
+	 		}
+	 	}		
+
+	document.body.addEventListener("click", function (e) {
+	// 모달 바깥을 클릭한 경우에만 닫기
+	if (
+		 !notiModal.contains(e.target)
+		 & !notiBtn.contains(e.target)
+		 ) {
+			closeNotiModal();
+	}
+	});
+		
+	
+	const loginBtn = document.getElementById("loginBtn");
+		const loginModalCloseBtn = document.getElementById("loginModalCloseBtn");
+		if (loginBtn) {
+			loginModalCloseBtn.addEventListener("click", closeModal);
+			loginBtn.addEventListener("click", openLoginModal);
+		} else {
+			console.warn("로그인 버튼 (#loginBtn)을 찾을 수 없습니다.");
+		}
+		
+	
+	notiBtn.addEventListener("click", openNotiModal)
+	
   const slider = document.getElementById("slider");
   const slides = slider.children;
   const gap = 45;
