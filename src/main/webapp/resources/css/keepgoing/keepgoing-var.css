@@ -1,0 +1,35 @@
+@charset "UTF-8";
+/* Figma Styles of your File */
+:root {
+	--a-black:#212529;
+	--membercount-blue: #407CF4;
+    --card-gray-color: #727F88;
+    --card-content-fontsize: 14px;
+    --dot-size: 0.1875rem;
+    --title-font:30px;    
+    --label-font:20px;
+    --placeholder-font:16px;
+    --content-blue-color:#1375F9;
+    --btn-blue-color:#0069F8;
+    --f5-gary:#f5f5f5;
+    --content-div-margin-bottom:20px;
+    --main-padding-top:20px;
+    --body-padding-bottom:30px;
+    --little-gap:10px;
+    --middle-gap:20px;
+    --large-gap:30px;
+    --label-bottom-margin:4px;
+    --icon-label-margin-gap:5px;
+    --day-font:14px;
+    --icon-gold-color: #FBD700;
+}
+
+[data--mode="mode-1"] {
+  /* mode-1 */
+  --1: #00bba8;
+  --2: #0070d1;
+  --1: #a6abbd;
+  --2: #414656;
+  --3: #c73c60;
+  --4: #ff7493;
+}
