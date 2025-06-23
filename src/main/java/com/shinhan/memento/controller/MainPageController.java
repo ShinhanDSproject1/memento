@@ -22,8 +22,7 @@ public class MainPageController {
 	public String error404() {
 	    return "mainpage/500error";
 	}
-
-		
+	
 	@RequestMapping("/already")
 	public String already() {
 		return "mainpage/already";
@@ -37,15 +36,6 @@ public class MainPageController {
 	@RequestMapping("/bye_modal")
 	public String bye_modal() {
 		return "mainpage/bye_modal";
-	}
-	
-	@RequestMapping("/login")
-	public String login() {
-		return "mainpage/login";
-	}
-	@RequestMapping("/mainTest")
-	public String mainTest() {
-		return "mainpage/mainTest";
 	}
 	
 	@RequestMapping("/")
