@@ -1,19 +1,5 @@
-/* 레이아웃 전체 wrapper */
-.layout-wrapper {
-  display: flex;
-  min-height: 100vh;
-}
-
-.main-content-wrapper {
-  display: flex;
-  flex: 1;
-  min-height: calc(100vh - 100px);
-  padding-top: 105px;
-}
-
 .page-container {
   margin: 0 auto;
-  padding: 40px;
   box-sizing: border-box;
   max-width: 1100px;
   width: 100%;

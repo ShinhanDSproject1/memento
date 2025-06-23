@@ -1,166 +1,133 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>마이페이지 매치업 목록</title>
-<link rel="stylesheet"
-	href="${pageContext.request.contextPath}/resources/css/mypage/dash-board/mypageMatchupListStyle.css" />
-<link rel="stylesheet"
-	href="${pageContext.request.contextPath}/resources/css/mypage/mypageVars.css" />
-</head>
-<link rel="stylesheet"
-	href="${pageContext.request.contextPath}/resources/css/sidebar/sidebar.css" />
-</head>
-<body>
-	<div class="layout-wrapper">
-		<%@ include file="../../header/header.jsp"%>
-		<div class="main-content-wrapper">
-			<%@ include file="../../sidebar/sidebar.jsp"%>
-			<div class="page-container">
-				<section id="matchup-list-section"
-					class="matchup-list-section style_1">
-					<div class="matchup-list-container">
-						<h2 class="page-title style_2">나의 매치업 목록</h2>
-						<div class="cards-list">
-							<article class="matchup-card style_4">
-								<div class="card-content-wrapper">
-									<img
-										src="${cpath}/resources/images/mypage/dash-board/matchup-list/vector0.svg"
-										alt="Avatar" class="avatar style_10">
-									<div class="details-column">
-										<div class="top-section">
-											<div class="tags-container style_11">
-												<span class="tag style_13"><span
-													class="tag-text style_14">#알고리즘 #C</span></span>
-											</div>
-											<span class="session-count style_9">3/5회</span>
-										</div>
-										<h3 class="study-title style_6">C언어로 운영체제 뜯어보는 스터디</h3>
-										<div class="bottom-section">
-											<div class="schedule-location-container style_15">
-												<span class="schedule style_16">화 17:00 - 19:00</span> <span
-													class="location style_17">마포구</span>
-											</div>
-											<div class="mentor-info">
-												<img
-													src="${cpath}/resources/images/mypage/dash-board/matchup-list/microphone-20.svg"
-													alt="Role Icon" class="mic-icon style_18"> <span
-													class="mentor-name style_7">조상호 멘토</span>
-											</div>
-											<span class="user-role style_8">방장</span>
-										</div>
-									</div>
-								</div>
-							</article>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<c:set var="cpath" value="${pageContext.servletContext.contextPath}" />	
 
-							<article class="matchup-card style_4">
-								<div class="card-content-wrapper">
-									<img
-										src="${cpath}/resources/images/mypage/dash-board/matchup-list/vector0.svg"
-										alt="Avatar" class="avatar style_20">
-									<div class="details-column">
-										<div class="top-section">
-											<div class="tags-container style_11">
-												<span class="tag style_13"><span
-													class="tag-text style_14">#알고리즘 #Java</span></span>
-											</div>
-											<span class="session-count style_9">1/7회</span>
-										</div>
-										<h3 class="study-title style_6">C언어로 운영체제 뜯어보는 스터디</h3>
-										<div class="bottom-section">
-											<div class="schedule-location-container style_15">
-												<span class="schedule style_16">화 17:00 - 19:00</span> <span
-													class="location style_17">마포구</span>
-											</div>
-											<div class="mentor-info"></div>
-											<span class="user-role style_19">팀원</span>
-										</div>
-									</div>
-								</div>
-							</article>
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/mypage/dash-board/mypageMatchupListStyle.css" />
 
-							<article class="matchup-card style_4">
-								<div class="card-content-wrapper">
-									<img
-										src="${cpath}/resources/images/mypage/dash-board/matchup-list/vector0.svg"
-										alt="Avatar" class="avatar style_23">
-									<div class="details-column">
-										<div class="top-section">
-											<div class="tags-container style_11">
-												<span class="tag style_13"><span
-													class="tag-text style_14">#알고리즘 #C</span></span>
-											</div>
-											<span class="session-count style_22">대기중</span>
-										</div>
-										<h3 class="study-title style_6">C언어로 운영체제 뜯어보는 스터디</h3>
-										<div class="bottom-section">
-											<div class="schedule-location-container style_15">
-												<span class="schedule style_16">화 17:00 - 19:00</span> <span
-													class="location style_17">마포구</span>
-											</div>
-											<div class="mentor-info">
-												<img
-													src="${cpath}/resources/images/mypage/dash-board/matchup-list/microphone-20.svg"
-													alt="Role Icon" class="mic-icon style_24"> <span
-													class="mentor-name style_21">미확정</span>
-											</div>
-											<span class="user-role style_8">방장</span>
-										</div>
-									</div>
-								</div>
-							</article>
+<div class="page-container">
+	<section class="matchup-list">
+		<div class="matchup-list__container">
+			<h2 class="matchup-list__title">나의 매치업 목록</h2>
 
-							<article class="matchup-card style_4">
-								<div class="card-content-wrapper">
-									<img
-										src="${cpath}/resources/images/mypage/dash-board/matchup-list/vector0.svg"
-										alt="Avatar" class="avatar style_26">
-									<div class="details-column">
-										<div class="top-section">
-											<div class="tags-container style_11">
-												<span class="tag style_13"><span
-													class="tag-text style_14">#알고리즘 #C</span></span>
-											</div>
-											<span class="session-count style_25">수료</span>
-										</div>
-										<h3 class="study-title style_6">C언어로 운영체제 뜯어보는 스터디</h3>
-										<div class="bottom-section">
-											<div class="schedule-location-container style_15">
-												<span class="schedule style_16">화 17:00 - 19:00</span> <span
-													class="location style_17">마포구</span>
-											</div>
-											<div class="mentor-info">
-												<img
-													src="${cpath}/resources/images/mypage/dash-board/matchup-list/microphone-20.svg"
-													alt="Role Icon" class="mic-icon style_27"> <span
-													class="mentor-name style_7">정진 멘토</span>
-											</div>
-											<span class="user-role style_8">방장</span>
-										</div>
-									</div>
+			<div class="matchup-list__cards">
+				<!-- Card 1: In Progress, Leader -->
+				<article class="matchup-card">
+					<div class="matchup-card__content">
+						<img src="${cpath}/resources/images/mypage/dash-board/matchup-list/vector0.svg" alt="Avatar" class="matchup-card__avatar">
+						<div class="matchup-card__details">
+							<header class="matchup-card__header">
+								<div class="matchup-card__tags">
+									<span class="tag">#알고리즘 #C</span>
 								</div>
-							</article>
-						</div>
-						<div class="action-buttons-container style_28">
-							<button class="action-button style_28">
-								<img
-									src="${cpath}/resources/images/mypage/dash-board/matchup-list/rectangle-3050.svg"
-									alt="킵고잉 찬성 배경" class="button-background style_29"> <span
-									class="button-text style_30">킵고잉 찬성</span>
-							</button>
-							<button class="action-button style_28">
-								<img
-									src="${cpath}/resources/images/mypage/dash-board/matchup-list/rectangle-3051.svg"
-									alt="리뷰 쓰기 배경" class="button-background style_31"> <span
-									class="button-text style_30">리뷰 쓰기</span>
-							</button>
+								<span class="matchup-card__session-count">3/5회</span>
+							</header>
+							<h3 class="matchup-card__title">C언어로 운영체제 뜯어보는 스터디</h3>
+							<footer class="matchup-card__footer">
+								<div class="matchup-card__meta">
+									<span class="matchup-card__schedule">화 17:00 - 19:00</span>
+									<span class="matchup-card__location">마포구</span>
+								</div>
+								<div class="matchup-card__mentor">
+									<img src="${cpath}/resources/images/mypage/dash-board/matchup-list/microphone-20.svg" alt="Mentor Icon" class="matchup-card__mentor-icon">
+									<span class="matchup-card__mentor-name">조상호 멘토</span>
+								</div>
+								<span class="matchup-card__role matchup-card__role--leader">방장</span>
+							</footer>
 						</div>
 					</div>
-				</section>
+				</article>
+
+				<!-- Card 2: In Progress, Member -->
+				<article class="matchup-card">
+					<div class="matchup-card__content">
+						<img src="${cpath}/resources/images/mypage/dash-board/matchup-list/vector0.svg" alt="Avatar" class="matchup-card__avatar">
+						<div class="matchup-card__details">
+							<header class="matchup-card__header">
+								<div class="matchup-card__tags">
+									<span class="tag">#알고리즘 #Java</span>
+								</div>
+								<span class="matchup-card__session-count">1/7회</span>
+							</header>
+							<h3 class="matchup-card__title">Java로 알아보는 객체지향 프로그래밍</h3>
+							<footer class="matchup-card__footer">
+								<div class="matchup-card__meta">
+									<span class="matchup-card__schedule">수 18:00 - 20:00</span>
+									<span class="matchup-card__location">강남구</span>
+								</div>
+								<div class="matchup-card__mentor">
+									<%-- No mentor info for this card --%>
+								</div>
+								<span class="matchup-card__role matchup-card__role--member">팀원</span>
+							</footer>
+						</div>
+					</div>
+				</article>
+
+				<!-- Card 3: Waiting -->
+				<article class="matchup-card">
+					<div class="matchup-card__content">
+						<img src="${cpath}/resources/images/mypage/dash-board/matchup-list/vector0.svg" alt="Avatar" class="matchup-card__avatar">
+						<div class="matchup-card__details">
+							<header class="matchup-card__header">
+								<div class="matchup-card__tags">
+									<span class="tag">#알고리즘 #C</span>
+								</div>
+								<span class="matchup-card__session-count matchup-card__session-count--waiting">대기중</span>
+							</header>
+							<h3 class="matchup-card__title">C언어로 운영체제 뜯어보는 스터디</h3>
+							<footer class="matchup-card__footer">
+								<div class="matchup-card__meta">
+									<span class="matchup-card__schedule">화 17:00 - 19:00</span>
+									<span class="matchup-card__location">마포구</span>
+								</div>
+								<div class="matchup-card__mentor">
+									<img src="${cpath}/resources/images/mypage/dash-board/matchup-list/microphone-20.svg" alt="Mentor Icon" class="matchup-card__mentor-icon">
+									<span class="matchup-card__mentor-name matchup-card__mentor-name--unconfirmed">미확정</span>
+								</div>
+								<span class="matchup-card__role matchup-card__role--leader">방장</span>
+							</footer>
+						</div>
+					</div>
+				</article>
+
+				<!-- Card 4: Completed -->
+				<article class="matchup-card">
+					<div class="matchup-card__content">
+						<img src="${cpath}/resources/images/mypage/dash-board/matchup-list/vector0.svg" alt="Avatar" class="matchup-card__avatar">
+						<div class="matchup-card__details">
+							<header class="matchup-card__header">
+								<div class="matchup-card__tags">
+									<span class="tag">#알고리즘 #C</span>
+								</div>
+								<span class="matchup-card__session-count matchup-card__session-count--completed">수료</span>
+							</header>
+							<h3 class="matchup-card__title">C언어로 운영체제 뜯어보는 스터디</h3>
+							<footer class="matchup-card__footer">
+								<div class="matchup-card__meta">
+									<span class="matchup-card__schedule">화 17:00 - 19:00</span>
+									<span class="matchup-card__location">마포구</span>
+								</div>
+								<div class="matchup-card__mentor">
+									<img src="${cpath}/resources/images/mypage/dash-board/matchup-list/microphone-20.svg" alt="Mentor Icon" class="matchup-card__mentor-icon">
+									<span class="matchup-card__mentor-name">정진 멘토</span>
+								</div>
+								<span class="matchup-card__role matchup-card__role--leader">방장</span>
+							</footer>
+						</div>
+					</div>
+					<!-- Action buttons are now inside the relevant card -->
+					<div class="matchup-card__actions">
+						<button class="action-button action-button--approve">
+							<img src="${cpath}/resources/images/mypage/dash-board/matchup-list/rectangle-3050.svg" alt="" class="action-button__background">
+							<span class="action-button__text">킵고잉 찬성</span>
+						</button>
+						<button class="action-button action-button--review">
+							<img src="${cpath}/resources/images/mypage/dash-board/matchup-list/rectangle-3051.svg" alt="" class="action-button__background">
+							<span class="action-button__text">리뷰 쓰기</span>
+						</button>
+					</div>
+				</article>
 			</div>
 		</div>
-	</div>
-</body>
-</html>
+	</section>
+</div>
