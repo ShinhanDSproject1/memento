@@ -1,31 +1,26 @@
 package com.shinhan.memento.dto;
 
 import java.sql.Date;
-import java.sql.Timestamp;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-@Data
-@NoArgsConstructor
 @AllArgsConstructor
+@NoArgsConstructor
 @Builder
-public class KeepgoingDTO {
-	Integer keepgoing_id;
+@Data
+public class MemberDTO {
 	Integer member_id;
-	Integer category_id;
-	Integer language_id;
 	Integer match_type_id;
-	String name;
-	String img_logo;
-	String img_activity;
-	Timestamp start_time;
-	Timestamp emd_time;
-	 String selected_days;
-	String content;
-	Integer price;
+	String email;
+	String nickname;
+	String phone_number;
+	String user_type;
+	Integer point;
+	String introduce_mento;
+	Integer score;
 	String region_group;
 	String region_subgroup;
 	String region_detail;

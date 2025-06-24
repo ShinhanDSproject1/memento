@@ -23,7 +23,7 @@
 </head>
 <body>
 <div class="layout-wrapper">
-	<%@ include file="../header/header.jsp"%>
+	<%@ include file="../common/header.jsp"%>
 	<div class="main-content-wrapper">
 		<%@ include file="../sidebar/sidebar.jsp"%>
 		<div id="screen" class="screen page-container"></div>

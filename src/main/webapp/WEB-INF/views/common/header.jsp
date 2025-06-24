@@ -16,15 +16,14 @@
 	<img class="header-me-mento-2" src="${cpath}/resources/images/header/me-mento-20.png" />
 	
 	<div class="frame-6">
-		<a href="${cpath}/matchup" class="match-up">
+		<a href="${cpath}/matchupList" class="match-up">
 			<div class="sub-title">매치업</div>
 		</a>
-		<a href="${cpath}/mentos" class="mentos">
+		<a href="${cpath}/mentos/full" class="mentos">
 			<div class="sub-title">멘토스</div>
-		</a> 
-		<a href="${cpath}/keepgoing" class="keepgoing">
-			<div class="sub-title">킵고잉</div>
 		</a>
+		<a href="${cpath}/keepgoing/keepgoinglist.do" class="keepgoing">
+			<div class="sub-title">킵고잉</div>
 		<a href="${cpath}/abovar" class="abovar">
 			<div class="sub-title">어부바</div>
 		</a> 
