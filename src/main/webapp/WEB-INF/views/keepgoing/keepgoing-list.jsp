@@ -40,7 +40,7 @@
 	<section class="filter">
 		<div class="filter-item">
 			<button type="button" id="location-btn" data-bs-toggle="modal"
-				data-bs-target="#myModal">지역</button>
+				data-bs-target="#myModal"  data-content-type="location">지역</button>
 		</div>
 		<div class="filter-item">
 			<select id="orderby" name="orderby" class="form-select order">
@@ -179,7 +179,255 @@
 				</div>
 			</a>
 
-			<a data-bs-toggle="modal" data-bs-target="#myModal">
+			<a data-bs-toggle="modal" data-bs-target="#myModal" data-content-type="register">
+				<div class="card-item">
+					<div class="logo-info">
+	
+						<div class="keepgoing-info">
+							<div class="name-membercount">
+								<span class="name">눈누입니다</span>
+								<div class="membercount">
+									<i class="fa-regular fa-user"></i> <span class="countvalue">33</span>
+								</div>
+							</div>
+	
+							<div class="location-detail">
+								<span class="location">서울시 마포구</span>
+								<!--${locatino} ${region} -->
+								<i class="fa-solid fa-circle graydot"></i> <span class="detail">꼬모레</span>
+							</div>
+	
+							<div class="studyinfo">
+								<span class="studytype">코드폭탄 해피빈</span> <i
+									class="fa-solid fa-circle graydot"></i> <span
+									class="category-language">알고리즘(JAVA)</span>
+								<!--${category}(${language}) -->
+							</div>
+	
+							<div class="day-time">
+								<i class="fa-solid fa-calendar"></i>
+								<div class="daylist">화,목</div>
+								<i class="fa-solid fa-circle bluedot"></i>
+								<div class="start-endtime">오후7시 ~ 오후9시</div>
+							</div>
+							
+						</div>
+						
+						<div class="logos">
+							<img class="keepgoing-logo" src="${cpath}/resources/images/aa.png">
+						</div>
+					</div>
+				</div>
+			</a>
+			
+		</div>
+				<div class="list-line">
+			<a data-bs-toggle="modal" data-bs-target="#myModal" data-content-type="register">
+				<div class="card-item">
+					
+					<div class="logo-info">
+						<div class="logos">
+							<img class="keepgoing-logo" src="${cpath}/resources/images/nunnu_icon.webp">
+						</div>
+
+						<div class="keepgoing-info">
+							<div class="name-membercount">
+								<span class="name">눈누입니다</span>
+								<div class="membercount">
+									<i class="fa-regular fa-user"></i> <span class="countvalue">33</span>
+								</div>
+							</div>
+
+							<div class="location-detail">
+								<span class="location">서울시 마포구</span>
+								<!--${locatino} ${region} -->
+								<i class="fa-solid fa-circle graydot"></i> <span class="detail">꼬모레</span>
+							</div>
+
+							<div class="studyinfo">
+								<span class="studytype">코드폭탄 해피빈</span> <i
+									class="fa-solid fa-circle graydot"></i> <span
+									class="category-language">알고리즘(JAVA)</span>
+								<!--${category}(${language}) -->
+							</div>
+
+							<div class="day-time">
+								<i class="fa-solid fa-calendar"></i>
+								<div class="daylist">화,목</div>
+								<i class="fa-solid fa-circle bluedot"></i>
+								<div class="start-endtime">오후7시 ~ 오후9시</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</a>
+			
+			<a data-bs-toggle="modal" data-bs-target="#myModal" data-content-type="member">
+				<div class="card-item">
+					<div class="logo-info">
+						
+						<div class="logos">
+							<img class="keepgoing-logo" src="${cpath}/resources/images/aa.png">
+						</div>
+	
+						<div class="keepgoing-info">
+							<div class="name-membercount">
+								<span class="name">눈누입니다</span>
+								<div class="membercount">
+									<i class="fa-regular fa-user"></i> <span class="countvalue">33</span>
+								</div>
+							</div>
+	
+							<div class="location-detail">
+								<span class="location">서울시 마포구</span>
+								<!--${locatino} ${region} -->
+								<i class="fa-solid fa-circle graydot"></i> <span class="detail">꼬모레</span>
+							</div>
+	
+							<div class="studyinfo">
+								<span class="studytype">코드폭탄 해피빈</span> <i
+									class="fa-solid fa-circle graydot"></i> <span
+									class="category-language">알고리즘(JAVA)</span>
+								<!--${category}(${language}) -->
+							</div>
+	
+							<div class="day-time">
+								<i class="fa-solid fa-calendar"></i>
+								<div class="daylist">화,목</div>
+								<i class="fa-solid fa-circle bluedot"></i>
+								<div class="start-endtime">오후7시 ~ 오후9시</div>
+							</div>
+	
+						</div>
+					</div>
+				</div>
+			</a>
+
+			<a data-bs-toggle="modal" data-bs-target="#myModal" data-content-type="register">
+				<div class="card-item">
+					<div class="logo-info">
+	
+						<div class="keepgoing-info">
+							<div class="name-membercount">
+								<span class="name">눈누입니다</span>
+								<div class="membercount">
+									<i class="fa-regular fa-user"></i> <span class="countvalue">33</span>
+								</div>
+							</div>
+	
+							<div class="location-detail">
+								<span class="location">서울시 마포구</span>
+								<!--${locatino} ${region} -->
+								<i class="fa-solid fa-circle graydot"></i> <span class="detail">꼬모레</span>
+							</div>
+	
+							<div class="studyinfo">
+								<span class="studytype">코드폭탄 해피빈</span> <i
+									class="fa-solid fa-circle graydot"></i> <span
+									class="category-language">알고리즘(JAVA)</span>
+								<!--${category}(${language}) -->
+							</div>
+	
+							<div class="day-time">
+								<i class="fa-solid fa-calendar"></i>
+								<div class="daylist">화,목</div>
+								<i class="fa-solid fa-circle bluedot"></i>
+								<div class="start-endtime">오후7시 ~ 오후9시</div>
+							</div>
+							
+						</div>
+						
+						<div class="logos">
+							<img class="keepgoing-logo" src="${cpath}/resources/images/aa.png">
+						</div>
+					</div>
+				</div>
+			</a>
+			
+		</div>
+				<div class="list-line">
+			<a data-bs-toggle="modal" data-bs-target="#myModal" data-content-type="register">
+				<div class="card-item">
+					
+					<div class="logo-info">
+						<div class="logos">
+							<img class="keepgoing-logo" src="${cpath}/resources/images/nunnu_icon.webp">
+						</div>
+
+						<div class="keepgoing-info">
+							<div class="name-membercount">
+								<span class="name">눈누입니다</span>
+								<div class="membercount">
+									<i class="fa-regular fa-user"></i> <span class="countvalue">33</span>
+								</div>
+							</div>
+
+							<div class="location-detail">
+								<span class="location">서울시 마포구</span>
+								<!--${locatino} ${region} -->
+								<i class="fa-solid fa-circle graydot"></i> <span class="detail">꼬모레</span>
+							</div>
+
+							<div class="studyinfo">
+								<span class="studytype">코드폭탄 해피빈</span> <i
+									class="fa-solid fa-circle graydot"></i> <span
+									class="category-language">알고리즘(JAVA)</span>
+								<!--${category}(${language}) -->
+							</div>
+
+							<div class="day-time">
+								<i class="fa-solid fa-calendar"></i>
+								<div class="daylist">화,목</div>
+								<i class="fa-solid fa-circle bluedot"></i>
+								<div class="start-endtime">오후7시 ~ 오후9시</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</a>
+			
+			<a data-bs-toggle="modal" data-bs-target="#myModal" data-content-type="member">
+				<div class="card-item">
+					<div class="logo-info">
+						
+						<div class="logos">
+							<img class="keepgoing-logo" src="${cpath}/resources/images/aa.png">
+						</div>
+	
+						<div class="keepgoing-info">
+							<div class="name-membercount">
+								<span class="name">눈누입니다</span>
+								<div class="membercount">
+									<i class="fa-regular fa-user"></i> <span class="countvalue">33</span>
+								</div>
+							</div>
+	
+							<div class="location-detail">
+								<span class="location">서울시 마포구</span>
+								<!--${locatino} ${region} -->
+								<i class="fa-solid fa-circle graydot"></i> <span class="detail">꼬모레</span>
+							</div>
+	
+							<div class="studyinfo">
+								<span class="studytype">코드폭탄 해피빈</span> <i
+									class="fa-solid fa-circle graydot"></i> <span
+									class="category-language">알고리즘(JAVA)</span>
+								<!--${category}(${language}) -->
+							</div>
+	
+							<div class="day-time">
+								<i class="fa-solid fa-calendar"></i>
+								<div class="daylist">화,목</div>
+								<i class="fa-solid fa-circle bluedot"></i>
+								<div class="start-endtime">오후7시 ~ 오후9시</div>
+							</div>
+	
+						</div>
+					</div>
+				</div>
+			</a>
+
+			<a data-bs-toggle="modal" data-bs-target="#myModal" data-content-type="register">
 				<div class="card-item">
 					<div class="logo-info">
 	
@@ -222,255 +470,7 @@
 			
 		</div>
 
-		<div class="list-line">
-			<a data-bs-toggle="modal" data-bs-target="#myModal">
-				<div class="card-item">
-					
-					<div class="logo-info">
-						<div class="logos">
-							<img class="keepgoing-logo" src="${cpath}/resources/images/nunnu_icon.webp">
-						</div>
 
-						<div class="keepgoing-info">
-							<div class="name-membercount">
-								<span class="name">눈누입니다</span>
-								<div class="membercount">
-									<i class="fa-regular fa-user"></i> <span class="countvalue">33</span>
-								</div>
-							</div>
-
-							<div class="location-detail">
-								<span class="location">서울시 마포구</span>
-								<!--${locatino} ${region} -->
-								<i class="fa-solid fa-circle graydot"></i> <span class="detail">꼬모레</span>
-							</div>
-
-							<div class="studyinfo">
-								<span class="studytype">코드폭탄 해피빈</span> <i
-									class="fa-solid fa-circle graydot"></i> <span
-									class="category-language">알고리즘(JAVA)</span>
-								<!--${category}(${language}) -->
-							</div>
-
-							<div class="day-time">
-								<i class="fa-solid fa-calendar"></i>
-								<div class="daylist">화,목</div>
-								<i class="fa-solid fa-circle bluedot"></i>
-								<div class="start-endtime">오후7시 ~ 오후9시</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</a>
-			
-			<a data-bs-toggle="modal" data-bs-target="#myModal">
-				<div class="card-item">
-					<div class="logo-info">
-						
-						<div class="logos">
-							<img class="keepgoing-logo" src="${cpath}/resources/images/aa.png">
-						</div>
-	
-						<div class="keepgoing-info">
-							<div class="name-membercount">
-								<span class="name">눈누입니다</span>
-								<div class="membercount">
-									<i class="fa-regular fa-user"></i> <span class="countvalue">33</span>
-								</div>
-							</div>
-	
-							<div class="location-detail">
-								<span class="location">서울시 마포구</span>
-								<!--${locatino} ${region} -->
-								<i class="fa-solid fa-circle graydot"></i> <span class="detail">꼬모레</span>
-							</div>
-	
-							<div class="studyinfo">
-								<span class="studytype">코드폭탄 해피빈</span> <i
-									class="fa-solid fa-circle graydot"></i> <span
-									class="category-language">알고리즘(JAVA)</span>
-								<!--${category}(${language}) -->
-							</div>
-	
-							<div class="day-time">
-								<i class="fa-solid fa-calendar"></i>
-								<div class="daylist">화,목</div>
-								<i class="fa-solid fa-circle bluedot"></i>
-								<div class="start-endtime">오후7시 ~ 오후9시</div>
-							</div>
-	
-						</div>
-					</div>
-				</div>
-			</a>
-
-			<a data-bs-toggle="modal" data-bs-target="#myModal">
-				<div class="card-item">
-					<div class="logo-info">
-						
-						<div class="logos">
-							<img class="keepgoing-logo" src="${cpath}/resources/images/aa.png">
-						</div>
-	
-						<div class="keepgoing-info">
-							<div class="name-membercount">
-								<span class="name">눈누입니다</span>
-								<div class="membercount">
-									<i class="fa-regular fa-user"></i> <span class="countvalue">33</span>
-								</div>
-							</div>
-	
-							<div class="location-detail">
-								<span class="location">서울시 마포구</span>
-								<!--${locatino} ${region} -->
-								<i class="fa-solid fa-circle graydot"></i> <span class="detail">꼬모레</span>
-							</div>
-	
-							<div class="studyinfo">
-								<span class="studytype">코드폭탄 해피빈</span> <i
-									class="fa-solid fa-circle graydot"></i> <span
-									class="category-language">알고리즘(JAVA)</span>
-								<!--${category}(${language}) -->
-							</div>
-	
-							<div class="day-time">
-								<i class="fa-solid fa-calendar"></i>
-								<div class="daylist">화,목</div>
-								<i class="fa-solid fa-circle bluedot"></i>
-								<div class="start-endtime">오후7시 ~ 오후9시</div>
-							</div>
-	
-						</div>
-					</div>
-				</div>
-			</a>
-			
-		</div>
-
-		<div class="list-line">
-			<a data-bs-toggle="modal" data-bs-target="#myModal">
-				<div class="card-item">
-					
-					<div class="logo-info">
-						<div class="logos">
-							<img class="keepgoing-logo" src="${cpath}/resources/images/nunnu_icon.webp">
-						</div>
-
-						<div class="keepgoing-info">
-							<div class="name-membercount">
-								<span class="name">눈누입니다</span>
-								<div class="membercount">
-									<i class="fa-regular fa-user"></i> <span class="countvalue">33</span>
-								</div>
-							</div>
-
-							<div class="location-detail">
-								<span class="location">서울시 마포구</span>
-								<!--${locatino} ${region} -->
-								<i class="fa-solid fa-circle graydot"></i> <span class="detail">꼬모레</span>
-							</div>
-
-							<div class="studyinfo">
-								<span class="studytype">코드폭탄 해피빈</span> <i
-									class="fa-solid fa-circle graydot"></i> <span
-									class="category-language">알고리즘(JAVA)</span>
-								<!--${category}(${language}) -->
-							</div>
-
-							<div class="day-time">
-								<i class="fa-solid fa-calendar"></i>
-								<div class="daylist">화,목</div>
-								<i class="fa-solid fa-circle bluedot"></i>
-								<div class="start-endtime">오후7시 ~ 오후9시</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</a>
-			
-			<a data-bs-toggle="modal" data-bs-target="#myModal">
-				<div class="card-item">
-					<div class="logo-info">
-						
-						<div class="logos">
-							<img class="keepgoing-logo" src="${cpath}/resources/images/aa.png">
-						</div>
-	
-						<div class="keepgoing-info">
-							<div class="name-membercount">
-								<span class="name">눈누입니다</span>
-								<div class="membercount">
-									<i class="fa-regular fa-user"></i> <span class="countvalue">33</span>
-								</div>
-							</div>
-	
-							<div class="location-detail">
-								<span class="location">서울시 마포구</span>
-								<!--${locatino} ${region} -->
-								<i class="fa-solid fa-circle graydot"></i> <span class="detail">꼬모레</span>
-							</div>
-	
-							<div class="studyinfo">
-								<span class="studytype">코드폭탄 해피빈</span> <i
-									class="fa-solid fa-circle graydot"></i> <span
-									class="category-language">알고리즘(JAVA)</span>
-								<!--${category}(${language}) -->
-							</div>
-	
-							<div class="day-time">
-								<i class="fa-solid fa-calendar"></i>
-								<div class="daylist">화,목</div>
-								<i class="fa-solid fa-circle bluedot"></i>
-								<div class="start-endtime">오후7시 ~ 오후9시</div>
-							</div>
-	
-						</div>
-					</div>
-				</div>
-			</a>
-
-			<a data-bs-toggle="modal" data-bs-target="#myModal">
-				<div class="card-item">
-					<div class="logo-info">
-						
-						<div class="logos">
-							<img class="keepgoing-logo" src="${cpath}/resources/images/aa.png">
-						</div>
-	
-						<div class="keepgoing-info">
-							<div class="name-membercount">
-								<span class="name">눈누입니다</span>
-								<div class="membercount">
-									<i class="fa-regular fa-user"></i> <span class="countvalue">33</span>
-								</div>
-							</div>
-	
-							<div class="location-detail">
-								<span class="location">서울시 마포구</span>
-								<!--${locatino} ${region} -->
-								<i class="fa-solid fa-circle graydot"></i> <span class="detail">꼬모레</span>
-							</div>
-	
-							<div class="studyinfo">
-								<span class="studytype">코드폭탄 해피빈</span> <i
-									class="fa-solid fa-circle graydot"></i> <span
-									class="category-language">알고리즘(JAVA)</span>
-								<!--${category}(${language}) -->
-							</div>
-	
-							<div class="day-time">
-								<i class="fa-solid fa-calendar"></i>
-								<div class="daylist">화,목</div>
-								<i class="fa-solid fa-circle bluedot"></i>
-								<div class="start-endtime">오후7시 ~ 오후9시</div>
-							</div>
-	
-						</div>
-					</div>
-				</div>
-			</a>
-			
-		</div>
 	</section>
 	<section class="paging">페이지이동</section>
 

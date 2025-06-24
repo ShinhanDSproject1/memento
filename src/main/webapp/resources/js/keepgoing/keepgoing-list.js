@@ -91,12 +91,23 @@ $(() => {
 				url = "/memento/keepgoing/keepgoingdetail.do"
 			}	else if (contentType === "location") { // '지역' 버튼을 위한 새로운 조건 추가
             	url = "/memento/keepgoing/keepgoinglocation.do"; // 예시 URL, 실제 URL로 변경하세요.
+        		$(".modal-header").css("display","flex")
+        		$(".modal-footer").css("display","none")
+        		$(".modal-body").addClass("modal-body-scroll");
+        		$.ajax({
+        			url:url,
+        			success:(responseData)=>{
+        				$(".modal-body").html(responseData)
+        			}
+        		})
+        		
+        		return;
         	} else {
 	            console.warn("Undefined or unhandled content type. Using default behavior.");
 	        }
-			
-			$(".modal-header").css("display","none")
-			$(".modal-footer").css("display","none")
+	        
+	        $(".modal-header").css("display","none")
+	        $(".modal-footer").css("display","none")
 			
 			if(url){
 				$.ajax({
@@ -196,6 +207,7 @@ $(() => {
     	if (myChartInstance) {
         	myChartInstance.destroy();
         }
+        $(".modal-body").removeClass("modal-body-scroll");
     	console.log("Modal body has been cleared after modal was hidden.");
 	})
 	

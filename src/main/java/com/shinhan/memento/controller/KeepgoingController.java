@@ -38,6 +38,11 @@ public class KeepgoingController {
 		return "keepgoing/keepgoing-member";
 	}
 	
+	@GetMapping("keepgoinglocation.do")
+	public String keepgoingLocation() {
+		return "keepgoing/keepgoing-location-modal";
+	}
+	
 	@PostMapping("keepgoinginsert.do")
     @ResponseBody // 이 메서드의 반환 값이 HTTP 응답 본문으로 직접 전송됨 (뷰 이름이 아님)
     public String insertKeepgoing(@RequestBody KeepgoingDTO data) {

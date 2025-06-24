@@ -403,3 +403,8 @@ ul {
 .modal-content {
 	width: fit-content !important;
 }
+
+.modal-body-scroll{
+	overflow-y: scroll !important;
+    max-height: 50vh !important;
+}
