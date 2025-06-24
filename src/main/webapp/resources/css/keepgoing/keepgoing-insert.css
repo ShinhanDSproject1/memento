@@ -285,6 +285,7 @@ input[type="time"] {
     background-color: #C0D0F9; /* 선택된 요일 배경색 */
     color: #233B8E; /* 선택된 요일 글자색 */
     border-color: #233B8E;
+    padding: 9px 11.5px;
 }
 
 .last-select-border{
