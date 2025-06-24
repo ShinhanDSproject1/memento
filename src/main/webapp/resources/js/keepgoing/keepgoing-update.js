@@ -34,7 +34,7 @@ $(document).ready(function() {
     	console.log(data)
     	
     	$.ajax({
-    		url: "/spring/emp/keepgoingupdate.do",
+    		url: "/memento/keepgoing/keepgoingupdate.do",
     		data: JSON.stringify(data),
     		type:"PUT",
     		contentType:"application/json",
