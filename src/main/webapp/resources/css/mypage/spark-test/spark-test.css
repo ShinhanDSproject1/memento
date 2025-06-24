@@ -1,0 +1,152 @@
+body {
+	margin: 0;
+}
+
+.spark-test-container{
+	margin: 0 auto;
+    box-sizing: border-box;
+    max-width: 1000px;
+    width: 100%;
+    position: relative;
+    top : -70px;
+}
+
+/* 스파크테스트 - 노란 디자인 띠 (상단 진행 바 또는 장식) */
+.spark-test__designLavel {
+    background: #ffea41;
+    width: 100%; /* 부모 .page-container 너비에 맞춤 */
+    height: 85.5px;
+    /* position: absolute; top: 0; left: 0; */ /* 페이지 상단에 고정하고 싶을 때 사용 */
+}
+
+/* 스파크테스트 - 타이틀 컨테이너 (이미지 배경 포함) */
+.spark-test__container--title {
+    position: absolute; /* .page-container를 기준으로 위치 */
+    /* 기존 padding 값은 배경 이미지 위치에 영향을 줌, 필요에 따라 조정 */
+    padding: 246px 126px; /* 배경 이미지의 실제 크기에 따라 조정 */
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    align-items: center;
+    justify-content: center;
+    
+    /* `page-container` 안에서 조정되도록 픽셀 값을 사용합니다. */
+    left: 200px; /* 이전 `frame-3715`의 left 위치를 유지합니다. */
+    top: 124px; /* **이 값을 124px로 다시 조정하여 화면 안에 보이도록 합니다.** */
+    width: 400px; /* 이전 `frame-3715`의 width를 유지합니다. */
+    height: 157px; /* 이전 `frame-3715`의 height를 유지합니다. */
+    /* background 속성은 HTML style 속성으로 이동했으므로 여기서는 제거합니다. */
+}
+
+
+/* 스파크테스트 - 타이틀 텍스트 (SPARK TEST) */
+.spark-test__title--text {
+    position: absolute; /* .spark-test__container--title 내에서 절대 위치 */
+    color: #0e0d0d;
+    text-align: center;
+    font-family: "D2Coding-Bold", sans-serif;
+    font-size: 64px;
+    font-weight: 700;
+    width: 320px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    -webkit-text-stroke: 1px #000000;
+    
+    /* .spark-test__container--title 내에서 중앙 정렬 */
+    left: 50%;
+    top: 38%;
+    transform: translate(-50%, -50%);
+    white-space: nowrap; /* 텍스트가 줄 바꿈되지 않도록 */
+}
+
+/* 스파크 테스트 - 서브타이틀 텍스트 컨테이너 */
+.spark-test__contatiner--subtitle {
+    position: absolute; /* .page-container를 기준으로 위치 */
+    padding: 10px;
+    display: flex; /* flex로 변경하여 내부 텍스트 정렬 */
+    flex-direction: row; /* 텍스트 자체는 row가 자연스러움 */
+    gap: 10px;
+    align-items: center;
+    justify-content: center;
+    width: 500px;
+    /* left/top은 .page-container를 기준으로 재조정 필요 */
+    left: 50%; /* 가로 중앙 정렬을 위한 시작점 */
+    transform: translateX(-50%); /* 가로 중앙 정렬 */
+    top: 630px; /* 기존 top 값 유지, 필요 시 조정 */
+}
+
+/* 스파크 테스트 - 서브타이틀 텍스트 (너의 매치업 성향이 궁금해?) */
+.spark-test__subtitle--text {
+    color: #3a3a3a;
+    text-align: center;
+    font-family: "Inter-SemiBold", sans-serif;
+    font-size: 42px;
+    font-weight: 600;
+    position: relative; /* 컨테이너 내에서 상대 위치 */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%; /* 부모 컨테이너 너비에 맞춤 */
+}
+
+/* 스파크 테스트 - 버튼 컨테이너 */
+.spark-test__container--button {
+    display: flex;
+    flex-direction: row;
+    gap: 82px;
+    align-items: center;
+    justify-content: center; /* 버튼들을 가로 중앙으로 정렬 */
+
+    width: 100%;
+    max-width: 1136px; /* .page-container의 너비와 동일하게 */
+    height: auto;
+    padding: 40px 20px;
+    box-sizing: border-box;
+
+    position: absolute; /* .page-container를 기준으로 위치 */
+    left: 50%; /* 가로 중앙 정렬 */
+    transform: translateX(-50%); /* 가로 중앙 정렬 */
+    top: 732.83px; /* 기존 top 값 유지, 필요 시 조정 */
+}
+
+/* 스파크테스트 - 버튼 스타일 공통 */
+.spark-test__button {
+    background-color: #ffea41;
+    border-radius: 20px;
+    padding: 8px 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    width: 331px;
+    height: 115px;
+    position: relative; /* 텍스트나 내부 요소에 대한 기준점 */
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+    text-align: center;
+    font-family: "D2Coding-Bold", sans-serif;
+    font-size: 25px;
+    line-height: 1.2; /* 폰트 크기에 맞춰 줄 간격 조정 */
+    letter-spacing: 0.6px;
+    font-weight: 700;
+    border: none; /* 기본 버튼 테두리 제거 */
+    color: #0e0d0d; /* 버튼 텍스트 색상 */
+}
+
+.spark-test__button:hover {
+    cursor: pointer;
+    background-color: #D6BE00;
+}
+
+/* 스파크테스트 - 시작버튼 (개별 위치 지정 제거, flex 컨테이너가 처리) */
+.spark-test__button--teststart {
+    /* left 속성 제거: 부모 컨테이너의 flexbox가 위치를 관리함 */
+    /* 필요 시 flex-start, flex-end, center 등의 justify-content로 조절 */
+}
+
+/* 스파크테스트 - 학습 유형 버튼 (개별 위치 지정 제거, flex 컨테이너가 처리) */
+.spark-test__button--showtype {
+    /* left 속성 제거: 부모 컨테이너의 flexbox가 위치를 관리함 */
+}
