@@ -31,27 +31,25 @@
 		      <input type="checkbox" id="selectAll" />
 		      전체 선택
 		    </label>
-		    <label style="margin-left: 20px;">
-		      <input type="checkbox" class="delete-check" />
-		      선택 삭제
-		    </label>
 		  </div>
 		  <button class="delete-button">삭제하기</button>
 		</div>
 
-      <div class="cart-item">
-        <img src="${pageContext.request.contextPath}/resources/images/main1/lecture.png" alt="강의 이미지" class="item-image" />
-        <div class="item-info">
-          <p class="item-title">스프링 부트와 리액트로 구현하는 소셜 로그인</p>
-          <div class="item-meta">
-            <span class="meta-date">06/16(월)</span>
-            <span class="meta-time">08:00</span>
-            <span class="meta-count">3회</span>
-            <span class="meta-place">신한DS 카페</span>
-          </div>
-        </div>
-        <div class="item-price">₩18,000</div>
-      </div>
+	<div class="cart-item">
+	  <input type="checkbox" class="selectItem" />
+	  <img src="${pageContext.request.contextPath}/resources/images/main1/lecture.png" alt="강의 이미지" class="item-image" />
+	  <div class="item-info">
+	    <p class="item-title">스프링 부트와 리액트로 구현하는 소셜 로그인</p>
+	    <div class="item-meta">
+	      <span class="meta-date">06/16(월)</span>
+	      <span class="meta-time">08:00</span>
+	      <span class="meta-count">3회</span>
+	      <span class="meta-place">신한DS 카페</span>
+	    </div>
+	  </div>
+	  <div class="item-price">₩18,000</div>
+	</div>
+
     </section>
 
     <!-- 오른쪽: 구매자 정보 + 결제 영역 -->
@@ -112,5 +110,21 @@
   </script>
   <script src="${pageContext.request.contextPath}/resources/js/header.js"></script>
   <script src="${pageContext.request.contextPath}/resources/js/notificationModal.js"></script>
+	<script>
+	  document.addEventListener("DOMContentLoaded", function () {
+	    const pointInput = document.querySelector('.point input');
+	
+	    pointInput.addEventListener('input', function () {
+	      const value = parseInt(pointInput.value, 10);
+	
+	      if (value < 1000) {
+	        pointInput.setCustomValidity("1000P 이상 입력해주세요.");
+	        pointInput.reportValidity();
+	      } else {
+	        pointInput.setCustomValidity('');
+	      }
+	    });
+	  });
+	</script>
 </body>
 </html>
