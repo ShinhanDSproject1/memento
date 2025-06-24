@@ -32,10 +32,9 @@ body {
   width: 100%;
   background-color: rgba(237, 246, 255, 0); /* style_2 */
   border-radius: 10px; /* style_2 */
-  padding: 3px 51px 25px 49px; /* Calculated: top: (6619-6616)=3, right: 1011 - ((10044-9865)+781) = 51, bottom: 902 - ((7213-6616)+280) = 25, left: (9914-9865)=49 */
   box-sizing: border-box;
-  margin-top: 20%;
-  margin-left: 10%;
+  margin-top: 10%;
+  margin-left: 5%;
 }
 
 .page-title { /* style_3 */

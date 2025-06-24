@@ -239,6 +239,18 @@ body {
 	font-size: 16px;
 }
 
+.btn {
+	height: 35px;
+	border-radius: 5px;
+	border: none;
+	cursor: pointer;
+	color: #ffffff;
+}
+
+.btn--keep {
+	background-color: #407cf4;
+}
+
 /* ==========================================================================
    Responsive Design
    ========================================================================== */

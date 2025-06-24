@@ -117,13 +117,8 @@
 					</div>
 					<!-- Action buttons are now inside the relevant card -->
 					<div class="matchup-card__actions">
-						<button class="action-button action-button--approve">
-							<img src="${cpath}/resources/images/mypage/dash-board/matchup-list/rectangle-3050.svg" alt="" class="action-button__background">
-							<span class="action-button__text">킵고잉 찬성</span>
-						</button>
-						<button class="action-button action-button--review">
-							<img src="${cpath}/resources/images/mypage/dash-board/matchup-list/rectangle-3051.svg" alt="" class="action-button__background">
-							<span class="action-button__text">리뷰 쓰기</span>
+						<button class="btn btn--keep">
+							<span class="action-button__text">킵고잉 찬성하기</span>
 						</button>
 					</div>
 				</article>
