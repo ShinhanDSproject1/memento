@@ -277,11 +277,12 @@
 
 .chat .others .chat-message {
     position: relative;
-    text-align: center;
+    text-align: left;
     background-color: #00BBA8D1;
     color: white;
     padding: 7px 10px;
     border-radius: 10px 10px 10px 10px;
+    white-space: pre-wrap;
 }
 
 .chat .others .chat-message::after {
@@ -301,11 +302,12 @@
 
 .chat .mychat .chat-message {
     position: relative;
-    text-align: center;
+    text-align: left;
     color: #E7F7FF;
     background-color: #076DF9;
     padding: 7px 10px;
     border-radius: 10px 10px 10px 10px;
+	white-space: pre-wrap;
 }
 
 .message-services {

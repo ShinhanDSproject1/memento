@@ -71,14 +71,19 @@ $(() => {
     let isComposing = false; // 한글 조합 중인지 여부를 나타내는 플래그 (메인 스크립트로 이동)
    	
    	function sendMymessage(){
-    let myMessageValue = $("#messageValue").val(); // 이 시점에는 #messageValue가 DOM에 존재해야 합니다.
-    let myMessageHTML = "<div class='mychat'><span class='chat-message'>"+myMessageValue+"</span><img src='/memento/resources/images/nunnu_icon.webp'></div>";
-    if(myMessageValue.trim() !== ""){
-        $("#chat").append(myMessageHTML);
-        $("#chat").scrollTop($("#chat")[0].scrollHeight);
-    }
-    	$("#messageValue").val("");
-	}
+	    let myMessageValue = $("#messageValue").val(); // 이 시점에는 #messageValue가 DOM에 존재해야 합니다.
+	    
+	    // 줄바꿈 문자(\n)를 <br> 태그로 변경
+    	// 정규식을 사용하여 모든 줄바꿈 문자를 변경합니다.
+	   let formattedMessageValue = myMessageValue.replace(/(\r\n|\n|\r)/g, "<br>");
+	    
+	    let myMessageHTML = "<div class='mychat'><span class='chat-message'>"+formattedMessageValue+"</span><img src='/memento/resources/images/nunnu_icon.webp'></div>";
+	    if(myMessageValue.trim() !== ""){
+	        $("#chat").append(myMessageHTML);
+	        $("#chat").scrollTop($("#chat")[0].scrollHeight);
+	    }
+	    	$("#messageValue").val("");
+		}
     
     $(myModalEl).on("show.bs.modal",function(e){
 			let contentType = $(e.relatedTarget).data("content-type");
@@ -138,7 +143,6 @@ $(() => {
                     data: data,
                 });
                 
-                //    `.off().on()`을 사용하여 기존 리스너를 제거하고 새로 바인딩할 수 있습니다.
                 const messageValueElement = $("#messageValue");
                 const sendBtnElement = $("#sendBtn");
                 const updateBtnElement = $("#updateBtn");
@@ -156,9 +160,11 @@ $(() => {
                     });
 
                     messageValueElement.off("keydown").on("keydown", function(e) {
-                        if (e.key === "Enter" && e.shiftKey && !isComposing) {
-                            e.preventDefault();
-                            sendMymessage();
+                        if(!isComposing){
+                        	if(e.key === "Enter" && !e.shiftKey){
+	                        	e.preventDefault();
+	                            sendMymessage();
+                        	}
                         }
                     });
                     resetBtnElement.on("click",()=>{
