@@ -987,14 +987,14 @@
 }
 
 .number-input {
-	width: 80px;
+	width: 100px;
 	padding-right: 24px;
 	font-size: 16px;
 	font-family: "Inter-Medium", sans-serif;
 	border: none;
 	outline: none;
 	background: transparent;
-	text-align: right;
+	text-align: center;
 }
 
 .unit-label {
@@ -1051,6 +1051,7 @@
 	font-size: 16px;
 	cursor: pointer;
 }
+
 .together-type-section {
 	display: flex;
 	flex-direction: column;
@@ -1099,5 +1100,5 @@
 }
 
 .dropdown-box {
-	position: relative; 
+	position: relative;
 }
