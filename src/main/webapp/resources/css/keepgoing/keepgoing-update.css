@@ -1,0 +1,332 @@
+body{
+    font-family: "Noto Sans", sans-serif;
+    padding-bottom: var(--body-padding-bottom);
+}
+@media (max-width:991px){
+	.update-main{
+		display:flex;
+		flex-direction: column;
+	}
+}
+*{
+    margin:0px;
+    padding: 0px;
+}
+
+li,ul{
+    list-style: none;
+}
+
+ul{
+    margin-bottom: 0px !important;
+    padding-left: 0px !important;
+}
+
+.day{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    white-space: nowrap;
+    border: 1px solid #ccc;
+    border-radius: 20px;
+    font-size: var(--day-font);
+    padding: 10px 20px;
+    cursor: pointer;
+    box-sizing: border-box;
+    min-width: fit-content;
+}
+
+.dayofweek .day .fa-check {
+    margin-right: 5px; /* 아이콘과 텍스트 사이 간격 */
+    flex-shrink: 0;
+}
+
+.dayofweek .day span {
+    flex-shrink: 1; /* 텍스트는 필요하면 축소될 수 있도록 */
+    text-align: center; /* 텍스트만 중앙 정렬하고 싶을 때 */
+}
+
+.dayofweek {
+    display: flex; /* 요일 목록 ul을 Flex 컨테이너로 */
+    flex-wrap: wrap; /* 너비가 부족하면 다음 줄로 넘어가도록 */
+    justify-content: flex-start; /* 또는 center, space-around 등 필요에 따라 */
+    gap: var(--little-gap); /* li 요소들 사이의 간격 (margin 대신 gap 사용) */
+}
+
+textarea{
+    resize: none !important;
+    border: none;
+    overflow: hidden;
+    flex-grow: 1; /* 남은 공간을 모두 차지하여 늘어남 */
+    outline: none; /* textarea 자체의 포커스 아웃라인 제거 */
+    font-size: var(--placeholder-font);
+    padding: 0; /* textarea 자체의 패딩 제거 (컨테이너에서 줄 예정) */
+    background: transparent; /* 배경을 투명하게 */
+    resize: none; /* 사용자가 크기 조절 못하게 */
+    overflow: hidden; /* 내용이 넘칠 때 스크롤바 숨기기 (한 줄로 보일 때 중요) */
+    white-space: nowrap; /* 내용이 넘치면 줄바꿈 안되게 (필요시) */
+}
+
+label{
+    font-size: var(--label-font);
+    margin-bottom: var(--label-bottom-margin);
+}
+
+.icon-label i{
+    color: var(--content-blue-color);
+    font-size: 20px;
+    margin-right: var(--icon-label-margin-gap);
+}
+
+.update-main{
+    display: flex;
+    align-items: stretch;
+    padding-top:var(--main-padding-top);
+    gap:30px;
+    margin-bottom: var(--content-div-margin-bottom);
+}
+
+.page-title{
+    border-bottom: 3px solid #016BC7;
+    width: 100%;
+    font-size: var(--title-font);
+    padding: 20px;
+}
+
+.main-name-info{
+    display: flex;
+    flex-direction: column;
+    flex-grow: 7;
+}
+
+.main-logo{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex-grow: 3;
+    align-items: stretch;
+}
+
+.main-selection{
+    display: flex;
+    flex-direction: column;
+    width:100%;
+}
+
+.main-name-info .flexrow{
+    display: flex;
+    flex-direction: row;
+    width:100%;
+    justify-content: space-between;
+}
+
+.textarea-border{
+    display: flex; /* 내부 요소를 가로로 정렬 */
+    align-items: center; /* 세로 중앙 정렬 */
+    width: 100%; /* 전체 컨테이너 너비 */
+    border: 1px solid #ccc; /* 초기 테두리 */
+    border-radius: 4px;
+    padding: 8px 12px; /* 내부 여백 */
+    box-sizing: border-box; /* 패딩과 테두리가 width에 포함되도록 */
+    transition: border-color 0.3s ease, box-shadow 0.3s ease; /* 포커스 애니메이션 */
+}
+
+.textarea-border:has(textarea:focus) {
+    border-color: #007bff; /* 포커스 시 테두리 색상 변경 */
+    box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.25); /* 포커스 시 그림자 효과 */
+}
+
+.last-select{
+    display: flex;
+    width:100%;
+    justify-content: space-between;
+    flex-direction: row;
+    gap: var(--large-gap);
+}
+
+.last-select .flexcol{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+}
+
+.last-select .flexcol input{
+    width: 100%;
+}
+
+.bottom-buttons{
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    justify-content: space-between;
+    gap:var(--little-gap);
+}
+
+.bottom-buttons button{
+    flex: 1;
+    padding: 16px 12px;
+    border-radius: 20px;
+    color: white;
+}
+
+.cancel-btn{
+    border: 1px solid var(--f5-gary);
+    background-color: #A6ABBD;
+}
+
+.make-btn{
+    background-color: var(--btn-blue-color);
+    border: 1px solid var(--f5-gary);
+}
+
+.activity-img{
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+}
+
+.content-line{    
+    margin-bottom: var(--content-div-margin-bottom);
+}
+
+form{
+    padding: 0px 15px
+}
+
+.flexgap-20{
+    gap:var(--middle-gap);
+}
+
+.drag-text h4{
+    text-align: center;
+}
+
+.drag-logo-file{
+    padding:var(--body-padding-bottom);
+    border: 1px dotted black;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+    flex-grow: 9;
+    margin-bottom: var(--content-div-margin-bottom);
+}
+
+.drag-logo-file i{
+    font-size: 60px;
+    color: var(--content-blue-color);
+    margin-bottom: 10px;
+}
+
+.input-file{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin: 0px;
+    align-items: stretch;
+    height: 35px;
+}
+
+.upload-file {
+    display: none; /* 실제 파일 input은 숨김 */
+}
+
+.upload-label{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    font-size: var(--placeholder-font);
+    cursor: pointer; /* 클릭 가능한 요소임을 나타냄 */
+    background-color: var(--btn-blue-color);
+    color: white;
+    flex-grow: 2;
+}
+
+.input-file .upload-name {
+    display: flex;
+    padding: 0 10px;
+    outline: none; /* textarea 자체의 포커스 아웃라인 제거 */
+    vertical-align: middle;
+    border: 1px solid #dddddd;
+    font-size: var(--placeholder-font);
+    color: black;
+    flex-grow: 7;
+}
+
+.input-file input[type="file"] {
+	position:absolute;
+    width: 0;
+    height: 0;
+    padding: 0;
+    overflow: hidden;
+    border: 0;
+}
+
+.time{
+    gap: var(--little-gap);
+    align-items: center;
+}
+
+input[type="time"] {
+    padding: 7px;
+    text-align:center;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+}
+
+.dayofweek .day.selected {
+    background-color: #C0D0F9; /* 선택된 요일 배경색 */
+    color: #233B8E; /* 선택된 요일 글자색 */
+    border-color: #233B8E;
+    padding: 9px 11.5px;
+}
+
+.last-select-border{
+    height: 100%;
+    padding: 4px 12px;
+    border-radius: 10px;
+    border: 1px solid #ccc;
+}
+
+.last-select-border select{
+    width:100%;
+    height: 100%;
+    border: none;
+    outline: none;
+}
+
+.last-select-border input{
+    width:100%;
+    height: 100%;
+    border: none;
+    outline: none;
+    padding: 4px 6px;
+}
+
+.main-selection select{
+    width:100%;
+    height: 100%;
+    border: none;
+    outline: none;
+    padding: 6px 12px;
+}
+
+.main-selection .main-selection-border{
+    border: 1px solid #ccc;
+    padding: 4px 6px;
+    border-radius: 10px;
+}
+
+.last-select-border{
+    transition: border-color 0.3s ease, box-shadow 0.3s ease; /* 포커스 애니메이션 */
+}
+
+.last-select-border:has(input:focus) {
+    border-color: #007bff; /* 포커스 시 테두리 색상 변경 */
+    box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.25); /* 포커스 시 그림자 효과 */
+}

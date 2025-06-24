@@ -1,0 +1,40 @@
+:root {
+    --border-color-light-gray: #D9E0E6;
+    --full-border-color: #A6ABBD;
+    --location-modal-content-font-size: 16px;
+}
+
+* {
+    margin: 0px;
+    padding: 0px;
+}
+
+ul,
+li {
+    list-style: none;
+}
+
+.location-modal {
+    display: flex;
+    width: 100%;
+}
+
+.location-modal .location-ul {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 18vw;
+}
+
+.location-modal .location-ul a{
+	width:100%;
+}
+
+.location-modal .location-ul a li {
+    text-align: center;
+    width: 100%;
+    border-bottom: 1px solid var(--border-color-light-gray);
+    padding: 1vh 0px;
+    font-size: var(--location-modal-content-font-size);
+}
