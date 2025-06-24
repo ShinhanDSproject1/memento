@@ -1,0 +1,231 @@
+/* 기본 설정 */
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background-color: #fff;
+  font-family: 'Inter', sans-serif;
+}
+
+/* ===== 공통 컨테이너 ===== */
+.cart-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  width: 100%;       
+  padding: 0 250px;
+  gap: 40px;
+  margin-top: 120px;
+}
+
+/* ===== 왼쪽 영역: 항목 목록 ===== */
+.cart-left {
+  flex: 2;
+}
+
+.cart-title {
+  font-size: 2rem;
+  font-weight: bold;
+  margin-bottom: 30px;
+  text-align: left;
+}
+
+.cart-actions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.delete-button {
+  background-color: #ffffff;
+  border: 1px solid #00b39e;
+  color: #00b39e;
+  border-radius: 6px;
+  padding: 10px 20px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.delete-button:hover {
+  background-color: #00b39e;
+  color: white;
+}
+
+.cart-item {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+  border-top: 1px solid #909294;
+  border-bottom: 1px solid #909294;
+  padding: 20px 0;
+}
+
+.item-image {
+  width: 150px;
+  height: auto;
+  object-fit: cover;
+}
+
+.item-info {
+  flex: 1;
+}
+
+.item-title {
+  font-size: 1.125rem;
+  font-weight: 600;
+}
+
+.item-meta {
+  display: flex;
+  gap: 8px;
+  margin-top: 5px;
+  font-size: 0.9rem;
+  color: #666;
+  flex-wrap: nowrap;
+  align-items: center;
+}
+
+.item-meta > span {
+  line-height: 1.2;
+  white-space: nowrap;
+}
+
+.meta-place {
+  color: #00b39e;
+  font-weight: 400;
+}
+
+.item-price {
+  font-size: 1rem;
+  font-weight: 500;
+  min-width: 80px;
+  text-align: right;
+}
+
+/* ===== 오른쪽 영역: 구매자 정보 + 결제 ===== */
+.cart-right {
+  flex: 1;
+  width: 300px;
+  background: #ffffff;
+  padding: 25px;
+  border-radius: 12px;
+  border: 1px solid #e0e0e0;
+  box-shadow: 4px 6px 12px rgba(0, 0, 0, 0.2);
+  margin-top: 100px;
+}
+
+.user-summary h3 {
+  font-size: 1.2rem;
+  margin-bottom: 12px;
+}
+
+.buyer-info-box {
+  background: #fff;
+  border-radius: 10px;
+  border: 1px solid #ced4da;
+  padding: 15px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.point-cash {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  margin-bottom: 20px;
+}
+
+.point,
+.cash {
+  display: flex;
+  flex-direction: column;
+}
+
+.point input,
+.cash input {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+}
+
+.total-price {
+  display: flex;
+  justify-content: space-between;
+  font-size: 1.125rem;
+  font-weight: 600;
+  margin: 20px 0;
+}
+
+.agreement {
+  font-size: 0.85rem;
+  color: #909294;
+  line-height: 1.4;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.action-buttons {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+}
+
+.btn {
+  flex: 1;
+  padding: 12px 0;
+  font-size: 14px;
+  font-weight: 600;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.btn.cancel {
+  background-color: #ddd;
+  color: #333;
+}
+
+.btn.pay {
+  background-color: #00B39E;
+  color: #fff;
+}
+
+/* ===== 반응형 ===== */
+@media (max-width: 1440px) {
+  .cart-container {
+    flex-direction: column;
+    padding: 0 40px;
+  }
+
+  .cart-left,
+  .cart-right {
+    width: 100%;
+  }
+
+  .action-buttons {
+    flex-direction: column;
+  }
+}
+
+/* === 숫자 input의 스핀 버튼 제거 === */
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input[type="number"] {
+  -moz-appearance: textfield;
+}
+
+/* 전체 선택 체크박스 */
+#selectAll {
+  margin-right: 6px;
+}

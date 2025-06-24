@@ -1,0 +1,149 @@
+.home-page-3,
+.home-page-3 * {
+  box-sizing: border-box;
+}
+
+.home-page-3 {
+  background: linear-gradient(180deg, rgba(255, 255, 255, 1) 93.27%);
+  width: 100%;
+  padding: 50px 250px 70px; /* 상단 여백 + 양쪽 250px 패딩 + 하단 여백 */
+  overflow: hidden;
+  font-family: 'Inter', sans-serif;
+}
+
+.home-page-3-inner {
+  max-width: 1400px;
+  margin: 0 auto;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 40px;
+  align-items: flex-start;
+}
+
+.text-area {
+  flex: 1 1 400px;
+  min-width: 320px;
+  color: #000;
+}
+
+.title {
+  color: #016bc7;
+  font-family: "Inter-ExtraBold", sans-serif;
+  font-size: 35px;
+  font-weight: 800;
+  margin-bottom: 20px;
+}
+
+.me-mento {
+  font-family: "Inter-SemiBold", sans-serif;
+  font-size: 60px;
+  font-weight: 600;
+  line-height: 1.1;
+}
+
+.me-mento span.me-mento-span2 {
+  color: #00bba8;
+  margin-right: 0;
+}
+
+.me-mento span.me-mento-span3 {
+  color: #0070d1;
+}
+
+/* 이미지 영역 */
+.image-area {
+  flex: 1 1 600px;
+  min-width: 300px;
+  position: relative;
+}
+
+/* 기존 맥북, 그림자 등 내부 요소들 절대 위치 조정 */
+
+.device-macbook-pro {
+  width: 100%;
+  max-width: 1000px;
+  height: auto;
+  position: relative;
+  margin-bottom: 20px;
+}
+
+/* 그림자 */
+.shadow {
+  background: #000000;
+  border-radius: 50%;
+  width: 80%;
+  height: 15px;
+  position: absolute;
+  left: 10%;
+  bottom: 0;
+  filter: blur(22px);
+  opacity: 0.2;
+}
+
+/* top (노트북 화면) */
+.top {
+  width: 100%;
+  height: auto;
+  position: relative;
+  border-radius: 28px 28px 4px 4px;
+  border: 2px solid #cbd5e0;
+  background: #e2e8f0;
+  box-sizing: border-box;
+  padding-top: 60%; /* 비율 유지용 패딩 */
+}
+
+/* lid와 dark-screen는 top 안에 스타일로 통합함 */
+.lid,
+.dark-screen {
+  display: none; /* 간단화 위해 숨김 처리 */
+}
+
+/* screen-wrap과 screen */
+.screen-wrap {
+  position: absolute;
+  top: 12%;
+  left: 5%;
+  width: 90%;
+  height: 75%;
+  background: white;
+  border-radius: 22px 22px 0 0;
+  overflow: hidden;
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
+}
+
+.screen {
+  width: 100%;
+  height: 100%;
+  background: white;
+  position: relative;
+}
+
+/* Insert Your Design Here 텍스트 */
+.insert-your-design-here {
+  color: #2d3748;
+  text-align: center;
+  font-family: "Inter-Medium", sans-serif;
+  font-size: 18px;
+  line-height: 1;
+  font-weight: 500;
+  padding-top: 40%;
+}
+
+/* bottom 이미지 */
+.bottom {
+  width: 100%;
+  max-width: 1000px;
+  height: auto;
+  display: block;
+  margin: 0 auto;
+}
+
+/* 서비스 내부 이미지 */
+.image-55 {
+  width: 100%;
+  max-width: 664px;
+  height: auto;
+  display: block;
+  margin: 0 auto;
+  object-fit: cover;
+}
