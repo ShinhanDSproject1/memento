@@ -15,17 +15,12 @@
 	gap: 39px;
 	align-items: flex-start;
 	justify-content: flex-start;
-	width: 1440px;
-	height: 1195px;
 	position: absolute;
 	left: 1px;
-	top: 99px;
 }
 
 .frame-331 {
-	border-style: solid;
-	border-color: #a6abbd;
-	border-width: 0px 1px 0px 0px;
+	border-right: 1px solid #ccc;
 	padding: 90px 0px 90px 0px;
 	display: flex;
 	flex-direction: column;
@@ -124,6 +119,7 @@
 	height: 28px;
 	position: relative;
 }
+
 .mento {
 	color: #ffffff;
 	text-align: center;
@@ -1014,7 +1010,6 @@
 	box-sizing: border-box;
 }
 
-
 .icon {
 	width: clamp(11px, 2vw, 5px);
 	height: auto;
@@ -1212,7 +1207,6 @@
 	height: 15px;
 }
 
-
 .aws {
 	color: #000000;
 	text-align: left;
@@ -1257,7 +1251,6 @@
 	overflow: visible;
 }
 
-
 .group-371 {
 	flex-shrink: 0;
 	width: 36px;
@@ -1274,8 +1267,6 @@
 	left: 52px;
 	top: 3.02px;
 }
-
-
 
 .frame-408 {
 	display: flex;
@@ -1623,7 +1614,6 @@
 		padding: 1vw 3vw;
 	}
 }
-
 
 .scroll-container {
 	display: flex;

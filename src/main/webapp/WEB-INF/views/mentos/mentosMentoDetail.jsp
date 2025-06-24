@@ -228,7 +228,7 @@
 							<div class="div4">진행중인 멘토스 내역</div>
 						</div>
 					</div>
-					<div class="frame-3640"></div>
+					
 				</div>
 			</div>
 		</div>
