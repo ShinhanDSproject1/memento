@@ -5,9 +5,12 @@
     <div class="notify-top">
       <div class="d-2-b-12-black">알림</div>
     </div>
+
     <div class="d-2-b-12-black2">오늘 받은 알림</div>
     <img class="more" src="${pageContext.request.contextPath}/resources/images/more0.svg" />
-    <div class="d-2-b-12-black3">지난 알림</div>
+
+    <!-- 첫 번째 알림 카드 -->
+    <div class="rectangle-306"></div>
     <div class="frame-447">
       <div class="d-2-b-12-black4">매치업 완료</div>
       <div class="dot"></div>
@@ -22,7 +25,9 @@
         킵고잉 전환 투표를 진행해 주세요!
       </div>
     </div>
-    <div class="rectangle-306"></div>
+
+    <!-- 두 번째 알림 카드 -->
+    <div class="rectangle-3062"></div>
     <div class="frame-4472">
       <div class="d-2-b-12-black4">매치업 완료</div>
       <div class="dot"></div>
@@ -34,11 +39,17 @@
         <br />
         매치업이 완료되었습니다
         <br />
-        
         킵고잉 전환 투표를 진행해 주세요!
       </div>
     </div>
-    <div class="rectangle-3062"></div>
+    <img class="more2" src="${pageContext.request.contextPath}/resources/images/more1.svg" />
+
+    <!-- 지난 알림 구분선 -->
+    <div class="d-2-b-12-black3">지난 알림</div>
+    <div class="line-56"></div>
+
+    <!-- 세 번째 알림 카드 -->
+    <div class="rectangle-3063"></div>
     <div class="frame-4473">
       <div class="d-2-b-12-black4">킵고잉 가입 완료</div>
       <div class="dot"></div>
@@ -51,9 +62,5 @@
         팀원들에게 인사말을 남겨주세요.
       </div>
     </div>
-    <div class="rectangle-3063"></div>
-    <img class="more2" src="${pageContext.request.contextPath}/resources/images/more1.svg" />
     <img class="more3" src="${pageContext.request.contextPath}/resources/images/more2.svg" />
-    <div class="line-56"></div>
-  </div>
-
+</div>
