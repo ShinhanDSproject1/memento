@@ -73,8 +73,7 @@
 				<div class="scroll-container">
 
 					<div class="mentos-class-cardview mentos-hover-guide"
-						onclick="location.href='${cpath}/mentos/detail'">
-						<div class="frame-3786">
+						onclick="location.href='${cpath}/mentos/detail'">						
 							<div class="mentos-class">
 								<div class="mentos-text">
 									<div class="frame-37862">
@@ -88,7 +87,7 @@
 											<div class="d">명</div>
 										</div>
 									</div>
-									<div class="aws">비전공자도 이해할 수 있는 AWS 입문/실전</div>
+									<div class="aws">비전공자도 이해할 수 있는 입문/실전</div>
 									<div class="frame-406">
 										<div class="frame-407">
 											<img class="user-user"
@@ -169,7 +168,7 @@
 								<div class="mentos-hover-popup">
 									<div class="hover-inner">
 										<div class="hover-title">
-											비전공자도 이해할 수 있는<br />AWS 입문/실전
+											비전공자도 이해할 수 있는<br />입문/실전
 										</div>
 										<div class="hover-desc">초보자도 쉽게 따라올 수 있게, 실무 중심으로 강의해요!</div>
 										<div class="hover-tags">
@@ -178,13 +177,13 @@
 									</div>
 								</div>
 							</div>
-						</div>
+						
 					</div>
 
 
 					<div class="mentos-class-cardview mentos-hover-guide"
 						onclick="location.href='${cpath}/mentos/detail'">
-						<div class="frame-3786">
+						
 							<div class="mentos-class">
 								<div class="mentos-text">
 									<div class="frame-37862">
@@ -288,7 +287,7 @@
 									</div>
 								</div>
 							</div>
-						</div>
+					
 					</div>
 
 
@@ -296,7 +295,7 @@
 
 					<div class="mentos-class-cardview mentos-hover-guide"
 						onclick="location.href='${cpath}/mentos/detail'">
-						<div class="frame-3786">
+					
 							<div class="mentos-class">
 								<div class="mentos-text">
 									<div class="frame-37862">
@@ -400,11 +399,11 @@
 									</div>
 								</div>
 							</div>
-						</div>
+					
 					</div>
 					<div class="mentos-class-cardview mentos-hover-guide"
 						onclick="location.href='${cpath}/mentos/detail'">
-						<div class="frame-3786">
+					
 							<div class="mentos-class">
 								<div class="mentos-text">
 									<div class="frame-37862">
@@ -508,7 +507,7 @@
 									</div>
 								</div>
 							</div>
-						</div>
+						
 					</div>
 
 
@@ -519,7 +518,7 @@
 
 					<div class="mentos-class-cardview mentos-hover-guide"
 						onclick="location.href='${cpath}/mentos/detail'">
-						<div class="frame-3786">
+						
 							<div class="mentos-class">
 								<div class="mentos-text">
 									<div class="frame-37862">
@@ -623,14 +622,14 @@
 									</div>
 								</div>
 							</div>
-						</div>
+						
 					</div>
 
 
 
 					<div class="mentos-class-cardview mentos-hover-guide"
 						onclick="location.href='${cpath}/mentos/detail'">
-						<div class="frame-3786">
+						
 							<div class="mentos-class">
 								<div class="mentos-text">
 									<div class="frame-37862">
@@ -734,7 +733,7 @@
 									</div>
 								</div>
 							</div>
-						</div>
+						
 					</div>
 
 
@@ -742,7 +741,7 @@
 
 					<div class="mentos-class-cardview mentos-hover-guide"
 						onclick="location.href='${cpath}/mentos/detail'">
-						<div class="frame-3786">
+						
 							<div class="mentos-class">
 								<div class="mentos-text">
 									<div class="frame-37862">
@@ -846,7 +845,7 @@
 									</div>
 								</div>
 							</div>
-						</div>
+						
 				
 
 
@@ -861,7 +860,7 @@
 
 				<div class="mentos-class-cardview mentos-hover-guide"
 					onclick="location.href='${cpath}/mentos/detail'">
-					<div class="frame-3786">
+					
 						<div class="mentos-class">
 							<div class="mentos-text">
 								<div class="frame-37862">
@@ -965,7 +964,7 @@
 								</div>
 							</div>
 						</div>
-					</div>
+					
 				</div>
 
 
@@ -973,7 +972,7 @@
 
 				<div class="mentos-class-cardview mentos-hover-guide"
 					onclick="location.href='${cpath}/mentos/detail'">
-					<div class="frame-3786">
+					
 						<div class="mentos-class">
 							<div class="mentos-text">
 								<div class="frame-37862">
@@ -1077,7 +1076,7 @@
 								</div>
 							</div>
 						</div>
-					</div>
+					
 				</div>
 
 
@@ -1086,7 +1085,7 @@
 
 				<div class="mentos-class-cardview mentos-hover-guide"
 					onclick="location.href='${cpath}/mentos/detail'">
-					<div class="frame-3786">
+				
 						<div class="mentos-class">
 							<div class="mentos-text">
 								<div class="frame-37862">
@@ -1190,7 +1189,7 @@
 								</div>
 							</div>
 						</div>
-					</div>
+					
 
 				</div>
 			</div>

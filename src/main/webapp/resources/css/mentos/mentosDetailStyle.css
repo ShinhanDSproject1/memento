@@ -26,6 +26,16 @@
 	box-sizing: border-box;
 }
 
+.full,
+.class-wrapper-frame,
+.class-main-frame,
+.class-detail-content {
+  width: 100%;
+  max-width: 100%;
+  margin: 0 auto;
+  /* 필요하면 중앙정렬용 flex 옵션 등 추가 */
+}
+
 /* 상단 배경 영역 */
 .class-header-bg {
 	width: 100vw;

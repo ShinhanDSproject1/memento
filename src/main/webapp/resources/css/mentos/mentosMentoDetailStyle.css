@@ -124,7 +124,6 @@
 	height: 28px;
 	position: relative;
 }
-
 .mento {
 	color: #ffffff;
 	text-align: center;
@@ -1015,6 +1014,7 @@
 	box-sizing: border-box;
 }
 
+
 .icon {
 	width: clamp(11px, 2vw, 5px);
 	height: auto;
@@ -1080,7 +1080,6 @@
 	font-weight: 700;
 	cursor: pointer;
 }
-
 /* 클릭시(누르고 있을 때) */
 .mentos-list-link:active {
 	color: #153090;
@@ -1213,18 +1212,6 @@
 	height: 15px;
 }
 
-.div2 {
-	color: #ffffff;
-	text-align: center;
-	font-family: "Inter-Medium", sans-serif;
-	font-size: 10px;
-	line-height: 150%;
-	letter-spacing: -0.023em;
-	font-weight: 500;
-	position: relative;
-	width: 7px;
-	height: 15px;
-}
 
 .aws {
 	color: #000000;
@@ -1270,16 +1257,6 @@
 	overflow: visible;
 }
 
-.div3 {
-	color: #000000;
-	text-align: left;
-	font-family: "D2Coding-Regular", sans-serif;
-	font-size: 12px;
-	line-height: 150%;
-	letter-spacing: -0.011000000000000001em;
-	font-weight: 400;
-	position: relative;
-}
 
 .group-371 {
 	flex-shrink: 0;
@@ -1298,23 +1275,7 @@
 	top: 3.02px;
 }
 
-.mento {
-	color: #ffffff;
-	text-align: center;
-	font-family: "Inter-Medium", sans-serif;
-	font-size: 8px;
-	line-height: 150%;
-	letter-spacing: -0.011000000000000001em;
-	font-weight: 500;
-	position: absolute;
-	left: calc(50% - -8px);
-	top: 50%;
-	translate: 0 -50%;
-	width: 36px;
-	display: flex;
-	align-items: center;
-	justify-content: center;
-}
+
 
 .frame-408 {
 	display: flex;

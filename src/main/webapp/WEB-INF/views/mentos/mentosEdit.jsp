@@ -7,11 +7,19 @@
 <head>
 <meta charset="UTF-8">
 <title>멘토스 수정하기</title>
+
+<link rel="stylesheet" 
+	href="${pageContext.request.contextPath}/resources/css/mentos/mentosInsertStyle.css" />
 <link rel="stylesheet"
-	href="${pageContext.request.contextPath}/resources/css/mentos/mentosEditStyle.css" />
-<link rel="stylesheet"
-	href="${pageContext.request.contextPath}/resources/css/mentos/mentosEditVars.css" />
+	href="${pageContext.request.contextPath}/resources/css/mentos/mentosInsertVars.css" />
+<script
+	src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+	rel="stylesheet" />
+<script src="${cpath}/resources/css/mentosInsert.js"></script>
 <body>
 	<div class="container">
 		<div class="mentos-make-page">
@@ -28,7 +36,9 @@
 								<!-- 전송용 hidden input -->
 								<input type="hidden" id="mentosTitleHidden" name="mentosTitle"
 									value="">
+
 							</div>
+
 							<div class="mentos-make-name">
 								<div class="title">간단 소개글</div>
 								<div id="mentosSubTitle" class="editable-title"
@@ -40,7 +50,7 @@
 							</div>
 							<div class="mentos-make-location">
 								<div class="mentos-make-city">
-									<div class="title">최소 수강 인원</div>
+									<div class="title">최소 수강인원</div>
 									<div class="min-member-box">
 										<input type="number" id="minMember" name="minMember" min="1"
 											class="number-input" />
@@ -213,9 +223,10 @@
 					</div>
 
 					<div class="mentos-make-buttons">
-						<!-- 1. 팝업 트리거 체크박스 각각 분리 -->
-						<input type="checkbox" id="cancelPopup" style="display: none;" />
-						<input type="checkbox" id="submitPopup" style="display: none;" />
+						<!-- 1. 팝업 트리거 체크박스 각각 분리 --> 
+						<input type="checkbox" id="cancelPopup"
+							style="display: none;" /> <input type="checkbox"
+							id="submitPopup" style="display: none;" />
 
 						<!-- 2. 버튼 각각 연결 -->
 						<div class="mentos-make-buttons">
@@ -231,7 +242,8 @@
 							<div class="rectangle-294">
 								<div class="frame-3783">
 									<div class="emoji">❌</div>
-									<div class="popup-title">삭제되었습니다</div>
+									<div class="popup-title">정말로 삭제하시겠습니까?</div>
+									<div class="popup-desc">지금까지 작성하신 내용이 전부 삭제됩니다.</div>
 									<div class="confirm-btn-box">
 										<label for="cancelPopup" class="confirm-btn">확인</label>
 									</div>
@@ -244,7 +256,7 @@
 							<div class="rectangle-294">
 								<div class="frame-3783">
 									<div class="emoji">👍</div>
-									<div class="popup-title">수정완료되었습니다!</div>
+									<div class="popup-title">수정이 완료되었습니다</div>
 									<div class="confirm-btn-box">
 										<label for="submitPopup" class="confirm-btn">확인</label>
 									</div>
@@ -253,7 +265,6 @@
 						</div>
 					</div>
 				</div>
-
 			</div>
 		</div>
 	</div>
@@ -301,6 +312,5 @@
 			});
 
 	</script>
-
 </body>
 </html>

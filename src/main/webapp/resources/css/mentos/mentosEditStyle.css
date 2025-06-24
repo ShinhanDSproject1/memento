@@ -16,7 +16,7 @@
 	align-items: center;
 	justify-content: flex-start;
 	width: 1440px;
-	height: 1890px;
+	height: 1915px;
 	position: absolute;
 	left: 10px;
 	top: 15px;
@@ -105,6 +105,7 @@
 	content: attr(data-placeholder);
 	color: #999;
 }
+
 .title {
 	color: #414656;
 	text-align: left;
@@ -156,6 +157,7 @@
 	justify-content: flex-start;
 	flex: 1;
 	position: relative;
+	
 }
 
 .mentos-make-city-input {
@@ -752,7 +754,6 @@
 	font-weight: 700;
 	position: relative;
 }
-
 .min-member-box {
 	background: #ffffff;
 	border-radius: 10px;

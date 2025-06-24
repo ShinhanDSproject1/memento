@@ -21,6 +21,7 @@
 	left: 1px;
 	top: 99px;
 }
+
 .frame-331 {
 	border-style: solid;
 	border-color: #a6abbd;
@@ -670,7 +671,6 @@
 	box-sizing: border-box;
 }
 
-
 .icon {
 	width: clamp(11px, 2vw, 5px);
 	height: auto;
@@ -715,23 +715,21 @@
 	font-size: 15px;
 	justify-content: end;
 }
+
 .mentor-profile {
-  width: 150px;
-  height: 150px;
-  background: #d9d9d9;
-  border-radius: 50%;
-  position: absolute;
-  left: 100px;
-  top: 90px;
-  
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-
-  box-sizing: border-box;
+	width: 150px;
+	height: 150px;
+	background: #d9d9d9;
+	border-radius: 50%;
+	position: absolute;
+	left: 100px;
+	top: 90px;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	box-sizing: border-box;
 }
-
 
 .mentor-image {
 	width: 100%;
@@ -752,7 +750,6 @@
 	box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
 	object-fit: cover;
 }
-
 
 .group-81 {
 	flex-shrink: 0;
@@ -1018,32 +1015,34 @@
 	height: 306px;
 	position: relative;
 }
+
 .mentos-list-link {
-  color: #b0b0b0;           /* 평소엔 연한 회색 */
-  font-size: 1.5vw;         /* 또는 24px */
-  font-family: "Inter-Medium", sans-serif;
-  background: transparent;
-  border-radius: 0.4vw;
-  padding: 0.4vw 1vw;
-  cursor: pointer;
-  transition: color 0.15s, background 0.15s, font-weight 0.15s;
-  font-weight: 400;
-  display: inline-block;
-  user-select: none;
+	color: #b0b0b0; /* 평소엔 연한 회색 */
+	font-size: 1.5vw; /* 또는 24px */
+	font-family: "Inter-Medium", sans-serif;
+	background: transparent;
+	border-radius: 0.4vw;
+	padding: 0.4vw 1vw;
+	cursor: pointer;
+	transition: color 0.15s, background 0.15s, font-weight 0.15s;
+	font-weight: 400;
+	display: inline-block;
+	user-select: none;
 }
 
 /* 마우스 올리면 색 진하게 + 커서 손가락 */
 .mentos-list-link:hover {
-  color: #25356d;           /* 진한 남색 or 원하는 진한색 */
-  font-weight: 700;
-  cursor: pointer;
+	color: #25356d; /* 진한 남색 or 원하는 진한색 */
+	font-weight: 700;
+	cursor: pointer;
 }
 
 /* 클릭시(누르고 있을 때) */
 .mentos-list-link:active {
-  color: #153090;
-  background: #d0e4ff;
+	color: #153090;
+	background: #d0e4ff;
 }
+
 .frame-3786, .frame-3786 * {
 	box-sizing: border-box;
 }
@@ -1170,19 +1169,6 @@
 	height: 15px;
 }
 
-.div2 {
-	color: #ffffff;
-	text-align: center;
-	font-family: "Inter-Medium", sans-serif;
-	font-size: 10px;
-	line-height: 150%;
-	letter-spacing: -0.023em;
-	font-weight: 500;
-	position: relative;
-	width: 7px;
-	height: 15px;
-}
-
 .aws {
 	color: #000000;
 	text-align: left;
@@ -1227,17 +1213,6 @@
 	overflow: visible;
 }
 
-.div3 {
-	color: #000000;
-	text-align: left;
-	font-family: "D2Coding-Regular", sans-serif;
-	font-size: 12px;
-	line-height: 150%;
-	letter-spacing: -0.011000000000000001em;
-	font-weight: 400;
-	position: relative;
-}
-
 .group-371 {
 	flex-shrink: 0;
 	width: 36px;
@@ -1253,24 +1228,6 @@
 	position: absolute;
 	left: 52px;
 	top: 3.02px;
-}
-
-.mento {
-	color: #ffffff;
-	text-align: center;
-	font-family: "Inter-Medium", sans-serif;
-	font-size: 8px;
-	line-height: 150%;
-	letter-spacing: -0.011000000000000001em;
-	font-weight: 500;
-	position: absolute;
-	left: calc(50% - -8px);
-	top: 50%;
-	translate: 0 -50%;
-	width: 36px;
-	display: flex;
-	align-items: center;
-	justify-content: center;
 }
 
 .frame-408 {
@@ -1618,4 +1575,4 @@
 		border-radius: 2vw;
 		padding: 1vw 3vw;
 	}
-
+}
