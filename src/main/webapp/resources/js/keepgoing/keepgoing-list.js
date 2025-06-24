@@ -143,6 +143,7 @@ $(() => {
                 const sendBtnElement = $("#sendBtn");
                 const updateBtnElement = $("#updateBtn");
                 const deleteBtnElement = $("#deleteBtn");
+                const resetBtnElement = $("#resetBtn")
                 
                 
                 if (messageValueElement.length) { // #messageValue 요소가 존재하는지 확인
@@ -160,6 +161,10 @@ $(() => {
                             sendMymessage();
                         }
                     });
+                    resetBtnElement.on("click",()=>{
+                    	messageValueElement.val("");
+                    })
+                    
                 } else {
                     console.warn("#messageValue element not found for chat input.");
                 }

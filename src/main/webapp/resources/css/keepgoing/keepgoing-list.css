@@ -264,7 +264,7 @@ ul {
 	border: 1px solid #A6ABBD;
 	border-radius: 30px;
 	gap: 1.5vw;
-	padding: 3vh 3vw;
+	padding: 3vh 2vw;
 	background: linear-gradient(180deg, #F6FCFF 0%, #FFF 34%);
 	box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
 }
@@ -279,7 +279,7 @@ ul {
 }
 
 .logos .keepgoing-logo {
-	height: 10vh;
+	width: 5vw;
 	aspect-ratio: 1/1;
 }
 
