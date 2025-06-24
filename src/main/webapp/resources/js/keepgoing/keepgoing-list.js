@@ -143,21 +143,22 @@ $(() => {
                     data: data,
                 });
                 
-                const messageValueElement = $("#messageValue");
-                const sendBtnElement = $("#sendBtn");
-                const updateBtnElement = $("#updateBtn");
-                const deleteBtnElement = $("#deleteBtn");
+                const messageValueElement = $("#messageValue")
+                const sendBtnElement = $("#sendBtn")
+                const updateBtnElement = $("#updateBtn")
+                const deleteBtnElement = $("#deleteBtn")
                 const resetBtnElement = $("#resetBtn")
+                const emojiBtnElement = $("#emojiBtn")
                 
                 
                 if (messageValueElement.length) { // #messageValue 요소가 존재하는지 확인
                     messageValueElement.off("compositionstart").on("compositionstart", function() {
                         isComposing = true;
-                    });
+                    })
 
                     messageValueElement.off("compositionend").on("compositionend", function() {
                         isComposing = false;
-                    });
+                    })
 
                     messageValueElement.off("keydown").on("keydown", function(e) {
                         if(!isComposing){
@@ -166,7 +167,8 @@ $(() => {
 	                            sendMymessage();
                         	}
                         }
-                    });
+                    })
+                    
                     resetBtnElement.on("click",()=>{
                     	messageValueElement.val("");
                     })
@@ -177,7 +179,7 @@ $(() => {
                  if (sendBtnElement.length) { // #sendBtn 요소가 존재하는지 확인
                     sendBtnElement.off("click").on("click", function(){
                         sendMymessage();
-                    });
+                    })
                 } else {
                     console.warn("#sendBtn element not found for chat send button.");
                 }
@@ -186,7 +188,7 @@ $(() => {
                 if (updateBtnElement.length) {
                     updateBtnElement.off("click").on("click", function(){
                         location.href='/memento/keepgoing/keepgoingupdate.do';
-                    });
+                    })
                 } else {
                      console.warn("#updateBtn element not found.");
                 }
@@ -195,10 +197,10 @@ $(() => {
                 if (deleteBtnElement.length) {
                     deleteBtnElement.off("click").on("click", function(){
                        
-                    });
-                
+                    })
+
                 } else {
-                     console.warn("#updateBtn element not found.");
+                     console.warn("#updateBtn element not found.")
                 }
 					},
 					error: (xhr, status, error) => {
@@ -206,6 +208,9 @@ $(() => {
                     	$(".modal-body").html("<p>콘텐츠를 불러오는 데 실패했습니다.</p>");
                 	}
 				})
+				
+				
+				
 			}
 			else{
 				$(".modal-body").empty(); // 이전에 불러온 내용이 있다면 비웁니다.

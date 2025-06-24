@@ -413,7 +413,8 @@
 
 .service-buttons .member-buttons {
     display: flex;
-    gap: 5px;
+    width:100%;
+    justify-content:space-between;
 }
 
 .service-buttons .leader-buttons{

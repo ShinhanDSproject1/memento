@@ -408,3 +408,7 @@ ul {
 	overflow-y: scroll !important;
     max-height: 50vh !important;
 }
+
+.emoji-picker{
+	z-index: 2147483647 !important;
+}

@@ -72,7 +72,7 @@
                                     <div class="message-services">
                                         <button><i class="fa-regular fa-image" style="color: #74C0FC;"></i></button>
                                         <button><i class="fa-solid fa-file-arrow-up" style="color: #63E6BE;"></i></button>
-                                        <button><i class="fa-regular fa-face-smile" style="color: #FFD43B;"></i></button>
+                                        <button type="button" id="emojiBtn"><i class="fa-regular fa-face-smile" style="color: #FFD43B;"></i></button>
                                     </div>
                                     <div class="send-close">
                                         <button type="button" id="resetBtn"><i class="fa-solid fa-circle-xmark"></i></button>
@@ -89,11 +89,8 @@
                             <button id="memberListBtn">팀원 목록보기</button>
                             <button id="payBtn">회비 결제하기</button>
                             <button id="leaveBtn">탈퇴하기</button>
-                        </div>
-                        <div class="leader-buttons">
                             <button id="updateBtn">수정하기</button>
                             <button id="deleteBtn">삭제하기</button>
-                        </div>
                     </div>
 
                 </div>
