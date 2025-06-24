@@ -1,4 +1,9 @@
 @charset "UTF-8";
+body {
+	margin: 0;
+}
+
+
 .frame-3767,
 .frame-3767 * {
   box-sizing: border-box;
@@ -459,7 +464,7 @@
   top: 1791px;
   box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
 }
-.div9 {
+.div-type_check {
   color: #000000;
   text-align: left;
   font-family: "-", sans-serif;

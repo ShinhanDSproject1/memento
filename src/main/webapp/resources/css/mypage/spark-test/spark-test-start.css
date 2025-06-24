@@ -1,5 +1,10 @@
 @charset "UTF-8";
 
+body {
+	margin: 0;
+}
+
+
 /* 전체 Spark Test 컨테이너 */
 .spark-test-wrapper {
   display: flex;
@@ -22,7 +27,7 @@
   justify-content: flex-start;
   flex-shrink: 0;
   width: 1136px;
-  height: 1028px;
+  height: auto;
   position: absolute;
   left: 0px;
   top: 0px;

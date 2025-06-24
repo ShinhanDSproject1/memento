@@ -1,4 +1,8 @@
 @charset "UTF-8";
+body {
+	margin: 0;
+}
+
 .cash-recahrge,
 .cash-recahrge * {
   box-sizing: border-box;

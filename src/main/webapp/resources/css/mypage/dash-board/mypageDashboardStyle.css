@@ -26,12 +26,9 @@
 	--font-display: 'Fredericka the Great', cursive;
 	--font-code: 'D2Coding', 'Courier New', monospace;
 }
-
-body {
-	font-family: var(--font-primary);
-	margin: 0;
-	background-color: var(--color-background);
-	color: var(--color-text-primary);
+*{
+	margin:0px;
+	padding:0px;
 }
 
 .dashboard-container {
