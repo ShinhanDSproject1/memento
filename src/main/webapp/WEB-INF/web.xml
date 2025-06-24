@@ -38,8 +38,7 @@
 		<servlet-name>default</servlet-name>
 		<url-pattern>/resources/*</url-pattern>
 	</servlet-mapping>
-
-
+  
 	<filter>
 		<filter-name>encodingFilter</filter-name>
 		<filter-class>org.springframework.web.filter.CharacterEncodingFilter
@@ -67,6 +66,5 @@
 		<error-code>500</error-code>
 		<location>/mainpage/500error</location>
 	</error-page>
-
-
+  
 </web-app>

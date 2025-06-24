@@ -1,0 +1,177 @@
+.sidebar {
+	width: 305px;
+	height: calc(100vh - 105px); /* header 높이 뺀 만큼 */
+	background: #ffffff;
+	border-right: 1px solid rgba(117, 117, 117, 0.35);
+	padding: 50px 26px;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: 30px;
+	position: sticky;
+	top: 105px;
+	flex-shrink: 0;
+}
+
+/* ======== 프로필 섹션 ======== */
+.profile-section {
+	width: 239px;
+	height: 305px;
+}
+
+.profile-card {
+	width: 150px;
+	height: 275px;
+	position: relative; /* 자식 요소들의 absolute positioning 기준 */
+	margin: 0 auto; /* 중앙 정렬 */
+	text-align: center;
+}
+
+.profile-avatar-wrapper {
+	width: 115px;
+	height: 115px;
+	position: absolute;
+	top: 0;
+	left: 50%;
+	transform: translateX(-50%);
+}
+
+.avatar-image {
+	width: 115px;
+	height: 115px;
+	border-radius: 50%; /* 원형 이미지 */
+}
+
+.edit-profile-button-wrapper {
+	width: 33px;
+	height: 33px;
+	background: #b3979f;
+	border-radius: 16.5px;
+	padding: 7px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	position: absolute;
+	right: 0;
+	bottom: 0;
+}
+
+.edit-profile-link {
+	display: flex;
+}
+
+.edit-profile-icon {
+	width: 19px;
+	height: 19px;
+}
+
+.user-nickname {
+	width: 100%;
+	color: #000000;
+	font-family: "Inter-Bold", sans-serif;
+	font-size: 20px;
+	font-weight: 700;
+	position: absolute;
+	top: 135px; /* avatar 아래 위치 조정 */
+	left: 0;
+}
+
+.user-role {
+	color: #00c3af;
+	font-family: "AbhayaLibreExtraBold-Regular", sans-serif;
+	font-size: 24px;
+	position: absolute;
+	top: 179px; /* nickname 아래 위치 조정 */
+	left: 50%;
+	transform: translateX(-50%);
+}
+
+.user-assets {
+	width: 100%;
+	position: absolute;
+	top: 227px; /* role 아래 위치 조정 */
+	left: 50%;
+	transform: translateX(-50%);
+	display: flex;
+	flex-direction: column;
+	gap: 5px;
+}
+
+.asset-item {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	font-size: 14px;
+	font-family: "ABeeZee-Regular", sans-serif;
+}
+
+.asset-label {
+	font-size: 20px;
+	font-weight: 400;
+	color: #016bc7;
+}
+
+.cash-label {
+	font-family: "AbhayaLibreExtraBold-Regular", sans-serif;
+}
+
+.point-label {
+	font-family: "AbhayaLibreExtraBold-Regular", sans-serif;
+}
+
+.asset-value {
+	color: #000000;
+}
+
+.divider {
+	border: 0;
+	border-top: 1px solid #a6abbd;
+	width: 99%;
+	position: absolute;
+	top: 355px;
+	left: 2.5px; /* sidebar padding 고려 */
+}
+
+/* ======== 네비게이션 메뉴 ======== */
+.sidebar-nav {
+	width: 166px;
+	display: flex;
+	justify-content: center;
+}
+
+.nav-menu {
+	list-style: none;
+	padding: 0;
+	margin: 0;
+	width: 100%;
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+	gap: 25px;
+}
+
+.nav-item {
+	width: 100%;
+}
+
+.nav-item .page-link {
+	background: none;
+	border: none;
+	padding: 0;
+	color: rgba(0, 0, 0, 0.4); /* 비활성 상태 색상 */
+	font-family: "Inter-SemiBold", sans-serif;
+	font-size: 20px;
+	font-weight: 600;
+	cursor: pointer;
+	text-align: left;
+	width: 100%;
+	transition: color 0.3s;
+}
+
+.nav-item .page-link:hover {
+	color: #000000; /* 호버 시 색상 변경 */
+}
+
+.nav-item .page-link.active {
+	color: #000000; /* 활성 상태 색상 */
+}
