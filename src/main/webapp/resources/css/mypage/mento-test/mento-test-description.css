@@ -1,0 +1,120 @@
+@charset "UTF-8";
+body {
+	margin: 0;
+}
+
+
+.frame-3706,
+.frame-3706 * {
+  box-sizing: border-box;
+}
+.frame-3706 {
+  background: #ffffff;
+  height: 1025px;
+  position: relative;
+}
+.frame-3705 {
+  display: flex;
+  flex-direction: row;
+  gap: 82px;
+  align-items: center;
+  justify-content: center;
+  width: 1136px;
+  height: 197px;
+  position: absolute;
+  left: 0px;
+  top: 732.83px;
+}
+.rectangle-311 {
+  border-style: solid;
+  border-color: #000000;
+  border-width: 1px 5px 1px 5px;
+  width: 993px;
+  height: 883px;
+  position: absolute;
+  left: 76px;
+  top: 47px;
+}
+.group-3793 {
+  position: absolute;
+  inset: 0;
+}
+.rectangle-312 {
+  background: linear-gradient(
+    98.84deg,
+    rgba(205, 201, 201, 1) 0%,
+    rgba(162, 157, 157, 1) 100%
+  );
+  border-radius: 50px;
+  border-style: solid;
+  border-color: #000000;
+  border-width: 2px;
+  width: 251px;
+  height: 105.15px;
+  position: absolute;
+  left: 438px;
+  top: 638px;
+}
+.div {
+border:transparent;
+background:transparent;
+  color: #000000;
+  text-align: center;
+  font-family: "Inter-SemiBold", sans-serif;
+  font-size: 40px;
+  line-height: 16px;
+  letter-spacing: 0.6px;
+  font-weight: 600;
+  position: absolute;
+  left: 483.79px;
+  top: 672.77px;
+  width: 158.57px;
+  height: 34.77px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+._1 {
+  width: 726px;
+  height: 417px;
+  position: absolute;
+  left: 180px;
+  top: 155px;
+  object-fit: cover;
+  aspect-ratio: 726/417;
+}
+.cs-15-12-10 {
+  color: #000000;
+  text-align: left;
+  position: absolute;
+  left: 323px;
+  top: 190px;
+  width: 470px;
+  height: 255px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+.cs-15-12-10-span {
+  font-family: "Inter-SemiBold", sans-serif;
+  font-size: 40px;
+  line-height: 16px;
+  letter-spacing: 0.6px;
+  font-weight: 600;
+}
+.cs-15-12-10-span2 {
+  font-family: "Inter-SemiBold", sans-serif;
+  font-size: 20px;
+  line-height: 16px;
+  letter-spacing: 0.6px;
+  font-weight: 600;
+}
+.cs-15-12-10-span3 {
+  list-style-type: decimal;
+  padding-left: 1em;
+  font-family: "Inter-SemiBold", sans-serif;
+  font-size: 20px;
+  line-height: 16px;
+  letter-spacing: 0.6px;
+  font-weight: 600;
+}

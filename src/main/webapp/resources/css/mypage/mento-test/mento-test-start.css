@@ -1,0 +1,116 @@
+@charset "UTF-8";
+body {
+	margin: 0;
+}
+
+
+.frame-3782,
+.frame-3782 * {
+  box-sizing: border-box;
+}
+.frame-3782 {
+  background: #ffffff;
+  height: 1857px;
+  position: relative;
+  overflow: hidden;
+}
+.rectangle-311 {
+  border-style: solid;
+  border-color: #000000;
+  border-width: 1px 5px 1px 5px;
+  width: 993px;
+  height: 1550px;
+  position: absolute;
+  left: 70px;
+  top: 45px;
+}
+._1-a-fifo-lifo-b-lifo-fifo-c-fifo-d-lifo-binary-search-a-o-1-b-o-log-n-c-o-n-d-o-n-log-n-collision-a-b-c-d-2-a-b-c-d-os-a-b-c-d-virtual-memory-a-b-c-d-3-http-https-a-http-ftp-b-https-c-http-d-https-osi-7-tcp-a-b-c-d-ip-a-ftp-b-dhcp-c-dns-d-ssh-4-sql-a-insert-b-update-c-delete-d-select-4-acid-a-b-c-d-a-b-c-d-5-git-a-git-init-b-git-add-c-git-commit-d-git-push-rest-api-a-stateless-b-c-d-oop-4-a-b-c-d {
+  color: #000000;
+  text-align: left;
+  font-family: "Inter-SemiBold", sans-serif;
+  font-size: 15px;
+  line-height: 16px;
+  letter-spacing: 0.6px;
+  font-weight: 600;
+  position: absolute;
+  left: 103px;
+  top: 90px;
+  width: 891px;
+  height: 1489px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+._1-a-fifo-lifo-b-lifo-fifo-c-fifo-d-lifo-binary-search-a-o-1-b-o-log-n-c-o-n-d-o-n-log-n-collision-a-b-c-d-2-a-b-c-d-os-a-b-c-d-virtual-memory-a-b-c-d-3-http-https-a-http-ftp-b-https-c-http-d-https-osi-7-tcp-a-b-c-d-ip-a-ftp-b-dhcp-c-dns-d-ssh-4-sql-a-insert-b-update-c-delete-d-select-4-acid-a-b-c-d-a-b-c-d-5-git-a-git-init-b-git-add-c-git-commit-d-git-push-rest-api-a-stateless-b-c-d-oop-4-a-b-c-d-span {
+}
+._1-a-fifo-lifo-b-lifo-fifo-c-fifo-d-lifo-binary-search-a-o-1-b-o-log-n-c-o-n-d-o-n-log-n-collision-a-b-c-d-2-a-b-c-d-os-a-b-c-d-virtual-memory-a-b-c-d-3-http-https-a-http-ftp-b-https-c-http-d-https-osi-7-tcp-a-b-c-d-ip-a-ftp-b-dhcp-c-dns-d-ssh-4-sql-a-insert-b-update-c-delete-d-select-4-acid-a-b-c-d-a-b-c-d-5-git-a-git-init-b-git-add-c-git-commit-d-git-push-rest-api-a-stateless-b-c-d-oop-4-a-b-c-d-span2 {
+  list-style-type: decimal;
+  padding-left: 1em;
+}
+.group-3794 {
+  position: absolute;
+  inset: 0;
+}
+.rectangle-312 {
+  background: linear-gradient(
+    98.84deg,
+    rgba(205, 201, 201, 1) 0%,
+    rgba(162, 157, 157, 1) 100%
+  );
+  border-radius: 50px;
+  border-style: solid;
+  border-color: #000000;
+  border-width: 2px;
+  width: 251px;
+  height: 105.15px;
+  position: absolute;
+  left: 453px;
+  top: 1606px;
+}
+.div_mento_start {
+  color: #000000;
+  text-align: center;
+  font-family: "Inter-SemiBold", sans-serif;
+  font-size: 40px;
+  line-height: 16px;
+  letter-spacing: 0.6px;
+  font-weight: 600;
+  position: absolute;
+  left: 486px;
+  top: 1634px;
+  width: 186px;
+  height: 43px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.group-3792 {
+  position: absolute;
+  inset: 0;
+}
+.photoroom-1 {
+  width: 232.77px;
+  height: 236.25px;
+  position: absolute;
+  left: 830px;
+  top: 5px;
+  object-fit: cover;
+  aspect-ratio: 232.77/236.25;
+}
+.div2_mento_start {
+  color: #ffffff;
+  text-align: center;
+  font-family: "Inter-SemiBold", sans-serif;
+  font-size: 16px;
+  line-height: 16px;
+  letter-spacing: 0.6px;
+  font-weight: 600;
+  position: absolute;
+  left: 876.07px;
+  top: 84.19px;
+  width: 141.1px;
+  height: 25.44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
