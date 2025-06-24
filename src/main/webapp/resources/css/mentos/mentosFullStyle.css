@@ -1,0 +1,1332 @@
+.div, .div * {
+	box-sizing: border-box;
+}
+
+.div {
+	background: #ffffff;
+	height: 100vh;
+	position: relative;
+	overflow: hidden;
+	width: 100vw;
+	margin: 0 auto;
+	padding: 0 150px;
+}
+
+.full {
+	background: #ffffff;
+	height: 100vh;
+	position: relative;
+	overflow: hidden;
+	width: 100vw;
+	margin: 0 auto;
+	/* ✅ 기본 250px, 최소 24px, 최대 250px 유지 */
+	padding-left: clamp(24px, 13vw, 250px);
+	padding-right: clamp(24px, 13vw, 250px);
+	box-sizing: border-box;
+}
+
+* {
+	margin: 0px;
+	padding: 0px;
+}
+/*1.  선택조회  */
+.full-detail-select {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: space-between;
+	width: 100%;
+	max-width: 100%; /* 부모 .div 안에서 꽉 채우도록 */
+	position: relative;
+	flex-shrink: 1;
+	padding-bottom: 3vw;;
+	box-sizing: border-box;
+}
+
+.detail-select {
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap; /* 줄바꿈 허용 */
+	gap: 0.75rem; /* rem 단위로 여유 간격 */
+	align-items: center;
+	justify-content: flex-start;
+	position: relative;
+	width: 100%;
+}
+
+.detail-select-li {
+	border-radius: 20px;
+	border-style: solid;
+	border-color: #ced4da;
+	border-width: 1px;
+	padding: 4px 0px 4px 0px;
+	display: flex;
+	flex-direction: column;
+	gap: 10px;
+	align-items: center;
+	justify-content: center;
+	flex-shrink: 0;
+	position: relative;
+	overflow: hidden;
+}
+
+.detail-select-li-text {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	padding: 0 0.5rem;
+	width: 100%;
+	box-sizing: border-box;
+	font-size: clamp(0.75rem, 1.2vw, 0.875rem); /* 글자 반응형 */
+}
+
+/* 2. 멘토스 생성버튼 */
+.mentos-create-button {
+	background: rgba(255, 255, 255, 0.36);
+	border-radius: 10px;
+	border-style: solid;
+	border-color: #d9d9d9;
+	border-width: 1px;
+	padding: 10px 20px 10px 20px;
+	display: flex;
+	flex-direction: row;
+	gap: 10px;
+	align-items: center;
+	justify-content: center;
+	flex-shrink: 0;
+	position: relative;
+}
+
+/* 3.멘토스 전체 화면 */
+.mentos-all-class {
+	display: flex;
+	flex-direction: column;
+	gap: 4vh; /* 화면 높이에 따라 간격 조정 */
+	align-items: center;
+	justify-content: flex-start;
+	flex-shrink: 1; /* 줄어들 수 있도록 변경 */
+	position: relative;
+	width: 100%;
+	box-sizing: border-box;
+}
+/* 멘토스 전체 화면 1번줄 */
+.mentos-all-class-row {
+	display: flex;
+	flex-direction: row;
+	gap: 15px;
+	align-items: center;
+	padding-bottom: 12px;
+	max-width: 98%;
+}
+/* 멘토스 전체 화면 2,3 번줄 */
+.mentos-all-class-row1 {
+	display: flex;
+	flex-direction: row;
+	gap: 8vw;
+	align-items: flex-start;
+	box-sizing: border-box; /* 패딩까지 포함 */
+	max-width: 100%; /* 기존 유지 */
+	margin: 0 auto;
+	overflow-x: auto;
+}
+/* 4. 광고 */
+.advertisement-slider {
+	position: relative;
+	width: clamp(14vw, 15vw, 17vw); /* 요청한 크기 그대로 */
+	height: auto;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	overflow: hidden;
+}
+
+.advertisement-slide {
+	display: none;
+	width: 100%;
+	height: 100%;
+	transition: opacity 0.4s;
+	position: absolute;
+	top: 0;
+	left: 0;
+}
+
+.advertisement-slide.active {
+	display: block;
+	position: relative;
+	opacity: 1;
+	z-index: 1;
+}
+
+.advertisement-image-2025 {
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+	border-radius: 10px;
+	box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+	display: block;
+}
+/* 광고 움직이는 버튼  */
+.ad-prev, .ad-next {
+	position: absolute;
+	top: 50%;
+	transform: translateY(-50%);
+	background: rgba(255, 255, 255, 0.85);
+	border: none;
+	border-radius: 50%;
+	width: 1.5vw;
+	height: 1.5vw;
+	cursor: pointer;
+	font-size: 0.85rem;
+	color: #3A4254;
+	z-index: 2;
+	transition: background 0.18s;
+	box-shadow: 0 2px 6px rgba(0, 0, 0, 0.11);
+}
+
+.ad-prev {
+	left: 10px;
+}
+
+.ad-next {
+	right: 10px;
+}
+
+.ad-prev:hover, .ad-next:hover {
+	background: #dbeafe;
+}
+
+.advertisement {
+	width: 100%;
+}
+/*pre멘토 스크롤  */
+.scroll-container {
+	display: flex;
+	flex-direction: row;
+	gap: clamp(16px, 2vw, 24px);
+	overflow-x: auto;
+	overflow-y: hidden;
+	padding: clamp(10px, 2vh, 16px) 0;
+	scroll-snap-type: x mandatory;
+	-webkit-overflow-scrolling: touch;
+	width: 100%;
+	height: auto;
+	box-sizing: border-box;
+}
+
+.scroll-container>div {
+	flex: 0 0 auto;
+	scroll-snap-align: start;
+}
+/* 5.멘토스 강의 카드 프레임 */
+.mentos-class-cardview {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	flex: 0 0 auto;
+	border-radius: 10px;
+	overflow: hidden;
+	position: relative;
+	font-size: clamp(0.75rem, 1vw, 0.95rem); /* ✅ 내부 글자 반응형 */
+	box-sizing: border-box;
+	overflow: visible;
+	height: auto; /* ✅ 콘텐츠만큼 자동으로 높이 늘어남 */
+}
+
+/* 이미지 영역 상대위치로 만들기 */
+
+/* 1. 이미지 hover시 이미지 어둡게 + 안내문구(팝업) show */
+.mentos-class-image-frame:hover .mentos-class-image {
+	filter: brightness(30%);
+	transition: filter 0.18s;
+}
+
+/* 2. 카드 전체에 hover해도 팝업 뜨도록(hover영역 확장) */
+.mentos-class-cardview:hover .hover-blur-popup.flex-popup-center {
+	display: flex;
+	opacity: 1;
+	pointer-events: auto;
+	width: clamp(14vw, 15vw, 17vw); /* 가로만 카드와 동일하게! */
+	min-width: 0;
+	max-width: 100%;
+}
+
+/* 3. 팝업: 초기에는 숨김, 가운데 작게, 내용 길이에 맞게 */
+.hover-blur-popup.flex-popup-center {
+	display: none;
+	opacity: 0;
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	transform: translate(-50%, -50%);
+	background: #fff;
+	border: 2px solid #D1D5DB;
+	border-radius: 18px;
+	box-shadow: 0 4px 18px rgba(0, 0, 0, 0.11);
+	z-index: 20;
+	padding: 24px 20px 18px 20px;
+	min-height: 0;
+	max-height: 88vh;
+	flex-direction: column;
+	align-items: flex-start;
+	transition: opacity 0.17s;
+	width: clamp(14vw, 15vw, 17vw); /* 가로만 카드와 동일하게! */
+	min-width: 0;
+	max-width: 100%;
+}
+
+/* 4. 팝업 내용 유동적으로 */
+.hover-content-box {
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+	gap: 14px;
+	width: auto;
+	min-width: 160px;
+}
+
+/* 제목 */
+.hover-title {
+	font-family: "Pretendard", "Noto Sans KR", sans-serif;
+	font-size: clamp(0.6rem, 1vw, 0.95rem);
+	font-weight: 700;
+	color: #212529;
+	margin-bottom: 2px;
+	white-space: pre-line;
+	line-height: 1.48;
+}
+
+/* 설명 */
+.hover-desc {
+	color: #758499;
+	font-size: clamp(0.5rem, 1vw, 0.95rem);
+	font-weight: 400;
+	line-height: 1.65;
+	margin-bottom: 4px;
+}
+
+.hover-tag {
+	background: #ffffff;
+	position: relative;
+	overflow: hidden;
+	width: 100vw;
+	margin: 0 auto;
+	padding: 0 150px;
+}
+
+/* 태그들 */
+.frame-428 {
+	display: flex;
+	margin-bottom: 3px;
+	flex-wrap: wrap;
+	gap: 2px;
+}
+
+.frame-428 .hover-tag {
+	display: inline-block;
+	background: #e5edf3;
+	color: #58677a;
+	border-radius: 8px;
+	font-size: min(11.5px, 2vw); /* 더 작아지게 */
+	padding: 4px 10px;
+	font-family: "Pretendard", "Noto Sans KR", sans-serif;
+	font-weight: 500;
+	min-width: 0; /* 유동적 */
+	width: auto; /* 유동적 */
+	max-width: 100%; /* 한줄에 너무 길지 않게 */
+	white-space: nowrap; /* 줄바꿈 없이 한 줄 */
+	box-sizing: border-box;
+	text-align: center;
+	flex: 0 0 auto;
+}
+
+/* 하트 이미지 */
+.like-heart-btn {
+	width: 32px;
+	height: 32px;
+	background: none;
+	border: none;
+	cursor: pointer;
+	outline: none;
+	padding: 0;
+	position: relative;
+	transition: filter 0.14s;
+}
+
+/* 투명(빈) 하트 */
+.like-heart-btn::before {
+	content: '';
+	display: block;
+	width: 100%;
+	height: 100%;
+	background:
+		url('data:image/svg+xml;utf8,<svg width="32" height="32" fill="none" xmlns="http://www.w3.org/2000/svg"><path stroke="black" stroke-width="2" d="M16 29S3 18.5 3 10.5C3 6.5 6.5 3 10.5 3c2.5 0 4.5 1.5 5.5 3.5C17 4.5 19 3 21.5 3 25.5 3 29 6.5 29 10.5c0 8-13 18.5-13 18.5Z"/></svg>');
+	background-size: 32px 32px;
+	transition: opacity 0.22s;
+	opacity: 1;
+	position: absolute;
+	left: 0;
+	top: 0;
+	z-index: 1;
+}
+
+/* 빨간 하트(초기에는 투명) */
+.like-heart-btn.liked::after {
+	content: '';
+	display: block;
+	width: 100%;
+	height: 100%;
+	background:
+		url('data:image/svg+xml;utf8,<svg width="32" height="32" fill="red" xmlns="http://www.w3.org/2000/svg"><path fill="red" stroke="black" stroke-width="2" d="M16 29S3 18.5 3 10.5C3 6.5 6.5 3 10.5 3c2.5 0 4.5 1.5 5.5 3.5C17 4.5 19 3 21.5 3 25.5 3 29 6.5 29 10.5c0 8-13 18.5-13 18.5Z"/></svg>');
+	background-size: 32px 32px;
+	transition: opacity 0.22s, transform 0.22s;
+	opacity: 1;
+	position: absolute;
+	left: 0;
+	top: 0;
+	z-index: 2;
+	animation: heart-pop 0.22s;
+}
+
+/* 클릭 애니메이션 */
+@
+keyframes heart-pop { 0% {
+	transform: scale(0.5);
+	opacity: 0.3;
+}
+
+80
+
+
+
+
+
+
+%
+{
+transform
+
+
+
+
+
+
+:
+
+
+
+
+
+
+scale
+
+
+
+
+(
+
+
+
+
+
+
+1
+
+
+
+
+.12
+
+
+
+
+
+
+)
+
+
+
+
+;
+opacity
+
+
+
+
+
+
+:
+
+
+
+
+
+
+1
+
+
+
+
+;
+}
+100
+
+
+
+
+
+
+%
+{
+transform
+
+
+
+
+
+
+:
+
+
+
+
+
+
+scale
+
+
+
+
+(
+
+
+
+
+
+
+1
+
+
+
+
+
+
+)
+
+
+
+
+;
+opacity
+
+
+
+
+
+
+:
+
+
+
+
+
+
+1
+
+
+
+
+;
+}
+}
+
+/* 숨김 처리: 빨간 하트는 liked 없으면 보이지 않음 */
+.like-heart-btn:not(.liked)::after {
+	content: none;
+}
+/* 반응형 */
+@media ( max-width : 540px) {
+	.mentos-class-cardview {
+		width: 96vw;
+		min-width: 0;
+	}
+	.hover-blur-popup.flex-popup-center {
+		padding: 10px 4vw 9px 4vw;
+	}
+	.hover-title {
+		font-size: clamp(0.6rem, 1vw, 0.95rem);
+	}
+	.hover-desc {
+		font-size: clamp(0.5rem, 1vw, 0.95rem);
+	}
+	.frame-428 .hover-tag {
+		font-size: 10.5px;
+		padding: 3px 8px;
+	}
+}
+
+}
+.scroll-right-space {
+	flex: 0 0 242px; /* 광고와 같은 너비 */
+	pointer-events: none; /* 클릭 안 되게 */
+}
+
+.person-image {
+	width: clamp(14px, 1.8vw, 21px); /* 최소 14px ~ 최대 21px 사이 */
+	height: auto; /* 비율 유지하며 자동 높이 */
+	object-fit: cover; /* 이미지 꽉 채우기 */
+	flex-shrink: 0;
+}
+
+/* Wrapper */
+.mentos-card-wrapper, .mentos-card-wrapper * {
+	box-sizing: border-box;
+}
+
+.mentos-card-wrapper {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: flex-start;
+}
+
+.mentos-card {
+	background: linear-gradient(0deg, #ffffff 66%, #f6fcff 100%);
+	border-radius: 30px;
+	border: 1px solid #a6abbd;
+	padding: 30px 15px 35px 15px;
+	display: flex;
+	flex-direction: row;
+	gap: 20px;
+	align-items: center;
+	justify-content: center;
+	width: 446px;
+	height: 231px;
+	box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+.mentos-card-content {
+	padding-top: 30px;
+	display: flex;
+	flex-direction: column;
+	gap: 10px;
+	height: 226px;
+}
+
+.mentos-card-status {
+	display: flex;
+	flex-direction: row;
+	gap: 10px;
+	height: 22px;
+}
+
+.mentos-status-d-day {
+	background: rgba(206, 224, 69, 0.88);
+	border-radius: 50px;
+	padding: 0 7px;
+	display: flex;
+	gap: 0;
+	align-items: center;
+	justify-content: center;
+	width: 61px;
+	height: 22px;
+}
+
+.mentos-status-info {
+	background: rgba(47, 204, 117, 0.88);
+	border-radius: 50px;
+	padding: 4px 7px;
+	display: flex;
+	gap: 0;
+	align-items: center;
+	justify-content: center;
+	width: 100px;
+	height: 22px;
+}
+
+.mentos-card-title {
+	color: #000;
+	font-family: "D2Coding-Bold", sans-serif;
+	font-size: 16px;
+	font-weight: 700;
+	line-height: 150%;
+	letter-spacing: -0.011em;
+	width: 214px;
+	height: 46px;
+}
+
+.mentos-card-detail {
+	padding-bottom: 11px;
+	display: flex;
+	flex-direction: column;
+	gap: 3px;
+	width: 214px;
+	height: 117px;
+}
+
+.mentos-card-author, .mentos-card-date, .mentos-card-time,
+	.mentos-card-location {
+	display: flex;
+	flex-direction: row;
+	gap: 5px;
+	align-items: center;
+}
+
+.author-icon, .date-icon img, .time-icon img, .location-icon img {
+	width: 16px;
+	height: 16px;
+}
+
+.author-name, .date-range, .time-range, .location-name, .price {
+	color: #000;
+	font-family: "D2Coding-Regular", sans-serif;
+	font-size: 12px;
+	font-weight: 400;
+	line-height: 150%;
+	letter-spacing: -0.011em;
+}
+
+.author-role {
+	position: relative;
+	width: 36px;
+	height: 12px;
+}
+
+.role-bg {
+	background: rgba(0, 112, 209, 0.73);
+	border-radius: 5px;
+	width: 36px;
+	height: 12px;
+	position: absolute;
+	top: 3px;
+	left: 52px;
+}
+
+.role-label {
+	color: #fff;
+	font-family: "Inter-Medium", sans-serif;
+	font-size: 8px;
+	font-weight: 500;
+	line-height: 150%;
+	letter-spacing: -0.011em;
+	text-align: center;
+	position: absolute;
+	left: calc(50% - -8px);
+	top: 50%;
+	transform: translateY(-50%);
+	width: 36px;
+}
+
+.mentos-card-price {
+	display: flex;
+	justify-content: flex-end;
+	height: 30px;
+	align-items: center;
+}
+
+.price {
+	font-family: "AbhayaLibreExtraBold-Regular", sans-serif;
+	font-size: 20px;
+	font-weight: 400;
+	letter-spacing: -0.023em;
+}
+
+.mentos-card-image {
+	display: flex;
+	align-items: center;
+	height: 231px;
+}
+
+.thumbnail {
+	border-radius: 30px;
+	border: 1px solid #a6abbd;
+	width: 170px;
+	height: 169px;
+	object-fit: cover;
+	box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+/* Text reuse classes */
+.text, .author-name, .date-range, .time-range, .location-name {
+	color: #000;
+	font-family: "D2Coding-Regular", sans-serif;
+	font-size: 12px;
+	font-weight: 400;
+	line-height: 150%;
+	letter-spacing: -0.011em;
+}
+
+.frame-3786, .frame-3786 * {
+	box-sizing: border-box;
+}
+
+
+.frame-3786 {
+	display: flex;
+	flex-direction: row;
+	gap: 0px;
+	align-items: center;
+	justify-content: flex-start;
+	position: relative;
+}
+
+.mentos-class {
+	background: linear-gradient(0deg, rgba(255, 255, 255, 1)
+		66.00000262260437%, rgba(246, 252, 255, 1) 100%);
+	border-radius: 30px;
+	border-style: solid;
+	border-color: #a6abbd;
+	border-width: 1px;
+	padding: 30px 15px 35px 15px;
+	display: flex;
+	flex-direction: row;
+	gap: 10px;
+	align-items: center;
+	justify-content: center;
+	flex-shrink: 0;
+	width: 100%;
+	height: 229px;
+	position: relative;
+	box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+	transition: box-shadow 0.18s, transform 0.18s, border 0.18s;
+	border: 1.5px solid #e7eaf3;
+	overflow: visible;
+
+}
+
+.mentos-text {
+	display: flex;
+	flex-direction: column;
+	gap: 10px;
+	align-items: flex-start;
+	justify-content: center;
+	flex-shrink: 0;
+	height: 22vh;
+	position: relative;
+}
+
+.frame-37862 {
+	display: flex;
+	flex-direction: row;
+	gap: 10px;
+	align-items: flex-start;
+	justify-content: flex-start;
+	flex-shrink: 0;
+	height: 22px;
+	position: relative;
+}
+
+.frame-413 {
+	background: rgba(206, 224, 69, 0.88);
+	border-radius: 50px;
+	padding: 0px 7px 0px 7px;
+	display: flex;
+	flex-direction: row;
+	gap: 0px;
+	align-items: center;
+	justify-content: center;
+	flex-shrink: 0;
+	width: 100%;
+	height: 22px;
+	position: relative;
+	padding: 0;
+}
+
+.d {
+	color: #ffffff;
+	text-align: center;
+	font-family: "Inter-Medium", sans-serif;
+	font-size: 10px;
+	line-height: 150%;
+	letter-spacing: -0.023em;
+	font-weight: 500;
+	height: 22px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.frame-414 {
+	background: rgba(47, 204, 117, 0.88);
+	border-radius: 50px;
+	padding: 0px 7px 0px 7px;
+	display: flex;
+	flex-direction: row;
+	gap: 0px;
+	align-items: center;
+	justify-content: center;
+	flex-shrink: 0;
+	width: 100%;
+	height: 22px;
+	position: relative;
+}
+
+.div {
+	color: #ffffff;
+	text-align: center;
+	font-family: "Inter-Medium", sans-serif;
+	font-size: 10px;
+	line-height: 150%;
+	letter-spacing: -0.023em;
+	font-weight: 500;
+	position: relative;
+	width: 46px;
+	height: 15px;
+}
+
+._3 {
+	color: #ffffff;
+	text-align: center;
+	font-family: "Inter-Medium", sans-serif;
+	font-size: 10px;
+	line-height: 150%;
+	letter-spacing: -0.023em;
+	font-weight: 500;
+	position: relative;
+	width: 9px;
+	height: 15px;
+}
+
+.div2 {
+	color: #ffffff;
+	text-align: center;
+	font-family: "Inter-Medium", sans-serif;
+	font-size: 10px;
+	line-height: 150%;
+	letter-spacing: -0.023em;
+	font-weight: 500;
+	position: relative;
+	width: 7px;
+	height: 15px;
+}
+
+.aws {
+	color: #000000;
+	text-align: left;
+	font-family: "D2Coding-Bold", sans-serif;
+	font-size: 16px;
+	line-height: 150%;
+	letter-spacing: -0.011000000000000001em;
+	font-weight: 700;
+	position: relative;
+	width: 214px;
+	height: 46px;
+}
+
+.frame-406 {
+	padding: 0px 0px 11px 0px;
+	display: flex;
+	flex-direction: column;
+	gap: 3px;
+	align-items: flex-start;
+	justify-content: flex-start;
+	flex-shrink: 0;
+	width: 100%;
+	height: fit-content;
+	position: relative;
+}
+
+.frame-407 {
+	display: flex;
+	flex-direction: row;
+	gap: 6px;
+	align-items: center;
+	justify-content: flex-start;
+	flex-shrink: 0;
+	position: relative;
+}
+
+.user-user-03 {
+	flex-shrink: 0;
+	width: 16px;
+	height: 16.44px;
+	position: relative;
+	overflow: visible;
+}
+
+.div3 {
+	color: #000000;
+	text-align: left;
+	font-family: "D2Coding-Regular", sans-serif;
+	font-size: 12px;
+	line-height: 150%;
+	letter-spacing: -0.011000000000000001em;
+	font-weight: 400;
+	position: relative;
+}
+
+.group-371 {
+	flex-shrink: 0;
+	width: 36px;
+	height: 12.04px;
+	position: static;
+}
+
+.rectangle-279 {
+	background: rgba(0, 112, 209, 0.73);
+	border-radius: 5px;
+	width: 36px;
+	height: 12px;
+	position: absolute;
+	left: 52px;
+	top: 3.02px;
+}
+
+.mento {
+	color: #ffffff;
+	text-align: center;
+	font-family: "Inter-Medium", sans-serif;
+	font-size: 8px;
+	line-height: 150%;
+	letter-spacing: -0.011000000000000001em;
+	font-weight: 500;
+	position: absolute;
+	left: calc(50% - -8px);
+	top: 50%;
+	translate: 0 -50%;
+	width: 36px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.frame-408 {
+	display: flex;
+	flex-direction: row;
+	gap: 1px;
+	align-items: center;
+	justify-content: flex-start;
+	flex-shrink: 0;
+	position: relative;
+}
+
+.icon-time-02 {
+	flex-shrink: 0;
+	width: 13px;
+	height: 12px;
+	position: relative;
+	overflow: hidden;
+}
+
+.icon-time-calendar {
+	height: auto;
+	position: absolute;
+	left: 1.08px;
+	top: 0.5px;
+	overflow: visible;
+}
+
+._2025 {
+	color: #000000;
+	text-align: left;
+	font-family: "-", sans-serif;
+	font-size: 12px;
+	line-height: 150%;
+	letter-spacing: -0.011000000000000001em;
+	font-weight: 400;
+	position: relative;
+}
+
+._2025-span {
+	font-family: "D2Coding-Regular", sans-serif;
+}
+
+._2025-span2 {
+	font-family: "Inter-Medium", sans-serif;
+	font-weight: 500;
+}
+
+._06 {
+	color: #000000;
+	text-align: left;
+	font-family: "D2Coding-Regular", sans-serif;
+	font-size: 12px;
+	line-height: 150%;
+	letter-spacing: -0.011000000000000001em;
+	font-weight: 400;
+	position: relative;
+}
+
+._23 {
+	color: #000000;
+	text-align: left;
+	font-family: "D2Coding-Regular", sans-serif;
+	font-size: 12px;
+	line-height: 150%;
+	letter-spacing: -0.011000000000000001em;
+	font-weight: 400;
+	position: relative;
+}
+
+._20252 {
+	color: #000000;
+	text-align: left;
+	font-family: "D2Coding-Regular", sans-serif;
+	font-size: 12px;
+	line-height: 150%;
+	letter-spacing: -0.011000000000000001em;
+	font-weight: 400;
+	position: relative;
+}
+
+._30 {
+	color: #000000;
+	text-align: left;
+	font-family: "D2Coding-Regular", sans-serif;
+	font-size: 12px;
+	line-height: 150%;
+	letter-spacing: -0.011000000000000001em;
+	font-weight: 400;
+	position: relative;
+}
+
+.frame-409 {
+	display: flex;
+	flex-direction: row;
+	gap: 1px;
+	align-items: center;
+	justify-content: flex-start;
+	flex-shrink: 0;
+	position: relative;
+}
+
+.icon-time-04 {
+	flex-shrink: 0;
+	width: 13px;
+	height: 12px;
+	position: relative;
+	overflow: hidden;
+}
+
+.icon-time-clock-outlined {
+	height: auto;
+	position: absolute;
+	left: 0.54px;
+	top: 0.5px;
+	overflow: visible;
+}
+
+._15 {
+	color: #000000;
+	text-align: left;
+	font-family: "D2Coding-Regular", sans-serif;
+	font-size: 12px;
+	line-height: 150%;
+	letter-spacing: -0.011000000000000001em;
+	font-weight: 400;
+	position: relative;
+}
+
+.div4 {
+	color: #000000;
+	text-align: left;
+	font-family: "-", sans-serif;
+	font-size: 12px;
+	line-height: 150%;
+	letter-spacing: -0.011000000000000001em;
+	font-weight: 400;
+	position: relative;
+}
+
+.div-4-span {
+	font-family: "D2Coding-Regular", sans-serif;
+}
+
+.div-4-span2 {
+	font-family: "Inter-Medium", sans-serif;
+	font-weight: 500;
+}
+
+._17 {
+	color: #000000;
+	text-align: left;
+	font-family: "-", sans-serif;
+	font-size: 12px;
+	line-height: 150%;
+	letter-spacing: -0.011000000000000001em;
+	font-weight: 400;
+	position: relative;
+}
+
+._17-span {
+	font-family: "D2Coding-Regular", sans-serif;
+}
+
+._17-span2 {
+	font-family: "Inter-Medium", sans-serif;
+	font-weight: 500;
+}
+
+.div-4-span {
+	font-family: "D2Coding-Regular", sans-serif;
+}
+
+.div-4-span2 {
+	font-family: "Inter-Medium", sans-serif;
+	font-weight: 500;
+}
+
+.frame-410 {
+	display: flex;
+	flex-direction: row;
+	gap: 5px;
+	align-items: center;
+	justify-content: flex-start;
+	flex-shrink: 0;
+	position: relative;
+}
+
+.icon-maps-04 {
+	flex-shrink: 0;
+	width: 13px;
+	height: 12px;
+	position: relative;
+	overflow: hidden;
+}
+
+.icon-maps-map-pin {
+	height: auto;
+	position: absolute;
+	left: 1.08px;
+	top: 0px;
+	overflow: visible;
+}
+
+.frame-3659 {
+	display: flex;
+	flex-direction: column;
+	gap: 0px;
+	width: 100%;
+	height: 100%;
+	overflow: hidden;
+}
+
+._45-000 {
+	color: #000000;
+	text-align: left;
+	font-family: "AbhayaLibreExtraBold-Regular", sans-serif;
+	font-size: 20px;
+	line-height: 150%;
+	letter-spacing: -0.023em;
+	font-weight: 400;
+	position: relative;
+}
+
+.frame-3778 {
+	display: flex;
+	flex-direction: column;
+	gap: 10px;
+	align-items: center;
+	justify-content: flex-start;
+	flex-shrink: 0;
+	width: 151px;
+	position: relative;
+}
+
+.image {
+	border-radius: 30px;
+	border-style: solid;
+	border-color: #a6abbd;
+	border-width: 1px;
+	align-self: stretch;
+	flex-shrink: 0;
+	height: 122px;
+	position: relative;
+	box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+	object-fit: cover;
+}
+
+
+
+
+
+.mentos-class:hover {
+	box-shadow: 0 1vw 2vw rgba(0, 0, 0, 0.16), 0 0.3vw 1vw
+		rgba(0, 0, 0, 0.09);
+	transform: translateY(-0.5vw) scale(1.02);
+	border: 1.5px solid #7da4fa;
+	z-index: 10;
+}
+
+/* 안내문구 팝업 */
+.mentos-hover-popup {
+	pointer-events: none;
+	opacity: 0;
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	background: rgba(255, 255, 255, 0.6);
+	backdrop-filter: blur(5px);
+	border-radius: 2vw;
+	transition: opacity 0.18s;
+	z-index: 99;
+}
+
+. .mentos-hover-popup {
+	opacity: 1;
+}
+
+.hover-inner {
+	background: #fff;
+	border-radius: 1vw;
+	box-shadow: 0 0.3vw 1vw rgba(0, 0, 0, 0.14);
+	padding: 2vw 2vw;
+	text-align: center;
+	min-width: 20vw;
+	max-width: 40vw;
+}
+
+.hover-title {
+	font-size: 1.3vw;
+	font-weight: 700;
+	color: #22314e;
+	margin-bottom: 0.8vw;
+}
+
+.hover-desc {
+	font-size: 1vw;
+	color: #456;
+	margin-bottom: 1vw;
+}
+
+.hover-tags {
+	display: flex;
+	gap: 0.8vw;
+	justify-content: center;
+}
+
+.hover-tag {
+	background: #f3f8ff;
+	color: #5585f3;
+	border-radius: 0.6vw;
+	font-size: 0.9vw;
+	padding: 0.5vw 1.2vw;
+}
+
+@media ( max-width : 700px) {
+	.mentos-class, .mentos-hover-popup {
+		border-radius: 4vw;
+	}
+	.hover-inner {
+		border-radius: 2vw;
+		padding: 6vw 3vw;
+		min-width: 60vw;
+		max-width: 90vw;
+	}
+	.hover-title {
+		font-size: 4vw;
+	}
+	.hover-desc {
+		font-size: 3vw;
+	}
+	.hover-tag {
+		font-size: 2vw;
+		border-radius: 2vw;
+		padding: 1vw 3vw;
+	}
+}
