@@ -1,4 +1,9 @@
 @charset "UTF-8";
+body {
+	margin: 0;
+}
+
+
 .frame-3706,
 .frame-3706 * {
   box-sizing: border-box;

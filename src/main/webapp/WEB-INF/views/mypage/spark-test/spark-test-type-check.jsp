@@ -169,7 +169,7 @@
       <img class="image-89" src="${sparkImgPath}/gitYomi.png" />
       <div class="group-4633">
         <div class="frame-4214">
-          <div class="div9">
+          <div class="div-type-check">
             <span>
               <span class="div-9-span">
                 계획표 없이는 불안한 체계형.
