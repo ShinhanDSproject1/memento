@@ -1,3 +1,4 @@
+/* 기본 설정 */
 * {
   box-sizing: border-box;
 }
@@ -13,10 +14,10 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
-  max-width: 1100px;
-  margin: 120px auto;
-  padding: 0 20px;
+  width: 100%;       
+  padding: 0 250px;
   gap: 40px;
+  margin-top: 120px;
 }
 
 /* ===== 왼쪽 영역: 항목 목록 ===== */
@@ -24,19 +25,11 @@ body {
   flex: 2;
 }
 
-.cart-right {
-  flex: 1;
-  border: 1px solid #ddd;
-  padding: 20px;
-  border-radius: 10px;
-  background: #f9f9f9;
-}
-
 .cart-title {
   font-size: 2rem;
   font-weight: bold;
   margin-bottom: 30px;
-  text-align: LEFT;
+  text-align: left;
 }
 
 .cart-actions {
@@ -101,12 +94,6 @@ body {
   white-space: nowrap;
 }
 
-.meta-date,
-.meta-time,
-.meta-count {
-  color: #666;
-}
-
 .meta-place {
   color: #00b39e;
   font-weight: 400;
@@ -121,6 +108,7 @@ body {
 
 /* ===== 오른쪽 영역: 구매자 정보 + 결제 ===== */
 .cart-right {
+  flex: 1;
   width: 300px;
   background: #ffffff;
   padding: 25px;
@@ -210,9 +198,10 @@ body {
 }
 
 /* ===== 반응형 ===== */
-@media (max-width: 768px) {
+@media (max-width: 1440px) {
   .cart-container {
     flex-direction: column;
+    padding: 0 40px;
   }
 
   .cart-left,
@@ -223,4 +212,20 @@ body {
   .action-buttons {
     flex-direction: column;
   }
+}
+
+/* === 숫자 input의 스핀 버튼 제거 === */
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input[type="number"] {
+  -moz-appearance: textfield;
+}
+
+/* 전체 선택 체크박스 */
+#selectAll {
+  margin-right: 6px;
 }
