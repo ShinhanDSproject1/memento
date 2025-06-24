@@ -193,7 +193,7 @@
 					<div class="flexcol">
 						<label for="price">가격</label>
 						<div class="last-select-border">
-							<input id="price" name="price" type="number" placeholder="무료">
+							<input id="price" name="price" type="number" placeholder="무료" step="100">
 						</div>
 					</div>
 				</div>
