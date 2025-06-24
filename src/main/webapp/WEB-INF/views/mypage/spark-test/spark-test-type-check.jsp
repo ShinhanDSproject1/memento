@@ -46,14 +46,14 @@
             </span>
           </div>
           <div class="frame-3692"></div>
-          <div class="div">잘 맞는 파트너</div>
+          <div class="div_spark_type">잘 맞는 파트너</div>
           <img class="image-77" src="${sparkImgPath}/slowGom-icon.png" />
           <div class="image-63"></div>
           <img class="image-66" src="${sparkImgPath}/comZung-icon.png" />
           <div class="line-54"></div>
           <img class="image-88" src="${sparkImgPath}/gitYomi-icon.png" />
         </div>
-        <div class="div2">활발한 개발자</div>
+        <div class="div2_spark_type">활발한 개발자</div>
         <div class="div3">
           <span>
             <span class="div-3-span">🔥</span>
@@ -65,7 +65,7 @@
       <div class="frame-3698">
         <div class="group-4632">
           <div class="frame-4212">
-            <div class="div4">
+            <div class="div4_spark_type">
               <span>
                 <span class="div-4-span">
                   조용하고 신중하며 혼자 집중하는 걸 좋아하는 내향적 타입.
@@ -120,7 +120,7 @@
       </div>
       <div class="group-4632">
         <div class="frame-4213">
-          <div class="div4">
+          <div class="div4_spark_type">
             <span>
               <span class="div-4-span">
                 아이디어와 창의력이 폭발하는 타입.
@@ -159,7 +159,7 @@
           <img class="image-68" src="${sparkImgPath}/coachChee-icon.png" />
         </div>
         <div class="div7">창의적 실험가 개발자</div>
-        <div class="div8">
+        <div class="div8_spark_type">
           <span>
             <span class="div-8-span">🌊</span>
             <span class="div-8-span2">아이디어 요정 깃요미</span>

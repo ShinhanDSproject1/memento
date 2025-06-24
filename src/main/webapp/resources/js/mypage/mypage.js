@@ -13,23 +13,21 @@ $(document).on('click', '.page-link', function () {
 function loadPage(url) {
   if (!url) return;
 
-  // 로딩 중 메시지 표시
-  $('#screen').html('<p>로딩 중입니다...</p>');
+  // 오버레이 표시
+  $('#loading-overlay').show();
 
-  // URL 로드
+  // 페이지 비동기 로드
   $('#screen').load(url, function (response, status) {
+    $('#loading-overlay').hide(); // 로딩 완료 후 숨김
+
     if (status === 'error') {
-      $(this).html('<p>페이지를 불러올 수 없습니다 😢</p>');
+      $('#screen').html('<p>페이지를 불러올 수 없습니다 😢</p>');
     } else {
-      // 히스토리 추가
       history.pushState(null, '', url);
 
-
-      // spark-test 페이지일 경우 전용 스크립트 불러오기
       if (url.includes('spark-test')) {
         $.getScript(`${cpath}/resources/js/mypage/spark-test/spark-test.js`)
           .done(function () {
-            // 핵심: DOM 노드를 polling 방식으로 기다림
             const interval = setInterval(() => {
               if (document.getElementById("question-text")) {
                 clearInterval(interval);
@@ -37,7 +35,7 @@ function loadPage(url) {
                   renderQuestion();
                 }
               }
-            }, 30); // 30ms마다 검사
+            }, 30);
           })
           .fail(function () {
             console.error('spark-test.js 로드 실패');

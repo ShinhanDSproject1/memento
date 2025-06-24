@@ -3,19 +3,20 @@
 .cash-recahrge * {
   box-sizing: border-box;
 }
-.cash-recahrge {
+.cash-recharge-container {
   background: #ffffff;
   border-style: solid;
   border-color: transparent;
   border-width: 1px;
-  padding: 63px 44px 63px 44px;
+  padding: 0px 44px 0px 44px;
   display: flex;
   flex-direction: column;
   gap: 10px;
   align-items: center;
   justify-content: center;
   height: 871px;
-  position: relative;
+  position: absolute;
+  top:-50px;
 }
 .group-200 {
   flex-shrink: 0;
@@ -61,17 +62,17 @@
   object-fit: cover;
   aspect-ratio: 136.48/18.7;
 }
-.group-422 {
+/* .group-422 {
   flex-shrink: 0;
   width: 846.85px;
   height: 603.8px;
   position: static;
-}
-.group-166 {
+} */
+/* .group-166 {
   width: 479.77px;
   height: 64.05px;
   position: static;
-}
+} */
 .rectangle-223 {
   background: linear-gradient(
     90deg,
@@ -156,6 +157,7 @@
 .rectangle-2244.clicked, .rectangle-2254.clicked,
 .rectangle-2245.clicked, .rectangle-2255.clicked {
     border-color: #024ADA;
+    border-width: 3px;
 }
 
 
@@ -168,8 +170,8 @@
 .rectangle-224 {
   border-radius: 35px;
   border-style: solid;
-  border-color: rgba(2, 74, 218, 0.49);
-  border-width: 3px;
+  border-color: rgba(0, 0, 0, 0.34);
+  border-width: 0.5px;
   width: 230.03px;
   height: 99.93px;
   position: absolute;
@@ -203,8 +205,8 @@
   background: #edeef2;
   border-radius: 0px 0px 35px 35px;
   border-style: solid;
-  border-color: #83a6ed;
-  border-width: 3px;
+  border-color: rgba(0, 0, 0, 0.34);
+  border-width: 0.5px;
   width: 230.03px;
   height: 35.87px;
   position: absolute;
@@ -219,7 +221,7 @@
   font-weight: 700;
   position: absolute;
   left: 3.22px;
-  top: 73.45px;
+  top: 65px;
   width: 208px;
   display: flex;
   align-items: center;
@@ -286,7 +288,7 @@
   font-weight: 700;
   position: absolute;
   left: 284.31px;
-  top: 73.45px;
+  top: 63px;
   width: 208px;
   display: flex;
   align-items: center;
@@ -325,7 +327,7 @@
   font-size: 24px;
   font-weight: 700;
   position: absolute;
-  left: 45.52px;
+  left: 48.52px;
   top: 149.74px;
   width: 101.38px;
   height: 23.91px;
@@ -353,7 +355,7 @@
   font-weight: 700;
   position: absolute;
   left: 0px;
-  top: 200.13px;
+  top: 190px;
   width: 232px;
   display: flex;
   align-items: center;
@@ -392,7 +394,7 @@
   font-size: 24px;
   font-weight: 700;
   position: absolute;
-  left: 326.76px;
+  left: 330.76px;
   top: 149.74px;
   width: 101.38px;
   height: 23.91px;
@@ -420,7 +422,7 @@
   font-weight: 700;
   position: absolute;
   left: 281.09px;
-  top: 200.13px;
+  top: 190.13px;
   width: 232px;
   display: flex;
   align-items: center;
@@ -459,7 +461,7 @@
   font-size: 24px;
   font-weight: 700;
   position: absolute;
-  left: 48.42px;
+  left: 52.42px;
   top: 276.53px;
   display: flex;
   align-items: center;
@@ -484,8 +486,8 @@
   font-size: 14px;
   font-weight: 700;
   position: absolute;
-  left: 0px;
-  top: 331.08px;
+  left: -10px;
+  top: 320.08px;
   width: 240px;
   display: flex;
   align-items: center;
@@ -654,7 +656,7 @@
   left: 264.66px;
   top: 158.44px;
 }
-.div {
+.cashcash {
   color: rgba(0, 0, 0, 0.58);
   text-align: center;
   font-family: "D2Coding-Bold", sans-serif;
@@ -719,7 +721,7 @@
   height: 15.37px;
   position: static;
 }
-.div2 {
+.div-recharge-check {
   color: #000000;
   text-align: center;
   font-family: "D2Coding-Regular", sans-serif;
@@ -727,7 +729,7 @@
   font-weight: 400;
   position: absolute;
   left: 28.02px;
-  top: 259.95px;
+  top: 280px;
   width: 276px;
   display: flex;
   align-items: center;
@@ -737,8 +739,8 @@
   width: 15.34px;
   height: 15.37px;
   position: absolute;
-  left: 11.21px;
-  top: 258.98px;
+  left: 35px;
+  top: 280px;
   overflow: visible;
 }
 .group-173 {
@@ -754,7 +756,7 @@
   height: 60.64px;
   position: absolute;
   left: 8.95px;
-  top: 284.35px;
+ top: 300px;
 }
 .me8 {
   text-align: center;
@@ -763,7 +765,7 @@
   font-weight: 700;
   position: absolute;
   left: 66.84px;
-  top: 300.14px;
+  top: 317.14px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -789,7 +791,7 @@
   color: #000000;
   text-align: left;
   font-family: "D2Coding-Bold", sans-serif;
-  font-size: 12px;
+  font-size: 20px;
   font-weight: 700;
   position: relative;
   align-self: stretch;
@@ -797,24 +799,26 @@
   display: flex;
   align-items: center;
   justify-content: flex-start;
+  top:30px;
 }
 .rectangle-227 {
   background: rgba(249, 242, 249, 0.8);
   border-radius: 11px;
   align-self: stretch;
   flex-shrink: 0;
-  height: 217px;
+  height: 400px;
   position: relative;
+  top:30px;
 }
 .me-me-mento-me-me-mento-me-me-me-7-me-7-i-os-me-080-333-4000-google-play-me-48-google-play-48-1-1-me {
   color: #000000;
   text-align: left;
   font-family: "-", sans-serif;
-  font-size: 7px;
+  font-size: 10px;
   font-weight: 400;
   position: absolute;
   left: 7.66px;
-  top: 23.54px;
+  top: 150px;
   width: 279.44px;
   height: 201.56px;
   display: flex;

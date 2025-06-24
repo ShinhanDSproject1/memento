@@ -5,12 +5,16 @@ $(document).ready(function () {
   });
 });
 
-// 그룹을 클릭했을 때, 도형만 색상이 변하도록 하는 함수
 function changeRectangleColor(event) {
-    const rectangles = event.currentTarget.querySelectorAll('.rectangle-224, .rectangle-225');
-    // 도형만 색상 변경
+    // 모든 클릭 상태를 초기화
+    document.querySelectorAll('.rectangle-224, .rectangle-225, .rectangle-2242, .rectangle-2252, .rectangle-2253, .rectangle-2254, .rectangle-2255, .rectangle-2243, .rectangle-2244, .rectangle-2245')
+        .forEach(rect => rect.classList.remove('clicked'));
+
+    // 클릭된 그룹 내 도형만 클릭 상태로 변경
+    const rectangles = event.currentTarget.querySelectorAll('.rectangle-224, .rectangle-225, .rectangle-2242, .rectangle-2252, .rectangle-2253, .rectangle-2254, .rectangle-2255, .rectangle-2243, .rectangle-2244, .rectangle-2245');
+    
     rectangles.forEach(rectangle => {
-        rectangle.classList.toggle('clicked');
+        rectangle.classList.add('clicked');
     });
 }
 
@@ -21,13 +25,14 @@ $(document).ready(function () {
   });
 });
 
-// 그룹을 클릭했을 때, 도형만 색상이 변하도록 하는 함수
 function changeButtonColor(event) {
-    // 해당 그룹 내 도형만 찾아서 색상을 변경합니다.
-    const rectangles = event.currentTarget.querySelectorAll('rectangle-226');
+    // 모든 버튼 도형 클릭 해제
+    document.querySelectorAll('.rectangle-226').forEach(rect => rect.classList.remove('clicked'));
+
+    // 클릭된 그룹 내의 도형만 클릭 상태로 변경
+    const rectangles = event.currentTarget.querySelectorAll('.rectangle-226');
     
-    // 도형만 색상 변경
     rectangles.forEach(rectangle => {
-        rectangle.classList.toggle('clicked');
+        rectangle.classList.add('clicked');
     });
 }

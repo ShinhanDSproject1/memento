@@ -112,7 +112,7 @@
   left: 70px;
   top: 335px;
 }
-.div {
+.div_spark_type{
   color: #000000;
   text-align: left;
   font-family: "Inter-SemiBold", sans-serif;
@@ -171,7 +171,7 @@
   object-fit: cover;
   aspect-ratio: 159/143;
 }
-.div2 {
+.div2_spark_type {
   color: rgba(0, 0, 0, 0.59);
   text-align: left;
   font-family: "Inter-Medium", sans-serif;
@@ -236,7 +236,7 @@
   top: 110px;
   box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
 }
-.div4 {
+.div4_spark_type {
   color: #000000;
   text-align: left;
   font-family: "-", sans-serif;
@@ -411,7 +411,7 @@
   left: 552px;
   top: 1181px;
 }
-.div8 {
+.div8_spark_type {
   text-align: left;
   font-family: "Inter-Bold", sans-serif;
   font-size: 40px;
