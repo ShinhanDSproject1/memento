@@ -3,15 +3,18 @@
 }
 
 .div {
+	display: flex;
 	background: #ffffff;
 	height: 1717px;
 	position: relative;
 	overflow: hidden;
+	justify-content: center;
+	align-items: center;
 }
 
 .frame-3657 {
 	background: #ffffff;
-	padding: 30px 100px;
+	padding: 30px 110px;
 	display: flex;
 	flex-direction: column;
 	gap: 45px;
@@ -28,9 +31,13 @@
 	align-items: center;
 	justify-content: space-between;
 	flex-shrink: 0;
-	width: 1296px;
+	width: 80%;
 	height: 63px;
 	position: relative;
+}
+
+span {
+	align-items: center;
 }
 
 .keepgoing-filter-and-make {
@@ -287,14 +294,16 @@
 .frame-3694 {
 	display: flex;
 	flex-wrap: wrap;
-	gap: 55px;
-	/* justify-content: flex-start; or center */
-	
+	gap: 30px; /* 카드 사이 간격 */
+	justify-content: flex-start; /* ← 중요! 줄마다 왼쪽부터 정렬되도록 */
+	max-width: 1280px; /* 총 3개 + 여유 */
+	margin: 0 auto; /* 전체를 가운데 정렬 */
 }
+
 .matchup-cardview {
 	width: calc(32% - 20px); /* 너무 좁지 않게! */
 	min-width: 320px;
-	padding: 20px 24px;
+	padding: 10px 24px;
 	margin-bottom: 40px;
 	box-sizing: border-box;
 	position: relative;
