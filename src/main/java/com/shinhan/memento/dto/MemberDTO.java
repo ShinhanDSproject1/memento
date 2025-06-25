@@ -27,4 +27,5 @@ public class MemberDTO {
 	Date created_at;
 	Date updated_at;
 	String status;
+	String profile_image_url;
 }
