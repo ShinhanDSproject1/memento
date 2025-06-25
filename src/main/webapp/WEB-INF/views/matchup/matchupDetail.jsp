@@ -13,29 +13,29 @@
 	<div class="div">
 		<div class="top-bar">
 			<div class="top-bar-tag">
-				<div class="top-bar-mento">
-					<div class="div2">멘토 모집중</div>
-				</div>
+			    <c:if test="${!matchupDetail.has_mento}">
+			        멘토 모집중
+			    </c:if>
 				<div class="top-bar-category">
-					<div class="java-c">#알고리즘 #Java #C</div>
+					<div class="java-c">${matchupDetail.tags}</div>
 				</div>
 			</div>
-			<div class="div3">일주일 단기 알고리즘 스터디원 모집 중 🔥</div>
+			<div class="div3">${matchupDetail.title}</div>
 		</div>
 		<div class="top-info-area">
 			<div class="top-info">
 				<div class="group-475">
 					<div class="div4">현재 모집인원</div>
 					<div class="_3-5">
-						<span class="now-member-cnt">3</span> <span class="dash">/</span>
-						<span class="max-member-cnt">5</span>
+						<span class="now-member-cnt">${matchupDetail.formattedMemberCount}</span> 
 					</div>
 				</div>
 				<div class="group-476">
 					<div class="div5">모집 시간</div>
 					<div class="_15-00-17-00">
-						<span class="start-time">15:00</span> <span class="dash">-</span>
-						<span class="end-time">17:00</span>
+						<span class="start-time">${matchupDetail.formattedStartTime}</span> 
+						<span class="dash">-</span>
+						<span class="end-time">${matchupDetail.formattedEndTime}</span>
 					</div>
 				</div>
 				<div class="group-477">
@@ -44,7 +44,7 @@
 				</div>
 				<img class="line" src="${cpath}/resources/images/line0.svg" />
 				<div class="group-478">
-					<div class="_70-000">₩70,000</div>
+					<div class="_70-000">₩${matchupDetail.formattedPrice}</div>
 					<button class="apply-btn" id="apply-btn" type="button">
 						<span class="rectangle-298"></span> <span class="div7">신청하기</span>
 					</button>
@@ -113,7 +113,7 @@
 						<div class="frame-3666">
 							<img class="icon-maps-map-pin"
 								src="${cpath}/resources/images/icon-map-red.svg" />
-							<div class="_4-77-1-f">마포구 월드컵북로 4길 77 1F</div>
+							<div class="_4-77-1-f">${matchupDetail.region_group}</div>
 						</div>
 						<div class="rectangle-189"></div>
 					</div>

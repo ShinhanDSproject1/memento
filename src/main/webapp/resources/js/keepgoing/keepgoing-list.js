@@ -18,7 +18,7 @@ $(() => {
 
     filterIds.forEach(id => {
         const options = {
-            ...baseOptions,
+            baseOptions,
             placeholderValue: placeholderMap[id]
         };
 
