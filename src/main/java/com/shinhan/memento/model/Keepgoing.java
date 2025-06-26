@@ -13,23 +13,23 @@ import lombok.NoArgsConstructor;
 @Getter
 @Builder
 public class Keepgoing {
-	int keepgoing_id;
-	int member_id;
-	int category_id;
-	int language_id;
-	int match_type_id;
-	String name;
-	String img_logo;
-	String img_activity;
-	LocalDateTime start_time;
-	LocalDateTime emd_time;
-	String selected_days;
-	String content;
-	int price;
-	String region_group;
-	String region_subgroup;
-	String region_detail;
-	Date created_at;
-	Date updated_at;
-	BaseStatus status;
+	private int keepgoingId;
+	private int memberId;
+	private int categoryId;
+	private int languageId;
+	private int matchTypeId;
+	private String name;
+	private String imgLogo;
+	private String imgActivity;
+	private LocalDateTime startTime;
+	private LocalDateTime emdTime;
+	private String selectedDays;
+	private String content;
+	private int price;
+	private String regionGroup;
+	private String regionSubgroup;
+	private String regionDetail;
+	private Date createdAt;
+	private Date updatedAt;
+	private BaseStatus status;
 }

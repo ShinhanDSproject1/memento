@@ -12,10 +12,10 @@ import lombok.NoArgsConstructor;
 @Builder
 @Getter
 public class MemberKeepgoing {
-	int member_keepgoing_id;
-	int member_id;
-	int keepgoing_id;
-	Date created_at;
-	Date updated_at;
-	BaseStatus status;
+	private int memberKeepgoingId;
+	private int memberId;
+	private int keepgoingId;
+	private Date createdAt;
+	private Date updatedAt;
+	private BaseStatus status;
 }
