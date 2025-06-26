@@ -20,11 +20,14 @@ public class MemberDTO {
 	String user_type;
 	Integer point;
 	String introduce_mento;
+	String introduce;
 	Integer score;
 	String region_group;
 	String region_subgroup;
 	String region_detail;
+	String profile_image;
 	Date created_at;
 	Date updated_at;
 	String status;
+
 }
