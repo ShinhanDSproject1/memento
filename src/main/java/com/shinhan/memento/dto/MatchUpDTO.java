@@ -127,10 +127,10 @@ public class MatchUpDTO {
 		switch (typeId) {
 		  case 1: return "코드폭탄 해피빈";
 		  case 2: return "혼코딩 슬로우곰";
-		  case 3: return "#아이디어 요정 깃요미";
-		  case 4: return "#계획왕 컴정이";
-		  case 5: return "#느긋한 타닥냥";
-		  case 6: return "#목표러 코취지";
+		  case 3: return "아이디어 요정 깃요미";
+		  case 4: return "계획왕 컴정이";
+		  case 5: return "느긋한 타닥냥";
+		  case 6: return "목표러 코취지";
 		  default: return "수정 필요";
 	      }
 	  } 

@@ -32,7 +32,7 @@ function renderMatchups(matchups) {
     let html = '';
     matchups.forEach(matchup => {
         html += `
-            <div class="matchup-cardview" onclick="location.href='${cpath}/matchupDetailPage?id=${matchup.matchup_id}'">
+            <div class="matchup-cardview" onclick="location.href='${cpath}/matchup/matchupDetail?id=${matchup.matchup_id}'">
                 <div class="rectangle-48"></div>
                 <div class="rectangle-210"></div>
                 <div class="div3">${matchup.region_group}</div>
