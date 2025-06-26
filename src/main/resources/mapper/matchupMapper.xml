@@ -5,8 +5,10 @@
 
 <mapper namespace="com.shinhan.memento.dao.MatchUpDAO">
 
-  <select id="selectAll" resultType="com.shinhan.memento.dto.MatchUpDTO">
-    select * from matchup
+  <select id="selectAll" resultType="com.shinhan.memento.dto.MatchupListDTO">
+    SELECT matchup_id, category_id, selected_days, language_id, region_group, start_day, end_day, start_time, end_time, 
+           min_member, max_member, price, title, has_mento
+  	  FROM matchup
 	  <where>
 	    <if test="region_group != null and region_group != ''">
 	      AND region_group = #{region_group}
@@ -31,9 +33,24 @@
 		     and matchup_id = #{matchupId}
 	</select>
 	
-	  <select id="selectByMatchupId" parameterType="int" resultType="com.shinhan.memento.dto.MatchUpDTO">
-		  select * from matchup
+	  <select id="selectByMatchupId" parameterType="int" resultType="com.shinhan.memento.dto.MatchupDetailDTO">
+		  select matchup_id, category_id, language_id, leader_id, mento_id, region_group, region_subgroup, region_detail, 
+		         start_day, end_day, start_time, end_time, count, max_member, price, content, title, match_type_first, 
+		         match_type_second, match_type_third, has_mento
+		    from matchup
 		   where matchup_id = #{matchupId}
+	</select>
+
+	<select id="getCategoryName" parameterType="int" resultType="String">
+	  select category_name from category where category_id = #{categoryId}
+	</select>
+
+	<select id="getLanguageName" parameterType="int" resultType="String">
+	  SELECT language_name FROM language WHERE language_id = #{languageId}
+	</select>
+	
+	<select id="getMatchTypeName" parameterType="int" resultType="String">
+	  SELECT match_type_name FROM match_type WHERE match_type_id = #{matchTypeId}
 	</select>
 
 	<insert id="createMatchup" parameterType="com.shinhan.memento.dto.MatchUpDTO">

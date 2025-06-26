@@ -31,16 +31,15 @@
                      <div class="detail-select-li2">
                          <select name="category_id" class="filter-select" onchange="applyFilters()">
                              <option value="">-- 학습유형 (전체) --</option>
-                             <option value="1" ${param.category_id == '1' ? 'selected' : ''}>알고리즘</option>
-                             <option value="2" ${param.category_id == '2' ? 'selected' : ''}>자료구조</option>
-                             <option value="3" ${param.category_id == '3' ? 'selected' : ''}>면접준비</option>
-                             <option value="4" ${param.category_id == '4' ? 'selected' : ''}>자격증</option>
-                             <option value="5" ${param.category_id == '5' ? 'selected' : ''}>데이터베이스</option>
-                             <option value="6" ${param.category_id == '6' ? 'selected' : ''}>운영체제</option>
+                             <option value="1" ${param.category_id == '1' ? 'selected' : ''}>백엔드</option>
+                             <option value="2" ${param.category_id == '2' ? 'selected' : ''}>프론트엔드</option>
+                             <option value="3" ${param.category_id == '3' ? 'selected' : ''}>알고리즘</option>
+                             <option value="4" ${param.category_id == '4' ? 'selected' : ''}>면접준비</option>
+                             <option value="5" ${param.category_id == '5' ? 'selected' : ''}>운영체제</option>
+                             <option value="6" ${param.category_id == '6' ? 'selected' : ''}>데이터베이스</option>
                              <option value="7" ${param.category_id == '7' ? 'selected' : ''}>네트워크</option>
-                             
-                             
-                             
+                             <option value="8" ${param.category_id == '8' ? 'selected' : ''}>자료구조</option>
+                             <option value="9" ${param.category_id == '9' ? 'selected' : ''}>자격증</option>
                          </select>
                      </div>
                      <div class="detail-select-li">
@@ -107,7 +106,7 @@
                   <img class="_1" src="${cpath}/resources/images/profile.svg" />
                   <div class="group-414">
                      <div class="rectangle-209"></div>
-                     <div class="java-c">${matchup.tags}</div>
+                     <div class="java-c">#${matchup.languageName} #${matchup.categoryName}</div>
                   </div>
                   <div class="badges-wrapper">
                       <c:if test="${not empty matchup.recruit}">

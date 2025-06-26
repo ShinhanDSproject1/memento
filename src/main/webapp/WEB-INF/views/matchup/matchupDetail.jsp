@@ -17,7 +17,7 @@
 			        멘토 모집중
 			    </c:if>
 				<div class="top-bar-category">
-					<div class="java-c">${matchupDetail.tags}</div>
+					<div class="java-c">#${matchupDetail.languageName} #${matchupDetail.categoryName}</div>
 				</div>
 			</div>
 			<div class="div3">${matchupDetail.title}</div>
@@ -84,21 +84,21 @@
 									<img class="ellipse-147"
 										src="${cpath}/resources/images/ellipse.svg" />
 									<div class="div10">
-										🔥 ${matchupDetail.formattedMatchTypeFirst}
+										🔥 ${matchupDetail.matchTypeFirstName}
 									</div>
 								</div>
 								<div class="type-circle">
 									<img class="ellipse-1472"
 										src="${cpath}/resources/images/ellipse.svg" />
 									<div class="div11">
-										🔥 ${matchupDetail.formattedMatchTypeSecond}
+										🔥 ${matchupDetail.matchTypeSecondName}
 									</div>
 								</div>
 								<div class="type-circle">
 									<img class="ellipse-1473"
 										src="${cpath}/resources/images/ellipse.svg" />
 									<div class="div12">
-										🔥 ${matchupDetail.formattedMatchTypeThird}
+										🔥 ${matchupDetail.matchTypeThirdName}
 									</div>
 								</div>
 							</div>
@@ -110,7 +110,7 @@
 						<div class="frame-3666">
 							<img class="icon-maps-map-pin"
 								src="${cpath}/resources/images/icon-map-red.svg" />
-							<div class="_4-77-1-f">${matchupDetail.region_group}</div>
+							<div class="_4-77-1-f">${matchupDetail.formattedRegion}</div>
 						</div>
 						<div class="rectangle-189"></div>
 					</div>

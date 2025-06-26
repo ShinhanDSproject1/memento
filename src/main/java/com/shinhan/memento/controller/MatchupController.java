@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,6 +19,8 @@ import com.shinhan.memento.common.response.BaseErrorResponse;
 import com.shinhan.memento.common.response.BaseResponse;
 import com.shinhan.memento.common.response.status.BaseExceptionResponseStatus;
 import com.shinhan.memento.dto.MatchUpDTO;
+import com.shinhan.memento.dto.MatchupDetailDTO;
+import com.shinhan.memento.dto.MatchupListDTO;
 import com.shinhan.memento.service.MatchupService;
 
 @Controller
@@ -53,7 +56,7 @@ public class MatchupController {
 	/* 매치업 조회페이지 이동 */
    @GetMapping("/matchupList")
    public String matchupListPage(Model model) {
-      List<MatchUpDTO> matchups = matchupService.getMatchupList(new HashMap<>());
+      List<MatchupListDTO> matchups = matchupService.getMatchupList(new HashMap<>());
        model.addAttribute("matchupList", matchups);
       return "/matchup/matchupList";
    }
@@ -61,7 +64,7 @@ public class MatchupController {
    /* 매치업 카테고리별 조회 */
    @ResponseBody
    @GetMapping("/getMatchupList")
-   public BaseResponse<List<MatchUpDTO>> getMatchupList(
+   public BaseResponse<List<MatchupListDTO>> getMatchupList(
          @RequestParam(required = false) String region_group,
          @RequestParam(required = false) Integer category_id,
          @RequestParam(required = false) String selected_days,
@@ -73,7 +76,11 @@ public class MatchupController {
       filters.put("selected_days", selected_days);
       filters.put("language_id", language_id);
       
-      List<MatchUpDTO> matchups = matchupService.getMatchupList(filters); 
+      List<MatchupListDTO> matchups = matchupService.getMatchupList(filters); 
+      
+      if (matchups == null) {
+    	  return new BaseResponse<>(BaseExceptionResponseStatus.FAILURE, null); /* 매치업은 에러 처리가 없어서 임시 처리 */
+      }
       return new BaseResponse<>(matchups);
    }
    
@@ -83,17 +90,17 @@ public class MatchupController {
 	   if (id == null) {
 		    return "redirect:/matchup/matchupList";
 	   }
-	   MatchUpDTO matchupDetail = matchupService.getMatchupDetail(id);
+	   MatchupDetailDTO matchupDetail = matchupService.getMatchupDetail(id);
 	   model.addAttribute("matchupDetail", matchupDetail);
        return "/matchup/matchupDetail";
    }
    
    @GetMapping("/getMatchupDetail")
    @ResponseBody
-   public Object getMatchupDetail(@RequestParam int id) {
-	   MatchUpDTO matchupDetail = matchupService.getMatchupDetail(id);
+   public BaseResponse<MatchupDetailDTO> getMatchupDetail(@RequestParam int id) {
+	   MatchupDetailDTO matchupDetail = matchupService.getMatchupDetail(id);
 	   if (matchupDetail == null) {
-	        return new BaseErrorResponse(BaseExceptionResponseStatus.FAILURE);
+		   return new BaseResponse<>(BaseExceptionResponseStatus.FAILURE, null); /* 매치업은 에러 처리가 없어서 임시 처리 */
 	   }
 	   return new BaseResponse<>(matchupDetail);
    }

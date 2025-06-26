@@ -58,7 +58,7 @@ function renderMatchups(matchups) {
                 <img class="_1" src="${cpath}/resources/images/profile.svg" />
                 <div class="group-414">
                     <div class="rectangle-209"></div>
-                    <div class="java-c">${matchup.tags}</div>
+                    <div class="java-c">#${matchup.languageName} #${matchup.categoryName}</div>
                 </div>
                 <div class="badges-wrapper">
                     ${renderRecruitBadge(matchup.recruit)}
