@@ -12,7 +12,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Builder
 @Data
-public class MentosDTO {
+public class MentosEntity {
 	Integer mentos_id;
 	Integer category_id;
 	Integer language_id;
@@ -38,4 +38,6 @@ public class MentosDTO {
 	Integer match_type_id_first;
 	Integer match_type_id_second;
 	Integer match_type_id_third;
+    Integer startRow;
+    Integer endRow;
 }

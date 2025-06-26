@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.shinhan.memento.dao.MentosDAO">
+
+    <select id="selectPreMentos" parameterType="com.shinhan.memento.dto.mentos.MentosListRequestDTO" resultType="com.shinhan.memento.dto.MentosEntity">
+        SELECT * 
+        FROM mentos
+        WHERE price = 0
+    </select>
+
+    <select id="selectMentos" parameterType="com.shinhan.memento.dto.mentos.MentosListRequestDTO" resultType="com.shinhan.memento.dto.MentosEntity">
+       SELECT *
+    FROM (
+        SELECT t.*, ROWNUM rnum
+        FROM (
+            SELECT *
+            FROM mentos
+            WHERE status = 'ACTIVE'
+              AND price != 0
+              <if test="category != null and category != ''">
+                AND category_id = #{category}
+              </if>
+              <if test="lang != null and lang != ''">
+                AND language_id = #{lang}
+              </if>
+            ORDER BY updated_at ASC
+        ) t
+        WHERE ROWNUM &lt;= #{endRow}
+    )
+    WHERE rnum &gt;= #{startRow}
+    </select>
+
+    <select id="countTotalPages" parameterType="com.shinhan.memento.dto.mentos.MentosListRequestDTO" resultType="int">
+        SELECT CEIL(COUNT(*) / 10.0) FROM mentos
+        <!-- 필터링 조건과 일치하게 -->
+    </select>
+
+</mapper>
