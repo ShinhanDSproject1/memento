@@ -47,6 +47,6 @@
 			left join language lan on m.language_id = lan.language_id
 			left join member leader on m.leader_id = leader.member_id
 			left join member mento on m.mento_id = mento.member_id
-		where mm.member_id = #{memberId}
+		where mm.member_id = #{memberId} and m.status != 'delete'
 	</select>
 </mapper>
