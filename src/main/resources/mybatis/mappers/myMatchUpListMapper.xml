@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- Mybatis가 select 결과를 읽어서 resultType객체를 생성(기본생성자필수)하고 setting한다.(setter필수) -->
+<!-- namespace로 구별한다. 변수이기에 아무거나 주기 -->
+<mapper namespace="com.memento.shinhan.mymatchuplist">
+	    <resultMap id="myMatchupResultMap" type="myMatchupListDTO">
+        <result property="matchupId"       column="matchup_id"/>
+        <result property="leaderImg"       column="leader_img"/>
+        <result property="matchupTitle"    column="matchup_title"/>
+        <result property="regionSubgroup"  column="region_subgroup"/>
+        <result property="category"        column="category"/>
+        <result property="language"        column="language"/>
+        <result property="startTime"       column="start_time"/>
+        <result property="endTime"         column="end_time"/>
+        <result property="selectedDays"    column="selected_days"/>
+        <result property="hasMento"        column="has_mento"/>
+        <result property="mentoNickname"   column="mento_nickname"/>
+        <result property="count"           column="count"/>
+        <result property="matchupCount"    column="matchup_count"/>
+        <result property="role"            column="role"/>
+        <result property="status"          column="status"/>
+    </resultMap>
+	
+	<select id="selectMyMatchUpList" parameterType="int" resultMap="myMatchupResultMap">
+		select
+			mm.matchup_id as matchup_id, 
+			leader.PROFILE_IMAGE as leader_img, 
+			m.title as matchup_title, 
+			m.region_subgroup as region_subgroup,
+			cat.category_name as category,
+			lan.language_name as language, 	
+			m.start_time as start_time, 		
+			m.end_time as end_time,
+			m.selected_days as selected_days, 
+			m.has_mento as has_mento,
+			mento.nickname as mento_nickname,
+			m.count as count, 
+			m.matchup_count as matchup_count,
+			CASE WHEN m.leader_id = mm.member_id THEN '팀장'ELSE '팀원'END AS role,
+			m.status as status
+		from member_matchup mm
+			join matchup m on mm.matchup_id = m.matchup_id
+			left join category cat on m.category_id = cat.category_id
+			left join language lan on m.language_id = lan.language_id
+			left join member leader on m.leader_id = leader.member_id
+			left join member mento on m.mento_id = mento.member_id
+		where mm.member_id = #{memberId}
+	</select>
+</mapper>

@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import com.shinhan.memento.common.response.BaseResponse;
-import com.shinhan.memento.dto.MyMatchupListDTO;
+import com.shinhan.memento.dto.MyMatchupListResponseDTO;
 import com.shinhan.memento.service.MemberMatchUpService;
 
 @RestController
@@ -18,11 +18,11 @@ public class MyPageRestController {
 	@Autowired
 	MemberMatchUpService memberMatchUpService;
 	
-	@GetMapping(value="/page6/{memberid}", produces = "application/json")
-	public BaseResponse<List<MyMatchupListDTO>> selectJoinListByMemberId(
-				@PathVariable Integer memberid
+	@GetMapping(value="/page6/{memberId}", produces = "application/json")
+	public BaseResponse<List<MyMatchupListResponseDTO>> selectJoinListByMemberId(
+				@PathVariable Integer memberId
 			){
-		List<MyMatchupListDTO> memberMatchUpList = memberMatchUpService.selectJoinListByMemberId(memberid);
+		List<MyMatchupListResponseDTO> memberMatchUpList = memberMatchUpService.selectJoinListByMemberId(memberId);
 		if(memberMatchUpList.size() == 0) {
 			return new BaseResponse<>(null);
 		}

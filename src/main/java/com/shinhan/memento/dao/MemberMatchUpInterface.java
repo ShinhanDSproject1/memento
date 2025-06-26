@@ -1,9 +1,9 @@
 package com.shinhan.memento.dao;
 
 import java.util.List;
-import com.shinhan.memento.dto.MyMatchupListDTO;
+import com.shinhan.memento.dto.MyMatchupListResponseDTO;
 
 public interface MemberMatchUpInterface {
 
-	List<MyMatchupListDTO> selectJoinListByMemberId(Integer memberid);
+	List<MyMatchupListResponseDTO> selectJoinListByMemberId(Integer memberId);
 }
