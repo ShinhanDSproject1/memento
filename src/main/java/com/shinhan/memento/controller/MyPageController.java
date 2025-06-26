@@ -10,9 +10,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.shinhan.memento.common.exception.MemberException;
 import com.shinhan.memento.common.response.BaseResponse;
+import com.shinhan.memento.common.response.status.BaseExceptionResponseStatus;
 import com.shinhan.memento.dto.MypageKeepgoingHistoryDTO;
+import com.shinhan.memento.model.Member;
 import com.shinhan.memento.service.MemberKeepgoingService;
+import com.shinhan.memento.service.MemberService;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -22,6 +26,9 @@ import lombok.extern.slf4j.Slf4j;
 public class MyPageController {
 	@Autowired
 	MemberKeepgoingService memberKeepgoingService;
+	
+	@Autowired
+	MemberService memberService;
 
 	@RequestMapping("/page1")
 	public String myPageView1(HttpServletRequest request) {
@@ -178,6 +185,10 @@ public class MyPageController {
 	@GetMapping("/history/keepgoing")
 	public BaseResponse<List<MypageKeepgoingHistoryDTO>> showKeepgoingHistoryByMemberId(@RequestParam int memberId){
 		log.info("[MypageController.showKeepgoingHistory]");
+		Member member = memberService.selectMemberById(memberId);
+		if(member==null) {
+			throw new MemberException(BaseExceptionResponseStatus.CANNOT_FOUND_MEMBER);
+		}
 		return new BaseResponse<>(memberKeepgoingService.showKeepgoingHistoryByMemberId(memberId));
 	}
 }
