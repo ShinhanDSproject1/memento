@@ -20,9 +20,9 @@ public class MatchUpDTO {
    Integer language_id;
    Integer leader_id;
    Integer mento_id;
-   Integer match_type_id_first;
-   Integer match_type_id_second;
-   Integer match_type_id_third;
+   Integer match_type_first;
+   Integer match_type_second;
+   Integer match_type_third;
    String title;
    Integer count;
    Integer matchup_count;
@@ -107,5 +107,31 @@ public class MatchUpDTO {
         }
         return langTag + " " + catTag;
     }
-
+    
+  	/* spark 유형 이름 표출 */
+    public String getFormattedMatchTypeFirst() {
+        String matchType1 = getMatchTypeName(match_type_first);
+        return matchType1;
+    }
+    public String getFormattedMatchTypeSecond() {
+        String matchType2 = getMatchTypeName(match_type_second);
+        return matchType2;
+    }
+    public String getFormattedMatchTypeThird() {
+        String matchType3 = getMatchTypeName(match_type_third);
+        return matchType3;
+    }
+    
+	public String getMatchTypeName(Integer typeId) {
+		if (typeId == null) return "선택 안함";
+		switch (typeId) {
+		  case 1: return "코드폭탄 해피빈";
+		  case 2: return "혼코딩 슬로우곰";
+		  case 3: return "#아이디어 요정 깃요미";
+		  case 4: return "#계획왕 컴정이";
+		  case 5: return "#느긋한 타닥냥";
+		  case 6: return "#목표러 코취지";
+		  default: return "수정 필요";
+	      }
+	  } 
 }

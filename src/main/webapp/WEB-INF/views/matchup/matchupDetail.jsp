@@ -40,7 +40,7 @@
 				</div>
 				<div class="group-477">
 					<div class="div6">스터디 횟수</div>
-					<div class="_1">1회</div>
+					<div class="_1">${matchupDetail.count}회</div>
 				</div>
 				<img class="line" src="${cpath}/resources/images/line0.svg" />
 				<div class="group-478">
@@ -58,11 +58,7 @@
 						<div class="div8">멘토링 소개</div>
 						<div class="frame-3665">
 							<div class="_1-1-2-3-1-3-or-1">
-								<span> <span class="_1-1-2-3-1-3-or-1-span"> “잠깐
-										몰입해서, 확실히 성장하자” <br /> <br /> 안녕하세요! <br /> 짧고 굵게, 진짜 집중해서
-										알고리즘 실력을 끌어올리고 싶은 분들을 위해 <br /> ‘1주일 단기 알고리즘 집중 스터디’를 모집합니다.
-										<br /> <br /> &quot;계속 미루고만 있던 알고리즘 공부, 이번 기회에 딱 1주일만 진짜
-										해봅시다!&quot; <br /> <br /> <br /> 진행방식 <br /> <br />
+								<span> <span class="_1-1-2-3-1-3-or-1-span">${matchupDetail.content} 
 								</span>
 									<ul class="_1-1-2-3-1-3-or-1-span2">
 										<li>매일 문제 2~3개 선정 → 각자 풀이 후 리뷰</li>
@@ -75,7 +71,8 @@
 										알고리즘을 다시 잡고 싶은 분 <br /> 코딩 테스트를 앞두고 있는 분 <br /> 루틴을 만들며 단기간
 										집중하고 싶은 분 <br /> 작심삼일 끝판왕… 누군가랑 함께해야 동기부여 되는 분 <br /> <br />
 										혼자보다 함께라면 더 멀리 갈 수 있어요!!!! <br /> 시작이 반! 같이 해요 <br />
-								</span> <span class="_1-1-2-3-1-3-or-1-span3"> <br /> <br />
+								</span> 
+								<span class="_1-1-2-3-1-3-or-1-span3"> <br /> <br />
 								</span>
 								</span>
 							</div>
@@ -87,21 +84,21 @@
 									<img class="ellipse-147"
 										src="${cpath}/resources/images/ellipse.svg" />
 									<div class="div10">
-										🔥 <br /> 코드폭탄 <br /> 해피빈
+										🔥 ${matchupDetail.formattedMatchTypeFirst}
 									</div>
 								</div>
 								<div class="type-circle">
 									<img class="ellipse-1472"
 										src="${cpath}/resources/images/ellipse.svg" />
 									<div class="div11">
-										🔥 <br /> 코드폭탄 <br /> 해피빈
+										🔥 ${matchupDetail.formattedMatchTypeSecond}
 									</div>
 								</div>
 								<div class="type-circle">
 									<img class="ellipse-1473"
 										src="${cpath}/resources/images/ellipse.svg" />
 									<div class="div12">
-										🔥 <br /> 코드폭탄 <br /> 해피빈
+										🔥 ${matchupDetail.formattedMatchTypeThird}
 									</div>
 								</div>
 							</div>
@@ -282,10 +279,7 @@
 					</div>
 				</a>
 			</div>
-
-
 		</div>
-
 	</div>
 
 	<script>
