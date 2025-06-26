@@ -14,7 +14,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.shinhan.memento.common.response.BaseErrorResponse;
 import com.shinhan.memento.common.response.BaseResponse;
+import com.shinhan.memento.common.response.status.BaseExceptionResponseStatus;
 import com.shinhan.memento.dto.MatchUpDTO;
 import com.shinhan.memento.service.MatchupService;
 
@@ -30,20 +32,21 @@ public class MatchupController {
       return "/matchup/matchupDetailLeader";
    }
    
-   @GetMapping("/createMatchup")
-   public String f3() {
-      return "/matchup/createMatchup";
-   }
-   
    @GetMapping("/updateMatchup")
    public String f4() {
       return "/matchup/updateMatchup";
    }
-
+   
+   @GetMapping("/createMatchup")
+   public String createMatchupForm() {
+      return "/matchup/createMatchup";
+   }
+   
    /* 매치업 작성하기 */
-   @PostMapping("/createMatchup")
+   @PostMapping("/postCreateMatchup")
    @ResponseBody
    public BaseResponse<MatchUpDTO> createMatchup(@RequestBody MatchUpDTO matchup) {
+	  System.out.println("Received DTO via JSON: " + matchup);
       return new BaseResponse<>(matchup);
    }
    
@@ -77,6 +80,9 @@ public class MatchupController {
    /* 매치업 상세 조회 페이지 이동 */
    @GetMapping("/matchupDetail")
    public String matchupDetailPage(@RequestParam(required = false) Integer id, Model model) {
+	   if (id == null) {
+		    return "redirect:/matchup/matchupList";
+	   }
 	   MatchUpDTO matchupDetail = matchupService.getMatchupDetail(id);
 	   model.addAttribute("matchupDetail", matchupDetail);
        return "/matchup/matchupDetail";
@@ -84,8 +90,11 @@ public class MatchupController {
    
    @GetMapping("/getMatchupDetail")
    @ResponseBody
-   public BaseResponse<MatchUpDTO> getMatchupDetail(@RequestParam int id) {
-		   MatchUpDTO matchupDetail = matchupService.getMatchupDetail(id);
-		   return new BaseResponse<>(matchupDetail);
+   public Object getMatchupDetail(@RequestParam int id) {
+	   MatchUpDTO matchupDetail = matchupService.getMatchupDetail(id);
+	   if (matchupDetail == null) {
+	        return new BaseErrorResponse(BaseExceptionResponseStatus.FAILURE);
+	   }
+	   return new BaseResponse<>(matchupDetail);
    }
 }

@@ -31,13 +31,16 @@
                      <div class="detail-select-li2">
                          <select name="category_id" class="filter-select" onchange="applyFilters()">
                              <option value="">-- 학습유형 (전체) --</option>
-                             <option value="1" ${param.category_id == '1' ? 'selected' : ''}>면접준비</option>
-                             <option value="2" ${param.category_id == '2' ? 'selected' : ''}>운영체제</option>
-                             <option value="3" ${param.category_id == '3' ? 'selected' : ''}>데이터베이스</option>
-                             <option value="4" ${param.category_id == '4' ? 'selected' : ''}>네트워크</option>
-                             <option value="5" ${param.category_id == '5' ? 'selected' : ''}>자료구조</option>
-                             <option value="6" ${param.category_id == '6' ? 'selected' : ''}>알고리즘</option>
-                             <option value="7" ${param.category_id == '7' ? 'selected' : ''}>자격증</option>
+                             <option value="1" ${param.category_id == '1' ? 'selected' : ''}>알고리즘</option>
+                             <option value="2" ${param.category_id == '2' ? 'selected' : ''}>자료구조</option>
+                             <option value="3" ${param.category_id == '3' ? 'selected' : ''}>면접준비</option>
+                             <option value="4" ${param.category_id == '4' ? 'selected' : ''}>자격증</option>
+                             <option value="5" ${param.category_id == '5' ? 'selected' : ''}>데이터베이스</option>
+                             <option value="6" ${param.category_id == '6' ? 'selected' : ''}>운영체제</option>
+                             <option value="7" ${param.category_id == '7' ? 'selected' : ''}>네트워크</option>
+                             
+                             
+                             
                          </select>
                      </div>
                      <div class="detail-select-li">
@@ -67,7 +70,7 @@
                  </div>
             </div>
             <button class="group-389" type="button"
-               onclick="location.href='${pageContext.request.contextPath}/createMatchup'">
+               onclick="location.href='${pageContext.request.contextPath}/matchup/createMatchup'">
                새로운 매치업 작성하기</button>
          </div>
          <div class="frame-3694">

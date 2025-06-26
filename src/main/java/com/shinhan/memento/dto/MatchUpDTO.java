@@ -3,6 +3,7 @@ package com.shinhan.memento.dto;
 import java.sql.Date;
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 
 import lombok.AllArgsConstructor;
@@ -42,6 +43,7 @@ public class MatchUpDTO {
    Date created_at;
    Date updated_at;
    String status;
+   String selected_days;
    
    /* 모집 현황 정보 */
    String recruit;
@@ -84,26 +86,29 @@ public class MatchUpDTO {
         String langTag = "";
         String catTag = "";
         
-        switch (language_id) {
-         case 1: langTag = "#Python"; break;
-         case 2: langTag = "#Java"; break;
-         case 3: langTag = "#C++"; break;
-         case 4: langTag = "#C#"; break;
-         case 5: langTag = "#C"; break;
-         case 6: langTag = "#HTML/CSS"; break;
-         case 7: langTag = "#JavaScript"; break;
-         default: langTag = "";
+        if (language_id != null) {
+	        switch (language_id) {
+	         case 1: langTag = "#Python"; break;
+	         case 2: langTag = "#Java"; break;
+	         case 3: langTag = "#C++"; break;
+	         case 4: langTag = "#C#"; break;
+	         case 5: langTag = "#C"; break;
+	         case 6: langTag = "#HTML/CSS"; break;
+	         case 7: langTag = "#JavaScript"; break;
+	         default: langTag = "";
+	        }
         }
- 
-        switch (category_id) {
-         case 1: catTag = "#면접준비"; break;
-         case 2: catTag = "#운영체제"; break;
-         case 3: catTag = "#데이터베이스"; break;
-         case 4: catTag = "#네트워크"; break;
-         case 5: catTag = "#자료구조"; break;
-         case 6: catTag = "#알고리즘"; break;
-         case 7: catTag = "#자격증"; break;
-         default: catTag = "";
+	    if (category_id != null) {
+	        switch (category_id) {
+	         case 1: catTag = "#알고리즘"; break;
+	         case 2: catTag = "#자료구조"; break;
+	         case 3: catTag = "#면접준비"; break;
+	         case 4: catTag = "#자격증"; break;
+	         case 5: catTag = "#데이터베이스"; break;
+	         case 6: catTag = "#운영체제"; break;
+	         case 7: catTag = "#네트워크"; break;
+	         default: catTag = "";
+	        }
         }
         return langTag + " " + catTag;
     }

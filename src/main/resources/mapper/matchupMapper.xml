@@ -7,33 +7,59 @@
 
   <select id="selectAll" resultType="com.shinhan.memento.dto.MatchUpDTO">
     select * from matchup
-    <where>
-      <if test="region_group != null and region_group != ''">
-        AND region_group = #{region_group}
-      </if>
-      <if test="category_id != null">
-        AND category_id = #{category_id}
-      </if>
-      <if test="selected_days != null and selected_days != ''">
-        AND selected_days LIKE '%' || #{selected_days} || '%'
-      </if>
-      <if test="language_id != null">
-        AND language_id = #{language_id}
-      </if>
-    </where>
-    order by start_day
-  </select>
+	  <where>
+	    <if test="region_group != null and region_group != ''">
+	      AND region_group = #{region_group}
+	    </if>
+	    <if test="category_id != null">
+	      AND category_id = #{category_id}
+	    </if>
+	    <if test="selected_days != null and selected_days != ''">
+	      AND selected_days LIKE '%' || #{selected_days} || '%'
+	    </if>
+	    <if test="language_id != null">
+	      AND language_id = #{language_id}
+	    </if>
+	  </where>
+	  order by start_day
+	</select>
+	
+	<select id="getActiveMemberCount" parameterType="int" resultType="int">
+		  select count(*)
+		    from member_matchup
+		   where status = 'ACTIVE'
+		     and matchup_id = #{matchupId}
+	</select>
+	
+	  <select id="selectByMatchupId" parameterType="int" resultType="com.shinhan.memento.dto.MatchUpDTO">
+		  select * from matchup
+		   where matchup_id = #{matchupId}
+	</select>
 
-  <select id="getActiveMemberCount" parameterType="int" resultType="int">
-    select count(*)
-      from member_matchup
-     where status = 'ACTIVE'
-       and matchup_id = #{matchupId}
-  </select>
+	<insert id="createMatchup" parameterType="com.shinhan.memento.dto.MatchUpDTO">
+		insert into matchup (
+		  matchup_id, category_id, language_id,
+		  leader_id, mento_id, match_type_first,
+		  match_type_second, match_type_third,
+		  title, count, matchup_count, start_day,
+		  end_day, start_time, end_time,
+		  min_member, max_member, content,
+		  has_mento, price, kg_count, region_group,
+		  region_subgroup, region_detail, selected_days,
+		  created_at, updated_at, status
+		)
+		values (
+		  seq_matchup_id.nextval, 
+		  #{category_id}, #{language_id}, 
+		  #{leader_id}, #{mento_id}, #{match_type_first},
+		  #{match_type_second}, #{match_type_third},
+		  #{title}, #{count}, #{matchup_count}, #{start_day},
+		  #{end_day}, #{start_time}, #{end_time},
+		  #{min_member}, #{max_member}, #{content},
+		  #{has_mento}, #{price}, #{kg_count}, #{region_group},
+		  #{region_subgroup}, #{region_detail}, #{selected_days},
+		  sysdate, sysdate, #{status}
+		)
+	</insert>
   
-    <select id="selectByMatchupId" parameterType="int" resultType="com.shinhan.memento.dto.MatchUpDTO">
-    select * from matchup
-     where matchup_id = #{matchupId}
-  </select>
-
 </mapper>

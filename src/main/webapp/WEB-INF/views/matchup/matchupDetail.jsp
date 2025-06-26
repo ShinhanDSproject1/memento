@@ -141,7 +141,6 @@
 			<div class="line-10"></div>
 			<div class="div9">비슷한 다른 매치업 둘러보기</div>
 			<div class="frame-3770">
-
 				<a href="${cpath}/matchupDetail" class="card-link">
 					<div class="frame-3769">
 						<div class="group-413">
@@ -281,7 +280,6 @@
 			</div>
 		</div>
 	</div>
-
 	<script>
 		document.addEventListener('DOMContentLoaded', function() {
 			document.getElementById('apply-btn').addEventListener('click',
@@ -290,6 +288,5 @@
 					});
 		});
 	</script>
-
 </body>
 </html>
