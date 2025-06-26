@@ -1,12 +1,27 @@
 package com.shinhan.memento.controller;
 
-import javax.servlet.http.HttpServletRequest;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
+import java.util.List;
 
-@Controller
+import javax.servlet.http.HttpServletRequest;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.shinhan.memento.common.response.BaseResponse;
+import com.shinhan.memento.dto.MypageKeepgoingHistoryDTO;
+import com.shinhan.memento.service.MemberKeepgoingService;
+
+import lombok.extern.slf4j.Slf4j;
+
+@RestController
+@Slf4j
 @RequestMapping("/mypage")
 public class MyPageController {
+	@Autowired
+	MemberKeepgoingService memberKeepgoingService;
 
 	@RequestMapping("/page1")
 	public String myPageView1(HttpServletRequest request) {
@@ -155,5 +170,14 @@ public class MyPageController {
 	        request.setAttribute("initialPage", "/memento/mypage/mento-test"); // 실제 경로 지정
 	        return "mypage/mypage-main"; // 전체 레이아웃에서 내부에서 AJAX 호출
 	    }
+	}
+	
+	/**
+	 * 마이페이지(킵고잉 이용내역 조회)
+	 */
+	@GetMapping("/history/keepgoing")
+	public BaseResponse<List<MypageKeepgoingHistoryDTO>> showKeepgoingHistoryByMemberId(@RequestParam int memberId){
+		log.info("[MypageController.showKeepgoingHistory]");
+		return new BaseResponse<>(memberKeepgoingService.showKeepgoingHistoryByMemberId(memberId));
 	}
 }
