@@ -27,7 +27,7 @@
 	<select id="selectMyMatchUpList" parameterType="int" resultMap="myMatchupResultMap">
 		select
 			mm.matchup_id as matchup_id, 
-			leader.PROFILE_IMAGE as leader_img, 
+			leader.PROFILE_IMAGE_URL as leader_img, 
 			m.title as matchup_title, 
 			m.region_subgroup as region_subgroup,
 			cat.category_name as category,
