@@ -26,10 +26,10 @@ public class MatchUp {
 	private String title;
 	private int count; // 전체 횟수 
 	private int matchupCount; //실제 이행 횟수 
-	private Date startDate;
+	private Date startDay;
 	private Date endDay;
 	private LocalDateTime startTime;
-	private LocalDateTime emdTime;
+	private LocalDateTime endTime;
 	private int minMember;
 	private int maxMember;
 	private String content; //매치업 소개내용 

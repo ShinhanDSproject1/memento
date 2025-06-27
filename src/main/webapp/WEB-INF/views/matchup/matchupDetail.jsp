@@ -13,38 +13,38 @@
 	<div class="div">
 		<div class="top-bar">
 			<div class="top-bar-tag">
-				<div class="top-bar-mento">
-					<div class="div2">멘토 모집중</div>
-				</div>
+			    <c:if test="${!matchupDetail.has_mento}">
+			        멘토 모집중
+			    </c:if>
 				<div class="top-bar-category">
-					<div class="java-c">#알고리즘 #Java #C</div>
+					<div class="java-c">#${matchupDetail.languageName} #${matchupDetail.categoryName}</div>
 				</div>
 			</div>
-			<div class="div3">일주일 단기 알고리즘 스터디원 모집 중 🔥</div>
+			<div class="div3">${matchupDetail.title}</div>
 		</div>
 		<div class="top-info-area">
 			<div class="top-info">
 				<div class="group-475">
 					<div class="div4">현재 모집인원</div>
 					<div class="_3-5">
-						<span class="now-member-cnt">3</span> <span class="dash">/</span>
-						<span class="max-member-cnt">5</span>
+						<span class="now-member-cnt">${matchupDetail.formattedMemberCount}</span> 
 					</div>
 				</div>
 				<div class="group-476">
 					<div class="div5">모집 시간</div>
 					<div class="_15-00-17-00">
-						<span class="start-time">15:00</span> <span class="dash">-</span>
-						<span class="end-time">17:00</span>
+						<span class="start-time">${matchupDetail.formattedStartTime}</span> 
+						<span class="dash">-</span>
+						<span class="end-time">${matchupDetail.formattedEndTime}</span>
 					</div>
 				</div>
 				<div class="group-477">
 					<div class="div6">스터디 횟수</div>
-					<div class="_1">1회</div>
+					<div class="_1">${matchupDetail.count}회</div>
 				</div>
 				<img class="line" src="${cpath}/resources/images/line0.svg" />
 				<div class="group-478">
-					<div class="_70-000">₩70,000</div>
+					<div class="_70-000">₩${matchupDetail.formattedPrice}</div>
 					<button class="apply-btn" id="apply-btn" type="button">
 						<span class="rectangle-298"></span> <span class="div7">신청하기</span>
 					</button>
@@ -58,11 +58,7 @@
 						<div class="div8">멘토링 소개</div>
 						<div class="frame-3665">
 							<div class="_1-1-2-3-1-3-or-1">
-								<span> <span class="_1-1-2-3-1-3-or-1-span"> “잠깐
-										몰입해서, 확실히 성장하자” <br /> <br /> 안녕하세요! <br /> 짧고 굵게, 진짜 집중해서
-										알고리즘 실력을 끌어올리고 싶은 분들을 위해 <br /> ‘1주일 단기 알고리즘 집중 스터디’를 모집합니다.
-										<br /> <br /> &quot;계속 미루고만 있던 알고리즘 공부, 이번 기회에 딱 1주일만 진짜
-										해봅시다!&quot; <br /> <br /> <br /> 진행방식 <br /> <br />
+								<span> <span class="_1-1-2-3-1-3-or-1-span">${matchupDetail.content} 
 								</span>
 									<ul class="_1-1-2-3-1-3-or-1-span2">
 										<li>매일 문제 2~3개 선정 → 각자 풀이 후 리뷰</li>
@@ -75,7 +71,8 @@
 										알고리즘을 다시 잡고 싶은 분 <br /> 코딩 테스트를 앞두고 있는 분 <br /> 루틴을 만들며 단기간
 										집중하고 싶은 분 <br /> 작심삼일 끝판왕… 누군가랑 함께해야 동기부여 되는 분 <br /> <br />
 										혼자보다 함께라면 더 멀리 갈 수 있어요!!!! <br /> 시작이 반! 같이 해요 <br />
-								</span> <span class="_1-1-2-3-1-3-or-1-span3"> <br /> <br />
+								</span> 
+								<span class="_1-1-2-3-1-3-or-1-span3"> <br /> <br />
 								</span>
 								</span>
 							</div>
@@ -87,21 +84,21 @@
 									<img class="ellipse-147"
 										src="${cpath}/resources/images/ellipse.svg" />
 									<div class="div10">
-										🔥 <br /> 코드폭탄 <br /> 해피빈
+										🔥 ${matchupDetail.matchTypeFirstName}
 									</div>
 								</div>
 								<div class="type-circle">
 									<img class="ellipse-1472"
 										src="${cpath}/resources/images/ellipse.svg" />
 									<div class="div11">
-										🔥 <br /> 코드폭탄 <br /> 해피빈
+										🔥 ${matchupDetail.matchTypeSecondName}
 									</div>
 								</div>
 								<div class="type-circle">
 									<img class="ellipse-1473"
 										src="${cpath}/resources/images/ellipse.svg" />
 									<div class="div12">
-										🔥 <br /> 코드폭탄 <br /> 해피빈
+										🔥 ${matchupDetail.matchTypeThirdName}
 									</div>
 								</div>
 							</div>
@@ -113,7 +110,7 @@
 						<div class="frame-3666">
 							<img class="icon-maps-map-pin"
 								src="${cpath}/resources/images/icon-map-red.svg" />
-							<div class="_4-77-1-f">마포구 월드컵북로 4길 77 1F</div>
+							<div class="_4-77-1-f">${matchupDetail.formattedRegion}</div>
 						</div>
 						<div class="rectangle-189"></div>
 					</div>
@@ -144,7 +141,6 @@
 			<div class="line-10"></div>
 			<div class="div9">비슷한 다른 매치업 둘러보기</div>
 			<div class="frame-3770">
-
 				<a href="${cpath}/matchupDetail" class="card-link">
 					<div class="frame-3769">
 						<div class="group-413">
@@ -282,12 +278,8 @@
 					</div>
 				</a>
 			</div>
-
-
 		</div>
-
 	</div>
-
 	<script>
 		document.addEventListener('DOMContentLoaded', function() {
 			document.getElementById('apply-btn').addEventListener('click',
@@ -296,6 +288,5 @@
 					});
 		});
 	</script>
-
 </body>
 </html>
