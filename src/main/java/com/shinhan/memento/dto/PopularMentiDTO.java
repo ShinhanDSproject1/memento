@@ -6,7 +6,7 @@ import lombok.Data;
 @Data
 @Builder
 public class PopularMentiDTO {
-    private int memberId;
+	/* private int memberId; */
     private String nickname;
     private String profileImage;
     private double score;

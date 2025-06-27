@@ -9,7 +9,6 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Data
 public class PopularLanguageDTO {
-    private int languageId;
     private String languageName;
     private int totalCount;
 

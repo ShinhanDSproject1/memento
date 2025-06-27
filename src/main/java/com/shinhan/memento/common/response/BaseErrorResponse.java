@@ -1,5 +1,6 @@
 package com.shinhan.memento.common.response;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import com.shinhan.memento.common.response.status.ResponseStatus;
 
@@ -14,6 +15,7 @@ public class BaseErrorResponse implements ResponseStatus {
     private final int code;
     private final int status;
     private final String message;
+    @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss.SSSSSSSSS")
     private final LocalDateTime timestamp;
 
     public BaseErrorResponse(ResponseStatus status) {
