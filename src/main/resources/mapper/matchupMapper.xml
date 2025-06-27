@@ -97,4 +97,15 @@
 		)
 	</insert>
   
+  	<delete id="deleteMemberMatchupsByMatchupId" parameterType="int">
+		  DELETE FROM MEMBER_MATCHUP
+		  WHERE MATCHUP_ID = #{matchupId}
+	</delete>
+  
+  	<delete id="deleteMatchupByIdAndLeader" parameterType="int">
+		  DELETE FROM MATCHUP
+		  WHERE MATCHUP_ID = #{matchupId}
+		    AND LEADER_ID = #{leaderId}
+	</delete>
+  
 </mapper>

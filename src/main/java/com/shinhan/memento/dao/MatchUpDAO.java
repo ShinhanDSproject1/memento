@@ -1,8 +1,10 @@
 package com.shinhan.memento.dao;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -56,4 +58,13 @@ public class MatchUpDAO {
 	public int createMatchup(MatchUpDTO matchup) {
 	    return sqlSession.insert(namespace + "createMatchup", matchup);
 	}
+	
+	/* 매치업 삭제하기 (방장만이 갖고 있는 권한) */
+	public int deleteMatchupByIdAndLeader(int matchupId, int leaderId) {
+		Map<String, Object> params = new HashMap<>();
+	    params.put("matchupId", matchupId);
+	    params.put("leaderId", leaderId);
+	    return sqlSession.delete(namespace + "deleteMatchupByIdAndLeader", params);
+	}
+	
 }
