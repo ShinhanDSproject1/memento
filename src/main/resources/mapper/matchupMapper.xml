@@ -67,15 +67,33 @@
 		)
 		values (
 		  seq_matchup_id.nextval, 
-		  #{category_id}, #{language_id}, 
-		  #{leader_id}, #{mento_id}, #{match_type_first},
-		  #{match_type_second}, #{match_type_third},
-		  #{title}, #{count}, #{matchup_count}, #{start_day},
-		  #{end_day}, #{start_time}, #{end_time},
-		  #{min_member}, #{max_member}, #{content},
-		  #{has_mento}, #{price}, #{kg_count}, #{region_group},
-		  #{region_subgroup}, #{region_detail}, #{selected_days},
-		  sysdate, sysdate, #{status}
+		  #{category_id, jdbcType=INTEGER}, 
+		  #{language_id, jdbcType=INTEGER}, 
+		  #{leader_id, jdbcType=INTEGER}, 
+		  #{mento_id, jdbcType=INTEGER}, 
+		  #{match_type_first, jdbcType=INTEGER},
+		  #{match_type_second, jdbcType=INTEGER}, 
+		  #{match_type_third, jdbcType=INTEGER},
+		  #{title, jdbcType=VARCHAR}, 
+		  #{count, jdbcType=INTEGER}, 
+		  #{matchup_count, jdbcType=INTEGER}, 
+		  #{start_day, jdbcType=VARCHAR},
+		  #{end_day, jdbcType=VARCHAR}, 
+		  #{start_time, jdbcType=VARCHAR}, 
+		  #{end_time, jdbcType=VARCHAR},
+		  #{min_member, jdbcType=INTEGER}, 
+		  #{max_member, jdbcType=INTEGER}, 
+		  #{content, jdbcType=VARCHAR},
+		  #{has_mento, jdbcType=VARCHAR}, 
+		  #{price, jdbcType=INTEGER}, 
+		  #{kg_count, jdbcType=INTEGER}, 
+		  #{region_group, jdbcType=VARCHAR},
+		  #{region_subgroup, jdbcType=VARCHAR}, 
+		  #{region_detail, jdbcType=VARCHAR}, 
+		  #{selected_days, jdbcType=VARCHAR},
+		  sysdate, 
+		  sysdate, 
+		  #{status, jdbcType=VARCHAR}
 		)
 	</insert>
   

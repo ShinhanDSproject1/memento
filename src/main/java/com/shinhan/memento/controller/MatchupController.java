@@ -40,17 +40,25 @@ public class MatchupController {
       return "/matchup/updateMatchup";
    }
    
+   /* 매치업 신규 작성 페이지 이동 */
    @GetMapping("/createMatchup")
    public String createMatchupForm() {
       return "/matchup/createMatchup";
    }
    
-   /* 매치업 작성하기 */
+   /* 매치업 신규 작성하기 */
    @PostMapping("/postCreateMatchup")
    @ResponseBody
    public BaseResponse<MatchUpDTO> createMatchup(@RequestBody MatchUpDTO matchup) {
 	  System.out.println("Received DTO via JSON: " + matchup);
-      return new BaseResponse<>(matchup);
+      
+	  int result = matchupService.createMatchup(matchup);
+	  
+	  if (result > 0) {
+		  return new BaseResponse<>(matchup);
+	  } else {
+		  return new BaseResponse<>(BaseExceptionResponseStatus.FAILURE, null);
+	  }
    }
    
 	/* 매치업 조회페이지 이동 */

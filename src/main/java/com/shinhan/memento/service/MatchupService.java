@@ -67,4 +67,8 @@ public class MatchupService {
 		}
 		return matchupDetail;
 	}
+	
+	public int createMatchup(MatchUpDTO matchup) {
+	    return matchUpDAO.createMatchup(matchup);
+	}
 }

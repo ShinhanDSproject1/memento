@@ -20,10 +20,8 @@ document.addEventListener('DOMContentLoaded', function () {
             return;
         }
 
-        // 드롭다운 열기/닫기
         trigger.addEventListener('click', (event) => {
             event.stopPropagation();
-            // 다른 드롭다운은 닫기
             document.querySelectorAll('.dropdown-list').forEach(d => {
                 if (d.id !== dropdownId) d.classList.add('hidden');
             });
@@ -181,6 +179,10 @@ document.addEventListener('DOMContentLoaded', function () {
 		    
 		        // 3. DTO에 매핑될 JavaScript 객체 생성
 		        const matchupData = {
+		        	leader_id: 1, 		// ###로그인이 아직 적용되지 않았으므로 일단 고정해놓음 ###
+		        	matchup_count: 0,  	// 신규 생성 시 현재 신청 인원은 0이므로 설정함. 
+		        	kg_count: 0,  		// 신규 생성 시 킵고잉 찬성 인원은 0이므로 설정함. 
+		        
 				    title: document.getElementById('matchupTitleHidden').value,
 				    content: document.getElementById('matchupContentHidden').value,
 				    
@@ -212,15 +214,14 @@ document.addEventListener('DOMContentLoaded', function () {
         };
 
         // 2. fetch API를 사용하여 서버에 POST 요청
-        fetch(window.cpath + '/matchup/postCreateMatchup', { // Controller의 @PostMapping 경로와 일치해야 함
+        fetch(window.cpath + '/matchup/postCreateMatchup', { // Controller의 @PostMapping 경로와 일치
             method: 'POST',
             headers: {
-                'Content-Type': 'application/json' // Body에 JSON 데이터가 담겼다고 명시 (필수)
+                'Content-Type': 'application/json' // Body에 JSON 데이터가 담겼다고 명시
             },
             body: JSON.stringify(matchupData) // JavaScript 객체를 JSON 문자열로 변환
         })
         .then(response => {
-            // 서버 응답이 정상이 아니면 에러 처리
             if (!response.ok) {
                 throw new Error('서버 응답이 올바르지 않습니다.');
             }
@@ -232,17 +233,14 @@ document.addEventListener('DOMContentLoaded', function () {
             console.log('서버 응답:', data);
 
             // BaseResponse의 code 또는 status를 확인하여 성공 여부 판단
-            if (data.code === 1000) { // BaseExceptionResponseStatus.SUCCESS.getCode() 값
-                // 성공 시, 만들어 두신 확인 모달을 띄웁니다.
+            if (data.code === 1000) { 
                 document.getElementById('createConfirmModal').classList.remove('hidden');
 
-                // 모달의 확인 버튼을 누르면 목록 페이지 등으로 이동하도록 설정
                 document.querySelector(".modal-close-btn").addEventListener("click", () => {
                     location.href = window.cpath + "/matchup/matchupList"; // 성공 후 이동할 페이지
                 });
 
             } else {
-                // 실패 시, 에러 메시지 표시
                 alert(data.message || '매치업 생성에 실패했습니다.');
             }
         })
@@ -258,8 +256,7 @@ document.addEventListener('DOMContentLoaded', function () {
      * 모달 창 닫기 로직 (수정)
      * =============================================
      */
-     // 기존 모달 닫기 버튼 로직은 성공 후 동적으로 설정되므로, 
-     // 단순 닫기 기능만 남기거나 위의 로직에 통합합니다.
+
      const closeModalBtn = document.querySelector(".modal-close-btn");
      if(closeModalBtn) {
          closeModalBtn.addEventListener("click", () => {

@@ -51,4 +51,9 @@ public class MatchUpDAO {
 	public MatchupDetailDTO getMatchupDetail(int matchupId) {
 		return sqlSession.selectOne(namespace + "selectByMatchupId", matchupId);
 	}
+	
+	/* 매치업 신규 생성하기 */
+	public int createMatchup(MatchUpDTO matchup) {
+	    return sqlSession.insert(namespace + "createMatchup", matchup);
+	}
 }
