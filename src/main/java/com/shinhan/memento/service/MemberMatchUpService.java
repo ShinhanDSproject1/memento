@@ -13,7 +13,7 @@ public class MemberMatchUpService {
 	@Autowired
 	MemberMatchUpDAO memberMatchUpDAO;
 	
-	public List<MyMatchupListResponseDTO> selectJoinListByMemberId(Integer memberId){
+	public List<MyMatchupListResponseDTO> selectJoinListByMemberId(Integer memberId){		
 		return memberMatchUpDAO.selectJoinListByMemberId(memberId);
 	}
 }

@@ -1,11 +1,11 @@
 package com.shinhan.memento.dto;
 
-import java.sql.Timestamp;
-
 import lombok.Builder;
 import lombok.Getter;
+import lombok.Setter;
 
 @Getter
+@Setter
 @Builder
 public class MyMatchupListResponseDTO {
 	private Integer matchupId;
@@ -14,8 +14,8 @@ public class MyMatchupListResponseDTO {
 	private String regionSubgroup;
 	private String category;
 	private String language;
-	private Timestamp startTime;
-	private Timestamp endTime;
+	private String startTime;
+	private String endTime;
 	private String selectedDays;
 	private Boolean hasMento;
 	private String mentoNickname;
