@@ -29,17 +29,17 @@ public class MatchupController {
    MatchupService matchupService;
    
    /* 
-    * 매치업 삭제하기 - 신규 생성 후 최종 매치업 확정 전까지는 DELETE, 확정 후 진행 중, 진행 완료 시에는 UPDATE STATUS = INACTIVE 
+    * 매치업 삭제하기 - UPDATE STATUS = INACTIVE 
     * */
 	@PostMapping("/deleteMatchup")
 	@ResponseBody
 	public BaseResponse<String> deleteMatchup(@RequestParam("matchupId") int matchupId,
 	                                          @RequestParam("leaderId") int leaderId) {
 	    try {
-	        int result = matchupService.deleteMatchup(matchupId, leaderId);
+	        int result = matchupService.inactivateMatchup(matchupId, leaderId);
 
 	        if (result > 0) {
-	            return new BaseResponse<>(BaseExceptionResponseStatus.SUCCESS, result + "건이 삭제되었습니다.");
+	            return new BaseResponse<>(BaseExceptionResponseStatus.SUCCESS, result + "건이 비활성화되었습니다.");
 	        } else {
 	            return new BaseResponse<>(BaseExceptionResponseStatus.FAILURE, null);
 	        }

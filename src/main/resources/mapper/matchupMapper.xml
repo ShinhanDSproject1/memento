@@ -8,9 +8,11 @@
     <select id="selectAll"
         resultType="com.shinhan.memento.dto.MatchupListDTO">
         SELECT matchup_id, category_id, selected_days, language_id,
-        region_group, start_day, end_day, start_time, end_time, min_member,
-        max_member, price, title, has_mento FROM matchup
+        	region_group, start_day, end_day, start_time, end_time, min_member,
+        	max_member, price, title, has_mento 
+        FROM matchup
         <where>
+        	status = 'ACTIVE'
             <if test="region_group != null and region_group != ''"> AND region_group = #{region_group} </if>
             <if test="category_id != null"> AND category_id = #{category_id} </if>
             <if test="selected_days != null and selected_days != ''"> AND selected_days LIKE '%' || #{selected_days} || '%' </if>
@@ -20,28 +22,43 @@
     </select>
 
     <select id="getActiveMemberCount" parameterType="int" resultType="int">
-        select count(*) from member_matchup where status = 'ACTIVE' and matchup_id = #{matchupId}
+        select count(*) 
+          from member_matchup 
+         where status = 'ACTIVE' 
+           and matchup_id = #{matchupId}
     </select>
 
     <select id="selectByMatchupId" parameterType="int"
         resultType="com.shinhan.memento.dto.MatchupDetailDTO">
         select matchup_id, category_id, language_id, leader_id,
-        mento_id, region_group, region_subgroup, region_detail, start_day,
-        end_day, start_time, end_time, count, max_member, price, content,
-        title, match_type_first, match_type_second, match_type_third,
-        has_mento from matchup where matchup_id = #{matchupId}
+	        mento_id, region_group, region_subgroup, region_detail, start_day,
+	        end_day, start_time, end_time, count, max_member, price, content,
+	        title, match_type_first, match_type_second, match_type_third,
+	        has_mento 
+        from matchup 
+       where matchup_id = #{matchupId}
+         AND status = 'ACTIVE'
     </select>
 
     <select id="getCategoryName" parameterType="int" resultType="String">
-        select category_name from category where category_id = #{categoryId}
+        select category_name 
+          from category 
+         where category_id = #{categoryId}
+           AND status = 'ACTIVE'
     </select>
 
     <select id="getLanguageName" parameterType="int" resultType="String">
-        SELECT language_name FROM language WHERE language_id = #{languageId}
+        SELECT language_name 
+          FROM language 
+         WHERE language_id = #{languageId}
+           AND status = 'ACTIVE'
     </select>
 
     <select id="getMatchTypeName" parameterType="int" resultType="String">
-        SELECT match_type_name FROM match_type WHERE match_type_id = #{matchTypeId}
+        SELECT match_type_name 
+          FROM match_type 
+         WHERE match_type_id = #{matchTypeId}
+           AND status = 'ACTIVE'
     </select>
 
 	<insert id="createMatchup" parameterType="com.shinhan.memento.model.MatchUp">
@@ -68,12 +85,18 @@
 	    )
 	</insert>
 
-    <delete id="deleteMemberMatchupsByMatchupId" parameterType="int">
-        DELETE FROM MEMBER_MATCHUP WHERE MATCHUP_ID = #{matchupId}
-    </delete>
+	<update id="inactivateMemberMatchupById" parameterType="int">
+        UPDATE MEMBER_MATCHUP
+           SET status = 'INACTIVE'
+         WHERE MATCHUP_ID = #{matchupId}
+    </update>
 
-    <delete id="deleteMatchupByIdAndLeader" parameterType="int">
-        DELETE FROM MATCHUP WHERE MATCHUP_ID = #{matchupId} AND LEADER_ID = #{leaderId}
-    </delete>
+    <update id="inactivateMatchupByIdAndLeader" parameterType="int">
+        UPDATE MATCHUP
+           SET status = 'INACTIVE',
+               updated_at = sysdate
+         WHERE MATCHUP_ID = #{matchupId} 
+           AND LEADER_ID = #{leaderId}
+    </update>
 
 </mapper>

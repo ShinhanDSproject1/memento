@@ -18,6 +18,7 @@ public class MatchupService {
 
 	@Autowired
 	MatchUpDAO matchUpDAO;
+	@Autowired
 	MemberMatchUpDAO memberMatchUpDAO;
 
 	public List<MatchupListDTO> getMatchupList(Map<String, Object> filters) {
@@ -72,15 +73,16 @@ public class MatchupService {
 		return matchupDetail;
 	}
 	
+	/* 매치업 생성 */
 	public int createMatchup(MatchUp matchup) {
 	    return matchUpDAO.createMatchup(matchup);
 	}
 
-	@Transactional // 한꺼번에 처리 위해
-	public int deleteMatchup(int matchupId, int leaderId) {
-		memberMatchUpDAO.deleteByMatchupId(matchupId);
+	@Transactional // 한꺼번에 처리 위해 (1. 매치업 테이블에서 해당 매치업 삭제, 2. 멤버 매치업 테이블에서 관련 내역 삭제)
+	public int inactivateMatchup(int matchupId, int leaderId) {
+		memberMatchUpDAO.inactivateMemberMatchupById(matchupId);
 
-	    int result = matchUpDAO.deleteMatchupByIdAndLeader(matchupId, leaderId);
+	    int result = matchUpDAO.inactivateMatchupByIdAndLeader(matchupId, leaderId);
 
 	    return result;
 	}
