@@ -46,4 +46,4 @@ me:mento는 개발자 멘토링을 중심으로 한 B2C 쇼핑/예약/추천 플
 | Front-End | JSP, JSTL, JavaScript, jQuery, CSS |
 | DB | Oracle Database |
 | API | Kakao 로그인 API, REST API |
-| Tools | Maven, Tomcat, Git, SQL Developer, VS Code, Eclipse |
+| Tools | Maven, Tomcat, Git, SQL Developer, Eclipse |
