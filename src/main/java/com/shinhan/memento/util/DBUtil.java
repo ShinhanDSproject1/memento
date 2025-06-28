@@ -7,12 +7,10 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 public class DBUtil {
-
 	public static Connection getConnection() {
 		Connection conn = null;
 		String url = "jdbc:oracle:thin:@localhost:1521:xe";
 		String userid = "memento", userpass = "memento";
-
 		try {
 			Class.forName("oracle.jdbc.driver.OracleDriver");
 			conn = DriverManager.getConnection(url, userid, userpass);
@@ -28,6 +26,13 @@ public class DBUtil {
 	}
 
 	public static void dbDisconnect(Connection conn, Statement st, ResultSet rs) {
+
+		return conn;
+	}
+	
+	public static void dbDisconnect(
+			 Connection conn, Statement st, ResultSet rs) {
+
 		
 		try {
 			if(rs!=null) rs.close();
@@ -39,7 +44,7 @@ public class DBUtil {
 			e.printStackTrace();
 		}
 	}
-
+  
 	public static String buildDebugSQL(String sqlTemplate, Object... params) {
 	    for (Object param : params) {
 	        String val = (param instanceof String) ? "'" + param + "'" : String.valueOf(param);

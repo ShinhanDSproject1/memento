@@ -27,12 +27,10 @@
         </span>
       </span>
     </div>
+	<a class="div2" href="https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=dd889aeee45cfc71c810b8d5b41a800f&redirect_uri=http://localhost:9999/memento/api/auth/kakao/callback">
+	  <img src="${pageContext.request.contextPath}/resources/images/main1/kakaotalk.png" alt="카카오 로그인" />
+	</a>
 
-    <div class="button-image">
-      <button class="div2">
-        <img src="${pageContext.request.contextPath}/resources/images/main1/kakaotalk.png" alt="카카오 로그인" />
-      </button>
-    </div>
 
   </div>
 </div>
