@@ -13,7 +13,7 @@
 	<div class="div">
 		<div class="top-bar">
 			<div class="top-bar-tag">
-			    <c:if test="${!matchupDetail.has_mento}">
+			    <c:if test="${!matchupDetail.hasMento}">
 			        멘토 모집중
 			    </c:if>
 				<div class="top-bar-category">

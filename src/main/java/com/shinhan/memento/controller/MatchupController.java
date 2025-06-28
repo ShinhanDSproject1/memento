@@ -17,6 +17,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.shinhan.memento.common.response.BaseResponse;
 import com.shinhan.memento.common.response.status.BaseExceptionResponseStatus;
 import com.shinhan.memento.model.MatchUp;
+import com.shinhan.memento.dto.CategoryDTO;
+import com.shinhan.memento.dto.LanguageDTO;
 import com.shinhan.memento.dto.MatchupDetailDTO;
 import com.shinhan.memento.dto.MatchupListDTO;
 import com.shinhan.memento.service.MatchupService;
@@ -79,7 +81,16 @@ public class MatchupController {
    @GetMapping("/matchupList")
    public String matchupListPage(Model model) {
       List<MatchupListDTO> matchups = matchupService.getMatchupList(new HashMap<>());
-       model.addAttribute("matchupList", matchups);
+      model.addAttribute("matchupList", matchups);
+      
+      List<String> regionGroups = matchupService.getDistinctRegionGroups();
+      List<CategoryDTO> categories = matchupService.getAllCategories();
+      List<LanguageDTO> languages = matchupService.getAllLanguages();
+      
+      model.addAttribute("regionGroups", regionGroups);
+      model.addAttribute("categories", categories);
+      model.addAttribute("languages", languages);
+      
       return "/matchup/matchupList";
    }
    
@@ -87,16 +98,16 @@ public class MatchupController {
    @ResponseBody
    @GetMapping("/getMatchupList")
    public BaseResponse<List<MatchupListDTO>> getMatchupList(
-         @RequestParam(required = false) String region_group,
-         @RequestParam(required = false) Integer category_id,
-         @RequestParam(required = false) String selected_days,
-         @RequestParam(required = false) Integer language_id) {
+         @RequestParam(required = false) String regionGroup,
+         @RequestParam(required = false) Integer categoryId,
+         @RequestParam(required = false) String selectedDays,
+         @RequestParam(required = false) Integer languageId) {
       
       Map<String, Object> filters = new HashMap<>();
-      filters.put("region_group", region_group);
-      filters.put("category_id", category_id);
-      filters.put("selected_days", selected_days);
-      filters.put("language_id", language_id);
+      filters.put("regionGroup", regionGroup);
+      filters.put("categoryId", categoryId);
+      filters.put("selectedDays", selectedDays);
+      filters.put("languageId", languageId);
       
       List<MatchupListDTO> matchups = matchupService.getMatchupList(filters); 
       
@@ -113,10 +124,12 @@ public class MatchupController {
 		    return "redirect:/matchup/matchupList";
 	   }
 	   MatchupDetailDTO matchupDetail = matchupService.getMatchupDetail(id);
+	   System.out.println("### Service에서 가져온 DTO: " + matchupDetail); 
+	   
 	   model.addAttribute("matchupDetail", matchupDetail);
 	   
 	   /* 방장을 위한 상세 조회 페이지 이동 */
-	   if (matchupDetail.getLeader_id() == 1) { // 추후 로그인된 memberId와 비교해야 함. 임시로 1로 설정.
+	   if (matchupDetail.getLeaderId() == 1) { // 추후 로그인된 memberId와 비교해야 함. 임시로 1로 설정.
 		   return "/matchup/matchupDetailLeader";
 	   }
        return "/matchup/matchupDetail";

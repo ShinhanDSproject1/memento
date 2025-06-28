@@ -10,6 +10,8 @@ import org.springframework.transaction.annotation.Transactional;
 import com.shinhan.memento.dao.MatchUpDAO;
 import com.shinhan.memento.dao.MemberMatchUpDAO;
 import com.shinhan.memento.model.MatchUp;
+import com.shinhan.memento.dto.CategoryDTO;
+import com.shinhan.memento.dto.LanguageDTO;
 import com.shinhan.memento.dto.MatchupDetailDTO;
 import com.shinhan.memento.dto.MatchupListDTO;
 
@@ -25,18 +27,18 @@ public class MatchupService {
 		List<MatchupListDTO> matchups = matchUpDAO.getMatchupList(filters);
 		
 		for (MatchupListDTO matchup : matchups) {
-			int currentMemberCount = matchUpDAO.getActiveMemberCount(matchup.getMatchup_id()); /* 현재 신청 인원 */
+			int currentMemberCount = matchUpDAO.getActiveMemberCount(matchup.getMatchupId()); /* 현재 신청 인원 */
 			matchup.setCount(currentMemberCount);
 			
-			String categoryName = matchUpDAO.getCategoryName(matchup.getCategory_id()); /* 카테고리 이름 */
+			String categoryName = matchUpDAO.getCategoryName(matchup.getCategoryId()); /* 카테고리 이름 */
 			matchup.setCategoryName(categoryName);
 			
-			String languageName = matchUpDAO.getLanguageName(matchup.getLanguage_id()); /* 언어 이름 */
+			String languageName = matchUpDAO.getLanguageName(matchup.getLanguageId()); /* 언어 이름 */
 			matchup.setLanguageName(languageName);
 			
-			if (matchup.getMax_member() != null && currentMemberCount >= matchup.getMax_member()) {
+			if (matchup.getMaxMember() != null && currentMemberCount >= matchup.getMaxMember()) {
 				matchup.setRecruit("모집완료");
-			} else if (matchup.getMax_member() != null && currentMemberCount >= (matchup.getMax_member() - 2)) {
+			} else if (matchup.getMaxMember() != null && currentMemberCount >= (matchup.getMaxMember() - 2)) {
 				matchup.setRecruit("마감임박");
 			} else {
 				matchup.setRecruit("모집중");
@@ -52,18 +54,22 @@ public class MatchupService {
 			throw new IllegalArgumentException("매치업을 찾을 수 없습니다. id: " + id);
 		} else {
 			
-			int currentMemberCount = matchUpDAO.getActiveMemberCount(matchupDetail.getMatchup_id());  /* 현재 신청 인원 */
+			int currentMemberCount = matchUpDAO.getActiveMemberCount(matchupDetail.getMatchupId());  /* 현재 신청 인원 */
 			matchupDetail.setCount(currentMemberCount);
 			
-			String categoryName = matchUpDAO.getCategoryName(matchupDetail.getCategory_id()); /* 카테고리 이름 */
-			matchupDetail.setCategoryName(categoryName);
+			if (matchupDetail.getCategoryId() != null) {
+				String categoryName = matchUpDAO.getCategoryName(matchupDetail.getCategoryId()); /* 카테고리 이름 */
+				matchupDetail.setCategoryName(categoryName);
+			}
 			
-			String languageName = matchUpDAO.getLanguageName(matchupDetail.getLanguage_id()); /* 언어 이름 */
-		    matchupDetail.setLanguageName(languageName);
+			if (matchupDetail.getLanguageId() != null) {
+				String languageName = matchUpDAO.getLanguageName(matchupDetail.getLanguageId()); /* 언어 이름 */
+			    matchupDetail.setLanguageName(languageName);
+			}
 		    
-		    String matchTypeFirstName = matchUpDAO.getMatchTypeName(matchupDetail.getMatch_type_first()); 	/* 첫 번째 유형 이름 */
-		    String matchTypeSecondName = matchUpDAO.getMatchTypeName(matchupDetail.getMatch_type_second()); /* 두 번째 유형 이름 */
-		    String matchTypeThirdName = matchUpDAO.getMatchTypeName(matchupDetail.getMatch_type_third()); 	/* 세 번째 유형 이름 */
+			String matchTypeFirstName = matchUpDAO.getMatchTypeName(matchupDetail.getMatchTypeFirst()); 	/* 첫 번째 유형 이름 */
+		    String matchTypeSecondName = matchUpDAO.getMatchTypeName(matchupDetail.getMatchTypeSecond()); /* 두 번째 유형 이름 */
+		    String matchTypeThirdName = matchUpDAO.getMatchTypeName(matchupDetail.getMatchTypeThird()); 	/* 세 번째 유형 이름 */
 		    
 		    matchupDetail.setMatchTypeFirstName(matchTypeFirstName);
 		    matchupDetail.setMatchTypeSecondName(matchTypeSecondName);
@@ -72,6 +78,20 @@ public class MatchupService {
 		}
 		return matchupDetail;
 	}
+	
+	public List<String> getDistinctRegionGroups() {
+		return matchUpDAO.getDistinctRegionGroups();
+	}
+	
+	/* 필터 목록 */
+	public List<CategoryDTO> getAllCategories() {
+		return matchUpDAO.getAllCategories();
+	}
+
+	public List<LanguageDTO> getAllLanguages() {
+		return matchUpDAO.getAllLanguages();
+	}
+	
 	
 	/* 매치업 생성 */
 	public int createMatchup(MatchUp matchup) {

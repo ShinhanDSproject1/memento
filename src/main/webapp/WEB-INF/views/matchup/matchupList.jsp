@@ -20,50 +20,39 @@
             <div class="keepgoing-filter-and-make">
                  <div class="detail-select">
                      <div class="detail-select-li">
-                         <select name="region_group" class="filter-select" onchange="applyFilters()">
+                         <select name="regionGroup" class="filter-select" onchange="applyFilters()">
                              <option value="">-- 지역 (전체) --</option>
-                             <option value="서울" ${param.region_group == '서울' ? 'selected' : ''}>서울</option>
-                             <option value="부산" ${param.region_group == '부산' ? 'selected' : ''}>부산</option>
-                             <option value="대전" ${param.region_group == '대전' ? 'selected' : ''}>대전</option>
-                             <option value="대구" ${param.region_group == '대구' ? 'selected' : ''}>대구</option>
+				             <c:forEach var="region" items="${regionGroups}">
+				                <option value="${region}" ${param.regionGroup == region ? 'selected' : ''}>${region}</option>
+				             </c:forEach>
                          </select>
                      </div>
                      <div class="detail-select-li2">
-                         <select name="category_id" class="filter-select" onchange="applyFilters()">
+                         <select name="categoryId" class="filter-select" onchange="applyFilters()">
                              <option value="">-- 학습유형 (전체) --</option>
-                             <option value="1" ${param.category_id == '1' ? 'selected' : ''}>백엔드</option>
-                             <option value="2" ${param.category_id == '2' ? 'selected' : ''}>프론트엔드</option>
-                             <option value="3" ${param.category_id == '3' ? 'selected' : ''}>알고리즘</option>
-                             <option value="4" ${param.category_id == '4' ? 'selected' : ''}>면접준비</option>
-                             <option value="5" ${param.category_id == '5' ? 'selected' : ''}>운영체제</option>
-                             <option value="6" ${param.category_id == '6' ? 'selected' : ''}>데이터베이스</option>
-                             <option value="7" ${param.category_id == '7' ? 'selected' : ''}>네트워크</option>
-                             <option value="8" ${param.category_id == '8' ? 'selected' : ''}>자료구조</option>
-                             <option value="9" ${param.category_id == '9' ? 'selected' : ''}>자격증</option>
+                             <c:forEach var="cat" items="${categories}">
+                				<option value="${cat.categoryId}" ${param.categoryId == cat.categoryId ? 'selected' : ''}>${cat.categoryName}</option>
+            				 </c:forEach>
                          </select>
                      </div>
                      <div class="detail-select-li">
-                          <select name="selected_days" class="filter-select" onchange="applyFilters()">
+                          <select name="selectedDays" class="filter-select" onchange="applyFilters()">
                              <option value="">-- 요일 (전체) --</option>
-                             <option value="MON" ${param.selected_days == 'MON' ? 'selected' : ''}>월요일</option>
-                             <option value="TUE" ${param.selected_days == 'TUE' ? 'selected' : ''}>화요일</option>
-                             <option value="WED" ${param.selected_days == 'WED' ? 'selected' : ''}>수요일</option>
-                             <option value="THU" ${param.selected_days == 'THU' ? 'selected' : ''}>목요일</option>
-                             <option value="FRI" ${param.selected_days == 'FRI' ? 'selected' : ''}>금요일</option>
-                             <option value="SAT" ${param.selected_days == 'SAT' ? 'selected' : ''}>토요일</option>
-                             <option value="SUN" ${param.selected_days == 'SUN' ? 'selected' : ''}>일요일</option>
+                             <option value="MON" ${param.selectedDays == 'MON' ? 'selected' : ''}>월요일</option>
+                             <option value="TUE" ${param.selectedDays == 'TUE' ? 'selected' : ''}>화요일</option>
+                             <option value="WED" ${param.selectedDays == 'WED' ? 'selected' : ''}>수요일</option>
+                             <option value="THU" ${param.selectedDays == 'THU' ? 'selected' : ''}>목요일</option>
+                             <option value="FRI" ${param.selectedDays == 'FRI' ? 'selected' : ''}>금요일</option>
+                             <option value="SAT" ${param.selectedDays == 'SAT' ? 'selected' : ''}>토요일</option>
+                             <option value="SUN" ${param.selectedDays == 'SUN' ? 'selected' : ''}>일요일</option>
                          </select>
                      </div>
                      <div class="detail-select-li">
-                         <select name="language_id" class="filter-select" onchange="applyFilters()">
+                         <select name="languageId" class="filter-select" onchange="applyFilters()">
                              <option value="">-- 언어 (전체) --</option>
-                             <option value="1" ${param.language_id == '1' ? 'selected' : ''}>Python</option>
-                             <option value="2" ${param.language_id == '2' ? 'selected' : ''}>Java</option>
-                             <option value="3" ${param.language_id == '3' ? 'selected' : ''}>C++</option>
-                             <option value="4" ${param.language_id == '4' ? 'selected' : ''}>C#</option>
-                             <option value="5" ${param.language_id == '5' ? 'selected' : ''}>C</option>
-                             <option value="6" ${param.language_id == '6' ? 'selected' : ''}>HTML/CSS</option>
-                             <option value="7" ${param.language_id == '7' ? 'selected' : ''}>JavaScript</option>
+                             <c:forEach var="lang" items="${languages}">
+				                <option value="${lang.languageId}" ${param.languageId == lang.languageId ? 'selected' : ''}>${lang.languageName}</option>
+				             </c:forEach>
                          </select>
                      </div>
                  </div>
@@ -74,10 +63,10 @@
          </div>
          <div class="frame-3694">
             <c:forEach var="matchup" items="${matchupList}">
-               <div class="matchup-cardview" onclick="location.href='${cpath}/matchup/matchupDetail?id=${matchup.matchup_id}'">
+               <div class="matchup-cardview" onclick="location.href='${cpath}/matchup/matchupDetail?id=${matchup.matchupId}'">
                   <div class="rectangle-48"></div>
                   <div class="rectangle-210"></div>
-                  <div class="div3">${matchup.region_group}</div>
+                  <div class="div3">${matchup.regionGroup}</div>
                   <div class="icon-time-04">
                      <img class="icon-time-clock-outlined"
                         src="${cpath}/resources/images/icon_time.svg" />
@@ -122,7 +111,7 @@
                               </c:otherwise>
                           </c:choose>
                       </c:if>
-                      <c:if test="${!matchup.has_mento}">
+                      <c:if test="${!matchup.hasMento}">
                           <div class="badge badge-mentor">멘토모집중</div>
                       </c:if>
                   </div>

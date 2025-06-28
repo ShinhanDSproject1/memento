@@ -1,14 +1,14 @@
 function applyFilters() {
-    const region = document.querySelector('select[name="region_group"]').value;
-    const category = document.querySelector('select[name="category_id"]').value;
-    const day = document.querySelector('select[name="selected_days"]').value;
-    const language = document.querySelector('select[name="language_id"]').value;
+    const region = document.querySelector('select[name="regionGroup"]').value;
+    const category = document.querySelector('select[name="categoryId"]').value;
+    const day = document.querySelector('select[name="selectedDays"]').value;
+    const language = document.querySelector('select[name="languageId"]').value;
 
     const queryParams = new URLSearchParams({
-        region_group: region,
-        category_id: category,
-        selected_days: day,
-        language_id: language
+        regionGroup: region,
+        categoryId: category,
+        selectedDays: day,
+        languageId: language
     });
 
     fetch(`${cpath}/matchup/getMatchupList?${queryParams}`)
@@ -32,10 +32,10 @@ function renderMatchups(matchups) {
     let html = '';
     matchups.forEach(matchup => {
         html += `
-            <div class="matchup-cardview" onclick="location.href='${cpath}/matchup/matchupDetail?id=${matchup.matchup_id}'">
+            <div class="matchup-cardview" onclick="location.href='${cpath}/matchup/matchupDetail?id=${matchup.matchupId}'">
                 <div class="rectangle-48"></div>
                 <div class="rectangle-210"></div>
-                <div class="div3">${matchup.region_group}</div>
+                <div class="div3">${matchup.regionGroup}</div>
                 <div class="icon-time-04">
                     <img class="icon-time-clock-outlined" src="${cpath}/resources/images/icon_time.svg" />
                 </div>
@@ -62,7 +62,7 @@ function renderMatchups(matchups) {
                 </div>
                 <div class="badges-wrapper">
                     ${renderRecruitBadge(matchup.recruit)}
-                    ${!matchup.has_mento ? '<div class="badge badge-mentor">멘토모집중</div>' : ''}
+                    ${!matchup.hasMento ? '<div class="badge badge-mentor">멘토모집중</div>' : ''}
                 </div>
             </div>
         `;

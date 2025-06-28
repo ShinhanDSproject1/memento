@@ -16,7 +16,7 @@
 
 		<!-- 확인 버튼 -->
 		<div class="modal-buttons" style="justify-content: center;">
-			<button class="confirm-btn" onclick="hideDeleteCompleteModal()">확인</button>
+			<button class="confirm-btn" onclick="hideDeleteCompleteModalAndRedirect()">확인</button>
 		</div>
 	</div>
 </div>

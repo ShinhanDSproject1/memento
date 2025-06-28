@@ -17,27 +17,28 @@ import lombok.NoArgsConstructor;
 @Builder
 @Data
 public class MatchupListDTO {
-    Integer matchup_id;
-    Integer category_id;
-    Integer language_id;
-    Integer leader_id;
+    Integer matchupId;
+    Integer categoryId;
+    Integer languageId;
+    Integer leaderId;
     String title;
     Integer count;
-    Integer matchup_count;
-    Date start_day;
-    Date end_day;
-    Integer max_member;
-    boolean has_mento;
+    Integer matchupCount;
+    Date startDay;
+    Date endDay;
+    Integer maxMember;
+    boolean hasMento;
     Integer price;
-    String region_group;
-    String recruit;  	/* 매치업 멤버를 아직 모집중인가에 대한 여부 (모집중, 마감임박, 모집 완료)*/
-    String m_recruit; 	/* 멘토를 모집하는 매치업인가에 대한 여부 (멘토 모집중, 모집 완료(표시 안됨))*/
+    String regionGroup;
+    String recruit;     /* 매치업 멤버를 아직 모집중인가에 대한 여부 (모집중, 마감임박, 모집 완료)*/
+    String mRecruit;    /* 멘토를 모집하는 매치업인가에 대한 여부 (멘토 모집중, 모집 완료(표시 안됨))*/
+    String selectedDays;
     
     @JsonIgnore
-    LocalDateTime start_time;
+    LocalDateTime startTime;
     
     @JsonIgnore
-    LocalDateTime end_time;    
+    LocalDateTime endTime;  
 
     /* Category, Language 테이블을 통해 이름을 참조*/
     String categoryName;
@@ -45,29 +46,29 @@ public class MatchupListDTO {
     
     /* 날짜 포맷 변경 */
     public String getFormattedStartDate() {
-        if (start_day == null) return "";
-        return new SimpleDateFormat("yyyy/MM/dd").format(start_day);
+        if (startDay == null) return "";
+        return new SimpleDateFormat("yyyy/MM/dd").format(startDay);
     }
 
     public String getFormattedEndDate() {
-        if (end_day == null) return "";
-        return new SimpleDateFormat("yyyy/MM/dd").format(end_day);
+        if (endDay == null) return "";
+        return new SimpleDateFormat("yyyy/MM/dd").format(endDay);
     }
     
    /* 시간 포맷 변경 */
     public String getFormattedStartTime() {
-        if (start_time == null) return "";
-        return start_time.format(DateTimeFormatter.ofPattern("HH:mm"));
+        if (startTime == null) return "";
+        return startTime.format(DateTimeFormatter.ofPattern("HH:mm"));
     }
 
     public String getFormattedEndTime() {
-        if (end_time == null) return "";
-        return end_time.format(DateTimeFormatter.ofPattern("HH:mm"));
+        if (endTime == null) return "";
+        return endTime.format(DateTimeFormatter.ofPattern("HH:mm"));
     }
     
     /* 모집인원 포맷 변경 */
     public String getFormattedMemberCount() {
-        return String.format("%02d/%02d", count, max_member);
+        return String.format("%02d/%02d", count, maxMember);
     }
     
    /* 가격 포맷 변경 */ 
