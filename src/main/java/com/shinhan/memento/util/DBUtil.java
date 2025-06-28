@@ -24,11 +24,6 @@ public class DBUtil {
 
 		return conn;
 	}
-
-	public static void dbDisconnect(Connection conn, Statement st, ResultSet rs) {
-
-		return conn;
-	}
 	
 	public static void dbDisconnect(
 			 Connection conn, Statement st, ResultSet rs) {
