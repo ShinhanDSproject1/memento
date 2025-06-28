@@ -46,4 +46,5 @@ public class MatchUpDTO {
    Date updated_at;
    String status;
    String selected_days;
+   
 }

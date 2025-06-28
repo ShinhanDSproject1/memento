@@ -23,4 +23,5 @@ public class ReviewDTO {
 	Date updated_at;
 	String status;
 	String nickname;
+	
 }
