@@ -3,8 +3,10 @@ package com.shinhan.memento.controller;
 import java.util.List;
 
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.shinhan.memento.common.response.BaseResponse;
 import com.shinhan.memento.dto.PopularLanguageDTO;
 import com.shinhan.memento.dto.PopularMentiDTO;
 import com.shinhan.memento.dto.PopularMentorDTO;
@@ -16,24 +18,25 @@ import lombok.RequiredArgsConstructor;
 
 @RestController
 @RequiredArgsConstructor
+@RequestMapping("/api")
 public class MainpageApiController {
 
     private final MentorRankingService mentorRankingService;
     private final PopularMentiService popularMentiService;
     private final PopularLanguageService popularLanguageService;
 
-    @GetMapping("/api/popular-mentors")
-    public List<PopularMentorDTO> getPopularMentors() {
-        return mentorRankingService.getPopularMentors();
+    @GetMapping("/popular-mentors")
+    public BaseResponse<List<PopularMentorDTO>> getPopularMentors() {
+        return new BaseResponse<>(mentorRankingService.getPopularMentors());
     }
     
-    @GetMapping("/api/popular-menti")
-    public List<PopularMentiDTO> getPopularMenti() {
-        return popularMentiService.getPopularMenti();
+    @GetMapping("/popular-menti")
+    public BaseResponse<List<PopularMentiDTO>> getPopularMenti() {
+        return new BaseResponse<>(popularMentiService.getPopularMenti());
     }
     
-    @GetMapping("/api/popular-languages")
-    public List<PopularLanguageDTO> getPopularLanguages() {
-        return popularLanguageService.getPopularLanguages();
+    @GetMapping("/popular-languages")
+    public BaseResponse<List<PopularLanguageDTO>> getPopularLanguages() {
+        return new BaseResponse<>(popularLanguageService.getPopularLanguages());
     }
 }
