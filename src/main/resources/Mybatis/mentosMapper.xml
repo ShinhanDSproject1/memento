@@ -32,6 +32,7 @@
 		match_type_id_first = #{matchTypeIdFirst},
 		match_type_id_second = #{matchTypeIdSecond},
 		match_type_id_third = #{matchTypeIdThird}
+		
 		WHERE mentos_id = #{mentosId}
 	</update>
 
