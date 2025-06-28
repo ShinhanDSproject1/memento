@@ -1,7 +1,8 @@
 package com.shinhan.memento.common.response.status;
 
-import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
+
+import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
 public enum BaseExceptionResponseStatus implements ResponseStatus{
@@ -15,12 +16,14 @@ public enum BaseExceptionResponseStatus implements ResponseStatus{
     /**
     * 3000 : member 관련
     */
-    CANNOT_FOUND_MEMBER(3000,HttpStatus.OK.value(), "해당 유저를 찾을 수 없습니다.");
+    CANNOT_FOUND_MEMBER(3000,HttpStatus.OK.value(), "해당 유저를 찾을 수 없습니다."),
     
     /**
     * 4000 : mentos 관련
     */
-   
+	CANNOT_CREATE_MENTOS(4000,HttpStatus.BAD_REQUEST.value(), "멘토스를 개설할 수 없습니다. "),
+	CANNOT_EDIT_MENTOS(4001,HttpStatus.BAD_REQUEST.value(), "멘토스를 수정할 수 없습니다. "),
+	CANNOT_DElETE_MENTOS(4002,HttpStatus.BAD_REQUEST.value(), "멘토스를 삭제할 수 없습니다. ");
 	  /**
 	  * 5000 : keepgoing 관련
 	  */

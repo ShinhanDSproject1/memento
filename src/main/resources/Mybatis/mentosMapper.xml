@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+	<mapper namespace="com.shinhan.memento.dao.MentosDAO">
+
+	<update id="updateMentos"
+		parameterType="com.shinhan.memento.dto.EditMentosDTO">
+		UPDATE mentos
+		SET
+		title = #{title},
+		simple_content = #{simpleContent},
+		image = #{image},
+		mento_id = #{mentoId},
+		min_member = #{minMember},
+		max_member = #{maxMember},
+		start_day = #{startDay},
+		end_day = #{endDay},
+		start_time = #{startTime},
+		end_time = #{endTime},
+		selected_days = #{selectedDays},
+		price = #{price},
+		times = #{times},
+		category_id = #{categoryId},
+		language_id = #{languageId},
+		region_group = #{regionGroup},
+		region_subgroup = #{regionSubgroup},
+		region_detail = #{regionDetail},
+		content = #{content},
+		match_type_id_first = #{matchTypeIdFirst},
+		match_type_id_second = #{matchTypeIdSecond},
+		match_type_id_third = #{matchTypeIdThird}
+		WHERE mentos_id = #{mentosId}
+	</update>
+
+		
+</mapper>
+
