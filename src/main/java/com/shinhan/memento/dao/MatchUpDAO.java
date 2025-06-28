@@ -1,5 +1,6 @@
 package com.shinhan.memento.dao;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -7,7 +8,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import com.shinhan.memento.dto.MatchUpDTO;
+import com.shinhan.memento.model.MatchUp;
 import com.shinhan.memento.dto.MatchupDetailDTO;
 import com.shinhan.memento.dto.MatchupListDTO;
 
@@ -53,7 +54,27 @@ public class MatchUpDAO {
 	}
 	
 	/* 매치업 신규 생성하기 */
-	public int createMatchup(MatchUpDTO matchup) {
+	public int createMatchup(MatchUp matchup) {
 	    return sqlSession.insert(namespace + "createMatchup", matchup);
 	}
+	
+	/* 매치업 삭제하기 (방장만이 갖고 있는 권한) */
+	public int inactivateMatchupByIdAndLeader(int matchupId, int leaderId) {
+		Map<String, Object> params = new HashMap<>();
+	    params.put("matchupId", matchupId);
+	    params.put("leaderId", leaderId);
+	    return sqlSession.delete(namespace + "inactivateMatchupByIdAndLeader", params);
+	}
+	
+	public int getMaxMemberCount(int matchupId) {
+	    return sqlSession.selectOne(namespace + "getMaxMemberCount", matchupId);
+	}
+
+	public int updateRecruitStatus(int matchupId, String status) {
+	    Map<String, Object> params = new HashMap<>();
+	    params.put("matchupId", matchupId);
+	    params.put("status", status);
+	    return sqlSession.update(namespace + "updateRecruitStatus", params);
+	}
+	
 }

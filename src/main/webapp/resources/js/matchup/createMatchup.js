@@ -154,64 +154,56 @@ document.addEventListener('DOMContentLoaded', function () {
      * 매치업 생성 AJAX 요청 (NEW)
      * =============================================
      */
-		    const createBtn = document.getElementById('createMatchupBtn');
-		    
-		    createBtn.addEventListener('click', function() {
-		    	// 1. 날짜 및 시간 값 가져오기
-				const startDate = document.querySelector('input[name="startDate"]').value;
-				const startTime = document.querySelector('input[name="startTime"]').value;
-				const endDate = document.querySelector('input[name="endDate"]').value;
-				const endTime = document.querySelector('input[name="endTime"]').value;
-		    
-		    	// 2. 날짜와 시간 조합 (YYYY-MM-DDTHH:MM 형식)
-			    const combinedStartDay = startDate && startTime ? `${startDate}T${startTime}` : null;
-				const combinedEndDay = endDate && endTime ? `${endDate}T${endTime}` : null;
-		    
-		       	// 3. 주소 데이터 가공
-			    const fullAddress = document.getElementById('roadAddress').value; // ex) "경기 성남시 분당구 판교역로 166"
-			    const addressParts = fullAddress.split(' '); // 공백 기준으로 배열 생성 ["경기", "성남시", "분당구", "판교역로", "166"]
-			    
-			    // region_group: 앞 두 단어 (시/도) ex) "경기 성남시"
-			    const regionGroup = addressParts.slice(0, 2).join(' '); 
-			    
-			    // region_subgroup: 나머지 주소 ex) "분당구 판교역로 166"
-			    const regionSubgroup = addressParts.slice(2).join(' '); 
-		    
-		        // 3. DTO에 매핑될 JavaScript 객체 생성
-		        const matchupData = {
-		        	leader_id: 1, 		// ###로그인이 아직 적용되지 않았으므로 일단 고정해놓음 ###
-		        	matchup_count: 0,  	// 신규 생성 시 현재 신청 인원은 0이므로 설정함. 
-		        	kg_count: 0,  		// 신규 생성 시 킵고잉 찬성 인원은 0이므로 설정함. 
-		        
-				    title: document.getElementById('matchupTitleHidden').value,
-				    content: document.getElementById('matchupContentHidden').value,
-				    
-				    region_group: regionGroup,
-				    region_subgroup: regionSubgroup,
-				    region_detail: document.getElementById('detailAddress').value,
-				
-				    language_id: parseInt(document.getElementById('languageValue').value, 10),
-				    category_id: parseInt(document.getElementById('categoryValue').value, 10),
-				    has_mento: document.getElementById('mentoYn').value === 'Y',
-				
-				    start_day: document.querySelector('input[name="startDate"]').value,
-				    end_day: document.querySelector('input[name="endDate"]').value,
-				    start_time: combinedStartDay,
-				    end_time: combinedEndDay,
-				
-				    count: parseInt(document.getElementById('sessionCountValue').value, 10),
-				    price: parseInt(document.querySelector('input[name="price"]').value, 10) || 0,
-				    min_member: parseInt(document.querySelector('input[name="minMember"]').value, 10) || 1,
-				    max_member: parseInt(document.querySelector('input[name="maxMember"]').value, 10) || 1,
-				
-				    selected_days: document.getElementById('selectedDaysInput').value,
-				
-				    match_type_first: parseInt(document.querySelectorAll('.preferred-type-value')[0].value, 10) || null,
-				    match_type_second: parseInt(document.querySelectorAll('.preferred-type-value')[1].value, 10) || null,
-				    match_type_third: parseInt(document.querySelectorAll('.preferred-type-value')[2].value, 10) || null,
-				
-				    status: 'ACTIVE' // 기본값
-        };
+    const createBtn = document.getElementById('createMatchupBtn');
+    
+    createBtn.addEventListener('click', function() {
+    	// 1. 날짜 및 시간 값 가져오기
+		const startDate = document.querySelector('input[name="startDate"]').value;
+		const startTime = document.querySelector('input[name="startTime"]').value;
+		const endDate = document.querySelector('input[name="endDate"]').value;
+		const endTime = document.querySelector('input[name="endTime"]').value;
+    
+    	// 2. 날짜와 시간 조합 (YYYY-MM-DDTHH:MM 형식)
+	    const combinedStartDay = startDate && startTime ? `${startDate}T${startTime}` : null;
+		const combinedEndDay = endDate && endTime ? `${endDate}T${endTime}` : null;
+    
+       	// 3. 주소 데이터 가공
+	    const fullAddress = document.getElementById('roadAddress').value; // ex) "경기 성남시 분당구 판교역로 166"
+	    const addressParts = fullAddress.split(' '); // 공백 기준으로 배열 생성 ["경기", "성남시", "분당구", "판교역로", "166"]
+	    
+	    // region_group: 앞 두 단어 (시/도) ex) "경기 성남시"
+	    const regionGroup = addressParts.slice(0, 2).join(' '); 
+	    
+	    // region_subgroup: 나머지 주소 ex) "분당구 판교역로 166"
+	    const regionSubgroup = addressParts.slice(2).join(' '); 
+    
+        // 3. DTO에 매핑될 JavaScript 객체 생성
+		const matchupData = {
+		    leaderId: 1,                // ###로그인이 아직 적용되지 않았으므로 일단 고정해놓음 ###
+		    matchupCount: 0,            // 신규 생성 시 현재 신청 인원은 0이므로 설정함. 
+		    kgCount: 0,                 // 신규 생성 시 킵고잉 찬성 인원은 0이므로 설정함. 
+		    title: document.getElementById('matchupTitleHidden').value,
+		    content: document.getElementById('matchupContentHidden').value,
+		    regionGroup: regionGroup,       
+		    regionSubgroup: regionSubgroup,  
+		    regionDetail: document.getElementById('detailAddress').value,    
+		    languageId: parseInt(document.getElementById('languageValue').value, 10),    
+		    categoryId: parseInt(document.getElementById('categoryValue').value, 10),    
+		    hasMento: document.getElementById('mentoYn').value === 'Y',         
+		    startDay: document.querySelector('input[name="startDate"]').value,  
+		    endDay: document.querySelector('input[name="endDate"]').value,      
+		    startTime: combinedStartDay, 
+		    endTime: combinedEndDay,     
+		    count: parseInt(document.getElementById('sessionCountValue').value, 10),
+		    price: parseInt(document.querySelector('input[name="price"]').value, 10) || 0,
+		    minMember: parseInt(document.querySelector('input[name="minMember"]').value, 10) || 1,     
+		    maxMember: parseInt(document.querySelector('input[name="maxMember"]').value, 10) || 1,     
+		    selectedDays: document.getElementById('selectedDaysInput').value,  
+		    matchTypeIdFirst: parseInt(document.querySelectorAll('.preferred-type-value')[0].value, 10) || null, 
+		    matchTypeIdSecond: parseInt(document.querySelectorAll('.preferred-type-value')[1].value, 10) || null,
+		    matchTypeIdThird: parseInt(document.querySelectorAll('.preferred-type-value')[2].value, 10) || null, 
+		    status: 'ACTIVE'
+		};
 
         // 2. fetch API를 사용하여 서버에 POST 요청
         fetch(window.cpath + '/matchup/postCreateMatchup', { // Controller의 @PostMapping 경로와 일치

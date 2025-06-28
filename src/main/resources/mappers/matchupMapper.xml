@@ -96,5 +96,29 @@
 		  #{status, jdbcType=VARCHAR}
 		)
 	</insert>
+	
+		  <!-- 신청 중복 체크 -->
+	  <select id="existsActiveApplication" parameterType="map" resultType="int">
+	    SELECT COUNT(*) FROM member_matchup
+	    WHERE member_id = #{memberId}
+	      AND matchup_id = #{matchupId}
+	      AND status = 'ACTIVE'
+	  </select>
+	
+	  <!-- 신청 insert -->
+	  <insert id="insertApplication" parameterType="map">
+	    INSERT INTO member_matchup (member_matchup_id, member_id, matchup_id, status, created_at)
+	    VALUES (member_matchup_seq.nextval, #{memberId}, #{matchupId}, 'ACTIVE', SYSDATE)
+	  </insert>
+	
+	  <!-- 신청 취소 (논리 삭제) -->
+	  <update id="updateStatusToInactive" parameterType="map">
+	    UPDATE member_matchup
+	    SET status = 'INACTIVE', updated_at = SYSDATE
+	    WHERE member_id = #{memberId}
+	      AND matchup_id = #{matchupId}
+	      AND status = 'ACTIVE'
+	  </update>
+	
   
 </mapper>

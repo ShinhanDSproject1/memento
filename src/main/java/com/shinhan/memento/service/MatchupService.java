@@ -5,8 +5,11 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
 import com.shinhan.memento.dao.MatchUpDAO;
-import com.shinhan.memento.dto.MatchUpDTO;
+import com.shinhan.memento.dao.MemberMatchUpDAO;
+import com.shinhan.memento.model.MatchUp;
 import com.shinhan.memento.dto.MatchupDetailDTO;
 import com.shinhan.memento.dto.MatchupListDTO;
 
@@ -15,6 +18,8 @@ public class MatchupService {
 
 	@Autowired
 	MatchUpDAO matchUpDAO;
+	@Autowired
+	MemberMatchUpDAO memberMatchUpDAO;
 
 	public List<MatchupListDTO> getMatchupList(Map<String, Object> filters) {
 		List<MatchupListDTO> matchups = matchUpDAO.getMatchupList(filters);
@@ -68,7 +73,17 @@ public class MatchupService {
 		return matchupDetail;
 	}
 	
-	public int createMatchup(MatchUpDTO matchup) {
+	/* 매치업 생성 */
+	public int createMatchup(MatchUp matchup) {
 	    return matchUpDAO.createMatchup(matchup);
+	}
+
+	@Transactional // 한꺼번에 처리 위해 (1. 매치업 테이블에서 해당 매치업 삭제, 2. 멤버 매치업 테이블에서 관련 내역 삭제)
+	public int inactivateMatchup(int matchupId, int leaderId) {
+		memberMatchUpDAO.inactivateMemberMatchupById(matchupId);
+
+	    int result = matchUpDAO.inactivateMatchupByIdAndLeader(matchupId, leaderId);
+
+	    return result;
 	}
 }

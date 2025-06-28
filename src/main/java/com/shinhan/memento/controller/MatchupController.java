@@ -5,7 +5,6 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,10 +14,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.shinhan.memento.common.response.BaseErrorResponse;
 import com.shinhan.memento.common.response.BaseResponse;
 import com.shinhan.memento.common.response.status.BaseExceptionResponseStatus;
-import com.shinhan.memento.dto.MatchUpDTO;
+import com.shinhan.memento.model.MatchUp;
 import com.shinhan.memento.dto.MatchupDetailDTO;
 import com.shinhan.memento.dto.MatchupListDTO;
 import com.shinhan.memento.service.MatchupService;
@@ -30,11 +28,28 @@ public class MatchupController {
    @Autowired
    MatchupService matchupService;
    
-   @GetMapping("/matchupDetailLeader")
-   public String f2() {
-      return "/matchup/matchupDetailLeader";
-   }
+   /* 
+    * 매치업 삭제하기 - UPDATE STATUS = INACTIVE 
+    * */
+	@PostMapping("/deleteMatchup")
+	@ResponseBody
+	public BaseResponse<String> deleteMatchup(@RequestParam("matchupId") int matchupId,
+	                                          @RequestParam("leaderId") int leaderId) {
+	    try {
+	        int result = matchupService.inactivateMatchup(matchupId, leaderId);
+
+	        if (result > 0) {
+	            return new BaseResponse<>(BaseExceptionResponseStatus.SUCCESS, result + "건이 비활성화되었습니다.");
+	        } else {
+	            return new BaseResponse<>(BaseExceptionResponseStatus.FAILURE, null);
+	        }
+	    } catch (Exception e) {
+	        e.printStackTrace();
+	        return new BaseResponse<>(BaseExceptionResponseStatus.FAILURE, null);
+	    }
+	}
    
+   /* 매치업 수정하기 */
    @GetMapping("/updateMatchup")
    public String f4() {
       return "/matchup/updateMatchup";
@@ -49,11 +64,10 @@ public class MatchupController {
    /* 매치업 신규 작성하기 */
    @PostMapping("/postCreateMatchup")
    @ResponseBody
-   public BaseResponse<MatchUpDTO> createMatchup(@RequestBody MatchUpDTO matchup) {
+   public BaseResponse<MatchUp> createMatchup(@RequestBody MatchUp matchup) {
 	  System.out.println("Received DTO via JSON: " + matchup);
       
 	  int result = matchupService.createMatchup(matchup);
-	  
 	  if (result > 0) {
 		  return new BaseResponse<>(matchup);
 	  } else {
@@ -100,6 +114,11 @@ public class MatchupController {
 	   }
 	   MatchupDetailDTO matchupDetail = matchupService.getMatchupDetail(id);
 	   model.addAttribute("matchupDetail", matchupDetail);
+	   
+	   /* 방장을 위한 상세 조회 페이지 이동 */
+	   if (matchupDetail.getLeader_id() == 1) { // 추후 로그인된 memberId와 비교해야 함. 임시로 1로 설정.
+		   return "/matchup/matchupDetailLeader";
+	   }
        return "/matchup/matchupDetail";
    }
    
