@@ -14,13 +14,14 @@ import lombok.NoArgsConstructor;
 public class Member {
 	private int memberId;
 	private int matchTypeId;
+	private String profileImg;
 	private String email;
 	private String nickname;
 	private String phoneNumber;
-	private String userType;
+	private UserType userType;
 	private int point;
 	private String introduceMento;
-	private int score;
+	private int score; // 매치업이나 멘토스 참여하면 점수 올리기 
 	private String regionGroup;
 	private String regionSubgroup;
 	private String regionDetail;
