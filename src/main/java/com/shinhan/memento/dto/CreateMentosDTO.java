@@ -7,16 +7,14 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 
+@Getter
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-@Getter
-@Setter
-public class EditMentosDTO {
+public class CreateMentosDTO {
+
 	
-	    private int mentosId;
 		private String title;
 		private String simpleContent;
 		private String image;
@@ -39,11 +37,10 @@ public class EditMentosDTO {
 		private String regionDetail;
 
 		private String content;
-		
+
 		private int matchTypeIdFirst;
 		private int matchTypeIdSecond;
 		private int matchTypeIdThird;
-
 
 
 

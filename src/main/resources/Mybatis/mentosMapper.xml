@@ -4,17 +4,85 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-	<mapper namespace="com.shinhan.memento.dao.MentosDAO">
+<mapper namespace="com.shinhan.memento.dao.MentosDAO">
+
+
+	<select id="selectMentosDetail" parameterType="int"
+		resultType="com.shinhan.memento.dto.DetailMentosDTO">
+		SELECT * FROM mentos WHERE mentos_id = #{mentosId}
+	</select>
+
+
+	<insert id="insertMentos"
+		parameterType="com.shinhan.memento.dto.CreateMentosDTO">
+		INSERT INTO mentos (
+		mentos_id,
+		category_id,
+		language_id,
+		mento_id,
+		title,
+		simple_content,
+		image,
+		price,
+		region_group,
+		region_subgroup,
+		region_detail,
+		start_day,
+		end_day,
+		start_time,
+		end_time,
+		times,
+		min_member,
+		max_member,
+		selected_days,
+		content,
+		created_at,
+		updated_at,
+		status,
+		match_type_id_first,
+		match_type_id_second,
+		match_type_id_third
+		) VALUES (
+		seq_mentos_id.nextval,
+		#{categoryId},
+		#{languageId},
+		#{mentoId},
+		#{title},
+		#{simpleContent},
+		#{image},
+		#{price},
+		#{regionGroup},
+		#{regionSubgroup},
+		#{regionDetail},
+		#{startDay},
+		#{endDay},
+		#{startTime},
+		#{endTime},
+		#{times},
+		#{minMember},
+		#{maxMember},
+		#{selectedDays},
+		#{content},
+		CURRENT_DATE,
+		null,
+		'ACTIVE',
+		#{matchTypeIdFirst},
+		#{matchTypeIdSecond},
+		#{matchTypeIdThird}
+		)
+	</insert>
 
 	<update id="updateMentos"
 		parameterType="com.shinhan.memento.dto.EditMentosDTO">
 		UPDATE mentos
 		SET
 		title = #{title},
-		simple_content = #{simpleContent},
+		simple_content =
+		#{simpleContent},
 		image = #{image},
 		mento_id = #{mentoId},
-		min_member = #{minMember},
+		min_member =
+		#{minMember},
 		max_member = #{maxMember},
 		start_day = #{startDay},
 		end_day = #{endDay},
@@ -25,17 +93,28 @@
 		times = #{times},
 		category_id = #{categoryId},
 		language_id = #{languageId},
-		region_group = #{regionGroup},
+		region_group =
+		#{regionGroup},
 		region_subgroup = #{regionSubgroup},
-		region_detail = #{regionDetail},
+		region_detail =
+		#{regionDetail},
 		content = #{content},
-		match_type_id_first = #{matchTypeIdFirst},
+		match_type_id_first =
+		#{matchTypeIdFirst},
 		match_type_id_second = #{matchTypeIdSecond},
 		match_type_id_third = #{matchTypeIdThird}
-		
+
 		WHERE mentos_id = #{mentosId}
 	</update>
 
-		
+	<update id="deleteMentos" parameterType="int">
+		UPDATE mentos
+		SET status
+		= 'INACTIVE',
+		updated_at = CURRENT_DATE
+		WHERE mentos_id = #{mentosId}
+	</update>
+
+
 </mapper>
 
