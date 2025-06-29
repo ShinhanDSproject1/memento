@@ -13,6 +13,9 @@
 	<section class="my-mentors">
 		<div class="my-mentors__wrapper">
 			<h1 class="my-mentors__title">나의 멘토스 목록</h1>
+			    <div id="mentos-list-container" class="card-grid"></div>
+				
+			
 			<div class="my-mentors__container">
 				<div class="mentors-grid">
 					<!-- Card 1: Waiting -->
@@ -163,6 +166,32 @@
 		</div>
 	</section>
 </div>
+<script>
+        const userListElem = $('.mentors-grid');
+
+        // JSP를 통해 동적으로 Context Path가 포함된 URL을 생성
+        const API_URL = '${pageContext.request.contextPath}/api/mypage/page7?memberId=2';
+        
+        console.log("생성된 API URL:", API_URL); // 브라우저 콘솔에서 확인해보세요.
+
+        async function fetchUsers() {
+            try {
+                const response = await fetch(API_URL);
+                const users = await response.json();
+				console.log(users)
+                userListElem.innerHTML = '';
+                users.forEach(user => {
+                    const li = document.createElement('li');
+                    li.textContent = `ID: ${result}`;
+                    userListElem.appendChild(li);
+                });
+            } catch (error) {
+                console.error('Error:', error);
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', fetchUsers);
+    </script>
 
 
 <div class="modal-overlay" id="reviewModal">
