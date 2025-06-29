@@ -1,36 +1,35 @@
 package com.shinhan.memento.model;
 
 import java.sql.Date;
+import java.time.LocalDateTime;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-@Getter
-@AllArgsConstructor
 @NoArgsConstructor
+@AllArgsConstructor
+@Getter
 @Builder
-public class Member {
+public class Keepgoing {
+	private int keepgoingId;
 	private int memberId;
+	private int categoryId;
+	private int languageId;
 	private int matchTypeId;
-	private String profileImg;
-	private String email;
-	private String nickname;
-	private String phoneNumber;
-	private UserType userType;
-	private int point;
-	private String introduceMento;
-	private int score; // 매치업이나 멘토스 참여하면 점수 올리기 
+	private String name;
+	private String imgLogo;
+	private String imgActivity;
+	private LocalDateTime startTime;
+	private LocalDateTime emdTime;
+	private String selectedDays;
+	private String content;
+	private int price;
 	private String regionGroup;
 	private String regionSubgroup;
 	private String regionDetail;
 	private Date createdAt;
 	private Date updatedAt;
 	private BaseStatus status;
-	
-	
-	public void updateMemberProfile(String newProfileImg) {
-		this.profileImg = newProfileImg;
-	}
 }

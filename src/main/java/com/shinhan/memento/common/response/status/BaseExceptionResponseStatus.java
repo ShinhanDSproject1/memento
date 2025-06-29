@@ -20,6 +20,7 @@ public enum BaseExceptionResponseStatus implements ResponseStatus{
     /**
     * 4000 : mentos 관련
     */
+
    
 	  /**
 	  * 5000 : keepgoing 관련

@@ -21,13 +21,11 @@ public class DBUtil {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-
 		return conn;
 	}
 	
 	public static void dbDisconnect(
 			 Connection conn, Statement st, ResultSet rs) {
-
 		
 		try {
 			if(rs!=null) rs.close();
@@ -39,7 +37,7 @@ public class DBUtil {
 			e.printStackTrace();
 		}
 	}
-  
+
 	public static String buildDebugSQL(String sqlTemplate, Object... params) {
 	    for (Object param : params) {
 	        String val = (param instanceof String) ? "'" + param + "'" : String.valueOf(param);
@@ -47,5 +45,4 @@ public class DBUtil {
 	    }
 	    return sqlTemplate;
 	}
-	
 }
