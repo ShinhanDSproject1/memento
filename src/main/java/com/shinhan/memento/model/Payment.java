@@ -17,9 +17,10 @@ import lombok.NoArgsConstructor;
 public class Payment {
 	private int paymentId;
 	private int memberId;
-	private int serialNumber;
+	private String orderId;
 	private Date payAt;
 	private int amount;
+    private Payment_Step step;
 	private PayType payType;
 	private int matchupId;
 	private int mentosId;

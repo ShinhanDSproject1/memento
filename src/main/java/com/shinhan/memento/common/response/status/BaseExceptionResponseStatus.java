@@ -15,7 +15,7 @@ public enum BaseExceptionResponseStatus implements ResponseStatus{
     /**
     * 3000 : member 관련
     */
-    CANNOT_FOUND_MEMBER(3000,HttpStatus.OK.value(), "해당 유저를 찾을 수 없습니다.");
+    CANNOT_FOUND_MEMBER(3000,HttpStatus.OK.value(), "해당 유저를 찾을 수 없습니다."),
     
     /**
     * 4000 : mentos 관련
@@ -28,6 +28,7 @@ public enum BaseExceptionResponseStatus implements ResponseStatus{
 	  /**
 	  * 6000 : mypage 관련 
 	  */
+		NEED_LOGIN(6000,HttpStatus.UNAUTHORIZED.value(), "로그인이 필요합니다.");
 
 		/**
 		* 7000 : 결제 관련?

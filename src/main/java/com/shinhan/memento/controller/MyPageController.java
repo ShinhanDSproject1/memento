@@ -135,6 +135,28 @@ public class MyPageController {
 	    }
 	}
 	
+	@RequestMapping("/cash-recharge/checkout")
+	public String cashRechargeCheckout(HttpServletRequest request) {
+		boolean isAjax = "XMLHttpRequest".equals(request.getHeader("X-Requested-With"));
+	    if (isAjax) {
+	    	 return "mypage/cash-recharge/cash-recharge-checkout"; // ✨ screen 전용 뷰
+	    } else {
+	        request.setAttribute("initialPage", "/memento/mypage/cash-recharge/checkout"); // 실제 경로 지정
+	        return "mypage/mypage-main"; // 전체 레이아웃에서 내부에서 AJAX 호출
+	    }
+	}
+	  
+    @RequestMapping("/cash-recharge/success")
+	public String cashRechargeSuccess(HttpServletRequest request) {
+		boolean isAjax = "XMLHttpRequest".equals(request.getHeader("X-Requested-With"));
+	    if (isAjax) {
+	    	 return "mypage/cash-recharge/cash-recharge-success"; // ✨ screen 전용 뷰
+	    } else {
+	        request.setAttribute("initialPage", "/memento/mypage/cash-recharge/success"); // 실제 경로 지정
+	        return "mypage/mypage-main"; // 전체 레이아웃에서 내부에서 AJAX 호출
+	    }
+	}
+	
 	@RequestMapping("/spark-test")
 	public String sparkTest(HttpServletRequest request) {
 	    boolean isAjax = "XMLHttpRequest".equals(request.getHeader("X-Requested-With"));
