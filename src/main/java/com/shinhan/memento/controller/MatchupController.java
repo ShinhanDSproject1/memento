@@ -19,8 +19,11 @@ import com.shinhan.memento.common.response.status.BaseExceptionResponseStatus;
 import com.shinhan.memento.model.MatchUp;
 import com.shinhan.memento.dto.CategoryDTO;
 import com.shinhan.memento.dto.LanguageDTO;
+import com.shinhan.memento.dto.MatchTypeDTO;
+import com.shinhan.memento.dto.MatchupCreateDTO;
 import com.shinhan.memento.dto.MatchupDetailDTO;
 import com.shinhan.memento.dto.MatchupListDTO;
+import com.shinhan.memento.dto.MatchupUpdateDTO;
 import com.shinhan.memento.service.MatchupService;
 
 @Controller
@@ -51,30 +54,76 @@ public class MatchupController {
 	    }
 	}
    
-   /* 매치업 수정하기 */
+   /* 매치업 수정 페이지 이동 */
    @GetMapping("/updateMatchup")
-   public String f4() {
-      return "/matchup/updateMatchup";
+   public String matchupUpdatePage(@RequestParam int id, Model model) {
+      // 기존 상세 정보를 가져와서 모델에 담아줌
+      MatchupDetailDTO matchupDetail = matchupService.getMatchupDetail(id);
+      
+      System.out.println("### 최종 DTO 확인 (JSP로 전달 직전): " + matchupDetail); 
+      
+      model.addAttribute("matchupDetail", matchupDetail);
+      
+	  List<LanguageDTO> languages = matchupService.getAllLanguages();
+	  List<CategoryDTO> categories = matchupService.getAllCategories();
+	  List<MatchTypeDTO> matchTypes = matchupService.getAllMatchTypes();
+	      
+	  model.addAttribute("languages", languages);
+	  model.addAttribute("categories", categories);
+	  model.addAttribute("matchTypes", matchTypes); 
+
+      return "/matchup/updateMatchup"; // 수정 페이지 JSP 경로
+   }
+   
+   /* 매치업 수정하기 */
+   @PostMapping("/updateMatchup")
+   @ResponseBody
+   public BaseResponse<String> updateMatchup(@RequestBody MatchupUpdateDTO dto) {
+       try {
+           int result = matchupService.updateMatchup(dto);
+           if (result > 0) {
+               return new BaseResponse<>(BaseExceptionResponseStatus.SUCCESS, "매치업 정보가 성공적으로 수정되었습니다.");
+           } else {
+               return new BaseResponse<>(BaseExceptionResponseStatus.FAILURE, "매치업 수정에 실패했습니다.");
+           }
+       } catch (Exception e) {
+           e.printStackTrace();
+           return new BaseResponse<>(BaseExceptionResponseStatus.FAILURE, "서버 오류로 수정에 실패했습니다.");
+       }
    }
    
    /* 매치업 신규 작성 페이지 이동 */
    @GetMapping("/createMatchup")
-   public String createMatchupForm() {
-      return "/matchup/createMatchup";
+   public String createMatchupForm(Model model) {
+	  List<LanguageDTO> languages = matchupService.getAllLanguages();
+	  List<CategoryDTO> categories = matchupService.getAllCategories();
+	  List<MatchTypeDTO> matchTypes = matchupService.getAllMatchTypes();
+	      
+	  model.addAttribute("languages", languages);
+	  model.addAttribute("categories", categories);
+	  model.addAttribute("matchTypes", matchTypes); 
+      
+	  return "/matchup/createMatchup";
    }
    
    /* 매치업 신규 작성하기 */
    @PostMapping("/postCreateMatchup")
    @ResponseBody
-   public BaseResponse<MatchUp> createMatchup(@RequestBody MatchUp matchup) {
-	  System.out.println("Received DTO via JSON: " + matchup);
-      
-	  int result = matchupService.createMatchup(matchup);
-	  if (result > 0) {
-		  return new BaseResponse<>(matchup);
-	  } else {
-		  return new BaseResponse<>(BaseExceptionResponseStatus.FAILURE, null);
-	  }
+   // [수정] 반환 타입을 BaseResponse<String>으로 변경 (혹은 BaseResponse<Integer> 등)
+   public BaseResponse<String> createMatchup(@RequestBody MatchupCreateDTO dto) {
+       System.out.println("Received DTO via JSON: " + dto);
+       try {
+           int result = matchupService.createMatchup(dto);
+           if (result > 0) {
+               // [수정] 성공 시 메시지를 담아 반환
+               return new BaseResponse<>(BaseExceptionResponseStatus.SUCCESS, "매치업이 성공적으로 생성되었습니다.");
+           } else {
+               return new BaseResponse<>(BaseExceptionResponseStatus.FAILURE, "매치업 생성에 실패했습니다.");
+           }
+       } catch (Exception e) {
+           e.printStackTrace();
+           return new BaseResponse<>(BaseExceptionResponseStatus.FAILURE, "서버 오류로 생성에 실패했습니다.");
+       }
    }
    
 	/* 매치업 조회페이지 이동 */

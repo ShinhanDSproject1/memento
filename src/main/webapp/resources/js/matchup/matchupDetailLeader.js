@@ -32,7 +32,6 @@ function hideDeleteCompleteModalAndRedirect() {
     window.location.href = cpath + "/matchup/matchupList";
 }
 
-
 // AJAX 통신 함수
 async function handleConfirmDelete() {
     // JSP에서 전달받은 전역 변수 matchupDetail 사용
@@ -72,9 +71,11 @@ async function handleConfirmDelete() {
 // 페이지 로드 시 이벤트 리스너 설정 
 document.addEventListener("DOMContentLoaded", () => {
     const updateBtn = document.getElementById('update-btn');
+    const matchupId = matchupDetail.matchupId;
+    
     if (updateBtn) {
         updateBtn.addEventListener('click', () => {
-            alert('수정 버튼이 클릭되었습니다!');
+			window.location.href = cpath + "/matchup/updateMatchup?id=" + matchupId;
         });
     }
 

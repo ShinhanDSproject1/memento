@@ -23,8 +23,8 @@ public class MatchupDetailDTO {
 	    Integer leaderId;
 	    Integer mentoId;
 	    String title;
-	    Integer count;
-	    Integer matchupCount;
+	    Integer totalCount; 	/* 총 진행 횟수 */
+	    Integer matchupCount;	/* 현재 참여 인원  */
 	    Date startDay; 			/* 화면 상에 추가해야 하지 않나 생각함. */
 	    Date endDay; 			/* 화면 상에 추가해야 하지 않나 생각함. */
 	    Integer matchTypeFirst;
@@ -37,6 +37,7 @@ public class MatchupDetailDTO {
 	    @JsonIgnore
 	    LocalDateTime endTime;
 	    
+	    Integer minMember; 
 	    Integer maxMember;
 	    boolean hasMento;
 	    String content;
@@ -59,12 +60,12 @@ public class MatchupDetailDTO {
 	   	/* 날짜 포맷 변경 */
 	    public String getFormattedStartDate() {
 	        if (startDay == null) return "";
-	        return new SimpleDateFormat("yyyy/MM/dd").format(startDay);
+	        return new SimpleDateFormat("yyyy-MM-dd").format(startDay);
 	    }
 
 	    public String getFormattedEndDate() {
 	        if (endDay == null) return "";
-	        return new SimpleDateFormat("yyyy/MM/dd").format(endDay);
+	        return new SimpleDateFormat("yyyy-MM-dd").format(endDay);
 	    }
 	    
 	    /* 시간 포맷 변경 */
@@ -98,7 +99,7 @@ public class MatchupDetailDTO {
 	    
 	    /* 모집인원 포맷 변경 */
 	    public String getFormattedMemberCount() {
-	        return String.format("%02d/%02d", count, maxMember);
+	        return String.format("%02d/%02d", matchupCount, maxMember);
 	    }
 	    
 	    /* 가격 포맷 변경 */ 

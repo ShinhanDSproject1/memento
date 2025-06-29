@@ -11,6 +11,7 @@ import org.springframework.stereotype.Repository;
 import com.shinhan.memento.model.MatchUp;
 import com.shinhan.memento.dto.CategoryDTO;
 import com.shinhan.memento.dto.LanguageDTO;
+import com.shinhan.memento.dto.MatchTypeDTO;
 import com.shinhan.memento.dto.MatchupDetailDTO;
 import com.shinhan.memento.dto.MatchupListDTO;
 
@@ -41,6 +42,10 @@ public class MatchUpDAO {
 
 	public List<LanguageDTO> getAllLanguages() {
 		return sqlSession.selectList(namespace + "getAllLanguages");
+	}
+	
+	public List<MatchTypeDTO> getAllMatchTypes() {
+		return sqlSession.selectList(namespace + "getAllMatchTypes");
 	}
 	
 	
@@ -75,6 +80,16 @@ public class MatchUpDAO {
 	    return sqlSession.insert(namespace + "createMatchup", matchup);
 	}
 	
+	/* MatchUp Model 반환 */
+	public MatchUp getMatchupById(Integer matchupId) {
+		return sqlSession.selectOne(namespace + "getMatchupModelById", matchupId);
+	}
+	
+	/* 매치업 수정하기 (방장만이 갖고 있는 권한) */
+	public int updateMatchup(MatchUp matchup) {
+	    return sqlSession.update(namespace + "updateMatchup", matchup);
+	}
+	
 	/* 매치업 삭제하기 (방장만이 갖고 있는 권한) */
 	public int inactivateMatchupByIdAndLeader(int matchupId, int leaderId) {
 		Map<String, Object> params = new HashMap<>();
@@ -82,5 +97,5 @@ public class MatchUpDAO {
 	    params.put("leaderId", leaderId);
 	    return sqlSession.delete(namespace + "inactivateMatchupByIdAndLeader", params);
 	}
-	
+
 }

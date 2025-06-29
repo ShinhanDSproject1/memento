@@ -64,13 +64,9 @@
                         <img class="dropdown-arrow-icon" src="${cpath}/resources/images/icon-down.svg" />
                     </div>
                     <ul class="dropdown-list hidden" id="languageDropdown">
-                        <li data-value="1">파이썬(Python)</li>
-                        <li data-value="2">자바(Java)</li> 
-                        <li data-value="3">C++</li> 
-                        <li data-value="4">C#</li> 
-                        <li data-value="5">C</li> 
-                        <li data-value="6">HTML/CSS</li>
-                        <li data-value="7">JavaScript</li> 
+                        <c:forEach var="lang" items="${languages}">
+					        <li data-value="${lang.languageId}">${lang.languageName}</li>
+					    </c:forEach>
                         <li data-value="">언어 없음</li>
                     </ul>
                     <input type="hidden" id="languageValue" name="language" value="2">
@@ -85,13 +81,9 @@
                         <img class="dropdown-arrow-icon" src="${cpath}/resources/images/icon-down.svg" />
                     </div>
                     <ul class="dropdown-list hidden" id="categoryDropdown">
-                        <li data-value="1">알고리즘</li> 
-                        <li data-value="2">자료구조</li> 
-                        <li data-value="3">면접 준비</li> 
-                        <li data-value="4">자격증</li> 
-                        <li data-value="5">데이터베이스</li> 
-                        <li data-value="6">운영체제</li> 
-                        <li data-value="7">네트워크</li>
+                        <c:forEach var="cat" items="${categories}">
+					        <li data-value="${cat.categoryId}">${cat.categoryName}</li>
+					    </c:forEach>
                     </ul>
                     <input type="hidden" id="categoryValue" name="category" value="1">
                 </div>
@@ -155,36 +147,27 @@
 		        <div class="field-input-wrapper">
 		            <div class="dropdown-trigger-box"><span class="selected-value-text">선택</span><img class="dropdown-arrow-icon" src="${cpath}/resources/images/icon-down.svg" /></div>
 		            <ul class="dropdown-list hidden">
-			            <li data-value="1">활발한 개발자</li> 
-			            <li data-value="2">조용한 몰입형 개발자</li> 
-			            <li data-value="3">창의적 실험가 개발자</li> 
-			            <li data-value="4">구조화 좋아하는 개발자</li> 
-			            <li data-value="5">느긋한 꾸준형 개발자</li> 
-			            <li data-value="6">목표지향 개발자</li>
+			            <c:forEach var="type" items="${matchTypes}">
+					        <li data-value="${type.matchTypeId}">${type.matchTypeName}</li>
+					    </c:forEach>
 		            </ul>
 		            <input type="hidden" class="preferred-type-value" name="preferredTypes">
 		        </div>
 		        <div class="field-input-wrapper">
 		            <div class="dropdown-trigger-box"><span class="selected-value-text">선택</span><img class="dropdown-arrow-icon" src="${cpath}/resources/images/icon-down.svg" /></div>
 		            <ul class="dropdown-list hidden">
-			            <li data-value="1">활발한 개발자</li>
-			            <li data-value="2">조용한 몰입형 개발자</li>
-			            <li data-value="3">창의적 실험가 개발자</li>
-			            <li data-value="4">구조화 좋아하는 개발자</li>
-			            <li data-value="5">느긋한 꾸준형 개발자</li>
-			            <li data-value="6">목표지향 개발자</li>
+			            <c:forEach var="type" items="${matchTypes}">
+					        <li data-value="${type.matchTypeId}">${type.matchTypeName}</li>
+					    </c:forEach>
 		            </ul>
 		            <input type="hidden" class="preferred-type-value" name="preferredTypes">
 		        </div>
 		        <div class="field-input-wrapper">
 		            <div class="dropdown-trigger-box"><span class="selected-value-text">선택</span><img class="dropdown-arrow-icon" src="${cpath}/resources/images/icon-down.svg" /></div>
 		            <ul class="dropdown-list hidden">
-			            <li data-value="1">활발한 개발자</li> 
-			            <li data-value="2">조용한 몰입형 개발자</li> 
-			            <li data-value="3">창의적 실험가 개발자</li> 
-			            <li data-value="4">구조화 좋아하는 개발자</li> 
-			            <li data-value="5">느긋한 꾸준형 개발자</li> 
-			            <li data-value="6">목표지향 개발자</li>
+			            <c:forEach var="type" items="${matchTypes}">
+					        <li data-value="${type.matchTypeId}">${type.matchTypeName}</li>
+					    </c:forEach>
 		            </ul>
 		            <input type="hidden" class="preferred-type-value" name="preferredTypes">
 		        </div>

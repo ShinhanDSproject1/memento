@@ -5,22 +5,22 @@ import java.time.LocalDateTime;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
-import lombok.Getter;
+import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-@Getter
+@Data
 public class MatchUp {
 	private int matchupId;
 	private int categoryId;
 	private int languageId;
 	private int leaderId;
 	private int mentoId;
-	private int matchTypeIdFirst;
-	private int matchTypeIdSecond;
-	private int matchTypeIdThird;
+	private int matchTypeFirst;
+	private int matchTypeSecond;
+	private int matchTypeThird;
 	private String title;
 	private int count; // 전체 횟수 
 	private int matchupCount; //실제 이행 횟수 

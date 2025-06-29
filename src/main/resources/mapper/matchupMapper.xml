@@ -5,132 +5,245 @@
 
 <mapper namespace="com.shinhan.memento.dao.MatchUpDAO">
 
-    <resultMap id="matchupListResultMap" type="com.shinhan.memento.dto.MatchupListDTO">
-        <id property="matchupId" column="matchup_id" />
-        <result property="categoryId" column="category_id" />
-        <result property="languageId" column="language_id" />
-        <result property="leaderId" column="leader_id" />
-        <result property="title" column="title" />
-        <result property="matchupCount" column="matchup_count" />
-        <result property="startDay" column="start_day" />
-        <result property="endDay" column="end_day" />
-        <result property="maxMember" column="max_member" />
-        <result property="hasMento" column="has_mento" />
-        <result property="price" column="price" />
-        <result property="regionGroup" column="region_group" />
-        <result property="startTime" column="start_time" />
-        <result property="endTime" column="end_time" />
+	<resultMap id="matchupListResultMap"
+		type="com.shinhan.memento.dto.MatchupListDTO">
+		<id property="matchupId" column="matchup_id" />
+		<result property="categoryId" column="category_id" />
+		<result property="languageId" column="language_id" />
+		<result property="leaderId" column="leader_id" />
+		<result property="title" column="title" />
+		<result property="matchupCount" column="matchup_count" />
+		<result property="startDay" column="start_day" />
+		<result property="endDay" column="end_day" />
+		<result property="maxMember" column="max_member" />
+		<result property="hasMento" column="has_mento" />
+		<result property="price" column="price" />
+		<result property="regionGroup" column="region_group" />
+		<result property="startTime" column="start_time" />
+		<result property="endTime" column="end_time" />
+	</resultMap>
+
+	<resultMap id="matchupDetailResultMap"
+		type="com.shinhan.memento.dto.MatchupDetailDTO">
+		<id property="matchupId" column="matchup_id" />
+		<result property="categoryId" column="category_id" />
+		<result property="languageId" column="language_id" />
+		<result property="leaderId" column="leader_id" />
+		<result property="mentoId" column="mento_id" />
+		<result property="regionGroup" column="region_group" />
+		<result property="regionSubgroup" column="region_subgroup" />
+		<result property="regionDetail" column="region_detail" />
+		<result property="startDay" column="start_day" />
+		<result property="endDay" column="end_day" />
+		<result property="startTime" column="start_time" />
+		<result property="endTime" column="end_time" />
+		<result property="totalCount" column="count" />
+		<result property="matchupCount" column="matchup_count" />
+		<result property="minMember" column="min_member" />
+		<result property="maxMember" column="max_member" />
+		<result property="price" column="price" />
+		<result property="content" column="content" />
+		<result property="title" column="title" />
+		<result property="matchTypeFirst" column="match_type_first" />
+		<result property="matchTypeSecond" column="match_type_second" />
+		<result property="matchTypeThird" column="match_type_third" />
+		<result property="hasMento" column="has_mento" />
+		<result property="selectedDays" column="selected_days" />
+	</resultMap>
+
+	<resultMap id="matchupModelResultMap" type="com.shinhan.memento.model.MatchUp">
+	    <id property="matchupId" column="matchup_id"/>
+	    <result property="categoryId" column="category_id"/>
+	    <result property="languageId" column="language_id"/>
+	    <result property="leaderId" column="leader_id"/>
     </resultMap>
-    
-    <resultMap id="matchupDetailResultMap" type="com.shinhan.memento.dto.MatchupDetailDTO">
-        <id property="matchupId" column="matchup_id" />
-        <result property="categoryId" column="category_id" />
-        <result property="languageId" column="language_id" />
-        <result property="leaderId" column="leader_id" />
-        <result property="mentoId" column="mento_id" />
-        <result property="regionGroup" column="region_group" />
-        <result property="regionSubgroup" column="region_subgroup" />
-        <result property="regionDetail" column="region_detail" />
-        <result property="startDay" column="start_day" />
-        <result property="endDay" column="end_day" />
-        <result property="startTime" column="start_time" />
-        <result property="endTime" column="end_time" />
-        <result property="count" column="count" />
-        <result property="maxMember" column="max_member" />
-        <result property="price" column="price" />
-        <result property="content" column="content" />
-        <result property="title" column="title" />
-        <result property="matchTypeFirst" column="match_type_first" />
-        <result property="matchTypeSecond" column="match_type_second" />
-        <result property="matchTypeThird" column="match_type_third" />
-        <result property="hasMento" column="has_mento" />
-    </resultMap>
 
-    <select id="selectAll" resultMap="matchupListResultMap" parameterType="map">
-        SELECT matchup_id, category_id, selected_days, language_id,
-               region_group, start_day, end_day, start_time, end_time,
-               max_member, price, title, has_mento 
-        FROM matchup
-        <where>
-            status = 'ACTIVE'
-            <if test="regionGroup != null and regionGroup != ''"> AND region_group = #{regionGroup} </if>
-            <if test="categoryId != null"> AND category_id = #{categoryId} </if>
-            <if test="selectedDays != null and selectedDays != ''"> AND selected_days LIKE '%' || #{selectedDays} || '%' </if>
-            <if test="languageId != null"> AND language_id = #{languageId} </if>
-        </where>
-        ORDER BY start_day
-    </select>
+	<select id="getMatchupModelById" parameterType="int" resultMap="matchupModelResultMap">
+	    SELECT * FROM matchup
+	    WHERE matchup_id = #{matchupId}
+	</select>
 
-    <select id="selectByMatchupId" parameterType="int" resultMap="matchupDetailResultMap">
-        select matchup_id, category_id, language_id, leader_id,
-	       mento_id, region_group, region_subgroup, region_detail, start_day,
-	       end_day, start_time, end_time, count, max_member, price, content,
-	       title, match_type_first, match_type_second, match_type_third,
-	       has_mento 
-        from matchup 
-       where matchup_id = #{matchupId}
-         AND status = 'ACTIVE'
-    </select>
-    
-    <select id="getDistinctRegionGroups" resultType="string">
-        SELECT DISTINCT SUBSTR(region_group, 1, 2)
-        FROM matchup
-        WHERE region_group IS NOT NULL 
-          AND status = 'ACTIVE'
-        ORDER BY 1
-    </select>
+	<select id="selectAll" resultMap="matchupListResultMap"
+		parameterType="map">
+		SELECT matchup_id, category_id, selected_days, language_id,
+		region_group, start_day, end_day, start_time, end_time,
+		max_member, matchup_count
+		price, title, has_mento
+		FROM matchup
+		<where>
+			status = 'ACTIVE'
+			<if test="regionGroup != null and regionGroup != ''"> AND region_group = #{regionGroup} </if>
+			<if test="categoryId != null"> AND category_id = #{categoryId} </if>
+			<if test="selectedDays != null and selectedDays != ''"> AND selected_days LIKE '%' || #{selectedDays} || '%'
+			</if>
+			<if test="languageId != null"> AND language_id = #{languageId} </if>
+		</where>
+		ORDER BY start_day
+	</select>
 
-    <select id="getAllCategories" resultType="com.shinhan.memento.dto.CategoryDTO">
-        SELECT category_id AS categoryId, category_name AS categoryName
-        FROM category
+	<select id="selectByMatchupId" parameterType="int"
+		resultMap="matchupDetailResultMap">
+		select matchup_id, category_id, language_id, leader_id,
+		mento_id, region_group, region_subgroup, region_detail, start_day,
+		end_day, start_time, end_time, count, min_member, max_member, price, content,
+		title, match_type_first, match_type_second, match_type_third,
+		has_mento, selected_days
+		from matchup
+		where matchup_id = #{matchupId}
+		AND status =
+		'ACTIVE'
+	</select>
+
+	<select id="getDistinctRegionGroups" resultType="string">
+		SELECT DISTINCT
+		SUBSTR(region_group, 1, 2)
+		FROM matchup
+		WHERE region_group IS NOT NULL
+		AND status = 'ACTIVE'
+		ORDER BY 1
+	</select>
+
+	<select id="getAllCategories"
+		resultType="com.shinhan.memento.dto.CategoryDTO">
+		SELECT category_id AS categoryId, category_name AS
+		categoryName
+		FROM category
+		WHERE status = 'ACTIVE'
+		ORDER BY category_id
+	</select>
+
+	<select id="getAllLanguages"
+		resultType="com.shinhan.memento.dto.LanguageDTO">
+		SELECT language_id AS languageId, language_name AS
+		languageName
+		FROM language
+		WHERE status = 'ACTIVE'
+		ORDER BY language_id
+	</select>
+
+	<select id="getAllMatchTypes" resultType="com.shinhan.memento.dto.MatchTypeDTO">
+        SELECT match_type_id AS matchTypeId, 
+               match_type_name AS matchTypeName
+        FROM match_type
         WHERE status = 'ACTIVE'
-        ORDER BY category_id
+        ORDER BY match_type_id
     </select>
 
-    <select id="getAllLanguages" resultType="com.shinhan.memento.dto.LanguageDTO">
-        SELECT language_id AS languageId, language_name AS languageName
-        FROM language
-        WHERE status = 'ACTIVE'
-        ORDER BY language_id
-    </select>
+	<select id="getActiveMemberCount" parameterType="int"
+		resultType="int">
+		select count(*)
+		from member_matchup
+		where status = 'ACTIVE'
+		and matchup_id = #{matchupId}
+	</select>
+	<select id="getCategoryName" parameterType="int"
+		resultType="String">
+		select category_name
+		from category
+		where category_id =
+		#{categoryId}
+		AND status = 'ACTIVE'
+	</select>
+	<select id="getLanguageName" parameterType="int"
+		resultType="String">
+		SELECT language_name
+		FROM language
+		WHERE language_id =
+		#{languageId}
+		AND status = 'ACTIVE'
+	</select>
+	<select id="getMatchTypeName" parameterType="int"
+		resultType="String">
+		SELECT match_type_name
+		FROM match_type
+		WHERE match_type_id =
+		#{matchTypeId}
+		AND status = 'ACTIVE'
+	</select>
+	<insert id="createMatchup"
+		parameterType="com.shinhan.memento.model.MatchUp">
+	</insert>
+	<update id="inactivateMemberMatchupById" parameterType="int">
+		UPDATE
+		MEMBER_MATCHUP
+		SET status = 'INACTIVE'
+		WHERE MATCHUP_ID = #{matchupId}
+	</update>
+	<update id="inactivateMatchupByIdAndLeader" parameterType="map">
+		UPDATE MATCHUP
+		SET status = 'INACTIVE',
+		updated_at = sysdate
+		WHERE
+		MATCHUP_ID = #{matchupId}
+		AND LEADER_ID = #{leaderId}
+	</update>
 
-    <select id="getActiveMemberCount" parameterType="int" resultType="int">
-        select count(*) 
-          from member_matchup 
-         where status = 'ACTIVE' 
-           and matchup_id = #{matchupId}
-    </select>
-    <select id="getCategoryName" parameterType="int" resultType="String">
-        select category_name 
-          from category 
-         where category_id = #{categoryId}
-           AND status = 'ACTIVE'
-    </select>
-    <select id="getLanguageName" parameterType="int" resultType="String">
-        SELECT language_name 
-          FROM language 
-         WHERE language_id = #{languageId}
-           AND status = 'ACTIVE'
-    </select>
-    <select id="getMatchTypeName" parameterType="int" resultType="String">
-        SELECT match_type_name 
-          FROM match_type 
-         WHERE match_type_id = #{matchTypeId}
-           AND status = 'ACTIVE'
-    </select>
-    <insert id="createMatchup" parameterType="com.shinhan.memento.model.MatchUp">
-        </insert>
-    <update id="inactivateMemberMatchupById" parameterType="int">
-        UPDATE MEMBER_MATCHUP
-           SET status = 'INACTIVE'
-         WHERE MATCHUP_ID = #{matchupId}
-    </update>
-    <update id="inactivateMatchupByIdAndLeader" parameterType="map">
-        UPDATE MATCHUP
-           SET status = 'INACTIVE',
-               updated_at = sysdate
-         WHERE MATCHUP_ID = #{matchupId} 
-           AND LEADER_ID = #{leaderId}
-    </update>
-
+	<update id="updateMatchup"
+		parameterType="com.shinhan.memento.model.MatchUp">
+		UPDATE matchup
+		<set>
+			<if test="title != null and title != ''">
+				title = #{title},
+			</if>
+			<if test="content != null and content != ''">
+				content = #{content},
+			</if>
+			<if test="categoryId != null">
+				category_id = #{categoryId},
+			</if>
+			<if test="languageId != null">
+				language_id = #{languageId},
+			</if>
+			<if test="mentoId != null">
+				mento_id = #{mentoId},
+			</if>
+			<if test="matchTypeIdFirst != null">
+				match_type_first = #{matchTypeFirst},
+			</if>
+			<if test="matchTypeIdSecond != null">
+				match_type_second = #{matchTypeSecond},
+			</if>
+			<if test="matchTypeIdThird != null">
+				match_type_third = #{matchTypeThird},
+			</if>
+			<if test="count != null">
+				count = #{count},
+			</if>
+			<if test="startDay != null">
+				start_day = #{startDay},
+			</if>
+			<if test="endDay != null">
+				end_day = #{endDay},
+			</if>
+			<if test="startTime != null">
+				start_time = #{startTime},
+			</if>
+			<if test="endTime != null">
+				end_time = #{endTime},
+			</if>
+			<if test="minMember != null">
+				min_member = #{minMember},
+			</if>
+			<if test="maxMember != null">
+				max_member = #{maxMember},
+			</if>
+			<if test="price != null">
+				price = #{price},
+			</if>
+			<if test="regionGroup != null and regionGroup != ''">
+				region_group = #{regionGroup},
+			</if>
+			<if test="regionSubgroup != null and regionSubgroup != ''">
+				region_subgroup = #{regionSubgroup},
+			</if>
+			<if test="regionDetail != null and regionDetail != ''">
+				region_detail = #{regionDetail},
+			</if>
+			<if test="selectedDays != null and selectedDays != ''">
+				selected_days = #{selectedDays},
+			</if>
+			updated_at = sysdate
+		</set>
+		WHERE matchup_id = #{matchupId}
+	</update>
 </mapper>
