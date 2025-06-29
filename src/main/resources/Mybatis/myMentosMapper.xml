@@ -14,6 +14,7 @@
 		m.end_time AS endTime,
 		m.selected_days AS selectedDays,
 		mem.nickname AS mentoNickname,
+		mem.user_type AS mentoUserType,
 		m.status AS status,
 		r.status AS reviewStatus
 		from member_mentos mm

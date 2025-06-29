@@ -2,7 +2,7 @@ $(()=>{
 	fetchMentoringData();
 async function fetchMentoringData() {
     // 1. 데이터를 표시할 HTML 컨테이너를 가져옵니다.
-    const container = document.getElementById('mentos-list-container');
+    const container = $('#my-mentos-list');
     
     // 2. API를 호출합니다. URL은 실제 환경에 맞게 수정해야 합니다.
     const API_URL = 'http://localhost:9999/memento/api/mypage/page7?memberId=2'; // 백엔드 API 엔드포인트
@@ -31,6 +31,8 @@ async function fetchMentoringData() {
             card.className = 'mentos-card';
 
             // 멘토링 이미지
+            const imgDiv = document.createElement('div');
+            imgDiv.className='img-border';
             const img = document.createElement('img');
             img.src = '/memento/'+ mentos.mentosImg;
             img.alt = mentos.mentosTitle;
@@ -41,24 +43,28 @@ async function fetchMentoringData() {
             cardBody.className = 'mentos-card-body';
 
             // 멘토링 제목
-            const title = document.createElement('h3');
+            const title = document.createElement('h4');
             title.className = 'mentos-title';
             title.textContent = mentos.mentosTitle;
 
             // 멘토 닉네임
-            const nickname = document.createElement('p');
+            const nickname = document.createElement('div');
             nickname.className = 'mento-nickname';
-            nickname.textContent = `멘토: ${mentos.mentoNickname}`;
+            nickname.textContent = `${mentos.mentoNickname}`;
 
+			// mento or pre-mento
+			const usertype = document.createElement('div')
+			usertype.className = 'mento-type'
+			usertype.textContent = `${mentos.mentoUserType}`
             // 활동 시간 및 요일
-            const schedule = document.createElement('p');
+            const schedule = document.createElement('div');
             schedule.className = 'mentos-schedule';
-            schedule.textContent = `시간: ${mentos.startTime} ~ ${mentos.endTime} (${mentos.selectedDays})`;
+            schedule.textContent = `${mentos.startTime} ~ ${mentos.endTime} (${mentos.selectedDays})`;
             
             // 활동 지역
-            const region = document.createElement('p');
+            const region = document.createElement('div');
             region.className = 'mentos-region';
-            region.textContent = `지역: ${mentos.regionSubgroup}`;
+            region.textContent = `${mentos.regionSubgroup}`;
 
             // 활동 상태 (active/inactive에 따라 다른 스타일 적용)
             const status = document.createElement('span');
@@ -68,15 +74,17 @@ async function fetchMentoringData() {
             // 생성된 요소들을 카드에 추가합니다.
             cardBody.appendChild(title);
             cardBody.appendChild(nickname);
+            cardBody.appendChild(usertype);
             cardBody.appendChild(schedule);
             cardBody.appendChild(region);
             cardBody.appendChild(status);
-
-            card.appendChild(img);
+			
+            card.appendChild(imgDiv);
+            imgDiv.appendChild(img);
             card.appendChild(cardBody);
 
             // 6. 완성된 카드를 컨테이너에 추가합니다.
-            container.appendChild(card);
+            container.append(card);
         });
 
     } catch (error) {

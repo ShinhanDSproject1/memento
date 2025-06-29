@@ -49,6 +49,7 @@ public class MyPageDAO implements MyPageDAOInterface{
 			.endTime(endRaw)
 			.selectedDays((String)data.get("SELECTEDDAYS"))
 			.mentoNickname((String)data.get("MENTONICKNAME"))
+			.mentoUserType((String)data.get("MENTOUSERTYPE"))			
 			.status((String)data.get("STATUS"))
 			.reviewStatus(reviewStatus)
 			.build();

@@ -18,6 +18,7 @@ public class MyMentosListResponseDTO {
 	private String endTime;
 	private String selectedDays;
 	private String mentoNickname;
+	private String mentoUserType;
 	private String status;
 	private String reviewStatus;
 }
