@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.memento.shinhan.mypagelist">
+	<select id="selectMyMentosListById" parameterType="int" resultType="map">
+		select 
+		mm.mentos_id AS mentosId,
+		m.image AS mentosImg,
+		m.title AS mentosTitle,
+		m.region_subgroup AS regionSubgroup,
+		m.start_time AS startTime,
+		m.end_time AS endTime,
+		m.selected_days AS selectedDays,
+		mem.nickname AS mentoNickname,
+		m.status AS status,
+		r.status AS reviewStatus
+		from member_mentos mm
+		join mentos m on mm.mentos_id = m.mentos_id
+		left join member mem on m.mento_id = mem.member_id
+		left join review r on mm.mentos_id = r.mentos_id
+		where mm.member_id = #{memberId}
+		and m.status != 'delete'
+		and mm.status != 'delete'
+	</select>
+</mapper>

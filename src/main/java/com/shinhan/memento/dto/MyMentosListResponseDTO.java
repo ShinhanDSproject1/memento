@@ -1,0 +1,23 @@
+package com.shinhan.memento.dto;
+
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
+@Getter
+public class MyMentosListResponseDTO {
+	private Integer mentosId;
+	private String mentosImg;
+	private String mentosTitle;
+	private String regionSubgroup;
+	private String startTime;
+	private String endTime;
+	private String selectedDays;
+	private String mentoNickname;
+	private String status;
+	private String reviewStatus;
+}
