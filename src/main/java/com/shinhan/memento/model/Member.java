@@ -28,4 +28,9 @@ public class Member {
 	private Date createdAt;
 	private Date updatedAt;
 	private BaseStatus status;
+	
+	
+	public void updateMemberProfile(String newProfileImg) {
+		this.profileImg = newProfileImg;
+	}
 }

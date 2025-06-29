@@ -36,6 +36,7 @@ public class DBUtil {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+	}
 
 	public static String buildDebugSQL(String sqlTemplate, Object... params) {
 	    for (Object param : params) {
