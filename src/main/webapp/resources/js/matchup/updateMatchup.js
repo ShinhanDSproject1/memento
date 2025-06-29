@@ -96,24 +96,38 @@ async function handleUpdate() {
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(data)
         });
+
+        // 서버의 응답을 JSON 형태로 파싱합니다.
         const result = await response.json();
+
+        // 서버로부터 성공 응답(code: 1000)을 받았을 경우
         if (result.code === 1000) {
-            const confirmModal = document.getElementById("update-confirm-modal");
+            // 1. 올바른 ID로 모달 요소를 찾습니다.
+            const confirmModal = document.getElementById("editConfirmModal");
+            
             if (confirmModal) {
-                confirmModal.style.display = 'flex';
-                confirmModal.querySelector('.confirm-btn').onclick = () => {
-                    window.location.href = `/memento/matchup/matchupDetail?id=${data.matchupId}`;
-                };
+                // 2. 모달을 화면에 표시합니다. 'hidden' 클래스를 제거합니다.
+                confirmModal.classList.remove('hidden');
+
+                // 3. 모달의 '확인' 버튼을 찾아 클릭 이벤트를 설정합니다.
+                const closeBtn = confirmModal.querySelector('.modal-close-btn');
+                if (closeBtn) {
+                    closeBtn.onclick = () => {
+                        // 클릭 시, 수정된 매치업의 상세 페이지로 이동합니다.
+                        window.location.href = `/memento/matchup/matchupDetail?id=${data.matchupId}`;
+                    };
+                }
             }
         } else {
+            // 서버로부터 실패 응답을 받았을 경우, 에러 메시지를 표시합니다.
             alert(result.message || '수정에 실패했습니다.');
         }
     } catch (error) {
+        // 네트워크 오류 등 fetch 요청 자체에 실패했을 경우
         console.error('Error:', error);
         alert('오류가 발생했습니다.');
     }
 }
-
 
 /**
  * 폼의 모든 입력 값을 수집하여 서버로 보낼 객체 형태로 반환하는 함수

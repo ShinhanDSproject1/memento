@@ -68,7 +68,7 @@ public class MatchupListDTO {
     
     /* 모집인원 포맷 변경 */
     public String getFormattedMemberCount() {
-        return String.format("%02d/%02d", count, maxMember);
+        return String.format("%02d/%02d", matchupCount, maxMember);
     }
     
    /* 가격 포맷 변경 */ 

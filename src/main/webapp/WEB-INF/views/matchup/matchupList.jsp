@@ -22,17 +22,17 @@
                      <div class="detail-select-li">
                          <select name="regionGroup" class="filter-select" onchange="applyFilters()">
                              <option value="">-- 지역 (전체) --</option>
-				             <c:forEach var="region" items="${regionGroups}">
-				                <option value="${region}" ${param.regionGroup == region ? 'selected' : ''}>${region}</option>
-				             </c:forEach>
+                         <c:forEach var="region" items="${regionGroups}">
+                            <option value="${region}" ${param.regionGroup == region ? 'selected' : ''}>${region}</option>
+                         </c:forEach>
                          </select>
                      </div>
                      <div class="detail-select-li2">
                          <select name="categoryId" class="filter-select" onchange="applyFilters()">
                              <option value="">-- 학습유형 (전체) --</option>
                              <c:forEach var="cat" items="${categories}">
-                				<option value="${cat.categoryId}" ${param.categoryId == cat.categoryId ? 'selected' : ''}>${cat.categoryName}</option>
-            				 </c:forEach>
+                            <option value="${cat.categoryId}" ${param.categoryId == cat.categoryId ? 'selected' : ''}>${cat.categoryName}</option>
+                         </c:forEach>
                          </select>
                      </div>
                      <div class="detail-select-li">
@@ -51,8 +51,8 @@
                          <select name="languageId" class="filter-select" onchange="applyFilters()">
                              <option value="">-- 언어 (전체) --</option>
                              <c:forEach var="lang" items="${languages}">
-				                <option value="${lang.languageId}" ${param.languageId == lang.languageId ? 'selected' : ''}>${lang.languageName}</option>
-				             </c:forEach>
+                            <option value="${lang.languageId}" ${param.languageId == lang.languageId ? 'selected' : ''}>${lang.languageName}</option>
+                         </c:forEach>
                          </select>
                      </div>
                  </div>
@@ -111,7 +111,7 @@
                               </c:otherwise>
                           </c:choose>
                       </c:if>
-                      <c:if test="${!matchup.hasMento}">
+                      <c:if test="${matchup.hasMento}">
                           <div class="badge badge-mentor">멘토모집중</div>
                       </c:if>
                   </div>

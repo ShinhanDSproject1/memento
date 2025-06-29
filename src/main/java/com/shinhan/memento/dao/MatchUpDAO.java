@@ -20,37 +20,36 @@ import lombok.extern.slf4j.Slf4j;
 @Repository
 @Slf4j
 public class MatchUpDAO {
-	
-	@Autowired
-	SqlSession sqlSession;
-	String namespace = "com.shinhan.memento.dao.MatchUpDAO.";
-	
-	public List<MatchupListDTO> getMatchupList(Map<String, Object> filters) {
-		List<MatchupListDTO> matchuplist = sqlSession.selectList(namespace + "selectAll", filters);
-		log.info(matchuplist.size() + "건 조회되었습니다");
-		return matchuplist;
-	}
+   
+   @Autowired
+   SqlSession sqlSession;
+   String namespace = "com.shinhan.memento.dao.MatchUpDAO.";
+   
+   public List<MatchupListDTO> getMatchupList(Map<String, Object> filters) {
+      List<MatchupListDTO> matchuplist = sqlSession.selectList(namespace + "selectAll", filters);
+      log.info(matchuplist.size() + "건 조회되었습니다");
+      return matchuplist;
+   }
 
-	/* 필터 목록 조회를 위한 DAO 메서드 */
-	public List<String> getDistinctRegionGroups() {
-		return sqlSession.selectList(namespace + "getDistinctRegionGroups");
-	}
+   /* 필터 목록 조회를 위한 DAO 메서드 */
+   public List<String> getDistinctRegionGroups() {
+      return sqlSession.selectList(namespace + "getDistinctRegionGroups");
+   }
 
-	public List<CategoryDTO> getAllCategories() {
-		return sqlSession.selectList(namespace + "getAllCategories");
-	}
+   public List<CategoryDTO> getAllCategories() {
+      return sqlSession.selectList(namespace + "getAllCategories");
+   }
 
-	public List<LanguageDTO> getAllLanguages() {
-		return sqlSession.selectList(namespace + "getAllLanguages");
-	}
-	
-	public List<MatchTypeDTO> getAllMatchTypes() {
-		return sqlSession.selectList(namespace + "getAllMatchTypes");
-	}
-	
-	
-	
-	/* 현재 해당 매치업에 지원한 사람 수 체크 */
+   public List<LanguageDTO> getAllLanguages() {
+      return sqlSession.selectList(namespace + "getAllLanguages");
+   }
+   
+   public List<MatchTypeDTO> getAllMatchTypes() {
+      return sqlSession.selectList(namespace + "getAllMatchTypes");
+   }
+   
+   
+   /* 현재 해당 매치업에 지원한 사람 수 체크 */
     public int getActiveMemberCount(int matchupId) {
         return sqlSession.selectOne(namespace + "getActiveMemberCount", matchupId);
     }
@@ -71,31 +70,31 @@ public class MatchUpDAO {
     }
     
     /* 매치업 상세 페이지 정보 보기 */
-	public MatchupDetailDTO getMatchupDetail(int matchupId) {
-		return sqlSession.selectOne(namespace + "selectByMatchupId", matchupId);
-	}
-	
-	/* 매치업 신규 생성하기 */
-	public int createMatchup(MatchUp matchup) {
-	    return sqlSession.insert(namespace + "createMatchup", matchup);
-	}
-	
-	/* MatchUp Model 반환 */
-	public MatchUp getMatchupById(Integer matchupId) {
-		return sqlSession.selectOne(namespace + "getMatchupModelById", matchupId);
-	}
-	
-	/* 매치업 수정하기 (방장만이 갖고 있는 권한) */
-	public int updateMatchup(MatchUp matchup) {
-	    return sqlSession.update(namespace + "updateMatchup", matchup);
-	}
-	
-	/* 매치업 삭제하기 (방장만이 갖고 있는 권한) */
-	public int inactivateMatchupByIdAndLeader(int matchupId, int leaderId) {
-		Map<String, Object> params = new HashMap<>();
-	    params.put("matchupId", matchupId);
-	    params.put("leaderId", leaderId);
-	    return sqlSession.delete(namespace + "inactivateMatchupByIdAndLeader", params);
-	}
+   public MatchupDetailDTO getMatchupDetail(int matchupId) {
+      return sqlSession.selectOne(namespace + "selectByMatchupId", matchupId);
+   }
+   
+   /* 매치업 신규 생성하기 */
+   public int createMatchup(MatchUp matchup) {
+       return sqlSession.insert(namespace + "createMatchup", matchup);
+   }
+   
+   /* MatchUp Model 반환 */
+   public MatchUp getMatchupById(Integer matchupId) {
+      return sqlSession.selectOne(namespace + "getMatchupModelById", matchupId);
+   }
+   
+   /* 매치업 수정하기 (방장만이 갖고 있는 권한) */
+   public int updateMatchup(MatchUp matchup) {
+       return sqlSession.update(namespace + "updateMatchup", matchup);
+   }
+   
+   /* 매치업 삭제하기 (방장만이 갖고 있는 권한) */
+   public int inactivateMatchupByIdAndLeader(int matchupId, int leaderId) {
+      Map<String, Object> params = new HashMap<>();
+       params.put("matchupId", matchupId);
+       params.put("leaderId", leaderId);
+       return sqlSession.delete(namespace + "inactivateMatchupByIdAndLeader", params);
+   }
 
 }

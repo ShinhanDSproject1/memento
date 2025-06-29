@@ -134,32 +134,32 @@
             <div class="form-field"><div class="field-label">최대 인원</div><div class="field-input-wrapper input-box"><input type="number" name="maxMember" min="1" class="number-input" value="${matchupDetail.maxMember}" /></div></div>
         </div>
 
-		<div class="together-type-section">
-		    <div class="form-label" style="padding: 10px 0;">함께 하고 싶은 유형</div>
-		    <div class="type-dropdown-row">
-		        <div class="field-input-wrapper">
-		            <div class="dropdown-trigger-box"><span class="selected-value-text">선택</span><img class="dropdown-arrow-icon" src="${cpath}/resources/images/icon-down.svg" /></div>
-		            <ul class="dropdown-list hidden">
-			            <c:forEach var="type" items="${matchTypes}"><li data-value="${type.matchTypeId}">${type.matchTypeName}</li></c:forEach>
-		            </ul>
-		            <input type="hidden" class="preferred-type-value" name="matchTypeFirst" value="${matchupDetail.matchTypeFirst}">
-		        </div>
-		        <div class="field-input-wrapper">
-		            <div class="dropdown-trigger-box"><span class="selected-value-text">선택</span><img class="dropdown-arrow-icon" src="${cpath}/resources/images/icon-down.svg" /></div>
-		            <ul class="dropdown-list hidden">
-			            <c:forEach var="type" items="${matchTypes}"><li data-value="${type.matchTypeId}">${type.matchTypeName}</li></c:forEach>
-		            </ul>
-		            <input type="hidden" class="preferred-type-value" name="matchTypeSecond" value="${matchupDetail.matchTypeSecond}">
-		        </div>
-		        <div class="field-input-wrapper">
-		            <div class="dropdown-trigger-box"><span class="selected-value-text">선택</span><img class="dropdown-arrow-icon" src="${cpath}/resources/images/icon-down.svg" /></div>
-		            <ul class="dropdown-list hidden">
-			            <c:forEach var="type" items="${matchTypes}"><li data-value="${type.matchTypeId}">${type.matchTypeName}</li></c:forEach>
-		            </ul>
-		            <input type="hidden" class="preferred-type-value" name="matchTypeThird" value="${matchupDetail.matchTypeThird}">
-		        </div>
-		    </div>
-		</div>
+      <div class="together-type-section">
+          <div class="form-label" style="padding: 10px 0;">함께 하고 싶은 유형</div>
+          <div class="type-dropdown-row">
+              <div class="field-input-wrapper">
+                  <div class="dropdown-trigger-box"><span class="selected-value-text">선택</span><img class="dropdown-arrow-icon" src="${cpath}/resources/images/icon-down.svg" /></div>
+                  <ul class="dropdown-list hidden">
+                     <c:forEach var="type" items="${matchTypes}"><li data-value="${type.matchTypeId}">${type.matchTypeName}</li></c:forEach>
+                  </ul>
+                  <input type="hidden" class="preferred-type-value" name="matchTypeFirst" value="${matchupDetail.matchTypeFirst}">
+              </div>
+              <div class="field-input-wrapper">
+                  <div class="dropdown-trigger-box"><span class="selected-value-text">선택</span><img class="dropdown-arrow-icon" src="${cpath}/resources/images/icon-down.svg" /></div>
+                  <ul class="dropdown-list hidden">
+                     <c:forEach var="type" items="${matchTypes}"><li data-value="${type.matchTypeId}">${type.matchTypeName}</li></c:forEach>
+                  </ul>
+                  <input type="hidden" class="preferred-type-value" name="matchTypeSecond" value="${matchupDetail.matchTypeSecond}">
+              </div>
+              <div class="field-input-wrapper">
+                  <div class="dropdown-trigger-box"><span class="selected-value-text">선택</span><img class="dropdown-arrow-icon" src="${cpath}/resources/images/icon-down.svg" /></div>
+                  <ul class="dropdown-list hidden">
+                     <c:forEach var="type" items="${matchTypes}"><li data-value="${type.matchTypeId}">${type.matchTypeName}</li></c:forEach>
+                  </ul>
+                  <input type="hidden" class="preferred-type-value" name="matchTypeThird" value="${matchupDetail.matchTypeThird}">
+              </div>
+          </div>
+      </div>
 
         <button type="button" id="updateMatchupBtn" class="create-btn">
             <div class="div10">수정하기</div>
@@ -170,7 +170,7 @@
         window.matchupDetail = {
             languageId: '${matchupDetail.languageId}',
             categoryId: '${matchupDetail.categoryId}',
-            count: '${matchupDetail.totalCount}',
+            totalCount: '${matchupDetail.totalCount}',
             selectedDays: '${matchupDetail.selectedDays}',
             hasMento: ${matchupDetail.hasMento},
             matchTypeFirst: '${matchupDetail.matchTypeFirst}',
