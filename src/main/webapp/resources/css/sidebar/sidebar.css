@@ -1,6 +1,6 @@
 .sidebar {
 	width: 305px;
-	height: calc(100vh - 105px); /* header 높이 뺀 만큼 */
+	
 	background: #ffffff;
 	border-right: 1px solid rgba(117, 117, 117, 0.35);
 	padding: 50px 26px;
@@ -9,7 +9,7 @@
 	align-items: center;
 	gap: 30px;
 	position: sticky;
-	top: 105px;
+	top: 100px;
 	flex-shrink: 0;
 }
 

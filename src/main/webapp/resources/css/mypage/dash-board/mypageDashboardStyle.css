@@ -26,10 +26,6 @@
 	--font-display: 'Fredericka the Great', cursive;
 	--font-code: 'D2Coding', 'Courier New', monospace;
 }
-*{
-	margin:0px;
-	padding:0px;
-}
 
 .dashboard-container {
 	max-width: 1000px;
