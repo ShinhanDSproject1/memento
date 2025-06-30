@@ -17,6 +17,7 @@ import com.shinhan.memento.dto.MatchTypeDTO;
 import com.shinhan.memento.dto.MatchupApplyMentoDTO;
 import com.shinhan.memento.dto.MatchupDetailDTO;
 import com.shinhan.memento.dto.MatchupListDTO;
+import com.shinhan.memento.dto.MatchupWaitingMentoDTO;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -108,5 +109,15 @@ public class MatchUpDAO {
    /* 접속 유저의 유저 타입 확인 */
    public UserType findUserTypeById(int memberId) {
        return sqlSession.selectOne(namespace + "findUserTypeById", memberId);
+   }
+   
+   /* 접속 유저가 해당 매치업에 멘토로 신청했는지 여부 (요청 중 상태) */
+   public int checkMentoApplicationExists(Map<String, Object> params) {
+       return sqlSession.selectOne(namespace + "checkMentoApplicationExists", params);
+   }
+   
+   /* 요청 중인 멘토 리스트 조회 */
+   public List<MatchupWaitingMentoDTO> selectWaitingMentoByMatchupId(int matchupId) {
+       return sqlSession.selectList(namespace + "selectWaitingMentoByMatchupId", matchupId);
    }
 }

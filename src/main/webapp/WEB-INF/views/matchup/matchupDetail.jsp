@@ -47,7 +47,14 @@
 			  <div class="_70-000">₩${matchupDetail.formattedPrice}</div>
 			  <div class="button-area">
 			  	<c:if test="${matchupDetail.hasMento}">
-			    	<button class="mento-apply-btn" id="mento-apply-btn" type="button" data-matchup-id="${matchupDetail.matchupId}">멘토 신청하기</button>
+	    	        <c:choose>
+			            <c:when test="${matchupDetail.mentoApplicationPending}">
+			                <button class="mento-apply-btn pending" disabled>멘토 신청 중</button>
+			            </c:when>
+			            <c:otherwise>
+			                <button class="mento-apply-btn" id="mento-apply-btn" type="button" data-matchup-id="${matchupDetail.matchupId}">멘토 신청하기</button>
+			            </c:otherwise>
+			        </c:choose>
 			  	</c:if>
 			    <button class="apply-btn" id="apply-btn" type="button">신청하기</button>
 			  </div>
@@ -276,11 +283,10 @@
     	  const mentoApplyBtn = document.getElementById('mento-apply-btn');
           if (mentoApplyBtn) {
               mentoApplyBtn.addEventListener('click', function() {
-                  // 로그인 상태 확인
+                  
                   if (!loggedInMemberId) {
                       alert('로그인이 필요한 기능입니다.');
-                      // 로그인 페이지로 이동하는 로직 추가 가능
-                      // location.href = '${cpath}/login'; 
+
                       return;
                   }
 
@@ -303,9 +309,15 @@
                   })
                   .then(response => response.json())
                   .then(result => {
-                      alert(result.message); 
-                      if (result.isSuccess) {
-                          location.reload();
+                      if (result.code === 1000) { 
+                          this.textContent = '멘토 신청 중';
+                          this.disabled = true;
+                          this.classList.add('pending');
+                          this.id = '';
+                          alert('멘토 신청이 완료되었습니다.');
+
+                      } else {
+                          alert(result.message || '신청에 실패했습니다.');
                       }
                   })
                   .catch(error => {

@@ -57,18 +57,23 @@ function updateDropdownUI(list, displayElement, value) {
     const ul = (typeof list === 'string') ? document.getElementById(list) : list;
     const display = (typeof displayElement === 'string') ? document.getElementById(displayElement) : displayElement;
 
-    if (!ul || !display || value === null || value === '' || typeof value === 'undefined') {
-        if(display) display.textContent = '선택';
-        return;
-    }
+    if (!ul || !display) return;
 
     const selectedLi = ul.querySelector(`li[data-value="${value}"]`);
-    
+
     if (selectedLi) {
         display.textContent = selectedLi.textContent;
     } else {
         display.textContent = '선택';
-    
+    }
+
+    const wrapper = ul.closest('.field-input-wrapper');
+    if (wrapper) {
+        const hiddenInput = wrapper.querySelector('input[type="hidden"]');
+        if (hiddenInput) {
+            hiddenInput.value = value;
+        }
+    }
 }
 
 

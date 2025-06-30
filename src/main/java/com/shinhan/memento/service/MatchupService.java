@@ -4,6 +4,7 @@ import java.sql.Date;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -26,6 +27,7 @@ import com.shinhan.memento.dto.MatchupCreateDTO;
 import com.shinhan.memento.dto.MatchupDetailDTO;
 import com.shinhan.memento.dto.MatchupListDTO;
 import com.shinhan.memento.dto.MatchupUpdateDTO;
+import com.shinhan.memento.dto.MatchupWaitingMentoDTO;
 
 @Service
 public class MatchupService {
@@ -54,7 +56,7 @@ public class MatchupService {
    }
    
    /* 매치업 상세보기 */
-   public MatchupDetailDTO getMatchupDetail(int id) {
+   public MatchupDetailDTO getMatchupDetail(int id, Integer loginMemberId) {
       MatchupDetailDTO matchupDetail = matchUpDAO.getMatchupDetail(id); 
       
       if (matchupDetail == null) {
@@ -62,6 +64,18 @@ public class MatchupService {
       } else {
          int currentMemberCount = matchUpDAO.getActiveMemberCount(matchupDetail.getMatchupId());  /* 현재 신청 인원 */
          matchupDetail.setMatchupCount(currentMemberCount);
+      }
+      
+      if (loginMemberId != null) {
+          Map<String, Object> params = new HashMap<>();
+          params.put("memberId", loginMemberId);
+          params.put("matchupId", id);        
+          
+          int applicationCount = matchUpDAO.checkMentoApplicationExists(params);         
+          
+          if (applicationCount > 0) {
+              matchupDetail.setMentoApplicationPending(true);
+          }
       }
       return matchupDetail;
    }
@@ -189,27 +203,25 @@ public class MatchupService {
    public int applyMentoMatchup(MatchupApplyMentoDTO dto) {
 	   
 	    Member member = memberDAO.selectMemberById(dto.getMemberId()); 
-	    
         if (member == null) {
             System.out.println("사용자 정보가 존재하지 않습니다.");
             return -1;
         }
 	    
 	    UserType userType = matchUpDAO.findUserTypeById(dto.getMemberId());
-	    
         if (userType == null) {
             System.out.println("사용자 타입 정보가 DB에 존재하지 않습니다.");
             return -1;
         }
-        
         if (userType != UserType.MENTO) {
             System.out.println("멘토 권한이 없습니다. UserType=" + userType.name());
             return -1; 
         }
-	    
-        System.out.println("멘토 권한 확인 완료. 멘토 신청을 진행합니다. Member ID: " + dto.getMemberId());
-	    
 	    int result = matchUpDAO.applyMento(dto);
 	    return result;
+   }
+   
+   public List<MatchupWaitingMentoDTO> getWaitingMentoList(int matchupId) {
+       return matchUpDAO.selectWaitingMentoByMatchupId(matchupId);
    }
 }

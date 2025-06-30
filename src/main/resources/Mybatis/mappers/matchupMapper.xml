@@ -382,5 +382,30 @@
     WHERE 
         MEMBER_ID = #{memberId}
 	</select>
-   
+    
+    <!-- 접속 유저가 해당 메치업의 멘토를 신청했는지 여부 -->
+    <select id="checkMentoApplicationExists" parameterType="map" resultType="int">
+    SELECT 
+        COUNT(*)
+    FROM 
+        WAITINGMENTO_MATCHUP
+    WHERE 
+        MEMBER_ID = #{memberId} AND MATCHUP_ID = #{matchupId} AND STATUS = 'ACTIVE'
+	</select>
+    
+    <!-- 오청 중인 멘토 리스트업 -->
+    <select id="selectWaitingMentoByMatchupId" parameterType="int" resultType="com.shinhan.memento.dto.MatchupWaitingMentoDTO">
+    SELECT
+        w.MEMBER_ID        AS memberId,
+        m.NICKNAME         AS nickname,
+        m.PROFILE_IMAGE_URL AS profileImageUrl
+    FROM
+        WAITINGMENTO_MATCHUP w
+    JOIN
+        MEMBER m ON w.MEMBER_ID = m.MEMBER_ID
+    WHERE
+        w.MATCHUP_ID = #{matchupId}
+        AND w.STATUS = 'ACTIVE'
+</select>
+    
 </mapper>

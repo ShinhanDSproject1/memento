@@ -8,21 +8,6 @@
     
     <!-- 멘토 목록 -->
     <ul class="member-list">
-      <li class="member-item">
-        <img src="${pageContext.request.contextPath}/resources/images/member-icon.png" alt="멘토" />
-        <span>멘토 닉네임</span>
-        <input type="radio" name="selectedMember" checked />
-      </li>
-      <li class="member-item">
-        <img src="${pageContext.request.contextPath}/resources/images/member-icon.png" alt="팀원" />
-        <span>멘토 닉네임</span>
-        <input type="radio" name="selectedMember" />
-      </li>
-      <li class="member-item">
-        <img src="${pageContext.request.contextPath}/resources/images/member-icon.png" alt="팀원" />
-        <span>멘토 닉네임</span>
-        <input type="radio" name="selectedMember" />
-      </li>
     </ul>
 
     <!-- 버튼 영역 -->

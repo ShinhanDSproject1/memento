@@ -4,6 +4,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -24,6 +26,8 @@ import com.shinhan.memento.dto.MatchupCreateDTO;
 import com.shinhan.memento.dto.MatchupDetailDTO;
 import com.shinhan.memento.dto.MatchupListDTO;
 import com.shinhan.memento.dto.MatchupUpdateDTO;
+import com.shinhan.memento.dto.MatchupWaitingMentoDTO;
+import com.shinhan.memento.model.Member;
 import com.shinhan.memento.service.MatchupService;
 
 @Controller
@@ -32,6 +36,20 @@ public class MatchupController {
    
    @Autowired
    MatchupService matchupService;
+   
+   /* 요청중인 멘토 리스트 JSON 반환 API */
+   @GetMapping("/getWaitingMentoList")
+   @ResponseBody
+   public BaseResponse<List<MatchupWaitingMentoDTO>> getPendingMentos(@RequestParam int matchupId) {
+       try {
+           List<MatchupWaitingMentoDTO> mentoList = matchupService.getWaitingMentoList(matchupId);
+           return new BaseResponse<>(mentoList);
+       } catch (Exception e) {
+           e.printStackTrace();
+           // BaseResponse는 직접 만드신 공통 응답 객체이므로, 실패 시 생성자에 맞게 수정해주세요.
+           return new BaseResponse<>(BaseExceptionResponseStatus.FAILURE, null);
+       }
+   }
    
    /* 특정 매치업에 멘토로 신청하기 */
    @PostMapping("/applyMentoMatchup")
@@ -76,12 +94,14 @@ public class MatchupController {
    
    /* 매치업 수정 페이지 이동 */
    @GetMapping("/updateMatchup")
-   public String matchupUpdatePage(@RequestParam int id, Model model) {
-      MatchupDetailDTO matchupDetail = matchupService.getMatchupDetail(id);
+   public String matchupUpdatePage(@RequestParam int id, Model model, HttpSession session) {
+	 Integer loginMemberId = (Integer) session.getAttribute("loginMemberId");
+		  
+	 MatchupDetailDTO matchupDetail = matchupService.getMatchupDetail(id, loginMemberId);
       
-      System.out.println("### 최종 DTO 확인 (JSP로 전달 직전): " + matchupDetail); 
+     System.out.println("### 최종 DTO 확인 (JSP로 전달 직전): " + matchupDetail); 
       
-      model.addAttribute("matchupDetail", matchupDetail);
+     model.addAttribute("matchupDetail", matchupDetail);
       
      List<LanguageDTO> languages = matchupService.getAllLanguages();
      List<CategoryDTO> categories = matchupService.getAllCategories();
@@ -185,17 +205,25 @@ public class MatchupController {
    
    /* 매치업 상세 조회 페이지 이동 */
    @GetMapping("/matchupDetail")
-   public String matchupDetailPage(@RequestParam(required = false) Integer id, Model model) {
-      if (id == null) {
+   public String matchupDetailPage(@RequestParam(required = false) Integer id, Model model, HttpSession session) {
+	   
+	   if (id == null) {
           return "redirect:/matchup/matchupList";
       }
-      MatchupDetailDTO matchupDetail = matchupService.getMatchupDetail(id);
+      
+	  Member loginUser = (Member) session.getAttribute("loginUser");
+	  Integer loginMemberId = null;
+	  if (loginUser != null) {
+	      loginMemberId = loginUser.getMemberId();
+	  }
+      
+      MatchupDetailDTO matchupDetail = matchupService.getMatchupDetail(id, loginMemberId);
       System.out.println("### Service에서 가져온 DTO: " + matchupDetail); 
       
       model.addAttribute("matchupDetail", matchupDetail);
       
       /* 방장을 위한 상세 조회 페이지 이동 */
-      if (matchupDetail.getLeaderId() == 1) { // 추후 로그인된 memberId와 비교해야 함. 임시로 1로 설정.
+      if (matchupDetail.getLeaderId() == loginMemberId) {
          return "/matchup/matchupDetailLeader";
       }
        return "/matchup/matchupDetail";
@@ -203,8 +231,11 @@ public class MatchupController {
    
    @GetMapping("/getMatchupDetail")
    @ResponseBody
-   public BaseResponse<MatchupDetailDTO> getMatchupDetail(@RequestParam int id) {
-      MatchupDetailDTO matchupDetail = matchupService.getMatchupDetail(id);
+   public BaseResponse<MatchupDetailDTO> getMatchupDetail(@RequestParam int id, HttpSession session) {
+	  
+	  Integer loginMemberId = (Integer) session.getAttribute("loginMemberId");
+	  
+      MatchupDetailDTO matchupDetail = matchupService.getMatchupDetail(id, loginMemberId);
       if (matchupDetail == null) {
          return new BaseResponse<>(BaseExceptionResponseStatus.FAILURE, null); /* 매치업은 에러 처리가 없어서 임시 처리 */
       }
