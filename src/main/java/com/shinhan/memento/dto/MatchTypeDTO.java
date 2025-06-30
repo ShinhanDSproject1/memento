@@ -5,12 +5,11 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-@Data
-@NoArgsConstructor
 @AllArgsConstructor
+@NoArgsConstructor
 @Builder
+@Data
 public class MatchTypeDTO {
-	Integer match_type_id;
-	String match_type_name;
-	String match_type_info;
+    private Integer matchTypeId;
+    private String matchTypeName;
 }

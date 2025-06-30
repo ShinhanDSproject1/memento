@@ -5,12 +5,11 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-@Data
-@NoArgsConstructor
 @AllArgsConstructor
+@NoArgsConstructor
 @Builder
+@Data
 public class LanguageDTO {
-	Integer language_id;
-	String language_name;
-	String status;
+    private Integer languageId;
+    private String languageName;
 }
