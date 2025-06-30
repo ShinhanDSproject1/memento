@@ -21,12 +21,12 @@
 			<artifactId>jackson-datatype-jsr310</artifactId>
 			<version>${jackson.version}</version>
 		</dependency>
-    
+
 		<!-- SQL 문 로그 남기기를 위해 추가 -->
 		<dependency>
-			<groupId>org.lazyluke</groupId>
-			<artifactId>log4jdbc-remix</artifactId>
-			<version>0.2.7</version>
+			<groupId>org.bgee.log4jdbc-log4j2</groupId>
+			<artifactId>log4jdbc-log4j2-jdbc4.1</artifactId>
+			<version>1.16</version>
 		</dependency>
 
 		<dependency>
@@ -55,9 +55,16 @@
 		</dependency>
 
 		<dependency>
-		    <groupId>com.fasterxml.jackson.datatype</groupId>
-		    <artifactId>jackson-datatype-jsr310</artifactId>
-		    <version>2.18.3</version>
+			<groupId>com.fasterxml.jackson.datatype</groupId>
+			<artifactId>jackson-datatype-jsr310</artifactId>
+			<version>2.18.3</version>
+		</dependency>
+
+		<!-- LocalDate, LocalDateTime 처리를 위한 라이브러리 -->
+		<dependency>
+			<groupId>com.fasterxml.jackson.datatype</groupId>
+			<artifactId>jackson-datatype-jsr310</artifactId>
+			<version>2.18.3</version>
 		</dependency>
 
 		<!-- https://mvnrepository.com/artifact/org.springframework/spring-jdbc -->
@@ -204,10 +211,12 @@
 				<version>2.9</version>
 				<configuration>
 					<additionalProjectnatures>
-						<projectnature>org.springframework.ide.eclipse.core.springnature</projectnature>
+						<projectnature>org.springframework.ide.eclipse.core.springnature
+						</projectnature>
 					</additionalProjectnatures>
 					<additionalBuildcommands>
-						<buildcommand>org.springframework.ide.eclipse.core.springbuilder</buildcommand>
+						<buildcommand>org.springframework.ide.eclipse.core.springbuilder
+						</buildcommand>
 					</additionalBuildcommands>
 					<downloadSources>true</downloadSources>
 					<downloadJavadocs>true</downloadJavadocs>

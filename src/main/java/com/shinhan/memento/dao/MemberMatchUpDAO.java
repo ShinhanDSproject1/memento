@@ -1,27 +1,30 @@
 package com.shinhan.memento.dao;
 
-import java.util.ArrayList;
-import java.math.BigDecimal;
-import java.util.HashMap;
-import java.util.List;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
+import java.util.List;
+
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+
 import com.shinhan.memento.dto.MyMatchupListResponseDTO;
 
-@Repository
-public class MemberMatchUpDAO implements MemberMatchUpInterface{
+import lombok.extern.slf4j.Slf4j;
 
+@Repository
+@Slf4j
+public class MemberMatchUpDAO {
+	
 	@Autowired
 	SqlSession sqlSession;
-	String namespace="com.memento.shinhan.mymatchuplist.";
+	String namespace = "com.shinhan.memento.dao.MatchUpDAO.";
 	
-	@Override
+	String mypageNamespace="com.memento.shinhan.mymatchuplist.";
+	
 	public List<MyMatchupListResponseDTO> selectJoinListByMemberId(Integer memberId) {
 		// 1. 결과를 DTO 리스트로 직접 받습니다.
-        List<MyMatchupListResponseDTO> memberMatchUPList = sqlSession.selectList(namespace + "selectMyMatchUpList", memberId);
+        List<MyMatchupListResponseDTO> memberMatchUPList = sqlSession.selectList(mypageNamespace + "selectMyMatchUpList", memberId);
 
         // 2. DTO 리스트를 순회하며 시간 포맷만 수정합니다.
         for (MyMatchupListResponseDTO dto : memberMatchUPList) {
@@ -42,6 +45,13 @@ public class MemberMatchUpDAO implements MemberMatchUpInterface{
         }
 
         return memberMatchUPList;
+	}
+	
+	
+	/* 삭제된 매치업에 신청 혹은 참여중인 멤버 데이터 삭제하기 */
+	public int inactivateMemberMatchupById(int matchupId) {
+		return sqlSession.delete(namespace + "inactivateMemberMatchupById", matchupId);
+
 	}
 
 }
