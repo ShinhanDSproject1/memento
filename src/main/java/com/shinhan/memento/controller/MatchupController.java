@@ -19,6 +19,7 @@ import com.shinhan.memento.common.response.status.BaseExceptionResponseStatus;
 import com.shinhan.memento.dto.CategoryDTO;
 import com.shinhan.memento.dto.LanguageDTO;
 import com.shinhan.memento.dto.MatchTypeDTO;
+import com.shinhan.memento.dto.MatchupApplyMentoDTO;
 import com.shinhan.memento.dto.MatchupCreateDTO;
 import com.shinhan.memento.dto.MatchupDetailDTO;
 import com.shinhan.memento.dto.MatchupListDTO;
@@ -31,6 +32,28 @@ public class MatchupController {
    
    @Autowired
    MatchupService matchupService;
+   
+   /* 특정 매치업에 멘토로 신청하기 */
+   @PostMapping("/applyMentoMatchup")
+   @ResponseBody
+   public BaseResponse<String> applyMentoMatchup(@RequestBody MatchupApplyMentoDTO dto) {
+       System.out.println("Received DTO via JSON: " + dto);
+       try {
+           int result = matchupService.applyMentoMatchup(dto);
+           
+           // [수정] Service의 반환값에 따른 분기 처리
+           if (result > 0) {
+               return new BaseResponse<>(BaseExceptionResponseStatus.SUCCESS, "멘토 신청을 성공적으로 완료했습니다.");
+           } else if (result == -1) { // 멘토 권한이 없는 경우
+               return new BaseResponse<>(BaseExceptionResponseStatus.FAILURE, "멘토만 신청할 수 있는 기능입니다.");
+           } else { // 그 외 데이터베이스 insert 실패 등
+               return new BaseResponse<>(BaseExceptionResponseStatus.FAILURE, "멘토 신청에 실패했습니다. 다시 시도해주세요.");
+           }
+       } catch (Exception e) {
+           e.printStackTrace();
+           return new BaseResponse<>(BaseExceptionResponseStatus.FAILURE, "서버 오류로 신청에 실패했습니다.");
+       }
+   }
    
    /* 매치업 삭제하기 - UPDATE STATUS = INACTIVE */
    @PostMapping("/deleteMatchup")

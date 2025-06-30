@@ -9,9 +9,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.shinhan.memento.model.MatchUp;
+import com.shinhan.memento.model.UserType;
+import com.shinhan.memento.model.WaitingMentoMatchUp;
 import com.shinhan.memento.dto.CategoryDTO;
 import com.shinhan.memento.dto.LanguageDTO;
 import com.shinhan.memento.dto.MatchTypeDTO;
+import com.shinhan.memento.dto.MatchupApplyMentoDTO;
 import com.shinhan.memento.dto.MatchupDetailDTO;
 import com.shinhan.memento.dto.MatchupListDTO;
 
@@ -96,5 +99,14 @@ public class MatchUpDAO {
        params.put("leaderId", leaderId);
        return sqlSession.delete(namespace + "inactivateMatchupByIdAndLeader", params);
    }
-
+   
+   /* 특정 매치업에 멘토 신청하기 (멘토 기준) */ 
+   public int applyMento(MatchupApplyMentoDTO dto) {
+	   return sqlSession.insert(namespace + "applyMento", dto);
+   }
+   
+   /* 접속 유저의 유저 타입 확인 */
+   public UserType findUserTypeById(int memberId) {
+       return sqlSession.selectOne(namespace + "findUserTypeById", memberId);
+   }
 }

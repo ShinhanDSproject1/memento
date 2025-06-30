@@ -96,7 +96,7 @@
       LEFT JOIN language l ON m.language_id = l.language_id
       <where>
           m.status = 'ACTIVE'
-          <if test="regionGroup != null and regionGroup != ''"> AND m.region_group = #{regionGroup} </if>
+          <if test="regionGroup != null and regionGroup != ''"> AND m.region_group LIKE CONCAT(#{regionGroup}, '%')  </if>
           <if test="categoryId != null"> AND m.category_id = #{categoryId} </if>
           <if test="selectedDays != null and selectedDays != ''"> AND m.selected_days LIKE '%' || #{selectedDays} || '%' </if>
           <if test="languageId != null"> AND m.language_id = #{languageId} </if>
@@ -355,4 +355,32 @@
       </set>
       WHERE matchup_id = #{matchupId}
    </update>
+   
+   <!-- 멘토 신청하기 (멘토 기준) -->
+   <insert id="applyMento" parameterType="com.shinhan.memento.dto.MatchupApplyMentoDTO">
+   		insert into WAITINGMENTO_MATCHUP (
+   			WAIT_MENTO_ID,
+   			MEMBER_ID,
+   			MATCHUP_ID,
+   			CREATED_AT,
+   			STATUS
+   		) VALUES (
+   			SEQ_WAITINGMENTO_MATCHUP_ID.NEXTVAL,
+   			#{memberId},
+   			#{matchupId},
+   			SYSDATE,
+            'ACTIVE'
+   		)
+   </insert>
+   
+   <!-- 접속 유저의 유저타입 확인 -->
+   <select id="findUserTypeById" parameterType="int" resultType="com.shinhan.memento.model.UserType">
+    SELECT 
+        USER_TYPE 
+    FROM 
+        MEMBER 
+    WHERE 
+        MEMBER_ID = #{memberId}
+	</select>
+   
 </mapper>

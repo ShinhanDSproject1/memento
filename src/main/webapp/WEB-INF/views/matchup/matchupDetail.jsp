@@ -43,12 +43,15 @@
                <div class="_1">${matchupDetail.totalCount}회</div>
             </div>
             <img class="line" src="${cpath}/resources/images/line0.svg" />
-            <div class="group-478">
-               <div class="_70-000">₩${matchupDetail.formattedPrice}</div>
-               <button class="apply-btn" id="apply-btn" type="button">
-                  <span class="rectangle-298"></span> <span class="div7">신청하기</span>
-               </button>
-            </div>
+			<div class="group-478">
+			  <div class="_70-000">₩${matchupDetail.formattedPrice}</div>
+			  <div class="button-area">
+			  	<c:if test="${matchupDetail.hasMento}">
+			    	<button class="mento-apply-btn" id="mento-apply-btn" type="button" data-matchup-id="${matchupDetail.matchupId}">멘토 신청하기</button>
+			  	</c:if>
+			    <button class="apply-btn" id="apply-btn" type="button">신청하기</button>
+			  </div>
+			</div>
          </div>
       </div>
       <div class="middle-area">
@@ -266,11 +269,56 @@
       </div>
    </div>
    <script>
+      const loggedInMemberId = "${sessionScope.loginUser.memberId}"; 
+   
       document.addEventListener('DOMContentLoaded', function() {
-         document.getElementById('apply-btn').addEventListener('click',
-               function() {
-                  alert('신청하기 버튼이 클릭되었습니다!');
-               });
+         
+    	  const mentoApplyBtn = document.getElementById('mento-apply-btn');
+          if (mentoApplyBtn) {
+              mentoApplyBtn.addEventListener('click', function() {
+                  // 로그인 상태 확인
+                  if (!loggedInMemberId) {
+                      alert('로그인이 필요한 기능입니다.');
+                      // 로그인 페이지로 이동하는 로직 추가 가능
+                      // location.href = '${cpath}/login'; 
+                      return;
+                  }
+
+                  if (!confirm('멘토로 신청하시겠습니까?')) {
+                      return;
+                  }
+
+                  const matchupId = this.dataset.matchupId;
+                  const data = {
+                      memberId: loggedInMemberId,
+                      matchupId: matchupId
+                  };
+
+                  fetch('${cpath}/matchup/applyMentoMatchup', {
+                      method: 'POST',
+                      headers: {
+                          'Content-Type': 'application/json',
+                      },
+                      body: JSON.stringify(data)
+                  })
+                  .then(response => response.json())
+                  .then(result => {
+                      alert(result.message); 
+                      if (result.isSuccess) {
+                          location.reload();
+                      }
+                  })
+                  .catch(error => {
+                      console.error('Error:', error);
+                      alert('오류가 발생했습니다. 다시 시도해주세요.');
+                  });
+              });
+          }
+          
+    	  document.getElementById('apply-btn').addEventListener('click',
+                  function() {
+                     alert('신청하기 버튼이 클릭되었습니다!');
+                  });
       });
    </script>
 </body>

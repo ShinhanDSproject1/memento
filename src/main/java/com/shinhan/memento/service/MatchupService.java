@@ -12,12 +12,16 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.shinhan.memento.dao.MatchUpDAO;
+import com.shinhan.memento.dao.MemberDAO;
 import com.shinhan.memento.dao.MemberMatchUpDAO;
 import com.shinhan.memento.model.BaseStatus;
 import com.shinhan.memento.model.MatchUp;
+import com.shinhan.memento.model.Member;
+import com.shinhan.memento.model.UserType;
 import com.shinhan.memento.dto.CategoryDTO;
 import com.shinhan.memento.dto.LanguageDTO;
 import com.shinhan.memento.dto.MatchTypeDTO;
+import com.shinhan.memento.dto.MatchupApplyMentoDTO;
 import com.shinhan.memento.dto.MatchupCreateDTO;
 import com.shinhan.memento.dto.MatchupDetailDTO;
 import com.shinhan.memento.dto.MatchupListDTO;
@@ -30,6 +34,8 @@ public class MatchupService {
    MatchUpDAO matchUpDAO;
    @Autowired
    MemberMatchUpDAO memberMatchUpDAO;
+   @Autowired
+   MemberDAO memberDAO;
    
    /* 매치업 조회 */
    public List<MatchupListDTO> getMatchupList(Map<String, Object> filters) {
@@ -169,11 +175,41 @@ public class MatchupService {
        return matchUpDAO.updateMatchup(matchupToUpdate);
    }
    
+   /* 매치업 삭제 */
    @Transactional // 한꺼번에 처리 위해 (1. 매치업 테이블에서 해당 매치업 삭제, 2. 멤버 매치업 테이블에서 관련 내역 삭제)
    public int inactivateMatchup(int matchupId, int leaderId) {
       memberMatchUpDAO.inactivateMemberMatchupById(matchupId);
        int result = matchUpDAO.inactivateMatchupByIdAndLeader(matchupId, leaderId);
 
        return result;
+   }
+   
+   /* 특정 매치업에 멘토로 신청하기 */
+   @Transactional
+   public int applyMentoMatchup(MatchupApplyMentoDTO dto) {
+	   
+	    Member member = memberDAO.selectMemberById(dto.getMemberId()); 
+	    
+        if (member == null) {
+            System.out.println("사용자 정보가 존재하지 않습니다.");
+            return -1;
+        }
+	    
+	    UserType userType = matchUpDAO.findUserTypeById(dto.getMemberId());
+	    
+        if (userType == null) {
+            System.out.println("사용자 타입 정보가 DB에 존재하지 않습니다.");
+            return -1;
+        }
+        
+        if (userType != UserType.MENTO) {
+            System.out.println("멘토 권한이 없습니다. UserType=" + userType.name());
+            return -1; 
+        }
+	    
+        System.out.println("멘토 권한 확인 완료. 멘토 신청을 진행합니다. Member ID: " + dto.getMemberId());
+	    
+	    int result = matchUpDAO.applyMento(dto);
+	    return result;
    }
 }
