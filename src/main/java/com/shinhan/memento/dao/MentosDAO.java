@@ -1,5 +1,7 @@
 package com.shinhan.memento.dao;
 
+import java.util.List;
+
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -7,6 +9,7 @@ import org.springframework.stereotype.Repository;
 import com.shinhan.memento.dto.CreateMentosDTO;
 import com.shinhan.memento.dto.DetailMentosDTO;
 import com.shinhan.memento.dto.EditMentosDTO;
+import com.shinhan.memento.dto.SimilarMentosDTO;
 
 @Repository
 public class MentosDAO implements MentosInterfaceDAO {
@@ -18,9 +21,15 @@ public class MentosDAO implements MentosInterfaceDAO {
 
 	@Override
 	public DetailMentosDTO selectMentosDetail(int mentosId) {
-	    return session.selectOne(namespace + "selectMentosDetail", mentosId);
+		return session.selectOne(namespace + "selectMentosDetail", mentosId);
 	}
 	
+	@Override
+	public List<DetailMentosDTO> findSimilarMentos(SimilarMentosDTO simpleDTO) {
+	    return session.selectList(namespace + "findSimilarMentos", simpleDTO);
+	}
+
+
 	@Override
 	public int insertMentos(CreateMentosDTO dto) {
 		return session.insert(namespace + "insertMentos", dto);

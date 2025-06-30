@@ -2,6 +2,7 @@ package com.shinhan.memento.dto;
 
 import java.sql.Date;
 import java.time.LocalTime;
+import java.util.List;
 
 import com.shinhan.memento.model.UserType;
 
@@ -50,5 +51,7 @@ public class DetailMentosDTO {
 	private UserType userType;
 	
 	private double avgScore;
+	
+	private List<DetailMentosDTO> similarMentosList;
 
 }

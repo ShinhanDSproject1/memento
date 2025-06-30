@@ -7,7 +7,8 @@
 
 <mapper namespace="com.shinhan.memento.dao.MentosDAO">
 
-	<resultMap id="mentosDetailMap" type="com.shinhan.memento.dto.DetailMentosDTO">
+	<resultMap id="mentosDetailMap"
+		type="com.shinhan.memento.dto.DetailMentosDTO">
 		<result property="mentosId" column="mentos_id" />
 		<result property="title" column="title" />
 		<result property="simpleContent" column="simple_content" />
@@ -42,6 +43,23 @@
 		resultMap="mentosDetailMap">
 		SELECT * FROM mentos WHERE mentos_id = #{mentosId}
 	</select>
+
+	<select id="findSimilarMentos"
+		parameterType="com.shinhan.memento.dto.SimilarMentosDTO"
+		resultMap="mentosDetailMap">
+		SELECT *
+		FROM (
+		SELECT *
+		FROM mentos
+		WHERE region_group = #{regionGroup}
+		AND region_subgroup = #{regionSubgroup}
+		AND language_id = #{languageId}
+		AND mentos_id != #{mentosId}
+		ORDER BY mentos_id DESC
+		)
+		WHERE ROWNUM &lt;= 3
+	</select>
+
 
 
 	<insert id="insertMentos"
