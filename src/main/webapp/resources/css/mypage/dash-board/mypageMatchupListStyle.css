@@ -9,6 +9,17 @@ body {
 	background-color: #ffffff;
 }
 
+a {
+	outline: none !important;
+	color: var(--a-black) !important;
+	text-decoration: none !important;
+	cursor: pointer !important;
+}
+
+a:hover {
+	color: var(--a-black) !important;
+}
+
 .page-container {
 	flex: 1;
 	padding: 40px;
@@ -246,8 +257,8 @@ body {
 }
 
 .btn {
-	height: 35px;
-	border-radius: 5px;
+	height: 23px;
+	border-radius: 50px;
 	border: none;
 	cursor: pointer;
 	color: #ffffff;
