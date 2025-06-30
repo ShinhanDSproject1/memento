@@ -13,9 +13,9 @@
    <div class="div">
       <div class="top-bar">
          <div class="top-bar-tag">
-             <c:if test="${!matchupDetail.hasMento}">
-                 멘토 모집중
-             </c:if>
+            <c:if test="${matchupDetail.hasMento}">
+				<div class="top-bar-mento">멘토 모집중</div>
+			</c:if>
             <div class="top-bar-category">
                <div class="java-c">#${matchupDetail.languageName} #${matchupDetail.categoryName}</div>
             </div>
@@ -58,22 +58,7 @@
                   <div class="div8">멘토링 소개</div>
                   <div class="frame-3665">
                      <div class="_1-1-2-3-1-3-or-1">
-                        <span> <span class="_1-1-2-3-1-3-or-1-span">${matchupDetail.content} 
-                        </span>
-                           <ul class="_1-1-2-3-1-3-or-1-span2">
-                              <li>매일 문제 2~3개 선정 → 각자 풀이 후 리뷰</li>
-                              <li>문제는 백준/프로그래머스 기준, 난이도는 레벨1~3까지 다양하게 조정</li>
-                              <li>리뷰는 디스코드 음성 or 채팅으로 진행 (시간 협의)</li>
-                              <li>하루 1시간 정도 투자 예상 (풀이 + 리뷰 포함)</li>
-                              <li>리뷰는 설명 중심, 서로 모르는 부분은 꼭 짚고 넘어가기!</li>
-                              <li>희망 시 코드 리뷰 자료는 깃허브 공유</li>
-                           </ul> <span class="_1-1-2-3-1-3-or-1-span"> <br /> <br />
-                              알고리즘을 다시 잡고 싶은 분 <br /> 코딩 테스트를 앞두고 있는 분 <br /> 루틴을 만들며 단기간
-                              집중하고 싶은 분 <br /> 작심삼일 끝판왕… 누군가랑 함께해야 동기부여 되는 분 <br /> <br />
-                              혼자보다 함께라면 더 멀리 갈 수 있어요!!!! <br /> 시작이 반! 같이 해요 <br />
-                        </span> 
-                        <span class="_1-1-2-3-1-3-or-1-span3"> <br /> <br />
-                        </span>
+                        <span class="_1-1-2-3-1-3-or-1-span">${matchupDetail.content} 
                         </span>
                      </div>
                   </div>
