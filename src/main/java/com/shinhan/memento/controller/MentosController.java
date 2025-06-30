@@ -62,22 +62,19 @@ public class MentosController {
 	public String mentosMentoDetailClassList() {
 		return "mentos/mentosMentoDetailClassList";
 	}
+
 	
 	
-	
-	
-	
-	
-	@GetMapping("/detail")
+	@GetMapping("/detailmentos")
 	public BaseResponse<DetailMentosDTO> getMentosDetail(@RequestParam int mentosId) {
-	    log.info("MentosController.getMentosDetail 호출됨, id: " + mentosId);
+		log.info("MentosController.getMentosDetail 호출됨, id: " + mentosId);
 
-	    DetailMentosDTO dto = mentosService.getMentosDetail(mentosId);
-	    if (dto == null) {
-	        throw new MentosException(BaseExceptionResponseStatus.MENTOS_NOT_FOUND);
-	    }
+		DetailMentosDTO dto = mentosService.getMentosDetail(mentosId);
+		if (dto == null) {
+			throw new MentosException(BaseExceptionResponseStatus.MENTOS_NOT_FOUND);
+		}
 
-	    return new BaseResponse<>(dto);
+		return new BaseResponse<>(dto);
 	}
 
 	@PostMapping("/creatementos")
@@ -100,17 +97,17 @@ public class MentosController {
 		}
 		return new BaseResponse<>(null);
 	}
-	
+
 	@PatchMapping("/deletementos")
 	public BaseResponse<Void> deleteMento(@RequestBody DeleteMentosDTO dto) {
-	    log.info("MentosController.deleteMento");
+		log.info("MentosController.deleteMento");
 
-	    boolean result = mentosService.deleteMentos(dto.getMentosId());
-	    if (!result) {
-	        throw new MentosException(BaseExceptionResponseStatus.CANNOT_DElETE_MENTOS);
-	    }
+		boolean result = mentosService.deleteMentos(dto.getMentosId());
+		if (!result) {
+			throw new MentosException(BaseExceptionResponseStatus.CANNOT_DElETE_MENTOS);
+		}
 
-	    return new BaseResponse<>(null);
+		return new BaseResponse<>(null);
 	}
 
 }

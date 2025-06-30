@@ -3,6 +3,8 @@ package com.shinhan.memento.dto;
 import java.sql.Date;
 import java.time.LocalTime;
 
+import com.shinhan.memento.model.UserType;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -19,7 +21,6 @@ public class DetailMentosDTO {
 	private String title;
 	private String simpleContent;
 	private String image;
-	private int mentoId;
 	private int minMember;
 	private int maxMember;
 	private Date startDay;
@@ -42,5 +43,12 @@ public class DetailMentosDTO {
 	private int matchTypeIdFirst;
 	private int matchTypeIdSecond;
 	private int matchTypeIdThird;
+	
+	
+	private int mentoId;
+	private int matchTypeId;
+	private UserType userType;
+	
+	private double avgScore;
 
 }

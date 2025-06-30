@@ -5,37 +5,24 @@ import org.springframework.stereotype.Service;
 
 import com.shinhan.memento.dao.MentosDAO;
 import com.shinhan.memento.dao.ReviewDAO;
-import com.shinhan.memento.dto.CreateMentosDTO;
 import com.shinhan.memento.dto.DetailMentosDTO;
-import com.shinhan.memento.dto.EditMentosDTO;
 import com.shinhan.memento.dto.ReviewSummaryDTO;
 
 @Service
-public class MentosService {
-	@Autowired
-	MentosDAO mentosDAO;
+public class ReviewService {
 
 	@Autowired
 	ReviewDAO reviewDAO;
 
+	@Autowired
+	MentosDAO mentosDAO;
+
 	public DetailMentosDTO getMentosDetail(int mentosId) {
+		
 		DetailMentosDTO dto = mentosDAO.selectMentosDetail(mentosId);
 		ReviewSummaryDTO review = reviewDAO.getMentoReviewSummary(dto.getMentoId());
 		dto.setAvgScore(review != null ? review.getAvgScore() : 0.0);
 		return dto;
 	}
 
-	public boolean registerMento(CreateMentosDTO dto) {
-		int result = mentosDAO.insertMentos(dto);
-		return result > 0;
-	}
-
-	public boolean updateMentos(EditMentosDTO dto) {
-		int updatedRows = mentosDAO.updateMentos(dto);
-		return updatedRows > 0;
-	}
-
-	public boolean deleteMentos(int mentosId) {
-		return mentosDAO.deleteMentos(mentosId) > 0;
-	}
 }
