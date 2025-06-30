@@ -14,6 +14,11 @@
 <link rel="stylesheet" href="${cpath}/resources/css/vars.css">
 </head>
 <body>
+
+	<div class="header-fixed">
+	   <%@ include file="../common/logout_header.jsp"%>
+	</div>
+<div class="container">
    <div class="div">
       <div class="frame-3657">
          <div class="frame-390">
@@ -157,6 +162,8 @@
          </div>
       </div>
    </div>
+   
+   
 <script>
    const cpath = '${cpath}';
 </script>

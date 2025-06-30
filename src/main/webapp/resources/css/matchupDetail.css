@@ -1,18 +1,34 @@
 .div, .div * {
 	box-sizing: border-box;
 }
+/* 1. html/body에 스크롤 허용 */
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  overflow-y: auto;
+}
 
+/* 2. 고정 헤더 스타일 */
+.header-fixed {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%;  height: 80px;
+  background: #fff;
+  z-index: 1000;
+}
+
+
+/* 3. 본문 컨테이너를 헤더 아래로 밀기 */
+.container {
+  padding-top: 80px; /* header 높이와 동일하게 */
+  box-sizing: border-box;
+}
 .div {
-	background: #ffffff;
-	padding: 0px 250px 0px 250px;
-	display: flex;
-	flex-direction: column;
-	gap: 10px;
-	align-items: flex-start;
-	justify-content: flex-start;
-	height: 1856px;
-	position: relative;
-	overflow: hidden;
+  padding: 0 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
 }
 
 .top-bar {
@@ -308,7 +324,6 @@
 	justify-content: flex-start;
 	align-self: stretch;
 	flex-shrink: 0;
-	height: 1120px;
 	position: relative;
 }
 
@@ -319,7 +334,6 @@
 	align-items: center;
 	justify-content: center;
 	flex: 1;
-	height: 1105px;
 	position: relative;
 }
 
@@ -351,7 +365,7 @@
 	text-align: left;
 	font-family: "D2Coding-Regular", sans-serif;
 	font-size: 20px;
-	font-weight: 400;
+	font-weight: 500;
 	position: relative;
 	align-self: stretch;
 }
@@ -560,7 +574,7 @@
 	font-size: 20px;
 	line-height: 150%;
 	letter-spacing: -0.023em;
-	font-weight: 400;
+	font-weight: 420;
 	position: relative;
 }
 
@@ -1081,4 +1095,17 @@
 	left: 1.25px;
 	top: 0px;
 	overflow: visible;
+}
+
+
+
+/* 반응형 웹 */
+ .div {
+  padding: 0 20px;   /* 모바일·태블릿 기본 여백 */
+}
+
+@media (min-width: 1440px) {
+  .div {
+    padding: 0 250px;  /* 데스크탑 화면에서 양쪽 250px */
+  }
 }

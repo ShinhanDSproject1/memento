@@ -2,26 +2,52 @@
 	box-sizing: border-box;
 }
 
-.div {
-	display: flex;
-	background: #ffffff;
-	height: 1717px;
-	position: relative;
-	overflow: hidden;
-	justify-content: center;
-	align-items: center;
+body {
+  padding-top: 120px;  /* 헤더 높이와 똑같이 설정 */
+  
+}
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  overflow-y: auto;    /* body가 스크롤되도록 */
 }
 
-.frame-3657 {
-	background: #ffffff;
-	padding: 30px 110px;
-	display: flex;
-	flex-direction: column;
-	gap: 45px;
-	align-items: center;
-	width: auto;
-	height: 1686px;
-	position: absolute;
+.container {
+  position: absolute;
+  top: 120px;             /* 헤더 바로 아래부터 시작 */
+  right: 0; left: 0; bottom: 0;
+  overflow-y: auto;       /* 남은 영역만 스크롤 */
+}
+
+.header-fixed {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 120px;
+  background: #fff;
+  z-index: 1000;
+}
+.div {
+  display: flex;
+  background: #ffffff;
+  position: relative;
+  /* overflow: hidden; */    /* 삭제 */
+  overflow: visible;        /* fixed 요소가 잘리지 않도록 */
+  justify-content: center;
+  align-items: center;
+}
+
+frame-3657 {
+    background: #ffffff;
+    /* padding: 30px 110px; */
+    display: flex
+    flex-direction: column;
+    /* gap: 45px; */
+    width: auto;
+    height: 80%;
+    position: relative;
+    z-index: 1;
+    margin-top:-100px;   
 }
 
 .frame-390 {
@@ -49,6 +75,7 @@ span {
 	flex-shrink: 0;
 	width: 481px;
 	position: relative;
+	z-index: 10;
 }
 
 .detail-select {

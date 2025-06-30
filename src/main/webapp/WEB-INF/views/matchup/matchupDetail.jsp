@@ -10,10 +10,12 @@
 <link rel="stylesheet" href="${cpath}/resources/css/vars.css">
 </head>
 <body>
+<%@ include file="../common/logout_header.jsp"%>
+<div class = "container">
    <div class="div">
       <div class="top-bar">
          <div class="top-bar-tag">
-            <c:if test="${matchupDetail.hasMento}">
+            <c:if test="${!matchupDetail.hasMento}">
 				<div class="top-bar-mento">멘토 모집중</div>
 			</c:if>
             <div class="top-bar-category">
@@ -45,6 +47,7 @@
             <img class="line" src="${cpath}/resources/images/line0.svg" />
             <div class="group-478">
                <div class="_70-000">₩${matchupDetail.formattedPrice}</div>
+               
                <button class="apply-btn" id="apply-btn" type="button">
                   <span class="rectangle-298"></span> <span class="div7">신청하기</span>
                </button>
@@ -264,6 +267,7 @@
             </a>
          </div>
       </div>
+   </div>
    </div>
    <script>
       document.addEventListener('DOMContentLoaded', function() {
