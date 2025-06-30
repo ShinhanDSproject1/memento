@@ -16,6 +16,7 @@ public enum BaseExceptionResponseStatus implements ResponseStatus{
     * 3000 : member 관련
     */
     CANNOT_FOUND_MEMBER(3000,HttpStatus.BAD_REQUEST.value(), "해당 유저를 찾을 수 없습니다."),
+    CANNOT_FOUND_MENTO(3001,HttpStatus.BAD_REQUEST.value(), "해당 멘토유저를 찾을 수 없습니다."),
     
     /**
     * 4000 : mentos 관련
