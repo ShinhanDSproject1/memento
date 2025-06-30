@@ -9,7 +9,7 @@
 		<div class="matchup-list__container">
 			<h2 class="matchup-list__title">나의 매치업 목록</h2>
 
-			<div class="matchup-list__cards">
+			<div id="mypage-matchup-list" class="matchup-list__cards">
 				<!-- Card 1: In Progress, Leader -->
 				<article class="matchup-card">
 					<div class="matchup-card__content">
@@ -21,15 +21,14 @@
 								</div>
 								<span class="matchup-card__session-count">3/5회</span>
 							</header>
-							<h3 class="matchup-card__title">C언어로 운영체제 뜯어보는 스터디</h3>
+							<div class="matchup-card-main">
+								<span class="matchup-card__title">C언어로 운영체제 뜯어보는 스터디</span><span class="feat">(feat.조상호 멘토)</span> 
+							</div>
+							
 							<footer class="matchup-card__footer">
 								<div class="matchup-card__meta">
-									<span class="matchup-card__schedule">화 17:00 - 19:00</span>
+									<span class="matchup-card__schedule">화 (17:00 - 19:00)</span>
 									<span class="matchup-card__location">마포구</span>
-								</div>
-								<div class="matchup-card__mentor">
-									<img src="${cpath}/resources/images/mypage/dash-board/matchup-list/microphone-20.svg" alt="Mentor Icon" class="matchup-card__mentor-icon">
-									<span class="matchup-card__mentor-name">조상호 멘토</span>
 								</div>
 								<span class="matchup-card__role matchup-card__role--leader">방장</span>
 							</footer>
