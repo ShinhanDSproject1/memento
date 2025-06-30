@@ -10,9 +10,9 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class ValidateCashResponseDTO {
-	private String serialNumber;
-    private String cashProduct; 
+	private String orderId;
     private int amount;         
     private String orderName; 
     private int bonus;          
+    private int cash;
 }

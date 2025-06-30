@@ -8,8 +8,7 @@ const info = infoRaw ? JSON.parse(infoRaw) : null;
 
 if (info) {
   document.querySelector('.payment-number').textContent = `결제 금액: ${info.amount.toLocaleString()}원`;
-  const totalAmount = info.amount + (info.bonus || 0);
-  document.querySelector('.cash-number').textContent = `충전 금액: ${totalAmount.toLocaleString()}원`;
+  document.querySelector('.cash-number').textContent = `충전 금액: ${info.cash.toLocaleString()}원`;
 }else {
   document.querySelector('.payment-number').textContent = "결제 정보 없음";
 }
@@ -35,10 +34,10 @@ function renderTossWidget() {
 
     document.getElementById("payment-button").onclick = function() {
       widgets.requestPayment({
-        orderId: generateRandomString(),
-        orderName: info.description || "me:캐시 충전",
-successUrl: window.location.origin + "/memento/mypage/cash-recharge/success",
-failUrl: window.location.origin + "/memento/mypage/cash-recharge/fail",
+        orderId: info.orderId,
+        orderName: info.orderName || "me:캐시 충전",
+		successUrl: window.location.origin + "/memento/mypage/cash-recharge/success",
+		failUrl: window.location.origin + "/memento/mypage/cash-recharge/fail",
         customerEmail: "customer123@gmail.com",
         customerName: "김토스",
         customerMobilePhone: "01012341234",

@@ -4,5 +4,8 @@ import com.shinhan.memento.model.Payment;
 
 public interface MyPageDAOInterface {
 
-	public void insertWaitPayment(Payment payment);
+	public int insertPayment(Payment payment);
+	public Payment selectPaymentByOrderId(String orderId);
+	public int updatePaymentSuccess(String orderId, int cash);
+	public int updateUserBalance(int userId, int amount);
 }

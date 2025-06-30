@@ -536,11 +536,11 @@ button, input, textarea {
 }
 
 .p-grid {
-	height: 100%;
 	display: flex;
-	flex-wrap: wrap;
-	margin-right: -24px;
-	margin-right: calc(var(- -pGridGutter)* -1);
+  flex-wrap: wrap;
+  margin-right: -24px;
+  justify-content: center; /* 추가 */
+	
 }
 
 .p-grid-col {

@@ -3,6 +3,56 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.example.mapper.MypageMapper">
-    <!-- 여기에 실제 SQL이 들어감 -->
+<mapper namespace="com.shinhan.memento.dao.MyPageDAOInterface">
+	<insert id="insertPayment"
+		parameterType="com.shinhan.memento.model.Payment">
+		INSERT INTO payment (
+		payment_id, member_id, order_id, pay_at, amount, pay_type, step, matchup_id,
+		mentos_id, keepgoing_id, status
+		) VALUES (
+		seq_payment_id.nextval,
+		#{memberId},
+		#{orderId},
+		#{payAt, jdbcType=DATE},
+		#{amount},
+		#{payType},
+		#{step},
+		#{matchupId},
+		#{mentosId},
+		#{keepgoingId},
+		#{status}
+		)
+	</insert>
+
+	<select id="selectPaymentByOrderId" parameterType="string"
+		resultType="com.shinhan.memento.model.Payment">
+		SELECT
+		payment_id AS paymentId,
+		member_id AS memberId,
+		order_id AS orderId,
+		pay_at AS payAt,
+		amount,
+		pay_type AS payType,
+		step,
+		matchup_id AS matchupId,
+		mentos_id AS mentosId,
+		keepgoing_id AS keepgoingId,
+		status
+		FROM payment
+		WHERE order_id = #{orderId}
+	</select>
+
+	<update id="updatePaymentSuccess" parameterType="map">
+		UPDATE payment
+		SET step = 'SUCCESS', pay_at = SYSDATE, amount= #{cash}
+		WHERE order_id = #{orderId}
+	</update>
+
+	<update id="updateUserBalance" parameterType="map">
+		UPDATE userbalance
+		SET balance = balance + #{amount}, updated_at = SYSDATE
+		WHERE member_id = #{userId}
+	</update>
+
+
 </mapper>
