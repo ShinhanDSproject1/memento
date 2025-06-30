@@ -3,33 +3,31 @@ package com.shinhan.memento.model;
 import java.sql.Date;
 import java.time.LocalDateTime;
 
-import com.shinhan.memento.model.BaseStatus;
-
 import lombok.AllArgsConstructor;
 import lombok.Builder;
-import lombok.Getter;
+import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-@Getter
+@Data
 public class MatchUp {
 	private int matchupId;
 	private int categoryId;
 	private int languageId;
 	private int leaderId;
 	private int mentoId;
-	private int matchTypeIdFirst;
-	private int matchTypeIdSecond;
-	private int matchTypeIdThird;
+	private int matchTypeFirst;
+	private int matchTypeSecond;
+	private int matchTypeThird;
 	private String title;
 	private int count; // 전체 횟수 
 	private int matchupCount; //실제 이행 횟수 
-	private Date startDate;
+	private Date startDay;
 	private Date endDay;
 	private LocalDateTime startTime;
-	private LocalDateTime emdTime;
+	private LocalDateTime endTime;
 	private int minMember;
 	private int maxMember;
 	private String content; //매치업 소개내용 
