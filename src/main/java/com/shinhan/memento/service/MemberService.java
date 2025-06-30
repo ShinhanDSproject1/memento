@@ -11,22 +11,18 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Service;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.client.RestTemplate;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.shinhan.memento.dao.MemberDAO;
 import com.shinhan.memento.model.BaseStatus;
-import com.shinhan.memento.model.Member;
 import com.shinhan.memento.model.UserType;
 import com.shinhan.memento.util.DBUtil;
 
@@ -39,23 +35,11 @@ public class MemberService {
 	@Autowired
 	MemberMapper memberMapper;
 	
-	
 	public Member findMemberById(Map<String, Object> params) {
 		log.info("[MemberService.findMemberById]");
 		return memberMapper.findMemberById(params);
 	}
-
-	@Autowired
-	MemberDAO memberDAO;
-
-	/**
-	 * memberId 로 그런 유저가 있는지 찾는 메소드
-	 */
-	public Member selectMemberById(int memberId) {
-		log.info("[MemberService.selectMemberById]");
-		return memberDAO.selectMemberById(memberId);
-	}
-
+	
 	public Member kakaoLogin(String code, String clientId, String redirectUri) throws Exception {
 		// 1. access token 요청
 		RestTemplate rt = new RestTemplate();

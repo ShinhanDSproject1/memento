@@ -6,7 +6,6 @@ import org.apache.ibatis.annotations.Mapper;
 
 import com.shinhan.memento.model.Member;
 
-@Mapper
 public interface MemberMapper {
 	Member findMemberById(Map<String, Object> params);
 }
