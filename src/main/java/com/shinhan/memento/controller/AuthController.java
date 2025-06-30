@@ -2,6 +2,7 @@ package com.shinhan.memento.controller;
 
 import javax.servlet.http.HttpSession;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.stereotype.Controller;
@@ -18,7 +19,8 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class AuthController {
 
-    private final MemberService memberService;
+	@Autowired
+    MemberService memberService;
 
     @Value("${kakao.client-id}")
     private String clientId;
