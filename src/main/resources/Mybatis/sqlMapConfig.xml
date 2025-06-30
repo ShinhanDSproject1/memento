@@ -9,7 +9,7 @@
 		<setting name="jdbcTypeForNull" value="NULL" />
 	</settings>
 	<typeAliases>
-		<!-- <typeAlias type="com.shinhan.memento.dto.MyMatchupListResponseDTO" alias="myMatchupListDTO" /> -->
+		<typeAlias type="com.shinhan.memento.dto.MyMatchupListResponseDTO" alias="myMatchupListDTO" />
 	</typeAliases>
 	
 </configuration>
