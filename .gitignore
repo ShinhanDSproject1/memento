@@ -66,4 +66,4 @@ $RECYCLE.BIN/
 .settings/
 target/
 
-
+src/main/resources/application-secret.properties
