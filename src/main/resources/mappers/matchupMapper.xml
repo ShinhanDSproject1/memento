@@ -6,9 +6,22 @@
 <mapper namespace="com.shinhan.memento.dao.MatchUpDAO">
 
   <select id="selectAll" resultType="com.shinhan.memento.dto.MatchupListDTO">
-    SELECT matchup_id, category_id, selected_days, language_id, region_group, start_day, end_day, start_time, end_time, 
-           min_member, max_member, price, title, has_mento
-  	  FROM matchup
+        SELECT 
+        matchup_id AS matchupId,
+        category_id AS categoryId,
+        selected_days AS selectedDays,
+        language_id AS languageId,
+        region_group AS regionGroup,
+        start_day AS startDay,
+        end_day AS endDay,
+        start_time AS startTime,
+        end_time AS endTime,
+        min_member AS minMember,
+        max_member AS maxMember,
+        price,
+        title,
+        has_mento AS hasMento
+        from matchup
 	  <where>
 	    <if test="region_group != null and region_group != ''">
 	      AND region_group = #{region_group}
@@ -25,7 +38,7 @@
 	  </where>
 	  order by start_day
 	</select>
-	
+
 	<select id="getActiveMemberCount" parameterType="int" resultType="int">
 		  select count(*)
 		    from member_matchup
@@ -33,13 +46,32 @@
 		     and matchup_id = #{matchupId}
 	</select>
 	
-	  <select id="selectByMatchupId" parameterType="int" resultType="com.shinhan.memento.dto.MatchupDetailDTO">
-		  select matchup_id, category_id, language_id, leader_id, mento_id, region_group, region_subgroup, region_detail, 
-		         start_day, end_day, start_time, end_time, count, max_member, price, content, title, match_type_first, 
-		         match_type_second, match_type_third, has_mento
-		    from matchup
-		   where matchup_id = #{matchupId}
-	</select>
+<select id="selectByMatchupId" parameterType="int" resultType="com.shinhan.memento.dto.MatchupDetailDTO">
+      select 
+          matchup_id AS matchupId,
+          category_id AS categoryId,
+          language_id AS languageId,
+          leader_id AS leaderId,
+          mento_id AS mentoId,
+          region_group AS regionGroup,
+          region_subgroup AS regionSubgroup,
+          region_detail AS regionDetail,
+          start_day AS startDay,
+          end_day AS endDay,
+          start_time AS startTime,
+          end_time AS endTime,
+          count,
+          max_member AS maxMember,
+          price,
+          content,
+          title,
+          match_type_first AS matchTypeFirst,
+          match_type_second AS matchTypeSecond,
+          match_type_third AS matchTypeThird,
+          has_mento AS hasMento
+        from matchup
+       where matchup_id = #{matchupId}
+</select>
 
 	<select id="getCategoryName" parameterType="int" resultType="String">
 	  select category_name from category where category_id = #{categoryId}
@@ -97,28 +129,33 @@
 		)
 	</insert>
 	
-		  <!-- 신청 중복 체크 -->
-	  <select id="existsActiveApplication" parameterType="map" resultType="int">
+	<select id="existsActiveApplication" parameterType="map" resultType="int">
 	    SELECT COUNT(*) FROM member_matchup
 	    WHERE member_id = #{memberId}
 	      AND matchup_id = #{matchupId}
 	      AND status = 'ACTIVE'
-	  </select>
+	</select>
 	
-	  <!-- 신청 insert -->
-	  <insert id="insertApplication" parameterType="map">
-	    INSERT INTO member_matchup (member_matchup_id, member_id, matchup_id, status, created_at)
-	    VALUES (member_matchup_seq.nextval, #{memberId}, #{matchupId}, 'ACTIVE', SYSDATE)
-	  </insert>
+	<insert id="insertApplication" parameterType="map">
+	    INSERT INTO member_matchup (member_matchup_id, member_id, matchup_id, status, created_at, updated_at)
+	    VALUES (member_matchup_seq.nextval, #{memberId}, #{matchupId}, 'ACTIVE', SYSDATE, SYSDATE)
+	</insert>
 	
-	  <!-- 신청 취소 (논리 삭제) -->
-	  <update id="updateStatusToInactive" parameterType="map">
+	<update id="updateStatusToInactive" parameterType="map">
 	    UPDATE member_matchup
 	    SET status = 'INACTIVE', updated_at = SYSDATE
-	    WHERE member_id = #{memberId}
-	      AND matchup_id = #{matchupId}
-	      AND status = 'ACTIVE'
-	  </update>
+	    WHERE member_id = #{memberId} AND matchup_id = #{matchupId} AND status = 'ACTIVE'
+	</update>
+
+
+	<select id="findMembersByMatchupId" parameterType="int"
+		resultType="com.shinhan.memento.dto.MemberDTO">
+		SELECT m.*
+		FROM MEMBER m
+		JOIN MEMBER_MATCHUP mm ON m.MEMBER_ID = mm.MEMBER_ID
+		WHERE mm.MATCHUP_ID = #{matchupId}
+		AND mm.STATUS = 'ACTIVE'
+	</select>
 	
-  
 </mapper>
+<!--  -->

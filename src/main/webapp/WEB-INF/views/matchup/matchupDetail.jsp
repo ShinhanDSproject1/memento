@@ -13,7 +13,7 @@
 	<div class="div">
 		<div class="top-bar">
 			<div class="top-bar-tag">
-			    <c:if test="${!matchupDetail.has_mento}">
+			    <c:if test="${!matchupDetail.hasMento}">
 			        멘토 모집중
 			    </c:if>
 				<div class="top-bar-category">
@@ -45,9 +45,17 @@
 				<img class="line" src="${cpath}/resources/images/line0.svg" />
 				<div class="group-478">
 					<div class="_70-000">₩${matchupDetail.formattedPrice}</div>
-					<button class="apply-btn" id="apply-btn" type="button">
-						<span class="rectangle-298"></span> <span class="div7">신청하기</span>
-					</button>
+		<c:if test="${matchupDetail.count < matchupDetail.maxMember}">
+	  <button class="apply-btn" id="apply-btn" type="button">
+	    <span class="rectangle-298"></span>
+	    <span class="div7">
+	      <c:choose>
+	        <c:when test="${isApplied}">참여취소</c:when>
+	        <c:otherwise>신청하기</c:otherwise>
+	      </c:choose>
+	    </span>
+	  </button>
+	</c:if>
 				</div>
 			</div>
 		</div>
@@ -280,13 +288,167 @@
 			</div>
 		</div>
 	</div>
-	<script>
-		document.addEventListener('DOMContentLoaded', function() {
-			document.getElementById('apply-btn').addEventListener('click',
-					function() {
-						alert('신청하기 버튼이 클릭되었습니다!');
-					});
-		});
-	</script>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const applyBtn = document.getElementById('apply-btn');
+    if (!applyBtn) {
+        console.error('apply-btn 요소 찾지 못함');
+        return;
+    }
+    
+    const btnTextSpan = applyBtn.querySelector('.div7');
+    if (!btnTextSpan) {
+        console.error('apply-btn 내부에 .div7 요소를 찾지 못함');
+        return;
+    }
+    
+    const matchupId = "${matchupDetail.matchupId}";
+    const memberId = 1; // 실제 로그인된 회원 ID로 변경 필요
+    
+    applyBtn.addEventListener('click', function() {
+        const action = btnTextSpan.textContent.trim();
+        
+        if (action === '신청하기') {
+            fetch('${cpath}/matchup/apply', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded'
+                },
+                body: new URLSearchParams({
+                    matchupId: matchupId,
+                    memberId: memberId
+                })
+            })
+            .then(response => response.json())
+            .then(data => {
+                alert(data.message || '신청 완료');
+                if (!data.isError) {
+                    btnTextSpan.textContent = '참여취소';
+                }
+            })
+            .catch(() => alert('신청 실패'));
+        } else if (action === '참여취소') {
+            fetch('${cpath}/matchup/cancelApplication', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded'
+                },
+                body: new URLSearchParams({
+                    matchupId: matchupId,
+                    memberId: memberId
+                })
+            })
+            .then(response => response.json())
+            .then(data => {
+                alert(data.message || '취소 완료');
+                if (!data.isError) {
+                    btnTextSpan.textContent = '신청하기';
+                }
+            })
+            .catch(() => alert('취소 실패'));
+        }
+    });
+});
+    
+    function openMemberModal() {
+        document.getElementById("member-modal").style.display = "flex";
+    }
+
+    function closeMemberModal() {
+        document.getElementById("member-modal").style.display = "none";
+    }
+
+    function openMentoModal() {
+        document.getElementById("mento-modal").style.display = "flex";
+    }
+
+    function closeMentoModal() {
+        document.getElementById("mento-modal").style.display = "none";
+    }
+
+    function showDeleteConfirmModal() {
+        document.getElementById("delete-confirm-modal").style.display = "flex";
+    }
+
+    function hideDeleteConfirmModal() {
+        document.getElementById("delete-confirm-modal").style.display = "none";
+    }
+
+    function showDeleteCompleteModal() {
+        const completeModal = document.getElementById("delete-complete-modal");
+        completeModal.style.display = "flex";
+    }
+
+    function hideDeleteCompleteModalAndRedirect() {
+        document.getElementById("delete-complete-modal").style.display = "none";
+        window.location.href = cpath + "/matchup/matchupList";
+    }
+
+
+    // AJAX 통신 함수
+    async function handleConfirmDelete() {
+        // JSP에서 전달받은 전역 변수 matchupDetail 사용
+        const matchupId = matchupDetail.matchupId;
+        const leaderId = matchupDetail.leaderId;
+
+        const params = new URLSearchParams();
+        params.append('matchupId', matchupId);
+        params.append('leaderId', leaderId);
+
+        hideDeleteConfirmModal();
+
+        try {
+            const response = await fetch(cpath + '/matchup/deleteMatchup', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded'
+                },
+                body: params
+            });
+
+            const result = await response.json();
+
+            if (result.code == 1000) { 
+                showDeleteCompleteModal();
+            } else {
+                alert(result.message || '매치업 삭제에 실패했습니다.');
+            }
+
+        } catch (error) {
+            console.error('Error during fetch:', error);
+            alert('오류가 발생했습니다. 잠시 후 다시 시도해주세요.');
+        }
+    }
+
+
+    // 페이지 로드 시 이벤트 리스너 설정 
+    document.addEventListener("DOMContentLoaded", () => {
+        const updateBtn = document.getElementById('update-btn');
+        if (updateBtn) {
+            updateBtn.addEventListener('click', () => {
+                alert('수정 버튼이 클릭되었습니다!');
+            });
+        }
+
+        const openMemberBtn = document.getElementById("select-memberlist-btn");
+        if (openMemberBtn) {
+            openMemberBtn.addEventListener("click", openMemberModal);
+        }
+
+        const openMentoBtn = document.getElementById("select-mentolist-btn");
+        if (openMentoBtn) {
+            openMentoBtn.addEventListener("click", openMentoModal);
+        }
+    });
+
+    $('#cancel-btn').click(function() {
+        $.post('/memento/matchup/cancelApplication', {memberId: 1, matchupId: 3}, function(response) {
+            alert(response.message);
+        });
+    });
+</script>
+
+
+
 </body>
 </html>

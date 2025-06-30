@@ -70,7 +70,7 @@ function renderMatchups(matchups) {
 
     container.innerHTML = html;
 }
-
+//
 function renderRecruitBadge(recruitStatus) {
     if (!recruitStatus) return '';
 

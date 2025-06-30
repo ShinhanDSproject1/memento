@@ -9,29 +9,41 @@ public enum BaseExceptionResponseStatus implements ResponseStatus{
     /**
      * 1000: 요청 성공 (OK)
      */
-    SUCCESS(1000,HttpStatus.OK.value(), "요청에 성공하였습니다."),
+    SUCCESS(1000, HttpStatus.OK.value(), "요청에 성공하였습니다."),
     FAILURE(2000, HttpStatus.BAD_REQUEST.value(), "요청에 실패하였습니다."),
-    
+
     /**
     * 3000 : member 관련
     */
-    CANNOT_FOUND_MEMBER(3000,HttpStatus.OK.value(), "해당 유저를 찾을 수 없습니다.");
+    CANNOT_FOUND_MEMBER(3000, HttpStatus.OK.value(), "해당 유저를 찾을 수 없습니다."),
     
+    /**
+    * 3001 : 신청 중복 관련
+    */
+    ALREADY_EXISTS(3001, HttpStatus.CONFLICT.value(), "이미 존재하는 신청입니다."),
+
+    /**
+    * 3002 : 신청 내역 없음 관련
+    */
+    NOT_FOUND(3002, HttpStatus.NOT_FOUND.value(), "신청 내역을 찾을 수 없습니다."),
+
     /**
     * 4000 : mentos 관련
     */
    
-	  /**
-	  * 5000 : keepgoing 관련
-	  */
-	  
-	  /**
-	  * 6000 : mypage 관련 
-	  */
+    /**
+    * 5000 : keepgoing 관련
+    */
+    
+    /**
+    * 6000 : mypage 관련 
+    */
 
-		/**
-		* 7000 : 결제 관련?
-		*/ 
+    /**
+    * 7000 : 결제 관련?
+    */ 
+
+    ;
 
     private final int code;
     private final int status;

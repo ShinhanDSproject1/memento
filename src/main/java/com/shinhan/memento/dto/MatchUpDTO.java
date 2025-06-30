@@ -17,6 +17,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Builder
 @Data
+// DTO
 public class MatchUpDTO {
    Integer matchup_id;
    Integer category_id;

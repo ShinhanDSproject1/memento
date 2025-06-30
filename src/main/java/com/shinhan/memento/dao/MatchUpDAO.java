@@ -9,6 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.shinhan.memento.model.MatchUp;
+import com.shinhan.memento.dto.CategoryDTO;
+import com.shinhan.memento.dto.LanguageDTO;
 import com.shinhan.memento.dto.MatchupDetailDTO;
 import com.shinhan.memento.dto.MatchupListDTO;
 
@@ -27,7 +29,22 @@ public class MatchUpDAO {
 		log.info(matchuplist.size() + "건 조회되었습니다");
 		return matchuplist;
 	}
-    
+
+	/* 필터 목록 조회를 위한 DAO 메서드 */
+	public List<String> getDistinctRegionGroups() {
+		return sqlSession.selectList(namespace + "getDistinctRegionGroups");
+	}
+
+	public List<CategoryDTO> getAllCategories() {
+		return sqlSession.selectList(namespace + "getAllCategories");
+	}
+
+	public List<LanguageDTO> getAllLanguages() {
+		return sqlSession.selectList(namespace + "getAllLanguages");
+	}
+	
+	
+	
 	/* 현재 해당 매치업에 지원한 사람 수 체크 */
     public int getActiveMemberCount(int matchupId) {
         return sqlSession.selectOne(namespace + "getActiveMemberCount", matchupId);
@@ -64,17 +81,6 @@ public class MatchUpDAO {
 	    params.put("matchupId", matchupId);
 	    params.put("leaderId", leaderId);
 	    return sqlSession.delete(namespace + "inactivateMatchupByIdAndLeader", params);
-	}
-	
-	public int getMaxMemberCount(int matchupId) {
-	    return sqlSession.selectOne(namespace + "getMaxMemberCount", matchupId);
-	}
-
-	public int updateRecruitStatus(int matchupId, String status) {
-	    Map<String, Object> params = new HashMap<>();
-	    params.put("matchupId", matchupId);
-	    params.put("status", status);
-	    return sqlSession.update(namespace + "updateRecruitStatus", params);
 	}
 	
 }

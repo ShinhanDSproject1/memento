@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.shinhan.memento.dao.MatchUpDAO">
+
+    <resultMap id="matchupListResultMap" type="com.shinhan.memento.dto.MatchupListDTO">
+        <id property="matchupId" column="matchup_id" />
+        <result property="categoryId" column="category_id" />
+        <result property="languageId" column="language_id" />
+        <result property="leaderId" column="leader_id" />
+        <result property="title" column="title" />
+        <result property="matchupCount" column="matchup_count" />
+        <result property="startDay" column="start_day" />
+        <result property="endDay" column="end_day" />
+        <result property="maxMember" column="max_member" />
+        <result property="hasMento" column="has_mento" />
+        <result property="price" column="price" />
+        <result property="regionGroup" column="region_group" />
+        <result property="startTime" column="start_time" />
+        <result property="endTime" column="end_time" />
+    </resultMap>
+    
+    <resultMap id="matchupDetailResultMap" type="com.shinhan.memento.dto.MatchupDetailDTO">
+        <id property="matchupId" column="matchup_id" />
+        <result property="categoryId" column="category_id" />
+        <result property="languageId" column="language_id" />
+        <result property="leaderId" column="leader_id" />
+        <result property="mentoId" column="mento_id" />
+        <result property="regionGroup" column="region_group" />
+        <result property="regionSubgroup" column="region_subgroup" />
+        <result property="regionDetail" column="region_detail" />
+        <result property="startDay" column="start_day" />
+        <result property="endDay" column="end_day" />
+        <result property="startTime" column="start_time" />
+        <result property="endTime" column="end_time" />
+        <result property="count" column="count" />
+        <result property="maxMember" column="max_member" />
+        <result property="price" column="price" />
+        <result property="content" column="content" />
+        <result property="title" column="title" />
+        <result property="matchTypeFirst" column="match_type_first" />
+        <result property="matchTypeSecond" column="match_type_second" />
+        <result property="matchTypeThird" column="match_type_third" />
+        <result property="hasMento" column="has_mento" />
+    </resultMap>
+
+    <select id="selectAll" resultMap="matchupListResultMap" parameterType="map">
+        SELECT matchup_id, category_id, selected_days, language_id,
+               region_group, start_day, end_day, start_time, end_time,
+               max_member, price, title, has_mento 
+        FROM matchup
+        <where>
+            status = 'ACTIVE'
+            <if test="regionGroup != null and regionGroup != ''"> AND region_group = #{regionGroup} </if>
+            <if test="categoryId != null"> AND category_id = #{categoryId} </if>
+            <if test="selectedDays != null and selectedDays != ''"> AND selected_days LIKE '%' || #{selectedDays} || '%' </if>
+            <if test="languageId != null"> AND language_id = #{languageId} </if>
+        </where>
+        ORDER BY start_day
+    </select>
+
+	<select id="selectByMatchupId" parameterType="int" resultMap="matchupDetailResultMap">
+	SELECT m.*, 
+	       c.category_name AS categoryName,
+	       l.language_name AS languageName,
+	       mt1.match_type_name AS matchTypeFirstName,
+	       mt2.match_type_name AS matchTypeSecondName,
+	       mt3.match_type_name AS matchTypeThirdName
+	FROM matchup m
+	LEFT JOIN category c ON m.category_id = c.category_id
+	LEFT JOIN language l ON m.language_id = l.language_id
+	LEFT JOIN match_type mt1 ON m.match_type_first = mt1.match_type_id
+	LEFT JOIN match_type mt2 ON m.match_type_second = mt2.match_type_id
+	LEFT JOIN match_type mt3 ON m.match_type_third = mt3.match_type_id
+	WHERE m.matchup_id = #{matchupId}
+	
+	</select>
+
+    
+    <select id="getDistinctRegionGroups" resultType="string">
+        SELECT DISTINCT SUBSTR(region_group, 1, 2)
+        FROM matchup
+        WHERE region_group IS NOT NULL 
+          AND status = 'ACTIVE'
+        ORDER BY 1
+    </select>
+
+    <select id="getAllCategories" resultType="com.shinhan.memento.dto.CategoryDTO">
+        SELECT category_id AS categoryId, category_name AS categoryName
+        FROM category
+        WHERE status = 'ACTIVE'
+        ORDER BY category_id
+    </select>
+
+    <select id="getAllLanguages" resultType="com.shinhan.memento.dto.LanguageDTO">
+        SELECT language_id AS languageId, language_name AS languageName
+        FROM language
+        WHERE status = 'ACTIVE'
+        ORDER BY language_id
+    </select>
+
+    <select id="getActiveMemberCount" parameterType="int" resultType="int">
+        select count(*) 
+          from member_matchup 
+         where status = 'ACTIVE' 
+           and matchup_id = #{matchupId}
+    </select>
+    <select id="getCategoryName" parameterType="int" resultType="String">
+        select category_name 
+          from category 
+         where category_id = #{categoryId}
+           AND status = 'ACTIVE'
+    </select>
+    <select id="getLanguageName" parameterType="int" resultType="String">
+        SELECT language_name 
+          FROM language 
+         WHERE language_id = #{languageId}
+           AND status = 'ACTIVE'
+    </select>
+    <select id="getMatchTypeName" parameterType="int" resultType="String">
+        SELECT match_type_name 
+          FROM match_type 
+         WHERE match_type_id = #{matchTypeId}
+           AND status = 'ACTIVE'
+    </select>
+    <insert id="createMatchup" parameterType="com.shinhan.memento.model.MatchUp">
+        </insert>
+    <update id="inactivateMemberMatchupById" parameterType="int">
+        UPDATE MEMBER_MATCHUP
+           SET status = 'INACTIVE'
+         WHERE MATCHUP_ID = #{matchupId}
+    </update>
+    <update id="inactivateMatchupByIdAndLeader" parameterType="map">
+        UPDATE MATCHUP
+           SET status = 'INACTIVE',
+               updated_at = sysdate
+         WHERE MATCHUP_ID = #{matchupId} 
+           AND LEADER_ID = #{leaderId}
+    </update>
+
+</mapper>
