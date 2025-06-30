@@ -31,6 +31,8 @@ public class MyPageDAO implements MyPageDAOInterface{
 			
 		    Object reviewStatusObj = data.get("REVIEWSTATUS");
 		    String reviewStatus = (reviewStatusObj == null) ? null : (String) reviewStatusObj;
+		    Integer reviewId = (data.get("REVIEWID") == null) ? null: ((BigDecimal)data.get("REVIEWID")).intValue();
+		    
 		    String startRaw = data.get("STARTTIME").toString(); // rawData.get("STARTTIME") 대신 사용
             String endRaw = data.get("ENDTIME").toString();     // rawData.get("ENDTIME") 대신 사용
 		    if (startRaw != null && startRaw.length() >= 16) {
@@ -49,8 +51,9 @@ public class MyPageDAO implements MyPageDAOInterface{
 			.endTime(endRaw)
 			.selectedDays((String)data.get("SELECTEDDAYS"))
 			.mentoNickname((String)data.get("MENTONICKNAME"))
-			.mentoUserType((String)data.get("MENTOUSERTYPE"))			
+			.mentoUserType((String)data.get("MENTOUSERTYPE"))		
 			.status((String)data.get("STATUS"))
+			.reviewId(reviewId)
 			.reviewStatus(reviewStatus)
 			.build();
 			

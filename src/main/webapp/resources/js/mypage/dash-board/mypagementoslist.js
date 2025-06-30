@@ -27,64 +27,123 @@ async function fetchMentoringData() {
         // 5. 배열의 각 항목을 순회하며 HTML 카드를 생성합니다.
         mentosList.forEach(mentos => {
             // 카드 전체를 감싸는 div
-            const card = document.createElement('div');
-            card.className = 'mentos-card';
+            const card = document.createElement('article');
+            card.className = 'mentor-card';
 
             // 멘토링 이미지
-            const imgDiv = document.createElement('div');
-            imgDiv.className='img-border';
             const img = document.createElement('img');
             img.src = '/memento/'+ mentos.mentosImg;
             img.alt = mentos.mentosTitle;
-            img.className = 'mentos-image';
+            img.className = 'mentor-card__image';
             
             // 카드 내용 컨테이너
             const cardBody = document.createElement('div');
-            cardBody.className = 'mentos-card-body';
+            cardBody.className = 'mentor-card__content';
+			
+			// 제목 a tag
+			const titleAtag = document.createElement('a');
+			titleAtag.href = '/memento/'+'/mentos/detail/mentosId='+mentos.mentosId;
 
             // 멘토링 제목
-            const title = document.createElement('h4');
-            title.className = 'mentos-title';
+            const title = document.createElement('h2');
+            title.className = 'mentor-card__title';
             title.textContent = mentos.mentosTitle;
+            
+            const cardinfo = document.createElement('div');
+            cardinfo.className = 'mentor-card__info';
 
+			// 활동 시간 및 요일
+            const schedule = document.createElement('span');
+            schedule.className = 'mentor-card__schedule';
+            
+            let selectedDaysArray = mentos.selectedDays.split(',');
+            for(let i=0; i<selectedDaysArray.length; i++){
+            	selectedDaysArray[i] = selectedDaysArray[i].trim();
+            	switch(selectedDaysArray[i]){
+            		case "MON": selectedDaysArray[i] = '월'; break;
+            		case "TUE": selectedDaysArray[i] = '화'; break;
+            		case "WED": selectedDaysArray[i] = '수'; break;
+            		case "THU": selectedDaysArray[i] = '목'; break;
+            		case "FRI": selectedDaysArray[i] = '금'; break;
+            		case "SAT": selectedDaysArray[i] = '토'; break;
+            		case "SUN": selectedDaysArray[i] = '일'; break;
+ 					default:
+   						console.log('??');
+            	}
+            }
+            console.log(selectedDaysArray);
+            
+            schedule.textContent = selectedDaysArray + ` ${mentos.startTime} ~ ${mentos.endTime}`;
+	
+			// 활동 지역
+            const region = document.createElement('span');
+            region.className = 'mentor-card__location';
+            region.textContent = `${mentos.regionSubgroup}`;
+            
+            //status
+			const statusGroup = document.createElement('div');
+			statusGroup.className = 'mentor-card__status-group';
+			
+			let mentosStatus = document.createElement('span');
+			mentosStatus.className = 'mentor-card__status';
+			let mentosStatusText = mentos.status == 'active' ? '진행중':'종료'
+			let reviewStatus = document.createElement('span');
+			
+			if(mentosStatusText == '종료'){
+				mentosStatus = document.createElement('button');
+				mentosStatus.className = 'btn btn--review';
+				
+				switch(mentos.reviewStatus){
+					case 'active':reviewStatus.textContent = '리뷰수정'; mentosStatus.addEventListener('click', ()=>{
+							openModal(mentos.mentosId, mentos.memberId, 'edit', mentos.reviewId);
+						}); break;
+					case 'inactive':mentosStatus.textContent = '리뷰 삭제됨'; break;
+					case 'delete':mentosStatus.textContent = '리뷰 삭제됨'; break;
+					default:
+						reviewStatus.textContent = '리뷰 쓰기';
+						mentosStatus.addEventListener('click', ()=>{
+							openModal(mentos.mentosId, mentos.memberId, 'create', mentos.reviewId);
+						});
+				} 
+				
+			}else{
+				mentosStatus.textContent = mentosStatusText;
+			}
             // 멘토 닉네임
-            const nickname = document.createElement('div');
-            nickname.className = 'mento-nickname';
+            const mentoDiv = document.createElement('div');
+           	mentoDiv.className = 'mentor-card__mentor-details';
+            const nickname = document.createElement('span');
+            nickname.className = 'mentor-card__mentor-name';
             nickname.textContent = `${mentos.mentoNickname}`;
-
+			
+			//멘토 이미지
+			const mentoImg = document.createElement('img');
+			mentoImg.className = 'mentor-card__mentor-icon';
+			mentoImg.src = '/memento/'+'resources/images/mypage/dash-board/mentos-list/vuesax-linear-microphone0.svg';
+			mentoImg.alt = 'mento icon';
 			// mento or pre-mento
-			const usertype = document.createElement('div')
+			const usertype = document.createElement('span')
 			usertype.className = 'mento-type'
 			usertype.textContent = `${mentos.mentoUserType}`
-            // 활동 시간 및 요일
-            const schedule = document.createElement('div');
-            schedule.className = 'mentos-schedule';
-            schedule.textContent = `${mentos.startTime} ~ ${mentos.endTime} (${mentos.selectedDays})`;
-            
-            // 활동 지역
-            const region = document.createElement('div');
-            region.className = 'mentos-region';
-            region.textContent = `${mentos.regionSubgroup}`;
-
-            // 활동 상태 (active/inactive에 따라 다른 스타일 적용)
-            const status = document.createElement('span');
-            status.className = `mentos-status status-${mentos.status}`; // e.g., 'status-active'
-            status.textContent = mentos.status === 'active' ? '진행중' : '종료';
             
             // 생성된 요소들을 카드에 추가합니다.
-            cardBody.appendChild(title);
-            cardBody.appendChild(nickname);
-            cardBody.appendChild(usertype);
-            cardBody.appendChild(schedule);
-            cardBody.appendChild(region);
-            cardBody.appendChild(status);
-			
-            card.appendChild(imgDiv);
-            imgDiv.appendChild(img);
-            card.appendChild(cardBody);
+            card.append(img);
+			card.append(cardBody);
+			cardBody.append(titleAtag);
+			titleAtag.append(title);
+			cardBody.append(cardinfo);
+			cardinfo.append(schedule);
+			cardinfo.append(region);
+			cardBody.append(statusGroup);
+			statusGroup.append(mentosStatus);
+			mentosStatus.append(reviewStatus);
+			statusGroup.append(mentoDiv);
+			mentoDiv.append(mentoImg);
+			mentoDiv.append(nickname);
 
             // 6. 완성된 카드를 컨테이너에 추가합니다.
             container.append(card);
+            
         });
 
     } catch (error) {
@@ -95,8 +154,28 @@ async function fetchMentoringData() {
 
 })
 	/* 모달 관련 */
-	function openModal() {
-		document.getElementById("reviewModal").style.display = "flex";
+	function openModal(mentosId,memberId, actionType, reviewId) {
+		const modal = document.getElementById("reviewModal");
+    
+	    // 모달의 dataset에 ID들을 저장
+	    modal.dataset.mentosId = mentosId;
+	    modal.dataset.memberId = memberId;
+	    modal.dataset.action = actionType;
+	    if(reviewId){
+	    	modal.dataset.reviewId = reviewId;
+	    }
+	    
+	    let reviewDeleteButton = document.getElementById("review-delete-btn");
+	    if(modal.dataset.action == 'edit'){
+	    	reviewDeleteButton.style.display='flex';
+	    }else{
+	    	reviewDeleteButton.style.display='none';
+	    }
+	    console.log(mentosId)
+	    console.log(memberId)
+	    console.log(actionType)
+	    console.log(reviewId)
+	    modal.style.display = "flex";
 	}
 	function closeModal() {
 		document.getElementById("reviewModal").style.display = "none";
@@ -110,7 +189,7 @@ async function fetchMentoringData() {
 	});
 	
 	/* 별점 적용 */
-	let selectedStar = 0;
+	let selectedStar = 5;
 
 	document.querySelectorAll(".star").forEach(star => {
 	  star.addEventListener("click", function() {
@@ -131,9 +210,19 @@ async function fetchMentoringData() {
 	
 	/* 리뷰 등록 */
 	function submitReview() {
-	  const imageFile = document.getElementById("reviewImage").files[0];
-	  const content = document.getElementById("reviewContent").value;
-	
+		const modal = document.getElementById("reviewModal");
+	   	const mentosId = modal.dataset.mentosId;
+    	const memberId = 2;//session으로 처리
+    	const action = modal.dataset.action;
+	  	   if (!mentosId || !memberId) {
+       		 	alert("오류: 리뷰 대상 정보를 찾을 수 없습니다.");
+        		return;
+    		}
+	  	const reviewImagePreview = document.getElementById('reviewImagePreview'); // 이미지 미리보기
+	  	const imageFile = document.getElementById("reviewImage").files[0];
+	  	const content = document.getElementById("reviewContent").value;
+    	console.log(mentosId)
+    	console.log(memberId)
 	  if(selectedStar == 0){
 	    alert("별점을 선택해 주세요.");
 	    return;
@@ -145,6 +234,9 @@ async function fetchMentoringData() {
 	
 	  // 이제 여기서 formData로 서버로 전송 가능
 	  const formData = new FormData();
+	  formData.append("mentosId", mentosId);
+      formData.append("mentiId", memberId);
+      formData.append("action",action);
 	  formData.append("star", selectedStar);
 	  formData.append("content", content);
 	  if(imageFile) formData.append("image", imageFile);

@@ -20,5 +20,6 @@ public class MyMentosListResponseDTO {
 	private String mentoNickname;
 	private String mentoUserType;
 	private String status;
+	private Integer reviewId;
 	private String reviewStatus;
 }
