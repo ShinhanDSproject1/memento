@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper
+	namespace="com.shinhan.memento.dao.MemberKeepgoingDAOInterface">
+
+	<select id="showKeepgoingHistoryByMemberId" resultType="map">
+		SELECT
+		k.keepgoing_id AS keepgoingId,
+		k.img_logo AS logo,
+		k.name,
+		k.selected_days AS selectedDays,
+		k.start_time AS startTime,
+		k.end_time AS endTime,
+		k.region_subgroup AS location,
+		(
+			SELECT COUNT(*)
+			FROM member_keepgoing mk2
+			WHERE mk2.keepgoing_id = k.keepgoing_id
+			AND mk2.status = 'ACTIVE'
+		) AS totalCnt
+		FROM member_keepgoing mk
+		JOIN keepgoing k ON mk.keepgoing_id = k.keepgoing_id
+		WHERE mk.member_id = #{memberId}
+		and k.status = 'ACTIVE' or k.status='INACTIVE'
+	</select>
+
+
+</mapper>

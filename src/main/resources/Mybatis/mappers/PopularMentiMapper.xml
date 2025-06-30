@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.shinhan.memento.mapper.PopularMentiMapper">
+
+  <select id="findPopularMenti" resultType="com.shinhan.memento.dto.PopularMentiDTO">
+	  <![CDATA[
+	  SELECT * FROM (
+	    SELECT member_id AS memberId,
+	           nickname,
+	           profile_image_url AS profileImage,
+	           score
+	    FROM member
+	    WHERE user_type IN ('MENTI', 'AFFILIATES', 'PREMENTO')
+	    ORDER BY score DESC
+	  )
+	  WHERE ROWNUM <= 7
+	  ]]>
+  </select>
+
+</mapper>
