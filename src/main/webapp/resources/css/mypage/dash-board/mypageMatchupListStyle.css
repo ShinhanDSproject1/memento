@@ -22,7 +22,6 @@ a:hover {
 
 .page-container {
 	flex: 1;
-	padding: 40px;
 	box-sizing: border-box;
 }
 
@@ -32,6 +31,7 @@ a:hover {
 
 .matchup-list {
 	box-sizing: border-box;
+	padding:40px;
 }
 
 .matchup-list__container {
@@ -46,7 +46,7 @@ a:hover {
 	font-size: 32px;
 	line-height: 1.2;
 	text-align: center;
-	margin-bottom: 46px;
+	margin-bottom: 4vh;
 }
 
 .matchup-list__cards {
