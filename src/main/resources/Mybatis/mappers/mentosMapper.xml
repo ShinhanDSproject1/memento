@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.shinhan.memento.mapper.MentosMapper">
+
+	<insert id="createMentos" parameterType="com.shinhan.memento.dto.CreateMentosDBDTO">
+    INSERT INTO mentos (
+        mentos_id, category_id, language_id, mento_id, title, simple_content,
+        image, min_member, max_member, start_day, end_day,
+        start_time, end_time, selected_days, region_group, region_subgroup, region_detail,
+        content, price, times, created_at, updated_at, status,
+        match_type_first, match_type_second, match_type_third
+    ) VALUES (
+        seq_mentos_id.nextval, #{categoryId}, #{languageId}, #{mentoId}, #{title}, #{simpleContent},
+        #{image}, #{minMember}, #{maxMember}, #{startDay}, #{endDay},
+        #{startTime}, #{endTime}, #{selectedDays}, #{regionGroup}, #{regionSubgroup}, #{regionDetail},
+        #{content}, #{price}, #{times}, sysdate, null, 'ACTIVE',
+        #{matchTypeFirst}, #{matchTypeSecond}, #{matchTypeThird}
+    )
+</insert>
+
+
+</mapper>
+

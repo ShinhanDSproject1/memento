@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.shinhan.memento.mapper.PopularLanguageMapper">
+
+  <select id="findPopularLanguages" resultType="com.shinhan.memento.dto.PopularLanguageDTO">
+    <![CDATA[
+SELECT *
+FROM (
+    SELECT
+        l.language_id AS languageId,
+        l.language_name AS languageName,
+        COALESCE(k.keepgoing_count, 0) + COALESCE(mmu.matchup_count, 0) + COALESCE(mt.mentos_count, 0) AS totalCount
+    FROM language l
+    LEFT JOIN (
+        SELECT language_id, COUNT(*) AS keepgoing_count
+        FROM keepgoing
+        WHERE status = 'ACTIVE'
+        GROUP BY language_id
+    ) k ON l.language_id = k.language_id
+    LEFT JOIN (
+        SELECT language_id, COUNT(*) AS matchup_count
+        FROM matchup
+        WHERE status = 'ACTIVE'
+        GROUP BY language_id
+    ) mmu ON l.language_id = mmu.language_id
+    LEFT JOIN (
+        SELECT language_id, COUNT(*) AS mentos_count
+        FROM mentos
+        WHERE status = 'ACTIVE'
+        GROUP BY language_id
+    ) mt ON l.language_id = mt.language_id
+    WHERE l.status = 'ACTIVE'
+    ORDER BY COALESCE(k.keepgoing_count, 0) + COALESCE(mmu.matchup_count, 0) + COALESCE(mt.mentos_count, 0) DESC
+)
+WHERE ROWNUM <= 7
+    ]]>
+  </select>
+
+</mapper>

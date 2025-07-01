@@ -4,13 +4,6 @@
   min-height: 100vh;
 }
 
-.main-content-wrapper {
-  display: flex;
-  flex: 1;
-  min-height: calc(100vh - 100px);
-  padding-top: 105px;
-}
-
 .page-container {
   margin: 0 auto;
   box-sizing: border-box;
@@ -24,14 +17,12 @@ body {
   font-family: 'Inter', 'D2Coding', sans-serif;
   background-color: #ffffff; /* From style_1 on root node 298:17347 */
   justify-content: center;
-  padding-bottom: 50px;
 }
 
 .payment-history-section {
   display: flex;
   justify-content: center;
   width: 100%;
-  padding: 20px 0;
   box-sizing: border-box;
 }
 
