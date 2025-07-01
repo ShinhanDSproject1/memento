@@ -53,8 +53,8 @@
 			<div class="group-478">
 			  <div class="_70-000">₩${matchupDetail.formattedPrice}</div>
 			  <div class="button-area">
-			  	<c:if test="${matchupDetail.hasMento}">
-	    	        <c:choose>
+			  	<c:if test="${matchupDetail.hasMento && (matchupDetail.mentoId == null || matchupDetail.mentoId == 0)}">
+			        <c:choose>
 			            <c:when test="${matchupDetail.mentoApplicationPending}">
 			                <button class="mento-apply-btn pending" disabled>멘토 신청 중</button>
 			            </c:when>
@@ -62,7 +62,7 @@
 			                <button class="mento-apply-btn" id="mento-apply-btn" type="button" data-matchup-id="${matchupDetail.matchupId}">멘토 신청하기</button>
 			            </c:otherwise>
 			        </c:choose>
-			  	</c:if>
+			    </c:if>
 			    <button class="apply-btn" id="apply-btn" type="button">신청하기</button>
 			  </div>
 			</div>
