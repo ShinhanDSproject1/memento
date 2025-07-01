@@ -8,8 +8,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
-
-import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
@@ -163,21 +161,22 @@ public class MyPageService {
 			return myPageDAO.selectJoinListByMemberId(memberId);
 		}
 		
-		public List<MyPaymentListResponseDTO> selectMyPaymentList(Integer memberId){
-			List<Map<String, Object>> result = mypageMapper.selectMyPaymentList(memberId);
+		public List<MyPaymentListResponseDTO> selectMyPaymentListById(Integer memberId){
+			List<Map<String, Object>> result = mypageMapper.selectMyPaymentListById(memberId);
 			List<MyPaymentListResponseDTO> selectMyPaymentList = new ArrayList<MyPaymentListResponseDTO>();
 			
 			result.stream().forEach(data ->{
 			 	MyPaymentListResponseDTO dto = MyPaymentListResponseDTO.builder()
-			 	.orderId(((BigDecimal)data.get("ORDERID")).intValue())
-				.amount(((BigDecimal)data.get("AMOUT")).intValue())
+			 	.paymentId(((BigDecimal)data.get("PAYMENTID")).intValue())
+			 	.orderId((String)data.get("ORDERID"))
+				.amount(((BigDecimal)data.get("AMOUNT")).intValue())
 				.matchupId(((BigDecimal)data.get("MATCHUPID")).intValue())
 				.mentosId(((BigDecimal)data.get("MENTOSID")).intValue())
 				.keepgoingId(((BigDecimal)data.get("KEEPGOINGID")).intValue())
 				.paymentStatus((String)data.get("PAYMENTSTATUS"))
-				.matchupTitle((String)data.get("MATCHUPTITLE"))
-				.mentosTitle((String)data.get("MENTOSTITLE"))
-				.keepgoingName((String)data.get("KEEPGOINGNAME"))
+				.matchupTitle(((BigDecimal)data.get("MATCHUPID")).intValue()==0 ? null : (String)data.get("MATCHUPTITLE"))
+				.mentosTitle(((BigDecimal)data.get("MENTOSID")).intValue()==0 ? null :(String)data.get("MENTOSTITLE"))
+				.keepgoingName(((BigDecimal)data.get("KEEPGOINGID")).intValue()==0 ? null :(String)data.get("KEEPGOINGNAME"))
 			 	.build();
 			 	
 			 	selectMyPaymentList.add(dto);

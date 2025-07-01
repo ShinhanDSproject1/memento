@@ -112,7 +112,7 @@ public class MyPageApiController {
 		Member loginUser = (Member) session.getAttribute("loginUser");
 		if (loginUser == null) throw new MypageException(BaseExceptionResponseStatus.NEED_LOGIN);
 		int userId = loginUser.getMemberId();
-		List<MyPaymentListResponseDTO> myPaymentList = myPageService.selectMyPaymentList(userId);
+		List<MyPaymentListResponseDTO> myPaymentList = myPageService.selectMyPaymentListById(userId);
 		if(myPaymentList.size() == 0) {
 			return new BaseResponse<>(null);
 		}

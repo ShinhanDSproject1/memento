@@ -27,7 +27,7 @@ public class MyPageDAO implements MyPageDAOInterface{
 	@Autowired
 	SqlSession sqlSession;
 	
-	String namespace = "com.shinhan.memento.dao.MyPageDAOInterface.";
+	String namespace = "com.shinhan.memento.mapper.MypageMapper.";
 	
 	public CashProduct validateCash(int productId) {
 		return CashProduct.fromId(productId);

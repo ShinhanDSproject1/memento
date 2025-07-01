@@ -1,7 +1,7 @@
 $(()=>{
 	fetchPaymentData()
 	async function fetchPaymentData() {
-		const container = document.getElementById('payment-list"');
+		const container = document.getElementById('payment-list');
 		
 		const API_URL = 'http://localhost:9999/memento/api/mypage/paymentlist';
 	
