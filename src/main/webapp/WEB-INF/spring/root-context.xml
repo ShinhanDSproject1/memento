@@ -32,6 +32,10 @@
 		<constructor-arg ref="sqlSessionFactory" />
 	</bean>
 
+
+	<mybatis-spring:scan
+		base-package="com.shinhan.memento.dao" />
+
 	<!-- Mapper 자동 스캔 설정 -->
 	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
 		<property name="basePackage"
@@ -39,5 +43,6 @@
 		<property name="sqlSessionTemplateBeanName"
 			value="sqlSessionTemplate" />
 	</bean>
+
 
 </beans>

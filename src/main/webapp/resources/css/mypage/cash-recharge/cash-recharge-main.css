@@ -1,854 +1,452 @@
 @charset "UTF-8";
+
 body {
 	margin: 0;
 }
-
-.cash-recahrge,
-.cash-recahrge * {
-  box-sizing: border-box;
-}
+/* 메인 컨테이너 */
 .cash-recharge-container {
-  background: #ffffff;
-  border-style: solid;
-  border-color: transparent;
-  border-width: 1px;
-  padding: 0px 44px 0px 44px;
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  align-items: center;
-  justify-content: center;
-  height: 871px;
-  position: absolute;
-  top:-50px;
-}
-.group-200 {
-  flex-shrink: 0;
-  width: 908.57px;
-  height: 87px;
-  position: static;
-}
-.me {
-  text-align: center;
-  font-family: "D2Coding-Bold", sans-serif;
-  font-size: 36px;
-  font-weight: 700;
-  position: absolute;
-  left: 764.28px;
-  top: 122.1px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-.me-span {
-  color: #00bba8;
-}
-.me-span2 {
-  color: #0e0d0d;
-}
-.line-20 {
-  margin-top: -1px;
-  border-style: solid;
-  border-color: #000000;
-  border-width: 1px 0 0 0;
-  width: 906.42px;
-  height: 0px;
-  position: absolute;
-  left: 35.72px;
-  top: 172.1px;
-}
-.me-mento-3 {
-  width: 136.48px;
-  height: 18.7px;
-  position: absolute;
-  left: 35.72px;
-  top: 85.1px;
-  object-fit: cover;
-  aspect-ratio: 136.48/18.7;
-}
-/* .group-422 {
-  flex-shrink: 0;
-  width: 846.85px;
-  height: 603.8px;
-  position: static;
-} */
-/* .group-166 {
-  width: 479.77px;
-  height: 64.05px;
-  position: static;
-} */
-.rectangle-223 {
-  background: linear-gradient(
-    90deg,
-    rgba(0, 112, 209, 0.22) 0%,
-    rgba(0, 57, 107, 0.22) 100%
-  );
-  border-radius: 21px;
-  width: 479.77px;
-  height: 64.05px;
-  position: absolute;
-  left: 66.58px;
-  top: 188.94px;
-}
-._5-10 {
-  color: #0070d1;
-  text-align: center;
-  font-family: "D2Coding-Bold", sans-serif;
-  font-size: 14px;
-  font-weight: 700;
-  position: absolute;
-  left: 86.94px;
-  top: 202.4px;
-  width: 266px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-.me2 {
-  color: #00427c;
-  text-align: center;
-  font-family: "D2Coding-Bold", sans-serif;
-  font-size: 15px;
-  font-weight: 700;
-  position: absolute;
-  left: 86.94px;
-  top: 220.4px;
-  width: 255px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-.image-18 {
-  width: 40.59px;
-  height: 35.98px;
-  position: absolute;
-  left: 477.95px;
-  top: 202.51px;
-  object-fit: cover;
-  aspect-ratio: 40.59/35.98;
-}
-.frame-423 {
-  display: grid;
-  gap: 0px;
-  position: absolute;
-  left: 66.58px;
-  top: 279.47px;
-}
-.group-167 {
-  width: 230.03px;
-  height: 99.93px;
-  position: static;
-  grid-column: NaN / span undefined;
-  grid-row: NaN / span undefined;
-  
+	background: #fff;
+	border-radius: 12px;
+	border: 1px solid rgba(0, 0, 0, 0.2); box-shadow : 0px 4px 4px 0px
+	rgba( 0, 0, 0, 0.25);
+	padding: 48px 32px 40px 32px;
+	max-width: 900px;
+	margin: 48px auto;
+	display: flex;
+	flex-direction: column;
+	gap: 32px;
+	align-items: center;
+	box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
 }
 
-
-/* 도형에 클릭 시 색상이 변경될 수 있도록 스타일링 */
-.rectangle-224, .rectangle-225,
-.rectangle-2242, .rectangle-2252,
-.rectangle-2243, .rectangle-2253,
-.rectangle-2244, .rectangle-2254,
-.rectangle-2245, .rectangle-2255 {
-    transition: background-color 0.3s ease; /* 색상 변경에 애니메이션 추가 */
-    cursor: pointer; /* 클릭할 수 있음을 표시 */
+/* 타이틀 */
+.recharge-header .title {
+	font-size: 2.2rem; /* 이 크기는 그대로 유지해요! */
+	font-weight: 700; /* 전체 타이틀의 기본 굵기 */
+	display: flex;
+	gap: 0.5rem;
+	align-items: center;
+	justify-content: center;
+	letter-spacing: 0.02em;
 }
 
-/* 클릭 시 색상 변경 */
-.rectangle-224.clicked, .rectangle-225.clicked,
-.rectangle-2242.clicked, .rectangle-2252.clicked,
-.rectangle-2243.clicked, .rectangle-2253.clicked,
-.rectangle-2244.clicked, .rectangle-2254.clicked,
-.rectangle-2245.clicked, .rectangle-2255.clicked {
-    border-color: #024ADA;
-    border-width: 3px;
+.brand {
+	font-size: 45px;
 }
 
-
-
-.rectangle-226{
-	transition: background-color 0.3s ease; /* 색상 변경에 애니메이션 추가 */
-    cursor: pointer; /* 클릭할 수 있음을 표시 */
+.recharge-header {
+	color: #00bba8; /* 'me' 색상은 유지! */
+	font-weight: 700; /* '캐시충전'과 같은 굵기로 맞춰서 크기를 비슷하게 보이게 할게요! */
 }
 
-.rectangle-224 {
-  border-radius: 35px;
-  border-style: solid;
-  border-color: rgba(0, 0, 0, 0.34);
-  border-width: 0.5px;
-  width: 230.03px;
-  height: 99.93px;
-  position: absolute;
-  left: 0px;
-  top: 0px;
-}
-.vuesax-linear-money-recive {
-  width: 18.32px;
-  height: 18.36px;
-  position: absolute;
-  left: 20.45px;
-  top: 23.06px;
-  overflow: visible;
-}
-._5-000 {
-  color: #000000;
-  text-align: center;
-  font-family: "D2Coding-Bold", sans-serif;
-  font-size: 24px;
-  font-weight: 700;
-  position: absolute;
-  left: 40.89px;
-  top: 20.5px;
-  width: 101.38px;
-  height: 23.91px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-.rectangle-225 {
-  background: #edeef2;
-  border-radius: 0px 0px 35px 35px;
-  border-style: solid;
-  border-color: rgba(0, 0, 0, 0.34);
-  border-width: 0.5px;
-  width: 230.03px;
-  height: 35.87px;
-  position: absolute;
-  left: 0px;
-  top: 64.06px;
-}
-._250-5 {
-  color: #000000;
-  text-align: center;
-  font-family: "D2Coding-Bold", sans-serif;
-  font-size: 14px;
-  font-weight: 700;
-  position: absolute;
-  left: 3.22px;
-  top: 65px;
-  width: 208px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-.group-168 {
-  width: 230.03px;
-  height: 99.93px;
-  position: static;
-  grid-column: NaN / span undefined;
-  grid-row: NaN / span undefined;
-}
-.rectangle-2242 {
-  border-radius: 35px;
-  border-style: solid;
-  border-color: rgba(0, 0, 0, 0.34);
-  border-width: 0.5px;
-  width: 230.03px;
-  height: 99.93px;
-  position: absolute;
-  left: 281.09px;
-  top: 0px;
-}
-.vuesax-linear-money-recive2 {
-  width: 18.32px;
-  height: 18.36px;
-  position: absolute;
-  left: 301.53px;
-  top: 23.06px;
-  overflow: visible;
-}
-._10-000 {
-  color: #000000;
-  text-align: center;
-  font-family: "D2Coding-Bold", sans-serif;
-  font-size: 24px;
-  font-weight: 700;
-  position: absolute;
-  left: 321.98px;
-  top: 20.5px;
-  width: 101.38px;
-  height: 23.91px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-.rectangle-2252 {
-  background: #edeef2;
-  border-radius: 0px 0px 35px 35px;
-  border-style: solid;
-  border-color: #a8a8a8;
-  border-width: 1px;
-  width: 230.03px;
-  height: 35.87px;
-  position: absolute;
-  left: 281.09px;
-  top: 64.06px;
-}
-._500-5 {
-  color: #000000;
-  text-align: center;
-  font-family: "D2Coding-Bold", sans-serif;
-  font-size: 14px;
-  font-weight: 700;
-  position: absolute;
-  left: 284.31px;
-  top: 63px;
-  width: 208px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-.group-169 {
-  width: 234.66px;
-  height: 99.93px;
-  position: static;
-  grid-column: NaN / span undefined;
-  grid-row: NaN / span undefined;
-}
-.rectangle-2243 {
-  border-radius: 35px;
-  border-style: solid;
-  border-color: rgba(0, 0, 0, 0.34);
-  border-width: 0.5px;
-  width: 230.03px;
-  height: 99.93px;
-  position: absolute;
-  left: 4.63px;
-  top: 129.24px;
-}
-.vuesax-linear-money-recive3 {
-  width: 18.32px;
-  height: 18.36px;
-  position: absolute;
-  left: 25.08px;
-  top: 152.3px;
-  overflow: visible;
-}
-._30-000 {
-  color: #000000;
-  text-align: center;
-  font-family: "D2Coding-Bold", sans-serif;
-  font-size: 24px;
-  font-weight: 700;
-  position: absolute;
-  left: 48.52px;
-  top: 149.74px;
-  width: 101.38px;
-  height: 23.91px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-.rectangle-2253 {
-  background: #edeef2;
-  border-radius: 0px 0px 35px 35px;
-  border-style: solid;
-  border-color: #a8a8a8;
-  border-width: 1px;
-  width: 230.03px;
-  height: 35.87px;
-  position: absolute;
-  left: 4.63px;
-  top: 193.3px;
-}
-._1-500-10 {
-  color: #000000;
-  text-align: center;
-  font-family: "D2Coding-Bold", sans-serif;
-  font-size: 14px;
-  font-weight: 700;
-  position: absolute;
-  left: 0px;
-  top: 190px;
-  width: 232px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-.group-170 {
-  width: 234.81px;
-  height: 99.93px;
-  position: static;
-  grid-column: NaN / span undefined;
-  grid-row: NaN / span undefined;
-}
-.rectangle-2244 {
-  border-radius: 35px;
-  border-style: solid;
-  border-color: rgba(0, 0, 0, 0.34);
-  border-width: 0.5px;
-  width: 230.03px;
-  height: 99.93px;
-  position: absolute;
-  left: 285.86px;
-  top: 129.24px;
-}
-.vuesax-linear-money-recive4 {
-  width: 18.32px;
-  height: 18.36px;
-  position: absolute;
-  left: 306.31px;
-  top: 152.3px;
-  overflow: visible;
-}
-._50-000 {
-  color: #000000;
-  text-align: center;
-  font-family: "D2Coding-Bold", sans-serif;
-  font-size: 24px;
-  font-weight: 700;
-  position: absolute;
-  left: 330.76px;
-  top: 149.74px;
-  width: 101.38px;
-  height: 23.91px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-.rectangle-2254 {
-  background: #edeef2;
-  border-radius: 0px 0px 35px 35px;
-  border-style: solid;
-  border-color: #a8a8a8;
-  border-width: 1px;
-  width: 230.03px;
-  height: 35.87px;
-  position: absolute;
-  left: 285.86px;
-  top: 193.3px;
-}
-._5-000-10 {
-  color: #000000;
-  text-align: center;
-  font-family: "D2Coding-Bold", sans-serif;
-  font-size: 14px;
-  font-weight: 700;
-  position: absolute;
-  left: 281.09px;
-  top: 190.13px;
-  width: 232px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-.group-171 {
-  width: 240px;
-  height: 99.93px;
-  position: static;
-  grid-column: NaN / span undefined;
-  grid-row: NaN / span undefined;
-}
-.rectangle-2245 {
-  border-radius: 35px;
-  border-style: solid;
-  border-color: rgba(0, 0, 0, 0.34);
-  border-width: 0.5px;
-  width: 230.03px;
-  height: 99.93px;
-  position: absolute;
-  left: 6.78px;
-  top: 258.48px;
-}
-.vuesax-linear-money-recive5 {
-  width: 18.32px;
-  height: 18.36px;
-  position: absolute;
-  left: 27.23px;
-  top: 281.54px;
-  overflow: visible;
-}
-._100-000 {
-  color: #000000;
-  text-align: center;
-  font-family: "D2Coding-Bold", sans-serif;
-  font-size: 24px;
-  font-weight: 700;
-  position: absolute;
-  left: 52.42px;
-  top: 276.53px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-.rectangle-2255 {
-  background: #edeef2;
-  border-radius: 0px 0px 35px 35px;
-  border-style: solid;
-  border-color: #a8a8a8;
-  border-width: 1px;
-  width: 230.03px;
-  height: 35.87px;
-  position: absolute;
-  left: 6.78px;
-  top: 322.53px;
-}
-._10-000-10 {
-  color: #000000;
-  text-align: center;
-  font-family: "D2Coding-Bold", sans-serif;
-  font-size: 14px;
-  font-weight: 700;
-  position: absolute;
-  left: -10px;
-  top: 320.08px;
-  width: 240px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-.frame-4232 {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  align-items: center;
-  justify-content: flex-start;
-  width: 315.23px;
-  position: absolute;
-  left: 598.2px;
-  top: 182.1px;
-}
-.group-178 {
-  flex-shrink: 0;
-  width: 303.3px;
-  height: 49.37px;
-  position: static;
-}
-.me3 {
-  text-align: center;
-  font-family: "D2Coding-Bold", sans-serif;
-  font-size: 24px;
-  font-weight: 700;
-  position: absolute;
-  left: 29.74px;
-  top: 7.4px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-.me-3-span {
-  color: #000000;
-}
-.me-3-span2 {
-  color: #00bba8;
-}
-._0 {
-  color: #0070d1;
-  text-align: center;
-  font-family: "D2Coding-Bold", sans-serif;
-  font-size: 36px;
-  font-weight: 700;
-  position: absolute;
-  left: 209.8px;
-  top: 0px;
-  width: 97px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-.line-21 {
-  margin-top: -1px;
-  border-style: solid;
-  border-color: #000000;
-  border-width: 1px 0 0 0;
-  opacity: 0.25;
-  width: 303.3px;
-  height: 0px;
-  position: absolute;
-  left: 5.97px;
-  top: 49.37px;
-  transform-origin: 0 0;
-  transform: rotate(0deg) scale(1, 1);
-}
-.group-165 {
-  flex-shrink: 0;
-  width: 315.22px;
-  height: 189.61px;
-  position: static;
-}
-.button {
-  background: rgba(191, 194, 226, 0.2);
-  border-radius: 53px;
-  padding: 8px 12px 8px 12px;
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-  align-items: center;
-  justify-content: center;
-  width: 315.22px;
-  height: 189.61px;
-  position: absolute;
-  left: 0px;
-  top: 59.37px;
-  overflow: hidden;
-}
-.group-164 {
-  width: 270.85px;
-  height: 148.38px;
-  position: static;
-}
-.me4 {
-  color: #000000;
-  text-align: center;
-  font-family: "D2Coding-Bold", sans-serif;
-  font-size: 15px;
-  line-height: 16px;
-  letter-spacing: 0.6px;
-  font-weight: 700;
-  position: absolute;
-  left: 20.67px;
-  top: 80.72px;
-}
-._02 {
-  color: #000000;
-  text-align: center;
-  font-family: "D2Coding-Bold", sans-serif;
-  font-size: 15px;
-  line-height: 16px;
-  letter-spacing: 0.6px;
-  font-weight: 700;
-  position: absolute;
-  left: 264.66px;
-  top: 83.28px;
-  width: 24px;
-}
-._5000 {
-  color: #0070d1;
-  text-align: center;
-  font-family: "D2Coding-Bold", sans-serif;
-  font-size: 15px;
-  line-height: 16px;
-  letter-spacing: 0.6px;
-  font-weight: 700;
-  position: absolute;
-  left: 242.22px;
-  top: 108.05px;
-}
-._5250 {
-  color: #0070d1;
-  text-align: center;
-  font-family: "D2Coding-Bold", sans-serif;
-  font-size: 15px;
-  line-height: 16px;
-  letter-spacing: 0.6px;
-  font-weight: 700;
-  position: absolute;
-  left: 238.81px;
-  top: 213.1px;
-}
-._250 {
-  color: #00bba8;
-  text-align: center;
-  font-family: "D2Coding-Bold", sans-serif;
-  font-size: 15px;
-  line-height: 16px;
-  letter-spacing: 0.6px;
-  font-weight: 700;
-  position: absolute;
-  left: 250.03px;
-  top: 134.53px;
-}
-._03 {
-  color: #000000;
-  text-align: center;
-  font-family: "D2Coding-Bold", sans-serif;
-  font-size: 15px;
-  line-height: 16px;
-  letter-spacing: 0.6px;
-  font-weight: 700;
-  position: absolute;
-  left: 264.66px;
-  top: 158.44px;
-}
-.cashcash {
-  color: rgba(0, 0, 0, 0.58);
-  text-align: center;
-  font-family: "D2Coding-Bold", sans-serif;
-  font-size: 15px;
-  line-height: 16px;
-  letter-spacing: 0.6px;
-  font-weight: 700;
-  position: absolute;
-  left: 20.8px;
-  top: 108px;
-}
-.me5 {
-  color: rgba(0, 0, 0, 0.58);
-  text-align: center;
-  font-family: "D2Coding-Bold", sans-serif;
-  font-size: 15px;
-  line-height: 16px;
-  letter-spacing: 0.6px;
-  font-weight: 700;
-  position: absolute;
-  left: 20.67px;
-  top: 134.53px;
-}
-.me6 {
-  color: rgba(0, 0, 0, 0.58);
-  text-align: center;
-  font-family: "D2Coding-Bold", sans-serif;
-  font-size: 15px;
-  line-height: 16px;
-  letter-spacing: 0.6px;
-  font-weight: 700;
-  position: absolute;
-  left: 22.67px;
-  top: 158.44px;
-}
-.me7 {
-  color: #000000;
-  text-align: center;
-  font-family: "D2Coding-Bold", sans-serif;
-  font-size: 15px;
-  line-height: 16px;
-  letter-spacing: 0.6px;
-  font-weight: 700;
-  position: absolute;
-  left: 19.67px;
-  top: 213.1px;
-}
-.line-26 {
-  margin-top: -1px;
-  border-style: solid;
-  border-color: #000000;
-  border-width: 1px 0 0 0;
-  width: 261.55px;
-  height: 0px;
-  position: absolute;
-  left: 28.97px;
-  top: 196.02px;
-}
-.group-175 {
-  flex-shrink: 0;
-  width: 292.81px;
-  height: 15.37px;
-  position: static;
-}
-.div-recharge-check {
-  color: #000000;
-  text-align: center;
-  font-family: "D2Coding-Regular", sans-serif;
-  font-size: 12px;
-  font-weight: 400;
-  position: absolute;
-  left: 28.02px;
-  top: 280px;
-  width: 276px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-.vuesax-linear-arrow-circle-down {
-  width: 15.34px;
-  height: 15.37px;
-  position: absolute;
-  left: 35px;
-  top: 280px;
-  overflow: visible;
-}
-.group-173 {
-  flex-shrink: 0;
-  width: 297.33px;
-  height: 60.64px;
-  position: static;
-}
-.rectangle-226 {
-  background: #4f7fdf;
-  border-radius: 13px;
-  width: 297.33px;
-  height: 60.64px;
-  position: absolute;
-  left: 8.95px;
- top: 300px;
-}
-.me8 {
-  text-align: center;
-  font-family: "D2Coding-Bold", sans-serif;
-  font-size: 24px;
-  font-weight: 700;
-  position: absolute;
-  left: 66.84px;
-  top: 317.14px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-.me-8-span {
-  color: #00bba8;
-}
-.me-8-span2 {
-  color: #ffffff;
-}
-.frame-177 {
-  display: flex;
-  flex-direction: column;
-  gap: 7px;
-  align-items: flex-start;
-  justify-content: flex-start;
-  width: 297.33px;
-  position: absolute;
-  left: 610.13px;
-  top: 549.94px;
-}
-.div3 {
-  color: #000000;
-  text-align: left;
-  font-family: "D2Coding-Bold", sans-serif;
-  font-size: 20px;
-  font-weight: 700;
-  position: relative;
-  align-self: stretch;
-  height: 11.96px;
-  display: flex;
-  align-items: center;
-  justify-content: flex-start;
-  top:30px;
-}
-.rectangle-227 {
-  background: rgba(249, 242, 249, 0.8);
-  border-radius: 11px;
-  align-self: stretch;
-  flex-shrink: 0;
-  height: 400px;
-  position: relative;
-  top:30px;
-}
-.me-me-mento-me-me-mento-me-me-me-7-me-7-i-os-me-080-333-4000-google-play-me-48-google-play-48-1-1-me {
-  color: #000000;
-  text-align: left;
-  font-family: "-", sans-serif;
-  font-size: 10px;
-  font-weight: 400;
-  position: absolute;
-  left: 7.66px;
-  top: 150px;
-  width: 279.44px;
-  height: 201.56px;
-  display: flex;
-  align-items: center;
-  justify-content: flex-start;
-}
-.me-me-mento-me-me-mento-me-me-me-7-me-7-i-os-me-080-333-4000-google-play-me-48-google-play-48-1-1-me-span {
-  font-family: "Inter-Bold", sans-serif;
-  font-weight: 700;
-}
-.me-me-mento-me-me-mento-me-me-me-7-me-7-i-os-me-080-333-4000-google-play-me-48-google-play-48-1-1-me-span2 {
-  list-style-type: disc;
-  padding-left: 1em;
-  font-family: "Inter-Regular", sans-serif;
-}
-.me-me-mento-me-me-mento-me-me-me-7-me-7-i-os-me-080-333-4000-google-play-me-48-google-play-48-1-1-me-span3 {
-  font-family: "Inter-Regular", sans-serif;
-}/* 
-.me-me-mento-me-me-mento-me-me-me-7-me-7-i-os-me-080-333-4000-google-play-me-48-google-play-48-1-1-me-span4 {
-  list-style-type: disc;
-  padding-left: 1em;
-  font-family: "Inter-Regular", sans-serif;
-  text-decoration: underline;
-} */
-.me-me-mento-me-me-mento-me-me-me-7-me-7-i-os-me-080-333-4000-google-play-me-48-google-play-48-1-1-me-span5 {
-  font-family: "Inter-Bold", sans-serif;
-  font-weight: 700;
-  text-decoration: underline;
+.recharge-header .action {
+	color: #4A4A4A; /* '캐시충전' 색상 유지 */
+	font-weight: 700; /* 'me'와 같은 굵기로 맞춰서 크기를 비슷하게 보이게 할게요! */
+}
+
+.cash-recharge-divider {
+	border-top: 1.5px solid #d6d6d6;
+	width: 90%;
+	margin: 1rem auto 0 auto;
+}
+
+/* =====================
+   상단 배너(공지) 스타일
+===================== */
+.banner {
+	/* width: 100%; ← 삭제! */
+	display: inline-flex; /* inline-block도 가능 */
+	width: auto;
+	background: linear-gradient(90deg, #e5f1ff 0%, #f3fafd 100%);
+	border-radius: 14px;
+	color: #1567c7;
+	font-weight: 700;
+	font-size: 1.11rem;
+	text-align: center;
+	padding: 9px 23px 8px 23px; /* 가로 padding 조정! */
+	margin-bottom: 0;
+	margin-top: 10px;
+	letter-spacing: -0.4px;
+	align-items: center;
+	justify-content: center;
+	gap: 7px;
+	border: 1.5px solid #e1e7ee;
+}
+
+.banner .banner-icon {
+	width: 21px;
+	height: 21px;
+	margin-right: 7px;
+	margin-bottom: 2px;
+	vertical-align: middle;
+}
+
+/* 모바일 대응 */
+@media ( max-width :600px) {
+	.banner {
+		font-size: 0.99rem;
+		padding: 8px 13px 7px 13px;
+		border-radius: 9px;
+	}
+	.banner .banner-icon {
+		width: 16px;
+		height: 16px;
+	}
+}
+
+.desc {
+	background: none; /* 배경 제거 */
+	border: none; /* 테두리 제거 */
+	color: #2250b3; /* 상큼한 민트색(톤 맞춤) */
+	font-size: 1.09rem; /* 살짝 키움 */
+	font-weight: 700; /* 강조 */
+	font-family: 'Inter', 'Pretendard', 'Noto Sans KR', sans-serif;
+	/* 가독성 좋고 세련되게 */
+	text-align: center;
+	margin-bottom: 11px;
+	margin-top: 3px;
+	letter-spacing: 0.01em; /* 미세하게 자간 */
+	line-height: 1.5;
+	box-shadow: none; /* 혹시 남아있던 그림자 제거 */
+}
+
+.brand-logo {
+	width: 46px;
+	height: 41px;
+	margin-bottom: 8px;
+}
+
+/* 충전 금액 선택 영역 */
+.recharge-options {
+	display: flex;
+	gap: 22px;
+	flex-wrap: wrap;
+	justify-content: center;
+	width: 100%;
+}
+
+/* =======================
+   캐시 금액 선택 버튼 스타일
+======================= */
+.option {
+	width: 240px;
+	min-height: 100px;
+	margin-bottom: 16px;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	cursor: pointer;
+	box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+	background: #fff;
+	border: 1px solid rgb(25, 31, 40);
+	border-radius: 12px;
+	transition: border-color 0.2s, background 0.21s, box-shadow 0.18s,
+		transform 0.14s;
+	position: relative;
+	padding: 18px 0 10px 0;
+	box-sizing: border-box;
+}
+
+/* 선택/활성 시 */
+.option.selected, .option:active {
+	border: 3px solid #90c2ff; /* 토스 블루! */
+	background: #f3f8ff;
+	transform: translateY(-2.5px) scale(1.04);
+	z-index: 2;
+}
+
+/* hover만 됨(선택 아닐 때) */
+.option:hover:not(.selected) {
+	border-color: #90c2ff;
+	background: #f3f8ff;
+}
+
+.option-icon {
+	width: 28px;
+	height: 28px;
+	margin-bottom: 13px;
+}
+
+.amount {
+	font-size: 1.34rem;
+	font-weight: 800;
+	color: #1348a0;
+	margin-bottom: 8px;
+	letter-spacing: -1px;
+}
+
+.option-info ul {
+	list-style: none;
+	padding-left: 0;
+	margin: 0;
+	font-size: 1.01rem;
+	font-weight: 600;
+	color: #18b3b3;
+	text-align: center;
+	white-space: nowrap; /* 줄바꿈 금지! */
+	overflow: hidden; /* 혹시 넘치면 ... 처리 */
+	text-overflow: ellipsis;
+	width: 100%;
+	display: block;
+}
+
+.option-info li {
+	font-size: 0.98rem;
+	color: #18b3b3;
+	margin: 0;
+	padding: 0;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+
+/* 잔액/상세정보 영역 */
+.balance-section {
+	width: 93%;
+	background: linear-gradient(90deg, #f1f7fd 80%, #e5f2ff 100%);
+	border-radius: 14px;
+	border: 1.5px solid #d5e6fa;
+	box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+	padding: 22px 22px 16px 22px;
+	margin: 0 auto 10px auto;
+	display: flex;
+	flex-direction: column;
+	gap: 14px;
+	align-items: flex-start;
+}
+
+.balance-header {
+	display: flex;
+	align-items: center;
+	gap: 0.4em;
+	font-size: 1.19rem;
+	font-weight: 700;
+	color: #2250b3;
+	margin-bottom: 7px;
+	letter-spacing: 0.01em;
+}
+
+.balance-header .brand {
+	color: #00bba8;
+	font-size: 1.19rem;
+	font-family: 'Inter', 'Pretendard', 'Noto Sans KR', sans-serif;
+}
+
+.balance-amount {
+	font-size: 2.25rem;
+	font-weight: 800;
+	color: #1a274d;
+	letter-spacing: 0.03em;
+	margin-left: 0;
+	margin-bottom: 4px;
+}
+
+.cash-recharge-divider {
+	width: 99%;
+	border-top: 1.3px solid #e3ebf3;
+	margin: 10px 0 9px 0;
+}
+
+.balance-details {
+	width: 100%;
+	display: flex;
+	flex-direction: column;
+	gap: 2px;
+	font-size: 1.04rem;
+	color: #435071;
+	margin-top: 0;
+}
+
+.balance-details .info {
+	color: #6881a8;
+	font-size: 0.98rem;
+	margin-top: 6px;
+	letter-spacing: 0.01em;
+	font-weight: 500;
+}
+
+/* 결제 동의 체크 */
+.agreement-section {
+	display: flex;
+	align-items: center;
+	gap: 10px;
+	font-size: 1rem;
+	color: #111;
+	margin-top: 12px;
+}
+
+.agree-check {
+	width: 19px;
+	height: 19px;
+}
+
+/* 충전하기 버튼 */
+.submit-section {
+	margin-top: 18px;
+	width: 100%;
+	display: flex;
+	justify-content: center;
+}
+
+.submit-btn {
+	width: 290px;
+	height: 58px;
+	border: none;
+	border-radius: 13px;
+	background-color: #3182f6;
+	color: #f9fafb;
+	font-size: 1.36rem;
+	font-weight: 700;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	cursor: pointer;
+	transition: background 0.25s;
+	box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+}
+
+.submit-btn .brand {
+	color: #00bba8;
+}
+
+.submit-btn:hover {
+	background: #2362b8;
+}
+
+.submit-btn:disabled {
+	background: #d3d8e1; /* 흐린 회색 */
+	color: #a0a5ac; /* 글자도 약간 흐리게 */
+	cursor: not-allowed; /* 마우스 커서 변경 */
+	opacity: 1; /* 투명도 고정(브라우저 기본 흐릿함 방지) */
+	box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+}
+
+/* 안내/설명 영역 */
+.info-section {
+	margin-top: 34px;
+	width: 96%;
+	background: linear-gradient(100deg, #fff5f5 65%, #fff6fa 100%);
+	border-radius: 12px;
+	padding: 26px 22px 16px 22px;
+	box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+	display: flex;
+	flex-direction: column;
+	gap: 8px;
+	border: 1.6px solid #ffe0e0;
+	position: relative;
+}
+
+.info-section h2 {
+	font-size: 1.15rem;
+	font-weight: 800;
+	color: #ea4040; /* 빨강 계열 강조 */
+	margin-bottom: 10px;
+	display: flex;
+	align-items: center;
+	gap: 7px;
+	letter-spacing: -0.5px;
+}
+
+.info-cash-recharge-divider {
+	border-top: 1.2px solid #ffd1d1;
+	margin: 8px 0 15px 0;
+}
+
+.info-content {
+	color: #262525;
+	font-size: 1.07rem;
+	line-height: 1.85;
+	padding: 0 3px;
+	font-weight: 400;
+	letter-spacing: -0.03em;
+}
+
+.info-content strong {
+	color: #d60f0f; /* 진한 빨강, 섹션포인트 */
+	font-weight: 700;
+}
+
+.info-content ul {
+	list-style-type: disc;
+	padding-left: 1.35em;
+	margin: 0 0 12px 0;
+	font-size: 1.01rem;
+	color: #d60f0f; /* 리스트포인트도 레드 */
+	font-weight: 600;
+}
+
+.info-content li {
+	color: #222;
+	margin-bottom: 1px;
+	font-size: 0.99rem;
+	font-weight: 500;
+	letter-spacing: -0.05em;
+}
+
+.info-content .link {
+	color: #f15b6c; /* 핑크빨강 계열 */
+	text-decoration: underline;
+	cursor: pointer;
+	font-weight: 700;
+	letter-spacing: -0.4px;
+}
+
+@media ( max-width : 600px) {
+	.info-section {
+		padding: 14px 7px 10px 7px;
+		border-radius: 12px;
+		margin-top: 18px;
+		width: 99%;
+	}
+	.info-section h2 {
+		font-size: 1.03rem;
+		margin-bottom: 7px;
+	}
+	.info-content {
+		font-size: 0.97rem;
+		padding: 0;
+	}
+	.info-content ul {
+		font-size: 0.93rem;
+	}
+}
+
+.amount-guide-msg {
+	margin-top: 6px;
+	font-size: 1rem;
+	color: #3587e4;
+	font-weight: 500;
+	text-align: center;
+}
+
+/* 모바일 대응 */
+@media ( max-width : 600px) {
+	.cash-recharge-container {
+		padding: 20px 4px 18px 4px;
+		max-width: 100vw;
+	}
+	.recharge-header .title {
+		font-size: 1.3rem;
+	}
+	.banner, .desc {
+		font-size: 0.92rem;
+	}
+	.recharge-options {
+		flex-direction: column;
+		gap: 12px;
+	}
+	.option {
+		width: 98vw;
+		min-width: 0;
+		max-width: 97vw;
+	}
+	.balance-section, .info-section {
+		width: 100%;
+		padding: 12px 6px 9px 8px;
+	}
+	.submit-btn {
+		width: 98vw;
+		max-width: 98vw;
+	}
 }

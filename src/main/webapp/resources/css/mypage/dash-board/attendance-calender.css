@@ -1,4 +1,7 @@
 @charset "UTF-8";
+body {
+  background-color: #f0faff;
+}
 .frame-3707,
 .frame-3707 * {
   box-sizing: border-box;
