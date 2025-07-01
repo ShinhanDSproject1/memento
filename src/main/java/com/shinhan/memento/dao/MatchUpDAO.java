@@ -9,11 +9,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.shinhan.memento.model.MatchUp;
+import com.shinhan.memento.model.UserType;
+import com.shinhan.memento.model.WaitingMentoMatchUp;
 import com.shinhan.memento.dto.CategoryDTO;
 import com.shinhan.memento.dto.LanguageDTO;
 import com.shinhan.memento.dto.MatchTypeDTO;
+import com.shinhan.memento.dto.MatchupApplyMentoDTO;
 import com.shinhan.memento.dto.MatchupDetailDTO;
 import com.shinhan.memento.dto.MatchupListDTO;
+import com.shinhan.memento.dto.MatchupWaitingMentoDTO;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -96,5 +100,39 @@ public class MatchUpDAO {
        params.put("leaderId", leaderId);
        return sqlSession.delete(namespace + "inactivateMatchupByIdAndLeader", params);
    }
-
+   
+   /* 특정 매치업에 멘토 신청하기 (멘토 기준) */ 
+   public int applyMento(MatchupApplyMentoDTO dto) {
+	   return sqlSession.insert(namespace + "applyMento", dto);
+   }
+   
+   /* 접속 유저의 유저 타입 확인 */
+   public UserType findUserTypeById(int memberId) {
+       return sqlSession.selectOne(namespace + "findUserTypeById", memberId);
+   }
+   
+   /* 접속 유저가 해당 매치업에 멘토로 신청했는지 여부 (요청 중 상태) */
+   public int checkMentoApplicationExists(Map<String, Object> params) {
+       return sqlSession.selectOne(namespace + "checkMentoApplicationExists", params);
+   }
+   
+   /* 요청 중인 멘토 리스트 조회 */
+   public List<MatchupWaitingMentoDTO> selectWaitingMentoByMatchupId(int matchupId) {
+       return sqlSession.selectList(namespace + "selectWaitingMentoByMatchupId", matchupId);
+   }
+   
+   /* 요청 중인 멘토 중 선정된 멘토 해당 매치업 mento_id에 삽입 */
+   public int setMentoForMatchup(Map<String, Object> params) {
+       return sqlSession.update(namespace + "setMentoForMatchup", params);
+   }
+   
+   /* 나머지 대기중인 멘토 신청 내역 상태를 DELETE로 변경 */
+   public int deleteWaitingMentoApplications(int matchupId) {
+       return sqlSession.update(namespace + "deleteWaitingMentoApplications", matchupId);
+   }
+   
+   /* 닉네임, 이미지를 호출하기 위한 용도 */
+   public MatchupWaitingMentoDTO getApprovedMentoDetails(int memberId) {
+       return sqlSession.selectOne(namespace + "getApprovedMentoDetails", memberId);
+   }
 }

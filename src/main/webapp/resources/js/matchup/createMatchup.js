@@ -1,11 +1,6 @@
 document.addEventListener('DOMContentLoaded', function () {
 
-    /**
-     * =============================================
-     * (REVISED & UNIFIED) Reusable Dropdown Logic
-     * =============================================
-     * 모든 드롭다운을 구조 기반으로 찾아 일괄적으로 초기화하는 단일 함수
-     */
+    //모든 드롭다운을 구조 기반으로 찾아 일괄적으로 초기화하는 단일 함수
     function initializeAllDropdowns() {
         const dropdownContainers = document.querySelectorAll('.field-input-wrapper');
 
@@ -54,11 +49,7 @@ document.addEventListener('DOMContentLoaded', function () {
         document.querySelectorAll('.dropdown-list').forEach(d => d.classList.add('hidden'));
     });
 
-    /**
-     * =============================================
-     * 활동 요일 다중 선택 기능
-     * =============================================
-     */
+    // 활동 요일 다중 선택 기능
     const daySelector = document.querySelector('.dayofweek');
     if (daySelector) {
         const selectedDaysInput = document.getElementById('selectedDaysInput');
@@ -72,11 +63,8 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     }
 
-    /**
-     * =============================================
-     * 멘토 유무 토글 버튼
-     * =============================================
-     */
+
+    // 멘토 유무 토글 버튼
     const mentoGroup = document.querySelector('.mento-toggle-group');
     if (mentoGroup) {
         mentoGroup.querySelectorAll('.mento-btn').forEach(btn => {
@@ -88,11 +76,8 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     }
 
-    /**
-     * =============================================
-     * contenteditable 입력 처리 (매치업명, 소개글)
-     * =============================================
-     */
+
+    // contenteditable 입력 처리 (매치업명, 소개글)
     function setupEditableContent(divId, hiddenInputId, maxLength) {
         const editableDiv = document.getElementById(divId);
         const hiddenInput = document.getElementById(hiddenInputId);
@@ -118,11 +103,8 @@ document.addEventListener('DOMContentLoaded', function () {
     setupEditableContent('matchupTitle', 'matchupTitleHidden', 30);
     setupEditableContent('matchupContent', 'matchupContentHidden', 500);
     
-    /**
-     * =============================================
-     * 매치업 생성 AJAX 요청
-     * =============================================
-     */
+
+    // 매치업 생성 AJAX 요청
     const createBtn = document.getElementById('createMatchupBtn');
     if (createBtn) {
         createBtn.addEventListener('click', function() {
@@ -192,11 +174,7 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     }
 
-    /**
-     * =============================================
-     * 모달 창 닫기 로직
-     * =============================================
-     */
+    // * 모달 창 닫기 로직
     const closeModalBtn = document.querySelector(".modal-close-btn");
     if (closeModalBtn) {
         closeModalBtn.addEventListener("click", () => {
@@ -205,11 +183,8 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 });
 
-/**
- * =============================================
- * 다음 주소 API (전역 함수로 유지)
- * =============================================
- */
+
+// 다음 주소 API (전역 함수로 유지)
 function execDaumPostcode() {
     new daum.Postcode({
         oncomplete: function(data) {

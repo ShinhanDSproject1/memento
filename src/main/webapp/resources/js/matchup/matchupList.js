@@ -62,13 +62,26 @@ function renderMatchups(matchups) {
                 </div>
                 <div class="badges-wrapper">
                     ${renderRecruitBadge(matchup.recruit)}
-                    ${!matchup.hasMento ? '<div class="badge badge-mentor">멘토모집중</div>' : ''}
+                    ${renderMentoBadge(matchup)} 
                 </div>
             </div>
         `;
     });
 
     container.innerHTML = html;
+}
+
+// 멘토 상태에 따라 다른 상태 반환
+function renderMentoBadge(matchup) {
+    if (!matchup.hasMento) {
+        return '';
+    }
+    
+    if (matchup.mentoId && matchup.mentoId > 0) {
+        return '<div class="badge badge-mentor-completed">멘토 선정 완료</div>';
+    } else {
+        return '<div class="badge badge-mentor">멘토 모집중</div>';
+    }
 }
 
 function renderRecruitBadge(recruitStatus) {
