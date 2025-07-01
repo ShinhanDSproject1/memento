@@ -27,6 +27,7 @@ import lombok.extern.slf4j.Slf4j;
 @RequestMapping("/mentos")
 @Slf4j
 public class MentosController {
+
 	@Autowired
 	private MentosService mentosService;
 
@@ -45,6 +46,10 @@ public class MentosController {
 		return "mentos/mentosDetailMento";
 	}
 
+	@RequestMapping("/detail")
+	public String mentosDetailView() {
+		return "mentos/mentosDetail";
+	}
 
 	@RequestMapping("/insert")
 	public String mentosInsert() {
@@ -56,7 +61,7 @@ public class MentosController {
 		return "mentos/mentosEdit";
 	}
 
-	@RequestMapping("/detailmentos")
+	@RequestMapping("/mentodetail")
 	public String mentosMentoDetail() {
 		return "mentos/mentosMentoDetail";
 	}
@@ -71,17 +76,11 @@ public class MentosController {
 		return "mentos/mentosMentoDetailClassList";
 	}
 
-	
-	
-	
-	
-	
 
 	@GetMapping("/detailmenti")
 	public String mentiDetailPage() {
 	    return "mentos/mentosDetailMenti";
 	}
-	
 	
 	@GetMapping("/detailmentos")
 	@ResponseBody

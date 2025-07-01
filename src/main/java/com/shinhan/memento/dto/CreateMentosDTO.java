@@ -14,7 +14,6 @@ import lombok.NoArgsConstructor;
 @Builder
 public class CreateMentosDTO {
 
-	
 		private String title;
 		private String simpleContent;
 		private String image;
@@ -41,7 +40,5 @@ public class CreateMentosDTO {
 		private int matchTypeIdFirst;
 		private int matchTypeIdSecond;
 		private int matchTypeIdThird;
-
-
 
 }

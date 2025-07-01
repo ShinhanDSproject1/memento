@@ -298,6 +298,7 @@ span {
 	justify-content: flex-start; /* ← 중요! 줄마다 왼쪽부터 정렬되도록 */
 	max-width: 1280px; /* 총 3개 + 여유 */
 	margin: 0 auto; /* 전체를 가운데 정렬 */
+	align-items: stretch;
 }
 
 .matchup-cardview {
@@ -5358,4 +5359,58 @@ span {
 	height: 24px;
 	position: relative;
 	overflow: visible;
+}
+
+
+/* 모집 현황 관련*/
+.badges-wrapper {
+  position: absolute; 
+  top: 18px;
+  left: 18px;
+  
+  display: flex;
+  gap: 6px; 
+}
+
+.badge {
+  padding: 5px 12px; 
+  border-radius: 14px; /
+  color: white;
+  font-size: 13px; 
+  font-weight: 700; 
+  line-height: 1;
+  white-space: nowrap; 
+}
+
+.badge-recruiting {
+  background-color: #EF6968;
+}
+
+.badge-urgent {
+  background-color: #D9534F;
+}
+
+.badge-completed {
+  background-color: #888888;
+}
+
+.badge-mentor {
+  background-color: #4A90E2;
+}
+
+/* 카테고리 필터 검색 관련 */
+.filter-select {
+  border: none;
+  padding: 8px;
+  border-radius: 4px;
+  min-width: 120px;
+}
+
+.search-btn {
+  padding: 8px 16px;
+  border: none;
+  background-color: #4A90E2;
+  color: white;
+  border-radius: 4px;
+  cursor: pointer;
 }

@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.shinhan.memento.dao.MatchUpDAO">
+
+  <select id="selectAll" resultType="com.shinhan.memento.dto.MatchupListDTO">
+    SELECT matchup_id, category_id, selected_days, language_id, region_group, start_day, end_day, start_time, end_time, 
+           min_member, max_member, price, title, has_mento
+  	  FROM matchup
+	  <where>
+	    <if test="region_group != null and region_group != ''">
+	      AND region_group = #{region_group}
+	    </if>
+	    <if test="category_id != null">
+	      AND category_id = #{category_id}
+	    </if>
+	    <if test="selected_days != null and selected_days != ''">
+	      AND selected_days LIKE '%' || #{selected_days} || '%'
+	    </if>
+	    <if test="language_id != null">
+	      AND language_id = #{language_id}
+	    </if>
+	  </where>
+	  order by start_day
+	</select>
+	
+	<select id="getActiveMemberCount" parameterType="int" resultType="int">
+		  select count(*)
+		    from member_matchup
+		   where status = 'ACTIVE'
+		     and matchup_id = #{matchupId}
+	</select>
+	
+	  <select id="selectByMatchupId" parameterType="int" resultType="com.shinhan.memento.dto.MatchupDetailDTO">
+		  select matchup_id, category_id, language_id, leader_id, mento_id, region_group, region_subgroup, region_detail, 
+		         start_day, end_day, start_time, end_time, count, max_member, price, content, title, match_type_first, 
+		         match_type_second, match_type_third, has_mento
+		    from matchup
+		   where matchup_id = #{matchupId}
+	</select>
+
+	<select id="getCategoryName" parameterType="int" resultType="String">
+	  select category_name from category where category_id = #{categoryId}
+	</select>
+
+	<select id="getLanguageName" parameterType="int" resultType="String">
+	  SELECT language_name FROM language WHERE language_id = #{languageId}
+	</select>
+	
+	<select id="getMatchTypeName" parameterType="int" resultType="String">
+	  SELECT match_type_name FROM match_type WHERE match_type_id = #{matchTypeId}
+	</select>
+
+	<insert id="createMatchup" parameterType="com.shinhan.memento.dto.MatchUpDTO">
+		insert into matchup (
+		  matchup_id, category_id, language_id,
+		  leader_id, mento_id, match_type_first,
+		  match_type_second, match_type_third,
+		  title, count, matchup_count, start_day,
+		  end_day, start_time, end_time,
+		  min_member, max_member, content,
+		  has_mento, price, kg_count, region_group,
+		  region_subgroup, region_detail, selected_days,
+		  created_at, updated_at, status
+		)
+		values (
+		  seq_matchup_id.nextval, 
+		  #{category_id, jdbcType=INTEGER}, 
+		  #{language_id, jdbcType=INTEGER}, 
+		  #{leader_id, jdbcType=INTEGER}, 
+		  #{mento_id, jdbcType=INTEGER}, 
+		  #{match_type_first, jdbcType=INTEGER},
+		  #{match_type_second, jdbcType=INTEGER}, 
+		  #{match_type_third, jdbcType=INTEGER},
+		  #{title, jdbcType=VARCHAR}, 
+		  #{count, jdbcType=INTEGER}, 
+		  #{matchup_count, jdbcType=INTEGER}, 
+		  #{start_day, jdbcType=VARCHAR},
+		  #{end_day, jdbcType=VARCHAR}, 
+		  #{start_time, jdbcType=VARCHAR}, 
+		  #{end_time, jdbcType=VARCHAR},
+		  #{min_member, jdbcType=INTEGER}, 
+		  #{max_member, jdbcType=INTEGER}, 
+		  #{content, jdbcType=VARCHAR},
+		  #{has_mento, jdbcType=VARCHAR}, 
+		  #{price, jdbcType=INTEGER}, 
+		  #{kg_count, jdbcType=INTEGER}, 
+		  #{region_group, jdbcType=VARCHAR},
+		  #{region_subgroup, jdbcType=VARCHAR}, 
+		  #{region_detail, jdbcType=VARCHAR}, 
+		  #{selected_days, jdbcType=VARCHAR},
+		  sysdate, 
+		  sysdate, 
+		  #{status, jdbcType=VARCHAR}
+		)
+	</insert>
+  
+  	<delete id="deleteMemberMatchupsByMatchupId" parameterType="int">
+		  DELETE FROM MEMBER_MATCHUP
+		  WHERE MATCHUP_ID = #{matchupId}
+	</delete>
+  
+  	<delete id="deleteMatchupByIdAndLeader" parameterType="int">
+		  DELETE FROM MATCHUP
+		  WHERE MATCHUP_ID = #{matchupId}
+		    AND LEADER_ID = #{leaderId}
+	</delete>
+  
+</mapper>
