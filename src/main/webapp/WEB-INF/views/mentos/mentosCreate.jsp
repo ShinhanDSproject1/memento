@@ -17,31 +17,24 @@
 	rel="stylesheet"
 	integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
 	crossorigin="anonymous">
-	
+
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>MentosInsert</title>
 
-	
+
 <link rel="stylesheet"
-	href="<c:url value='/resources/css/mentos/mentosEdit.css'/>">
-	
+	href="<c:url value='/resources/css/mentos/mentosCreate.css'/>">
+
 <script src="<c:url value='/resources/js/mentos/mentosCreate.js'/>"></script>
 
-<!-- <script>
-$(function(){
-	$.ajax(url:"mentos/detail"
-		data:
-			success:
-				)
-});
-</script> -->
 
 <script src="<c:url value='/resources/js/keepgoing/HuskyEZCreator.js'/>"
 	charset="utf-8"></script>
 </head>
 <body>
+	<%@ include file="../common/logout_header.jsp"%>
 	<section class="container">
-		<div class="page-title">멘토스 수정하기</div>
+		<div class="page-title">멘토스 만들기</div>
 		<form action="${cpath}/mentos/create" method="post">
 			<section class="insert-main">
 				<div class="main-name-info">
@@ -280,36 +273,36 @@ $(function(){
 						<label for="cancelPopup" class="mentos-leader-cancel-btn">
 							<div class="d-2-r-18-blue">취소하기</div>
 						</label> <label for="submitPopup" class="mentos-leader-make-btn">
-							<div class="d-2-r-18-white">수정완료하기</div>
+							<div class="d-2-r-18-white">만들기</div>
 						</label>
 					</div>
 
 					<!-- 3. 취소 팝업 -->
-						<div class="popup-layer" id="cancelLayer">
-							<div class="rectangle-294">
-								<div class="frame-3783">
-									<div class="emoji">❌</div>
-									<div class="popup-title">정말로 삭제하시겠습니까?</div>
-									<div class="popup-desc">지금까지 작성하신 내용이 전부 삭제됩니다.</div>
-									<div class="confirm-btn-box">
-										<label for="cancelPopup" class="confirm-btn">확인</label>
-									</div>
+					<div class="popup-layer" id="cancelLayer">
+						<div class="rectangle-294">
+							<div class="frame-3783">
+								<div class="emoji">❌</div>
+								<div class="popup-title">작성이 취소되었습니다</div>
+								<div class="popup-desc">작성한 내용은 저장되지 않아요</div>
+								<div class="confirm-btn-box">
+									<label for="cancelPopup" class="confirm-btn">확인</label>
 								</div>
 							</div>
 						</div>
+					</div>
 
-						<!-- 4. 만들기 팝업 -->
-						<div class="popup-layer" id="submitLayer">
-							<div class="rectangle-294">
-								<div class="frame-3783">
-									<div class="emoji">👍</div>
-									<div class="popup-title">수정이 완료되었습니다</div>
-									<div class="confirm-btn-box">
-										<label for="submitPopup" class="confirm-btn">확인</label>
-									</div>
+					<!-- 4. 만들기 팝업 -->
+					<div class="popup-layer" id="submitLayer">
+						<div class="rectangle-294">
+							<div class="frame-3783">
+								<div class="emoji">👍</div>
+								<div class="popup-title">멘토스가 성공적으로 개설되었습니다</div>
+								<div class="confirm-btn-box">
+									<label for="submitPopup" class="confirm-btn">확인</label>
 								</div>
 							</div>
 						</div>
+					</div>
 				</div>
 				<script>
             	let oEditors=[]

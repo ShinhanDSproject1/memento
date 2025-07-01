@@ -32,7 +32,6 @@ document.addEventListener('DOMContentLoaded', function(){
 
 
 
-
 // keepgoing-insert.js
 
 $(document).ready(function() {
@@ -69,7 +68,7 @@ $(document).ready(function() {
     	console.log(data)
     	
     	$.ajax({
-    		url: "/spring/emp/keepgoinginsert.do",
+    		url: "/memento/keepgoing/keepgoinginsert.do",
     		data: JSON.stringify(data),
     		type:"POST",
     		contentType:"application/json",
@@ -166,3 +165,4 @@ $(document).ready(function() {
     });
     
 });
+ 

@@ -7,11 +7,10 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>멘토스 전체조회</title>
+<title>me:mento</title>
 <link rel="stylesheet"
-	href="${pageContext.request.contextPath}/resources/css/mentos/mentosFullStyle.css" />
-<link rel="stylesheet"
-	href="${pageContext.request.contextPath}/resources/css/mentos/mentosFullVars.css" />
+	href="${pageContext.request.contextPath}/resources/css/mentos/mentosFull.css" />
+
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <link
@@ -20,7 +19,7 @@
 <script
 	src="${pageContext.request.contextPath}/resources/js/mentosFull.js"></script>
 <body>
-
+<%@ include file="../common/logout_header.jsp"%>
 	<div class="container">
 		<div class="full-detail-select">
 			<div class="detail-select">
@@ -93,10 +92,9 @@
 									<div class="frame-407">
 										<img class="user-user"
 											src="${pageContext.request.contextPath}/resources/images/mentosFull/mento.svg" />
-										<div class="text">정진</div>
+										<div class="text">김코딩</div>
 										<div class="group-371">
-											<div class="rectangle-279"></div>
-											<div class="mento">mento</div>
+											<div class="pre-mento">pre-mento</div>
 										</div>
 									</div>
 									<div class="frame-408">
@@ -104,7 +102,7 @@
 											src="${pageContext.request.contextPath}/resources/images/mentosFull/day.svg" />
 										<div class="text">2025/06/23</div>
 										<div class="text">-</div>
-										<div class="text">2025/06/30</div>
+										<div class="text">2025/06/23</div>
 									</div>
 									<div class="frame-409">
 										<img class="icon-time-clock-outlined"
@@ -114,17 +112,17 @@
 									<div class="frame-410">
 										<img class="icon-maps-map-pin"
 											src="${pageContext.request.contextPath}/resources/images/mentosFull/maps.svg" />
-										<div class="text">홍대</div>
+										<div class="text">역삼</div>
 									</div>
 									<div class="frame-3659">
-										<div class="_45-000">₩45,000</div>
+										<div class="_45-000">무료</div>
 									</div>
 								</div>
 							</div>
-							<div class="frame-3778">
-								<img class="image"
-									src="${pageContext.request.contextPath}/resources/images/mentosFull/class1.png" />
-							</div>
+							<img class="image"
+								src="${pageContext.request.contextPath}/resources/images/mentosFull/class4.png" />
+
+
 							<div class="mentos-hover-popup">
 								<div class="hover-inner">
 									<div class="hover-title">
@@ -143,7 +141,6 @@
 
 					<div class="mentos-class-cardview mentos-hover-guide"
 						onclick="location.href='${cpath}/mentos/detail'">
-
 						<div class="mentos-class">
 							<div class="mentos-text">
 								<div class="frame-37862">
@@ -159,86 +156,45 @@
 								</div>
 								<div class="aws">비전공자도 이해할 수 있는 AWS 입문/실전</div>
 								<div class="frame-406">
+
 									<div class="frame-407">
 										<img class="user-user"
 											src="${pageContext.request.contextPath}/resources/images/mentosFull/mento.svg" />
-
-										<div class="text">정진</div>
+										<div class="text">김코딩</div>
 										<div class="group-371">
-											<div class="rectangle-279"></div>
-											<div class="mento">mento</div>
+											<div class="pre-mento">pre-mento</div>
 										</div>
 									</div>
 									<div class="frame-408">
-										<div class="icon-time-02">
-											<img class="icon-time-calendar"
-												src="${pageContext.request.contextPath}/resources/images/mentosFull/day.svg" />
-										</div>
-										<div class="_2025">
-											<span> <span class="_2025-span">2025</span> <span
-												class="_2025-span2"></span>
-											</span>
-										</div>
-										<div class="div3">/</div>
-										<div class="_06">06</div>
-										<div class="div3">/</div>
-										<div class="_23">23</div>
-										<div class="div3">-</div>
-										<div class="_20252">2025</div>
-										<div class="div3">/</div>
-										<div class="_06">06</div>
-										<div class="div3">/</div>
-										<div class="_30">30</div>
+										<img class="icon-time-calendar"
+											src="${pageContext.request.contextPath}/resources/images/mentosFull/day.svg" />
+										<div class="text">2025/06/23</div>
+										<div class="text">-</div>
+										<div class="text">2025/06/23</div>
 									</div>
 									<div class="frame-409">
-										<div class="icon-time-04">
-											<img class="icon-time-clock-outlined"
-												src="${pageContext.request.contextPath}/resources/images/mentosFull/time.svg" />
-
-
-										</div>
-										<div class="_15">15</div>
-										<div class="div3">시</div>
-										<div class="div4">
-											<span> <span class="div-4-span">-</span> <span
-												class="div-4-span2"></span>
-											</span>
-										</div>
-										<div class="_17">
-											<span> <span class="_17-span">17</span> <span
-												class="_17-span2"></span>
-											</span>
-										</div>
-										<div class="div3">시</div>
-										<div class="div3">(</div>
-										<div class="div4">
-											<span> <span class="div-4-span">화</span> <span
-												class="div-4-span2"></span>
-											</span>
-										</div>
-										<div class="div3">)</div>
+										<img class="icon-time-clock-outlined"
+											src="${pageContext.request.contextPath}/resources/images/mentosFull/time.svg" />
+										<div class="text">15시-17시(화)</div>
 									</div>
 									<div class="frame-410">
-										<div class="icon-maps-04">
-											<img class="icon-maps-map-pin"
-												src="${pageContext.request.contextPath}/resources/images/mentosFull/maps.svg" />
-
-										</div>
-										<div class="div3">홍대</div>
+										<img class="icon-maps-map-pin"
+											src="${pageContext.request.contextPath}/resources/images/mentosFull/maps.svg" />
+										<div class="text">역삼</div>
 									</div>
 									<div class="frame-3659">
-										<div class="_45-000">₩45,000</div>
+										<div class="_45-000">무료</div>
 									</div>
 								</div>
 							</div>
-							<div class="frame-3778">
-								<img class="image"
-									src="${pageContext.request.contextPath}/resources/images/mentosFull/class1.png" />
-							</div>
+							<img class="image"
+								src="${pageContext.request.contextPath}/resources/images/mentosFull/class4.png" />
+
+
 							<div class="mentos-hover-popup">
 								<div class="hover-inner">
 									<div class="hover-title">
-										비전공자도 이해할 수 있는<br />AWS 입문/실전
+										비전공자도 이해할 수 있는<br />입문/실전
 									</div>
 									<div class="hover-desc">초보자도 쉽게 따라올 수 있게, 실무 중심으로 강의해요!</div>
 									<div class="hover-tags">
@@ -249,13 +205,11 @@
 						</div>
 
 					</div>
-
 
 
 
 					<div class="mentos-class-cardview mentos-hover-guide"
 						onclick="location.href='${cpath}/mentos/detail'">
-
 						<div class="mentos-class">
 							<div class="mentos-text">
 								<div class="frame-37862">
@@ -271,86 +225,45 @@
 								</div>
 								<div class="aws">비전공자도 이해할 수 있는 AWS 입문/실전</div>
 								<div class="frame-406">
+
 									<div class="frame-407">
 										<img class="user-user"
 											src="${pageContext.request.contextPath}/resources/images/mentosFull/mento.svg" />
-
-										<div class="div3">정진</div>
+										<div class="text">김코딩</div>
 										<div class="group-371">
-											<div class="rectangle-279"></div>
-											<div class="mento">mento</div>
+											<div class="pre-mento">pre-mento</div>
 										</div>
 									</div>
 									<div class="frame-408">
-										<div class="icon-time-02">
-											<img class="icon-time-calendar"
-												src="${pageContext.request.contextPath}/resources/images/mentosFull/day.svg" />
-										</div>
-										<div class="_2025">
-											<span> <span class="_2025-span">2025</span> <span
-												class="_2025-span2"></span>
-											</span>
-										</div>
-										<div class="div3">/</div>
-										<div class="_06">06</div>
-										<div class="div3">/</div>
-										<div class="_23">23</div>
-										<div class="div3">-</div>
-										<div class="_20252">2025</div>
-										<div class="div3">/</div>
-										<div class="_06">06</div>
-										<div class="div3">/</div>
-										<div class="_30">30</div>
+										<img class="icon-time-calendar"
+											src="${pageContext.request.contextPath}/resources/images/mentosFull/day.svg" />
+										<div class="text">2025/06/23</div>
+										<div class="text">-</div>
+										<div class="text">2025/06/23</div>
 									</div>
 									<div class="frame-409">
-										<div class="icon-time-04">
-											<img class="icon-time-clock-outlined"
-												src="${pageContext.request.contextPath}/resources/images/mentosFull/time.svg" />
-
-
-										</div>
-										<div class="_15">15</div>
-										<div class="div3">시</div>
-										<div class="div4">
-											<span> <span class="div-4-span">-</span> <span
-												class="div-4-span2"></span>
-											</span>
-										</div>
-										<div class="_17">
-											<span> <span class="_17-span">17</span> <span
-												class="_17-span2"></span>
-											</span>
-										</div>
-										<div class="div3">시</div>
-										<div class="div3">(</div>
-										<div class="div4">
-											<span> <span class="div-4-span">화</span> <span
-												class="div-4-span2"></span>
-											</span>
-										</div>
-										<div class="div3">)</div>
+										<img class="icon-time-clock-outlined"
+											src="${pageContext.request.contextPath}/resources/images/mentosFull/time.svg" />
+										<div class="text">15시-17시(화)</div>
 									</div>
 									<div class="frame-410">
-										<div class="icon-maps-04">
-											<img class="icon-maps-map-pin"
-												src="${pageContext.request.contextPath}/resources/images/mentosFull/maps.svg" />
-
-										</div>
-										<div class="div3">홍대</div>
+										<img class="icon-maps-map-pin"
+											src="${pageContext.request.contextPath}/resources/images/mentosFull/maps.svg" />
+										<div class="text">역삼</div>
 									</div>
 									<div class="frame-3659">
-										<div class="_45-000">₩45,000</div>
+										<div class="_45-000">무료</div>
 									</div>
 								</div>
 							</div>
-							<div class="frame-3778">
-								<img class="image"
-									src="${pageContext.request.contextPath}/resources/images/mentosFull/class1.png" />
-							</div>
+							<img class="image"
+								src="${pageContext.request.contextPath}/resources/images/mentosFull/class4.png" />
+
+
 							<div class="mentos-hover-popup">
 								<div class="hover-inner">
 									<div class="hover-title">
-										비전공자도 이해할 수 있는<br />AWS 입문/실전
+										비전공자도 이해할 수 있는<br />입문/실전
 									</div>
 									<div class="hover-desc">초보자도 쉽게 따라올 수 있게, 실무 중심으로 강의해요!</div>
 									<div class="hover-tags">
@@ -361,9 +274,9 @@
 						</div>
 
 					</div>
+
 					<div class="mentos-class-cardview mentos-hover-guide"
 						onclick="location.href='${cpath}/mentos/detail'">
-
 						<div class="mentos-class">
 							<div class="mentos-text">
 								<div class="frame-37862">
@@ -379,86 +292,45 @@
 								</div>
 								<div class="aws">비전공자도 이해할 수 있는 AWS 입문/실전</div>
 								<div class="frame-406">
+
 									<div class="frame-407">
 										<img class="user-user"
 											src="${pageContext.request.contextPath}/resources/images/mentosFull/mento.svg" />
-
-										<div class="div3">정진</div>
+										<div class="text">김코딩</div>
 										<div class="group-371">
-											<div class="rectangle-279"></div>
-											<div class="mento">mento</div>
+											<div class="pre-mento">pre-mento</div>
 										</div>
 									</div>
 									<div class="frame-408">
-										<div class="icon-time-02">
-											<img class="icon-time-calendar"
-												src="${pageContext.request.contextPath}/resources/images/mentosFull/day.svg" />
-										</div>
-										<div class="_2025">
-											<span> <span class="_2025-span">2025</span> <span
-												class="_2025-span2"></span>
-											</span>
-										</div>
-										<div class="div3">/</div>
-										<div class="_06">06</div>
-										<div class="div3">/</div>
-										<div class="_23">23</div>
-										<div class="div3">-</div>
-										<div class="_20252">2025</div>
-										<div class="div3">/</div>
-										<div class="_06">06</div>
-										<div class="div3">/</div>
-										<div class="_30">30</div>
+										<img class="icon-time-calendar"
+											src="${pageContext.request.contextPath}/resources/images/mentosFull/day.svg" />
+										<div class="text">2025/06/23</div>
+										<div class="text">-</div>
+										<div class="text">2025/06/23</div>
 									</div>
 									<div class="frame-409">
-										<div class="icon-time-04">
-											<img class="icon-time-clock-outlined"
-												src="${pageContext.request.contextPath}/resources/images/mentosFull/time.svg" />
-
-
-										</div>
-										<div class="_15">15</div>
-										<div class="div3">시</div>
-										<div class="div4">
-											<span> <span class="div-4-span">-</span> <span
-												class="div-4-span2"></span>
-											</span>
-										</div>
-										<div class="_17">
-											<span> <span class="_17-span">17</span> <span
-												class="_17-span2"></span>
-											</span>
-										</div>
-										<div class="div3">시</div>
-										<div class="div3">(</div>
-										<div class="div4">
-											<span> <span class="div-4-span">화</span> <span
-												class="div-4-span2"></span>
-											</span>
-										</div>
-										<div class="div3">)</div>
+										<img class="icon-time-clock-outlined"
+											src="${pageContext.request.contextPath}/resources/images/mentosFull/time.svg" />
+										<div class="text">15시-17시(화)</div>
 									</div>
 									<div class="frame-410">
-										<div class="icon-maps-04">
-											<img class="icon-maps-map-pin"
-												src="${pageContext.request.contextPath}/resources/images/mentosFull/maps.svg" />
-
-										</div>
-										<div class="div3">홍대</div>
+										<img class="icon-maps-map-pin"
+											src="${pageContext.request.contextPath}/resources/images/mentosFull/maps.svg" />
+										<div class="text">역삼</div>
 									</div>
 									<div class="frame-3659">
-										<div class="_45-000">₩45,000</div>
+										<div class="_45-000">무료</div>
 									</div>
 								</div>
 							</div>
-							<div class="frame-3778">
-								<img class="image"
-									src="${pageContext.request.contextPath}/resources/images/mentosFull/class1.png" />
-							</div>
+							<img class="image"
+								src="${pageContext.request.contextPath}/resources/images/mentosFull/class4.png" />
+
+
 							<div class="mentos-hover-popup">
 								<div class="hover-inner">
 									<div class="hover-title">
-										비전공자도 이해할 수 있는<br />AWS 입문/실전
+										비전공자도 이해할 수 있는<br />입문/실전
 									</div>
 									<div class="hover-desc">초보자도 쉽게 따라올 수 있게, 실무 중심으로 강의해요!</div>
 									<div class="hover-tags">
@@ -469,16 +341,11 @@
 						</div>
 
 					</div>
-
-
 				</div>
-
 			</div>
 			<div class="mentos-all-class-row">
-
 				<div class="mentos-class-cardview mentos-hover-guide"
 					onclick="location.href='${cpath}/mentos/detail'">
-
 					<div class="mentos-class">
 						<div class="mentos-text">
 							<div class="frame-37862">
@@ -494,86 +361,45 @@
 							</div>
 							<div class="aws">비전공자도 이해할 수 있는 AWS 입문/실전</div>
 							<div class="frame-406">
+
 								<div class="frame-407">
 									<img class="user-user"
 										src="${pageContext.request.contextPath}/resources/images/mentosFull/mento.svg" />
-
-									<div class="div3">정진</div>
+									<div class="text">정진</div>
 									<div class="group-371">
-										<div class="rectangle-279"></div>
 										<div class="mento">mento</div>
 									</div>
 								</div>
 								<div class="frame-408">
-									<div class="icon-time-02">
-										<img class="icon-time-calendar"
-											src="${pageContext.request.contextPath}/resources/images/mentosFull/day.svg" />
-									</div>
-									<div class="_2025">
-										<span> <span class="_2025-span">2025</span> <span
-											class="_2025-span2"></span>
-										</span>
-									</div>
-									<div class="div3">/</div>
-									<div class="_06">06</div>
-									<div class="div3">/</div>
-									<div class="_23">23</div>
-									<div class="div3">-</div>
-									<div class="_20252">2025</div>
-									<div class="div3">/</div>
-									<div class="_06">06</div>
-									<div class="div3">/</div>
-									<div class="_30">30</div>
+									<img class="icon-time-calendar"
+										src="${pageContext.request.contextPath}/resources/images/mentosFull/day.svg" />
+									<div class="text">2025/06/23</div>
+									<div class="text">-</div>
+									<div class="text">2025/06/30</div>
 								</div>
 								<div class="frame-409">
-									<div class="icon-time-04">
-										<img class="icon-time-clock-outlined"
-											src="${pageContext.request.contextPath}/resources/images/mentosFull/time.svg" />
-
-
-									</div>
-									<div class="_15">15</div>
-									<div class="div3">시</div>
-									<div class="div4">
-										<span> <span class="div-4-span">-</span> <span
-											class="div-4-span2"></span>
-										</span>
-									</div>
-									<div class="_17">
-										<span> <span class="_17-span">17</span> <span
-											class="_17-span2"></span>
-										</span>
-									</div>
-									<div class="div3">시</div>
-									<div class="div3">(</div>
-									<div class="div4">
-										<span> <span class="div-4-span">화</span> <span
-											class="div-4-span2"></span>
-										</span>
-									</div>
-									<div class="div3">)</div>
+									<img class="icon-time-clock-outlined"
+										src="${pageContext.request.contextPath}/resources/images/mentosFull/time.svg" />
+									<div class="text">15시-17시(화)</div>
 								</div>
 								<div class="frame-410">
-									<div class="icon-maps-04">
-										<img class="icon-maps-map-pin"
-											src="${pageContext.request.contextPath}/resources/images/mentosFull/maps.svg" />
-
-									</div>
-									<div class="div3">홍대</div>
+									<img class="icon-maps-map-pin"
+										src="${pageContext.request.contextPath}/resources/images/mentosFull/maps.svg" />
+									<div class="text">홍대</div>
 								</div>
 								<div class="frame-3659">
 									<div class="_45-000">₩45,000</div>
 								</div>
 							</div>
 						</div>
-						<div class="frame-3778">
-							<img class="image"
-								src="${pageContext.request.contextPath}/resources/images/mentosFull/class1.png" />
-						</div>
+						<img class="image"
+							src="${pageContext.request.contextPath}/resources/images/mentosFull/class1.png" />
+
+
 						<div class="mentos-hover-popup">
 							<div class="hover-inner">
 								<div class="hover-title">
-									비전공자도 이해할 수 있는<br />AWS 입문/실전
+									비전공자도 이해할 수 있는<br />입문/실전
 								</div>
 								<div class="hover-desc">초보자도 쉽게 따라올 수 있게, 실무 중심으로 강의해요!</div>
 								<div class="hover-tags">
@@ -589,7 +415,6 @@
 
 				<div class="mentos-class-cardview mentos-hover-guide"
 					onclick="location.href='${cpath}/mentos/detail'">
-
 					<div class="mentos-class">
 						<div class="mentos-text">
 							<div class="frame-37862">
@@ -605,86 +430,45 @@
 							</div>
 							<div class="aws">비전공자도 이해할 수 있는 AWS 입문/실전</div>
 							<div class="frame-406">
+
 								<div class="frame-407">
 									<img class="user-user"
 										src="${pageContext.request.contextPath}/resources/images/mentosFull/mento.svg" />
-
-									<div class="div3">정진</div>
+									<div class="text">정진</div>
 									<div class="group-371">
-										<div class="rectangle-279"></div>
 										<div class="mento">mento</div>
 									</div>
 								</div>
 								<div class="frame-408">
-									<div class="icon-time-02">
-										<img class="icon-time-calendar"
-											src="${pageContext.request.contextPath}/resources/images/mentosFull/day.svg" />
-									</div>
-									<div class="_2025">
-										<span> <span class="_2025-span">2025</span> <span
-											class="_2025-span2"></span>
-										</span>
-									</div>
-									<div class="div3">/</div>
-									<div class="_06">06</div>
-									<div class="div3">/</div>
-									<div class="_23">23</div>
-									<div class="div3">-</div>
-									<div class="_20252">2025</div>
-									<div class="div3">/</div>
-									<div class="_06">06</div>
-									<div class="div3">/</div>
-									<div class="_30">30</div>
+									<img class="icon-time-calendar"
+										src="${pageContext.request.contextPath}/resources/images/mentosFull/day.svg" />
+									<div class="text">2025/06/23</div>
+									<div class="text">-</div>
+									<div class="text">2025/06/30</div>
 								</div>
 								<div class="frame-409">
-									<div class="icon-time-04">
-										<img class="icon-time-clock-outlined"
-											src="${pageContext.request.contextPath}/resources/images/mentosFull/time.svg" />
-
-
-									</div>
-									<div class="_15">15</div>
-									<div class="div3">시</div>
-									<div class="div4">
-										<span> <span class="div-4-span">-</span> <span
-											class="div-4-span2"></span>
-										</span>
-									</div>
-									<div class="_17">
-										<span> <span class="_17-span">17</span> <span
-											class="_17-span2"></span>
-										</span>
-									</div>
-									<div class="div3">시</div>
-									<div class="div3">(</div>
-									<div class="div4">
-										<span> <span class="div-4-span">화</span> <span
-											class="div-4-span2"></span>
-										</span>
-									</div>
-									<div class="div3">)</div>
+									<img class="icon-time-clock-outlined"
+										src="${pageContext.request.contextPath}/resources/images/mentosFull/time.svg" />
+									<div class="text">15시-17시(화)</div>
 								</div>
 								<div class="frame-410">
-									<div class="icon-maps-04">
-										<img class="icon-maps-map-pin"
-											src="${pageContext.request.contextPath}/resources/images/mentosFull/maps.svg" />
-
-									</div>
-									<div class="div3">홍대</div>
+									<img class="icon-maps-map-pin"
+										src="${pageContext.request.contextPath}/resources/images/mentosFull/maps.svg" />
+									<div class="text">홍대</div>
 								</div>
 								<div class="frame-3659">
 									<div class="_45-000">₩45,000</div>
 								</div>
 							</div>
 						</div>
-						<div class="frame-3778">
-							<img class="image"
-								src="${pageContext.request.contextPath}/resources/images/mentosFull/class1.png" />
-						</div>
+						<img class="image"
+							src="${pageContext.request.contextPath}/resources/images/mentosFull/class1.png" />
+
+
 						<div class="mentos-hover-popup">
 							<div class="hover-inner">
 								<div class="hover-title">
-									비전공자도 이해할 수 있는<br />AWS 입문/실전
+									비전공자도 이해할 수 있는<br />입문/실전
 								</div>
 								<div class="hover-desc">초보자도 쉽게 따라올 수 있게, 실무 중심으로 강의해요!</div>
 								<div class="hover-tags">
@@ -695,13 +479,9 @@
 					</div>
 
 				</div>
-
-
-
 
 				<div class="mentos-class-cardview mentos-hover-guide"
 					onclick="location.href='${cpath}/mentos/detail'">
-
 					<div class="mentos-class">
 						<div class="mentos-text">
 							<div class="frame-37862">
@@ -717,86 +497,45 @@
 							</div>
 							<div class="aws">비전공자도 이해할 수 있는 AWS 입문/실전</div>
 							<div class="frame-406">
+
 								<div class="frame-407">
 									<img class="user-user"
 										src="${pageContext.request.contextPath}/resources/images/mentosFull/mento.svg" />
-
-									<div class="div3">정진</div>
+									<div class="text">정진</div>
 									<div class="group-371">
-										<div class="rectangle-279"></div>
 										<div class="mento">mento</div>
 									</div>
 								</div>
 								<div class="frame-408">
-									<div class="icon-time-02">
-										<img class="icon-time-calendar"
-											src="${pageContext.request.contextPath}/resources/images/mentosFull/day.svg" />
-									</div>
-									<div class="_2025">
-										<span> <span class="_2025-span">2025</span> <span
-											class="_2025-span2"></span>
-										</span>
-									</div>
-									<div class="div3">/</div>
-									<div class="_06">06</div>
-									<div class="div3">/</div>
-									<div class="_23">23</div>
-									<div class="div3">-</div>
-									<div class="_20252">2025</div>
-									<div class="div3">/</div>
-									<div class="_06">06</div>
-									<div class="div3">/</div>
-									<div class="_30">30</div>
+									<img class="icon-time-calendar"
+										src="${pageContext.request.contextPath}/resources/images/mentosFull/day.svg" />
+									<div class="text">2025/06/23</div>
+									<div class="text">-</div>
+									<div class="text">2025/06/30</div>
 								</div>
 								<div class="frame-409">
-									<div class="icon-time-04">
-										<img class="icon-time-clock-outlined"
-											src="${pageContext.request.contextPath}/resources/images/mentosFull/time.svg" />
-
-
-									</div>
-									<div class="_15">15</div>
-									<div class="div3">시</div>
-									<div class="div4">
-										<span> <span class="div-4-span">-</span> <span
-											class="div-4-span2"></span>
-										</span>
-									</div>
-									<div class="_17">
-										<span> <span class="_17-span">17</span> <span
-											class="_17-span2"></span>
-										</span>
-									</div>
-									<div class="div3">시</div>
-									<div class="div3">(</div>
-									<div class="div4">
-										<span> <span class="div-4-span">화</span> <span
-											class="div-4-span2"></span>
-										</span>
-									</div>
-									<div class="div3">)</div>
+									<img class="icon-time-clock-outlined"
+										src="${pageContext.request.contextPath}/resources/images/mentosFull/time.svg" />
+									<div class="text">15시-17시(화)</div>
 								</div>
 								<div class="frame-410">
-									<div class="icon-maps-04">
-										<img class="icon-maps-map-pin"
-											src="${pageContext.request.contextPath}/resources/images/mentosFull/maps.svg" />
-
-									</div>
-									<div class="div3">홍대</div>
+									<img class="icon-maps-map-pin"
+										src="${pageContext.request.contextPath}/resources/images/mentosFull/maps.svg" />
+									<div class="text">홍대</div>
 								</div>
 								<div class="frame-3659">
 									<div class="_45-000">₩45,000</div>
 								</div>
 							</div>
 						</div>
-						<div class="frame-3778">
-							<img class="image"
-								src="${pageContext.request.contextPath}/resources/images/mentosFull/class1.png" />
-						</div>
+						<img class="image"
+							src="${pageContext.request.contextPath}/resources/images/mentosFull/class1.png" />
+
+
 						<div class="mentos-hover-popup">
 							<div class="hover-inner">
 								<div class="hover-title">
-									비전공자도 이해할 수 있는<br />AWS 입문/실전
+									비전공자도 이해할 수 있는<br />입문/실전
 								</div>
 								<div class="hover-desc">초보자도 쉽게 따라올 수 있게, 실무 중심으로 강의해요!</div>
 								<div class="hover-tags">
@@ -805,22 +544,14 @@
 							</div>
 						</div>
 					</div>
-
-
-
-
-
-
 				</div>
+
 			</div>
 
 
 			<div class="mentos-all-class-row">
-
-
 				<div class="mentos-class-cardview mentos-hover-guide"
 					onclick="location.href='${cpath}/mentos/detail'">
-
 					<div class="mentos-class">
 						<div class="mentos-text">
 							<div class="frame-37862">
@@ -836,86 +567,45 @@
 							</div>
 							<div class="aws">비전공자도 이해할 수 있는 AWS 입문/실전</div>
 							<div class="frame-406">
+
 								<div class="frame-407">
 									<img class="user-user"
 										src="${pageContext.request.contextPath}/resources/images/mentosFull/mento.svg" />
-
-									<div class="div3">정진</div>
+									<div class="text">정진</div>
 									<div class="group-371">
-										<div class="rectangle-279"></div>
 										<div class="mento">mento</div>
 									</div>
 								</div>
 								<div class="frame-408">
-									<div class="icon-time-02">
-										<img class="icon-time-calendar"
-											src="${pageContext.request.contextPath}/resources/images/mentosFull/day.svg" />
-									</div>
-									<div class="_2025">
-										<span> <span class="_2025-span">2025</span> <span
-											class="_2025-span2"></span>
-										</span>
-									</div>
-									<div class="div3">/</div>
-									<div class="_06">06</div>
-									<div class="div3">/</div>
-									<div class="_23">23</div>
-									<div class="div3">-</div>
-									<div class="_20252">2025</div>
-									<div class="div3">/</div>
-									<div class="_06">06</div>
-									<div class="div3">/</div>
-									<div class="_30">30</div>
+									<img class="icon-time-calendar"
+										src="${pageContext.request.contextPath}/resources/images/mentosFull/day.svg" />
+									<div class="text">2025/06/23</div>
+									<div class="text">-</div>
+									<div class="text">2025/06/30</div>
 								</div>
 								<div class="frame-409">
-									<div class="icon-time-04">
-										<img class="icon-time-clock-outlined"
-											src="${pageContext.request.contextPath}/resources/images/mentosFull/time.svg" />
-
-
-									</div>
-									<div class="_15">15</div>
-									<div class="div3">시</div>
-									<div class="div4">
-										<span> <span class="div-4-span">-</span> <span
-											class="div-4-span2"></span>
-										</span>
-									</div>
-									<div class="_17">
-										<span> <span class="_17-span">17</span> <span
-											class="_17-span2"></span>
-										</span>
-									</div>
-									<div class="div3">시</div>
-									<div class="div3">(</div>
-									<div class="div4">
-										<span> <span class="div-4-span">화</span> <span
-											class="div-4-span2"></span>
-										</span>
-									</div>
-									<div class="div3">)</div>
+									<img class="icon-time-clock-outlined"
+										src="${pageContext.request.contextPath}/resources/images/mentosFull/time.svg" />
+									<div class="text">15시-17시(화)</div>
 								</div>
 								<div class="frame-410">
-									<div class="icon-maps-04">
-										<img class="icon-maps-map-pin"
-											src="${pageContext.request.contextPath}/resources/images/mentosFull/maps.svg" />
-
-									</div>
-									<div class="div3">홍대</div>
+									<img class="icon-maps-map-pin"
+										src="${pageContext.request.contextPath}/resources/images/mentosFull/maps.svg" />
+									<div class="text">홍대</div>
 								</div>
 								<div class="frame-3659">
 									<div class="_45-000">₩45,000</div>
 								</div>
 							</div>
 						</div>
-						<div class="frame-3778">
-							<img class="image"
-								src="${pageContext.request.contextPath}/resources/images/mentosFull/class1.png" />
-						</div>
+						<img class="image"
+							src="${pageContext.request.contextPath}/resources/images/mentosFull/class1.png" />
+
+
 						<div class="mentos-hover-popup">
 							<div class="hover-inner">
 								<div class="hover-title">
-									비전공자도 이해할 수 있는<br />AWS 입문/실전
+									비전공자도 이해할 수 있는<br />입문/실전
 								</div>
 								<div class="hover-desc">초보자도 쉽게 따라올 수 있게, 실무 중심으로 강의해요!</div>
 								<div class="hover-tags">
@@ -929,10 +619,8 @@
 
 
 
-
 				<div class="mentos-class-cardview mentos-hover-guide"
 					onclick="location.href='${cpath}/mentos/detail'">
-
 					<div class="mentos-class">
 						<div class="mentos-text">
 							<div class="frame-37862">
@@ -948,86 +636,45 @@
 							</div>
 							<div class="aws">비전공자도 이해할 수 있는 AWS 입문/실전</div>
 							<div class="frame-406">
+
 								<div class="frame-407">
 									<img class="user-user"
 										src="${pageContext.request.contextPath}/resources/images/mentosFull/mento.svg" />
-
-									<div class="div3">정진</div>
+									<div class="text">정진</div>
 									<div class="group-371">
-										<div class="rectangle-279"></div>
 										<div class="mento">mento</div>
 									</div>
 								</div>
 								<div class="frame-408">
-									<div class="icon-time-02">
-										<img class="icon-time-calendar"
-											src="${pageContext.request.contextPath}/resources/images/mentosFull/day.svg" />
-									</div>
-									<div class="_2025">
-										<span> <span class="_2025-span">2025</span> <span
-											class="_2025-span2"></span>
-										</span>
-									</div>
-									<div class="div3">/</div>
-									<div class="_06">06</div>
-									<div class="div3">/</div>
-									<div class="_23">23</div>
-									<div class="div3">-</div>
-									<div class="_20252">2025</div>
-									<div class="div3">/</div>
-									<div class="_06">06</div>
-									<div class="div3">/</div>
-									<div class="_30">30</div>
+									<img class="icon-time-calendar"
+										src="${pageContext.request.contextPath}/resources/images/mentosFull/day.svg" />
+									<div class="text">2025/06/23</div>
+									<div class="text">-</div>
+									<div class="text">2025/06/30</div>
 								</div>
 								<div class="frame-409">
-									<div class="icon-time-04">
-										<img class="icon-time-clock-outlined"
-											src="${pageContext.request.contextPath}/resources/images/mentosFull/time.svg" />
-
-
-									</div>
-									<div class="_15">15</div>
-									<div class="div3">시</div>
-									<div class="div4">
-										<span> <span class="div-4-span">-</span> <span
-											class="div-4-span2"></span>
-										</span>
-									</div>
-									<div class="_17">
-										<span> <span class="_17-span">17</span> <span
-											class="_17-span2"></span>
-										</span>
-									</div>
-									<div class="div3">시</div>
-									<div class="div3">(</div>
-									<div class="div4">
-										<span> <span class="div-4-span">화</span> <span
-											class="div-4-span2"></span>
-										</span>
-									</div>
-									<div class="div3">)</div>
+									<img class="icon-time-clock-outlined"
+										src="${pageContext.request.contextPath}/resources/images/mentosFull/time.svg" />
+									<div class="text">15시-17시(화)</div>
 								</div>
 								<div class="frame-410">
-									<div class="icon-maps-04">
-										<img class="icon-maps-map-pin"
-											src="${pageContext.request.contextPath}/resources/images/mentosFull/maps.svg" />
-
-									</div>
-									<div class="div3">홍대</div>
+									<img class="icon-maps-map-pin"
+										src="${pageContext.request.contextPath}/resources/images/mentosFull/maps.svg" />
+									<div class="text">홍대</div>
 								</div>
 								<div class="frame-3659">
 									<div class="_45-000">₩45,000</div>
 								</div>
 							</div>
 						</div>
-						<div class="frame-3778">
-							<img class="image"
-								src="${pageContext.request.contextPath}/resources/images/mentosFull/class1.png" />
-						</div>
+						<img class="image"
+							src="${pageContext.request.contextPath}/resources/images/mentosFull/class1.png" />
+
+
 						<div class="mentos-hover-popup">
 							<div class="hover-inner">
 								<div class="hover-title">
-									비전공자도 이해할 수 있는<br />AWS 입문/실전
+									비전공자도 이해할 수 있는<br />입문/실전
 								</div>
 								<div class="hover-desc">초보자도 쉽게 따라올 수 있게, 실무 중심으로 강의해요!</div>
 								<div class="hover-tags">
@@ -1039,13 +686,8 @@
 
 				</div>
 
-
-
-
-
 				<div class="mentos-class-cardview mentos-hover-guide"
 					onclick="location.href='${cpath}/mentos/detail'">
-
 					<div class="mentos-class">
 						<div class="mentos-text">
 							<div class="frame-37862">
@@ -1061,86 +703,45 @@
 							</div>
 							<div class="aws">비전공자도 이해할 수 있는 AWS 입문/실전</div>
 							<div class="frame-406">
+
 								<div class="frame-407">
 									<img class="user-user"
 										src="${pageContext.request.contextPath}/resources/images/mentosFull/mento.svg" />
-
-									<div class="div3">정진</div>
+									<div class="text">정진</div>
 									<div class="group-371">
-										<div class="rectangle-279"></div>
 										<div class="mento">mento</div>
 									</div>
 								</div>
 								<div class="frame-408">
-									<div class="icon-time-02">
-										<img class="icon-time-calendar"
-											src="${pageContext.request.contextPath}/resources/images/mentosFull/day.svg" />
-									</div>
-									<div class="_2025">
-										<span> <span class="_2025-span">2025</span> <span
-											class="_2025-span2"></span>
-										</span>
-									</div>
-									<div class="div3">/</div>
-									<div class="_06">06</div>
-									<div class="div3">/</div>
-									<div class="_23">23</div>
-									<div class="div3">-</div>
-									<div class="_20252">2025</div>
-									<div class="div3">/</div>
-									<div class="_06">06</div>
-									<div class="div3">/</div>
-									<div class="_30">30</div>
+									<img class="icon-time-calendar"
+										src="${pageContext.request.contextPath}/resources/images/mentosFull/day.svg" />
+									<div class="text">2025/06/23</div>
+									<div class="text">-</div>
+									<div class="text">2025/06/30</div>
 								</div>
 								<div class="frame-409">
-									<div class="icon-time-04">
-										<img class="icon-time-clock-outlined"
-											src="${pageContext.request.contextPath}/resources/images/mentosFull/time.svg" />
-
-
-									</div>
-									<div class="_15">15</div>
-									<div class="div3">시</div>
-									<div class="div4">
-										<span> <span class="div-4-span">-</span> <span
-											class="div-4-span2"></span>
-										</span>
-									</div>
-									<div class="_17">
-										<span> <span class="_17-span">17</span> <span
-											class="_17-span2"></span>
-										</span>
-									</div>
-									<div class="div3">시</div>
-									<div class="div3">(</div>
-									<div class="div4">
-										<span> <span class="div-4-span">화</span> <span
-											class="div-4-span2"></span>
-										</span>
-									</div>
-									<div class="div3">)</div>
+									<img class="icon-time-clock-outlined"
+										src="${pageContext.request.contextPath}/resources/images/mentosFull/time.svg" />
+									<div class="text">15시-17시(화)</div>
 								</div>
 								<div class="frame-410">
-									<div class="icon-maps-04">
-										<img class="icon-maps-map-pin"
-											src="${pageContext.request.contextPath}/resources/images/mentosFull/maps.svg" />
-
-									</div>
-									<div class="div3">홍대</div>
+									<img class="icon-maps-map-pin"
+										src="${pageContext.request.contextPath}/resources/images/mentosFull/maps.svg" />
+									<div class="text">홍대</div>
 								</div>
 								<div class="frame-3659">
 									<div class="_45-000">₩45,000</div>
 								</div>
 							</div>
 						</div>
-						<div class="frame-3778">
-							<img class="image"
-								src="${pageContext.request.contextPath}/resources/images/mentosFull/class1.png" />
-						</div>
+						<img class="image"
+							src="${pageContext.request.contextPath}/resources/images/mentosFull/class1.png" />
+
+
 						<div class="mentos-hover-popup">
 							<div class="hover-inner">
 								<div class="hover-title">
-									비전공자도 이해할 수 있는<br />AWS 입문/실전
+									비전공자도 이해할 수 있는<br />입문/실전
 								</div>
 								<div class="hover-desc">초보자도 쉽게 따라올 수 있게, 실무 중심으로 강의해요!</div>
 								<div class="hover-tags">
@@ -1149,9 +750,8 @@
 							</div>
 						</div>
 					</div>
-
-
 				</div>
+
 			</div>
 		</div>
 	</div>

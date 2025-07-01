@@ -1,12 +1,14 @@
 package com.shinhan.memento.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.shinhan.memento.common.exception.MentosException;
@@ -21,7 +23,7 @@ import com.shinhan.memento.service.MentosService;
 import lombok.extern.slf4j.Slf4j;
 
 @RestController
-//@Controller
+@Controller
 @RequestMapping("/mentos")
 @Slf4j
 public class MentosController {
@@ -33,10 +35,16 @@ public class MentosController {
 		return "mentos/mentosFull";
 	}
 
-	@RequestMapping("/detail")
-	public String mentosDetailView() {
-		return "mentos/mentosDetail";
+	/*
+	  @RequestMapping("/detailmenti") public String mentosDetailMentiView() {
+	  return "mentos/mentosDetailMenti"; }
+	 */
+	
+	@RequestMapping("/detailmento")
+	public String mentosDetailMrntoView() {
+		return "mentos/mentosDetailMento";
 	}
+
 
 	@RequestMapping("/insert")
 	public String mentosInsert() {
@@ -48,7 +56,7 @@ public class MentosController {
 		return "mentos/mentosEdit";
 	}
 
-	@RequestMapping("/mentodetail")
+	@RequestMapping("/detailmentos")
 	public String mentosMentoDetail() {
 		return "mentos/mentosMentoDetail";
 	}
@@ -65,7 +73,18 @@ public class MentosController {
 
 	
 	
+	
+	
+	
+
+	@GetMapping("/detailmenti")
+	public String mentiDetailPage() {
+	    return "mentos/mentosDetailMenti";
+	}
+	
+	
 	@GetMapping("/detailmentos")
+	@ResponseBody
 	public BaseResponse<DetailMentosDTO> getMentosDetail(@RequestParam int mentosId) {
 		log.info("MentosController.getMentosDetail 호출됨, id: " + mentosId);
 
@@ -77,6 +96,8 @@ public class MentosController {
 		return new BaseResponse<>(dto);
 	}
 
+	
+	
 	@PostMapping("/creatementos")
 	public BaseResponse<Void> createMento(@RequestBody CreateMentosDTO dto) {
 		log.info("[MentosController.createMento]");

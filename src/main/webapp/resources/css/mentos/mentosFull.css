@@ -1,3 +1,12 @@
+:root {
+	
+}
+
+[data--mode="mode-1"] { --1: #00bba8; --2: #0070d1; --1: #a6abbd; --2:
+	#414656; --3: #c73c60; --4: #ff7493;
+	
+}
+
 .div, .div * {
 	box-sizing: border-box;
 }
@@ -10,6 +19,21 @@
 	width: 100vw;
 	margin: 0 auto;
 	padding: 0 150px;
+}
+
+body {
+	padding-top: 150px;
+	overflow-x: hidden;
+}
+
+html, body {
+	margin: 0;
+	padding: 0;
+	width: 100%;
+}
+
+.container {
+	padding-top: 150px;
 }
 
 .full {
@@ -29,6 +53,7 @@
 	margin: 0px;
 	padding: 0px;
 }
+
 /*1.  선택조회  */
 .full-detail-select {
 	display: flex;
@@ -188,254 +213,6 @@
 	scroll-snap-align: start;
 }
 
-/* 하트 이미지 */
-.like-heart-btn {
-	width: 32px;
-	height: 32px;
-	background: none;
-	border: none;
-	cursor: pointer;
-	outline: none;
-	padding: 0;
-	position: relative;
-	transition: filter 0.14s;
-}
-
-/* 투명(빈) 하트 */
-.like-heart-btn::before {
-	content: '';
-	display: block;
-	width: 100%;
-	height: 100%;
-	background:
-		url('data:image/svg+xml;utf8,<svg width="32" height="32" fill="none" xmlns="http://www.w3.org/2000/svg"><path stroke="black" stroke-width="2" d="M16 29S3 18.5 3 10.5C3 6.5 6.5 3 10.5 3c2.5 0 4.5 1.5 5.5 3.5C17 4.5 19 3 21.5 3 25.5 3 29 6.5 29 10.5c0 8-13 18.5-13 18.5Z"/></svg>');
-	background-size: 32px 32px;
-	transition: opacity 0.22s;
-	opacity: 1;
-	position: absolute;
-	left: 0;
-	top: 0;
-	z-index: 1;
-}
-
-/* 빨간 하트(초기에는 투명) */
-.like-heart-btn.liked::after {
-	content: '';
-	display: block;
-	width: 100%;
-	height: 100%;
-	background:
-		url('data:image/svg+xml;utf8,<svg width="32" height="32" fill="red" xmlns="http://www.w3.org/2000/svg"><path fill="red" stroke="black" stroke-width="2" d="M16 29S3 18.5 3 10.5C3 6.5 6.5 3 10.5 3c2.5 0 4.5 1.5 5.5 3.5C17 4.5 19 3 21.5 3 25.5 3 29 6.5 29 10.5c0 8-13 18.5-13 18.5Z"/></svg>');
-	background-size: 32px 32px;
-	transition: opacity 0.22s, transform 0.22s;
-	opacity: 1;
-	position: absolute;
-	left: 0;
-	top: 0;
-	z-index: 2;
-	animation: heart-pop 0.22s;
-}
-
-/* 클릭 애니메이션 */
-@
-keyframes heart-pop { 0% {
-	transform: scale(0.5);
-	opacity: 0.3;
-}
-
-80
-
-
-
-
-
-
-
-
-%
-{
-transform
-
-
-
-
-
-
-
-
-:
-
-
-
-
-
-
-
-
-scale
-
-
-
-
-
-
-(
-
-
-
-
-
-
-
-
-1
-
-
-
-
-
-
-.12
-
-
-
-
-
-
-
-
-)
-
-
-
-
-
-
-;
-opacity
-
-
-
-
-
-
-
-
-:
-
-
-
-
-
-
-
-
-1
-
-
-
-
-
-
-;
-}
-100
-
-
-
-
-
-
-
-
-%
-{
-transform
-
-
-
-
-
-
-
-
-:
-
-
-
-
-
-
-
-
-scale
-
-
-
-
-
-
-(
-
-
-
-
-
-
-
-
-1
-
-
-
-
-
-
-
-
-)
-
-
-
-
-
-
-;
-opacity
-
-
-
-
-
-
-
-
-:
-
-
-
-
-
-
-
-
-1
-
-
-
-
-
-
-;
-}
-}
-
-/* 숨김 처리: 빨간 하트는 liked 없으면 보이지 않음 */
-.like-heart-btn:not(.liked)::after {
-	content: none;
-}
-
-}
 /* 뭔지 모르겠음-> 원래 class 카드 전체 크레임이었음  */
 .frame-3786 {
 	display: flex;
@@ -590,40 +367,47 @@ opacity
 }
 /* mento 프레임 */
 .group-371 {
-	flex-shrink: 0;
-	width: 36px;
-	height: 12.04px;
-	position: static;
+	align-items: center;
+	position: relative;
 }
 
 /* mento 모양 */
-.rectangle-279 {
+.mento {
 	background: rgba(0, 112, 209, 0.73);
 	border-radius: 5px;
-	width: 36px;
-	height: 12px;
-	position: absolute;
-	left: 52px;
-	top: 3.02px;
-}
-
-/* mento */
-.mento {
-	color: #ffffff;
+	height: 18px; /* 더 크거나 작게 조정 가능 */
+	padding: 0 8px; /* 좌우 여백만 줌, width는 제거 */
+	color: #fff;
 	text-align: center;
-	font-family: "Inter-Medium", sans-serif;
-	font-size: 8px;
-	line-height: 150%;
-	letter-spacing: -0.011000000000000001em;
+	font-family: "D2Coding-Regular", sans-serif;
+	font-size: 9px;
 	font-weight: 500;
-	position: absolute;
-	left: calc(50% - -8px);
-	top: 50%;
-	translate: 0 -50%;
-	width: 36px;
+	line-height: 18px; /* 세로 중앙 맞춤 */
+	letter-spacing: -0.011em;
 	display: flex;
 	align-items: center;
 	justify-content: center;
+	white-space: nowrap; /* 줄바꿈 방지 */
+	position: relative;
+}
+/* pre-mento 모양 */
+.pre-mento {
+	background: rgba(0, 187, 168, 0.73);
+	border-radius: 5px;
+	height: 18px; /* 더 크거나 작게 조정 가능 */
+	padding: 0 8px; /* 좌우 여백만 줌, width는 제거 */
+	color: #fff;
+	text-align: center;
+	font-family: "D2Coding-Regular", sans-serif;
+	font-size: 9px;
+	font-weight: 500;
+	line-height: 18px; /* 세로 중앙 맞춤 */
+	letter-spacing: -0.011em;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	white-space: nowrap; /* 줄바꿈 방지 */
+	position: relative;
 }
 
 /*날짜 전체 프레임 */
@@ -644,7 +428,6 @@ opacity
 	width: 13px;
 	height: 12px;
 	position: relative;
-	
 }
 /* 시간 전체 프레임 */
 .frame-409 {
@@ -659,12 +442,12 @@ opacity
 
 /* 시간 이미지 */
 .icon-time-clock-outlined {
-	top: 0.5px;
-	overflow: visible;
+	top: 0px;
 	flex-shrink: 0;
 	width: 13px;
 	height: 12px;
-	position: relative;	
+	position: relative;
+	overflow: hidden;
 }
 /*장소 전체 프레임*/
 .frame-410 {
@@ -686,7 +469,7 @@ opacity
 	position: relative;
 	overflow: hidden;
 }
-
+/* 가격 프레임 */
 .frame-3659 {
 	display: flex;
 	flex-direction: column;
@@ -695,7 +478,7 @@ opacity
 	height: 100%;
 	overflow: hidden;
 }
-
+/* 가격 텍스트 */
 ._45-000 {
 	color: #000000;
 	text-align: left;
@@ -706,40 +489,19 @@ opacity
 	font-weight: 400;
 	position: relative;
 }
-
-.frame-3778 {
-	display: flex;
-	flex-direction: column;
-	gap: 10px;
-	align-items: center;
-	justify-content: flex-start;
-	flex-shrink: 0;
-	width: 151px;
-	position: relative;
-}
-
+/* 멘토스 이미지  */
 .image {
+	display: block;
 	border-radius: 30px;
-	border-style: solid;
-	border-color: #a6abbd;
-	border-width: 1px;
-	align-self: stretch;
-	flex-shrink: 0;
-	height: 122px;
-	position: relative;
-	box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+	border: 1px solid #a6abbd;
+	width: 151px;
+	height: 180px;
+	box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
 	object-fit: cover;
+	margin: 0 auto;
 }
 
-.mentos-class:hover {
-	box-shadow: 0 1vw 2vw rgba(0, 0, 0, 0.16), 0 0.3vw 1vw
-		rgba(0, 0, 0, 0.09);
-	transform: translateY(-0.5vw);
-	border: 1.5px solid #7da4fa;
-	z-index: 10;
-}
-
-/* 안내문구 팝업 */
+/* 멘토스 팝업 */
 .mentos-hover-popup {
 	pointer-events: none;
 	opacity: 0;
@@ -756,11 +518,6 @@ opacity
 	border-radius: 2vw;
 	transition: opacity 0.18s;
 	z-index: 99;
-}
-
-.
-.mentos-hover-popup {
-	opacity: 1;
 }
 
 .hover-inner {
@@ -824,7 +581,7 @@ opacity
 }
 /* 안내문구 팝업 */
 .mentos-hover-popup {
-	pointer-events: none;
+	pointer-events: auto;
 	opacity: 0;
 	position: absolute;
 	top: 0;
@@ -851,56 +608,25 @@ opacity
 	box-shadow: 0 0.3vw 1vw rgba(0, 0, 0, 0.14);
 	padding: 2vw 2vw;
 	text-align: center;
-	min-width: 20vw;
-	max-width: 40vw;
+	min-width: 16vw;
+	max-width: 22vw;
 }
 
 .hover-title {
-	font-size: 1.3vw;
+	font-size: 1vw;
 	font-weight: 700;
 	color: #22314e;
-	margin-bottom: 0.8vw;
+	margin-bottom: 0.6vw;
 }
 
 .hover-desc {
-	font-size: 1vw;
+	font-size: 0.8vw;
 	color: #456;
-	margin-bottom: 1vw;
-}
-
-.hover-tags {
-	display: flex;
-	gap: 0.8vw;
-	justify-content: center;
+	margin-bottom: 0.8vw;
 }
 
 .hover-tag {
-	background: #f3f8ff;
-	color: #5585f3;
-	border-radius: 0.6vw;
-	font-size: 0.9vw;
-	padding: 0.5vw 1.2vw;
-}
-
-@media ( max-width : 700px) {
-	.mentos-class, .mentos-hover-popup {
-		border-radius: 4vw;
-	}
-	.hover-inner {
-		border-radius: 2vw;
-		padding: 6vw 3vw;
-		min-width: 60vw;
-		max-width: 90vw;
-	}
-	.hover-title {
-		font-size: 4vw;
-	}
-	.hover-desc {
-		font-size: 3vw;
-	}
-	.hover-tag {
-		font-size: 2vw;
-		border-radius: 2vw;
-		padding: 1vw 3vw;
-	}
+	font-size: 0.7vw;
+	border-radius: 0.4vw;
+	padding: 0.3vw 0.8vw;
 }
