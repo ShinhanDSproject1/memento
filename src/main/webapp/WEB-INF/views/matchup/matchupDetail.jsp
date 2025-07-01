@@ -10,6 +10,8 @@
 <link rel="stylesheet" href="${cpath}/resources/css/vars.css">
 </head>
 <body>
+<%@ include file="../common/logout_header.jsp"%>
+<div class = "container">
    <div class="div">
       <div class="top-bar">
          <div class="top-bar-tag">
@@ -21,7 +23,7 @@
 	                <c:otherwise>
 	                    <div class="top-bar-mento">멘토 모집중</div>
 	                </c:otherwise>
-	            </c:choose>
+	      </c:choose>
 			</c:if>
             <div class="top-bar-category">
                <div class="java-c">#${matchupDetail.languageName} #${matchupDetail.categoryName}</div>
@@ -297,6 +299,7 @@
             </a>
          </div>
       </div>
+   </div>
    </div>
    <script>
       const loggedInMemberId = "${sessionScope.loginUser.memberId}"; 

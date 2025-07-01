@@ -72,10 +72,3 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   });
 });
-
-
-// ===================== 마이페이지(대시보드) 모달 =====================
-function gotoDashboard() {
-	  localStorage.setItem('activeMenu', 'dashboard');
-	  location.href = cpath + '/mypage/page1';
-}

@@ -11,9 +11,17 @@
 <meta charset="UTF-8">
 <title>me:mento</title>
 <link rel="stylesheet" href="${cpath}/resources/css/matchupList.css">
-<link rel="stylesheet" href="${cpath}/resources/css/vars.css">
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath}/resources/css/mainpage/notificationModal.css">
 </head>
 <body>
+
+	<div class="header-fixed">
+	   <%@ include file="../common/logout_header.jsp"%>
+	</div>
+	  <jsp:include page="../mainpage/notificationModal.jsp" />
+<div class="container">
+ <div class="content-wrap">
    <div class="div">
       <div class="frame-3657">
          <div class="frame-390">
@@ -65,7 +73,7 @@
             <c:forEach var="matchup" items="${matchupList}">
                <div class="matchup-cardview" onclick="location.href='${cpath}/matchup/matchupDetail?id=${matchup.matchupId}'">
                   <div class="rectangle-48"></div>
-                  <div class="rectangle-210"></div>
+                  <!-- <div class="rectangle-210"></div> -->
                   <div class="div3">${matchup.regionGroup}</div>
                   <div class="icon-time-04">
                      <img class="icon-time-clock-outlined"
@@ -87,14 +95,12 @@
                         src="${cpath}/resources/images/icon-user.svg" />
                   </div>
                   <div class="div5">${matchup.title}</div>
-                  <div class="rectangle-60"></div>
                   <div class="icon-maps-04">
                      <img class="icon-maps-map-pin"
                         src="${cpath}/resources/images/icon-map-black.svg" />
                   </div>
                   <img class="_1" src="${cpath}/resources/images/profile.svg" />
                   <div class="group-414">
-                     <div class="rectangle-209"></div>
                      <div class="java-c">#${matchup.languageName} #${matchup.categoryName}</div>
                   </div>
                   <div class="badges-wrapper">
@@ -164,9 +170,17 @@
          </div>
       </div>
    </div>
+   </div>
+</div>
+<%--  <jsp:include page="../mainpage/notificationModal.jsp" /> --%>
+   
 <script>
    const cpath = '${cpath}';
 </script>
+
+
 <script src="${cpath}/resources/js/matchup/matchupList.js"></script>
+<script src="${pageContext.request.contextPath}/resources/js/header.js"></script>
+<script src="${pageContext.request.contextPath}/js/notification.js"></script>
 </body>
 </html>

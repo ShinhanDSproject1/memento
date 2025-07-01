@@ -5,15 +5,61 @@
     box-sizing: border-box;
 }
 
+/* 헤더가 fixed 이므로, 본문을 헤더 아래로 밀어내기 위한 패딩 */
+.container {
+  padding-top: 80px; /* ← 실제 헤더 높이로 조절 */
+  box-sizing: border-box;
+}
+body {
+  padding-top: 80px;
+  box-sizing: border-box;
+}
+
 .create-matchup-container {
     background: #ffffff;
-    padding: 0 250px 50px 250px; /* 하단 여백 추가 */
+      padding: 0 250px;
     display: flex;
     flex-direction: column;
     gap: 20px; /* 전체적인 간격 조정 */
     align-items: stretch; /* 자식 요소들이 컨테이너 너비에 맞게 늘어나도록 설정 */
     font-family: "Inter", sans-serif;
+     max-width: 100%;
+      margin: 0 auto;
+    
 }
+
+@media (max-width: 1439px) {
+  .create-matchup-container {
+    /* 데스크탑보다 작아지면 여백 80px */
+    padding: 0 80px 50px;
+  }
+}
+
+@media (max-width: 1023px) {
+  .create-matchup-container {
+    /* 태블릿: 여백 40px */
+    padding: 0 40px 50px;
+  }
+}
+
+@media (max-width: 767px) {
+  .create-matchup-container {
+    /* 모바일: 여백 16px */
+    padding: 0 16px 50px;
+  }
+}
+/* 데스크탑 전용(1440px 이상) */
+@media (min-width: 1440px) {
+  .create-matchup-container {
+    padding: 0 250px 50px;
+  }
+}
+
+/* 데스크탑보다 작아지면 순차적으로 줄어듬 */
+@media (max-width: 1439px) {
+  .create-matchup-container { padding: 0 80px 50px; }
+}
+…
 
 
 /* =================================================================== */

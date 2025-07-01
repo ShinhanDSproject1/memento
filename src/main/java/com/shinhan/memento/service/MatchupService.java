@@ -13,7 +13,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.shinhan.memento.dao.MatchUpDAO;
-import com.shinhan.memento.dao.MemberDAO;
 import com.shinhan.memento.dao.MemberMatchUpDAO;
 import com.shinhan.memento.model.BaseStatus;
 import com.shinhan.memento.model.MatchUp;
