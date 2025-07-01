@@ -2,14 +2,12 @@ package com.shinhan.memento.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.Getter;
 
 @AllArgsConstructor
-@NoArgsConstructor
 @Builder
-@Data
+@Getter
 public class MatchTypeDTO {
-    private Integer matchTypeId;
+    private int matchTypeId;
     private String matchTypeName;
 }
