@@ -5,12 +5,16 @@ import java.sql.Timestamp;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.shinhan.memento.dto.CategoryDTO;
 import com.shinhan.memento.dto.CreateMentosDBDTO;
 import com.shinhan.memento.dto.CreateMentosDTO;
+import com.shinhan.memento.dto.LanguageDTO;
+import com.shinhan.memento.dto.MatchTypeDTO;
 import com.shinhan.memento.mapper.MentosMapper;
 
 import lombok.extern.slf4j.Slf4j;
@@ -59,6 +63,24 @@ public class MentosService {
         int result = mentosMapper.createMentos(createMentosDBDTO);
         return result == 1;
     }
+
+    /**
+     * 토글에서 언어,카테고리,학습유형 보여주기 
+     */
+	public List<LanguageDTO> getAllLanguages() {
+		log.info("[MentosService.getAllLanguages]");
+		return mentosMapper.getAllLanguages();
+	}
+
+	public List<CategoryDTO> getAllCategories() {
+		log.info("[MentosService.getAllCategories]");
+		return mentosMapper.getAllCategories();
+	}
+
+	public List<MatchTypeDTO> getAllMatchTypes() {
+		log.info("[MentosService.getAllMatchTypes]");
+		return mentosMapper.getAllMatchTypes();
+	}
 }
 
 
