@@ -35,7 +35,6 @@ public class MentosController {
 		List<CategoryDTO> categories = mentosService.getAllCategories();
 		List<MatchTypeDTO> matchTypes = mentosService.getAllMatchTypes();
 
-		languages.forEach(a->System.out.println(a.toString()));
 		model.addAttribute("languages", languages);
 		model.addAttribute("categories", categories);
 		model.addAttribute("matchTypes", matchTypes);

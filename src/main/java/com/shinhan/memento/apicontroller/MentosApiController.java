@@ -1,4 +1,4 @@
-package com.shinhan.memento.controller;
+package com.shinhan.memento.apicontroller;
 
 import java.util.HashMap;
 import java.util.Map;
