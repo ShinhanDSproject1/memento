@@ -22,6 +22,7 @@ import com.shinhan.memento.dto.CategoryDTO;
 import com.shinhan.memento.dto.LanguageDTO;
 import com.shinhan.memento.dto.MatchTypeDTO;
 import com.shinhan.memento.dto.MatchupApplyMentoDTO;
+import com.shinhan.memento.dto.MatchupApproveMentoDTO;
 import com.shinhan.memento.dto.MatchupCreateDTO;
 import com.shinhan.memento.dto.MatchupDetailDTO;
 import com.shinhan.memento.dto.MatchupListDTO;
@@ -30,12 +31,26 @@ import com.shinhan.memento.dto.MatchupWaitingMentoDTO;
 import com.shinhan.memento.model.Member;
 import com.shinhan.memento.service.MatchupService;
 
+
 @Controller
 @RequestMapping("/matchup")
 public class MatchupController {
    
    @Autowired
    MatchupService matchupService;
+   
+   /* 멘토 승인 요청 처리 API */
+   @PostMapping("/approveMento")
+   @ResponseBody
+   public BaseResponse<MatchupWaitingMentoDTO> approveMento(@RequestBody MatchupApproveMentoDTO dto) {
+       try {
+    	   MatchupWaitingMentoDTO approvedMento = matchupService.approveMento(dto.getMatchupId(), dto.getMemberId());
+           return new BaseResponse<>(approvedMento);
+       } catch (Exception e) {
+           e.printStackTrace();
+           return new BaseResponse<>(BaseExceptionResponseStatus.FAILURE, null);
+       }
+   }
    
    /* 요청중인 멘토 리스트 JSON 반환 API */
    @GetMapping("/getWaitingMentoList")
@@ -46,7 +61,6 @@ public class MatchupController {
            return new BaseResponse<>(mentoList);
        } catch (Exception e) {
            e.printStackTrace();
-           // BaseResponse는 직접 만드신 공통 응답 객체이므로, 실패 시 생성자에 맞게 수정해주세요.
            return new BaseResponse<>(BaseExceptionResponseStatus.FAILURE, null);
        }
    }
@@ -59,12 +73,11 @@ public class MatchupController {
        try {
            int result = matchupService.applyMentoMatchup(dto);
            
-           // [수정] Service의 반환값에 따른 분기 처리
            if (result > 0) {
                return new BaseResponse<>(BaseExceptionResponseStatus.SUCCESS, "멘토 신청을 성공적으로 완료했습니다.");
-           } else if (result == -1) { // 멘토 권한이 없는 경우
+           } else if (result == -1) { 
                return new BaseResponse<>(BaseExceptionResponseStatus.FAILURE, "멘토만 신청할 수 있는 기능입니다.");
-           } else { // 그 외 데이터베이스 insert 실패 등
+           } else { 
                return new BaseResponse<>(BaseExceptionResponseStatus.FAILURE, "멘토 신청에 실패했습니다. 다시 시도해주세요.");
            }
        } catch (Exception e) {

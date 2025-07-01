@@ -120,4 +120,19 @@ public class MatchUpDAO {
    public List<MatchupWaitingMentoDTO> selectWaitingMentoByMatchupId(int matchupId) {
        return sqlSession.selectList(namespace + "selectWaitingMentoByMatchupId", matchupId);
    }
+   
+   /* 요청 중인 멘토 중 선정된 멘토 해당 매치업 mento_id에 삽입 */
+   public int setMentoForMatchup(Map<String, Object> params) {
+       return sqlSession.update(namespace + "setMentoForMatchup", params);
+   }
+   
+   /* 나머지 대기중인 멘토 신청 내역 상태를 DELETE로 변경 */
+   public int deleteWaitingMentoApplications(int matchupId) {
+       return sqlSession.update(namespace + "deleteWaitingMentoApplications", matchupId);
+   }
+   
+   /* 닉네임, 이미지를 호출하기 위한 용도 */
+   public MatchupWaitingMentoDTO getApprovedMentoDetails(int memberId) {
+       return sqlSession.selectOne(namespace + "getApprovedMentoDetails", memberId);
+   }
 }

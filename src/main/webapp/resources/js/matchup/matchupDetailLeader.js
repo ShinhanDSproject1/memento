@@ -10,7 +10,6 @@ function closeMemberModal() {
     document.getElementById("member-modal").style.display = "none";
 }
 
-// [수정] openMentoModal 함수는 아래의 새로운 async 함수로 대체됩니다.
 function closeMentoModal() {
     document.getElementById("mento-modal").style.display = "none";
 }
@@ -34,18 +33,15 @@ function hideDeleteCompleteModalAndRedirect() {
 
 
 // ===================================================================
-// [신규 추가] '요청중인 멘토 보기' 버튼 클릭 시 실행되는 메인 로직
+// '요청중인 멘토 보기' 버튼 클릭 시 실행되는 메인 로직
 // ===================================================================
 async function openMentoListModal() {
     const matchupId = matchupDetail.matchupId; // JSP에서 이미 만들어 둔 JS 객체 활용
 
     try {
-        // 1. 서버에 멘토 리스트 요청
-        // Controller에서 getPendingMentos -> getWaitingMentoList 로 변경하셨으므로 URL을 수정했습니다.
         const response = await fetch(`${cpath}/matchup/getWaitingMentoList?matchupId=${matchupId}`);
         const result = await response.json();
 
-        // [수정] isSuccess가 아닌 code 값으로 성공 여부를 판단합니다.
         if (result.code !== 1000) { 
             alert(result.message || '멘토 목록을 불러오는데 실패했습니다.');
             return;
@@ -54,10 +50,8 @@ async function openMentoListModal() {
         const mentoList = result.result; // BaseResponse의 result 필드에서 데이터 추출
         const modalListElement = document.querySelector('#mento-modal .member-list');
         
-        // 2. 기존 목록을 초기화
         modalListElement.innerHTML = '';
 
-        // 3. 받아온 데이터로 목록 생성
         if (mentoList && mentoList.length > 0) {
             mentoList.forEach((mento, index) => {
                 const profileImg = mento.profileImageUrl || `${cpath}/resources/images/member-icon.png`;
@@ -77,7 +71,7 @@ async function openMentoListModal() {
             modalListElement.innerHTML = '<li class="no-members">요청중인 멘토가 없습니다.</li>';
         }
 
-        // 4. 모달창을 보여줌
+        // 모달창을 보여줌
         document.getElementById('mento-modal').style.display = 'flex';
 
     } catch (error) {
@@ -86,6 +80,60 @@ async function openMentoListModal() {
     }
 }
 
+// ===================================================================
+// [신규 추가] 멘토 승인하기 버튼 클릭 시 실행되는 로직
+// ===================================================================
+async function handleApproveMento() {
+    const selectedRadio = document.querySelector('input[name="selectedMember"]:checked');
+
+    if (!selectedRadio) {
+        alert('승인할 멘토를 선택해주세요.');
+        return;
+    }
+
+    const memberId = selectedRadio.value;
+    const matchupId = matchupDetail.matchupId;
+    
+    if (!confirm('해당 멘토를 최종 승인하시겠습니까? 승인 후에는 변경할 수 없습니다.')) {
+        return;
+    }
+
+    try {
+        const response = await fetch(`${cpath}/matchup/approveMento`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ matchupId, memberId })
+        });
+        const result = await response.json();
+
+        if (result.code !== 1000) {
+            alert(result.message || '멘토 승인에 실패했습니다.');
+            return;
+        }
+
+        // --- 승인 성공 후 UI 즉시 업데이트 ---
+        const approvedMento = result.result;
+        
+        // 1. 멘토 정보 업데이트
+        document.getElementById('mento-status-text').textContent = '멘토가 선정되었어요!';
+        document.getElementById('mento-profile-img').src = approvedMento.profileImageUrl || `${cpath}/resources/images/member-icon.png`;
+        document.getElementById('mento-nickname').textContent = approvedMento.nickname;
+
+        // 2. '요청중인 멘토 보기' 버튼 숨기기 또는 비활성화
+        const mentoListBtn = document.getElementById('select-mentolist-btn');
+        if (mentoListBtn) {
+            mentoListBtn.style.display = 'none';
+        }
+        
+        // 3. 모달 닫기
+        closeMentoModal();
+        alert('멘토가 최종 선정되었습니다!');
+
+    } catch (error) {
+        console.error('멘토 승인 중 오류 발생:', error);
+        alert('오류가 발생했습니다.');
+    }
+}
 
 // ===================================================================
 // 매치업 삭제 관련 AJAX 통신 함수
@@ -137,9 +185,16 @@ document.addEventListener("DOMContentLoaded", () => {
         openMemberBtn.addEventListener("click", openMemberModal);
     }
 
-    // [수정] 요청중인 멘토 보기 버튼에 새로운 함수 연결
+    // 요청중인 멘토 보기 버튼에 새로운 함수 연결
     const openMentoBtn = document.getElementById("select-mentolist-btn");
     if (openMentoBtn) {
         openMentoBtn.addEventListener("click", openMentoListModal);
     }
+    
+    // 멘토 승인하기 버튼 이벤트 리스너
+    const approveBtn = document.getElementById("approve-mento-btn");
+    if(approveBtn) {
+        approveBtn.addEventListener("click", handleApproveMento);
+    }
+    
 });

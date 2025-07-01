@@ -753,20 +753,13 @@
 
 .div15 {
 	color: #000000;
-	text-align: center;
+	text-align: left;
 	font-family: "D2Coding-Regular", sans-serif;
-	font-size: 10px;
+	font-size: 20px;
 	line-height: 150%;
 	letter-spacing: -0.023em;
 	font-weight: 400;
-	position: absolute;
-	left: 45px;
-	top: 114.41px;
-	width: 30px;
-	height: 13px;
-	display: flex;
-	align-items: center;
-	justify-content: center;
+	position: relative;
 }
 
 .icon-time-04 {

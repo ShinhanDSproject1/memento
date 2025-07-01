@@ -12,7 +12,7 @@
 
     <!-- 버튼 영역 -->
     <div class="modal-buttons-mento">
-      <button type="button" class="confirm-btn">승인하기</button>
+      <button type="button" class="confirm-btn" id="approve-mento-btn">승인하기</button>
       <button type="button" class="cancel-btn" onclick="closeMentoModal()">취소하기</button>
     </div>
   </div>
