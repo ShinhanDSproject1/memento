@@ -44,13 +44,13 @@
 
 	<update id="updatePaymentSuccess" parameterType="map">
 		UPDATE payment
-		SET step = 'SUCCESS', pay_at = SYSDATE, amount= #{cash}
+		SET step = 'SUCCESS', pay_at = #{payAt}, amount= #{cash}
 		WHERE order_id = #{orderId}
 	</update>
 
 	<update id="updateUserBalance" parameterType="map">
 		UPDATE userbalance
-		SET balance = balance + #{amount}, updated_at = SYSDATE
+		SET balance = balance + #{amount}, updated_at = #{updatedAt}
 		WHERE member_id = #{userId}
 	</update>
 

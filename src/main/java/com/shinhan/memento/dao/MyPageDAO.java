@@ -43,6 +43,7 @@ public class MyPageDAO implements MyPageDAOInterface{
 		Map<String, Object> paramMap = new HashMap<>();
 	    paramMap.put("orderId", orderId);
 	    paramMap.put("cash", cash);
+	    paramMap.put("payAt", new java.sql.Date(System.currentTimeMillis()));
 		return sqlSession.update(namespace + "updatePaymentSuccess", paramMap);
 	}
 
@@ -52,6 +53,7 @@ public class MyPageDAO implements MyPageDAOInterface{
 		Map<String, Object> paramMap = new HashMap<>();
 	    paramMap.put("userId", userId);
 	    paramMap.put("amount", amount);
+	    paramMap.put("updatedAt", new java.sql.Date(System.currentTimeMillis()));
 		return sqlSession.update(namespace + "updateUserBalance", paramMap);
 	}
 	

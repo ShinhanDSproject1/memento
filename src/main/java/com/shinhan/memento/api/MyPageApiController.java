@@ -28,24 +28,24 @@ public class MyPageApiController {
 
 	@PostMapping("/validate-cash")
     public BaseResponse<ValidateCashResponseDTO> validateCash(@RequestBody ValidateCashRequestDTO reqDTO,HttpSession session) {
-//		Member loginUser = (Member) session.getAttribute("loginUser");
-//		if (loginUser == null) throw new MypageException(BaseExceptionResponseStatus.NEED_LOGIN);
-//		int userId = loginUser.getMemberId();
+		Member loginUser = (Member) session.getAttribute("loginUser");
+		if (loginUser == null) throw new MypageException(BaseExceptionResponseStatus.NEED_LOGIN);
+		int userId = loginUser.getMemberId();
 		
 		//테스트용
-		int userId = 1;
+		//int userId = 1;
 		ValidateCashResponseDTO resDTO = myPageService.validateCash(reqDTO, userId);
         return new BaseResponse<>(resDTO);
     }
 	
 	@PostMapping("/confirm-cash")
 	public BaseResponse<ConfirmCashResponseDTO> confirmCash(@RequestBody ConfirmCashRequestDTO reqDTO, HttpSession session){
-//		Member loginUser = (Member) session.getAttribute("loginUser");
-//		if (loginUser == null) throw new MypageException(BaseExceptionResponseStatus.NEED_LOGIN);
-//		int userId = loginUser.getMemberId();
+		Member loginUser = (Member) session.getAttribute("loginUser");
+		if (loginUser == null) throw new MypageException(BaseExceptionResponseStatus.NEED_LOGIN);
+		int userId = loginUser.getMemberId();
 		
 		//테스트용
-		int userId = 1;
+		//int userId = 1;
 		
 		ConfirmCashResponseDTO resDTO = myPageService.confirmCash(reqDTO,userId);
         return new BaseResponse<>(resDTO);

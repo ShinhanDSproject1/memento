@@ -82,11 +82,37 @@ public class MemberService {
 					.profileImg(imageUrl).build();
 
 			insertMember(member);
+			member = findByEmail(email);
+			int insertSuccess =  insertUserbalance(member.getMemberId());
+			log.info(insertSuccess == 1 ? "insertUserbalance : sucess" : "insertUserbalance : fail");
+			
 		} else {
 			member.updateMemberProfile(imageUrl); // 기존 회원 프로필 최신화
 		}
 
 		return member;
+	}
+
+	private int insertUserbalance(int memberId) {
+		  String sql = "INSERT INTO userbalance ("
+	               + "userbalance_id, member_id, balance, updated_at, status"
+	               + ") VALUES (seq_userbalance_id.nextval, ?, ?, ?, ?)";
+		  
+		int result = 0;
+	    try (Connection conn = DBUtil.getConnection();
+	         PreparedStatement pstmt = conn.prepareStatement(sql)) {
+
+	        pstmt.setInt(1, memberId);                              // member_id
+	        pstmt.setInt(2, 0);                                     // balance 초기값
+	        pstmt.setDate(3, new java.sql.Date(System.currentTimeMillis())); // updated_at
+	        pstmt.setString(4, "ACTIVE");                           // status
+
+	        result = pstmt.executeUpdate();
+
+	    } catch (Exception e) {
+	        e.printStackTrace();
+	    }
+	    return result; 
 	}
 
 	public Member findByEmail(String email) {
