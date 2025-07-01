@@ -23,6 +23,7 @@ import com.shinhan.memento.dto.ConfirmCashRequestDTO;
 import com.shinhan.memento.dto.ConfirmCashResponseDTO;
 import com.shinhan.memento.dto.MyMatchupListResponseDTO;
 import com.shinhan.memento.dto.MyMentosListResponseDTO;
+import com.shinhan.memento.dto.MyPaymentListResponseDTO;
 import com.shinhan.memento.dto.MypageKeepgoingHistoryDTO;
 import com.shinhan.memento.dto.ValidateCashRequestDTO;
 import com.shinhan.memento.dto.ValidateCashResponseDTO;
@@ -104,6 +105,19 @@ public class MyPageApiController {
 			throw new MemberException(BaseExceptionResponseStatus.CANNOT_FOUND_MEMBER);
 		}
 		return new BaseResponse<>(memberKeepgoingService.showKeepgoingHistoryByMemberId(memberId));
+	}
+	
+	@GetMapping(value="/paymentlist", produces = "application/json")
+	public BaseResponse<List<MyPaymentListResponseDTO>> selectMyPaymentList(HttpSession session){
+		Member loginUser = (Member) session.getAttribute("loginUser");
+		if (loginUser == null) throw new MypageException(BaseExceptionResponseStatus.NEED_LOGIN);
+		int userId = loginUser.getMemberId();
+		List<MyPaymentListResponseDTO> myPaymentList = myPageService.selectMyPaymentList(userId);
+		if(myPaymentList.size() == 0) {
+			return new BaseResponse<>(null);
+		}
+		
+		return new BaseResponse<>(myPaymentList);
 	}
 
 

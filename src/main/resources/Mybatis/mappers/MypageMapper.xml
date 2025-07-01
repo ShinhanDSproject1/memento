@@ -121,15 +121,28 @@
 		and mm.status != 'delete'
 	</select>
 
-	<select id="selectMyMentosListById" parameterType="int" resultType="map">
+	<select id="selectMyPaymentListById" parameterType="int" resultType="map">
 	select 
 	p.order_id as orderId,
 	p.amount as amount,
 	p.matchup_id as matchupId,
 	p.mentos_id as mentosId,
 	p.keepgoing_id as keepgoingId,
-	p.status as paymentStatus
+	p.status as paymentStatus,
+	match.title as matchupTitle,
+	mentos.title as mentosTitle,
+	keep.name as keepgoingName,
 	from payment p
+	
+	<if test = 'p.matchup_id != 0'>
+		LEFT JOIN matchup match ON p.matchup_id = match.matchup_id
+	</if>
+	<if test = 'p.mentos_id != 0'>
+		LEFT JOIN mentos mentos ON p.mentos_id = mentos.mentos_id
+	</if>
+	<if test = 'p.keepgoing_id != 0'>
+		LEFT JOIN keepgoing keep ON p.keepgoing_id = keep.keepgoing_id
+	</if>
 	where p.member_id = #{memberId}
 	and p.status != 'delete'
 	</select>

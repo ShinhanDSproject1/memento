@@ -1,12 +1,15 @@
 package com.shinhan.memento.service;
 
+import java.math.BigDecimal;
 import java.nio.charset.StandardCharsets;
+import java.util.ArrayList;
 import java.util.Base64;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
+import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
@@ -23,8 +26,10 @@ import com.shinhan.memento.dto.ConfirmCashRequestDTO;
 import com.shinhan.memento.dto.ConfirmCashResponseDTO;
 import com.shinhan.memento.dto.MyMatchupListResponseDTO;
 import com.shinhan.memento.dto.MyMentosListResponseDTO;
+import com.shinhan.memento.dto.MyPaymentListResponseDTO;
 import com.shinhan.memento.dto.ValidateCashRequestDTO;
 import com.shinhan.memento.dto.ValidateCashResponseDTO;
+import com.shinhan.memento.mapper.MypageMapper;
 import com.shinhan.memento.model.BaseStatus;
 import com.shinhan.memento.model.CashProduct;
 import com.shinhan.memento.model.PayType;
@@ -39,6 +44,9 @@ public class MyPageService {
 
 	@Autowired
 	MyPageDAO myPageDAO;
+	
+	@Autowired
+	MypageMapper mypageMapper;
 
 	public ValidateCashResponseDTO validateCash(ValidateCashRequestDTO reqDTO, int userId) {
 
@@ -153,6 +161,29 @@ public class MyPageService {
 		
 		public List<MyMatchupListResponseDTO> selectJoinListByMemberId(Integer memberId){		
 			return myPageDAO.selectJoinListByMemberId(memberId);
+		}
+		
+		public List<MyPaymentListResponseDTO> selectMyPaymentList(Integer memberId){
+			List<Map<String, Object>> result = mypageMapper.selectMyPaymentList(memberId);
+			List<MyPaymentListResponseDTO> selectMyPaymentList = new ArrayList<MyPaymentListResponseDTO>();
+			
+			result.stream().forEach(data ->{
+			 	MyPaymentListResponseDTO dto = MyPaymentListResponseDTO.builder()
+			 	.orderId(((BigDecimal)data.get("ORDERID")).intValue())
+				.amount(((BigDecimal)data.get("AMOUT")).intValue())
+				.matchupId(((BigDecimal)data.get("MATCHUPID")).intValue())
+				.mentosId(((BigDecimal)data.get("MENTOSID")).intValue())
+				.keepgoingId(((BigDecimal)data.get("KEEPGOINGID")).intValue())
+				.paymentStatus((String)data.get("PAYMENTSTATUS"))
+				.matchupTitle((String)data.get("MATCHUPTITLE"))
+				.mentosTitle((String)data.get("MENTOSTITLE"))
+				.keepgoingName((String)data.get("KEEPGOINGNAME"))
+			 	.build();
+			 	
+			 	selectMyPaymentList.add(dto);
+			});
+			
+			return selectMyPaymentList;
 		}
 	
 	}

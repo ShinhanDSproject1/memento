@@ -2,14 +2,15 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <c:set var="cpath" value="${pageContext.servletContext.contextPath}" />	
-
+<script
+	src="${cpath}/resources/js/mypage/pay/payment.js"></script>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/mypage/pay/mypagePayStyle.css" />
 
 <div class="page-container">
 	<section id="payment-history" class="payment-history-section">
 		<div class="payment-history-container">
 			<h1 class="main-title">결제 / 사용 내역</h1>
-			<div class="payment-items-list">
+			<div id="payment-list" class="payment-items-list">
 				<article class="payment-item">
 					<div class="item-main-info">
 						<div class="item-row-1">
