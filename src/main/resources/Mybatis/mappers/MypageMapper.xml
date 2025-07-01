@@ -121,4 +121,17 @@
 		and mm.status != 'delete'
 	</select>
 
+	<select id="selectMyMentosListById" parameterType="int" resultType="map">
+	select 
+	p.order_id as orderId,
+	p.amount as amount,
+	p.matchup_id as matchupId,
+	p.mentos_id as mentosId,
+	p.keepgoing_id as keepgoingId,
+	p.status as paymentStatus
+	from payment p
+	where p.member_id = #{memberId}
+	and p.status != 'delete'
+	</select>
+
 </mapper>
