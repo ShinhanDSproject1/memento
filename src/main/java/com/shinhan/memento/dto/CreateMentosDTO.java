@@ -1,6 +1,6 @@
 package com.shinhan.memento.dto;
 
-import java.sql.Date;
+import org.springframework.web.multipart.MultipartFile;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -15,7 +15,7 @@ public class CreateMentosDTO {
 	
 	private String title;
 	private String simpleContent; // 간단 소개글 
-	private String image;
+	private MultipartFile image;
 	private int mentoId; // 멘토스 개설하는 멤버 식별자 
 	private int minMember;
 	private int maxMember;
