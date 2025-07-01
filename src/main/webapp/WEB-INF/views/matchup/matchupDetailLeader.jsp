@@ -16,6 +16,8 @@
 <link rel="stylesheet" href="${cpath}/resources/css/vars.css">
 </head>
 <body>
+<%@ include file="../common/logout_header.jsp"%>
+<div class="container">
 	<jsp:include page="/WEB-INF/views/matchup/memberListModal.jsp" />
 	<jsp:include page="/WEB-INF/views/matchup/mentoListModal.jsp" />
 	<jsp:include page="/WEB-INF/views/matchup/deleteConfirmModal.jsp" />
@@ -151,7 +153,9 @@
 		</div>
 		<div class="bottom-area">
 			<div class="line-10"></div>
+			<br style="border: 0.3px solid #ccc; margin: 40px 0;">
 			<div class="div11">비슷한 다른 매치업 둘러보기</div>
+
 			<div class="frame-3770">
 				<a href="/match-id=12" class="card-link">
 					<div class="frame-3769">
@@ -292,6 +296,7 @@
 			</div>
 		</div>
 	</div>
+</div>
 <script>
 	const cpath = '${cpath}';
 	const matchupDetail = {

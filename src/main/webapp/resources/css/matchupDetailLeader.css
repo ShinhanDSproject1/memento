@@ -1,7 +1,13 @@
 .div, .div * {
 	box-sizing: border-box;
 }
-
+.container {
+  padding-top: 80px; /* ← 실제 헤더 높이로 조절 */
+  box-sizing: border-box;
+}
+body {
+  box-sizing: border-box;
+}
 .div {
 	background: #ffffff;
 	padding: 0px 250px 0px 250px;
@@ -14,7 +20,6 @@
 	position: relative;
 	overflow: hidden;
 }
-
 .top-bar {
 	background: rgba(231, 247, 253, 0.54);
 	padding: 44px 200px 44px 200px;
@@ -506,7 +511,7 @@
 	letter-spacing: -0.011000000000000001em;
 	font-weight: 500;
 	position: absolute;
-	left: 55px;
+	left: 355px;
 	top: 75.16px;
 	width: 71px;
 	height: 81.66px;
