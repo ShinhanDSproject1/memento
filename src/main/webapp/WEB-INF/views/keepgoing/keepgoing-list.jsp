@@ -41,7 +41,7 @@
 </head>
 
 <body class="container">
-	<%@ include file="../common/header.jsp"%>
+
 	<section class="filter">
 		<div class="filter-item">
 			<button type="button" id="location-btn" data-bs-toggle="modal"

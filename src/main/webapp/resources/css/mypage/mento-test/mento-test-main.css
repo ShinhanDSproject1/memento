@@ -11,6 +11,8 @@ body {
 .frame-3706 {
   background: #ffffff;
   height: 1025px;
+  position: relative;
+  top : -10px;
 }
 .frame-3705 {
   display: flex;
@@ -66,7 +68,7 @@ body {
 .rectangle-311 {
   border-style: solid;
   border-color: #000000;
-  border-width: 5px;
+  border-width: 1px 5px 1px 5px;
   width: 993px;
   height: 883px;
   position: absolute;
