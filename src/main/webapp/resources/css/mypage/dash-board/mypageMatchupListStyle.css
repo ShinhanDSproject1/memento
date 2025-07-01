@@ -24,7 +24,6 @@ a:hover {
 	flex: 1;
 	box-sizing: border-box;
 }
-
 /* ==========================================================================
    Matchup List Section
    ========================================================================== */
@@ -33,7 +32,9 @@ a:hover {
 	box-sizing: border-box;
 	padding:40px;
 }
-
+.matchup-list{
+	padding:40px;
+}
 .matchup-list__container {
 	max-width: 964px;
 	margin: 0 auto;
