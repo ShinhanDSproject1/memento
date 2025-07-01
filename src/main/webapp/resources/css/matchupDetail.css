@@ -1,6 +1,7 @@
 .div, .div * {
 	box-sizing: border-box;
 }
+
 /* 1. html/body에 스크롤 허용 */
 html, body {
   margin: 0;
@@ -24,11 +25,18 @@ html, body {
   padding-top: 80px; /* header 높이와 동일하게 */
   box-sizing: border-box;
 }
+
 .div {
-  padding: 0 20px;
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
+	background: #ffffff;
+	padding: 0px 250px 0px 250px;
+	display: flex;
+	flex-direction: column;
+	gap: 10px;
+	align-items: flex-start;
+	justify-content: flex-start;
+	height: 1856px;
+	position: relative;
+	overflow: hidden;
 }
 
 .top-bar {
@@ -326,6 +334,7 @@ html, body {
 	justify-content: flex-start;
 	align-self: stretch;
 	flex-shrink: 0;
+	height: 1120px;
 	position: relative;
 }
 
@@ -336,6 +345,7 @@ html, body {
 	align-items: center;
 	justify-content: center;
 	flex: 1;
+	height: 1105px;
 	position: relative;
 }
 
@@ -367,7 +377,7 @@ html, body {
 	text-align: left;
 	font-family: "D2Coding-Regular", sans-serif;
 	font-size: 20px;
-	font-weight: 500;
+	font-weight: 400;
 	position: relative;
 	align-self: stretch;
 }
@@ -576,7 +586,7 @@ html, body {
 	font-size: 20px;
 	line-height: 150%;
 	letter-spacing: -0.023em;
-	font-weight: 420;
+	font-weight: 400;
 	position: relative;
 }
 
@@ -1092,16 +1102,6 @@ html, body {
 	overflow: visible;
 }
 
-
-/* 반응형 웹 */
- .div {
-  padding: 0 20px;   /* 모바일·태블릿 기본 여백 */
-}
-
-@media (min-width: 1440px) {
-  .div {
-    padding: 0 250px;  /* 데스크탑 화면에서 양쪽 250px */
-  }
 .apply-btn {
   background: #0070d1;
   border-radius: 10px;
