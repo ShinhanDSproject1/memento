@@ -7,10 +7,12 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 public class DBUtil {
+	
 	public static Connection getConnection() {
 		Connection conn = null;
 		String url = "jdbc:oracle:thin:@localhost:1521:xe";
 		String userid = "memento", userpass = "memento";
+		
 		try {
 			Class.forName("oracle.jdbc.driver.OracleDriver");
 			conn = DriverManager.getConnection(url, userid, userpass);
@@ -21,6 +23,7 @@ public class DBUtil {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		
 		return conn;
 	}
 	
@@ -37,7 +40,8 @@ public class DBUtil {
 			e.printStackTrace();
 		}
 	}
-
+	
+	
 	public static String buildDebugSQL(String sqlTemplate, Object... params) {
 	    for (Object param : params) {
 	        String val = (param instanceof String) ? "'" + param + "'" : String.valueOf(param);
@@ -45,4 +49,11 @@ public class DBUtil {
 	    }
 	    return sqlTemplate;
 	}
+	
 }
+
+
+
+
+
+
