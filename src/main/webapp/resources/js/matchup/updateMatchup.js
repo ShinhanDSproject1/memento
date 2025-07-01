@@ -1,9 +1,4 @@
-/**
- * 파일명: updateMatchup.js
- * 설명: 매치업 수정 페이지의 모든 UI 이벤트 및 데이터 통신을 처리합니다.
- */
-
-// 페이지의 모든 HTML 요소가 로드된 후 스크립트를 실행합니다.
+// 페이지의 모든 HTML 요소가 로드된 후 스크립트를 실행
 document.addEventListener("DOMContentLoaded", () => {
     initializeForm();
     setupEventListeners();
@@ -15,16 +10,14 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 
-/**
- * 수정 페이지 로드 시, 기존 데이터로 UI 요소들을 설정하는 함수
- */
+// 수정 페이지 로드 시, 기존 데이터로 UI 요소들을 설정하는 함수
 function initializeForm() {
     if (typeof matchupDetail === 'undefined') {
         console.error("matchupDetail 객체가 JSP에서 전달되지 않았습니다.");
         return;
     }
 
-    // 1. 커스텀 드롭다운들의 현재 값을 화면에 표시합니다.
+    // 1. 커스텀 드롭다운들의 현재 값을 화면에 표시
     updateDropdownUI('languageDropdown', 'selectedLanguage', matchupDetail.languageId);
     updateDropdownUI('categoryDropdown', 'selectedCategory', matchupDetail.categoryId);
     updateDropdownUI('sessionCountDropdown', 'selectedSessionCount', matchupDetail.totalCount); // totalCount 사용
@@ -36,54 +29,55 @@ function initializeForm() {
         updateDropdownUI(typeDropdowns[2].querySelector('.dropdown-list'), typeDropdowns[2].querySelector('.selected-value-text'), matchupDetail.matchTypeThird);
     }
 
-    // 2. '멘토 유무' 토글 버튼의 상태를 설정합니다. (CSS에 맞게 selected 사용)
+    // 2. '멘토 유무' 토글 버튼의 상태를 설정
     const mentoBtns = document.querySelectorAll('.mento-btn');
     mentoBtns.forEach(btn => {
-        btn.classList.remove('active'); // active가 아니라 selected일 수도 있으나, 둘다 제거
+        btn.classList.remove('active'); 
         btn.classList.remove('selected');
         if (String(btn.dataset.value) === String(matchupDetail.hasMento)) {
             btn.classList.add('active'); // mento-btn은 active를 사용하므로 유지
         }
     });
 
-    // 3. '활동 요일' 버튼들의 상태를 설정합니다. (CSS에 맞게 selected 사용)
+    // 3. '활동 요일' 버튼들의 상태를 설정
     const dayBtns = document.querySelectorAll('.dayofweek .day');
     const selectedDaysArray = (matchupDetail.selectedDays || "").trim().split(',');
     
     dayBtns.forEach(btn => {
-        btn.classList.remove('selected'); // 'active'가 아닌 'selected'로 초기화
+        btn.classList.remove('selected'); 
         if (selectedDaysArray.includes(btn.dataset.day)) {
-            btn.classList.add('selected'); // 'active'가 아닌 'selected'로 추가
+            btn.classList.add('selected');
         }
     });
 }
 
 
-/**
- * 드롭다운의 현재 값을 UI에 반영하는 헬퍼 함수
- */
+// 드롭다운의 현재 값을 UI에 반영하는 헬퍼 함수
 function updateDropdownUI(list, displayElement, value) {
     const ul = (typeof list === 'string') ? document.getElementById(list) : list;
     const display = (typeof displayElement === 'string') ? document.getElementById(displayElement) : displayElement;
 
-    if (!ul || !display || value === null || value === '' || typeof value === 'undefined') {
-        if(display) display.textContent = '선택';
-        return;
-    }
+    if (!ul || !display) return;
 
     const selectedLi = ul.querySelector(`li[data-value="${value}"]`);
-    
+
     if (selectedLi) {
         display.textContent = selectedLi.textContent;
     } else {
         display.textContent = '선택';
     }
+
+    const wrapper = ul.closest('.field-input-wrapper');
+    if (wrapper) {
+        const hiddenInput = wrapper.querySelector('input[type="hidden"]');
+        if (hiddenInput) {
+            hiddenInput.value = value;
+        }
+    }
 }
 
 
-/**
- * 수정하기 버튼 클릭 시, 서버로 데이터를 전송하는 메인 함수
- */
+// 수정하기 버튼 클릭 시, 서버로 데이터를 전송하는 메인 함수
 async function handleUpdate() {
     const data = collectFormData();
     if (!data.title || !data.content) {
@@ -97,41 +91,33 @@ async function handleUpdate() {
             body: JSON.stringify(data)
         });
 
-        // 서버의 응답을 JSON 형태로 파싱합니다.
+        // 서버의 응답을 JSON 형태로 파싱
         const result = await response.json();
 
         // 서버로부터 성공 응답(code: 1000)을 받았을 경우
         if (result.code === 1000) {
-            // 1. 올바른 ID로 모달 요소를 찾습니다.
             const confirmModal = document.getElementById("editConfirmModal");
             
             if (confirmModal) {
-                // 2. 모달을 화면에 표시합니다. 'hidden' 클래스를 제거합니다.
                 confirmModal.classList.remove('hidden');
 
-                // 3. 모달의 '확인' 버튼을 찾아 클릭 이벤트를 설정합니다.
                 const closeBtn = confirmModal.querySelector('.modal-close-btn');
                 if (closeBtn) {
                     closeBtn.onclick = () => {
-                        // 클릭 시, 수정된 매치업의 상세 페이지로 이동합니다.
                         window.location.href = `/memento/matchup/matchupDetail?id=${data.matchupId}`;
                     };
                 }
             }
         } else {
-            // 서버로부터 실패 응답을 받았을 경우, 에러 메시지를 표시합니다.
             alert(result.message || '수정에 실패했습니다.');
         }
     } catch (error) {
-        // 네트워크 오류 등 fetch 요청 자체에 실패했을 경우
         console.error('Error:', error);
         alert('오류가 발생했습니다.');
     }
 }
 
-/**
- * 폼의 모든 입력 값을 수집하여 서버로 보낼 객체 형태로 반환하는 함수
- */
+// 폼의 모든 입력 값을 수집하여 서버로 보낼 객체 형태로 반환하는 함수
 function collectFormData() {
     const roadAddr = document.getElementById('roadAddress').value;
     const addrParts = roadAddr.split(' ');
@@ -165,11 +151,9 @@ function collectFormData() {
 }
 
 
-/**
- * 드롭다운, 버튼 등 모든 UI 요소에 클릭 이벤트를 설정하는 함수
- */
+// 드롭다운, 버튼 등 모든 UI 요소에 클릭 이벤트를 설정하는 함수
 function setupEventListeners() {
-    // 1. 모든 커스텀 드롭다운 이벤트
+
     document.querySelectorAll('.dropdown-trigger-box').forEach(box => {
         box.addEventListener('click', (e) => {
             document.querySelectorAll('.dropdown-list').forEach(list => {
@@ -191,8 +175,7 @@ function setupEventListeners() {
         });
     });
 
-    // ========= [최종 수정] '활동 요일' 클릭 이벤트 수정 =========
-    // 3. 요일 버튼 클릭 시 'selected' 클래스 토글 및 hidden input 값 변경
+    // 요일 버튼 클릭 시 'selected' 클래스 토글 및 hidden input 값 변경
     document.querySelectorAll('.dayofweek .day').forEach(day => {
         day.addEventListener('click', (e) => {
             e.target.classList.toggle('selected'); // 'active' -> 'selected'
@@ -203,9 +186,8 @@ function setupEventListeners() {
             selectedDaysInput.value = activeDays.join(',');
         });
     });
-    // =======================================================
-
-    // 4. 멘토 유무 버튼 클릭 이벤트 (이 버튼은 CSS에서 active를 사용하므로 그대로 둡니다)
+  
+    // 멘토 유무 버튼 클릭 이벤트
     document.querySelectorAll('.mento-btn').forEach(btn => {
         btn.addEventListener('click', (e) => {
             const group = e.target.closest('.mento-toggle-group');
@@ -225,9 +207,7 @@ function setupEventListeners() {
     });
 }
 
-/**
- * 다음 주소 API 실행 함수
- */
+// 다음 주소 API 실행 함수
 function execDaumPostcode() {
     new daum.Postcode({
         oncomplete: function(data) {

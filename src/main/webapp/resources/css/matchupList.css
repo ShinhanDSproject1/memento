@@ -1307,16 +1307,19 @@ span {
 .div17 {
 	color: #000000;
 	text-align: center;
-	font-family: "AbhayaLibreExtraBold-Regular", sans-serif;
-	font-size: 16px;
+	font-family: "D2Coding-Regular", sans-serif;
+	font-size: 10px;
 	line-height: 150%;
 	letter-spacing: -0.023em;
 	font-weight: 400;
 	position: absolute;
-	left: 79px;
-	top: 340.35px;
-	width: 260px;
-	height: 24.43px;
+	left: 45px;
+	top: 114.41px;
+	width: 30px;
+	height: 13px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
 }
 
 .rectangle-604 {
@@ -5396,6 +5399,9 @@ span {
 
 .badge-mentor {
   background-color: #4A90E2;
+}
+.badge-mentor-completed {
+  background-color: #9dadc1;
 }
 
 /* 카테고리 필터 검색 관련 */

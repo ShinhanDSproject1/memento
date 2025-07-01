@@ -3,6 +3,7 @@ package com.shinhan.memento.service;
 import java.nio.charset.StandardCharsets;
 import java.util.Base64;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
@@ -20,6 +21,7 @@ import com.shinhan.memento.common.response.status.BaseExceptionResponseStatus;
 import com.shinhan.memento.dao.MyPageDAO;
 import com.shinhan.memento.dto.ConfirmCashRequestDTO;
 import com.shinhan.memento.dto.ConfirmCashResponseDTO;
+import com.shinhan.memento.dto.MyMentosListResponseDTO;
 import com.shinhan.memento.dto.ValidateCashRequestDTO;
 import com.shinhan.memento.dto.ValidateCashResponseDTO;
 import com.shinhan.memento.model.BaseStatus;
@@ -141,7 +143,11 @@ public class MyPageService {
 		} catch (Exception e) {
 			e.printStackTrace();
 			return false; // 승인 실패 처리
+		}	
+	}
+    
+		public List<MyMentosListResponseDTO> selectMyMentosListById(Integer memberId){
+			return myPageDAO.selectMyMentosListById(memberId);
 		}
 	
 	}
-}

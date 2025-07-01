@@ -13,6 +13,7 @@
       <result property="languageId" column="language_id" />
       <result property="languageName" column="language_name" />
       <result property="leaderId" column="leader_id" />
+      <result property="mentoId" column="mento_id"/>
       <result property="title" column="title" />
       <result property="matchupCount" column="matchup_count" />
       <result property="startDay" column="start_day" />
@@ -56,6 +57,8 @@
       <result property="matchTypeThirdName" column="match_type_third_name"/>
       <result property="hasMento" column="has_mento" />
       <result property="selectedDays" column="selected_days" />
+      <result property="mentoNickname" column="mento_nickname" />
+      <result property="mentoProfileImageUrl" column="mento_profile_image_url" />
    </resultMap>
 
    <resultMap id="matchupModelResultMap" type="com.shinhan.memento.model.MatchUp">
@@ -75,7 +78,8 @@
           m.matchup_id, 
           m.category_id, 
           c.category_name AS category_name,
-          m.language_id, 
+          m.language_id,
+          m.mento_id, 
           l.language_name AS language_name,
           m.selected_days, 
           m.region_group, 
@@ -96,7 +100,7 @@
       LEFT JOIN language l ON m.language_id = l.language_id
       <where>
           m.status = 'ACTIVE'
-          <if test="regionGroup != null and regionGroup != ''"> AND m.region_group = #{regionGroup} </if>
+          <if test="regionGroup != null and regionGroup != ''"> AND m.region_group LIKE CONCAT(#{regionGroup}, '%')  </if>
           <if test="categoryId != null"> AND m.category_id = #{categoryId} </if>
           <if test="selectedDays != null and selectedDays != ''"> AND m.selected_days LIKE '%' || #{selectedDays} || '%' </if>
           <if test="languageId != null"> AND m.language_id = #{languageId} </if>
@@ -133,13 +137,16 @@
            m.match_type_third, 
            mt3.match_type_name AS match_type_third_name,
            m.has_mento, 
-           m.selected_days
+           m.selected_days,
+           approved_mento.NICKNAME AS mento_nickname,
+           approved_mento.PROFILE_IMAGE_URL AS mento_profile_image_url
        FROM matchup m
        LEFT JOIN category c ON m.category_id = c.category_id
        LEFT JOIN language l ON m.language_id = l.language_id
        LEFT JOIN match_type mt1 ON m.match_type_first = mt1.match_type_id
        LEFT JOIN match_type mt2 ON m.match_type_second = mt2.match_type_id
        LEFT JOIN match_type mt3 ON m.match_type_third = mt3.match_type_id
+       LEFT JOIN MEMBER approved_mento ON m.mento_id = approved_mento.MEMBER_ID
        WHERE m.matchup_id = #{matchupId}
        AND m.status = 'ACTIVE'
    </select>
@@ -355,4 +362,90 @@
       </set>
       WHERE matchup_id = #{matchupId}
    </update>
+   
+   <!-- 멘토 신청하기 (멘토 기준) -->
+   <insert id="applyMento" parameterType="com.shinhan.memento.dto.MatchupApplyMentoDTO">
+   		insert into WAITINGMENTO_MATCHUP (
+   			WAIT_MENTO_ID,
+   			MEMBER_ID,
+   			MATCHUP_ID,
+   			CREATED_AT,
+   			STATUS
+   		) VALUES (
+   			SEQ_WAITINGMENTO_MATCHUP_ID.NEXTVAL,
+   			#{memberId},
+   			#{matchupId},
+   			SYSDATE,
+            'ACTIVE'
+   		)
+   </insert>
+   
+   <!-- 접속 유저의 유저타입 확인 -->
+   <select id="findUserTypeById" parameterType="int" resultType="com.shinhan.memento.model.UserType">
+    SELECT 
+        USER_TYPE 
+    FROM 
+        MEMBER 
+    WHERE 
+        MEMBER_ID = #{memberId}
+	</select>
+    
+    <!-- 접속 유저가 해당 메치업의 멘토를 신청했는지 여부 -->
+    <select id="checkMentoApplicationExists" parameterType="map" resultType="int">
+    SELECT 
+        COUNT(*)
+    FROM 
+        WAITINGMENTO_MATCHUP
+    WHERE 
+        MEMBER_ID = #{memberId} AND MATCHUP_ID = #{matchupId} AND STATUS = 'ACTIVE'
+	</select>
+    
+    <!-- 오청 중인 멘토 리스트업 -->
+    <select id="selectWaitingMentoByMatchupId" parameterType="int" resultType="com.shinhan.memento.dto.MatchupWaitingMentoDTO">
+    SELECT
+        w.MEMBER_ID        AS memberId,
+        m.NICKNAME         AS nickname,
+        m.PROFILE_IMAGE_URL AS profileImageUrl
+    FROM
+        WAITINGMENTO_MATCHUP w
+    JOIN
+        MEMBER m ON w.MEMBER_ID = m.MEMBER_ID
+    WHERE
+        w.MATCHUP_ID = #{matchupId}
+        AND w.STATUS = 'ACTIVE'
+	</select>
+	
+	<!-- 매칭이 끝난 매치업의 요청 멘토들은 DELETE 처리 -->
+	<update id="deleteWaitingMentoApplications" parameterType="int">
+    UPDATE
+        WAITINGMENTO_MATCHUP
+    SET
+        STATUS = 'DELETE'
+    WHERE
+        MATCHUP_ID = #{matchupId}
+        AND STATUS = 'ACTIVE'
+	</update>
+	
+	<!-- 선정된 멘토는 해당 매치업의 mento_id에 삽입 -->
+	<update id="setMentoForMatchup" parameterType="map">
+	    UPDATE MATCHUP
+	    SET
+	        MENTO_ID = #{memberId},
+	        UPDATED_AT = SYSDATE
+	    WHERE
+	        MATCHUP_ID = #{matchupId}
+	</update>
+    
+    <!-- 회원의 닉네임, 이미지를 호출하기 위한 용도 -->
+    <select id="getApprovedMentoDetails" parameterType="int" resultType="com.shinhan.memento.dto.MatchupWaitingMentoDTO">
+    SELECT
+        MEMBER_ID         AS memberId,
+        NICKNAME          AS nickname,
+        PROFILE_IMAGE_URL AS profileImageUrl
+    FROM
+        MEMBER
+    WHERE
+        MEMBER_ID = #{memberId}
+	</select>
+    
 </mapper>
