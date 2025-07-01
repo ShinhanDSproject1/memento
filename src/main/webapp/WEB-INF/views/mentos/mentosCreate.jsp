@@ -2,6 +2,8 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <c:set var="cpath" value="${pageContext.servletContext.contextPath}" />
+<c:set var="mentoId" value="${sessionScope.loginUser.memberId}" />
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -30,6 +32,9 @@
 <jsp:include page="/WEB-INF/views/mentos/submitPopup.jsp" />
 </head>
 <body>
+	<script>
+	  const mentoId = "${mentoId}";
+	</script>
 	<section class="container">
 		<div class="page-title">멘토스 만들기</div>
 		<form action="${cpath}/mentos/create" method="post">
@@ -59,7 +64,7 @@
 						</div>
 						<div class="main-selection">
 							<div class="title">최대 수강 인원</div>
-							<div class="main-selection-border">
+							<div class="day-main-selection-border">
 								<input type="number" id="maxMember" name="maxMember" min="1"
 									class="number-input" />
 							</div>
@@ -68,14 +73,14 @@
 					<div class="flexrow content-line flexgap-20">
 						<div class="main-selection">
 							<div class="title">시작일</div>
-							<div class="main-selection-border">
+							<div class="day-main-selection-border">
 								<input type="date" id="startDateInput" name="startDate"
 									class="date-input" />
 							</div>
 						</div>
 						<div class="main-selection">
 							<div class="title">마감일</div>
-							<div class="main-selection-border">
+							<div class="day-main-selection-border">
 								<input type="date" id="endDateInput" name="endDate"
 									class="date-input" />
 							</div>
