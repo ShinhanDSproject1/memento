@@ -5,6 +5,7 @@ import java.util.List;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,6 +17,7 @@ import com.shinhan.memento.common.response.BaseResponse;
 import com.shinhan.memento.common.response.status.BaseExceptionResponseStatus;
 import com.shinhan.memento.dto.ConfirmCashRequestDTO;
 import com.shinhan.memento.dto.ConfirmCashResponseDTO;
+import com.shinhan.memento.dto.MyMatchupListResponseDTO;
 import com.shinhan.memento.dto.MyMentosListResponseDTO;
 import com.shinhan.memento.dto.ValidateCashRequestDTO;
 import com.shinhan.memento.dto.ValidateCashResponseDTO;
@@ -60,6 +62,18 @@ public class MyPageApiController {
 	@GetMapping("/page7")
 	public BaseResponse<List<MyMentosListResponseDTO>> selectMyMentosListById(@RequestParam Integer memberId){
 		return new BaseResponse<>(myPageService.selectMyMentosListById(memberId));
+	}
+	
+	@GetMapping(value="/page6/{memberId}", produces = "application/json")
+	public BaseResponse<List<MyMatchupListResponseDTO>> selectJoinListByMemberId(
+				@PathVariable Integer memberId
+			){
+		List<MyMatchupListResponseDTO> memberMatchUpList = myPageService.selectJoinListByMemberId(memberId);
+		if(memberMatchUpList.size() == 0) {
+			return new BaseResponse<>(null);
+		}
+		
+		return new BaseResponse<>(memberMatchUpList);
 	}
 
 

@@ -21,6 +21,7 @@ import com.shinhan.memento.common.response.status.BaseExceptionResponseStatus;
 import com.shinhan.memento.dao.MyPageDAO;
 import com.shinhan.memento.dto.ConfirmCashRequestDTO;
 import com.shinhan.memento.dto.ConfirmCashResponseDTO;
+import com.shinhan.memento.dto.MyMatchupListResponseDTO;
 import com.shinhan.memento.dto.MyMentosListResponseDTO;
 import com.shinhan.memento.dto.ValidateCashRequestDTO;
 import com.shinhan.memento.dto.ValidateCashResponseDTO;
@@ -148,6 +149,10 @@ public class MyPageService {
     
 		public List<MyMentosListResponseDTO> selectMyMentosListById(Integer memberId){
 			return myPageDAO.selectMyMentosListById(memberId);
+		}
+		
+		public List<MyMatchupListResponseDTO> selectJoinListByMemberId(Integer memberId){		
+			return myPageDAO.selectJoinListByMemberId(memberId);
 		}
 	
 	}
