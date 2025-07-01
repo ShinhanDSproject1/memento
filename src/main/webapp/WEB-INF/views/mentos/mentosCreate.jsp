@@ -19,6 +19,8 @@
 	rel="stylesheet"
 	integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
 	crossorigin="anonymous">
+<link rel="stylesheet"
+	href="${cpath}/resources/css/mainpage/notificationModal.css">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>멘토스 생성하기</title>
@@ -32,8 +34,10 @@
 <jsp:include page="/WEB-INF/views/mentos/submitPopup.jsp" />
 </head>
 <body>
+	<%@ include file="../common/logout_header.jsp"%>
+	<%@ include file="../mainpage/notificationModal.jsp" %>
 	<script>
-	  const mentoId = "${mentoId}";
+		const mentoId = "${mentoId}";
 	</script>
 	<section class="container">
 		<div class="page-title">멘토스 만들기</div>
@@ -268,6 +272,8 @@
 		</form>
 	</section>
 	<script src="${cpath}/resources/js/mentosCreate.js"></script>
+	<script src="${cpath}/js/notification.js"></script>
+<script src="${cpath}/resources/js/header.js"></script>
 </body>
 
 </html>
