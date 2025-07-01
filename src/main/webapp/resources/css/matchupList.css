@@ -39,36 +39,30 @@ overflow: visible !important;
   background:#fff;
   z-index:1000;
 }
+
 .div {
-  display: grid;
-  justify-content: center;
-  align-items: center;       /* 세로 가운데 */
-  align-items: flex-start;
-  width:100%;
-  
+    display: flex; /* grid 대신 flex 사용 */
+    justify-content: center; /* 수평 중앙 정렬 */
+    width: 100%;
 }
 
 .frame-3657 {
-    background: #ffffff;
     display: flex;
     flex-direction: column;
-    width: 1700px;
-    height: 80%;
-    position: relative;
-    z-index: 1;
-   /*  margin-top:-100px; */
-/*     margin: -100 0 0 0;  */
+    align-items: center; /* 자식 요소들을 수평 중앙 정렬 */
+    width: 100%;
+    max-width: 1400px; /* 콘텐츠의 최대 너비를 지정하여 화면이 너무 커도 보기 좋게 함 */
     margin: 0 auto;
-       
+    padding: 0 20px; /* 좌우 여백 */
 }
 
 .frame-390 {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;  /* 필터는 왼쪽, 버튼은 오른쪽 끝 */
-  width: 1550px;                     /* wrapper 가 이미 max-width+padding 으로 중앙을 잡아줌 */
-  margin-bottom: 30px;
-  gap : 20px;
+    display: flex;
+    align-items: center;
+    /* [수정] space-between으로 필터와 버튼을 양 끝으로 보냅니다. */
+    justify-content: space-between; 
+    width: 100%; /* 부모(.frame-3657)의 너비를 꽉 채웁니다. */
+    margin-bottom: 30px;
 }
 
 span {
@@ -92,14 +86,10 @@ span {
 }
 
 .detail-select {
-	display: flex;
-	flex-direction: row;
-	gap: 15px;
-	align-items: center;
-	justify-content: flex-start;
-	flex-shrink: 0;
-	position: relative;
-	width : 1500px;
+    display: flex;
+    flex-direction: row;
+    gap: 15px; /* 필터 사이의 간격 */
+    align-items: center;
 }
 
 .detail-select-li {
@@ -272,48 +262,42 @@ span {
 
 /* 1. 버튼 리셋 + flex 중앙 정렬 */
 button.group-389 {
-  all: unset;
-  box-sizing: border-box;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 210px;
-  height: 48px;
-  border-radius: 10px;
-  background-color: #0070d1;
-  color: #fff;
-  font-weight: 500;
-  font-size: 15px;
-  cursor: pointer;
-
-  /* ↓ 오른쪽 끝으로 밀기 */
-  margin-left: auto;
-
-  transition: background-color 0.2s ease, border-color 0.2s ease;
+    all: unset;
+    box-sizing: border-box;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 210px;
+    height: 48px;
+    border-radius: 10px;
+    background-color: #0070d1;
+    color: #fff;
+    font-weight: 500;
+    font-size: 15px;
+    cursor: pointer;
+    flex-shrink: 0; /* 줄어들지 않게 함 */
+    /* [삭제] margin-left: auto; 속성 제거 */
+    transition: background-color 0.2s ease;
 }
 
 /* 2. hover 상태 */
 button.group-389:hover {
-  background-color: #005bb5;
-  border: 1px solid #005bb5;
+    background-color: #005bb5;
 }
 
 .frame-3694 {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(320px, 1fr));
-  /* ↓ 여기 gap 을 조절하세요 */
-  column-gap: 130px;  /* 열 간격 */
-  row-gap:    25px;  /* 행 간격 */
-  /* 중앙 정렬 & 최대 너비 */
-  max-width: 1280px;
-  margin: 30px auto 0;
-  justify-items: start;
+    display: grid;
+    width: 100%;
+    /* [수정] 열의 최소/최대 크기를 지정하고, 간격을 좀 더 유연하게 조절 */
+    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+    gap: 40px; /* 카드 사이의 간격 */
+    margin-top: 30px;
 }
 
 
 .matchup-cardview {
-	width: calc(32% - 20px); /* 너무 좁지 않게! */
-	min-width: 320px;
+	width: 100%; /* 너무 좁지 않게! */
+	min-width: initial;
 	padding: 10px 24px;
 	margin-bottom: 40px;
 	box-sizing: border-box;
@@ -744,6 +728,10 @@ button.group-389:hover {
 
 .badge-mentor {
   background-color: #4A90E2;
+}
+
+.badge-mentor-completed {
+  background-color: #9DADC1;
 }
 
 /* 카테고리 필터 검색 관련 */
