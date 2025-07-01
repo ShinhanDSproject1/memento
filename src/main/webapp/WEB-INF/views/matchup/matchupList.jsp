@@ -112,7 +112,14 @@
                           </c:choose>
                       </c:if>
                       <c:if test="${matchup.hasMento}">
-                          <div class="badge badge-mentor">멘토모집중</div>
+						<c:choose>
+						  <c:when test="${matchup.mentoId != null && matchup.mentoId > 0}">
+						      <div class="badge badge-mentor-completed">멘토 선정 완료</div>
+						  </c:when>
+						  <c:otherwise>
+						      <div class="badge badge-mentor">멘토 모집중</div>
+						  </c:otherwise>
+						</c:choose>
                       </c:if>
                   </div>
                </div>

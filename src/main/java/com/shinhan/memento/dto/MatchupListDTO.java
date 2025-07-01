@@ -21,6 +21,7 @@ public class MatchupListDTO {
     Integer categoryId;
     Integer languageId;
     Integer leaderId;
+    Integer mentoId;
     String title;
     Integer count;
     Integer matchupCount;
