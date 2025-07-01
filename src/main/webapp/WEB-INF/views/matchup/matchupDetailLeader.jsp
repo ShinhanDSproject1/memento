@@ -24,7 +24,14 @@
 		<div class="top-bar">
 			<div class="top-bar-tag">
 				<c:if test="${matchupDetail.hasMento}">
-					<div class="top-bar-mento">멘토 모집중</div>
+					<c:choose>
+		                <c:when test="${matchupDetail.mentoId != null && matchupDetail.mentoId > 0}">
+		                    <div class="top-bar-mento completed">멘토 선정 완료</div>
+		                </c:when>
+		                <c:otherwise>
+		                    <div class="top-bar-mento">멘토 모집중</div>
+		                </c:otherwise>
+		            </c:choose>
 				</c:if>
 				<div class="top-bar-category">
 					<div class="java-c">#${matchupDetail.languageName} #${matchupDetail.categoryName}</div>
@@ -60,7 +67,7 @@
 				    <button class="select-memberlist-btn" id="select-memberlist-btn" type="button">
 				        <span class="rectangle-298"></span> <span class="div8">팀원 리스트 보기</span>
 				    </button>
-				    <c:if test="${needMento eq true}">
+				    <c:if test="${matchupDetail.hasMento && (matchupDetail.mentoId == null || matchupDetail.mentoId == 0)}">
 				        <button class="select-mentolist-btn" id="select-mentolist-btn" type="button">
 				            <span class="rectangle-298"></span> <span class="div8">요청중인 멘토 보기</span>
 				        </button>
@@ -128,19 +135,36 @@
 						<div class="rectangle-189"></div>
 					</div>
 					<div class="frame-3670">
-						<div class="div15">멘토를 기다리고 있어요</div>
-						<div class="frame-3668">
-							<a href="/user/123" class="profile-link"> <img
-								class="image-47" src="${cpath}/resources/images/logo.png"
-								alt="유저 프로필" />
-							</a>
-						</div>
-						<div class="div15">알고리즘뿌셔뿌셔</div>
+				       <c:choose>
+				            <%-- 멘토가 이미 선정된 경우 --%>
+				            <c:when test="${matchupDetail.mentoId != null && matchupDetail.mentoId > 0}">
+				                <div class="div15" id="mento-status-text">멘토가 선정되었어요!</div>
+				                <div class="frame-3668">
+				                    <a href="/user/${matchupDetail.mentoId}" class="profile-link">
+				                        <img id="mento-profile-img" class="image-47" 
+				                             src="${not empty matchupDetail.mentoProfileImageUrl ? matchupDetail.mentoProfileImageUrl : cpath.concat('/resources/images/member-icon.png')}" 
+				                             alt="선정된 멘토 프로필" />
+				                    </a>
+				                </div>
+				                <div class="div15" id="mento-nickname">${matchupDetail.mentoNickname}</div>
+				            </c:when>
+				            
+				            <%-- 멘토를 아직 기다리는 경우 --%>
+				            <c:otherwise>
+				                <div class="div15" id="mento-status-text">멘토를 기다리고 있어요</div>
+				                <div class="frame-3668">
+				                    <a href="#" class="profile-link"> 
+				                        <img id="mento-profile-img" class="image-47" src="${cpath}/resources/images/logo.png" alt="유저 프로필" />
+				                    </a>
+				                </div>
+				                <div class="div15" id="mento-nickname">알고리즘뿌셔뿌셔</div>
+				            </c:otherwise>
+				        </c:choose>
 						<div class="line-7"></div>
 						<div class="div15">매치업을 주선한 방장이에요</div>
 						<div class="frame-3669">
-							<a href="/user/123" class="profile-link"> <img
-								class="image-47" src="${cpath}/resources/images/logo.png"
+							<a href="/user/123" class="profile-link"> 
+							<img class="image-47" src="${cpath}/resources/images/logo.png"
 								alt="유저 프로필" />
 							</a>
 						</div>

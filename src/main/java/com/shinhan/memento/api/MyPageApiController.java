@@ -15,6 +15,11 @@ import com.shinhan.memento.dto.ConfirmCashResponseDTO;
 import com.shinhan.memento.dto.ValidateCashRequestDTO;
 import com.shinhan.memento.dto.ValidateCashResponseDTO;
 import com.shinhan.memento.model.Member;
+import java.util.List;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import com.shinhan.memento.dto.MyMentosListResponseDTO;
+
 import com.shinhan.memento.service.MyPageService;
 
 import lombok.AllArgsConstructor;
@@ -50,4 +55,12 @@ public class MyPageApiController {
 		ConfirmCashResponseDTO resDTO = myPageService.confirmCash(reqDTO,userId);
         return new BaseResponse<>(resDTO);
 	}
+
+	
+	@GetMapping("/page7")
+	public BaseResponse<List<MyMentosListResponseDTO>> selectMyMentosListById(@RequestParam Integer memberId){
+		return new BaseResponse<>(myPageService.selectMyMentosListById(memberId));
+	}
+
+
 }

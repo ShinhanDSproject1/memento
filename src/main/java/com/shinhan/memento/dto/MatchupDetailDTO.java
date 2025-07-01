@@ -57,6 +57,12 @@ public class MatchupDetailDTO {
 	    /* 모집 현황 정보 */
 	    String mRecruit; 		/* 멘토를 모집하는 매치업인가에 대한 여부 (멘토 모집중, 모집 완료(표시 안됨))*/ 
 	   
+	    boolean isMentoApplicationPending; 	/* 현재 유저의 해당 매치업 멘토 신청 상태 */
+	    
+	    /* 선정된 멘토의 정보를 담을 필드 */
+	    private String mentoNickname;
+	    private String mentoProfileImageUrl;
+	    
 	   	/* 날짜 포맷 변경 */
 	    public String getFormattedStartDate() {
 	        if (startDay == null) return "";

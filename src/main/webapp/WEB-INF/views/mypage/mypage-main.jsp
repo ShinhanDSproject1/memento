@@ -26,12 +26,11 @@
 <link rel="stylesheet" href="${cpath}/resources/css/sidebar/sidebar.css" />
 </head>
 <body>
-	<div class="layout-wrapper">
-		<%@ include file="../common/header.jsp"%>
-		<div class="main-content-wrapper">
-			<%@ include file="../sidebar/sidebar.jsp"%>
-			<div id="screen" class="screen page-container"></div>
-		</div>
+<div class="layout-wrapper">
+	<%@ include file="../common/login_header.jsp"%>
+	<div class="main-content-wrapper">
+		<%@ include file="../sidebar/sidebar.jsp"%>
+		<div id="screen" class="screen page-container"></div>
 	</div>
 	<script src="https://js.tosspayments.com/v2/standard"></script>
 </body>

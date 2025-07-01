@@ -142,6 +142,9 @@ public class MyPageService {
 			e.printStackTrace();
 			return false; // 승인 실패 처리
 		}
+    
+		public List<MyMentosListResponseDTO> selectMyMentosListById(Integer memberId){
+			return myPageDAO.selectMyMentosListById(memberId);
+		}
 	
 	}
-}
