@@ -25,6 +25,9 @@ import com.shinhan.memento.dto.MatchupApplyMentoDTO;
 import com.shinhan.memento.dto.MatchupCreateDTO;
 import com.shinhan.memento.dto.MatchupDetailDTO;
 import com.shinhan.memento.dto.MatchupListDTO;
+import com.shinhan.memento.dto.MatchupPaginationDTO;
+import com.shinhan.memento.dto.MatchupPaginationResultDTO;
+import com.shinhan.memento.dto.MatchupPagingResponseDTO;
 import com.shinhan.memento.dto.MatchupUpdateDTO;
 import com.shinhan.memento.dto.MatchupWaitingMentoDTO;
 import com.shinhan.memento.mapper.MemberMapper;
@@ -40,8 +43,17 @@ public class MatchupService {
 	MemberMapper memberMapper;
 
 	/* 매치업 조회 */
-	public List<MatchupListDTO> getMatchupList(Map<String, Object> filters) {
-		List<MatchupListDTO> matchups = matchUpDAO.getMatchupList(filters);
+	public MatchupPagingResponseDTO<MatchupListDTO> getMatchupList(Map<String, Object> params) {
+		
+		int count = matchUpDAO.countAll(params);
+		
+		MatchupPaginationDTO pagination = (MatchupPaginationDTO) params.get("pagination");
+		MatchupPaginationResultDTO paginationResult = new MatchupPaginationResultDTO(pagination, count);
+		
+        params.put("offset", pagination.getOffset());
+        params.put("recordSize", pagination.getRecordSize());
+		
+		List<MatchupListDTO> matchups = matchUpDAO.getMatchupList(params);
 
 		for (MatchupListDTO matchup : matchups) {
 			if (matchup.getMaxMember() != null && matchup.getMatchupCount() >= matchup.getMaxMember()) {
@@ -52,7 +64,7 @@ public class MatchupService {
 				matchup.setRecruit("모집중");
 			}
 		}
-		return matchups;
+		return new MatchupPagingResponseDTO<>(matchups, paginationResult);
 	}
 
 	/* 매치업 상세보기 */

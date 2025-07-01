@@ -29,10 +29,12 @@ public class MatchUpDAO {
    SqlSession sqlSession;
    String namespace = "com.shinhan.memento.dao.MatchUpDAO.";
    
-   public List<MatchupListDTO> getMatchupList(Map<String, Object> filters) {
-      List<MatchupListDTO> matchuplist = sqlSession.selectList(namespace + "selectAll", filters);
-      log.info(matchuplist.size() + "건 조회되었습니다");
-      return matchuplist;
+   public List<MatchupListDTO> getMatchupList(Map<String, Object> params) {
+      return sqlSession.selectList(namespace + "selectAll", params);  
+   }
+   
+   public int countAll(Map<String, Object> params) {
+       return sqlSession.selectOne(namespace + "countAll", params);
    }
 
    /* 필터 목록 조회를 위한 DAO 메서드 */

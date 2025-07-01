@@ -2,6 +2,30 @@
 	box-sizing: border-box;
 }
 
+/* 1. html/body에 스크롤 허용 */
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  overflow-y: auto;
+}
+
+/* 2. 고정 헤더 스타일 */
+.header-fixed {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%;  height: 80px;
+  background: #fff;
+  z-index: 1000;
+}
+
+
+/* 3. 본문 컨테이너를 헤더 아래로 밀기 */
+.container {
+  padding-top: 80px; /* header 높이와 동일하게 */
+  box-sizing: border-box;
+}
+
 .div {
 	background: #ffffff;
 	padding: 0px 250px 0px 250px;
