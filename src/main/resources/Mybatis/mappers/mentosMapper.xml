@@ -52,5 +52,12 @@
 		select match_type_id, match_type_name
 		from match_type
 	</select>
+	
+	<select id="checkValidMentosById" parameterType="int" resultType="com.shinhan.memento.model.Mentos">
+		select *
+		from mentos
+		where mentos_id=#{mentosId}
+		and status='ACTIVE'
+	</select>
 </mapper>
 
