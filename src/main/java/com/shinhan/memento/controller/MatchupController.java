@@ -21,6 +21,7 @@ import com.shinhan.memento.common.response.status.BaseExceptionResponseStatus;
 import com.shinhan.memento.dto.CategoryDTO;
 import com.shinhan.memento.dto.LanguageDTO;
 import com.shinhan.memento.dto.MatchTypeDTO;
+import com.shinhan.memento.dto.MatchupApplyMentiDTO;
 import com.shinhan.memento.dto.MatchupApplyMentoDTO;
 import com.shinhan.memento.dto.MatchupApproveMentoDTO;
 import com.shinhan.memento.dto.MatchupCreateDTO;
@@ -40,6 +41,41 @@ public class MatchupController {
    
    @Autowired
    MatchupService matchupService;
+   
+   /* 특정 매치업에 멘티로 신청하기 */
+   @PostMapping("/applyMentiMatchup")
+   @ResponseBody
+   public BaseResponse<?> applyMentiMatchup(@RequestBody MatchupApplyMentiDTO dto, HttpSession session) {
+       try {
+           Member loginUser = (Member) session.getAttribute("loginUser");
+           if (loginUser == null) {
+               return new BaseResponse<>(BaseExceptionResponseStatus.FAILURE, "로그인이 필요합니다.");
+           }
+           dto.setMemberId(loginUser.getMemberId());
+
+           Map<String, Object> serviceResult = matchupService.applyForMatchupAsMenti(dto);
+           int resultCode = (int) serviceResult.get("resultCode");
+
+           switch (resultCode) {
+               case 1:
+                   Map<String, Object> responseData = new HashMap<>();
+                   responseData.put("message", "매치업 참여 신청이 완료되었습니다.");
+                   responseData.put("newMemberCount", serviceResult.get("newMemberCount"));
+                   return new BaseResponse<>(responseData); // 성공 응답에 데이터 포함
+               case -1:
+                   return new BaseResponse<>(BaseExceptionResponseStatus.FAILURE, "모집 인원이 모두 찼습니다.");
+               case -2:
+                   return new BaseResponse<>(BaseExceptionResponseStatus.FAILURE, "이미 신청한 매치업입니다.");
+               case -3:
+                   return new BaseResponse<>(BaseExceptionResponseStatus.FAILURE, "존재하지 않는 매치업입니다.");
+               default:
+                   return new BaseResponse<>(BaseExceptionResponseStatus.FAILURE, "신청에 실패했습니다. 다시 시도해주세요.");
+           }
+       } catch (Exception e) {
+           e.printStackTrace();
+           return new BaseResponse<>(BaseExceptionResponseStatus.FAILURE, "서버 오류로 신청에 실패했습니다.");
+       }
+   }
    
    /* 멘토 승인 요청 처리 API */
    @PostMapping("/approveMento")
@@ -232,10 +268,17 @@ public class MatchupController {
       
       model.addAttribute("matchupDetail", matchupDetail);
       
+      // 2. 위에서 조회한 상세 정보를 바탕으로, 비슷한 매치업 목록을 조회.
+      List<MatchupListDTO> similarList = matchupService.getSimilarMatchups(matchupDetail);
+      
+      // 3. 조회된 비슷한 매치업 목록을 "similarList"라는 이름으로 모델에 추가.
+      model.addAttribute("similarList", similarList);
+      
       /* 방장을 위한 상세 조회 페이지 이동 */
-      if (matchupDetail.getLeaderId() == loginMemberId) {
-         return "/matchup/matchupDetailLeader";
+      if (loginUser != null && matchupDetail.getLeaderId() == loginUser.getMemberId()) {
+          return "/matchup/matchupDetailLeader";
       }
+      
        return "/matchup/matchupDetail";
    }
    

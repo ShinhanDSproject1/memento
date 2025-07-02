@@ -59,6 +59,8 @@ public class MatchupDetailDTO {
 	   
 	    boolean isMentoApplicationPending; 	/* 현재 유저의 해당 매치업 멘토 신청 상태 */
 	    
+	    private boolean alreadyAppliedAsMenti = false; /* 현재 유저가 해당 매치업 멘티 참여 여부 상태 */
+	    
 	    /* 선정된 멘토의 정보를 담을 필드 */
 	    private String mentoNickname;
 	    private String mentoProfileImageUrl;
