@@ -217,9 +217,8 @@ public class MatchupService {
 
 		params.put("memberId", dto.getMemberId());
 		params.put("userType", UserType.MENTO);
-		params.put("status", BaseStatus.ACTIVE);
 
-		Member member = memberMapper.findMemberById(params);
+		Member member = memberMapper.findMemberByIdAndUserType(params);
 		if (member == null) {
 			System.out.println("사용자 정보가 존재하지 않습니다.");
 			return -1;
