@@ -5,9 +5,6 @@
 <!DOCTYPE html>
 <html>
 <head>
-
-
-
     <meta charset="UTF-8">
     <title>me:mento</title>
     <link rel="stylesheet" href="${cpath}/resources/css/matchupDetail.css">
