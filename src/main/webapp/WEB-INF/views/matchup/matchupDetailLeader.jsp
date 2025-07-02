@@ -4,7 +4,6 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
 <c:set var="cpath" value="${pageContext.servletContext.contextPath}" />
-<%-- 이 부분 주석 처리 해제하면 멘토가 필요한 부분에 대한 화면 확인 가능 --%>
 <c:set var="needMento" value="true" />
 
 <!DOCTYPE html>
