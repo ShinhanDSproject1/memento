@@ -3,9 +3,11 @@ package com.shinhan.memento.dto;
 import lombok.AllArgsConstructor;
 
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 @Getter
 @AllArgsConstructor
+@NoArgsConstructor
 public class JoinMentosDTO {
 
 	private int mentosId;

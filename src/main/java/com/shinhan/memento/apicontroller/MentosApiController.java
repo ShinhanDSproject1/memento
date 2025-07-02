@@ -5,6 +5,7 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.RestController;
@@ -15,8 +16,10 @@ import com.shinhan.memento.common.exception.MentosException;
 import com.shinhan.memento.common.response.BaseResponse;
 import com.shinhan.memento.common.response.status.BaseExceptionResponseStatus;
 import com.shinhan.memento.dto.CreateMentosDTO;
+import com.shinhan.memento.dto.JoinMentosDTO;
 import com.shinhan.memento.model.BaseStatus;
 import com.shinhan.memento.model.Member;
+import com.shinhan.memento.model.Mentos;
 import com.shinhan.memento.model.UserType;
 import com.shinhan.memento.service.MemberService;
 import com.shinhan.memento.service.MentosService;
@@ -42,22 +45,62 @@ public class MentosApiController {
 			@RequestPart(value = "image", required = false) MultipartFile imageFile) {
 		log.info("[MentosController.createMento]");
 
-		// mentoId 로 들어온 식별자값이 db에서 유효한 사용자인지 검증
-		Map<String, Object> memberCheckParams = new HashMap<>();
-		memberCheckParams.put("memberId", dto.getMentoId());
-		memberCheckParams.put("userType", String.valueOf(UserType.MENTO));
-		memberCheckParams.put("status", String.valueOf(BaseStatus.ACTIVE));
-		Member member = memberService.findMemberById(memberCheckParams);
-
+		Member member = checkValidMemberByIdAndUserType(dto.getMentoId(), UserType.MENTO);
 		if (member == null) {
 			throw new MemberException(BaseExceptionResponseStatus.CANNOT_FOUND_MENTO);
 		}
 
-		boolean result = mentosService.createMentos(dto,imageFile);
+		boolean result = mentosService.createMentos(dto, imageFile);
 		if (!result) {
 			throw new MentosException(BaseExceptionResponseStatus.CANNOT_CREATE_MENTOS);
 		}
 		return new BaseResponse<>(null);
 	}
 
+	/**
+	 * 멘토스 참여하기(신청하기)
+	 */
+	@PostMapping("/join")
+	public BaseResponse<Void> joinMentos(@RequestBody JoinMentosDTO joinMentosDto) {
+		log.info("[MentosController.joinMentos]");
+		Member member = checkValidMemberById(joinMentosDto.getMemberId());
+		if (member == null) {
+			throw new MemberException(BaseExceptionResponseStatus.CANNOT_FOUND_MEMBER);
+		}
+		
+		Mentos mentos = checkValidMentosById(joinMentosDto.getMentosId());
+		if(mentos == null) {
+			throw new MentosException(BaseExceptionResponseStatus.CANNOT_FOUND_MENTOS);
+		}
+		
+		int result = mentosService.joinMentos(joinMentosDto);
+		if(result == 0 ) { //무조건 1개만 생기게 해야하는데 그 멱등성에 대한 처리는 후에 하기...
+			throw new MentosException(BaseExceptionResponseStatus.CANNOT_JOIN_MENTOS);
+		}
+
+		return new BaseResponse<>(null);
+	}
+	
+	// mentosId 로 들어온 식별자값이 db에서 유효한 값인지 검증
+	private Mentos checkValidMentosById(int mentosId) {
+		log.info("[MentosApiController.checkValidMentosById]");
+		return mentosService.checkValidMentosById(mentosId);
+	}
+
+	// mentoId 로 들어온 식별자값이 db에서 유효한 사용자인지 검증
+	private Member checkValidMemberByIdAndUserType(int memberId, UserType userType) {
+		log.info("[MentosApiController.checkValidMemberByIdAndUserType]");
+		
+		Map<String, Object> memberCheckParams = new HashMap<>();
+		memberCheckParams.put("memberId", memberId);
+		memberCheckParams.put("userType", String.valueOf(userType));
+		Member member = memberService.findMemberByIdAndUserType(memberCheckParams);
+
+		return member;
+	}
+
+	private Member checkValidMemberById(int memberId) {
+		log.info("[MentosApiController.checkValidMemberById]");
+		return memberService.findMemberById(memberId);
+	}
 }
