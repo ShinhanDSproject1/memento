@@ -8,6 +8,7 @@ import com.shinhan.memento.dto.CategoryDTO;
 import com.shinhan.memento.dto.CreateMentosDBDTO;
 import com.shinhan.memento.dto.LanguageDTO;
 import com.shinhan.memento.dto.MatchTypeDTO;
+import com.shinhan.memento.model.Mentos;
 
 @Mapper
 public interface MentosMapper {
@@ -19,4 +20,6 @@ public interface MentosMapper {
 	List<CategoryDTO> getAllCategories();
 
 	List<MatchTypeDTO> getAllMatchTypes();
+	
+	Mentos checkValidMentosById(int mentosId);
 }

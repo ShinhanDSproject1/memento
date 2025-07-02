@@ -227,8 +227,7 @@ public class MyPageController {
 		Map<String, Object> memberCheckParams = new HashMap<>();
 		memberCheckParams.put("memberId", memberId);
 		memberCheckParams.put("userType", String.valueOf(UserType.MENTO));
-		memberCheckParams.put("status", String.valueOf(BaseStatus.ACTIVE));
-		Member member = memberService.findMemberById(memberCheckParams);
+		Member member = memberService.findMemberByIdAndUserType(memberCheckParams);
 		if (member == null) {
 			throw new MemberException(BaseExceptionResponseStatus.CANNOT_FOUND_MEMBER);
 		}

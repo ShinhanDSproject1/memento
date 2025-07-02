@@ -15,14 +15,18 @@ import java.util.UUID;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.shinhan.memento.dto.CategoryDTO;
 import com.shinhan.memento.dto.CreateMentosDBDTO;
 import com.shinhan.memento.dto.CreateMentosDTO;
+import com.shinhan.memento.dto.JoinMentosDTO;
 import com.shinhan.memento.dto.LanguageDTO;
 import com.shinhan.memento.dto.MatchTypeDTO;
+import com.shinhan.memento.mapper.MemberMentosMapper;
 import com.shinhan.memento.mapper.MentosMapper;
+import com.shinhan.memento.model.Mentos;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -32,10 +36,19 @@ public class MentosService {
 
     @Autowired
     MentosMapper mentosMapper;
+    
+    @Autowired
+    MemberMentosMapper memberMentosMapper;
 
     @Value("${file.upload.dir}")
     private String uploadDir;
 
+    public Mentos checkValidMentosById(int mentosId) {
+    	log.info("MentosService.checkValidMentosById");
+    	return mentosMapper.checkValidMentosById(mentosId);
+    }
+    
+    @Transactional
     public boolean createMentos(CreateMentosDTO requestDto, MultipartFile imageFile) {
         log.info("[MentosService.createMentos]");
 
@@ -116,5 +129,14 @@ public class MentosService {
 
     public List<MatchTypeDTO> getAllMatchTypes() {
         return mentosMapper.getAllMatchTypes();
+    }
+    
+    /**
+     * 멘토스 참여하기(신청하기)
+     */
+    @Transactional
+    public int joinMentos(JoinMentosDTO joinMentoDto) {
+    	log.info("[MentosService.joinMentos]");
+    	return memberMentosMapper.joinMentos(joinMentoDto);
     }
 }
