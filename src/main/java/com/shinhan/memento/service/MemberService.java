@@ -39,6 +39,10 @@ public class MemberService {
 		log.info("[MemberService.findMemberById]");
 		return memberMapper.findMemberById(params);
 	}
+	public Member findMemberByIdAndUserType(Map<String, Object> params) {
+		log.info("[MemberService.findMemberByIdAndUserType]");
+		return memberMapper.findMemberByIdAndUserType(params);
+	}
 	
 	public Member kakaoLogin(String code, String clientId, String redirectUri) throws Exception {
 		// 1. access token 요청
