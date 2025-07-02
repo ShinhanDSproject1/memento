@@ -10,26 +10,6 @@
 <link rel="stylesheet" href="${cpath}/resources/css/vars.css">
 </head>
 <body>
-
-    <%-- ================ 디버깅용 코드 시작 ================ --%>
-    <%
-        try {
-            // Model에 담긴 DTO 객체를 직접 가져옵니다.
-            com.shinhan.memento.dto.MatchupDetailDTO dto = (com.shinhan.memento.dto.MatchupDetailDTO) request.getAttribute("matchupDetail");
-            if (dto != null) {
-                // 수동으로 getter를 호출해봅니다.
-                boolean testValue = dto.isAlreadyAppliedAsMenti(); 
-                // 화면에 결과를 강제로 출력합니다.
-                out.println("<h3 style='color:blue; text-align:center;'>[디버깅] 스크립틀릿 테스트 성공! isAlreadyAppliedAsMenti() 값: " + testValue + "</h3>");
-            } else {
-                out.println("<h3 style='color:red; text-align:center;'>[디버깅] DTO 객체가 null입니다.</h3>");
-            }
-        } catch (Throwable e) { // 모든 에러(Error, Exception)를 잡습니다.
-            out.println("<h3 style='color:red; text-align:center;'>[디버깅] 스크립틀릿 테스트 중 에러 발생: " + e.toString() + "</h3>");
-        }
-    %>
-    <%-- ================ 디버깅용 코드 끝 ================ --%>
-
 <%@ include file="../common/logout_header.jsp"%>
 <div class = "container">
    <div class="div">
