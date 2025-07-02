@@ -8,6 +8,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
+
+import org.apache.ibatis.jdbc.Null;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
@@ -25,6 +27,7 @@ import com.shinhan.memento.dto.ConfirmCashResponseDTO;
 import com.shinhan.memento.dto.MyMatchupListResponseDTO;
 import com.shinhan.memento.dto.MyMentosListResponseDTO;
 import com.shinhan.memento.dto.MyPaymentListResponseDTO;
+import com.shinhan.memento.dto.PaymentDetailResponseDTO;
 import com.shinhan.memento.dto.ValidateCashRequestDTO;
 import com.shinhan.memento.dto.ValidateCashResponseDTO;
 import com.shinhan.memento.mapper.MypageMapper;
@@ -182,6 +185,37 @@ public class MyPageService {
 			});
 			
 			return selectMyPaymentList;
+		}
+		
+		public List<PaymentDetailResponseDTO> selectPaymentDetail(String orderId){
+			List<Map<String, Object>> result = mypageMapper.selectPaymentDetail(orderId);
+			List<PaymentDetailResponseDTO> selectPaymentDetailList = new ArrayList<>();
+			
+			result.stream().forEach(data ->{
+				PaymentDetailResponseDTO dto = PaymentDetailResponseDTO.builder()
+				.orderId((String)data.get("ORDERID"))
+				.amount(((BigDecimal)data.get("AMOUNT")).intValue())
+				.matchupId(((BigDecimal)data.get("MATCHUPID")).intValue())
+				.matchupTitle(((BigDecimal)data.get("MATCHUPID")).intValue()==0 ? null : (String)data.get("MATCHUPTITLE"))
+				.matchupPrice(data.get("MATCHUPPRICE") == null ? 0: ((BigDecimal)data.get("MATCHUPPRICE")).intValue())
+				.memberProfileImageUrl((String)data.get("MEMBERPROFILEIMAGEURL"))
+				.mentosId(((BigDecimal)data.get("MENTOSID")).intValue())
+				.mentosTitle(((BigDecimal)data.get("MENTOSID")).intValue()==0 ? null : (String)data.get("MENTOSTITLE"))
+				.mentosImage((String)data.get("MENTOSIMAGE"))
+				.mentosPrice(data.get("MENTOSPRICE") == null ? 0 : ((BigDecimal)data.get("MENTOSPRICE")).intValue())
+				.keepgoingId(((BigDecimal)data.get("KEEPGOINGID")).intValue())
+				.keepgoingName(((BigDecimal)data.get("KEEPGOINGID")).intValue()==0 ? null : (String)data.get("KEEPGOINGNAME"))
+				.keepgoingImgLogo((String)data.get("KEEPGOINGIMGLOGO"))
+				.keepgoingPrice(data.get("KEEPGOINGPRICE") == null ? 0 : ((BigDecimal)data.get("KEEPGOINGPRICE")).intValue())
+				.payAt((String)data.get("PAYAT"))
+				.payType((String)data.get("PAYTYPE"))
+				.status((String)data.get("STATUS"))
+				.build();
+				
+				selectPaymentDetailList.add(dto);
+			});
+			
+			return selectPaymentDetailList;
 		}
 	
 	}

@@ -10,7 +10,7 @@ $(() => {
 	async function fetchPaymentData() {
 		const container = document.getElementById('payment-list');
 		const API_URL = 'http://localhost:9999/memento/api/mypage/paymentlist';
-
+		const sessionMemberId = document.getElementById('sessionMemberId').value;
 		try {
 			// 1. API를 통해 결제 데이터를 비동기적으로 가져옵니다.
 			const response = await fetch(API_URL);
@@ -67,7 +67,7 @@ $(() => {
 					orderInfo = { text: '충전', className: ' tag-charge' };
 				} else if (productTypesPresent > 1 || totalProductCount > items.length) {
 					// 상품 종류가 2개 이상이거나, 한 아이템에 여러 상품이 있어도 '복합'
-					orderInfo = { text: '복합', className: ' tag-mix' };
+					orderInfo = { text: '꾸러미', className: ' tag-mix' };
 				} else {
 					if (counts.matchup > 0) orderInfo = { text: '매치업', className: ' tag-matchup' };
 					else if (counts.mentos > 0) orderInfo = { text: '멘토스', className: ' tag-mentos' };
@@ -179,9 +179,22 @@ $(() => {
 				totalValue.textContent = `${(price - point).toLocaleString()}원`;
 
 				const showDetail = document.createElement('a')
-				showDetail.href = '/memento/mypage/page4';
+				showDetail.href = '#';
 				showDetail.className = 'details-link'
 				showDetail.textContent = '상세 내역 보기 >'
+
+				// 클릭 이벤트를 추가합니다.
+				showDetail.addEventListener('click', (event) => {
+					// a 태그의 기본 동작(페이지 이동)을 막습니다.
+					event.preventDefault();
+
+					// sessionStorage에 클릭된 orderId를 저장합니다.
+					// (sessionStorage는 브라우저 탭을 닫으면 사라지는 임시 저장소입니다)
+					sessionStorage.setItem('detailOrderId', orderId);
+
+					// ID 없는 URL로 페이지를 이동시킵니다.
+					window.location.href = '/memento/mypage/page4';
+				});
 
 				// 3-5. 생성된 DOM 요소들을 조립합니다.
 				priceLineTotal.append(labelTotal, totalValue)

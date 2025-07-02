@@ -25,6 +25,7 @@ import com.shinhan.memento.dto.MyMatchupListResponseDTO;
 import com.shinhan.memento.dto.MyMentosListResponseDTO;
 import com.shinhan.memento.dto.MyPaymentListResponseDTO;
 import com.shinhan.memento.dto.MypageKeepgoingHistoryDTO;
+import com.shinhan.memento.dto.PaymentDetailResponseDTO;
 import com.shinhan.memento.dto.ValidateCashRequestDTO;
 import com.shinhan.memento.dto.ValidateCashResponseDTO;
 import com.shinhan.memento.model.BaseStatus;
@@ -113,12 +114,15 @@ public class MyPageApiController {
 		if (loginUser == null) throw new MypageException(BaseExceptionResponseStatus.NEED_LOGIN);
 		int userId = loginUser.getMemberId();
 		List<MyPaymentListResponseDTO> myPaymentList = myPageService.selectMyPaymentListById(userId);
-		if(myPaymentList.size() == 0) {
-			return new BaseResponse<>(null);
-		}
 		
 		return new BaseResponse<>(myPaymentList);
 	}
-
-
+	@GetMapping(value="/paymentdetail", produces = "application/json")
+	public BaseResponse<List<PaymentDetailResponseDTO>> selectPaymentDetail(@RequestParam String orderId, HttpSession session){
+		Member loginUser = (Member) session.getAttribute("loginUser");
+		if (loginUser == null) throw new MypageException(BaseExceptionResponseStatus.NEED_LOGIN);
+		List<PaymentDetailResponseDTO> paymentDetailList = myPageService.selectPaymentDetail(orderId);
+		
+		return new BaseResponse<>(paymentDetailList);
+	}
 }

@@ -5,7 +5,7 @@
 <script
 	src="${cpath}/resources/js/mypage/pay/payment.js"></script>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/mypage/pay/mypagePayStyle.css" />
-
+<input type="hidden" id="sessionMemberId" value="${sessionScope.loginMember.memberId}">
 <div class="page-container">
 	<section id="payment-history" class="payment-history-section">
 		<div class="payment-history-container">

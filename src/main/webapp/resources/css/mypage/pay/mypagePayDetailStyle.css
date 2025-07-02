@@ -43,23 +43,29 @@ body {
 
 /* Header */
 .order-details__header {
-	margin-left: 210px;
 	margin-bottom: 28px;
 }
 
 .order-details__title {
-	color: rgba(0, 0, 0, 0.63);
-	font-family: 'Inter', sans-serif;
-	font-weight: 600;
-	font-size: 20px;
-	line-height: 24.2px;
-	text-align: left;
-	margin-bottom: 9px;
+color: rgba(0, 0, 0, 0.6);
+  /* style_4 */
+  font-family: 'Inter', sans-serif;
+  font-weight: 600;
+  /* style_4 */
+  font-size: 32px;
+  /* style_4 */
+  line-height: 38.73px;
+  /* style_4 */
+  text-align: center;
+  /* Calculated from positioning */
+  margin: 0 auto 26px auto;
+  /* Centered, bottom margin to list */
 }
 
 .order-details__meta {
 	display: flex;
 	align-items: center;
+	justify-content:center;
 	gap: 12px;
 }
 
@@ -173,6 +179,7 @@ body {
 /* Action Buttons */
 .order-details__actions {
 	display: flex;
+	justify-content:center;
 	gap: 27px;
 }
 
