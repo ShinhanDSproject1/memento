@@ -26,6 +26,7 @@ public enum BaseExceptionResponseStatus implements ResponseStatus{
 	CANNOT_EDIT_MENTOS(4001,HttpStatus.BAD_REQUEST.value(), "멘토스를 수정할 수 없습니다. "),
 	CANNOT_DElETE_MENTOS(4002,HttpStatus.BAD_REQUEST.value(), "멘토스를 삭제할 수 없습니다. "),
 	CANNOT_JOIN_MENTOS(4003, HttpStatus.BAD_REQUEST.value(), "멘토스 참여에 실패했습니다."),
+	CANNOT_FOUND_MENTOS(4004, HttpStatus.BAD_REQUEST.value(), "해당 멘토스를 찾을 수 없습니다."),
 	  /**
 	  * 5000 : keepgoing 관련
 	  */
