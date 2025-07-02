@@ -14,10 +14,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.shinhan.memento.dao.MatchUpDAO;
 import com.shinhan.memento.dao.MemberMatchUpDAO;
-import com.shinhan.memento.model.BaseStatus;
-import com.shinhan.memento.model.MatchUp;
-import com.shinhan.memento.model.Member;
-import com.shinhan.memento.model.UserType;
 import com.shinhan.memento.dto.CategoryDTO;
 import com.shinhan.memento.dto.LanguageDTO;
 import com.shinhan.memento.dto.MatchTypeDTO;
@@ -31,6 +27,11 @@ import com.shinhan.memento.dto.MatchupPagingResponseDTO;
 import com.shinhan.memento.dto.MatchupUpdateDTO;
 import com.shinhan.memento.dto.MatchupWaitingMentoDTO;
 import com.shinhan.memento.mapper.MemberMapper;
+import com.shinhan.memento.model.BaseStatus;
+import com.shinhan.memento.model.MatchUp;
+import com.shinhan.memento.model.Member;
+import com.shinhan.memento.model.UserType;
+
 
 @Service
 public class MatchupService {
@@ -41,6 +42,19 @@ public class MatchupService {
 	MemberMatchUpDAO memberMatchUpDAO;
 	@Autowired
 	MemberMapper memberMapper;
+	
+	/* 비슷한 매치업 조회 */
+	@Autowired
+	private com.shinhan.memento.mapper.MatchupSimilarMapper matchupSimilarMapper;
+	
+	public List<MatchupListDTO> getSimilarMatchups(String regionSubgroup, int matchupId) {
+	    Map<String, Object> param = new HashMap<>();
+	    param.put("regionSubgroup", regionSubgroup);
+	    param.put("matchupId", matchupId);
+
+	    return matchupSimilarMapper.findSimilarMatchups(param);
+	}
+
 
 	/* 매치업 조회 */
 	public MatchupPagingResponseDTO<MatchupListDTO> getMatchupList(Map<String, Object> params) {

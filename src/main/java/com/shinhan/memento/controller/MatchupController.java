@@ -37,6 +37,8 @@ import com.shinhan.memento.service.MatchupService;
 @Controller
 @RequestMapping("/matchup")
 public class MatchupController {
+	
+	
    
    @Autowired
    MatchupService matchupService;
@@ -231,6 +233,10 @@ public class MatchupController {
       System.out.println("### Service에서 가져온 DTO: " + matchupDetail); 
       
       model.addAttribute("matchupDetail", matchupDetail);
+      
+      /* 비슷한 매치업 3개 조회 */
+      List<MatchupListDTO> similarList = matchupService.getSimilarMatchups(matchupDetail.getRegionSubgroup(), id);
+      model.addAttribute("similarList", similarList);
       
       /* 방장을 위한 상세 조회 페이지 이동 */
       if (matchupDetail.getLeaderId() == loginMemberId) {
