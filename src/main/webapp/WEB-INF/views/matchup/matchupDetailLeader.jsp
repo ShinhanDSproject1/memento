@@ -150,8 +150,7 @@
 									<div class="div15" id="mento-status-text">멘토가 선정되었어요!</div>
 									<div class="profile-circle-wrapper">
 										<a href="/user/${matchupDetail.mentoId}" class="profile-link">
-											<img id="mento-profile-img" class="image-47" src="${cpath}/resources/images/logo.png"
-												alt="선정된 멘토 프로필" />
+											<img id="mento-profile-img" class="profile-img" src="${not empty matchupDetail.mentoProfileImageUrl ? matchupDetail.mentoProfileImageUrl : cpath.concat('/resources/images/member-icon.png')}" alt="선정된 멘토 프로필" />
 										</a>
 									</div>
 									<div class="div15" id="mento-nickname">${matchupDetail.mentoNickname}</div>
@@ -181,123 +180,63 @@
 					</div>
 				</div>
 			</div>
+			<%-- 하단 비슷한 매치업 카드 --%>
+			<div class="bottom-area">
+				<div class="divider"></div>
+				<h3 class="section-title">비슷한 다른 매치업 둘러보기</h3>
+				<div class="card-list-container">
+					<c:forEach var="matchup" items="${similarList}">
+						<a href="${cpath}/matchup/matchupDetail?id=${matchup.matchupId}"
+							class="card-link">
+							<div class="matchup-card">
+								<div class="card-main-content">
+									<div class="card-header">
+										<div class="card-location">
+											<img src="${cpath}/resources/images/icon-map-black.svg"
+												alt="위치" /> <span>${matchup.regionSubgroup}</span>
+										</div>
+										<div class="card-badge ${matchup.newMatchup ? 'new' : ''}">
+											<c:choose>
+												<c:when test="${matchup.newMatchup}">신규등록🔥</c:when>
+												<c:otherwise>마감임박🚨</c:otherwise>
+											</c:choose>
+										</div>
 
-<div class="bottom-area">
-    <div class="line-10"></div>
-    <div class="section-title">비슷한 다른 매치업 둘러보기</div>
-    <div class="frame-3770">
-        <%-- Card 1 --%>
-        <a href="/match-id=12" class="card-link">
-            <div class="matchup-card">
-                <div class="card-main">
-                    <div class="card-header">
-                        <div class="card-location">
-                            <img src="${cpath}/resources/images/icon-map-black.svg" alt="위치"/>
-                            <span>강남구</span>
-                        </div>
-                        <div class="card-badge">마감임박🚨</div>
-                    </div>
-                    <h3 class="card-title">React 심화 프로젝트 스터디</h3>
-                    <div class="card-details">
-                        <div class="detail-item">
-                            <img src="${cpath}/resources/images/icon-calendar.svg" alt="날짜"/>
-                            <span>2025/06/13 - 2025/06/20</span>
-                        </div>
-                        <div class="detail-item">
-                            <img src="${cpath}/resources/images/icon_time.svg" alt="시간"/>
-                            <span>15:00 - 17:00</span>
-                        </div>
-                        <div class="detail-item">
-                            <img src="${cpath}/resources/images/icon-user.svg" alt="인원"/>
-                            <span>모집인원 2/4</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="card-side">
-                    <img class="profile-image" src="${cpath}/resources/images/profile.svg" alt="프로필"/>
-                </div>
-                <div class="card-footer">
-                    <div class="card-tags">#React #프로젝트</div>
-                    <div class="card-price">₩80,000</div>
-                </div>
-            </div>
-        </a>
+									</div>
+									<h3 class="card-title">${matchup.title}</h3>
+									<div class="card-details">
+										<div class="detail-item">
+											<img src="${cpath}/resources/images/icon-calendar.svg"
+												alt="날짜" /> <span>${matchup.formattedStartDate} -
+												${matchup.formattedEndDate}</span>
+										</div>
+										<div class="detail-item">
+											<img src="${cpath}/resources/images/icon_time.svg" alt="시간" />
+											<span>${matchup.formattedStartTime} -
+												${matchup.formattedEndTime}</span>
+										</div>
+										<div class="detail-item">
+											<img src="${cpath}/resources/images/icon-user.svg" alt="인원" />
+											<span>모집인원 ${matchup.count}/${matchup.maxMember}</span>
+										</div>
+									</div>
+								</div>
+								<div class="card-side-content">
+									<img class="profile-image"
+										src="${cpath}/resources/images/profile.svg" alt="프로필" />
+								</div>
+								<div class="card-footer">
+									<div class="card-tags">#${matchup.languageName}
+										#${matchup.categoryName}</div>
 
-        <%-- Card 2 --%>
-        <a href="/match-id=12" class="card-link">
-            <div class="matchup-card">
-                <div class="card-main">
-                    <div class="card-header">
-                        <div class="card-location">
-                            <img src="${cpath}/resources/images/icon-map-black.svg" alt="위치"/>
-                            <span>서초구</span>
-                        </div>
-                        <div class="card-badge">마감임박🚨</div>
-                    </div>
-                    <h3 class="card-title">Python 데이터 분석 스터디</h3>
-                    <div class="card-details">
-                        <div class="detail-item">
-                            <img src="${cpath}/resources/images/icon-calendar.svg" alt="날짜"/>
-                            <span>2025/06/15 - 2025/06/22</span>
-                        </div>
-                        <div class="detail-item">
-                            <img src="${cpath}/resources/images/icon_time.svg" alt="시간"/>
-                            <span>19:00 - 21:00</span>
-                        </div>
-                        <div class="detail-item">
-                            <img src="${cpath}/resources/images/icon-user.svg" alt="인원"/>
-                            <span>모집인원 3/5</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="card-side">
-                    <img class="profile-image" src="${cpath}/resources/images/profile.svg" alt="프로필"/>
-                </div>
-                <div class="card-footer">
-                    <div class="card-tags">#Python #데이터분석</div>
-                    <div class="card-price">₩90,000</div>
-                </div>
-            </div>
-        </a>
 
-        <%-- Card 3 --%>
-        <a href="/match-id=12" class="card-link">
-            <div class="matchup-card">
-                <div class="card-main">
-                    <div class="card-header">
-                        <div class="card-location">
-                            <img src="${cpath}/resources/images/icon-map-black.svg" alt="위치"/>
-                            <span>홍대구</span>
-                        </div>
-                        <div class="card-badge new">신규등록🔥</div>
-                    </div>
-                    <h3 class="card-title">JavaScript 심화 스터디</h3>
-                    <div class="card-details">
-                        <div class="detail-item">
-                            <img src="${cpath}/resources/images/icon-calendar.svg" alt="날짜"/>
-                            <span>2025/06/20 - 2025/06/27</span>
-                        </div>
-                        <div class="detail-item">
-                            <img src="${cpath}/resources/images/icon_time.svg" alt="시간"/>
-                            <span>14:00 - 16:00</span>
-                        </div>
-                        <div class="detail-item">
-                            <img src="${cpath}/resources/images/icon-user.svg" alt="인원"/>
-                            <span>모집인원 1/4</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="card-side">
-                    <img class="profile-image" src="${cpath}/resources/images/profile.svg" alt="프로필"/>
-                </div>
-                <div class="card-footer">
-                    <div class="card-tags">#JavaScript</div>
-                    <div class="card-price">₩75,000</div>
-                </div>
-            </div>
-        </a>
-    </div>
-</div>
+									<div class="card-price">₩${matchup.formattedPrice}</div>
+								</div>
+							</div>
+						</a>
+					</c:forEach>
+				</div>
+			</div>
 		</div>
 	</div>
 </div>

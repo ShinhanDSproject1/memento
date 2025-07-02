@@ -62,10 +62,17 @@
    </resultMap>
 
    <resultMap id="matchupModelResultMap" type="com.shinhan.memento.model.MatchUp">
-       <id property="matchupId" column="matchup_id"/>
-       <result property="categoryId" column="category_id"/>
-       <result property="languageId" column="language_id"/>
-       <result property="leaderId" column="leader_id"/>
+        <id property="matchupId" column="matchup_id"/>
+        <result property="categoryId" column="category_id"/>
+        <result property="languageId" column="language_id"/>
+        <result property="leaderId" column="leader_id"/>
+        <result property="minMember" column="min_member"/>
+		<result property="maxMember" column="max_member"/>
+		<result property="title" column="title"/>
+		<result property="content" column="content"/>
+		<result property="hasMento" column="has_mento"/>
+		<result property="price" column="price"/>
+		<result property="status" column="status"/>
     </resultMap>
 
    <select id="getMatchupModelById" parameterType="int" resultMap="matchupModelResultMap">
@@ -336,9 +343,9 @@
          <if test="languageId != null">
             language_id = #{languageId},
          </if>
-         <if test="mentoId != null">
-            mento_id = #{mentoId},
-         </if>
+		<if test="mentoId != null and mentoId > 0">
+		    mento_id = #{mentoId},
+		</if>
          <if test="matchTypeFirst != null">
             match_type_first = #{matchTypeFirst},
          </if>
@@ -408,48 +415,48 @@
    
    <!-- 접속 유저의 유저타입 확인 -->
    <select id="findUserTypeById" parameterType="int" resultType="com.shinhan.memento.model.UserType">
-    SELECT 
-        USER_TYPE 
-    FROM 
-        MEMBER 
-    WHERE 
-        MEMBER_ID = #{memberId}
+	    SELECT 
+	        USER_TYPE 
+	    FROM 
+	        MEMBER 
+	    WHERE 
+	        MEMBER_ID = #{memberId}
 	</select>
     
     <!-- 접속 유저가 해당 메치업의 멘토를 신청했는지 여부 -->
     <select id="checkMentoApplicationExists" parameterType="map" resultType="int">
-    SELECT 
-        COUNT(*)
-    FROM 
-        WAITINGMENTO_MATCHUP
-    WHERE 
-        MEMBER_ID = #{memberId} AND MATCHUP_ID = #{matchupId} AND STATUS = 'ACTIVE'
+	    SELECT 
+	        COUNT(*)
+	    FROM 
+	        WAITINGMENTO_MATCHUP
+	    WHERE 
+	        MEMBER_ID = #{memberId} AND MATCHUP_ID = #{matchupId} AND STATUS = 'ACTIVE'
 	</select>
     
     <!-- 오청 중인 멘토 리스트업 -->
     <select id="selectWaitingMentoByMatchupId" parameterType="int" resultType="com.shinhan.memento.dto.MatchupWaitingMentoDTO">
-    SELECT
-        w.MEMBER_ID        AS memberId,
-        m.NICKNAME         AS nickname,
-        m.PROFILE_IMAGE_URL AS profileImageUrl
-    FROM
-        WAITINGMENTO_MATCHUP w
-    JOIN
-        MEMBER m ON w.MEMBER_ID = m.MEMBER_ID
-    WHERE
-        w.MATCHUP_ID = #{matchupId}
-        AND w.STATUS = 'ACTIVE'
+	    SELECT
+	        w.MEMBER_ID        AS memberId,
+	        m.NICKNAME         AS nickname,
+	        m.PROFILE_IMAGE_URL AS profileImageUrl
+	    FROM
+	        WAITINGMENTO_MATCHUP w
+	    JOIN
+	        MEMBER m ON w.MEMBER_ID = m.MEMBER_ID
+	    WHERE
+	        w.MATCHUP_ID = #{matchupId}
+	        AND w.STATUS = 'ACTIVE'
 	</select>
 	
 	<!-- 매칭이 끝난 매치업의 요청 멘토들은 DELETE 처리 -->
 	<update id="deleteWaitingMentoApplications" parameterType="int">
-    UPDATE
-        WAITINGMENTO_MATCHUP
-    SET
-        STATUS = 'DELETE'
-    WHERE
-        MATCHUP_ID = #{matchupId}
-        AND STATUS = 'ACTIVE'
+	    UPDATE
+	        WAITINGMENTO_MATCHUP
+	    SET
+	        STATUS = 'DELETE'
+	    WHERE
+	        MATCHUP_ID = #{matchupId}
+	        AND STATUS = 'ACTIVE'
 	</update>
 	
 	<!-- 선정된 멘토는 해당 매치업의 mento_id에 삽입 -->
@@ -464,14 +471,21 @@
     
     <!-- 회원의 닉네임, 이미지를 호출하기 위한 용도 -->
     <select id="getApprovedMentoDetails" parameterType="int" resultType="com.shinhan.memento.dto.MatchupWaitingMentoDTO">
-    SELECT
-        MEMBER_ID         AS memberId,
-        NICKNAME          AS nickname,
-        PROFILE_IMAGE_URL AS profileImageUrl
-    FROM
-        MEMBER
-    WHERE
-        MEMBER_ID = #{memberId}
+	    SELECT
+	        MEMBER_ID         AS memberId,
+	        NICKNAME          AS nickname,
+	        PROFILE_IMAGE_URL AS profileImageUrl
+	    FROM
+	        MEMBER
+	    WHERE
+	        MEMBER_ID = #{memberId}
 	</select>
     
+    <update id="incrementMatchupCount" parameterType="int"> 
+	    UPDATE matchup 
+	    SET 
+	    	matchup_count = matchup_count + 1, 
+	    	updated_at = SYSDATE 
+	    WHERE matchup_id = #{matchupId} 
+    </update>
 </mapper>

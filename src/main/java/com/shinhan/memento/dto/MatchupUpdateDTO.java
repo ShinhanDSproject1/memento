@@ -15,6 +15,7 @@ public class MatchupUpdateDTO {
     private String content;
     private Integer languageId;
     private Integer categoryId;
+    private Integer mentoId;
     private String startDay;
     private String endDay;
     

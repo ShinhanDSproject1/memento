@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.shinhan.memento.dao.MemberMatchUpDAO">
+	<insert id="applyAsMenti" parameterType="com.shinhan.memento.dto.MatchupApplyMentiDTO"> 
+		INSERT INTO member_matchup ( 
+			member_matchup_id,
+			member_id, 
+			matchup_id, 
+			status, 
+			created_at, 
+			updated_at 
+		) VALUES (
+			SEQ_MEMBER_MATCHUP_ID.NEXTVAL, 
+			#{memberId}, 
+			#{matchupId}, 
+			'ACTIVE',
+			SYSDATE, 
+			SYSDATE 
+		) 
+	</insert>
+	
+	<select id="checkIfAlreadyApplied" parameterType="map" resultType="int"> 
+		SELECT COUNT(*) 
+		FROM member_matchup 
+		WHERE member_id = #{memberId} 
+		AND matchup_id = #{matchupId} 
+		AND status = 'ACTIVE'
+	</select>
+	
+	<update id="inactivateMemberMatchupById" parameterType="int"> 
+		UPDATE
+			MEMBER_MATCHUP 
+		SET status = 'INACTIVE' 
+		WHERE MATCHUP_ID = #{matchupId}
+	</update>
+
+</mapper>

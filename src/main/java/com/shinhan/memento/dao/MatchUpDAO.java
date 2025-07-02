@@ -137,4 +137,9 @@ public class MatchUpDAO {
    public MatchupWaitingMentoDTO getApprovedMentoDetails(int memberId) {
        return sqlSession.selectOne(namespace + "getApprovedMentoDetails", memberId);
    }
+   
+   /* 매치업 현재 인원 1 증가 */
+   public int incrementMatchupCount(int matchupId) {
+       return sqlSession.update(namespace + "incrementMatchupCount", matchupId);
+   }
 }

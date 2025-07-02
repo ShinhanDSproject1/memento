@@ -8,4 +8,8 @@
     <!-- 스네이크 케이스 → 카멜케이스 자동 매핑 -->
     <setting name="mapUnderscoreToCamelCase" value="true"/>
   </settings>
+  
+  <mappers>
+  	<mapper resource="mapper/MatchupSimilarMapper.xml"/>
+  </mappers>
 </configuration>

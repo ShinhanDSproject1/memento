@@ -3,7 +3,6 @@
 /* 기본 & 초기화 */
 * {
     box-sizing: border-box;
-    margin: 0;
     padding: 0;
 }
 body {
@@ -128,15 +127,17 @@ a {
 
 .button-group {
   display: flex;
-  justify-content: flex-end;  /* 버튼 오른쪽 정렬 */
-  flex: 1;                    /* 공간 차지해서 오른쪽으로 밀림 */
+  justify-content: flex-end;
+  flex: 1;
+  margin-left: 500px;
+  gap: 10px;
 }
 .price-text {
   font-size: 28px;
   font-weight: 700;
 }
 .custom-btn {
-    padding: 10px 20px;
+    padding: 10px 15px;
     border: none;
     border-radius: 8px;
     font-size: 14px;
@@ -145,8 +146,7 @@ a {
     cursor: pointer;
     transition: all 0.2s;
     width : auto;
-    background-color: #4dabf7;
-    margin-left: 650px;
+    background-color: #73bcf1;
 }
 .custom-btn:hover {
     filter: brightness(1.1);
@@ -246,17 +246,28 @@ a {
 }
 
 .location-info {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 8px;
-    font-size: 26px;
-    font-weight: 500;
+    display: flex;                     /* flex 사용 */
+    flex-direction: column;           /* 세로 방향 정렬 */
+    align-items: center;              /* 가운데 정렬 */
+    gap: 5px;                          /* 아이콘과 텍스트 사이 여백 */
+    color: #333333;
+    text-align: center;
     font-family: "D2Coding-Bold", sans-serif;
-    margin-bottom: 15px;
+    font-size: 20px;
+    line-height: 150%;
+    letter-spacing: -0.023em;
+    font-weight: 500;
+    position: relative;
 }
-
+#pin-icon {
+    width: 24px;
+    height: 24px;
+    flex-shrink: 0;
+    position: relative;
+    overflow: visible;
+}
 .map-placeholder {
+	margin-top: 20px;
     background: linear-gradient(180deg, #F5FFFF 0%, #E6F8FA 100%);
     border-radius: 10px;
     width: 100%;
