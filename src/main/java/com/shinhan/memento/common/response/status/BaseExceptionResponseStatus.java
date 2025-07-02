@@ -34,12 +34,17 @@ public enum BaseExceptionResponseStatus implements ResponseStatus{
 	  /**
 	  * 6000 : mypage 관련 
 	  */
-	NEED_LOGIN(6000,HttpStatus.UNAUTHORIZED.value(), "로그인이 필요합니다.");
+	NEED_LOGIN(6000,HttpStatus.UNAUTHORIZED.value(), "로그인이 필요합니다."),
 
 		/**
 		* 7000 : 결제 관련?
 		*/ 
-
+	
+	/**
+	 * 8000 : member_mentos 관련 
+	 */
+	CANNOT_FOUND_MEMBER_MENTOS(8000, HttpStatus.BAD_REQUEST.value(), "해당 멘토스 참여기록을 찾을 수 없습니다.");
+	
     private final int code;
     private final int status;
     private final String message;
