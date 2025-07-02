@@ -1,10 +1,11 @@
-function applyFilters() {
+function applyFilters(page = 1) {
     const region = document.querySelector('select[name="regionGroup"]').value;
     const category = document.querySelector('select[name="categoryId"]').value;
     const day = document.querySelector('select[name="selectedDays"]').value;
     const language = document.querySelector('select[name="languageId"]').value;
 
     const queryParams = new URLSearchParams({
+        page: page,
         regionGroup: region,
         categoryId: category,
         selectedDays: day,
@@ -14,8 +15,9 @@ function applyFilters() {
     fetch(`${cpath}/matchup/getMatchupList?${queryParams}`)
         .then(response => response.json())
         .then(data => {
-            const matchups = data.result;
-            renderMatchups(matchups);
+        	const responseData = data.result;
+            renderMatchups(responseData.list); // 목록 부분 렌더링
+            renderPagination(responseData.paginationResult); // 페이지 번호 부분 렌더링
         })
         .catch(error => console.error('Error:', error));
 }
@@ -96,3 +98,45 @@ function renderRecruitBadge(recruitStatus) {
 
     return `<div class="badge ${badgeClass}">${recruitStatus}</div>`;
 }
+
+function renderPagination(paginationResult) {
+    const paginationContainer = document.querySelector('.pagemove-list');
+    paginationContainer.innerHTML = ''; // 기존 내용 초기화
+
+    let html = '';
+    const currentPage = paginationResult.pagination.page;
+
+    // '이전' 버튼
+    if (currentPage > 1) {
+        html += `
+            <div class="page-back-btn" onclick="applyFilters(${currentPage - 1})">
+                <img class="vuesax-linear-arrow-left" src="${cpath}/resources/images/arrow-left.svg" />
+            </div>`;
+    }
+
+	// 페이지 번호 버튼들
+    for (let i = paginationResult.startPage; i <= paginationResult.endPage; i++) {
+        const isSelected = i === paginationResult.pagination.page;
+        const pageClass = isSelected ? 'page-li-btn-seleted-page' : 'page-li-btn';
+        const textClass = isSelected ? 'd-2-b-12-white' : 'd-2-r-12-black';
+        
+        html += `
+            <div class="${pageClass}" onclick="applyFilters(${i})">
+                <div class="${textClass}">${i}</div>
+            </div>`;
+    }
+
+    // '다음' 버튼
+    if (currentPage < paginationResult.totalPageCount) {
+        html += `
+            <div class="page-after-btn" onclick="applyFilters(${currentPage + 1})">
+                <img class="vuesax-linear-arrow-right" src="${cpath}/resources/images/arrow-right.svg" />
+            </div>`;
+    }
+
+    paginationContainer.innerHTML = html;
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+
+});

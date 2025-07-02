@@ -11,7 +11,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
-
 import org.apache.ibatis.jdbc.Null;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
@@ -21,7 +20,6 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
-
 import com.shinhan.memento.common.exception.MypageException;
 import com.shinhan.memento.common.response.status.BaseExceptionResponseStatus;
 import com.shinhan.memento.dao.MyPageDAO;
@@ -31,6 +29,8 @@ import com.shinhan.memento.dto.MyMatchupListResponseDTO;
 import com.shinhan.memento.dto.MyMentosListResponseDTO;
 import com.shinhan.memento.dto.MyPaymentListResponseDTO;
 import com.shinhan.memento.dto.PaymentDetailResponseDTO;
+import com.shinhan.memento.dto.SparkTestResultRequestDTO;
+import com.shinhan.memento.dto.SparkTestResultResponseDTO;
 import com.shinhan.memento.dto.ValidateCashRequestDTO;
 import com.shinhan.memento.dto.ValidateCashResponseDTO;
 import com.shinhan.memento.mapper.MypageMapper;
@@ -39,7 +39,7 @@ import com.shinhan.memento.model.CashProduct;
 import com.shinhan.memento.model.PayType;
 import com.shinhan.memento.model.Payment;
 import com.shinhan.memento.model.Payment_Step;
-
+import com.shinhan.memento.model.SparkTestType;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
@@ -52,9 +52,10 @@ public class MyPageService {
 	@Autowired
 	MypageMapper mypageMapper;
 
+	@Autowired
+	MypageMapper mypageMapper;
+	
 	public ValidateCashResponseDTO validateCash(ValidateCashRequestDTO reqDTO, int userId) {
-
-		
 		CashProduct product = myPageDAO.validateCash(reqDTO.getCashProductID());
 		String orderId = UUID.randomUUID().toString();
 		System.out.println(orderId);
@@ -189,7 +190,7 @@ public class MyPageService {
 			
 			return selectMyPaymentList;
 		}
-		
+
 		public List<PaymentDetailResponseDTO> selectPaymentDetail(String orderId){
 			List<Map<String, Object>> result = mypageMapper.selectPaymentDetail(orderId);
 			List<PaymentDetailResponseDTO> selectPaymentDetailList = new ArrayList<>();
@@ -202,7 +203,6 @@ public class MyPageService {
 		            // Convert Timestamp to Date and then format to String
 		            payAtFormatted = formatter.format(new Date(payAtTimestamp.getTime()));
 		        }
-				
 				
 				PaymentDetailResponseDTO dto = PaymentDetailResponseDTO.builder()
 				.orderId((String)data.get("ORDERID"))
@@ -228,6 +228,18 @@ public class MyPageService {
 			});
 			
 			return selectPaymentDetailList;
+    }
+
+		public SparkTestResultResponseDTO updateSparkType(SparkTestResultRequestDTO reqDTO, int memberId) {
+			
+			log.info("[updateSparkType - service]");
+			SparkTestType sparkType = reqDTO.getSparkResultType();
+			int metchTypeId = mypageMapper.selectMatchTypebyName(sparkType);
+			int updateTypeResult = mypageMapper.updateMyTypeByMemberId(metchTypeId,memberId); 
+			
+			return SparkTestResultResponseDTO.builder()
+					.result(updateTypeResult == 1? "success" : "fail")
+					.build();
 		}
 	
 	}

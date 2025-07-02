@@ -168,4 +168,17 @@
 		and p.status != 'delete'
 	</select>
 
+<select id="selectMatchTypebyName" parameterType="com.shinhan.memento.model.SparkTestType" resultType="int">
+		SELECT
+		match_type_id 
+		FROM match_type
+		WHERE match_type_name = #{_parameter}
+	</select>
+	
+	<update id="updateMyTypeByMemberId">
+    UPDATE member
+    SET match_type_id = #{matchTypeId}
+    WHERE member_id = #{memberId}
+</update>
+
 </mapper>

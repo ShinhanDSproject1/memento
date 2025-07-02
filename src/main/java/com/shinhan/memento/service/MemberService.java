@@ -35,9 +35,13 @@ public class MemberService {
 	@Autowired
 	MemberMapper memberMapper;
 	
-	public Member findMemberById(Map<String, Object> params) {
+	public Member findMemberById(int memberId) {
 		log.info("[MemberService.findMemberById]");
-		return memberMapper.findMemberById(params);
+		return memberMapper.findMemberById(memberId);
+	}
+	public Member findMemberByIdAndUserType(Map<String, Object> params) {
+		log.info("[MemberService.findMemberByIdAndUserType]");
+		return memberMapper.findMemberByIdAndUserType(params);
 	}
 	
 	public Member kakaoLogin(String code, String clientId, String redirectUri) throws Exception {

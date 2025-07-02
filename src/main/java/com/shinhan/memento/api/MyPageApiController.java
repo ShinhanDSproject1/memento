@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-
 import com.shinhan.memento.common.exception.MemberException;
 import com.shinhan.memento.common.exception.MypageException;
 import com.shinhan.memento.common.response.BaseResponse;
@@ -26,6 +25,8 @@ import com.shinhan.memento.dto.MyMentosListResponseDTO;
 import com.shinhan.memento.dto.MyPaymentListResponseDTO;
 import com.shinhan.memento.dto.MypageKeepgoingHistoryDTO;
 import com.shinhan.memento.dto.PaymentDetailResponseDTO;
+import com.shinhan.memento.dto.SparkTestResultRequestDTO;
+import com.shinhan.memento.dto.SparkTestResultResponseDTO;
 import com.shinhan.memento.dto.ValidateCashRequestDTO;
 import com.shinhan.memento.dto.ValidateCashResponseDTO;
 import com.shinhan.memento.model.BaseStatus;
@@ -47,14 +48,22 @@ public class MyPageApiController {
 	private final MemberKeepgoingService memberKeepgoingService;
 	private final MemberService memberService;
 	
+	@PostMapping("/spark-test-result")
+	public BaseResponse<SparkTestResultResponseDTO> sparkTestResult(@RequestBody SparkTestResultRequestDTO reqDTO,HttpSession session) {
+		Member loginUser = (Member) session.getAttribute("loginUser");
+		if (loginUser == null) throw new MypageException(BaseExceptionResponseStatus.NEED_LOGIN);
+		int userId = loginUser.getMemberId();
+		
+		SparkTestResultResponseDTO resDTO = myPageService.updateSparkType(reqDTO, userId);
+		return new BaseResponse<>(resDTO);
+	}
+
 	@PostMapping("/validate-cash")
     public BaseResponse<ValidateCashResponseDTO> validateCash(@RequestBody ValidateCashRequestDTO reqDTO,HttpSession session) {
 		Member loginUser = (Member) session.getAttribute("loginUser");
 		if (loginUser == null) throw new MypageException(BaseExceptionResponseStatus.NEED_LOGIN);
 		int userId = loginUser.getMemberId();
-		
-		//테스트용
-		//int userId = 1;
+
 		ValidateCashResponseDTO resDTO = myPageService.validateCash(reqDTO, userId);
         return new BaseResponse<>(resDTO);
     }
@@ -64,9 +73,6 @@ public class MyPageApiController {
 		Member loginUser = (Member) session.getAttribute("loginUser");
 		if (loginUser == null) throw new MypageException(BaseExceptionResponseStatus.NEED_LOGIN);
 		int userId = loginUser.getMemberId();
-		
-		//테스트용
-		//int userId = 1;
 		
 		ConfirmCashResponseDTO resDTO = myPageService.confirmCash(reqDTO,userId);
         return new BaseResponse<>(resDTO);
@@ -117,6 +123,7 @@ public class MyPageApiController {
 		
 		return new BaseResponse<>(myPaymentList);
 	}
+  
 	@GetMapping(value="/paymentdetail", produces = "application/json")
 	public BaseResponse<List<PaymentDetailResponseDTO>> selectPaymentDetail(@RequestParam String orderId, HttpSession session){
 		Member loginUser = (Member) session.getAttribute("loginUser");
