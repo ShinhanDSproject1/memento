@@ -21,6 +21,7 @@ import com.shinhan.memento.common.response.status.BaseExceptionResponseStatus;
 import com.shinhan.memento.dto.CategoryDTO;
 import com.shinhan.memento.dto.LanguageDTO;
 import com.shinhan.memento.dto.MatchTypeDTO;
+import com.shinhan.memento.dto.MatchupApplyMentiDTO;
 import com.shinhan.memento.dto.MatchupApplyMentoDTO;
 import com.shinhan.memento.dto.MatchupApproveMentoDTO;
 import com.shinhan.memento.dto.MatchupCreateDTO;
@@ -40,6 +41,37 @@ public class MatchupController {
    
    @Autowired
    MatchupService matchupService;
+
+   /* 특정 매치업에 멘티로 신청하기 */
+   @PostMapping("/applyMentiMatchup")
+   @ResponseBody
+   public BaseResponse<String> applyMentiMatchup(@RequestBody MatchupApplyMentiDTO dto, HttpSession session) {
+       try {
+           Member loginUser = (Member) session.getAttribute("loginUser");
+           if (loginUser == null) {
+               return new BaseResponse<>(BaseExceptionResponseStatus.FAILURE, "로그인이 필요합니다.");
+           }
+           dto.setMemberId(loginUser.getMemberId());
+
+           int result = matchupService.applyForMatchupAsMenti(dto);
+
+           switch (result) {
+               case 1:
+                   return new BaseResponse<>(BaseExceptionResponseStatus.SUCCESS, "매치업 참여 신청이 완료되었습니다.");
+               case -1:
+                   return new BaseResponse<>(BaseExceptionResponseStatus.FAILURE, "모집 인원이 모두 찼습니다.");
+               case -2:
+                   return new BaseResponse<>(BaseExceptionResponseStatus.FAILURE, "이미 신청한 매치업입니다.");
+               case -3:
+                   return new BaseResponse<>(BaseExceptionResponseStatus.FAILURE, "존재하지 않는 매치업입니다.");
+               default:
+                   return new BaseResponse<>(BaseExceptionResponseStatus.FAILURE, "신청에 실패했습니다. 다시 시도해주세요.");
+           }
+       } catch (Exception e) {
+           e.printStackTrace();
+           return new BaseResponse<>(BaseExceptionResponseStatus.FAILURE, "서버 오류로 신청에 실패했습니다.");
+       }
+   }
    
    /* 멘토 승인 요청 처리 API */
    @PostMapping("/approveMento")

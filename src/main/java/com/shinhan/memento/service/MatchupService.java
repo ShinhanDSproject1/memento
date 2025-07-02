@@ -21,6 +21,7 @@ import com.shinhan.memento.model.UserType;
 import com.shinhan.memento.dto.CategoryDTO;
 import com.shinhan.memento.dto.LanguageDTO;
 import com.shinhan.memento.dto.MatchTypeDTO;
+import com.shinhan.memento.dto.MatchupApplyMentiDTO;
 import com.shinhan.memento.dto.MatchupApplyMentoDTO;
 import com.shinhan.memento.dto.MatchupCreateDTO;
 import com.shinhan.memento.dto.MatchupDetailDTO;
@@ -78,17 +79,25 @@ public class MatchupService {
 			matchupDetail.setMatchupCount(currentMemberCount);
 		}
 
-		if (loginMemberId != null) {
-			Map<String, Object> params = new HashMap<>();
-			params.put("memberId", loginMemberId);
-			params.put("matchupId", id);
+        if (loginMemberId != null) {
+            // 멘토 신청 여부 확인 
+            Map<String, Object> mentoParams = new HashMap<>();
+            mentoParams.put("memberId", loginMemberId);
+            mentoParams.put("matchupId", id);
+            int mentoApplicationCount = matchUpDAO.checkMentoApplicationExists(mentoParams);
+            if (mentoApplicationCount > 0) {
+                matchupDetail.setMentoApplicationPending(true);
+            }
 
-			int applicationCount = matchUpDAO.checkMentoApplicationExists(params);
-
-			if (applicationCount > 0) {
-				matchupDetail.setMentoApplicationPending(true);
-			}
-		}
+            // 멘티 참여 여부 확인 
+            Map<String, Object> mentiParams = new HashMap<>();
+            mentiParams.put("memberId", loginMemberId);
+            mentiParams.put("matchupId", id);
+            int mentiApplicationCount = memberMatchUpDAO.checkIfAlreadyApplied(mentiParams); 
+            if (mentiApplicationCount > 0) {
+                matchupDetail.setAlreadyAppliedAsMenti(true);
+            }
+        }
 		return matchupDetail;
 	}
 
@@ -261,5 +270,46 @@ public class MatchupService {
         }
 		return resultDto;
 	}
+	
+	
+    /* 매치업에 멘티로 참여 신청하기 */
+    @Transactional 
+    public int applyForMatchupAsMenti(MatchupApplyMentiDTO dto) {
+        // 1. 신청하려는 매치업의 현재 정보를 가져온다.
+        MatchUp matchup = matchUpDAO.getMatchupById(dto.getMatchupId());
 
+        if (matchup == null) {
+            return -3; // 존재하지 않는 매치업
+        }
+
+        // 2. 이미 신청한 사용자인지 확인한다.
+        Map<String, Object> params = new HashMap<>();
+        params.put("memberId", dto.getMemberId());
+        params.put("matchupId", dto.getMatchupId());
+        int appliedCount = memberMatchUpDAO.checkIfAlreadyApplied(params);
+
+        if (appliedCount > 0) {
+            return -2; // 이미 신청한 경우
+        }
+
+        // 3. 모집 인원이 다 찼는지 확인한다.
+        // matchup_count는 DB에서 직접 관리되므로, getActiveMemberCount를 호출하여 최신 인원을 확인
+        int currentMemberCount = matchUpDAO.getActiveMemberCount(dto.getMatchupId());
+        if (currentMemberCount >= matchup.getMaxMember()) {
+            return -1; // 모집 인원 마감
+        }
+
+        // 4. 모든 조건을 통과했으면 신청 처리를 진행한다.
+        // 4-1. member_matchup 테이블에 신청자 정보 삽입
+        int insertResult = memberMatchUpDAO.applyAsMenti(dto);
+
+        // 4-2. matchup 테이블의 현재 인원 수(matchup_count) 1 증가
+        int updateResult = matchUpDAO.incrementMatchupCount(dto.getMatchupId());
+
+        if (insertResult > 0 && updateResult > 0) {
+            return 1; // 성공
+        } else {
+            return 0; // 실패
+        }
+    }
 }

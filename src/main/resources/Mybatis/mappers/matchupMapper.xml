@@ -62,10 +62,17 @@
    </resultMap>
 
    <resultMap id="matchupModelResultMap" type="com.shinhan.memento.model.MatchUp">
-       <id property="matchupId" column="matchup_id"/>
-       <result property="categoryId" column="category_id"/>
-       <result property="languageId" column="language_id"/>
-       <result property="leaderId" column="leader_id"/>
+		<id property="matchupId" column="matchup_id"/>
+		<result property="categoryId" column="category_id"/>
+		<result property="languageId" column="language_id"/>
+		<result property="leaderId" column="leader_id"/>
+		<result property="minMember" column="min_member"/>
+		<result property="maxMember" column="max_member"/>
+		<result property="title" column="title"/>
+		<result property="content" column="content"/>
+		<result property="hasMento" column="has_mento"/>
+		<result property="price" column="price"/>
+		<result property="status" column="status"/>
     </resultMap>
 
    <select id="getMatchupModelById" parameterType="int" resultMap="matchupModelResultMap">
@@ -304,13 +311,7 @@
            'ACTIVE'
        )
    </insert>
-
-   <update id="inactivateMemberMatchupById" parameterType="int">
-      UPDATE
-      MEMBER_MATCHUP
-      SET status = 'INACTIVE'
-      WHERE MATCHUP_ID = #{matchupId}
-   </update>
+   
    <update id="inactivateMatchupByIdAndLeader" parameterType="map">
       UPDATE MATCHUP
       SET status = 'INACTIVE',
@@ -473,5 +474,12 @@
     WHERE
         MEMBER_ID = #{memberId}
 	</select>
+
+    <update id="incrementMatchupCount" parameterType="int">
+        UPDATE matchup
+        SET matchup_count = matchup_count + 1,
+            updated_at = SYSDATE
+        WHERE matchup_id = #{matchupId}
+    </update>
     
 </mapper>

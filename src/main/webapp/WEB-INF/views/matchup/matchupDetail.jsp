@@ -10,6 +10,26 @@
 <link rel="stylesheet" href="${cpath}/resources/css/vars.css">
 </head>
 <body>
+
+    <%-- ================ 디버깅용 코드 시작 ================ --%>
+    <%
+        try {
+            // Model에 담긴 DTO 객체를 직접 가져옵니다.
+            com.shinhan.memento.dto.MatchupDetailDTO dto = (com.shinhan.memento.dto.MatchupDetailDTO) request.getAttribute("matchupDetail");
+            if (dto != null) {
+                // 수동으로 getter를 호출해봅니다.
+                boolean testValue = dto.isAlreadyAppliedAsMenti(); 
+                // 화면에 결과를 강제로 출력합니다.
+                out.println("<h3 style='color:blue; text-align:center;'>[디버깅] 스크립틀릿 테스트 성공! isAlreadyAppliedAsMenti() 값: " + testValue + "</h3>");
+            } else {
+                out.println("<h3 style='color:red; text-align:center;'>[디버깅] DTO 객체가 null입니다.</h3>");
+            }
+        } catch (Throwable e) { // 모든 에러(Error, Exception)를 잡습니다.
+            out.println("<h3 style='color:red; text-align:center;'>[디버깅] 스크립틀릿 테스트 중 에러 발생: " + e.toString() + "</h3>");
+        }
+    %>
+    <%-- ================ 디버깅용 코드 끝 ================ --%>
+
 <%@ include file="../common/logout_header.jsp"%>
 <div class = "container">
    <div class="div">
@@ -54,19 +74,42 @@
             <img class="line" src="${cpath}/resources/images/line0.svg" />
 			<div class="group-478">
 			  <div class="_70-000">₩${matchupDetail.formattedPrice}</div>
-			  <div class="button-area">
-			  	<c:if test="${matchupDetail.hasMento && (matchupDetail.mentoId == null || matchupDetail.mentoId == 0)}">
-			        <c:choose>
-			            <c:when test="${matchupDetail.mentoApplicationPending}">
-			                <button class="mento-apply-btn pending" disabled>멘토 신청 중</button>
-			            </c:when>
-			            <c:otherwise>
-			                <button class="mento-apply-btn" id="mento-apply-btn" type="button" data-matchup-id="${matchupDetail.matchupId}">멘토 신청하기</button>
-			            </c:otherwise>
-			        </c:choose>
-			    </c:if>
-			    <button class="apply-btn" id="apply-btn" type="button">신청하기</button>
-			  </div>
+                 <div class="button-area">
+                     <%-- 멘토 신청 버튼 --%>
+                     <c:if test="${matchupDetail.hasMento && (matchupDetail.mentoId == null || matchupDetail.mentoId == 0)}">
+                         <c:choose>
+                             <c:when test="${matchupDetail.mentoApplicationPending}">
+                                 <button class="mento-apply-btn pending" disabled>멘토 신청 중</button>
+                             </c:when>
+                             <c:otherwise>
+                                 <button class="mento-apply-btn" id="mento-apply-btn" type="button" data-matchup-id="${matchupDetail.matchupId}">멘토 신청하기</button>
+                             </c:otherwise>
+                         </c:choose>
+                     </c:if>
+                     
+                     <%-- 멘티 참여 신청 버튼 --%>
+				    <c:choose>
+				        <%-- 조건 1: 내가 이 매치업의 방장인 경우 --%>
+				        <c:when test="${sessionScope.loginUser.memberId == matchupDetail.leaderId}">
+				            <button class="apply-btn" disabled>방장</button>
+				        </c:when>
+				        
+				        <%-- 조건 2: 내가 이미 멘티로 참여 신청한 경우 --%>
+				        <c:when test="${matchupDetail.alreadyAppliedAsMenti}">
+				            <button class="apply-btn applied" disabled>참여 신청 완료</button>
+				        </c:when>
+				
+				        <%-- 조건 3: 모집 인원이 마감된 경우 --%>
+				        <c:when test="${matchupDetail.matchupCount >= matchupDetail.maxMember}">
+				            <button class="apply-btn" disabled>모집마감</button>
+				        </c:when>
+				        
+				        <%-- 그 외: 신청 가능 --%>
+				        <c:otherwise>
+				            <button class="apply-btn" id="applyMentiBtn" type="button" data-matchup-id="${matchupDetail.matchupId}">참여 신청하기</button>
+				        </c:otherwise>
+				    </c:choose>
+                 </div>
 			</div>
          </div>
       </div>
@@ -303,7 +346,8 @@
    </div>
    <script>
       const loggedInMemberId = "${sessionScope.loginUser.memberId}"; 
-   
+      const cpath = "${cpath}";   	
+      
       document.addEventListener('DOMContentLoaded', function() {
          
     	  const mentoApplyBtn = document.getElementById('mento-apply-btn');
@@ -353,10 +397,51 @@
               });
           }
           
-    	  document.getElementById('apply-btn').addEventListener('click',
-                  function() {
-                     alert('신청하기 버튼이 클릭되었습니다!');
+          const applyMentiBtn = document.getElementById('applyMentiBtn');
+          if(applyMentiBtn) {
+              applyMentiBtn.addEventListener('click', function() {
+                  // 1. 로그인 여부 확인
+                  if (!loggedInMemberId) {
+                      alert('로그인이 필요한 기능입니다.');
+                      // 필요 시 로그인 페이지로 리다이렉트
+                      // location.href = cpath + '/login';
+                      return;
+                  }
+
+                  // 2. 신청 의사 확인
+                  if (!confirm('해당 매치업에 참여 신청하시겠습니까?')) {
+                      return;
+                  }
+
+                  // 3. 서버에 전송할 데이터 준비
+                  const matchupId = this.dataset.matchupId;
+                  const requestData = {
+                      matchupId: parseInt(matchupId)
+                      // memberId는 Controller에서 세션으로 처리하므로 전송하지 않음
+                  };
+
+                  // 4. fetch API로 서버에 신청 요청
+                  fetch(cpath + '/matchup/applyMentiMatchup', {
+                      method: 'POST',
+                      headers: {
+                          'Content-Type': 'application/json'
+                      },
+                      body: JSON.stringify(requestData)
+                  })
+                  .then(response => response.json())
+                  .then(data => {
+                      // 5. 서버 응답 처리
+                      alert(data.message); // 서버로부터 받은 결과 메시지 출력
+                      if (data.isSuccess) {
+                          location.reload(); // 신청 성공 시, 페이지를 새로고침하여 현재 인원 및 버튼 상태 업데이트
+                      }
+                  })
+                  .catch(error => {
+                      console.error('Error:', error);
+                      alert('요청 처리 중 오류가 발생했습니다.');
                   });
+              });
+          }
       });
    </script>
 </body>

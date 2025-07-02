@@ -300,6 +300,13 @@ html, body {
   gap: 8px;
 }
 
+.button-area .apply-btn.applied {
+    background-color: #6c757d; /* 회색 계열 */
+    border-color: #6c757d;
+    color: white;
+    cursor: not-allowed; /* 마우스 커서 변경 */
+}
+
 .rectangle-298 {
 	background: #0070d1;
 	border-radius: 10px;
