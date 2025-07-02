@@ -11,7 +11,7 @@
 <link rel="stylesheet" href="${cpath}/resources/css/vars.css">
 </head>
 <body>
-	<%@ include file="../common/logout_header.jsp"%>
+	<%@ include file="../common/logout_header.jsp"%> 
 	<div class="container">
 		<div class="main-content">
 			<%-- 상단 정보 영역 --%>
