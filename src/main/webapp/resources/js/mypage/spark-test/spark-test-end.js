@@ -1,4 +1,5 @@
 (function () {
+localStorage.removeItem("enteredSparkTest");
   console.log("[spark-test-end.js] 결과 페이지 스크립트 실행됨 ✅");
 
   const rawScore = localStorage.getItem("sparkTypeScore");

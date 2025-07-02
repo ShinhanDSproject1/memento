@@ -1,3 +1,8 @@
+// 정상 진입 시 localStorage 플래그 설정
+if (!localStorage.getItem("enteredSparkTest")) {
+  localStorage.setItem("enteredSparkTest", "true");
+}
+
 const navType = window.navType || (window.navType = performance.getEntriesByType("navigation")[0]?.type);
 
 if (navType === "reload" || navType === "back_forward") {
