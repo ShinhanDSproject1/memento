@@ -34,109 +34,86 @@ import lombok.extern.slf4j.Slf4j;
 @Service
 public class MentosService {
 
-    @Autowired
-    MentosMapper mentosMapper;
-    
-    @Autowired
-    MemberMentosMapper memberMentosMapper;
+	@Autowired
+	MentosMapper mentosMapper;
 
-    @Value("${file.upload.dir}")
-    private String uploadDir;
+	@Value("${file.upload.dir}")
+	private String uploadDir;
 
-    public Mentos checkValidMentosById(int mentosId) {
-    	log.info("MentosService.checkValidMentosById");
-    	return mentosMapper.checkValidMentosById(mentosId);
-    }
-    
-    @Transactional
-    public boolean createMentos(CreateMentosDTO requestDto, MultipartFile imageFile) {
-        log.info("[MentosService.createMentos]");
+	public Mentos checkValidMentosById(int mentosId) {
+		log.info("MentosService.checkValidMentosById");
+		return mentosMapper.checkValidMentosById(mentosId);
+	}
 
-        // 날짜 및 시간 변환
-        Date startDay = Date.valueOf(requestDto.getStartDay());
-        Date endDay = Date.valueOf(requestDto.getEndDay());
-        Timestamp startTime = Timestamp.valueOf(LocalDateTime.of(LocalDate.of(2000, 1, 1), LocalTime.parse(requestDto.getStartTime())));
-        Timestamp endTime = Timestamp.valueOf(LocalDateTime.of(LocalDate.of(2000, 1, 1), LocalTime.parse(requestDto.getEndTime())));
+	@Transactional
+	public boolean createMentos(CreateMentosDTO requestDto, MultipartFile imageFile) {
+		log.info("[MentosService.createMentos]");
 
-        // 이미지 저장 처리
-        String imageUrl = null;
-        if (imageFile != null && !imageFile.isEmpty()) {
-            try {
-                File dir = new File(uploadDir);
-                if (!dir.exists()) {
-                    dir.mkdirs();
-                }
+		// 날짜 및 시간 변환
+		Date startDay = Date.valueOf(requestDto.getStartDay());
+		Date endDay = Date.valueOf(requestDto.getEndDay());
+		Timestamp startTime = Timestamp
+				.valueOf(LocalDateTime.of(LocalDate.of(2000, 1, 1), LocalTime.parse(requestDto.getStartTime())));
+		Timestamp endTime = Timestamp
+				.valueOf(LocalDateTime.of(LocalDate.of(2000, 1, 1), LocalTime.parse(requestDto.getEndTime())));
 
-                // 확장자 추출 + 고유 파일명 생성
-                String ext = getFileExtension(imageFile.getOriginalFilename());
-                String savedFileName = UUID.randomUUID().toString() + (ext != null ? "." + ext : "");
-                File destFile = new File(dir, savedFileName);
-                Files.copy(imageFile.getInputStream(), destFile.toPath(), StandardCopyOption.REPLACE_EXISTING);
+		// 이미지 저장 처리
+		String imageUrl = null;
+		if (imageFile != null && !imageFile.isEmpty()) {
+			try {
+				File dir = new File(uploadDir);
+				if (!dir.exists()) {
+					dir.mkdirs();
+				}
 
-                // 웹에서 접근 가능한 경로로 구성 (리소스 경로 기준)
-                imageUrl = "/resources/uploadImage/" + savedFileName;
-                log.info("이미지 저장 완료: {}", imageUrl);
-            } catch (IOException e) {
-                log.error("이미지 업로드 실패", e);
-                return false;
-            }
-        }
+				// 확장자 추출 + 고유 파일명 생성
+				String ext = getFileExtension(imageFile.getOriginalFilename());
+				String savedFileName = UUID.randomUUID().toString() + (ext != null ? "." + ext : "");
+				File destFile = new File(dir, savedFileName);
+				Files.copy(imageFile.getInputStream(), destFile.toPath(), StandardCopyOption.REPLACE_EXISTING);
 
-        // DB 저장용 DTO 생성
-        CreateMentosDBDTO dbDTO = CreateMentosDBDTO.builder()
-                .categoryId(requestDto.getCategoryId())
-                .content(requestDto.getContent())
-                .endDay(endDay)
-                .startDay(startDay)
-                .endTime(endTime)
-                .startTime(startTime)
-                .image(imageUrl) // URL 경로 저장
-                .languageId(requestDto.getLanguageId())
-                .matchTypeFirst(requestDto.getMatchTypeFirst())
-                .matchTypeSecond(requestDto.getMatchTypeSecond())
-                .matchTypeThird(requestDto.getMatchTypeThird())
-                .maxMember(requestDto.getMaxMember())
-                .minMember(requestDto.getMinMember())
-                .price(requestDto.getPrice())
-                .mentoId(requestDto.getMentoId())
-                .title(requestDto.getTitle())
-                .simpleContent(requestDto.getSimpleContent())
-                .selectedDays(requestDto.getSelectedDays())
-                .times(requestDto.getTimes())
-                .regionDetail(requestDto.getRegionDetail())
-                .regionGroup(requestDto.getRegionGroup())
-                .regionSubgroup(requestDto.getRegionSubgroup())
-                .build();
+				// 웹에서 접근 가능한 경로로 구성 (리소스 경로 기준)
+				imageUrl = "/resources/uploadImage/" + savedFileName;
+				log.info("이미지 저장 완료: {}", imageUrl);
+			} catch (IOException e) {
+				log.error("이미지 업로드 실패", e);
+				return false;
+			}
+		}
 
-        int result = mentosMapper.createMentos(dbDTO);
-        return result == 1;
-    }
+		// DB 저장용 DTO 생성
+		CreateMentosDBDTO dbDTO = CreateMentosDBDTO.builder().categoryId(requestDto.getCategoryId())
+				.content(requestDto.getContent()).endDay(endDay).startDay(startDay).endTime(endTime)
+				.startTime(startTime).image(imageUrl) // URL 경로 저장
+				.languageId(requestDto.getLanguageId()).matchTypeFirst(requestDto.getMatchTypeFirst())
+				.matchTypeSecond(requestDto.getMatchTypeSecond()).matchTypeThird(requestDto.getMatchTypeThird())
+				.maxMember(requestDto.getMaxMember()).minMember(requestDto.getMinMember()).price(requestDto.getPrice())
+				.mentoId(requestDto.getMentoId()).title(requestDto.getTitle())
+				.simpleContent(requestDto.getSimpleContent()).selectedDays(requestDto.getSelectedDays())
+				.times(requestDto.getTimes()).regionDetail(requestDto.getRegionDetail())
+				.regionGroup(requestDto.getRegionGroup()).regionSubgroup(requestDto.getRegionSubgroup()).build();
 
-    private String getFileExtension(String fileName) {
-        if (fileName != null && fileName.contains(".")) {
-            return fileName.substring(fileName.lastIndexOf('.') + 1);
-        }
-        return null;
-    }
+		int result = mentosMapper.createMentos(dbDTO);
+		return result == 1;
+	}
 
-    public List<LanguageDTO> getAllLanguages() {
-        return mentosMapper.getAllLanguages();
-    }
+	private String getFileExtension(String fileName) {
+		if (fileName != null && fileName.contains(".")) {
+			return fileName.substring(fileName.lastIndexOf('.') + 1);
+		}
+		return null;
+	}
 
-    public List<CategoryDTO> getAllCategories() {
-        return mentosMapper.getAllCategories();
-    }
+	public List<LanguageDTO> getAllLanguages() {
+		return mentosMapper.getAllLanguages();
+	}
 
-    public List<MatchTypeDTO> getAllMatchTypes() {
-        return mentosMapper.getAllMatchTypes();
-    }
-    
-    /**
-     * 멘토스 참여하기(신청하기)
-     */
-    @Transactional
-    public int joinMentos(JoinMentosDTO joinMentoDto) {
-    	log.info("[MentosService.joinMentos]");
-    	return memberMentosMapper.joinMentos(joinMentoDto);
-    }
+	public List<CategoryDTO> getAllCategories() {
+		return mentosMapper.getAllCategories();
+	}
+
+	public List<MatchTypeDTO> getAllMatchTypes() {
+		return mentosMapper.getAllMatchTypes();
+	}
+
 }
