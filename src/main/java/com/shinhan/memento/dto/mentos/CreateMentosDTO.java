@@ -1,4 +1,4 @@
-package com.shinhan.memento.dto;
+package com.shinhan.memento.dto.mentos;
 
 import org.springframework.web.multipart.MultipartFile;
 
