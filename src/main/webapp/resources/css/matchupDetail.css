@@ -17,12 +17,15 @@ a {
 }
 
 .section-box.profile-box {
-    min-height: 180px; /* 지도 박스 높이와 동일하게 */
-    background: linear-gradient(180deg, #F5FFFF 0%, #E6F8FA 100%);
-    border: none;         /* 그림자 제거 */
-    box-shadow: none;
-    align-items: center;  /* 내부 중앙 정렬 */
+    min-height: 420px;         /* 높이 더 크게 */
+    padding: 40px 24px;        /* 내부 여백 증가 */
+    border: none;
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+    align-items: center;
     text-align: center;
+    flex-grow: 1;
+    border: 1px solid #a6abbd;
+    
 }
 
 /* --- 페이지 전체 레이아웃 --- */
@@ -154,16 +157,22 @@ a {
 
 /* --- 중간 콘텐츠 영역 --- */
 .middle-area {
-    display: grid;
-    grid-template-columns: 2fr 1fr;
+    display: flex;
+    gap: 30px;
+    align-items: stretch;
+}
+.middle-area-left {
+    width: 66.66%;  /* 2/3 */
+    display: flex;
+    flex-direction: column;
     gap: 30px;
 }
 
-/* [수정됨] 오른쪽 사이드바 간격 추가 */
 .middle-area-right {
+    width: 33.33%;  /* 1/3 */
     display: flex;
     flex-direction: column;
-    gap: 30px; /* 지도 박스와 멘토 박스 사이의 간격 */
+    gap: 30px;
 }
 
 .middle-area-left .section-box {
@@ -197,30 +206,16 @@ a {
     flex-wrap: wrap;
     gap: 20px;
 }
-/* 
-.type-item {
-    border-radius: 50px;
-    background-color: #f8f9fa;
-    border: 1px solid #f1f3f5;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    font-weight: 600;
-    padding: 15px 30px;
-    font-size: 15px;
-    flex-grow: 1;
-} */
 
 .type-item {
-    border: none;
-    background-color: transparent;
-    box-shadow: none;
     width: 180px;
     height: 180px;
     display: flex;
     align-items: center;
     justify-content: center;
+    background-color: transparent;
+    box-shadow: none;
+    border: none;
 }
 
 .type-circle {
@@ -228,13 +223,26 @@ a {
     height: 160px;
     border-radius: 50%;
     background-color: #F5FFFF;
-    border: 1px #F5FFFF;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    gap: 8px;
-    flex-shrink: 0;
+    border: 1px solid #d0f0f7;
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.08);
+}
+
+.circle-emoji {
+    font-size: 30px;
+    margin-bottom: 8px;
+}
+
+.circle-text {
+    font-size: 14px;
+    font-weight: 600;
+    color: #333;
+    text-align: center;
+    line-height: 1.4;
+    word-break: keep-all;
 }
 
 .location-info {
@@ -260,6 +268,7 @@ a {
     flex-direction: column;
     align-items: center;
     gap: 15px;
+    flex-grow: 1;
 }
 .profile-title {
     font-weight: 600;
@@ -414,7 +423,7 @@ h3.card-title {
 /* --- 반응형 레이아웃 --- */
 @media (max-width: 992px) {
     .middle-area {
-        grid-template-columns: 1fr;
+        flex-direction: column;
     }
 }
 @media (max-width: 768px) {

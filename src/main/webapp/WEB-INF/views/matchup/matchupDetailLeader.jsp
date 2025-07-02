@@ -139,10 +139,9 @@
 									src="${cpath}/resources/images/icon-map-red.svg" alt="위치 아이콘" />
 								<div class="_4-77-1-f">${matchupDetail.formattedRegion}</div>
 							</div>
-							<div class="map-placeholder"></div> <%-- 지도 영역 대체 --%>
+							<div class="map-placeholder"></div>
 						</div>
 					</div>
-					<%-- 멘토 및 방장 프로필을 감싸는 큰 박스 --%>
 					<div class="section-box">
 						<div class="frame-3670 profile-section-box"> <%-- 프로필 박스 추가 --%>
 							<c:choose>

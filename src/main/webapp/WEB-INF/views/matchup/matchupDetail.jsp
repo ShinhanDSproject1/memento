@@ -58,9 +58,24 @@
                         <div class="section-content">${matchupDetail.content}</div>
                         <h3 class="section-title">✋ 이런 분과 함께하고 싶어요</h3>
                         <div class="type-circle-wrapper">
-                            <div class="type-item">🔥 ${matchupDetail.matchTypeFirstName}</div>
-                            <div class="type-item">🎯 ${matchupDetail.matchTypeSecondName}</div>
-                            <div class="type-item">🤝 ${matchupDetail.matchTypeThirdName}</div>
+                        	<div class="type-item">
+                        		<div class="type-circle">
+                        			<div class="circle-emoji">🔥</div>
+                            	  	<div class="circle-text">${matchupDetail.matchTypeFirstName}</div>
+                            	</div>
+                            </div>
+                            <div class="type-item">
+                            	<div class="type-circle">
+                            	  <div class="circle-emoji">🎯</div>
+                             	  <div class="circle-text">${matchupDetail.matchTypeSecondName}</div>
+                            	</div><!--  -->
+                            </div>
+                            <div class="type-item">
+                               <div class="type-circle">
+                               	<div class="circle-emoji">🤝</div>
+                             	<div class="circle-text">${matchupDetail.matchTypeThirdName}</div>
+                        </div>
+                        </div>
                         </div>
                     </div>
                 </div>
