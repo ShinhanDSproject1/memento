@@ -2,12 +2,56 @@
 // 모달 열기/닫기 관련 함수들
 // ===================================================================
 
-function openMemberModal() {
-    document.getElementById("member-modal").style.display = "flex";
+async function openMemberListModal() {
+    const matchupId = matchupDetail.matchupId; // 페이지에 이미 있는 JS 객체 활용
+
+    try {
+        // 1. 서버에 팀원 목록 데이터 요청
+        const response = await fetch(`${cpath}/matchup/getMembers?matchupId=${matchupId}`);
+        const result = await response.json();
+
+        if (result.code !== 1000) {
+            alert(result.message || '팀원 목록을 불러오는데 실패했습니다.');
+            return;
+        }
+
+        // 2. 데이터로 HTML 목록 생성
+        const memberList = result.result;
+        const modalListElement = document.getElementById('member-list-ul'); // ID로 ul 요소를 정확히 타겟
+        
+        modalListElement.innerHTML = ''; // 기존 목록 초기화
+
+        if (memberList && memberList.length > 0) {
+            memberList.forEach(member => {
+                const profileImg = member.profileImageUrl || `${cpath}/resources/images/member-icon.png`;
+                
+                // 팀원 한 명에 대한 li HTML 생성
+                const memberItemHTML = `
+                    <li class="member-item">
+                        <img src="${profileImg}" alt="팀원 프로필" />
+                        <span>${member.nickname}</span>
+                    </li>
+                `;
+                modalListElement.insertAdjacentHTML('beforeend', memberItemHTML);
+            });
+        } else {
+            modalListElement.innerHTML = '<li class="no-members">참여중인 팀원이 없습니다.</li>';
+        }
+
+        // 3. 모달창 보여주기
+        document.getElementById('member-modal').style.display = 'flex';
+
+    } catch (error) {
+        console.error('팀원 목록 조회 중 오류 발생:', error);
+        alert('오류가 발생했습니다.');
+    }
 }
 
 function closeMemberModal() {
-    document.getElementById("member-modal").style.display = "none";
+    const memberModal = document.getElementById('member-modal');
+    if (memberModal) {
+        memberModal.style.display = 'none';
+    }
 }
 
 function closeMentoModal() {
@@ -81,7 +125,7 @@ async function openMentoListModal() {
 }
 
 // ===================================================================
-// [신규 추가] 멘토 승인하기 버튼 클릭 시 실행되는 로직
+// 멘토 승인하기 버튼 클릭 시 실행되는 로직
 // ===================================================================
 async function handleApproveMento() {
     const selectedRadio = document.querySelector('input[name="selectedMember"]:checked');
@@ -182,7 +226,7 @@ document.addEventListener("DOMContentLoaded", () => {
     // 팀원 리스트 보기 버튼
     const openMemberBtn = document.getElementById("select-memberlist-btn");
     if (openMemberBtn) {
-        openMemberBtn.addEventListener("click", openMemberModal);
+        openMemberBtn.addEventListener("click", openMemberListModal);
     }
 
     // 요청중인 멘토 보기 버튼에 새로운 함수 연결

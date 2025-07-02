@@ -4,6 +4,7 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.shinhan.memento.dao.MemberMatchUpDAO">
+	<!-- 매치업 신청하기 -->
 	<insert id="applyAsMenti" parameterType="com.shinhan.memento.dto.MatchupApplyMentiDTO"> 
 		INSERT INTO member_matchup ( 
 			member_matchup_id,
@@ -22,6 +23,7 @@
 		) 
 	</insert>
 	
+	<!-- 이미 해당 매치업에 가입했는지에 대한 여부 -->
 	<select id="checkIfAlreadyApplied" parameterType="map" resultType="int"> 
 		SELECT COUNT(*) 
 		FROM member_matchup 
@@ -30,6 +32,7 @@
 		AND status = 'ACTIVE'
 	</select>
 	
+	<!-- 매치업 비활성화 -->
 	<update id="inactivateMemberMatchupById" parameterType="int"> 
 		UPDATE
 			MEMBER_MATCHUP 
@@ -37,4 +40,18 @@
 		WHERE MATCHUP_ID = #{matchupId}
 	</update>
 
+	<!-- 참여중인 매치업 팀원 목록 보기 -->
+	<select id="findMembersByMatchupId" parameterType="int" resultType="com.shinhan.memento.dto.MatchupMemberDTO">
+	    SELECT
+	        m.member_id         AS memberId,
+	        m.nickname,
+	        m.profile_image_url AS profileImageUrl
+	    FROM
+	        member_matchup mm
+	    JOIN
+	        member m ON mm.member_id = m.member_id
+	    WHERE
+	        mm.matchup_id = #{matchupId}
+	        AND mm.status = 'ACTIVE'
+	</select>
 </mapper>

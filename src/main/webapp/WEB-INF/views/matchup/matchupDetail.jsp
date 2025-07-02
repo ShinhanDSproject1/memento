@@ -11,7 +11,7 @@
 <link rel="stylesheet" href="${cpath}/resources/css/vars.css">
 </head>
 <body>
-	<%@ include file="../common/logout_header.jsp"%> 
+	<%@ include file="../common/logout_header.jsp"%>
 	<div class="container">
 		<div class="main-content">
 			<%-- 상단 정보 영역 --%>
@@ -128,27 +128,43 @@
 					</div>
 					<div class="section-box profile-box">
 						<c:choose>
-							<c:when
-								test="${matchupDetail.mentoId != null && matchupDetail.mentoId > 0}">
-								<div class="profile-title">멘토가 선정되었어요!</div>
-								<a href="/user/${matchupDetail.mentoId}" class="profile-link"><img
-									class="profile-img"
-									src="${not empty matchupDetail.mentoProfileImageUrl ? matchupDetail.mentoProfileImageUrl : cpath.concat('/resources/images/member-icon.png')}"
-									alt="멘토 프로필" /></a>
-								<div class="profile-nickname">${matchupDetail.mentoNickname}</div>
-							</c:when>
-							<c:otherwise>
-								<div class="profile-title">멘토를 기다리고 있어요</div>
+							<%-- 애초에 멘토가 없는 매치업 --%>
+							<c:when test="${!matchupDetail.hasMento}">
+								<div class="profile-title">멘토가 없는 매치업이에요!</div>
 								<a href="#" class="profile-link"><img class="profile-img"
 									src="${cpath}/resources/images/logo.png" alt="기본 프로필" /></a>
+							</c:when>
+
+							<%-- 멘토가 있는 매치업 --%>
+							<c:otherwise>
+								<%-- 멘토가 선정되었는지, 모집 중인지 확인 --%>
+								<c:choose>
+									<c:when
+										test="${matchupDetail.mentoId != null && matchupDetail.mentoId > 0}">
+										<div class="profile-title">멘토가 선정되었어요!</div>
+										<a href="/user/${matchupDetail.mentoId}" class="profile-link"><img
+											class="profile-img"
+											src="${not empty matchupDetail.mentoProfileImageUrl ? matchupDetail.mentoProfileImageUrl : cpath.concat('/resources/images/member-icon.png')}"
+											alt="멘토 프로필" /></a>
+										<div class="profile-nickname">${matchupDetail.mentoNickname}</div>
+									</c:when>
+									<c:otherwise>
+										<div class="profile-title">멘토를 기다리고 있어요</div>
+										<a href="#" class="profile-link"><img class="profile-img"
+											src="${cpath}/resources/images/logo.png" alt="기본 프로필" /></a>
+									</c:otherwise>
+								</c:choose>
 							</c:otherwise>
 						</c:choose>
 						<div class="divider"></div>
 						<div class="profile-title">매치업을 주선한 방장이에요</div>
-						<a href="/user/123" class="profile-link"><img
-							class="profile-img" src="${cpath}/resources/images/logo.png"
-							alt="방장 프로필" /></a>
-						<div class="profile-nickname">알고리즘뿌셔뿌셔</div>
+						<div class="profile-circle-wrapper"> 
+						    <a href="${cpath}/user/${matchupDetail.leaderId}" class="profile-link">
+						        <img class="profile-img" src="${not empty matchupDetail.leaderProfileImageUrl ? matchupDetail.leaderProfileImageUrl : cpath.concat('/resources/images/member-icon.png')}"
+						            alt="방장 프로필" />
+						    </a>
+						</div>
+						<div class="profile-nickname">${matchupDetail.leaderNickname}</div>
 					</div>
 				</div>
 			</div>

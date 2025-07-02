@@ -65,6 +65,10 @@ public class MatchupDetailDTO {
 	    private String mentoNickname;
 	    private String mentoProfileImageUrl;
 	    
+	    /* 방장의 정보를 담을 필드 */
+	    private String leaderNickname;
+	    private String leaderProfileImageUrl;
+	    
 	   	/* 날짜 포맷 변경 */
 	    public String getFormattedStartDate() {
 	        if (startDay == null) return "";

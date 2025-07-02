@@ -27,6 +27,7 @@ import com.shinhan.memento.dto.MatchupApplyMentoDTO;
 import com.shinhan.memento.dto.MatchupCreateDTO;
 import com.shinhan.memento.dto.MatchupDetailDTO;
 import com.shinhan.memento.dto.MatchupListDTO;
+import com.shinhan.memento.dto.MatchupMemberDTO;
 import com.shinhan.memento.dto.MatchupPaginationDTO;
 import com.shinhan.memento.dto.MatchupPaginationResultDTO;
 import com.shinhan.memento.dto.MatchupPagingResponseDTO;
@@ -44,6 +45,10 @@ public class MatchupService {
 	@Autowired
 	MemberMapper memberMapper;
 	
+	/* 특정 매치업에 참여중인 멤버 목록 조회 */
+	public List<MatchupMemberDTO> getMatchupMembers(int matchupId) {
+	    return memberMatchUpDAO.findMembersByMatchupId(matchupId);
+	}
 	
 	/* 비슷한 매치업 조회 */
 	@Autowired
