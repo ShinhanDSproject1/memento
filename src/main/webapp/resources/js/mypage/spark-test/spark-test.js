@@ -1,4 +1,33 @@
+const navType = window.navType || (window.navType = performance.getEntriesByType("navigation")[0]?.type);
+
+if (navType === "reload" || navType === "back_forward") {
+  alert("테스트가 초기화되어 처음부터 다시 시작합니다.");
+  location.replace("/memento/mypage/spark-test"); // 테스트 시작 페이지로 강제 이동
+}
+
+// 2. 뒤로가기 등 이탈 감지 → 앞으로가기 차단을 위한 플래그 저장
+window.addEventListener("beforeunload", function () {
+  sessionStorage.setItem("exitedSparkTest", "true");
+});
+
+// 3. 앞으로가기 접근 감지 후 차단
+window.addEventListener("pageshow", function (event) {
+  const fromForward = sessionStorage.getItem("exitedSparkTest");
+
+  // 브라우저가 캐시에서 페이지를 복원했거나, 플래그가 있는 경우
+  if (event.persisted || navType === "back_forward") {
+    if (fromForward === "true") {
+      alert("앞으로가기로는 테스트에 다시 접근할 수 없습니다.");
+      sessionStorage.removeItem("exitedSparkTest");
+      location.replace("/memento/mypage/spark-test");
+    }
+  }
+});
+
 if (typeof window.sparkTestLoaded === 'undefined') {
+ localStorage.setItem("sparkTestInProgress", "true");
+  
+  
   window.sparkTestLoaded = true;
 
   const questions = [
@@ -144,7 +173,8 @@ if (typeof window.sparkTestLoaded === 'undefined') {
           }
           const result = Object.entries(typeScore).sort((a, b) => b[1] - a[1])[0];
           const [topType] = result;
-          location.href = `spark-test-end?type=${encodeURIComponent(topType)}`;
+          localStorage.setItem("sparkTypeScore", JSON.stringify(typeScore));
+		  location.href = "spark-test-end";
         };
       } else {
         nextBtnLabel.innerText = "다음문제";

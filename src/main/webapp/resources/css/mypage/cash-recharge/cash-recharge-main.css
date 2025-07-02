@@ -2,16 +2,18 @@
 
 body {
 	margin: 0;
+    background-color: #f0faff;
 }
 /* 메인 컨테이너 */
 .cash-recharge-container {
+	zoom : 0.8;
 	background: #fff;
 	border-radius: 12px;
 	border: 1px solid rgba(0, 0, 0, 0.2); box-shadow : 0px 4px 4px 0px
 	rgba( 0, 0, 0, 0.25);
 	padding: 48px 32px 40px 32px;
-	max-width: 900px;
-	margin: 48px auto;
+	max-width: 1100px;
+	margin: 10px auto;
 	display: flex;
 	flex-direction: column;
 	gap: 32px;
@@ -118,10 +120,10 @@ body {
 
 /* 충전 금액 선택 영역 */
 .recharge-options {
-	display: flex;
+	display: grid;
+	grid-template-columns: repeat(3, 1fr); /* 한 줄에 3개 */
 	gap: 22px;
-	flex-wrap: wrap;
-	justify-content: center;
+	justify-items: center; /* 가운데 정렬 */
 	width: 100%;
 }
 

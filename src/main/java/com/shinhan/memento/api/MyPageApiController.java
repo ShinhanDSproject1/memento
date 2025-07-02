@@ -17,9 +17,13 @@ import com.shinhan.memento.common.response.status.BaseExceptionResponseStatus;
 import com.shinhan.memento.dto.ConfirmCashRequestDTO;
 import com.shinhan.memento.dto.ConfirmCashResponseDTO;
 import com.shinhan.memento.dto.MyMentosListResponseDTO;
+import com.shinhan.memento.dto.SparkTestResultRequestDTO;
+import com.shinhan.memento.dto.SparkTestResultResponseDTO;
 import com.shinhan.memento.dto.ValidateCashRequestDTO;
 import com.shinhan.memento.dto.ValidateCashResponseDTO;
 import com.shinhan.memento.model.Member;
+import com.shinhan.memento.service.MemberKeepgoingService;
+import com.shinhan.memento.service.MemberService;
 import com.shinhan.memento.service.MyPageService;
 
 import lombok.AllArgsConstructor;
@@ -30,15 +34,26 @@ import lombok.AllArgsConstructor;
 public class MyPageApiController {
 	
 	private final MyPageService myPageService;
-
+	private final MemberKeepgoingService memberKeepgoingService;
+	private final MemberService memberService;
+	
+	
+	@PostMapping("/spark-test-result")
+	public BaseResponse<SparkTestResultResponseDTO> sparkTestResult(@RequestBody SparkTestResultRequestDTO reqDTO,HttpSession session) {
+		Member loginUser = (Member) session.getAttribute("loginUser");
+		if (loginUser == null) throw new MypageException(BaseExceptionResponseStatus.NEED_LOGIN);
+		int userId = loginUser.getMemberId();
+		
+		SparkTestResultResponseDTO resDTO = myPageService.updateSparkType(reqDTO, userId);
+		return new BaseResponse<>(resDTO);
+	}
+	
 	@PostMapping("/validate-cash")
     public BaseResponse<ValidateCashResponseDTO> validateCash(@RequestBody ValidateCashRequestDTO reqDTO,HttpSession session) {
 		Member loginUser = (Member) session.getAttribute("loginUser");
 		if (loginUser == null) throw new MypageException(BaseExceptionResponseStatus.NEED_LOGIN);
 		int userId = loginUser.getMemberId();
-		
-		//테스트용
-		//int userId = 1;
+
 		ValidateCashResponseDTO resDTO = myPageService.validateCash(reqDTO, userId);
         return new BaseResponse<>(resDTO);
     }
@@ -48,9 +63,6 @@ public class MyPageApiController {
 		Member loginUser = (Member) session.getAttribute("loginUser");
 		if (loginUser == null) throw new MypageException(BaseExceptionResponseStatus.NEED_LOGIN);
 		int userId = loginUser.getMemberId();
-		
-		//테스트용
-		//int userId = 1;
 		
 		ConfirmCashResponseDTO resDTO = myPageService.confirmCash(reqDTO,userId);
         return new BaseResponse<>(resDTO);
