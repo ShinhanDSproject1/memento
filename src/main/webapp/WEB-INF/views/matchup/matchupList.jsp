@@ -132,42 +132,24 @@
             </c:forEach>
          </div>
          <div class="pagemove-list">
-            <div class="page-back-btn">
-               <img class="vuesax-linear-arrow-left"
-                  src="${cpath}/resources/images/arrow-left.svg" />
-            </div>
-            <div class="page-li-btn-seleted-page">
-               <div class="d-2-b-12-white">1</div>
-            </div>
-            <div class="page-li-btn">
-               <div class="d-2-r-12-black">2</div>
-            </div>
-            <div class="page-li-btn">
-               <div class="d-2-r-12-black">3</div>
-            </div>
-            <div class="page-li-btn">
-               <div class="d-2-r-12-black">4</div>
-            </div>
-            <div class="page-li-btn">
-               <div class="d-2-r-12-black">5</div>
-            </div>
-            <div class="page-li-btn">
-               <div class="d-2-r-12-black">6</div>
-            </div>
-            <div class="page-li-btn">
-               <div class="d-2-r-12-black">7</div>
-            </div>
-            <div class="page-li-btn">
-               <div class="d-2-r-12-black">8</div>
-            </div>
-            <div class="page-li-btn">
-               <div class="d-2-r-12-black">9</div>
-            </div>
-            <div class="page-after-btn">
-               <img class="vuesax-linear-arrow-right"
-                  src="${cpath}/resources/images/arrow-right.svg" />
-            </div>
-         </div>
+		    <c:if test="${paginationResult.pagination.page > 1}">
+		        <div class="page-back-btn" onclick="applyFilters(${paginationResult.pagination.page - 1})">
+		            <img class="vuesax-linear-arrow-left" src="${cpath}/resources/images/arrow-left.svg" />
+		        </div>
+		    </c:if>
+		
+		    <c:forEach var="page" begin="${paginationResult.startPage}" end="${paginationResult.endPage}">
+		        <div class="${page == paginationResult.pagination.page ? 'page-li-btn-seleted-page' : 'page-li-btn'}" onclick="applyFilters(${page})">
+		            <div class="${page == paginationResult.pagination.page ? 'd-2-b-12-white' : 'd-2-r-12-black'}">${page}</div>
+		        </div>
+		    </c:forEach>
+		
+		    <c:if test="${paginationResult.pagination.page < paginationResult.totalPageCount}">
+		        <div class="page-after-btn" onclick="applyFilters(${paginationResult.pagination.page + 1})">
+		            <img class="vuesax-linear-arrow-right" src="${cpath}/resources/images/arrow-right.svg" />
+		        </div>
+		    </c:if>
+		 </div>
       </div>
    </div>
    </div>
@@ -177,7 +159,6 @@
 <script>
    const cpath = '${cpath}';
 </script>
-
 
 <script src="${cpath}/resources/js/matchup/matchupList.js"></script>
 <script src="${pageContext.request.contextPath}/resources/js/header.js"></script>

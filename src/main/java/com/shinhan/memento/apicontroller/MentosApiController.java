@@ -1,13 +1,14 @@
-package com.shinhan.memento.controller;
+package com.shinhan.memento.apicontroller;
 
 import java.util.HashMap;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.shinhan.memento.common.exception.MemberException;
 import com.shinhan.memento.common.exception.MentosException;
@@ -26,32 +27,33 @@ import lombok.extern.slf4j.Slf4j;
 @RestController
 @RequestMapping("/mentos")
 public class MentosApiController {
-	
+
 	@Autowired
 	private MentosService mentosService;
-	
+
 	@Autowired
 	private MemberService memberService;
 
 	/**
-	 * 멘토스 생성 
+	 * 멘토스 생성
 	 */
 	@PostMapping("")
-	public BaseResponse<Void> createmento(@RequestBody CreateMentosDTO dto) {
+	public BaseResponse<Void> createmento(@RequestPart("data") CreateMentosDTO dto,
+			@RequestPart(value = "image", required = false) MultipartFile imageFile) {
 		log.info("[MentosController.createMento]");
-		
+
 		// mentoId 로 들어온 식별자값이 db에서 유효한 사용자인지 검증
 		Map<String, Object> memberCheckParams = new HashMap<>();
 		memberCheckParams.put("memberId", dto.getMentoId());
 		memberCheckParams.put("userType", String.valueOf(UserType.MENTO));
 		memberCheckParams.put("status", String.valueOf(BaseStatus.ACTIVE));
 		Member member = memberService.findMemberById(memberCheckParams);
-		
-		if(member==null) {
+
+		if (member == null) {
 			throw new MemberException(BaseExceptionResponseStatus.CANNOT_FOUND_MENTO);
 		}
-		
-		boolean result = mentosService.createMentos(dto);
+
+		boolean result = mentosService.createMentos(dto,imageFile);
 		if (!result) {
 			throw new MentosException(BaseExceptionResponseStatus.CANNOT_CREATE_MENTOS);
 		}

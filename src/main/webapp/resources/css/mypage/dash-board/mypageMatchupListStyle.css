@@ -2,6 +2,14 @@
    Base & Layout Styles
    ========================================================================== */
 
+
+.page-container {
+	flex: 1;
+	padding: 40px;
+	box-sizing: border-box;
+}
+
+
 body {
 	font-family: 'Inter', sans-serif;
 	margin: 0;
@@ -20,21 +28,16 @@ a:hover {
 	color: var(--a-black) !important;
 }
 
-.page-container {
-	flex: 1;
-	box-sizing: border-box;
-}
+
+
 /* ==========================================================================
    Matchup List Section
    ========================================================================== */
 
 .matchup-list {
 	box-sizing: border-box;
-	padding:40px;
 }
-.matchup-list{
-	padding:40px;
-}
+
 .matchup-list__container {
 	max-width: 964px;
 	margin: 0 auto;
@@ -47,7 +50,7 @@ a:hover {
 	font-size: 32px;
 	line-height: 1.2;
 	text-align: center;
-	margin-bottom: 4vh;
+	margin-bottom: 46px;
 }
 
 .matchup-list__cards {
@@ -65,14 +68,15 @@ a:hover {
 	border: 1px solid rgba(0, 0, 0, 0.3);
 	border-radius: 10px;
 	box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
-	padding: 28px;
+	padding: 24px;
+	position: relative; /* For action buttons positioning */
 }
 
 .matchup-card__content {
 	display: flex;
 	gap: 30px;
 	width: 100%;
-	align-items: center;
+	align-items: flex-start;
 }
 
 .matchup-card__avatar {
@@ -85,7 +89,6 @@ a:hover {
 .matchup-card__details {
 	flex-grow: 1;
 	display: flex;
-	gap:15px;
 	flex-direction: column;
 }
 
@@ -94,6 +97,7 @@ a:hover {
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
+	margin-bottom: 19px;
 }
 
 .matchup-card__tags {
@@ -119,7 +123,7 @@ a:hover {
 	color: #000000;
 	font-family: 'Inter', sans-serif;
 	font-weight: 600;
-	font-size: 20px;
+	font-size: 24px;
 }
 
 /* Session Count Modifiers */
@@ -135,17 +139,10 @@ a:hover {
 .matchup-card__title {
 	color: #000000;
 	font-family: 'Inter', sans-serif;
-	font-weight: 600;
+	font-weight: 400;
 	font-size: 24px;
-}
-.matchup-card-main{
-	display:flex;
-	align-items: center;
-	gap:5px;
-}
-
-.matchup-card-main .feat{
-	font-size:18px;
+	margin-top: 0;
+	margin-bottom: 10px;
 }
 
 /* Card Footer */
@@ -163,17 +160,17 @@ a:hover {
 }
 
 .matchup-card__schedule {
-	color: #8f8f8f;
+	color: #000000;
 	font-family: 'Inter', sans-serif;
 	font-weight: 400;
-	font-size: 18px;
+	font-size: 16px;
 }
 
 .matchup-card__location {
-	color: #8f8f8f;;
+	color: #000000;
 	font-family: 'Inter', sans-serif;
 	font-weight: 500;
-	font-size: 18px;
+	font-size: 20px;
 }
 
 .matchup-card__mentor {
@@ -202,7 +199,7 @@ a:hover {
 .matchup-card__role {
 	font-family: 'D2Coding';
 	font-weight: 700;
-	font-size: 20px;
+	font-size: 24px;
 }
 
 /* Role Modifiers */
@@ -258,8 +255,8 @@ a:hover {
 }
 
 .btn {
-	height: 23px;
-	border-radius: 50px;
+	height: 35px;
+	border-radius: 5px;
 	border: none;
 	cursor: pointer;
 	color: #ffffff;

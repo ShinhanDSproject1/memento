@@ -26,9 +26,17 @@
 	--font-display: 'Fredericka the Great', cursive;
 	--font-code: 'D2Coding', 'Courier New', monospace;
 }
+*{
+	margin:0px;
+	padding:0px;
+}
+
+body {
+  background-color: #f0faff;
+}
 
 .dashboard-container {
-	max-width: 1100px;
+	max-width: 1000px;
 	margin: 0 auto;
 	padding: 40px 20px;
 	display: flex;

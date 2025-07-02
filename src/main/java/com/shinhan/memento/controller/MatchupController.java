@@ -26,6 +26,8 @@ import com.shinhan.memento.dto.MatchupApproveMentoDTO;
 import com.shinhan.memento.dto.MatchupCreateDTO;
 import com.shinhan.memento.dto.MatchupDetailDTO;
 import com.shinhan.memento.dto.MatchupListDTO;
+import com.shinhan.memento.dto.MatchupPaginationDTO;
+import com.shinhan.memento.dto.MatchupPagingResponseDTO;
 import com.shinhan.memento.dto.MatchupUpdateDTO;
 import com.shinhan.memento.dto.MatchupWaitingMentoDTO;
 import com.shinhan.memento.model.Member;
@@ -179,8 +181,14 @@ public class MatchupController {
    /* 매치업 조회페이지 이동 */
    @GetMapping("/matchupList")
    public String matchupListPage(Model model) {
-      List<MatchupListDTO> matchups = matchupService.getMatchupList(new HashMap<>());
-      model.addAttribute("matchupList", matchups);
+
+      Map<String, Object> params = new HashMap<>();
+      params.put("pagination", new MatchupPaginationDTO());
+       
+      MatchupPagingResponseDTO<MatchupListDTO> response = matchupService.getMatchupList(params);
+       
+      model.addAttribute("matchupList", response.getList());
+      model.addAttribute("paginationResult", response.getPaginationResult());
       
       List<String> regionGroups = matchupService.getDistinctRegionGroups();
       List<CategoryDTO> categories = matchupService.getAllCategories();
@@ -196,24 +204,13 @@ public class MatchupController {
    /* 매치업 카테고리별 조회 */
    @ResponseBody
    @GetMapping("/getMatchupList")
-   public BaseResponse<List<MatchupListDTO>> getMatchupList(
-         @RequestParam(required = false) String regionGroup,
-         @RequestParam(required = false) Integer categoryId,
-         @RequestParam(required = false) String selectedDays,
-         @RequestParam(required = false) Integer languageId) {
-      
-      Map<String, Object> filters = new HashMap<>();
-      filters.put("regionGroup", regionGroup);
-      filters.put("categoryId", categoryId);
-      filters.put("selectedDays", selectedDays);
-      filters.put("languageId", languageId);
-      
-      List<MatchupListDTO> matchups = matchupService.getMatchupList(filters); 
-      
-      if (matchups == null) {
-         return new BaseResponse<>(BaseExceptionResponseStatus.FAILURE, null); /* 매치업은 에러 처리가 없어서 임시 처리 */
-      }
-      return new BaseResponse<>(matchups);
+   public BaseResponse<MatchupPagingResponseDTO<MatchupListDTO>> getMatchupList(MatchupPaginationDTO pagination) {
+       
+       Map<String, Object> params = new HashMap<>();
+       params.put("pagination", pagination);
+       
+       MatchupPagingResponseDTO<MatchupListDTO> matchups = matchupService.getMatchupList(params);
+       return new BaseResponse<>(matchups);
    }
    
    /* 매치업 상세 조회 페이지 이동 */
