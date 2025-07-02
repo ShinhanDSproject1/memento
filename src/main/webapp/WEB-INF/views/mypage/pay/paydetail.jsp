@@ -2,7 +2,6 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <c:set var="cpath" value="${pageContext.servletContext.contextPath}" />
-
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/resources/css/mypage/pay/mypagePayDetailStyle.css" />
 
@@ -93,3 +92,5 @@
 		</div>
 	</section>
 </div>
+
+<script src="${cpath}/resources/js/mypage/pay/payment-detail.js"></script>

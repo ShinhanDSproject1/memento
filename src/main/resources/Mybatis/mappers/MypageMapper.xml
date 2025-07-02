@@ -143,7 +143,7 @@
 	<select id="selectPaymentDetail" parameterType ="String" resultType="map">
 		select
 		p.order_id as orderId,
-		p.amount as amount amount,
+		p.amount as amount,
 		p.matchup_id as matchupId,
 		match.title as matchupTitle,
 		match.price as matchupPrice,
@@ -164,7 +164,7 @@
 		left join member m on match.leader_id = m.member_id
 		left join mentos mentos on p.mentos_id = mentos.mentos_id
 		left join keepgoing keep on p.keepgoing_id = keep.keepgoing_id
-		where p.order_id = #{orderId}
+		where p.order_id = #{_parameter}
 		and p.status != 'delete'
 	</select>
 

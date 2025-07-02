@@ -2,8 +2,11 @@ package com.shinhan.memento.service;
 
 import java.math.BigDecimal;
 import java.nio.charset.StandardCharsets;
+import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Base64;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -190,8 +193,17 @@ public class MyPageService {
 		public List<PaymentDetailResponseDTO> selectPaymentDetail(String orderId){
 			List<Map<String, Object>> result = mypageMapper.selectPaymentDetail(orderId);
 			List<PaymentDetailResponseDTO> selectPaymentDetailList = new ArrayList<>();
+			SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss"); // Adjust format as needed
 			
 			result.stream().forEach(data ->{
+				Timestamp payAtTimestamp = (Timestamp) data.get("PAYAT");
+				String payAtFormatted = null;
+				if (payAtTimestamp != null) {
+		            // Convert Timestamp to Date and then format to String
+		            payAtFormatted = formatter.format(new Date(payAtTimestamp.getTime()));
+		        }
+				
+				
 				PaymentDetailResponseDTO dto = PaymentDetailResponseDTO.builder()
 				.orderId((String)data.get("ORDERID"))
 				.amount(((BigDecimal)data.get("AMOUNT")).intValue())
@@ -207,7 +219,7 @@ public class MyPageService {
 				.keepgoingName(((BigDecimal)data.get("KEEPGOINGID")).intValue()==0 ? null : (String)data.get("KEEPGOINGNAME"))
 				.keepgoingImgLogo((String)data.get("KEEPGOINGIMGLOGO"))
 				.keepgoingPrice(data.get("KEEPGOINGPRICE") == null ? 0 : ((BigDecimal)data.get("KEEPGOINGPRICE")).intValue())
-				.payAt((String)data.get("PAYAT"))
+				.payAt(payAtFormatted)
 				.payType((String)data.get("PAYTYPE"))
 				.status((String)data.get("STATUS"))
 				.build();
