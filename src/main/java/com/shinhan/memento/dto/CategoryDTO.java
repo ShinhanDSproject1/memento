@@ -2,15 +2,14 @@ package com.shinhan.memento.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.Getter;
+import lombok.ToString;
 
 @AllArgsConstructor
-@NoArgsConstructor
 @Builder
-@Data
+@Getter
+@ToString
 public class CategoryDTO {
-	Integer category_id;
-	String category_name;
-	String status;
+    private int categoryId;
+    private String categoryName;
 }

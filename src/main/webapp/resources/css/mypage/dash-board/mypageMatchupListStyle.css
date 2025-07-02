@@ -2,6 +2,14 @@
    Base & Layout Styles
    ========================================================================== */
 
+
+.page-container {
+	flex: 1;
+	padding: 40px;
+	box-sizing: border-box;
+}
+
+
 body {
 	font-family: 'Inter', sans-serif;
 	margin: 0;
@@ -9,11 +17,18 @@ body {
 	background-color: #ffffff;
 }
 
-.page-container {
-	flex: 1;
-	padding: 40px;
-	box-sizing: border-box;
+a {
+	outline: none !important;
+	color: var(--a-black) !important;
+	text-decoration: none !important;
+	cursor: pointer !important;
 }
+
+a:hover {
+	color: var(--a-black) !important;
+}
+
+
 
 /* ==========================================================================
    Matchup List Section

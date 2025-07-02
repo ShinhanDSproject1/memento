@@ -59,7 +59,7 @@
 				<div id="slider-container">
 					<div class="home-page-1" id="slider">
 						<!-- 슬라이드 1 - SPARK TEST -->
-						<div class="page-1-com-1">
+						<div class="page-1-com-1" >
 							<div class="group-391">
 								<div class="spark-image-container">
 									<img class="spark-icon"

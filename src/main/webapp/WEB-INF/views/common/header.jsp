@@ -16,7 +16,7 @@
 	<img class="header-me-mento-2" src="${cpath}/resources/images/header/me-mento-20.png" />
 	
 	<div class="frame-6">
-		<a href="${cpath}/matchupList" class="match-up">
+		<a href="${cpath}/matchup/matchupList" class="match-up">
 			<div class="sub-title">매치업</div>
 		</a>
 		<a href="${cpath}/mentos/full" class="mentos">

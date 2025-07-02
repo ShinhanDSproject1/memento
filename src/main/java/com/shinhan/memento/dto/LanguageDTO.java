@@ -2,15 +2,14 @@ package com.shinhan.memento.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.Getter;
+import lombok.ToString;
 
-@Data
-@NoArgsConstructor
 @AllArgsConstructor
 @Builder
+@Getter
+@ToString
 public class LanguageDTO {
-	Integer language_id;
-	String language_name;
-	String status;
+    private int languageId;
+    private String languageName;
 }

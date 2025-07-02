@@ -9,5 +9,5 @@ public interface MentosDAO {
     List<MentosEntity> selectPreMentos(MentosListRequestDTO reqDTO);
     List<MentosEntity> selectMentos(MentosListRequestDTO reqDTO);
     int countTotalPages(MentosListRequestDTO reqDTO);
+    int insertMentos(CreateMentosDTO dto);
 }
-

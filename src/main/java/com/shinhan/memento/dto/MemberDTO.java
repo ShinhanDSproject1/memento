@@ -12,19 +12,11 @@ import lombok.NoArgsConstructor;
 @Builder
 @Data
 public class MemberDTO {
-	Integer member_id;
-	Integer match_type_id;
-	String email;
-	String nickname;
-	String phone_number;
-	String user_type;
-	Integer point;
-	String introduce_mento;
-	Integer score;
-	String region_group;
-	String region_subgroup;
-	String region_detail;
-	Date created_at;
-	Date updated_at;
-	String status;
+    private int member_id;
+    private String email;
+    private String nickname;
+    private String user_type;
+    private String status;
+    private String profile_image_url;
+    // 필요 시 추가 필드 작성
 }
