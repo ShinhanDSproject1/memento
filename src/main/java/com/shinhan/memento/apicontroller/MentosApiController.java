@@ -4,6 +4,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -12,15 +14,17 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.shinhan.memento.common.exception.MemberException;
+import com.shinhan.memento.common.exception.MemberMentosException;
 import com.shinhan.memento.common.exception.MentosException;
 import com.shinhan.memento.common.response.BaseResponse;
 import com.shinhan.memento.common.response.status.BaseExceptionResponseStatus;
 import com.shinhan.memento.dto.CreateMentosDTO;
 import com.shinhan.memento.dto.JoinMentosDTO;
-import com.shinhan.memento.model.BaseStatus;
 import com.shinhan.memento.model.Member;
+import com.shinhan.memento.model.MemberMentos;
 import com.shinhan.memento.model.Mentos;
 import com.shinhan.memento.model.UserType;
+import com.shinhan.memento.service.MemberMentosService;
 import com.shinhan.memento.service.MemberService;
 import com.shinhan.memento.service.MentosService;
 
@@ -36,6 +40,9 @@ public class MentosApiController {
 
 	@Autowired
 	private MemberService memberService;
+	
+	@Autowired
+	private MemberMentosService memberMentosService;
 
 	/**
 	 * 멘토스 생성
@@ -63,6 +70,9 @@ public class MentosApiController {
 	@PostMapping("/join")
 	public BaseResponse<Void> joinMentos(@RequestBody JoinMentosDTO joinMentosDto) {
 		log.info("[MentosController.joinMentos]");
+		
+		// 해당 memberId, mentosId 로 이미 참여신청이 되어 있는건 없는지 찾아봐야함!!!!!
+		
 		Member member = checkValidMemberById(joinMentosDto.getMemberId());
 		if (member == null) {
 			throw new MemberException(BaseExceptionResponseStatus.CANNOT_FOUND_MEMBER);
@@ -73,7 +83,7 @@ public class MentosApiController {
 			throw new MentosException(BaseExceptionResponseStatus.CANNOT_FOUND_MENTOS);
 		}
 		
-		int result = mentosService.joinMentos(joinMentosDto);
+		int result = memberMentosService.joinMentos(joinMentosDto);
 		if(result == 0 ) { //무조건 1개만 생기게 해야하는데 그 멱등성에 대한 처리는 후에 하기...
 			throw new MentosException(BaseExceptionResponseStatus.CANNOT_JOIN_MENTOS);
 		}
@@ -102,5 +112,27 @@ public class MentosApiController {
 	private Member checkValidMemberById(int memberId) {
 		log.info("[MentosApiController.checkValidMemberById]");
 		return memberService.findMemberById(memberId);
+	}
+	
+	/**
+	 * 멘토스 참여 취소하기(신청 취소)
+	 */
+	@PatchMapping("/join/cancel")
+	public BaseResponse<Void> cancelJoinMentos(@RequestBody JoinMentosDTO joinMentosDto){
+		log.info("MentosApiController.cancelJoinMentos");
+		
+		MemberMentos memberMentos = memberMentosService.checkValidMemberMentos(joinMentosDto);
+		if(memberMentos == null) {
+			throw new MemberMentosException(BaseExceptionResponseStatus.CANNOT_FOUND_MEMBER_MENTOS);
+		}
+		
+		System.out.println(memberMentos.getMemberId());
+		
+		int result = memberMentosService.cancelJoinMentos(memberMentos.getMemberMentosId());
+		if(result==0) {
+			throw new MemberMentosException(BaseExceptionResponseStatus.CANNOT_CANCEL_MEMBER_MENTOS);
+		}
+		
+		return new BaseResponse<>(null);
 	}
 }
