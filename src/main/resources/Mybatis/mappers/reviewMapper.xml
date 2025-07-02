@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.shinhan.memento.mapper.ReviewMapper">
+
+	<select id="calculateAvgReviews" parameterType="int" resultType="com.shinhan.memento.dto.ReviewSummaryDTO">
+		select mentos_id, avg(score)
+		from review
+		where mentos_id=#{mentosId}
+		group by mentos_id
+	</select>
+
+</mapper>

@@ -37,8 +37,8 @@ public class CreateMentosDTO {
 
 		private String content;
 
-		private int matchTypeIdFirst;
-		private int matchTypeIdSecond;
-		private int matchTypeIdThird;
+		private int matchTypeFirst;
+		private int matchTypeSecond;
+		private int matchTypeThird;
 
 }

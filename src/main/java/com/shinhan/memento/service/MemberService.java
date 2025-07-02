@@ -34,11 +34,11 @@ public class MemberService {
 	
 	@Autowired
 	MemberMapper memberMapper;
+
+    public Member findMemberById(Map<String, Object> params) {
+        return memberMapper.findMemberById(params);
+    }
 	
-	public Member findMemberById(Map<String, Object> params) {
-		log.info("[MemberService.findMemberById]");
-		return memberMapper.findMemberById(params);
-	}
 	
 	public Member kakaoLogin(String code, String clientId, String redirectUri) throws Exception {
 		// 1. access token 요청

@@ -32,6 +32,8 @@ public class MatchupController {
    @Autowired
    MatchupService matchupService;
    
+   
+   
    /* 매치업 삭제하기 - UPDATE STATUS = INACTIVE */
    @PostMapping("/deleteMatchup")
    @ResponseBody
