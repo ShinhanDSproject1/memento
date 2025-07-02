@@ -167,7 +167,6 @@ public class MyPageService {
 			
 			result.stream().forEach(data ->{
 			 	MyPaymentListResponseDTO dto = MyPaymentListResponseDTO.builder()
-			 	.paymentId(((BigDecimal)data.get("PAYMENTID")).intValue())
 			 	.orderId((String)data.get("ORDERID"))
 				.amount(((BigDecimal)data.get("AMOUNT")).intValue())
 				.matchupId(((BigDecimal)data.get("MATCHUPID")).intValue())

@@ -123,7 +123,6 @@
 
 	<select id="selectMyPaymentListById" parameterType="int" resultType="map">
 	select 
-	p.payment_id as paymentId,
 	p.order_id as orderId,
 	p.amount as amount,
 	p.matchup_id as matchupId,

@@ -8,7 +8,6 @@ import lombok.Getter;
 @Builder
 @AllArgsConstructor
 public class MyPaymentListResponseDTO {
-	private Integer paymentId;
 	private String orderId;
 	private Integer amount;
 	private Integer matchupId;
