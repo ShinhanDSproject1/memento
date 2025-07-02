@@ -26,40 +26,42 @@
       <result property="endTime" column="end_time" />
    </resultMap>
 
-   <resultMap id="matchupDetailResultMap"
-      type="com.shinhan.memento.dto.MatchupDetailDTO">
-      <id property="matchupId" column="matchup_id" />
-      <result property="categoryId" column="category_id" />
-      <result property="categoryName" column="category_name"/>
-      <result property="languageId" column="language_id" />
-      <result property="languageName" column="language_name"/>
-      <result property="leaderId" column="leader_id" />
-      <result property="mentoId" column="mento_id" />
-      <result property="regionGroup" column="region_group" />
-      <result property="regionSubgroup" column="region_subgroup" />
-      <result property="regionDetail" column="region_detail" />
-      <result property="startDay" column="start_day" />
-      <result property="endDay" column="end_day" />
-      <result property="startTime" column="start_time" />
-      <result property="endTime" column="end_time" />
-      <result property="totalCount" column="count" />
-      <result property="matchupCount" column="matchup_count" />
-      <result property="minMember" column="min_member" />
-      <result property="maxMember" column="max_member" />
-      <result property="price" column="price" />
-      <result property="content" column="content" />
-      <result property="title" column="title" />
-      <result property="matchTypeFirst" column="match_type_first" />
-      <result property="matchTypeSecond" column="match_type_second" />
-      <result property="matchTypeThird" column="match_type_third" />
-      <result property="matchTypeFirstName" column="match_type_first_name"/>
-      <result property="matchTypeSecondName" column="match_type_second_name"/>
-      <result property="matchTypeThirdName" column="match_type_third_name"/>
-      <result property="hasMento" column="has_mento" />
-      <result property="selectedDays" column="selected_days" />
-      <result property="mentoNickname" column="mento_nickname" />
-      <result property="mentoProfileImageUrl" column="mento_profile_image_url" />
-   </resultMap>
+	<resultMap id="matchupDetailResultMap"
+	     type="com.shinhan.memento.dto.MatchupDetailDTO">
+	     <id property="matchupId" column="matchup_id" />
+	     <result property="categoryId" column="category_id" />
+	     <result property="categoryName" column="category_name"/>
+	     <result property="languageId" column="language_id" />
+	     <result property="languageName" column="language_name"/>
+	     <result property="leaderId" column="leader_id" />
+	     <result property="mentoId" column="mento_id" />
+	     <result property="regionGroup" column="region_group" />
+	     <result property="regionSubgroup" column="region_subgroup" />
+	     <result property="regionDetail" column="region_detail" />
+	     <result property="startDay" column="start_day" />
+	     <result property="endDay" column="end_day" />
+	     <result property="startTime" column="start_time" />
+	     <result property="endTime" column="end_time" />
+	     <result property="totalCount" column="count" />
+	     <result property="matchupCount" column="matchup_count" />
+	     <result property="minMember" column="min_member" />
+	     <result property="maxMember" column="max_member" />
+	     <result property="price" column="price" />
+	     <result property="content" column="content" />
+	     <result property="title" column="title" />
+	     <result property="matchTypeFirst" column="match_type_first" />
+	     <result property="matchTypeSecond" column="match_type_second" />
+	     <result property="matchTypeThird" column="match_type_third" />
+	     <result property="matchTypeFirstName" column="match_type_first_name"/>
+	     <result property="matchTypeSecondName" column="match_type_second_name"/>
+	     <result property="matchTypeThirdName" column="match_type_third_name"/>
+	     <result property="hasMento" column="has_mento" />
+	     <result property="selectedDays" column="selected_days" />
+	     <result property="mentoNickname" column="mento_nickname" />
+	     <result property="mentoProfileImageUrl" column="mento_profile_image_url" />
+	     <result property="leaderNickname" column="leader_nickname" />
+	     <result property="leaderProfileImageUrl" column="leader_profile_image_url" />
+	</resultMap>
 
    <resultMap id="matchupModelResultMap" type="com.shinhan.memento.model.MatchUp">
         <id property="matchupId" column="matchup_id"/>
@@ -141,48 +143,51 @@
 	    </where>
 	</select>
 
-   <select id="selectByMatchupId" parameterType="int" resultMap="matchupDetailResultMap">
-       SELECT 
-           m.matchup_id, 
-           m.category_id, 
-           c.category_name AS category_name,
-           m.language_id, 
-           l.language_name AS language_name,
-           m.leader_id, 
-           m.mento_id, 
-           m.region_group, 
-           m.region_subgroup, 
-           m.region_detail, 
-           m.start_day, 
-           m.end_day, 
-           m.start_time, 
-           m.end_time, 
-           m.count, 
-           m.min_member, 
-           m.max_member, 
-           m.price, 
-           m.content, 
-           m.title, 
-           m.match_type_first, 
-           mt1.match_type_name AS match_type_first_name,
-           m.match_type_second, 
-           mt2.match_type_name AS match_type_second_name,
-           m.match_type_third, 
-           mt3.match_type_name AS match_type_third_name,
-           m.has_mento, 
-           m.selected_days,
-           approved_mento.NICKNAME AS mento_nickname,
-           approved_mento.PROFILE_IMAGE_URL AS mento_profile_image_url
-       FROM matchup m
-       LEFT JOIN category c ON m.category_id = c.category_id
-       LEFT JOIN language l ON m.language_id = l.language_id
-       LEFT JOIN match_type mt1 ON m.match_type_first = mt1.match_type_id
-       LEFT JOIN match_type mt2 ON m.match_type_second = mt2.match_type_id
-       LEFT JOIN match_type mt3 ON m.match_type_third = mt3.match_type_id
-       LEFT JOIN MEMBER approved_mento ON m.mento_id = approved_mento.MEMBER_ID
-       WHERE m.matchup_id = #{matchupId}
-       AND m.status = 'ACTIVE'
-   </select>
+	<select id="selectByMatchupId" parameterType="int" resultMap="matchupDetailResultMap">
+	    SELECT 
+	        m.matchup_id, 
+	        m.category_id, 
+	        c.category_name,
+	        m.language_id, 
+	        l.language_name,
+	        m.leader_id, 
+	        m.mento_id, 
+	        m.region_group, 
+	        m.region_subgroup, 
+	        m.region_detail, 
+	        m.start_day, 
+	        m.end_day, 
+	        m.start_time, 
+	        m.end_time, 
+	        m.count, 
+	        m.min_member, 
+	        m.max_member, 
+	        m.price, 
+	        m.content, 
+	        m.title, 
+	        m.match_type_first, 
+	        mt1.match_type_name AS match_type_first_name,
+	        m.match_type_second, 
+	        mt2.match_type_name AS match_type_second_name,
+	        m.match_type_third, 
+	        mt3.match_type_name AS match_type_third_name,
+	        m.has_mento, 
+	        m.selected_days,
+	        approved_mento.NICKNAME AS mento_nickname,
+	        approved_mento.PROFILE_IMAGE_URL AS mento_profile_image_url,
+	        leader_info.NICKNAME AS leader_nickname,
+	        leader_info.PROFILE_IMAGE_URL AS leader_profile_image_url
+	    FROM matchup m
+	    LEFT JOIN category c ON m.category_id = c.category_id
+	    LEFT JOIN language l ON m.language_id = l.language_id
+	    LEFT JOIN match_type mt1 ON m.match_type_first = mt1.match_type_id
+	    LEFT JOIN match_type mt2 ON m.match_type_second = mt2.match_type_id
+	    LEFT JOIN match_type mt3 ON m.match_type_third = mt3.match_type_id
+	    LEFT JOIN MEMBER approved_mento ON m.mento_id = approved_mento.MEMBER_ID
+	    LEFT JOIN MEMBER leader_info ON m.leader_id = leader_info.MEMBER_ID
+	    WHERE m.matchup_id = #{matchupId}
+	      AND m.status = 'ACTIVE'
+	</select>
 
    <select id="getDistinctRegionGroups" resultType="string">
       SELECT DISTINCT

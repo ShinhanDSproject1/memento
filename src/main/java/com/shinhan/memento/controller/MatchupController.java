@@ -27,6 +27,7 @@ import com.shinhan.memento.dto.MatchupApproveMentoDTO;
 import com.shinhan.memento.dto.MatchupCreateDTO;
 import com.shinhan.memento.dto.MatchupDetailDTO;
 import com.shinhan.memento.dto.MatchupListDTO;
+import com.shinhan.memento.dto.MatchupMemberDTO;
 import com.shinhan.memento.dto.MatchupPaginationDTO;
 import com.shinhan.memento.dto.MatchupPagingResponseDTO;
 import com.shinhan.memento.dto.MatchupUpdateDTO;
@@ -41,6 +42,19 @@ public class MatchupController {
    
    @Autowired
    MatchupService matchupService;
+   
+   /* 특정 매치업의 팀원 리스트를 JSON으로 반환 */
+   @GetMapping("/getMembers")
+   @ResponseBody
+   public BaseResponse<List<MatchupMemberDTO>> getMatchupMemberList(@RequestParam int matchupId) {
+       try {
+           List<MatchupMemberDTO> memberList = matchupService.getMatchupMembers(matchupId);
+           return new BaseResponse<>(memberList);
+       } catch (Exception e) {
+           e.printStackTrace();
+           return new BaseResponse<>(BaseExceptionResponseStatus.FAILURE, null);
+       }
+   }
    
    /* 특정 매치업에 멘티로 신청하기 */
    @PostMapping("/applyMentiMatchup")

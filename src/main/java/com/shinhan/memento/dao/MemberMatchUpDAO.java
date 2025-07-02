@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.shinhan.memento.dto.MatchupApplyMentiDTO;
+import com.shinhan.memento.dto.MatchupMemberDTO;
 import com.shinhan.memento.dto.MyMatchupListResponseDTO;
 
 import lombok.extern.slf4j.Slf4j;
@@ -64,4 +65,8 @@ public class MemberMatchUpDAO {
         return sqlSession.update(namespace + "inactivateMemberMatchupById", matchupId);
     }
 
+    /* 특정 매치업에 참여중인 멤버 목록 조회 */
+    public List<MatchupMemberDTO> findMembersByMatchupId(int matchupId) {
+        return sqlSession.selectList(namespace + "findMembersByMatchupId", matchupId);
+    }
 }
