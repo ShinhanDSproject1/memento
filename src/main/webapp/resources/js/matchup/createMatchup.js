@@ -101,13 +101,22 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     setupEditableContent('matchupTitle', 'matchupTitleHidden', 30);
-    setupEditableContent('matchupContent', 'matchupContentHidden', 500);
+    // setupEditableContent('matchupContent', 'matchupContentHidden', 500);
     
 
     // 매치업 생성 AJAX 요청
     const createBtn = document.getElementById('createMatchupBtn');
     if (createBtn) {
         createBtn.addEventListener('click', function() {
+         // SmartEditor2 값 업데이트
+         
+			if (window.oEditors && oEditors.getById && oEditors.getById["matchupContent"]) {
+			    oEditors.getById["matchupContent"].exec("UPDATE_CONTENTS_FIELD", []);
+			} else {
+			    alert("에디터가 아직 준비되지 않았습니다. 잠시 후 다시 시도해주세요.");
+			    return;
+			}
+        	
             const startDate = document.querySelector('input[name="startDate"]').value;
             const startTime = document.querySelector('input[name="startTime"]').value;
             const endDate = document.querySelector('input[name="endDate"]').value;
@@ -126,7 +135,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 matchupCount: 0,
                 kgCount: 0,
                 title: document.getElementById('matchupTitleHidden').value,
-                content: document.getElementById('matchupContentHidden').value,
+                content: document.getElementById('matchupContent').value, 
                 regionGroup: regionGroup,
                 regionSubgroup: regionSubgroup,
                 regionDetail: document.getElementById('detailAddress').value,
