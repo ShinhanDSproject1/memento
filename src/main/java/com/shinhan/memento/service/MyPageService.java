@@ -2,13 +2,16 @@ package com.shinhan.memento.service;
 
 import java.math.BigDecimal;
 import java.nio.charset.StandardCharsets;
+import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Base64;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
-
+import org.apache.ibatis.jdbc.Null;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
@@ -17,7 +20,6 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
-
 import com.shinhan.memento.common.exception.MypageException;
 import com.shinhan.memento.common.response.status.BaseExceptionResponseStatus;
 import com.shinhan.memento.dao.MyPageDAO;
@@ -26,6 +28,7 @@ import com.shinhan.memento.dto.ConfirmCashResponseDTO;
 import com.shinhan.memento.dto.MyMatchupListResponseDTO;
 import com.shinhan.memento.dto.MyMentosListResponseDTO;
 import com.shinhan.memento.dto.MyPaymentListResponseDTO;
+import com.shinhan.memento.dto.PaymentDetailResponseDTO;
 import com.shinhan.memento.dto.SparkTestResultRequestDTO;
 import com.shinhan.memento.dto.SparkTestResultResponseDTO;
 import com.shinhan.memento.dto.ValidateCashRequestDTO;
@@ -37,7 +40,6 @@ import com.shinhan.memento.model.PayType;
 import com.shinhan.memento.model.Payment;
 import com.shinhan.memento.model.Payment_Step;
 import com.shinhan.memento.model.SparkTestType;
-
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
@@ -46,6 +48,9 @@ public class MyPageService {
 
 	@Autowired
 	MyPageDAO myPageDAO;
+	
+	@Autowired
+	MypageMapper mypageMapper;
 
 	@Autowired
 	MypageMapper mypageMapper;
@@ -185,6 +190,45 @@ public class MyPageService {
 			
 			return selectMyPaymentList;
 		}
+
+		public List<PaymentDetailResponseDTO> selectPaymentDetail(String orderId){
+			List<Map<String, Object>> result = mypageMapper.selectPaymentDetail(orderId);
+			List<PaymentDetailResponseDTO> selectPaymentDetailList = new ArrayList<>();
+			SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss"); // Adjust format as needed
+			
+			result.stream().forEach(data ->{
+				Timestamp payAtTimestamp = (Timestamp) data.get("PAYAT");
+				String payAtFormatted = null;
+				if (payAtTimestamp != null) {
+		            // Convert Timestamp to Date and then format to String
+		            payAtFormatted = formatter.format(new Date(payAtTimestamp.getTime()));
+		        }
+				
+				PaymentDetailResponseDTO dto = PaymentDetailResponseDTO.builder()
+				.orderId((String)data.get("ORDERID"))
+				.amount(((BigDecimal)data.get("AMOUNT")).intValue())
+				.matchupId(((BigDecimal)data.get("MATCHUPID")).intValue())
+				.matchupTitle(((BigDecimal)data.get("MATCHUPID")).intValue()==0 ? null : (String)data.get("MATCHUPTITLE"))
+				.matchupPrice(data.get("MATCHUPPRICE") == null ? 0: ((BigDecimal)data.get("MATCHUPPRICE")).intValue())
+				.memberProfileImageUrl((String)data.get("MEMBERPROFILEIMAGEURL"))
+				.mentosId(((BigDecimal)data.get("MENTOSID")).intValue())
+				.mentosTitle(((BigDecimal)data.get("MENTOSID")).intValue()==0 ? null : (String)data.get("MENTOSTITLE"))
+				.mentosImage((String)data.get("MENTOSIMAGE"))
+				.mentosPrice(data.get("MENTOSPRICE") == null ? 0 : ((BigDecimal)data.get("MENTOSPRICE")).intValue())
+				.keepgoingId(((BigDecimal)data.get("KEEPGOINGID")).intValue())
+				.keepgoingName(((BigDecimal)data.get("KEEPGOINGID")).intValue()==0 ? null : (String)data.get("KEEPGOINGNAME"))
+				.keepgoingImgLogo((String)data.get("KEEPGOINGIMGLOGO"))
+				.keepgoingPrice(data.get("KEEPGOINGPRICE") == null ? 0 : ((BigDecimal)data.get("KEEPGOINGPRICE")).intValue())
+				.payAt(payAtFormatted)
+				.payType((String)data.get("PAYTYPE"))
+				.status((String)data.get("STATUS"))
+				.build();
+				
+				selectPaymentDetailList.add(dto);
+			});
+			
+			return selectPaymentDetailList;
+    }
 
 		public SparkTestResultResponseDTO updateSparkType(SparkTestResultRequestDTO reqDTO, int memberId) {
 			

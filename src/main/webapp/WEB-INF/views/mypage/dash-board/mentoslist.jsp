@@ -14,7 +14,7 @@
 		<div class="my-mentors__wrapper">
 			<h1 class="my-mentors__title">나의 멘토스 목록</h1>
 			<div class="my-mentors__container">
-				<div class="mentors-grid">
+				<div id="my-mentos-list" class="mentors-grid">
 					<!-- Card 1: Waiting -->
 					<article class="mentor-card mentor-card--waiting">
 						<img
@@ -196,6 +196,7 @@
 		</div>
 		<div
 			style="margin-top: 10px; display: flex; justify-content: flex-end; gap: 10px;">
+			<button id="review-delete-btn" onclick="submitReivew()">리뷰 삭제</button>
 			<button onclick="submitReview()">작성 완료</button>
 			<button onclick="closeModal()">닫기</button>
 		</div>

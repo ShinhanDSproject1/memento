@@ -7,17 +7,16 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-
 import com.shinhan.memento.dto.MyMatchupListResponseDTO;
 import com.shinhan.memento.dto.MyMentosListResponseDTO;
 import com.shinhan.memento.model.CashProduct;
 import com.shinhan.memento.model.Payment;
-
 import lombok.extern.slf4j.Slf4j;
+import com.shinhan.memento.dto.MyMatchupListResponseDTO;
+import com.shinhan.memento.dto.MyMentosListResponseDTO;
 
 @Slf4j
 @Repository
@@ -26,7 +25,7 @@ public class MyPageDAO implements MyPageDAOInterface{
 	@Autowired
 	SqlSession sqlSession;
 	
-	String namespace = "com.shinhan.memento.dao.MyPageDAOInterface.";
+	String namespace = "com.shinhan.memento.mapper.MypageMapper.";
 	
 	public CashProduct validateCash(int productId) {
 		return CashProduct.fromId(productId);
@@ -63,13 +62,11 @@ public class MyPageDAO implements MyPageDAOInterface{
 	    paramMap.put("updatedAt", new java.sql.Date(System.currentTimeMillis()));
 		return sqlSession.update(namespace + "updateUserBalance", paramMap);
 	}
-	
-	String listNameSpace = "com.memento.shinhan.mypagelist.";
-	
+
 	@Override
 	public List<MyMentosListResponseDTO> selectMyMentosListById(Integer memberId) {
 		
-		List<HashMap<String, Object>> dataList = sqlSession.selectList(listNameSpace + "selectMyMentosListById", memberId);
+		List<HashMap<String, Object>> dataList = sqlSession.selectList(namespace + "selectMyMentosListById", memberId);
 		List<MyMentosListResponseDTO> myMentosList = new ArrayList<>();
 		
 		dataList.stream().forEach(data -> {
@@ -107,6 +104,7 @@ public class MyPageDAO implements MyPageDAOInterface{
 
 		return myMentosList;
 	}
+  
 	@Override
 	public List<MyMatchupListResponseDTO> selectJoinListByMemberId(Integer memberId) {
 		// 1. 결과를 DTO 리스트로 직접 받습니다.
