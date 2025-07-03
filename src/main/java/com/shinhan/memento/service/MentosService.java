@@ -25,6 +25,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.shinhan.memento.dto.CategoryDTO;
 import com.shinhan.memento.dto.LanguageDTO;
 import com.shinhan.memento.dto.MatchTypeDTO;
+import com.shinhan.memento.dto.mentoDetail.MentoDetailClassDTO;
 import com.shinhan.memento.dto.mentos.CreateMentosDBDTO;
 import com.shinhan.memento.dto.mentos.CreateMentosDTO;
 import com.shinhan.memento.dto.mentos.GetMentosDTO;
@@ -246,5 +247,14 @@ public class MentosService {
 		}
 
 		return result;
+	}
+	
+	/**
+	 * 멘토 상세보기 페이지(홈화면)
+	 */
+	public List<Mentos> showInProgressMentosList(int memberId){
+		log.info("[MentoService.showInProgressMentosList]");
+		
+		return mentosMapper.showInProgressMentosList(memberId);
 	}
 }

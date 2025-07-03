@@ -132,5 +132,19 @@
 		and
 		status='ACTIVE'
 	</select>
+	
+	<select id="showInProgressMentosList" parameterType="int" resultMap="mentosResultMap">
+		select *
+		from (select * from mentos
+			where mento_id=#{mentoId}
+			and start_day &lt; = sysdate
+			and end_day &gt; = sysdate
+			and status='ACTIVE'
+			order by start_day desc
+		)
+		where rownum &lt; = 3
+	</select>
+	
+	
 </mapper>
 
