@@ -1,18 +1,19 @@
 package com.shinhan.memento.dto.mentos;
 
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor
+@Builder
 public class GetMentosDTO {
 	
 	private int mentosId;
-	private int remainDays; // d-2 여기에 들어가는 값
-	private int nowMemberCnt; // 현재 모집인원
-	private int maxMember;
+	private long daysBetween; // d-2 여기에 들어가는 값
+	private String remainMemberCnt; // 이거 그냥 그대로 프론트로 뿌리기
 	private String mentosImg;
 	private String title;
 	private String subTitle; // 소개글
