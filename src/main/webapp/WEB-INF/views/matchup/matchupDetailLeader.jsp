@@ -138,7 +138,7 @@
 									src="${cpath}/resources/images/icon-map-red.svg" alt="위치 아이콘" />
 								<div class="_4-77-1-f">${matchupDetail.formattedRegion}</div>
 							</div>
-							<div class="map-placeholder"></div>
+							<div id="map" class="map-placeholder"></div>
 						</div>
 					</div>
 					<div class="section-box">
@@ -242,6 +242,55 @@
 		</div>
 	</div>
 </div>
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=508d0978b8a40544a729f282b6187bd0&libraries=services&autoload=false"></script>
+<script>
+    kakao.maps.load(function() {
+        // 1. 지도를 담을 영역의 DOM 레퍼런스
+        const mapContainer = document.getElementById('map'); 
+        
+        // 2. 서버로부터 받은 주소 데이터
+        const address = "${matchupDetail.formattedRegion}";
+
+        // 주소 데이터가 비어있으면 실행하지 않습니다.
+        if (!address) {
+            console.warn("지도에 표시할 주소 정보가 없습니다.");
+            return;
+        }
+
+        // 3. 주소-좌표 변환 객체를 생성합니다
+        const geocoder = new kakao.maps.services.Geocoder();
+
+        // 4. 주소로 좌표를 검색합니다
+        geocoder.addressSearch(address, function(result, status) {
+
+            // 정상적으로 검색이 완료됐으면 
+            if (status === kakao.maps.services.Status.OK) {
+                
+                const coords = new kakao.maps.LatLng(result[0].y, result[0].x);
+
+                // 지도 옵션 설정
+                const mapOption = {
+                    center: coords, // 검색된 좌표를 지도의 중심으로 설정
+                    level: 3 // 지도의 확대 레벨
+                };
+
+                // 지도를 생성합니다    
+                const map = new kakao.maps.Map(mapContainer, mapOption); 
+
+                // 결과 좌표에 마커를 생성하고 표시합니다
+                const marker = new kakao.maps.Marker({
+                    map: map,
+                    position: coords
+                });
+
+            } else {
+                // 주소 검색에 실패했을 경우, 지도 컨테이너에 메시지를 표시합니다.
+                console.warn('주소 검색에 실패했습니다:', status);
+                mapContainer.innerHTML = '<div style="text-align:center; padding-top: 70px; color: #888;">정확한 위치를 찾을 수 없어요.</div>';
+            }
+        });
+    });
+</script>
 <script>
 	const cpath = '${cpath}';
 	const matchupDetail = {

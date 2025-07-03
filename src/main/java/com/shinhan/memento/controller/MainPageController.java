@@ -1,17 +1,34 @@
 package com.shinhan.memento.controller;
 
+import java.util.List;
+import java.util.Map;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+import com.shinhan.memento.dto.MainPageBannerDTO;
+import com.shinhan.memento.service.MainPageService;
 
 
 @RequestMapping("/mainpage")
 @Controller
 public class MainPageController {
 
-	@RequestMapping("/main1")
-	public String mainPageView() {
-		return "mainpage/mainpage";
-	}
+    @Autowired
+    private MainPageService mainPageService;
+	
+    @RequestMapping({"/main1", "/"})
+    public String mainPageView(Model model) {
+        Map<String, Integer> counts = mainPageService.getMainPageCounts();
+        model.addAttribute("counts", counts);
+        
+        List<MainPageBannerDTO> bannerList = mainPageService.getRecentBanners();
+        model.addAttribute("bannerList", bannerList);
+        
+        return "mainpage/mainpage";
+    }
 	
 	@RequestMapping("/404error")
 	public String error() {

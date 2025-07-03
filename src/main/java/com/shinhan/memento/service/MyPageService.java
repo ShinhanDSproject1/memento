@@ -6,8 +6,11 @@ import java.math.BigDecimal;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.StandardCopyOption;
+import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Base64;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -15,9 +18,7 @@ import java.util.Map;
 import java.util.Set;
 import java.util.UUID;
 import java.util.stream.Collectors;
-
 import javax.swing.ListModel;
-
 import org.apache.ibatis.jdbc.Null;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
@@ -29,7 +30,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.multipart.MultipartFile;
-
 import com.shinhan.memento.common.exception.MypageException;
 import com.shinhan.memento.common.response.status.BaseExceptionResponseStatus;
 import com.shinhan.memento.dao.MyPageDAO;
@@ -42,6 +42,7 @@ import com.shinhan.memento.dto.MyPaymentListResponseDTO;
 import com.shinhan.memento.dto.MyProfileDBUpdateDTO;
 import com.shinhan.memento.dto.MyProfileInfoResponseDTO;
 import com.shinhan.memento.dto.MyProfileUpdateRequestDTO;
+import com.shinhan.memento.dto.PaymentDetailResponseDTO;
 import com.shinhan.memento.dto.SparkTestResultRequestDTO;
 import com.shinhan.memento.dto.SparkTestResultResponseDTO;
 import com.shinhan.memento.dto.ValidateCashRequestDTO;
@@ -56,7 +57,6 @@ import com.shinhan.memento.model.Payment;
 import com.shinhan.memento.model.Payment_Step;
 import com.shinhan.memento.model.SparkTestType;
 import org.springframework.beans.factory.annotation.Value;
-
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
 
@@ -229,7 +229,7 @@ public class MyPageService {
 				log.error("이미지 업로드 실패", e);
 				return false;
 			}
-		}else{
+		} else {
 			imageUrl = dto.getOriginalProfileUrl();
 		}
 
@@ -259,70 +259,69 @@ public class MyPageService {
 				.regionGroup(regeionGroup == "" ? null : regeionGroup)
 				.regionSubGroup(regionSubGroup == "" ? null : regionSubGroup)
 				.regionDetail(regionDetail == "" ? null : regionDetail).profileImageUrl(imageUrl).build();
-				
+
 		int result = mypageMapper.updateProfileInfo(myProfileDBUpdateDTO);
 
 		List<String> inputInterestNamesList = new ArrayList<>();
 		String interestString = dto.getInterestNames();
-		
-        if (interestString != null && !interestString.trim().isEmpty()) {
-        	String processedNames = interestString.replaceAll("(?i)c#", "C_SHARP"); // 임시 문자로 변경
-        	String[] tags = processedNames.trim().split("\\s+");
-        	
-        	for (String tag : tags) {
-                String cleanTag = tag;
 
-                // 4. 태그가 #으로 시작하면 #을 제거
-                if (cleanTag.startsWith("#")) {
-                    cleanTag = cleanTag.substring(1);
-                }
+		if (interestString != null && !interestString.trim().isEmpty()) {
+			String processedNames = interestString.replaceAll("(?i)c#", "C_SHARP"); // 임시 문자로 변경
+			String[] tags = processedNames.trim().split("\\s+");
 
-                // 5. C# 복원
-                if (cleanTag.equalsIgnoreCase("C_SHARP")) {
-                    cleanTag = "C#";
-                }
-                
-                // 6. *** 가장 중요한 부분 ***
-                //    정리된 태그가 비어있지 않을 때만 리스트에 추가합니다.
-                if (!cleanTag.isEmpty()) {
-                    inputInterestNamesList.add(cleanTag);
-                }
-            }
-        }
-        
-        // 입력받은 관심사 이름을 Set으로 변환
-        Set<String> inputInterestNameSet = inputInterestNamesList.stream()
-                .map(String::toUpperCase) // <-- 이 부분을 추가하여 대문자로 통일
-                .collect(Collectors.toSet());
-        
-        for(String input:inputInterestNameSet) {
-        	System.out.println("after: "+input);
-        }
-        
-        
-		// member id로 이전 관심사들 모두 조회
-		List<InterestDTO> beforeMyInterestList = interestMapper.getMemberInterestsByMemberId(memberId);
-		
-		Set<String> beforeMyInterSet = new HashSet<String>();
+			for (String tag : tags) {
+				String cleanTag = tag;
 
-		if  (beforeMyInterestList != null && !beforeMyInterestList.isEmpty()) {
-			for (InterestDTO interest : beforeMyInterestList) {
-				if (interest != null && interest.getInterestName() != null) {
-		            beforeMyInterSet.add(interest.getInterestName().toUpperCase());
-		        }
+				// 4. 태그가 #으로 시작하면 #을 제거
+				if (cleanTag.startsWith("#")) {
+					cleanTag = cleanTag.substring(1);
+				}
+
+				// 5. C# 복원
+				if (cleanTag.equalsIgnoreCase("C_SHARP")) {
+					cleanTag = "C#";
+				}
+
+				// 6. *** 가장 중요한 부분 ***
+				// 정리된 태그가 비어있지 않을 때만 리스트에 추가합니다.
+				if (!cleanTag.isEmpty()) {
+					inputInterestNamesList.add(cleanTag);
+				}
 			}
 		}
-		for(String name : beforeMyInterSet) {
+
+		// 입력받은 관심사 이름을 Set으로 변환
+		Set<String> inputInterestNameSet = inputInterestNamesList.stream().map(String::toUpperCase) // <-- 이 부분을 추가하여
+																									// 대문자로 통일
+				.collect(Collectors.toSet());
+
+		for (String input : inputInterestNameSet) {
+			System.out.println("after: " + input);
+		}
+
+		// member id로 이전 관심사들 모두 조회
+		List<InterestDTO> beforeMyInterestList = interestMapper.getMemberInterestsByMemberId(memberId);
+
+		Set<String> beforeMyInterSet = new HashSet<String>();
+
+		if (beforeMyInterestList != null && !beforeMyInterestList.isEmpty()) {
+			for (InterestDTO interest : beforeMyInterestList) {
+				if (interest != null && interest.getInterestName() != null) {
+					beforeMyInterSet.add(interest.getInterestName().toUpperCase());
+				}
+			}
+		}
+		for (String name : beforeMyInterSet) {
 			System.out.println("before: " + name);
 		}
-		
+
 		if (inputInterestNameSet.isEmpty()) {
 			beforeMyInterestList.stream().forEach(interest -> {
 				interestMapper.deleteMemberInterest(memberId, interest.getInterestId());
 			});
 		} else {
 			System.out.println(inputInterestNameSet.equals(beforeMyInterSet));
-			if(!inputInterestNameSet.equals(beforeMyInterSet)) {
+			if (!inputInterestNameSet.equals(beforeMyInterSet)) {
 				// 현재 - 과거 (현재에는 있고 과거에는 없는) -> insert
 				Set<String> differenceAB = inputInterestNameSet.stream()
 						.filter(element -> !beforeMyInterSet.contains(element)).collect(Collectors.toSet());
@@ -330,29 +329,29 @@ public class MyPageService {
 				// 과거 - 현재 (과거에는 있고 현재에는 없는) -> delete
 				Set<String> differenceBA = beforeMyInterSet.stream()
 						.filter(element -> !inputInterestNameSet.contains(element)).collect(Collectors.toSet());
-				
-				//삽입로직
-				//삽입로직 (MERGE 구문 사용 시)
-				for(String interestName : differenceAB) {
-				    // 1. MERGE 구문이 알아서 삽입/무시를 처리해줍니다.
-				    interestMapper.insertInterest(interestName);
-				    
-				    // 2. 이제 interest는 반드시 존재하므로, 바로 조회해서 사용합니다.
-				    interestMapper.insertMemberInterestByName(memberId, interestName);
+
+				// 삽입로직
+				// 삽입로직 (MERGE 구문 사용 시)
+				for (String interestName : differenceAB) {
+					// 1. MERGE 구문이 알아서 삽입/무시를 처리해줍니다.
+					interestMapper.insertInterest(interestName);
+
+					// 2. 이제 interest는 반드시 존재하므로, 바로 조회해서 사용합니다.
+					interestMapper.insertMemberInterestByName(memberId, interestName);
 				}
-				
-				//삭제로직
-				for(String interestName:differenceBA) {
+
+				// 삭제로직
+				for (String interestName : differenceBA) {
 					System.out.println(interestName);
-					InterestDTO interest =  interestMapper.getInterestByName(interestName);
+					InterestDTO interest = interestMapper.getInterestByName(interestName);
 					System.out.println(interest);
-					if(interest != null) {
+					if (interest != null) {
 						interestMapper.deleteMemberInterest(memberId, interest.getInterestId());
 					}
 				}
-			}	
-		}	
-				
+			}
+		}
+
 		return result == 1;
 	}
 
@@ -384,6 +383,58 @@ public class MyPageService {
 			return fileName.substring(fileName.lastIndexOf('.') + 1);
 		}
 		return null;
+	}
+
+	public List<PaymentDetailResponseDTO> selectPaymentDetail(String orderId) {
+		List<Map<String, Object>> result = mypageMapper.selectPaymentDetail(orderId);
+		List<PaymentDetailResponseDTO> selectPaymentDetailList = new ArrayList<>();
+		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss"); // Adjust format as needed
+
+		result.stream().forEach(data -> {
+			Timestamp payAtTimestamp = (Timestamp) data.get("PAYAT");
+			String payAtFormatted = null;
+			if (payAtTimestamp != null) {
+				// Convert Timestamp to Date and then format to String
+				payAtFormatted = formatter.format(new Date(payAtTimestamp.getTime()));
+			}
+
+			PaymentDetailResponseDTO dto = PaymentDetailResponseDTO.builder().orderId((String) data.get("ORDERID"))
+					.amount(((BigDecimal) data.get("AMOUNT")).intValue())
+					.matchupId(((BigDecimal) data.get("MATCHUPID")).intValue())
+					.matchupTitle(((BigDecimal) data.get("MATCHUPID")).intValue() == 0 ? null
+							: (String) data.get("MATCHUPTITLE"))
+					.matchupPrice(
+							data.get("MATCHUPPRICE") == null ? 0 : ((BigDecimal) data.get("MATCHUPPRICE")).intValue())
+					.memberProfileImageUrl((String) data.get("MEMBERPROFILEIMAGEURL"))
+					.mentosId(((BigDecimal) data.get("MENTOSID")).intValue())
+					.mentosTitle(((BigDecimal) data.get("MENTOSID")).intValue() == 0 ? null
+							: (String) data.get("MENTOSTITLE"))
+					.mentosImage((String) data.get("MENTOSIMAGE"))
+					.mentosPrice(
+							data.get("MENTOSPRICE") == null ? 0 : ((BigDecimal) data.get("MENTOSPRICE")).intValue())
+					.keepgoingId(((BigDecimal) data.get("KEEPGOINGID")).intValue())
+					.keepgoingName(((BigDecimal) data.get("KEEPGOINGID")).intValue() == 0 ? null
+							: (String) data.get("KEEPGOINGNAME"))
+					.keepgoingImgLogo((String) data.get("KEEPGOINGIMGLOGO"))
+					.keepgoingPrice(data.get("KEEPGOINGPRICE") == null ? 0
+							: ((BigDecimal) data.get("KEEPGOINGPRICE")).intValue())
+					.payAt(payAtFormatted).payType((String) data.get("PAYTYPE")).status((String) data.get("STATUS"))
+					.build();
+
+			selectPaymentDetailList.add(dto);
+		});
+
+		return selectPaymentDetailList;
+	}
+
+	public SparkTestResultResponseDTO updateSparkType(SparkTestResultRequestDTO reqDTO, int memberId) {
+
+		log.info("[updateSparkType - service]");
+		SparkTestType sparkType = reqDTO.getSparkResultType();
+		int metchTypeId = mypageMapper.selectMatchTypebyName(sparkType);
+		int updateTypeResult = mypageMapper.updateMyTypeByMemberId(metchTypeId, memberId);
+
+		return SparkTestResultResponseDTO.builder().result(updateTypeResult == 1 ? "success" : "fail").build();
 	}
 
 }

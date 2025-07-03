@@ -11,6 +11,7 @@
 <link rel="stylesheet" href="${cpath}/resources/css/vars.css">
 <script
     src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+<script src="${cpath}/resources/smarteditor2/js/service/HuskyEZCreator.js" charset="utf-8"></script>
 </head>
 <body>
     <jsp:include page="/WEB-INF/views/matchup/updateConfirmModal.jsp" />
@@ -35,7 +36,7 @@
                 <div class="form-label">소개글</div>
             </div>
             <div class="input-container textarea-container">
-                <div id="matchupContent" class="editable-title" contenteditable="true" data-placeholder="활동 중심으로 소개해주세요.">${matchupDetail.content}</div>
+				<textarea id="matchupContent" name="content" rows="10" cols="100" style="width:100%;">${matchupDetail.content}</textarea>
             </div>
         </div>
 
@@ -179,5 +180,18 @@
         };
     </script>    
     <script src="${cpath}/resources/js/matchup/updateMatchup.js?v=<%= new java.util.Date().getTime() %>"></script>
+<script>
+  const cpath = '${cpath}';  // 이거 꼭 있어야 함!
+</script>
+<script type="text/javascript">
+  var oEditors = [];
+
+  nhn.husky.EZCreator.createInIFrame({
+    oAppRef: oEditors,
+    elPlaceHolder: "matchupContent",  // textarea id
+    sSkinURI: cpath + "/resources/smarteditor2/SmartEditor2Skin.html",
+    fCreator: "createSEditor2"
+  });
+</script>
 </body>
 </html>

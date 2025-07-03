@@ -79,6 +79,15 @@ function updateDropdownUI(list, displayElement, value) {
 
 // 수정하기 버튼 클릭 시, 서버로 데이터를 전송하는 메인 함수
 async function handleUpdate() {
+
+	// SmartEditor2의 textarea 값 반영
+	if (window.oEditors && oEditors.getById && oEditors.getById["matchupContent"]) {
+	    oEditors.getById["matchupContent"].exec("UPDATE_CONTENTS_FIELD", []);
+	} else {
+	    alert("에디터가 아직 준비되지 않았습니다. 잠시 후 다시 시도해주세요.");
+	    return;
+	}
+	
     const data = collectFormData();
     if (!data.title || !data.content) {
         alert('매치업명과 소개글은 필수 항목입니다.');
@@ -127,7 +136,7 @@ function collectFormData() {
     const matchupData = {
         matchupId: document.getElementById('matchupId').value,
         title: document.getElementById('matchupTitle').innerText,
-        content: document.getElementById('matchupContent').innerText,
+        content: document.getElementById('matchupContent').value,
         languageId: document.querySelector('input[name="languageId"]').value,
         categoryId: document.querySelector('input[name="categoryId"]').value,
         startDay: document.querySelector('input[name="startDay"]').value,

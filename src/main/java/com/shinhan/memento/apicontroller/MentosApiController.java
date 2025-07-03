@@ -1,14 +1,16 @@
 package com.shinhan.memento.apicontroller;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
@@ -18,8 +20,9 @@ import com.shinhan.memento.common.exception.MemberMentosException;
 import com.shinhan.memento.common.exception.MentosException;
 import com.shinhan.memento.common.response.BaseResponse;
 import com.shinhan.memento.common.response.status.BaseExceptionResponseStatus;
-import com.shinhan.memento.dto.CreateMentosDTO;
-import com.shinhan.memento.dto.JoinMentosDTO;
+import com.shinhan.memento.dto.mentos.CreateMentosDTO;
+import com.shinhan.memento.dto.mentos.GetMentosDTO;
+import com.shinhan.memento.dto.mentos.JoinMentosDTO;
 import com.shinhan.memento.model.Member;
 import com.shinhan.memento.model.MemberMentos;
 import com.shinhan.memento.model.Mentos;
@@ -115,6 +118,18 @@ public class MentosApiController {
 	}
 	
 	/**
+	 * 멘토스 메인페이지 리스트 조회 
+	 */
+	@GetMapping("")
+	public BaseResponse<List<GetMentosDTO>> showMentosList(@RequestParam(required = false) String regionGroup,
+			@RequestParam(required = false) Integer matchTypeId, @RequestParam(required = false) Integer categoryId,
+			@RequestParam(required = false) Integer languageId, @RequestParam(defaultValue = "1") int page) {
+		
+		log.info("[MentosApiController.showMentosList]");
+		return new BaseResponse<>(mentosService.showMentosList(regionGroup,matchTypeId,categoryId,languageId,page));
+	}
+	
+  /**
 	 * 멘토스 참여 취소하기(신청 취소)
 	 */
 	@PatchMapping("/join/cancel")
