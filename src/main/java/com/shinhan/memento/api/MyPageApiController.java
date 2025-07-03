@@ -33,24 +33,25 @@ import com.shinhan.memento.dto.SparkTestResultRequestDTO;
 import com.shinhan.memento.dto.SparkTestResultResponseDTO;
 import com.shinhan.memento.dto.ValidateCashRequestDTO;
 import com.shinhan.memento.dto.ValidateCashResponseDTO;
-import com.shinhan.memento.model.BaseStatus;
 import com.shinhan.memento.model.Member;
 import com.shinhan.memento.model.UserType;
 import com.shinhan.memento.service.MemberKeepgoingService;
 import com.shinhan.memento.service.MemberService;
 import com.shinhan.memento.service.MyPageService;
 import lombok.extern.slf4j.Slf4j;
-import lombok.AllArgsConstructor;
 
 @Slf4j
 @RestController
-@AllArgsConstructor
 @RequestMapping("/api/mypage")
 public class MyPageApiController {
+	@Autowired
+	MyPageService myPageService;
 	
-	private final MyPageService myPageService;
-	private final MemberKeepgoingService memberKeepgoingService;
-	private final MemberService memberService;
+	@Autowired
+	MemberKeepgoingService memberKeepgoingService;
+	
+	@Autowired
+	MemberService memberService;
 	
 	@PostMapping("/spark-test-result")
 	public BaseResponse<SparkTestResultResponseDTO> sparkTestResult(@RequestBody SparkTestResultRequestDTO reqDTO,HttpSession session) {
@@ -107,6 +108,7 @@ public class MyPageApiController {
 		boolean result = myPageService.updateProfile(userId,dto,imageFile);
 
 		return new BaseResponse<Boolean>(result);
+	}
 
 	@GetMapping(value="/page6/{memberId}", produces = "application/json")
 	public BaseResponse<List<MyMatchupListResponseDTO>> selectJoinListByMemberId(

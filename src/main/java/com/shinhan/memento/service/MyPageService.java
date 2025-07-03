@@ -206,7 +206,7 @@ public class MyPageService {
 
 		return SparkTestResultResponseDTO.builder().result(updateTypeResult == 1 ? "success" : "fail").build();
 	}
-
+	
 	@Transactional
 	public boolean updateProfile(Integer memberId, MyProfileUpdateRequestDTO dto, MultipartFile imgFile) {
 		String imageUrl = null;
@@ -425,16 +425,6 @@ public class MyPageService {
 		});
 
 		return selectPaymentDetailList;
-	}
-
-	public SparkTestResultResponseDTO updateSparkType(SparkTestResultRequestDTO reqDTO, int memberId) {
-
-		log.info("[updateSparkType - service]");
-		SparkTestType sparkType = reqDTO.getSparkResultType();
-		int metchTypeId = mypageMapper.selectMatchTypebyName(sparkType);
-		int updateTypeResult = mypageMapper.updateMyTypeByMemberId(metchTypeId, memberId);
-
-		return SparkTestResultResponseDTO.builder().result(updateTypeResult == 1 ? "success" : "fail").build();
 	}
 
 }
