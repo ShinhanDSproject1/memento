@@ -51,9 +51,6 @@ public class MyPageService {
 	
 	@Autowired
 	MypageMapper mypageMapper;
-
-	@Autowired
-	MypageMapper mypageMapper;
 	
 	public ValidateCashResponseDTO validateCash(ValidateCashRequestDTO reqDTO, int userId) {
 		CashProduct product = myPageDAO.validateCash(reqDTO.getCashProductID());

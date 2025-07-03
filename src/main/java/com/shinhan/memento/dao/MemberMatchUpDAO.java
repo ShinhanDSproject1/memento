@@ -1,7 +1,5 @@
 package com.shinhan.memento.dao;
 
-import java.time.LocalTime;
-import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Map;
 
@@ -11,7 +9,6 @@ import org.springframework.stereotype.Repository;
 
 import com.shinhan.memento.dto.MatchupApplyMentiDTO;
 import com.shinhan.memento.dto.MatchupMemberDTO;
-import com.shinhan.memento.dto.MyMatchupListResponseDTO;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -38,10 +35,6 @@ public class MemberMatchUpDAO {
         return sqlSession.selectOne(namespace + "checkIfAlreadyApplied", params);
     }
     
-    /* 매치업 비활성화 시 멤버들도 비활성화 */
-    public int inactivateMemberMatchupById(int matchupId) {
-        return sqlSession.update(namespace + "inactivateMemberMatchupById", matchupId);
-    }
 
     /* 특정 매치업에 참여중인 멤버 목록 조회 */
     public List<MatchupMemberDTO> findMembersByMatchupId(int matchupId) {
