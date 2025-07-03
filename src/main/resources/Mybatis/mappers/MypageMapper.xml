@@ -176,9 +176,31 @@
 	</select>
 	
 	<update id="updateMyTypeByMemberId">
-    UPDATE member
-    SET match_type_id = #{matchTypeId}
-    WHERE member_id = #{memberId}
-</update>
+	    UPDATE member
+	    SET match_type_id = #{matchTypeId}
+	    WHERE member_id = #{memberId}
+	</update>
+	
+	<select id="selectMyProfileInfo" parameterType="int" resultType="map">
+		select
+		m.profile_image_url as profileImgUrl,
+		m.NICKNAME as nickName,
+		m.INTRODUCE as introduce,
+		m.REGION_GROUP as regionGroup,
+		m.region_subgroup as regionSubGroup,
+		m.region_detail as regionDetail,
+		m.phone_number as phoneNumber,
+        i.interest_name as interestName
+		from member m
+		left join member_interest mi on m.member_id = mi.member_id
+		left join interest i on mi.interest_id = i.interest_id
+		where m.member_id = #{memberId}
+	</select>
+	
+	<update id="updateProfileInfo" parameterType="com.shinhan.memento.dto.MyProfileDBUpdateDTO">
+		update member
+		set NICKNAME = #{nickname}, PHONE_NUMBER = #{phoneNumber}, INTRODUCE = #{introduce}, REGION_GROUP = #{regionGroup} , REGION_SUBGROUP = #{regionSubGroup}, REGION_DETAIL = #{regionDetail}, PROFILE_IMAGE_URL = #{profileImageUrl}
+		where member_id = #{memberId}
+	</update>
 
 </mapper>

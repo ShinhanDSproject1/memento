@@ -5,39 +5,66 @@
   width: 100%;
 }
 
+#profile-img{
+	display:none;
+}
+.file-upload-label{
+	position:absolute;
+	top:100px;
+	left:100px;
+	color:#a6abbd;
+}
+
+.fa-up-right-from-square {
+  -webkit-transform: rotate(270deg);
+  -moz-transform: rotate(270deg);
+  -ms-transform: rotate(270deg);
+  -o-transform: rotate(270deg);
+  transform: rotate(270deg);
+  display: inline-block;
+}
+
 body {
   font-family: 'Inter', 'D2Coding', sans-serif;
   margin: 0;
   padding: 0;
-  background-color: #ffffff; /* style_1 from root node 298:17270 */
+  background-color: #ffffff;
+  /* style_1 from root node 298:17270 */
   display: block;
   justify-content: center;
   align-items: flex-start;
   min-height: 100vh;
-  padding-bottom: 50px; /* Arbitrary bottom padding */
+  padding-bottom: 50px;
+  /* Arbitrary bottom padding */
   box-sizing: border-box;
 }
 
 .profile-row-section {
   display: flex;
   flex-wrap: wrap;
-  gap: 20px; /* Common gap between cards */
-  margin-bottom: 20px; /* Space between sections */
+  gap: 20px;
+  /* Common gap between cards */
+  margin-bottom: 20px;
+  /* Space between sections */
   margin-left: auto;
   margin-right: auto;
 }
 
-.profile-edit-card { /* Corresponds to 298:17317 Frame 3592 */
+.profile-edit-card {
+  /* Corresponds to 298:17317 Frame 3592 */
   max-width: 1011px;
   width: 100%;
-  background-color: rgba(237, 246, 255, 0); /* style_2 */
-  border-radius: 10px; /* style_2 */
+  background-color: rgba(237, 246, 255, 0);
+  /* style_2 */
+  border-radius: 10px;
+  /* style_2 */
   box-sizing: border-box;
   margin-top: 10%;
   margin-left: 5%;
 }
 
-.page-title { /* style_3 */
+.page-title {
+  /* style_3 */
   color: rgba(0, 0, 0, 0.6);
   font-family: 'Inter', sans-serif;
   font-weight: 600;
@@ -46,7 +73,8 @@ body {
   margin: 0;
 }
 
-.action-buttons { /* style_4 */
+.action-buttons {
+  /* style_4 */
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -54,68 +82,92 @@ body {
 }
 
 .btn {
-  font-family: 'Inter', sans-serif; /* style_6 for text */
-  font-weight: 400; /* style_6 */
-  font-size: 20px; /* style_6 */
-  line-height: 24.20px; /* style_6 */
-  color: #ffffff; /* style_6 */
+  font-family: 'Inter', sans-serif;
+  /* style_6 for text */
+  font-weight: 400;
+  /* style_6 */
+  font-size: 20px;
+  /* style_6 */
+  line-height: 24.20px;
+  /* style_6 */
+  color: #ffffff;
+  /* style_6 */
   border: none;
   cursor: pointer;
-  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25); /* Common for style_5, style_7 */
-  border-radius: 15px; /* Common for style_5, style_7 */
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+  /* Common for style_5, style_7 */
+  border-radius: 15px;
+  /* Common for style_5, style_7 */
   display: flex;
   justify-content: center;
   align-items: center;
   text-decoration: none;
 }
 
-.btn-cancel { /* style_5 */
+.btn-cancel {
+  /* style_5 */
   background-color: #a6abbd;
   padding: 12px 15px;
 }
 
-.btn-save { /* style_7 */
+.btn-save {
+  /* style_7 */
   background-color: #0069f8;
   padding: 12px 16px;
 }
 
-.form-label { /* style_8 */
+.form-label {
+  /* style_8 */
   color: #000000;
-  font-family: 'D2Coding', sans-serif; /* Specific font for labels */
+  font-family: 'D2Coding', sans-serif;
+  /* Specific font for labels */
   font-weight: 400;
   font-size: 20px;
   line-height: 23.20px;
   flex-shrink: 0;
 }
 
-.form-input-field { /* style_12 */
+.form-input-field {
+  /* style_12 */
   border: 1px solid #a6abbd;
   border-radius: 10px;
   box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
-  padding: 20px 28px; /* Approx. from (text_y - rect_y) and (text_x - rect_x) */
+  padding: 20px 28px;
+  /* Approx. from (text_y - rect_y) and (text_x - rect_x) */
   box-sizing: border-box;
   width: 100%;
-  min-height: 66px; /* From Figma rectangles */
+  min-height: 66px;
+  /* From Figma rectangles */
   display: flex;
   align-items: center;
 }
 
-.form-input-text { /* style_13 */
+.form-input-text {
+  /* style_13 */
   color: #000000;
   font-family: 'Inter', sans-serif;
   font-weight: 400;
   font-size: 20px;
   line-height: 24.20px;
+  display: flex;
+  width: 100%;
+  height: 100%;
 }
 
-.tag + .tag {
-  margin-left: 22px; /* Calculated from X-coordinates of tags */
+.tag+.tag {
+  margin-left: 22px;
+  /* Calculated from X-coordinates of tags */
 }
 
 .avatar-container {
   position: relative;
-  width: 120px; /* From 298:17326 */
-  height: 120px; /* From 298:17326 */
+  border: 1px solid #a6abbd;
+  border-radius: 10px;
+  width: 120px;
+  /* From 298:17326 */
+  height: 120px;
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+  /* From 298:17326 */
 }
 
 .avatar-svg-outer,
@@ -125,59 +177,107 @@ body {
   left: 0;
 }
 
-.avatar-svg-outer { /* 298:17326 */
+.avatar-svg-outer {
+  /* 298:17326 */
   width: 120px;
   height: 120px;
 }
 
-.avatar-svg-inner { /* 298:17328 */
-  top: 9px;  /* Relative Y: 6721 - 6712 */
-  left: 8.5px; /* Relative X: 10052.5 - 10044 */
+.avatar-svg-inner {
+  /* 298:17328 */
+  top: 9px;
+  /* Relative Y: 6721 - 6712 */
+  left: 8.5px;
+  /* Relative X: 10052.5 - 10044 */
   width: 103px;
   height: 103px;
 }
 
 /* Responsive adjustments */
-@media (max-width: 1024px) { /* Tablet */
+@media (max-width: 1024px) {
+
+  /* Tablet */
   body {
     padding-top: 60px;
   }
+
   .profile-edit-card {
     padding: 3px 30px 25px 30px;
   }
 }
 
-@media (max-width: 768px) { /* Mobile landscape / Small Tablet */
+@media (max-width: 768px) {
+
+  /* Mobile landscape / Small Tablet */
   body {
     padding-top: 20px;
     padding-left: 15px;
     padding-right: 15px;
   }
+
   .profile-edit-card {
     padding: 20px;
   }
-  .page-title { font-size: 28px; line-height: 34px; }
-  .btn { font-size: 18px; line-height: 22px; }
-  .form-label, .form-input-text { font-size: 18px; line-height: 22px; }
-  .form-input-field { min-height: 50px; padding: 15px 20px; }
+
+  .page-title {
+    font-size: 28px;
+    line-height: 34px;
+  }
+
+  .btn {
+    font-size: 18px;
+    line-height: 22px;
+  }
+
+  .form-label,
+  .form-input-text {
+    font-size: 18px;
+    line-height: 22px;
+  }
+
+  .form-input-field {
+    min-height: 50px;
+    padding: 15px 20px;
+  }
 }
 
-@media (max-width: 480px) { /* Mobile portrait */
-  .page-title { font-size: 24px; line-height: 30px; }
-  .btn { font-size: 16px; line-height: 20px; padding: 10px 12px; }
-  .form-label, .form-input-text { font-size: 16px; line-height: 20px; }
-  .form-input-field { min-height: 44px; padding: 12px 15px; }
+@media (max-width: 480px) {
+
+  /* Mobile portrait */
+  .page-title {
+    font-size: 24px;
+    line-height: 30px;
+  }
+
+  .btn {
+    font-size: 16px;
+    line-height: 20px;
+    padding: 10px 12px;
+  }
+
+  .form-label,
+  .form-input-text {
+    font-size: 16px;
+    line-height: 20px;
+  }
+
+  .form-input-field {
+    min-height: 44px;
+    padding: 12px 15px;
+  }
 }
 
 /* CSS from section:profile-page */
 .profile-edit-header-content {
   display: flex;
   justify-content: space-between;
-  align-items: flex-start; /* Title top, buttons lower to match Figma y-coords */
+  align-items: flex-start;
+  /* Title top, buttons lower to match Figma y-coords */
 }
 
 .profile-edit-header-content .action-buttons {
-  margin-top: 48px; /* (Button group y_rel 51px) - (Title y_rel 3px, which is card's top padding edge) */
+  margin-top: 48px;
+  /* (Button group y_rel 51px) - (Title y_rel 3px, which is card's top padding edge) */
 }
 
 .profile-form-content {
@@ -188,16 +288,21 @@ body {
 
 .form-row {
   display: flex;
-  align-items: center; /* Vertically center label and value based on Figma visual */
-  margin-bottom: 24px; /* Consistent spacing (avg ~24px) between input field tops */
+  align-items: center;
+  /* Vertically center label and value based on Figma visual */
+  margin-bottom: 24px;
+  /* Consistent spacing (avg ~24px) between input field tops */
 }
+
 .form-row:last-child {
   margin-bottom: 0;
 }
 
 .form-label {
-  flex-basis: 110px; /* Max label width from "휴대폰 번호" (node 298:17339) */
-  margin-right: 40px; /* Approximate average gap between labels and input fields */
+  flex-basis: 110px;
+  /* Max label width from "휴대폰 번호" (node 298:17339) */
+  margin-right: 40px;
+  /* Approximate average gap between labels and input fields */
   text-align: left;
 }
 
@@ -205,48 +310,82 @@ body {
   flex-grow: 1;
 }
 
-.form-input-textarea { /* For the introduction field (node 298:17344) */
-  min-height: 280px; /* Height of the rectangle */
-  align-items: flex-start; /* Text should start at the top of the textarea */
-  padding-top: 18px; /* Text y:7231, Rect y:7213. Diff: 18px */
+.form-input-textarea {
+  /* For the introduction field (node 298:17344) */
+  min-height: 280px;
+  /* Height of the rectangle */
+  align-items: flex-start;
+  /* Text should start at the top of the textarea */
+  padding-top: 18px;
+  /* Text y:7231, Rect y:7213. Diff: 18px */
 }
 
 /* Responsive styles for this section */
 @media (max-width: 768px) {
   .profile-edit-header-content {
     flex-direction: column;
-    align-items: stretch; /* Full width for title and button group */
-    gap: 15px; /* Space between title and button group when stacked */
+    align-items: stretch;
+    /* Full width for title and button group */
+    gap: 15px;
+    /* Space between title and button group when stacked */
   }
+
   .profile-edit-header-content .action-buttons {
-    justify-content: flex-end; /* Align buttons to right on tablet */
-    margin-top: 0; /* Reset desktop positioning */
+    justify-content: flex-end;
+    /* Align buttons to right on tablet */
+    margin-top: 0;
+    /* Reset desktop positioning */
   }
+
   .profile-form-content {
-    margin-top: 30px; /* Space from header when stacked */
+    margin-top: 30px;
+    /* Space from header when stacked */
   }
+
   .form-row {
-    flex-direction: column; /* Stack label on top of input */
+    flex-direction: column;
+    /* Stack label on top of input */
     align-items: flex-start;
-    gap: 8px; /* Space between label and input */
+    gap: 8px;
+    /* Space between label and input */
     margin-bottom: 20px;
   }
+
   .form-label {
     margin-right: 0;
-    flex-basis: auto; /* Allow label to take natural width */
+    flex-basis: auto;
+    /* Allow label to take natural width */
   }
 }
 
 @media (max-width: 480px) {
   .profile-edit-header-content .action-buttons {
-    flex-direction: column; /* Stack buttons vertically */
-    align-items: stretch; /* Full width buttons */
+    flex-direction: column;
+    /* Stack buttons vertically */
+    align-items: stretch;
+    /* Full width buttons */
   }
+
   .btn {
-    width: 100%; /* Make buttons full width */
+    width: 100%;
+    /* Make buttons full width */
     box-sizing: border-box;
   }
-  .btn + .btn { /* If action-buttons is flex column */
-     /* No margin needed due to parent gap or handled by .action-buttons gap */
-  }
+}
+
+.form-value input {
+  display: flex;
+  width: 100%;
+  height: 100%;
+
+}
+
+textarea {
+  border: none;
+  resize: none;
+}
+
+textarea:focus {
+  outline: none !important;
+  box-shadow: none !important;
 }
