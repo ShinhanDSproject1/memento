@@ -84,7 +84,7 @@
 	</select>
 
 	<select id="checkValidMentosById" parameterType="int"
-		resultType="com.shinhan.memento.model.Mentos">
+		resultMap="mentosResultMap">
 		select *
 		from mentos
 		where mentos_id=#{mentosId}
