@@ -89,13 +89,13 @@ public class MyPageApiController {
 	}
 	
 	@PostMapping(value = "/profile-update")
-	public BaseResponse<Void> updateMyProfile(HttpSession session, @RequestParam(value = "imageFile", required = false) MultipartFile imageFile ,@ModelAttribute MyProfileUpdateRequestDTO dto){
+	public BaseResponse<Boolean> updateMyProfile(HttpSession session, @RequestParam(value = "imageFile", required = false) MultipartFile imageFile ,@ModelAttribute MyProfileUpdateRequestDTO dto){
 		Member loginUser = (Member) session.getAttribute("loginUser");
 		if (loginUser == null) throw new MypageException(BaseExceptionResponseStatus.NEED_LOGIN);
 		int userId = loginUser.getMemberId();
 		
 		boolean result = myPageService.updateProfile(userId,dto,imageFile);
 
-		return new BaseResponse<Void>(null);
+		return new BaseResponse<Boolean>(result);
 	}
 }
