@@ -182,324 +182,55 @@
 			</div>
 			<!-- RANKING 페이지 -->
 			<div class="ranking-container">
-
-				<!-- 🏆 인기 멘토 랭킹 -->
-				<div class="ranking-section mentor-ranking">
-					<div class="section-title">🏆 인기 멘토 랭킹</div>
-					<div class="podium">
-						<!-- 2등 -->
-						<div class="podium-place second">
-							<div class="winner-info">
-								<div class="winner-avatar">
-									<img
-										src="${pageContext.request.contextPath}/resources/images/main1/_2-10.png"
-										alt="김신한">
-								</div>
-								<div class="winner-name">김신한</div>
-								<div class="winner-rating">⭐ 4.9</div>
-							</div>
-							<div class="medal">🥈</div>
-							<div class="podium-base second">2</div>
-						</div>
-						<!-- 1등 -->
-						<div class="podium-place first">
-							<div class="winner-info">
-								<div class="winner-avatar">
-									<img
-										src="${pageContext.request.contextPath}/resources/images/main1/_1-10.png"
-										alt="위치콤보">
-								</div>
-								<div class="winner-name">위치콤보</div>
-								<div class="winner-rating">⭐ 5.0</div>
-							</div>
-							<div class="medal">🥇</div>
-							<div class="podium-base first">1</div>
-						</div>
-						<!-- 3등 -->
-						<div class="podium-place third">
-							<div class="winner-info">
-								<div class="winner-avatar">
-									<img
-										src="${pageContext.request.contextPath}/resources/images/main1/_3-10.png"
-										alt="길동햄">
-								</div>
-								<div class="winner-name">길동햄</div>
-								<div class="winner-rating">⭐ 4.8</div>
-							</div>
-							<div class="medal">🥉</div>
-							<div class="podium-base third">3</div>
-						</div>
-					</div>
-
-					<!-- 랭킹 테이블 -->
-					<div class="ranking-table">
-						<div class="ranking-header">
-							<div>순위</div>
-							<div>멘토</div>
-							<div>평점</div>
-						</div>
-						<div class="ranking-item">
-							<div class="rank-number">4</div>
-							<div class="participant-info">
-								<div class="participant-avatar">
-									<img
-										src="${pageContext.request.contextPath}/resources/images/main1/_4-40.png"
-										alt="벗나무">
-								</div>
-								<div class="participant-name">벗나무</div>
-							</div>
-							<div class="rating">⭐ 4.7</div>
-						</div>
-						<div class="ranking-item">
-							<div class="rank-number">5</div>
-							<div class="participant-info">
-								<div class="participant-avatar">
-									<img
-										src="${pageContext.request.contextPath}/resources/images/main1/_4-30.png"
-										alt="에듀윌">
-								</div>
-								<div class="participant-name">에듀윌</div>
-							</div>
-							<div class="rating">⭐ 4.7</div>
-						</div>
-						<div class="ranking-item">
-							<div class="rank-number">6</div>
-							<div class="participant-info">
-								<div class="participant-avatar">
-									<img
-										src="${pageContext.request.contextPath}/resources/images/main1/_4-20.png"
-										alt="세븐하이">
-								</div>
-								<div class="participant-name">세븐하이</div>
-							</div>
-							<div class="rating">⭐ 4.7</div>
-						</div>
-						<div class="ranking-item">
-							<div class="rank-number">7</div>
-							<div class="participant-info">
-								<div class="participant-avatar">
-									<img
-										src="${pageContext.request.contextPath}/resources/images/main1/_4-10.png"
-										alt="혐규">
-								</div>
-								<div class="participant-name">혐규</div>
-							</div>
-							<div class="rating">⭐ 5.0</div>
-						</div>
-					</div>
-				</div>
-
-				<!-- 🧠 열정 멘티 랭킹 -->
-				<div class="ranking-section mentee-ranking">
-					<div class="section-title">🏆 열정 멘티 랭킹</div>
-					<div class="podium">
-						<div class="podium-place second">
-							<div class="winner-info">
-								<div class="winner-avatar">
-									<img
-										src="${pageContext.request.contextPath}/resources/images/main1/_210.png"
-										alt="김핑구">
-								</div>
-								<div class="winner-name">김핑구</div>
-								<div class="winner-rating">🔥 4.8</div>
-							</div>
-							<div class="medal">🥈</div>
-							<div class="podium-base second">2</div>
-						</div>
-						<div class="podium-place first">
-							<div class="winner-info">
-								<div class="winner-avatar">
-									<img
-										src="${pageContext.request.contextPath}/resources/images/main1/_14.png"
-										alt="코딩개">
-								</div>
-								<div class="winner-name">코딩개</div>
-								<div class="winner-rating">🔥 5.0</div>
-							</div>
-							<div class="medal">🥇</div>
-							<div class="podium-base first">1</div>
-						</div>
-						<div class="podium-place third">
-							<div class="winner-info">
-								<div class="winner-avatar">
-									<img
-										src="${pageContext.request.contextPath}/resources/images/main1/_33.png"
-										alt="홍길동">
-								</div>
-								<div class="winner-name">홍길동</div>
-								<div class="winner-rating">🔥 4.5</div>
-							</div>
-							<div class="medal">🥉</div>
-							<div class="podium-base third">3</div>
-						</div>
-					</div>
-
-					<div class="ranking-table">
-						<div class="ranking-header">
-							<div>순위</div>
-							<div>멘티</div>
-							<div>열정도</div>
-						</div>
-						<div class="ranking-item">
-							<div class="rank-number">4</div>
-							<div class="participant-info">
-								<div class="participant-avatar">
-									<img
-										src="${pageContext.request.contextPath}/resources/images/main1/_42.png"
-										alt="딥카페라떼">
-								</div>
-								<div class="participant-name">딥카페라떼</div>
-							</div>
-							<div class="rating">🔥 5.0</div>
-						</div>
-						<div class="ranking-item">
-							<div class="rank-number">5</div>
-							<div class="participant-info">
-								<div class="participant-avatar">
-									<img
-										src="${pageContext.request.contextPath}/resources/images/main1/_211.png"
-										alt="피카츄">
-								</div>
-								<div class="participant-name">피카츄</div>
-							</div>
-							<div class="rating">🔥 5.0</div>
-						</div>
-						<div class="ranking-item">
-							<div class="rank-number">6</div>
-							<div class="participant-info">
-								<div class="participant-avatar">
-									<img
-										src="${pageContext.request.contextPath}/resources/images/main1/chat-gpt-image-2025-5-12-04-46-27-10.png"
-										alt="라이츄">
-								</div>
-								<div class="participant-name">라이츄</div>
-							</div>
-							<div class="rating">🔥 5.0</div>
-						</div>
-						<div class="ranking-item">
-							<div class="rank-number">7</div>
-							<div class="participant-info">
-								<div class="participant-avatar">
-									<img
-										src="${pageContext.request.contextPath}/resources/images/main1/ellipse-411.svg"
-										alt="파이리">
-								</div>
-								<div class="participant-name">파이리</div>
-							</div>
-							<div class="rating">🔥 4.0</div>
-						</div>
-					</div>
-				</div>
-
-				<!-- 💻 인기 언어 랭킹 -->
-				<div class="ranking-section language-ranking">
-					<div class="section-title">🏆 인기 언어 랭킹</div>
-					<div class="podium">
-						<div class="podium-place second">
-							<div class="winner-info">
-								<div class="winner-avatar">
-									<img
-										src="${pageContext.request.contextPath}/resources/images/main1/python-10.png"
-										alt="Python" class="language-icon">
-								</div>
-								<div class="winner-name">Python</div>
-								<div class="winner-rating">❤️ 4.7</div>
-							</div>
-							<div class="medal">🥈</div>
-							<div class="podium-base second">2</div>
-						</div>
-						<div class="podium-place first">
-							<div class="winner-info">
-								<div class="winner-avatar">
-									<img
-										src="${pageContext.request.contextPath}/resources/images/main1/java-10.png"
-										alt="Java" class="language-icon">
-								</div>
-								<div class="winner-name">Java</div>
-								<div class="winner-rating">❤️ 5.0</div>
-							</div>
-							<div class="medal">🥇</div>
-							<div class="podium-base first">1</div>
-						</div>
-						<div class="podium-place third">
-							<div class="winner-info">
-								<div class="winner-avatar">
-									<img
-										src="${pageContext.request.contextPath}/resources/images/main1/html-10.png"
-										alt="HTML" class="language-icon">
-								</div>
-								<div class="winner-name">HTML</div>
-								<div class="winner-rating">❤️ 4.5</div>
-							</div>
-							<div class="medal">🥉</div>
-							<div class="podium-base third">3</div>
-						</div>
-					</div>
-
-					<div class="ranking-table">
-						<div class="ranking-header">
-							<div>순위</div>
-							<div>언어</div>
-							<div>인기도</div>
-						</div>
-						<div class="ranking-item">
-							<div class="rank-number">4</div>
-							<div class="participant-info">
-								<div class="participant-avatar">
-									<img
-										src="${pageContext.request.contextPath}/resources/images/main1/react-10.png"
-										alt="React" class="language-icon">
-								</div>
-								<div class="participant-name">React</div>
-							</div>
-							<div class="rating">❤️ 4.0</div>
-						</div>
-						<div class="ranking-item">
-							<div class="rank-number">5</div>
-							<div class="participant-info">
-								<div class="participant-avatar">
-									<img
-										src="${pageContext.request.contextPath}/resources/images/main1/spring-10.png"
-										alt="Spring" class="language-icon">
-								</div>
-								<div class="participant-name">Spring</div>
-							</div>
-							<div class="rating">❤️ 4.0</div>
-						</div>
-						<div class="ranking-item">
-							<div class="rank-number">6</div>
-							<div class="participant-info">
-								<div class="participant-avatar">
-									<img
-										src="${pageContext.request.contextPath}/resources/images/main1/javascript-10.png"
-										alt="JavaScript" class="language-icon">
-								</div>
-								<div class="participant-name">JavaScript</div>
-							</div>
-							<div class="rating">❤️ 4.0</div>
-						</div>
-						<div class="ranking-item">
-							<div class="rank-number">7</div>
-							<div class="participant-info">
-								<div class="participant-avatar">
-									<img
-										src="${pageContext.request.contextPath}/resources/images/main1/css-10.png"
-										alt="CSS" class="language-icon">
-								</div>
-								<div class="participant-name">CSS</div>
-							</div>
-							<div class="rating">❤️ 4.0</div>
-						</div>
-					</div>
-				</div>
+			    <div class="ranking-section mentor-ranking">
+			        <div class="section-title">🏆 인기 멘토 랭킹</div>
+			        <div class="podium" id="mentorPodium">
+			            </div>
+			        <div class="ranking-table">
+			            <div class="ranking-header">
+			                <div>순위</div>
+			                <div>멘토</div>
+			                <div>평점</div>
+			            </div>
+			            <div id="mentorTableBody"></div>
+			        </div>
+			    </div>
+			
+			    <div class="ranking-section mentee-ranking">
+			        <div class="section-title">🏆 열정 멘티 랭킹</div>
+			        <div class="podium" id="mentiPodium">
+			            </div>
+			        <div class="ranking-table">
+			            <div class="ranking-header">
+			                <div>순위</div>
+			                <div>멘티</div>
+			                <div>열정도</div>
+			            </div>
+			            <div id="mentiTableBody"></div>
+			        </div>
+			    </div>
+			
+			    <div class="ranking-section language-ranking">
+			        <div class="section-title">🏆 인기 언어 랭킹</div>
+			        <div class="podium" id="languagePodium">
+			            </div>
+			        <div class="ranking-table">
+			            <div class="ranking-header">
+			                <div>순위</div>
+			                <div>언어</div>
+			                <div>인기도</div>
+			            </div>
+			            <div id="languageTableBody"></div>
+			        </div>
+			    </div>
+			
 			</div>
-		</div>
-		<!-- page-container 닫기 -->
-		<div class="right"></div>
-	</div>
 	<!-- layout-wrapper 닫기 -->
 	<script src="${pageContext.request.contextPath}/resources/js/header.js"></script>
-
+	<script>
+	    const CPATH = "${cpath}";
+	</script>
+	<script src="${pageContext.request.contextPath}/resources/js/mainpage.js"></script>
 </body>
 
 <!-- 푸터 영역 -->
