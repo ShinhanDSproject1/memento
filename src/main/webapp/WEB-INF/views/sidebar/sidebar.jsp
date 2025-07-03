@@ -8,30 +8,32 @@
 
 <aside class="sidebar">
 	<div class="profile-section">
-		<div class="profile-card">
-			<div class="profile-avatar-wrapper">
-				<img class="avatar-image"
-					src="${cpath}/resources/images/sidebar/avatar-default0.svg" />
-				<div class="edit-profile-button-wrapper">
-					<a class="edit-profile-link" href="${cpath}/mypage/page2">
-						<img class="edit-profile-icon"
-						src="${cpath}/resources/images/sidebar/vuesax-linear-export0.svg" />
-					</a>
+		<a href="${cpath}/mypage/page2">
+			<div class="profile-card">
+				<div class="profile-avatar-wrapper">
+					<img class="avatar-image"
+						src="${cpath}/resources/images/sidebar/avatar-default0.svg" />
+					<div class="edit-profile-button-wrapper">
+						<a class="edit-profile-link" href="${cpath}/mypage/page2">
+							<img class="edit-profile-icon"
+							src="${cpath}/resources/images/sidebar/vuesax-linear-export0.svg" />
+						</a>
+					</div>
+				</div>
+				<div class="user-nickname">코딩하는 뭉뭉이</div>
+				<div class="user-role">mento</div>
+				<div class="user-assets">
+					<div class="asset-item">
+						<span class="asset-label cash-label">Cash :</span>
+						<span class="asset-value">53,000</span>
+					</div>
+					<div class="asset-item">
+						<span class="asset-label point-label">Point :</span>
+						<span class="asset-value">530 P</span>
+					</div>
 				</div>
 			</div>
-			<div class="user-nickname">코딩하는 뭉뭉이</div>
-			<div class="user-role">mento</div>
-			<div class="user-assets">
-				<div class="asset-item">
-					<span class="asset-label cash-label">Cash :</span>
-					<span class="asset-value">53,000</span>
-				</div>
-				<div class="asset-item">
-					<span class="asset-label point-label">Point :</span>
-					<span class="asset-value">530 P</span>
-				</div>
-			</div>
-		</div>
+		</a>
 		<hr class="divider">
 	</div>
 	<nav class="sidebar-nav">
