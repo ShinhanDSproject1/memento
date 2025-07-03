@@ -238,6 +238,15 @@ public class MentosService {
 
 		return result;
 	}
+	
+	/**
+	 * 멘토 상세보기 페이지(홈화면)
+	 */
+	public List<Mentos> showInProgressMentosList(int memberId){
+		log.info("[MentoService.showInProgressMentosList]");
+		
+		return mentosMapper.showInProgressMentosList(memberId);
+}
 
 	/**
 	 * 멘토 상세조회(진행한 멘토스내역 보기)

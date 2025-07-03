@@ -9,6 +9,7 @@ import org.apache.ibatis.annotations.Param;
 import com.shinhan.memento.dto.CategoryDTO;
 import com.shinhan.memento.dto.LanguageDTO;
 import com.shinhan.memento.dto.MatchTypeDTO;
+import com.shinhan.memento.dto.mentoDetail.MentoDetailClassDTO;
 import com.shinhan.memento.dto.mentos.CreateMentosDBDTO;
 import com.shinhan.memento.model.Mentos;
 
@@ -30,6 +31,7 @@ public interface MentosMapper {
 			@Param("offset") int offset);
 	
 	int countNowMember(int mentosId);
+	List<Mentos> showInProgressMentosList(int mentoId);
 
 	List<Mentos> showMentosListByMentoId(Map<String, Object> mentosParams);
 }

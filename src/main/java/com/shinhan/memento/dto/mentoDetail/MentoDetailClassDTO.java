@@ -8,6 +8,7 @@ import lombok.Getter;
 @Builder
 @AllArgsConstructor
 public class MentoDetailClassDTO {
+	private int mentosId; // 서버로 전송할 때 필요함
 	private String mentosImg;
 	private String title;
 	private String mentoName;
