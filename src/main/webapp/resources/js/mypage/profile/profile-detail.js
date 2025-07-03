@@ -8,7 +8,7 @@ $(() => {
 
         try {
             const response = await fetch(API_URL);
-            const placeholderColor = '#d4d4d4'
+
             if (!response.ok) {
                 throw new Error(`HTTP error! status: ${response.status}`);
             }
@@ -34,55 +34,54 @@ $(() => {
             }
 
             const nickname = document.getElementById('nickname')
-            nickname.textContent = `${profileData.nickName}`
+            nickname.value = `${profileData.nickName}`
 
             const interestNames = document.getElementById('interestNames')
             interestNames.innerHTML = ''
 
             const interestList = profileData.interestName.split(" ")
 
+            let intersetNameValue = ''
+
             if (interestList[0].trim == "") {
-                interestNames.textContent = '아직 관심사가 등록되지 않았습니다...'
-                interestNames.style.color = placeholderColor
+                interestNames.value = '아직 관심사가 등록되지 않았습니다...'
+
             } else {
                 interestList.forEach(element => {
-                    const tagSpan = document.createElement('span')
-                    tagSpan.className = 'form-input-text' + ' tag'
-                    tagSpan.textContent = '#' + element
-                    interestNames.append(tagSpan)
+                    intersetNameValue += '#' + element + " "
                 });
+                interestNames.value = intersetNameValue.trim()
             }
 
             const address = document.getElementById('address')
             console.log(profileData.location.trim())
 
             if (profileData.location.trim() == "") {
-                address.textContent = '주소 정보가 없습니다'
-                address.style.color = placeholderColor
+                address.placeholder = '주소 정보가 없습니다'
             } else {
-                address.textContent = `${profileData.location}`
+                address.value = `${profileData.location}`
             }
 
             const phone = document.getElementById('phone')
 
             if (profileData.phoneNumber.trim() == "") {
-                phone.textContent = '휴대폰 번호를 등록해주세요!'
-                phone.style.color = placeholderColor
+                phone.placeholder = '휴대폰 번호를 등록해주세요! (-생략불가)'
+
             } else {
-                phone.textContent = `${profileData.location}`
+                phone.value = `${profileData.location}`
             }
 
             const introduction = document.getElementById('introduction')
             if (profileData.introduce) {
                 if (profileData.introduce.trim == "") {
-                    introduction.textContent = '아직 소개 정보가 등록되지 않았습니다. \n소개 정보가 없을 시 서비스 참여에 약간의 불편함이 생길 수도 있습니다...'
-                    introduction.style.color = placeholderColor
+                    introduction.placeholder = '아직 소개 정보가 등록되지 않았습니다. \n소개 정보가 없을 시 서비스 참여에 약간의 불편함이 생길 수도 있습니다...'
+
                 } else {
-                    introduction.textContent = profileData.introduce
+                    introduction.value = profileData.introduce
                 }
             } else {
-                introduction.textContent = '아직 소개 정보가 등록되지 않았습니다. \n소개 정보가 없을 시 서비스 참여에 약간의 불편함이 생길 수도 있습니다...'
-                introduction.style.color = placeholderColor
+                introduction.placeholder = '아직 소개 정보가 등록되지 않았습니다. \n소개 정보가 없을 시 서비스 참여에 약간의 불편함이 생길 수도 있습니다...'
+
             }
 
         } catch (error) {

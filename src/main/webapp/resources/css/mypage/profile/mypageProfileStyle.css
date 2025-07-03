@@ -130,6 +130,9 @@ body {
   font-weight: 400;
   font-size: 20px;
   line-height: 24.20px;
+  display: flex;
+  width: 100%;
+  height: 100%;
 }
 
 .tag+.tag {
@@ -349,9 +352,21 @@ body {
     /* Make buttons full width */
     box-sizing: border-box;
   }
+}
 
-  .btn+.btn {
-    /* If action-buttons is flex column */
-    /* No margin needed due to parent gap or handled by .action-buttons gap */
-  }
+.form-value input {
+  display: flex;
+  width: 100%;
+  height: 100%;
+
+}
+
+textarea {
+  border: none;
+  resize: none;
+}
+
+textarea:focus {
+  outline: none !important;
+  box-shadow: none !important;
 }
