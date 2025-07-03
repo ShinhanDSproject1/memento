@@ -27,12 +27,13 @@
 	</resultMap>
 
 	<select id="findMemberById" parameterType="map"
-		resultType="com.shinhan.memento.model.Member">
+		resultMap="memberResultMap">
 		SELECT *
 		FROM member
 		WHERE member_id = #{memberId}
 		AND
 		user_type = #{userType}
 		AND status = #{status}
+
 	</select>
 </mapper>

@@ -44,5 +44,4 @@ public class MentosDAO implements MentosInterfaceDAO {
 	public int deleteMentos(int mentosId) {
 		return session.update(namespace + "deleteMentos", mentosId);
 	}
-
 }

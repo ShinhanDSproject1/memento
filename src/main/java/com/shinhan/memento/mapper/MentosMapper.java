@@ -19,7 +19,10 @@ public interface MentosMapper {
 	
 	Mentos findMentosByMentosId(Map<String, Object> params);
 	
-	List<SimilarMentosListDTO> findSimilarMentos(SimilarMentosDTO dto);
+	List<Mentos> findSimilarMentos(Map<String, Object> mentosParams);
 	
     DetailMentosDTO findDetailMentosById(@Param("mentosId") int mentosId);
+    
+    //List<DetailMentosDTO.SimilarMentosListDTO> findSimilarMentos(Map<String, Object> mentosParams);
+
 }

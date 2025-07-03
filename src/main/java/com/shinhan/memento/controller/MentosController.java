@@ -26,9 +26,12 @@ public class MentosController {
 	public String mentosAllView() {
 		return "mentos/mentosFull";
 	}
+	@RequestMapping("/detail")
+	public String MentosDetailView() {
+		return "mentos/mentosDetailMenti";
+	}
 
-
-	@GetMapping("/detail")
+	/*@GetMapping("/detail")
 	public String getMentosDetailView(@RequestParam int mentosId, Model model) {
 		log.info("[MentosController.getMentosDetailView] mentosId: {}", mentosId);		
 
@@ -44,11 +47,8 @@ public class MentosController {
 		} else {
 			return "mentos/mentosDetailMento";  
 		}
-	}
+	}*/
 
-	
-	
-	
 	@RequestMapping("/insert")
 	public String mentosInsert() {
 		return "mentos/mentosCreate";

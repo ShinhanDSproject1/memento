@@ -7,17 +7,20 @@
 <meta charset="UTF-8">
 <title>me:mento</title>
 <link rel="stylesheet"
+	href="${pageContext.request.contextPath}/resources/css/mainpage/notificationModal.css">
+<link rel="stylesheet"
 	href="${pageContext.request.contextPath}/resources/css/mentos/mentosDetailMento.css" />
 
 </head>
 <link
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
-	rel="stylesheet" />
-<script
-	src="${pageContext.request.contextPath}/resources/js/mentos/mentosDetail.js"></script>
+	rel="stylesheet"/>
+
 
 <body>
 	<%@ include file="../common/logout_header.jsp"%>
+	<%@ include file="../mainpage/notificationModal.jsp"%>
+
 	<div class="container">
 		<div class="class-wrapper-frame">
 			<div class="class-main-info">
@@ -504,5 +507,9 @@
 			</div>
 		</div>
 	</div>
+	<script src="${pageContext.request.contextPath}/js/notification.js"></script>
+	<script src="${pageContext.request.contextPath}/resources/js/header.js"></script>
+	<script
+	src="${pageContext.request.contextPath}/resources/js/mentos/mentosDetail.js"></script>
 </body>
 </html>

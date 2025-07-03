@@ -1,10 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>me:mento</title>
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath}/resources/css/mainpage/notificationModal.css">
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/resources/css/mentos/mentosDetailMenti.css" />
 
@@ -12,40 +15,44 @@
 <link
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
 	rel="stylesheet" />
-<script
-	src="${pageContext.request.contextPath}/resources/js/mentos/mentosDetail.js"></script>
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
 <body>
 	<%@ include file="../common/logout_header.jsp"%>
+	<%@ include file="../mainpage/notificationModal.jsp"%>
 
 
 	<script>
-  $(document).ready(function () {
-    const mentosId = new URLSearchParams(window.location.search).get("mentosId");
+		$(document)
+				.ready(
+						function() {
+							const mentosId = new URLSearchParams(
+									window.location.search).get("mentosId");
 
-    $.ajax({
-      type: "GET",
-      url: "/memento/mentos/detailmentos",
-      data: { mentosId: mentosId },
-      success: function (response) {
-        const data = response.result;
-        $("#title").text(data.title);
-      },
-      error: function () {
-        alert("불러오기 실패");
-      }
-    });
-  });
-</script>
-	
-	
-	
+							$.ajax({
+								type : "GET",
+								url : "/memento/mentos/detailmentos",
+								data : {
+									mentosId : mentosId
+								},
+								success : function(response) {
+									const data = response.result;
+									$("#title").text(data.title);
+								},
+								error : function() {
+									alert("불러오기 실패");
+								}
+							});
+						});
+	</script>
+
+
+
 	<div class="container">
 		<div class="class-wrapper-frame">
 			<div class="class-main-info">
 				<div class="frame-429">
-					<div class="hover-tag">#백엔드</div>
-					<div class="hover-tag">#AWS</div>
+					<div class="hover-tag"></div>
+					<div class="hover-tag"></div>
 				</div>
 				<div class="class-title-wrap">
 					<div class="class-title">비전공자도 이해할 수 있는 AWS 입문/실전</div>
@@ -521,5 +528,11 @@
 			</div>
 		</div>
 	</div>
+	<script src="${pageContext.request.contextPath}/js/notification.js"></script>
+	<script src="${pageContext.request.contextPath}/resources/js/header.js"></script>
+
+	<script
+		src="${pageContext.request.contextPath}/resources/js/mentos/mentosDetail.js"></script>
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </body>
 </html>

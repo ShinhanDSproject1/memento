@@ -6,11 +6,15 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
 
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
+@ToString
+@Setter
 public class Member {
 	private int memberId;
 	private int matchTypeId;
@@ -20,7 +24,7 @@ public class Member {
 	private String phoneNumber;
 	private UserType userType;
 	private int point;
-	private String introduceMento;
+	private String introduce;
 	private int score; // 매치업이나 멘토스 참여하면 점수 올리기 
 	private String regionGroup;
 	private String regionSubgroup;

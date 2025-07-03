@@ -20,10 +20,10 @@ public class CreateMentosDTO {
 		private int mentoId;
 		private int minMember;
 		private int maxMember;
-		private Date startDay;
-		private Date endDay;
-		private LocalTime startTime;
-		private LocalTime endTime;
+		private String startDay;
+		private String endDay;
+		private String startTime;
+		private String endTime;
 		private String selectedDays;
 
 		private int price;

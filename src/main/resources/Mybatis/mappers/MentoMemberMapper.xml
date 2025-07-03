@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.shinhan.memento.mapper.MentoMemberMapper">
+
+    <!-- 특정 mentos_id에 대해 참여 중인 멤버 수 카운트 -->
+    <select id="countActiveMembersByMentosId" parameterType="int" resultType="int">
+        SELECT COUNT(*) 
+        FROM mento_member 
+        WHERE mentos_id = #{mentosId}
+          AND status = 'ACTIVE'
+    </select>
+
+</mapper>
