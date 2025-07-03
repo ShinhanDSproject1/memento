@@ -10,7 +10,7 @@ import com.shinhan.memento.common.response.BaseResponse;
 import com.shinhan.memento.dto.PopularLanguageDTO;
 import com.shinhan.memento.dto.PopularMentiDTO;
 import com.shinhan.memento.dto.PopularMentorDTO;
-import com.shinhan.memento.service.MentorRankingService;
+import com.shinhan.memento.service.PopularMentoService;
 import com.shinhan.memento.service.PopularLanguageService;
 import com.shinhan.memento.service.PopularMentiService;
 
@@ -21,7 +21,7 @@ import lombok.RequiredArgsConstructor;
 @RequestMapping("/api")
 public class MainpageApiController {
 
-    private final MentorRankingService mentorRankingService;
+    private final PopularMentoService mentorRankingService;
     private final PopularMentiService popularMentiService;
     private final PopularLanguageService popularLanguageService;
 

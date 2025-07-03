@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<c:set var="cpath" value="${pageContext.servletContext.contextPath}" />
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -18,8 +20,6 @@
 
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/resources/css/mainpage/notificationModal.css">
-
-
 <!-- Bootstrap -->
 <link
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
@@ -36,19 +36,14 @@
 		<%@ include file="../common/logout_header.jsp"%>
 		<div class="page-container">
 			<%@ include file="notificationModal.jsp"%>
-
 			<div id="loginModal"
 				style="display: none; position: fixed; top: 20%; left: 39%; transform: translateX(-50%); z-index: 1000;">
 
 				<%@ include file="login.jsp"%>
 			</div>
-
 			<div id="modalBackdrop"
 				style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.5); z-index: 999;"
 				onclick="closeModal()"></div>
-
-
-
 			<script src="${pageContext.request.contextPath}/js/notification.js"></script>
 
 			<!-- 슬라이드 배너 영역 -->
@@ -59,7 +54,7 @@
 				<div id="slider-container">
 					<div class="home-page-1" id="slider">
 						<!-- 슬라이드 1 - SPARK TEST -->
-						<div class="page-1-com-1" >
+						<div class="page-1-com-1">
 							<div class="group-391">
 								<div class="spark-image-container">
 									<img class="spark-icon"
@@ -72,56 +67,41 @@
 							<div class="mbti-subtitle">
 								나만의 학습 성향을 진단하고<br />더 빠르게 성장해보세요!
 							</div>
-							<a href="#" class="cta-button">🚀 지금 테스트하러 가기</a>
+							<a href="${cpath}/mypage/spark-test" class="cta-button">🚀 지금
+								테스트하러 가기</a>
 						</div>
-
-						<!-- 슬라이드 2 - Spring 멘토링 -->
-						<div class="page-1-com-12">
-							<div class="spring-content">
-								<div class="spring-text">
-									<div class="spring-title">
-										취업을 <span class="number">365</span>일 앞당겨주는<br /> <span
-											class="highlight">Spring</span> 속성 멘토링
-									</div>
-									<div class="spring-info">
-										<div class="info-row">
-											<div class="info-label">강사</div>
-											<div class="info-value">안가연</div>
+						<c:forEach var="banner" items="${bannerList}">
+							<div class="page-1-com-12">
+								<div class="spring-content" onclick="location.href='${cpath}/mentos/detail?mentosid='+ ${banner.mentosId}">
+									<div class="spring-text">
+										<div class="spring-title">${banner.title}</div>
+										<div class="spring-info">
+											<div class="info-row">
+												<div class="info-label">강사</div>
+												<div class="info-value">${banner.nickname}</div>
+											</div>
+											<div class="info-row">
+												<div class="info-label">일시</div>
+												<div class="info-value">
+													<fmt:formatDate value="${banner.startTime}"
+														pattern="M/d(E) a hh:mm" />
+												</div>
+											</div>
 										</div>
-										<div class="info-row">
-											<div class="info-label">일시</div>
-											<div class="info-value">6/15일 오전 9시</div>
-										</div>
 									</div>
+									<c:if test="${banner.image != null}">
+										<img
+											src="${cpath}/resources/images/mentosDetail/${banner.image}"
+											class="spring-image" alt="멘토 이미지">
+									</c:if>
+									<c:if test="${banner.image == null}">
+										<div class="spring-image">👩‍💻</div>
+									</c:if>
 								</div>
-								<div class="spring-image">👩‍💻</div>
 							</div>
-						</div>
-
-						<!-- 슬라이드 3 - React 멘토링 -->
-						<div class="page-1-com-13">
-							<div class="spring-content">
-								<div class="spring-text">
-									<div class="spring-title">
-										실무 중심의<br /> <span class="highlight">React</span> 마스터클래스
-									</div>
-									<div class="spring-info">
-										<div class="info-row">
-											<div class="info-label">강사</div>
-											<div class="info-value">김신한</div>
-										</div>
-										<div class="info-row">
-											<div class="info-label">일시</div>
-											<div class="info-value">6/20일 오후 2시</div>
-										</div>
-									</div>
-								</div>
-								<div class="spring-image">⚛️</div>
-							</div>
-						</div>
+						</c:forEach>
 					</div>
 				</div>
-
 				<button class="slider-btn right" onclick="slideNext()"
 					aria-label="다음 슬라이드">›</button>
 			</div>
@@ -138,72 +118,68 @@
 						<div class="stat-item">
 							<div class="stat-icon">📚</div>
 							<div class="stat-label">멘토링 수강 수</div>
-							<div class="stat-value" data-count="1000">0</div>
+							<div class="stat-value"
+								data-count="${counts.totalMentoringCount}">0</div>
 						</div>
 						<div class="stat-item">
 							<div class="stat-icon">🤝</div>
 							<div class="stat-label">매칭 현황</div>
-							<div class="stat-value" data-count="1000">0</div>
+							<div class="stat-value" data-count="${counts.totalActiveCount}">0</div>
 						</div>
 						<div class="stat-item">
 							<div class="stat-icon">🔥</div>
 							<div class="stat-label">누적 매치업</div>
-							<div class="stat-value" data-count="1000">0</div>
+							<div class="stat-value" data-count="${counts.totalMatchupCount}">0</div>
 						</div>
 						<div class="stat-item">
 							<div class="stat-icon">🏢</div>
 							<div class="stat-label">제휴업체</div>
-							<div class="stat-value" data-count="1000">0</div>
+							<div class="stat-value" data-count="${counts.partnerCount}">0</div>
 						</div>
 						<div class="stat-item">
 							<div class="stat-icon">👥</div>
 							<div class="stat-label">누적 방문수</div>
-							<div class="stat-value" data-count="1000">0</div>
+							<div class="stat-value" data-count="${counts.visitorCount}">0</div>
 						</div>
 					</div>
 				</div>
 			</section>
 
-<!-- 서비스 소개 페이지 -->
-<div class="home-page-3">
-  <div class="home-page-3-inner">
-    <div class="main-div">서비스 소개</div>
+			<!-- 서비스 소개 페이지 -->
+			<div class="home-page-3">
+				<div class="home-page-3-inner">
+					<div class="main-div">서비스 소개</div>
 
-    <div class="service-me-mento">
-      <span>
-        <span class="service-me-mento-span2">me:</span>
-        <span class="service-me-mento-span3">mento</span>
-        <span class="service-me-mento-span">
-          와 함께 <br />
-          내게 꼭 맞는 교육을 선택하세요!
-        </span>
-      </span>
-    </div>
+					<div class="service-me-mento">
+						<span> <span class="service-me-mento-span2">me:</span> <span
+							class="service-me-mento-span3">mento</span> <span
+							class="service-me-mento-span"> 와 함께 <br /> 내게 꼭 맞는 교육을
+								선택하세요!
+						</span>
+						</span>
+					</div>
+					<div class="device-macbook-pro">
+						<div class="shadow"></div>
+						<!-- 상단 뚜껑 (lid) 포함하는 top -->
+						<div class="top">
+							<div class="lid"></div>
+							<div class="dark-screen">
+								<div class="screen-wrap">
+									<div class="screen">
 
-    <div class="device-macbook-pro">
-      <div class="shadow"></div>
+										<img class="image-55"
+											src="${cpath}/resources/images/main1/serviceinner.png" />
+									</div>
+								</div>
+							</div>
+						</div>
 
-      <!-- 상단 뚜껑 (lid) 포함하는 top -->
-      <div class="top">
-        <div class="lid"></div>
-
-        <div class="dark-screen">
-          <div class="screen-wrap">
-            <div class="screen">
-
-              <img class="image-55" src="${cpath}/resources/images/main1/serviceinner.png" />
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- 하단 받침대 이미지 -->
-      <img class="bottom" src="${cpath}/resources/images/main1/bottom.svg" />
-    </div>
-  </div>
-</div>
-
-
+						<!-- 하단 받침대 이미지 -->
+						<img class="bottom"
+							src="${cpath}/resources/images/main1/bottom.svg" />
+					</div>
+				</div>
+			</div>
 			<!-- RANKING 페이지 -->
 			<div class="ranking-container">
 
@@ -516,16 +492,12 @@
 						</div>
 					</div>
 				</div>
-
 			</div>
-
-
 		</div>
 		<!-- page-container 닫기 -->
 		<div class="right"></div>
 	</div>
 	<!-- layout-wrapper 닫기 -->
-
 	<script src="${pageContext.request.contextPath}/resources/js/header.js"></script>
 
 </body>
@@ -555,5 +527,6 @@
 </footer>
 
 <!-- 슬라이더 JavaScript -->
-<script src="${pageContext.request.contextPath}/resources/js/mainslider.js"></script>
+<script
+	src="${pageContext.request.contextPath}/resources/js/mainslider.js"></script>
 </html>
