@@ -24,6 +24,7 @@
 							<img src="${cpath}/resources/images/mypage/profile/avatar-default0.svg"
 								alt="Avatar default" class="avatar-svg-inner"
 								id="profile-image-input">
+							<label for = "profile-img" class="file-upload-label"><i class="fa-solid fa-up-right-from-square"></i></label>
 							<input type="file" id = "profile-img">
 						</div>
 					</div>

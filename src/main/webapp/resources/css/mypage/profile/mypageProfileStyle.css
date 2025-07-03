@@ -5,6 +5,25 @@
   width: 100%;
 }
 
+#profile-img{
+	display:none;
+}
+.file-upload-label{
+	position:absolute;
+	top:100px;
+	left:100px;
+	color:#a6abbd;
+}
+
+.fa-up-right-from-square {
+  -webkit-transform: rotate(270deg);
+  -moz-transform: rotate(270deg);
+  -ms-transform: rotate(270deg);
+  -o-transform: rotate(270deg);
+  transform: rotate(270deg);
+  display: inline-block;
+}
+
 body {
   font-family: 'Inter', 'D2Coding', sans-serif;
   margin: 0;
@@ -143,7 +162,7 @@ body {
 .avatar-container {
   position: relative;
   border: 1px solid #a6abbd;
-  border-radius: 60px;
+  border-radius: 10px;
   width: 120px;
   /* From 298:17326 */
   height: 120px;
