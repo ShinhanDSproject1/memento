@@ -1,6 +1,8 @@
 package com.shinhan.memento.service;
 
+import java.math.BigDecimal;
 import java.nio.charset.StandardCharsets;
+import java.util.ArrayList;
 import java.util.Base64;
 import java.util.HashMap;
 import java.util.List;
@@ -21,14 +23,20 @@ import com.shinhan.memento.common.response.status.BaseExceptionResponseStatus;
 import com.shinhan.memento.dao.MyPageDAO;
 import com.shinhan.memento.dto.ConfirmCashRequestDTO;
 import com.shinhan.memento.dto.ConfirmCashResponseDTO;
+import com.shinhan.memento.dto.MyMatchupListResponseDTO;
 import com.shinhan.memento.dto.MyMentosListResponseDTO;
+import com.shinhan.memento.dto.MyPaymentListResponseDTO;
+import com.shinhan.memento.dto.SparkTestResultRequestDTO;
+import com.shinhan.memento.dto.SparkTestResultResponseDTO;
 import com.shinhan.memento.dto.ValidateCashRequestDTO;
 import com.shinhan.memento.dto.ValidateCashResponseDTO;
+import com.shinhan.memento.mapper.MypageMapper;
 import com.shinhan.memento.model.BaseStatus;
 import com.shinhan.memento.model.CashProduct;
 import com.shinhan.memento.model.PayType;
 import com.shinhan.memento.model.Payment;
 import com.shinhan.memento.model.Payment_Step;
+import com.shinhan.memento.model.SparkTestType;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -39,9 +47,10 @@ public class MyPageService {
 	@Autowired
 	MyPageDAO myPageDAO;
 
+	@Autowired
+	MypageMapper mypageMapper;
+	
 	public ValidateCashResponseDTO validateCash(ValidateCashRequestDTO reqDTO, int userId) {
-
-		
 		CashProduct product = myPageDAO.validateCash(reqDTO.getCashProductID());
 		String orderId = UUID.randomUUID().toString();
 		System.out.println(orderId);
@@ -148,6 +157,45 @@ public class MyPageService {
     
 		public List<MyMentosListResponseDTO> selectMyMentosListById(Integer memberId){
 			return myPageDAO.selectMyMentosListById(memberId);
+		}
+		
+		public List<MyMatchupListResponseDTO> selectJoinListByMemberId(Integer memberId){		
+			return myPageDAO.selectJoinListByMemberId(memberId);
+		}
+		
+		public List<MyPaymentListResponseDTO> selectMyPaymentListById(Integer memberId){
+			List<Map<String, Object>> result = mypageMapper.selectMyPaymentListById(memberId);
+			List<MyPaymentListResponseDTO> selectMyPaymentList = new ArrayList<MyPaymentListResponseDTO>();
+			
+			result.stream().forEach(data ->{
+			 	MyPaymentListResponseDTO dto = MyPaymentListResponseDTO.builder()
+			 	.orderId((String)data.get("ORDERID"))
+				.amount(((BigDecimal)data.get("AMOUNT")).intValue())
+				.matchupId(((BigDecimal)data.get("MATCHUPID")).intValue())
+				.mentosId(((BigDecimal)data.get("MENTOSID")).intValue())
+				.keepgoingId(((BigDecimal)data.get("KEEPGOINGID")).intValue())
+				.paymentStatus((String)data.get("PAYMENTSTATUS"))
+				.matchupTitle(((BigDecimal)data.get("MATCHUPID")).intValue()==0 ? null : (String)data.get("MATCHUPTITLE"))
+				.mentosTitle(((BigDecimal)data.get("MENTOSID")).intValue()==0 ? null :(String)data.get("MENTOSTITLE"))
+				.keepgoingName(((BigDecimal)data.get("KEEPGOINGID")).intValue()==0 ? null :(String)data.get("KEEPGOINGNAME"))
+			 	.build();
+			 	
+			 	selectMyPaymentList.add(dto);
+			});
+			
+			return selectMyPaymentList;
+		}
+
+		public SparkTestResultResponseDTO updateSparkType(SparkTestResultRequestDTO reqDTO, int memberId) {
+			
+			log.info("[updateSparkType - service]");
+			SparkTestType sparkType = reqDTO.getSparkResultType();
+			int metchTypeId = mypageMapper.selectMatchTypebyName(sparkType);
+			int updateTypeResult = mypageMapper.updateMyTypeByMemberId(metchTypeId,memberId); 
+			
+			return SparkTestResultResponseDTO.builder()
+					.result(updateTypeResult == 1? "success" : "fail")
+					.build();
 		}
 	
 	}

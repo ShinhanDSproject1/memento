@@ -17,11 +17,12 @@ body {
   flex-direction: column;
   gap: 16px;
   align-items: center;
-  position: **fixed**;     /* ← 여기! */
+  /* position: **fixed**;
   top: 12px;
-  left: 0;
+  left: 0; */
   z-index: 5;
-  margin: 0;
+  margin-top: 10px;
+  margin-left: 10px;
 }
 
 /* 마지막 버튼(예시 submit-btn)이 하단에 붙게 */
@@ -144,3 +145,4 @@ body {
     box-shadow: 0 2px 18px rgba(80,100,150,0.06);
   }
   .profile-section { max-width: none; width: 98%; }
+}
