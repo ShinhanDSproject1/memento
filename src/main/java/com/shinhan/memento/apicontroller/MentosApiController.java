@@ -116,7 +116,6 @@ public class MentosApiController {
 			@RequestParam(required = false) Integer languageId, @RequestParam(defaultValue = "1") int page) {
 		
 		log.info("[MentosApiController.showMentosList]");
-		
 		return new BaseResponse<>(mentosService.showMentosList(regionGroup,matchTypeId,categoryId,languageId,page));
 	}
 	
