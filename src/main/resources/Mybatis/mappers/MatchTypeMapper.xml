@@ -2,12 +2,21 @@
 <!DOCTYPE mapper
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-  
- <mapper namespace="com.shinhan.memento.mapper.MatchTypeMapper">
- 	
- 	<select id="findMatchTypeById" parameterType="int" resultType="String">
- 		select match_type_name
- 		from match_type
- 		where match_type_id=#{matchTypeId}
- 	</select>
- </mapper>
+
+<mapper namespace="com.shinhan.memento.mapper.MatchTypeMapper">
+
+	<resultMap id="matchTypeResultMap"
+		type="com.shinhan.memento.model.MatchType">
+		<id property="matchTypeId" column="match_type_id" />
+		<result property="matchTypeName" column="match_type_name" />
+		<result property="matchTypeInfo" column="match_type_info" />
+		<result property="matchTypeImg" column="match_type_img" />
+	</resultMap>
+
+	<select id="findMatchTypeById" parameterType="int"
+		resultType="String">
+		select match_type_name
+		from match_type
+		where match_type_id=#{matchTypeId}
+	</select>
+</mapper>
