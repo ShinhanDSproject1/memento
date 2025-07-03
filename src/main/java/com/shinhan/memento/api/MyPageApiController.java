@@ -5,11 +5,13 @@ import java.util.List;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.shinhan.memento.common.exception.MypageException;
 import com.shinhan.memento.common.response.BaseResponse;
@@ -18,6 +20,7 @@ import com.shinhan.memento.dto.ConfirmCashRequestDTO;
 import com.shinhan.memento.dto.ConfirmCashResponseDTO;
 import com.shinhan.memento.dto.MyMentosListResponseDTO;
 import com.shinhan.memento.dto.MyProfileInfoResponseDTO;
+import com.shinhan.memento.dto.MyProfileUpdateRequestDTO;
 import com.shinhan.memento.dto.SparkTestResultRequestDTO;
 import com.shinhan.memento.dto.SparkTestResultResponseDTO;
 import com.shinhan.memento.dto.ValidateCashRequestDTO;
@@ -84,5 +87,15 @@ public class MyPageApiController {
 		
 		return new BaseResponse<>(profileInfoDTO);
 	}
+	
+	@PostMapping(value = "/profile-update")
+	public BaseResponse<Void> updateMyProfile(HttpSession session, @RequestParam(value = "imageFile", required = false) MultipartFile imageFile ,@ModelAttribute MyProfileUpdateRequestDTO dto){
+		Member loginUser = (Member) session.getAttribute("loginUser");
+		if (loginUser == null) throw new MypageException(BaseExceptionResponseStatus.NEED_LOGIN);
+		int userId = loginUser.getMemberId();
+		
+		boolean result = myPageService.updateProfile(userId,dto,imageFile);
 
+		return new BaseResponse<Void>(null);
+	}
 }

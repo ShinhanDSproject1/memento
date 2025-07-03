@@ -83,5 +83,11 @@
 		left join interest i on mi.interest_id = i.interest_id
 		where m.member_id = #{memberId}
 	</select>
+	
+	<update id="updateProfileInfo" parameterType="com.shinhan.memento.dto.MyProfileDBUpdateDTO">
+		update member
+		set NICKNAME = #{nickname}, PHONE_NUMBER = #{phoneNumber}, INTRODUCE = #{introduce}, REGION_GROUP = #{regionGroup} , REGION_SUBGROUP = #{regionSubGroup}, REGION_DETAIL = #{regionDetail}, PROFILE_IMAGE_URL = #{profileImageUrl}
+		where member_id = #{memberId}
+	</update>
 
 </mapper>

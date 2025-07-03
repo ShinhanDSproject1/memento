@@ -1,7 +1,11 @@
 package com.shinhan.memento.service;
 
+import java.io.File;
+import java.io.IOException;
 import java.math.BigDecimal;
 import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.StandardCopyOption;
 import java.util.ArrayList;
 import java.util.Base64;
 import java.util.HashMap;
@@ -21,6 +25,7 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.shinhan.memento.common.exception.MypageException;
 import com.shinhan.memento.common.response.status.BaseExceptionResponseStatus;
@@ -30,7 +35,9 @@ import com.shinhan.memento.dto.ConfirmCashResponseDTO;
 import com.shinhan.memento.dto.MyMatchupListResponseDTO;
 import com.shinhan.memento.dto.MyMentosListResponseDTO;
 import com.shinhan.memento.dto.MyPaymentListResponseDTO;
+import com.shinhan.memento.dto.MyProfileDBUpdateDTO;
 import com.shinhan.memento.dto.MyProfileInfoResponseDTO;
+import com.shinhan.memento.dto.MyProfileUpdateRequestDTO;
 import com.shinhan.memento.dto.SparkTestResultRequestDTO;
 import com.shinhan.memento.dto.SparkTestResultResponseDTO;
 import com.shinhan.memento.dto.ValidateCashRequestDTO;
@@ -42,8 +49,7 @@ import com.shinhan.memento.model.PayType;
 import com.shinhan.memento.model.Payment;
 import com.shinhan.memento.model.Payment_Step;
 import com.shinhan.memento.model.SparkTestType;
-
-import lombok.Data;
+import org.springframework.beans.factory.annotation.Value;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
@@ -55,6 +61,9 @@ public class MyPageService {
 
 	@Autowired
 	MypageMapper mypageMapper;
+	
+	@Value("${file.upload.dir}")
+    private String uploadDir;
 	
 	public ValidateCashResponseDTO validateCash(ValidateCashRequestDTO reqDTO, int userId) {
 		CashProduct product = myPageDAO.validateCash(reqDTO.getCashProductID());
@@ -203,6 +212,69 @@ public class MyPageService {
 					.result(updateTypeResult == 1? "success" : "fail")
 					.build();
 		}
+		public boolean updateProfile(Integer memberId, MyProfileUpdateRequestDTO dto, MultipartFile imgFile) {
+			String imageUrl = null;
+	        if (imgFile != null && !imgFile.isEmpty()) {
+	            try {
+	                File dir = new File(uploadDir);
+	                if (!dir.exists()) {
+	                    dir.mkdirs();
+	                }
+	                // 확장자 추출 + 고유 파일명 생성
+	                String ext =  getFileExtension(imgFile.getOriginalFilename());
+	                String savedFileName = UUID.randomUUID().toString() + (ext != null ? "." + ext : "");
+	                File destFile = new File(dir, savedFileName);
+	                Files.copy(imgFile.getInputStream(), destFile.toPath(), StandardCopyOption.REPLACE_EXISTING);
+
+	                // 웹에서 접근 가능한 경로로 구성 (리소스 경로 기준)
+	                imageUrl = "/resources/uploadImage/" + savedFileName;
+	                log.info("이미지 저장 완료: {}", imageUrl);
+	            } catch (IOException e) {
+	                log.error("이미지 업로드 실패", e);
+	                return false;
+	            }
+	        }
+			//주소, 관심사 쪼개기
+	        String regeionGroup = "";
+	        String regionSubGroup = "";
+	        String regionDetail = "";
+	        if(dto.getAddress().trim() != "") {
+	        	String[] locationInfo = dto.getAddress().split(" ");
+	        	if(locationInfo.length == 1) {
+	        		regeionGroup = locationInfo[0].trim();
+	        	}else if(locationInfo.length == 2) {
+	        		regeionGroup = locationInfo[0].trim();
+	        		regionSubGroup = locationInfo[1].trim();
+	        	}else {
+	        		regeionGroup = locationInfo[0].trim();
+	        		regionSubGroup = locationInfo[1].trim();
+	        		for(int i=2; i<locationInfo.length;i++) {
+	        			regionDetail += locationInfo[i];
+	        		}
+	        		regionDetail.trim();
+	        	}
+	        }
+	        
+	        if(dto.getInterestNames().trim() != "") {
+	        	String[] interestInfo = dto.getInterestNames().trim().split("#");
+	        }
+	        
+	        MyProfileDBUpdateDTO myProfileDBUpdateDTO = MyProfileDBUpdateDTO.builder()
+	        		.memberId(memberId)
+	        		.nickname(dto.getNickname())
+	        		.phoneNumber(dto.getPhone())
+	        		.introduce(dto.getIntroduction())
+	        		.regionGroup(regeionGroup == "" ? null : regeionGroup)
+	        		.regionSubGroup(regionSubGroup == "" ? null : regionSubGroup)
+	        		.regionDetail(regionDetail == "" ? null : regionDetail)
+	        		.profileImageUrl(imageUrl)
+	        		.build();
+	        
+	        int result = mypageMapper.updateProfileInfo(myProfileDBUpdateDTO);
+	        
+			return result == 1;
+		}
+		
 		
 		public MyProfileInfoResponseDTO selectMyProfileInfo(Integer memberId){
 			List<Map<String, Object>> result = mypageMapper.selectMyProfileInfo(memberId);
@@ -229,5 +301,12 @@ public class MyPageService {
 			return dto;
 			
 		}
+		
+		 private String getFileExtension(String fileName) {
+		        if (fileName != null && fileName.contains(".")) {
+		            return fileName.substring(fileName.lastIndexOf('.') + 1);
+		        }
+		        return null;
+		    }
 	
 	}

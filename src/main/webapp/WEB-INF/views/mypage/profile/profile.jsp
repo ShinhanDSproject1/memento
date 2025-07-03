@@ -9,11 +9,11 @@
 	<section id="profile-page" class="profile-row-section">
 		<main class="profile-edit-card">
 
-			<form method="post" class="profile-form-content" action="${cpath}/mypage/update-profile">
+			<form method="post" id="profileForm" class="profile-form-content" action="#" enctype="multipart/form-data">
 				<header class="profile-edit-header-content">
 					<h1 class="page-title">프로필 정보 수정</h1>
 					<div class="action-buttons">
-						<button type="button" class="btn btn-cancel">취소</button>
+						<button type="reset" class="btn btn-cancel">취소</button>
 						<button type="submit" class="btn btn-save">저장</button>
 					</div>
 				</header>
@@ -24,6 +24,7 @@
 							<img src="${cpath}/resources/images/mypage/profile/avatar-default0.svg"
 								alt="Avatar default" class="avatar-svg-inner"
 								id="profile-image-input">
+							<input type="file" id = "profile-img">
 						</div>
 					</div>
 				</div>

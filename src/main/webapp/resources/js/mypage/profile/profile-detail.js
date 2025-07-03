@@ -1,5 +1,42 @@
 $(() => {
     fetchProfileData()
+    const profileForm = document.getElementById('profileForm');
+
+    profileForm.addEventListener('submit', async function (e) {
+        e.preventDefault
+        const formData = new FormData();
+        formData.append('nickname', document.getElementById('nickname').value)
+        formData.append('interestNames', document.getElementById('interestNames').value)
+        formData.append('address', document.getElementById('address').value)
+        formData.append('phone', document.getElementById('phone').value)
+        formData.append('introduction', document.getElementById('introduction').value)
+        const imgFile = document.getElementById('profile-img').files[0]
+        if (imgFile) {
+            formData.append('imageFile', imgFile)
+        }
+
+        const updateUrl = '/memento/api/mypage/profile-update';
+        try {
+            const response = await fetch(updateUrl, {
+                method: 'POST',
+                body: formData
+            })
+            if (response.ok) {
+                console.log('성공:', result);
+            }
+            else {
+                console.log(result)
+            }
+        } catch (error) {
+            console.log(error)
+        }
+
+    })
+    profileForm.addEventListener('reset', async function (e) {
+        e.preventDefault
+        fetchProfileData()
+    })
+
 
     async function fetchProfileData() {
         const container = document.getElementById('profile-page')
@@ -88,5 +125,9 @@ $(() => {
             console.error("데이터를 불러오는 중 오류 발생:", error);
             container.innerHTML = '<p>프로필 정보를 불러올 수 없습니다...</p>';
         }
+    }
+
+    function resetValue() {
+
     }
 })
