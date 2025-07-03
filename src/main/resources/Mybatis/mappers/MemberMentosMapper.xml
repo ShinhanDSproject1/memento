@@ -5,7 +5,7 @@
   
  <mapper namespace="com.shinhan.memento.mapper.MemberMentosMapper">
  
- 	<insert id="joinMentos" parameterType="com.shinhan.memento.dto.JoinMentosDTO">
+ 	<insert id="joinMentos" parameterType="com.shinhan.memento.dto.mentos.JoinMentosDTO">
  		insert into member_mentos(member_mentos_id, mentos_id, member_id, is_compeleted, created_at, updated_at, status)
  		values(seq_member_mentos_id.nextval, #{mentosId}, #{memberId}, 0, sysdate, null, 'ACTIVE')
  	</insert>
