@@ -22,9 +22,12 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.shinhan.memento.common.exception.MemberException;
+import com.shinhan.memento.common.response.status.BaseExceptionResponseStatus;
 import com.shinhan.memento.dto.CategoryDTO;
 import com.shinhan.memento.dto.LanguageDTO;
 import com.shinhan.memento.dto.MatchTypeDTO;
+import com.shinhan.memento.dto.mentoDetail.MentoDetailClassDTO;
 import com.shinhan.memento.dto.mentos.CreateMentosDBDTO;
 import com.shinhan.memento.dto.mentos.CreateMentosDTO;
 import com.shinhan.memento.dto.mentos.GetMentosDTO;
@@ -33,6 +36,7 @@ import com.shinhan.memento.mapper.CartMapper;
 import com.shinhan.memento.mapper.CategoryMapper;
 import com.shinhan.memento.mapper.LanguageMapper;
 import com.shinhan.memento.mapper.MatchTypeMapper;
+import com.shinhan.memento.mapper.MemberMapper;
 import com.shinhan.memento.mapper.MemberMentosMapper;
 import com.shinhan.memento.mapper.MentosMapper;
 import com.shinhan.memento.model.Member;
@@ -49,19 +53,19 @@ public class MentosService {
 
 	@Autowired
 	MemberMentosMapper memberMentosMapper;
-	
+
 	@Autowired
 	LanguageMapper languageMapper;
-	
+
 	@Autowired
 	CategoryMapper categoryMapper;
-	
+
 	@Autowired
 	MatchTypeMapper matchTypeMapper;
-	
+
 	@Autowired
 	CartMapper cartMapper;
-	
+
 	@Autowired
 	MemberService memberService;
 
@@ -181,28 +185,28 @@ public class MentosService {
 		String location;
 		int price;
 		boolean isFavorite;
-		
+
 		int offset = (page - 1) * 15;
 		List<Mentos> mentosList = mentosMapper.showMentosList(regionGroup, matchTypeId, categoryId, languageId, offset);
 		List<GetMentosDTO> result = new ArrayList<>();
-		
+
 		for (Mentos mentos : mentosList) {
 			Member member = memberService.findMemberById(mentos.getMentoId());
 			mentosId = mentos.getMentosId();
-			
+
 			LocalDate today = LocalDate.now();
 			LocalDate startDate = mentos.getStartDay().toLocalDate();
 			daysBetween = ChronoUnit.DAYS.between(today, startDate);
-			
+
 			// 현재 참여인원 세어오기 (확정까지 몇명)
 			int nowMemberCnt = mentosMapper.countNowMember(mentosId);
 			remainMemberCnt = mentos.getMinMember() - nowMemberCnt;
-			if(remainMemberCnt <= 0) {
+			if (remainMemberCnt <= 0) {
 				remainMemberStr = "확정";
-			}else {
-				remainMemberStr = "확정까지 "+remainMemberCnt +"명";
+			} else {
+				remainMemberStr = "확정까지 " + remainMemberCnt + "명";
 			}
-			
+
 			mentosImg = mentos.getImage();
 			title = mentos.getTitle();
 			subTitle = mentos.getSimpleContent();
@@ -216,35 +220,58 @@ public class MentosService {
 			endTime = mentos.getEndTime().toString().substring(11);
 			location = mentos.getRegionGroup();
 			price = mentos.getPrice();
-			
+
 			// 찜 여부 확인하기
 			Map<String, Object> favoriteParams = new HashMap<>();
 			favoriteParams.put("mentosId", mentos.getMentosId());
 			favoriteParams.put("memberId", member.getMemberId());
 			isFavorite = cartMapper.checkFavorite(favoriteParams) == null ? false : true;
-			
-			GetMentosDTO mentosForMap = GetMentosDTO.builder()
-					.mentosId(mentosId)
-					.daysBetween(daysBetween)
-					.remainMemberCnt(remainMemberStr)
-					.mentosImg(mentosImg)
-					.title(title)
-					.subTitle(subTitle)
-					.categoryName(categoryName)
-					.languageName(languageName)
-					.mentoName(mentoName)
-					.mentoType(mentoType)
-					.startDay(startDay)
-					.endDay(endDay)
-					.startTime(startTime)
-					.endTime(endTime)
-					.location(location)
-					.price(price)
-					.isFavorite(isFavorite).build();
-			
+
+			GetMentosDTO mentosForMap = GetMentosDTO.builder().mentosId(mentosId).daysBetween(daysBetween)
+					.remainMemberCnt(remainMemberStr).mentosImg(mentosImg).title(title).subTitle(subTitle)
+					.categoryName(categoryName).languageName(languageName).mentoName(mentoName).mentoType(mentoType)
+					.startDay(startDay).endDay(endDay).startTime(startTime).endTime(endTime).location(location)
+					.price(price).isFavorite(isFavorite).build();
+
 			result.add(mentosForMap);
 		}
 
+		return result;
+	}
+
+	/**
+	 * 멘토 상세조회(진행한 멘토스내역 보기)
+	 */
+	public List<MentoDetailClassDTO> showMentoDetailClassList(int mentoId, java.util.Date lastCreatedAt) {
+		log.info("[MentosService.showMentoDetailClassList]");
+		Map<String, Object> mentosParams = new HashMap<>();
+		mentosParams.put("mentoId", mentoId);
+		mentosParams.put("lastCreatedAt", lastCreatedAt);
+		List<Mentos> mentosList = mentosMapper.showMentosListByMentoId(mentosParams);
+		
+		List<MentoDetailClassDTO> result = new ArrayList<>();
+		
+		for(Mentos mentos : mentosList) {
+			Member member = memberService.findMemberById(mentos.getMentoId());
+			if(member==null) {
+				throw new MemberException(BaseExceptionResponseStatus.CANNOT_FOUND_MENTO);
+			}
+			
+			MentoDetailClassDTO dto = MentoDetailClassDTO.builder()
+					.mentosImg(mentos.getImage())
+					.title(mentos.getTitle())
+					.mentoName(member.getNickname())
+					.userType(member.getUserType().toString())
+					.startDay(mentos.getStartDay().toString())
+					.endDay(mentos.getEndDay().toString())
+					.startTime(mentos.getStartTime().toString().substring(11))
+					.endTime(mentos.getEndTime().toString().substring(11))
+					.selectedDays(mentos.getSelectedDays())
+					.region(mentos.getRegionGroup()+" "+mentos.getRegionSubgroup())
+					.price(mentos.getPrice()).build();
+			
+			result.add(dto);
+		}
 		return result;
 	}
 }
