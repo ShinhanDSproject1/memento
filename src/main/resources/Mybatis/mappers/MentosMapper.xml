@@ -132,5 +132,16 @@
 		and
 		status='ACTIVE'
 	</select>
+	
+	<select id="showMentosListByMentoId" parameterType="map" resultMap="mentosResultMap">
+		select *
+		from mentos
+		where mento_id=#{mentoId}
+		<if test="createdAt != null">
+			and created_at &lt; #{createdAt}
+		</if>
+		and status!='DELETE'
+		order by created_at desc
+	</select>
 </mapper>
 
