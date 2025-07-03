@@ -8,7 +8,11 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
+import javax.swing.ListModel;
+
+import org.apache.ibatis.jdbc.Null;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
@@ -26,6 +30,7 @@ import com.shinhan.memento.dto.ConfirmCashResponseDTO;
 import com.shinhan.memento.dto.MyMatchupListResponseDTO;
 import com.shinhan.memento.dto.MyMentosListResponseDTO;
 import com.shinhan.memento.dto.MyPaymentListResponseDTO;
+import com.shinhan.memento.dto.MyProfileInfoResponseDTO;
 import com.shinhan.memento.dto.SparkTestResultRequestDTO;
 import com.shinhan.memento.dto.SparkTestResultResponseDTO;
 import com.shinhan.memento.dto.ValidateCashRequestDTO;
@@ -38,6 +43,7 @@ import com.shinhan.memento.model.Payment;
 import com.shinhan.memento.model.Payment_Step;
 import com.shinhan.memento.model.SparkTestType;
 
+import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
@@ -196,6 +202,32 @@ public class MyPageService {
 			return SparkTestResultResponseDTO.builder()
 					.result(updateTypeResult == 1? "success" : "fail")
 					.build();
+		}
+		
+		public MyProfileInfoResponseDTO selectMyProfileInfo(Integer memberId){
+			List<Map<String, Object>> result = mypageMapper.selectMyProfileInfo(memberId);
+			String profileImageUrl = (String)result.get(0).get("PROFILEIMAGEURL");
+			String nickName = (String)result.get(0).get("NICKNAME");
+			String introduce = (String)result.get(0).get("INTRODUCE");
+			String regionGroup = result.get(0).get("REGIONGROUP") == null ? "" : (String)result.get(0).get("REGIONGROUP");
+			String regionSubGroup = result.get(0).get("REGIONSUBGROUP") == null ? "" : (String)result.get(0).get("REGIONSUBGROUP");
+			String regionDetail = result.get(0).get("REGIONDETAIL") == null ? "" : (String)result.get(0).get("REGIONDETAIL");
+			String locationInfo = regionGroup + " " + regionSubGroup + " " + regionDetail;
+			String phoneNumber = result.get(0).get("PHONENUMBER") == null ? "" : (String)result.get(0).get("PHONENUMBER");
+			String interestNames = result.stream()
+				    .map(data -> data.get("INTERESTNAME") == null ? "" : (String) data.get("INTERESTNAME"))
+				    .collect(Collectors.joining(" "));
+			
+			MyProfileInfoResponseDTO dto = MyProfileInfoResponseDTO.builder()
+					.profileImgUrl(profileImageUrl)
+					.nickName(nickName)
+					.introduce(introduce)
+					.location(locationInfo)
+					.phoneNumber(phoneNumber)
+					.interestName(interestNames)
+					.build();
+			return dto;
+			
 		}
 	
 	}

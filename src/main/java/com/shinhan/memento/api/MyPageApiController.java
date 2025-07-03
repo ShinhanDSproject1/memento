@@ -17,6 +17,7 @@ import com.shinhan.memento.common.response.status.BaseExceptionResponseStatus;
 import com.shinhan.memento.dto.ConfirmCashRequestDTO;
 import com.shinhan.memento.dto.ConfirmCashResponseDTO;
 import com.shinhan.memento.dto.MyMentosListResponseDTO;
+import com.shinhan.memento.dto.MyProfileInfoResponseDTO;
 import com.shinhan.memento.dto.SparkTestResultRequestDTO;
 import com.shinhan.memento.dto.SparkTestResultResponseDTO;
 import com.shinhan.memento.dto.ValidateCashRequestDTO;
@@ -73,6 +74,15 @@ public class MyPageApiController {
 	public BaseResponse<List<MyMentosListResponseDTO>> selectMyMentosListById(@RequestParam Integer memberId){
 		return new BaseResponse<>(myPageService.selectMyMentosListById(memberId));
 	}
-
+	
+	@GetMapping(value="/profile-info", produces = "application/json")
+	public BaseResponse<MyProfileInfoResponseDTO> selectMyProfileInfo(HttpSession session){
+		Member loginUser = (Member) session.getAttribute("loginUser");
+		if (loginUser == null) throw new MypageException(BaseExceptionResponseStatus.NEED_LOGIN);
+		int userId = loginUser.getMemberId();
+		MyProfileInfoResponseDTO profileInfoDTO = myPageService.selectMyProfileInfo(userId);
+		
+		return new BaseResponse<>(profileInfoDTO);
+	}
 
 }

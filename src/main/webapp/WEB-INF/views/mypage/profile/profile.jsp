@@ -4,7 +4,7 @@
 <c:set var="cpath" value="${pageContext.servletContext.contextPath}" />		
 
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/mypage/profile/mypageProfileStyle.css" />
-
+<script src = "${cpath}/resources/js/mypage/profile/profile-detail.js"></script>
 <div class="page-container">
 	<section id="profile-page" class="profile-row-section">
 		<main class="profile-edit-card">
@@ -21,10 +21,7 @@
 					<label for="profile-image-input" class="form-label">이미지</label>
 					<div class="form-value">
 						<div class="avatar-container">
-							<img
-								src="${cpath}/resources/images/mypage/profile/group-4500.svg"
-							alt="Avatar border" class="avatar-svg-outer"> <img
-							src="${cpath}/resources/images/mypage/profile/avatar-default0.svg"
+							<img src="${cpath}/resources/images/mypage/profile/avatar-default0.svg"
 								alt="Avatar default" class="avatar-svg-inner"
 								id="profile-image-input">
 						</div>
@@ -43,8 +40,8 @@
 				<div class="form-row">
 					<label for="interests" class="form-label">관심사</label>
 					<div class="form-value">
-						<div class="form-input-field">
-							<span class="form-input-text tag" id="interests">#JAVA</span>
+						<div id='interestNames' class="form-input-field">
+							<span class="form-input-text tag" >#JAVA</span>
 							<span class="form-input-text tag">#SQL</span> <span
 								class="form-input-text tag">#Algorithm</span>
 						</div>

@@ -13,4 +13,5 @@ public interface MypageMapper {
 	public abstract List<Map<String, Object>> selectMyPaymentListById(Integer memberId);
 	public abstract int selectMatchTypebyName(SparkTestType sparkType);
 	public abstract int updateMyTypeByMemberId(@Param("matchTypeId") int matchTypeId, @Param("memberId") int memberId);
+	public abstract List<Map<String, Object>> selectMyProfileInfo(Integer memberId);
 }
