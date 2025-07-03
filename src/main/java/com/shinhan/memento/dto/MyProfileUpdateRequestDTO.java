@@ -15,4 +15,5 @@ public class MyProfileUpdateRequestDTO {
 	private String address;
 	private String phone;
 	private String introduction;
+	private String originalProfileUrl;
 }

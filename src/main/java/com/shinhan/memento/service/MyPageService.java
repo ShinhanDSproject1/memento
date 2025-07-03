@@ -229,7 +229,10 @@ public class MyPageService {
 				log.error("이미지 업로드 실패", e);
 				return false;
 			}
+		}else{
+			imageUrl = dto.getOriginalProfileUrl();
 		}
+
 		// 주소, 관심사 쪼개기
 		String regeionGroup = "";
 		String regionSubGroup = "";
@@ -256,7 +259,7 @@ public class MyPageService {
 				.regionGroup(regeionGroup == "" ? null : regeionGroup)
 				.regionSubGroup(regionSubGroup == "" ? null : regionSubGroup)
 				.regionDetail(regionDetail == "" ? null : regionDetail).profileImageUrl(imageUrl).build();
-
+				
 		int result = mypageMapper.updateProfileInfo(myProfileDBUpdateDTO);
 
 		List<String> inputInterestNamesList = new ArrayList<>();

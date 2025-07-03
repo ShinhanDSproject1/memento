@@ -11,9 +11,12 @@ $(() => {
         formData.append('phone', document.getElementById('phone').value)
         formData.append('introduction', document.getElementById('introduction').value)
         const imgFile = document.getElementById('profile-img').files[0]
+        let originalProfileUrl = document.getElementById('original-profile-img-url').value()
         if (imgFile) {
             formData.append('imageFile', imgFile)
+            originalProfileUrl = ''
         }
+        formData.append("originalProfileUrl" ,originalProfileUrl)
 
         const updateUrl = '/memento/api/mypage/profile-update';
         try {
@@ -69,6 +72,8 @@ $(() => {
             } else {
                 profileImg.src = '/memento/resources/images/logo.png'
             }
+            const profileImgValue = document.getElementById('original-profile-img-url')
+            profileImgValue.value = `${profileData.profileImgUrl}`
 
             const nickname = document.getElementById('nickname')
             nickname.value = `${profileData.nickName}`
@@ -105,7 +110,7 @@ $(() => {
                 phone.placeholder = '휴대폰 번호를 등록해주세요! (-생략불가)'
 
             } else {
-                phone.value = `${profileData.location}`
+                phone.value = `${profileData.phoneNumber}`
             }
 
             const introduction = document.getElementById('introduction')

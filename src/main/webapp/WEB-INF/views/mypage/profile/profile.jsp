@@ -26,6 +26,7 @@
 								id="profile-image-input">
 							<label for = "profile-img" class="file-upload-label"><i class="fa-solid fa-up-right-from-square"></i></label>
 							<input type="file" id = "profile-img">
+							<input type="hidden" id="original-profile-img-url" name="originalProfileImgUrl" value="">
 						</div>
 					</div>
 				</div>
