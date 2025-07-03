@@ -17,10 +17,12 @@ import com.shinhan.memento.common.response.BaseResponse;
 import com.shinhan.memento.common.response.status.BaseExceptionResponseStatus;
 import com.shinhan.memento.dto.mentoDetail.MentoDetailClassDTO;
 import com.shinhan.memento.dto.mentoDetail.MentoDetailHomeDTO;
+import com.shinhan.memento.dto.mentoDetail.MentoDetailReviewDTO;
 import com.shinhan.memento.model.Member;
 import com.shinhan.memento.model.UserType;
 import com.shinhan.memento.service.MemberService;
 import com.shinhan.memento.service.MentosService;
+import com.shinhan.memento.service.ReviewService;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -33,9 +35,9 @@ public class MentoDetailApiController {
 
 	@Autowired
 	MentosService mentosService;
-  
-  @Autowired
-  ReviewService reviewService;
+
+	@Autowired
+	ReviewService reviewService;
 
 	@GetMapping("")
 	public BaseResponse<MentoDetailHomeDTO> showMentoDetailHome(@RequestParam int mentoId) {
@@ -74,20 +76,20 @@ public class MentoDetailApiController {
 	}
 
 	@GetMapping("/review")
-	public BaseResponse<List<MentoDetailReviewDTO>> showMentoReviews(@RequestParam("mentoId") int mentoId,  @DateTimeFormat(pattern = "yyyy-MM-dd")
-    Date lastCreatedAt){
+	public BaseResponse<List<MentoDetailReviewDTO>> showMentoReviews(@RequestParam("mentoId") int mentoId,
+			@DateTimeFormat(pattern = "yyyy-MM-dd") Date lastCreatedAt) {
 		log.info("[MentoDetailApiController.showMentoReviews]");
-		
-		//mentoId 로 들어온 값이 유효한지 확인 
+
+		// mentoId 로 들어온 값이 유효한지 확인
 		Map<String, Object> memberParams = new HashMap<>();
 		memberParams.put("memberId", mentoId);
 		memberParams.put("userType", UserType.MENTO);
 		Member member = memberService.findMemberByIdAndUserType(memberParams);
 
-		if(member==null) {
+		if (member == null) {
 			throw new MemberException(BaseExceptionResponseStatus.CANNOT_FOUND_MENTO);
 		}
-		
+
 		return new BaseResponse<>(reviewService.showMentoReviews(mentoId, lastCreatedAt));
 	}
 }
