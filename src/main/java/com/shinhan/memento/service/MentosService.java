@@ -268,7 +268,8 @@ public class MentosService {
 					.endTime(mentos.getEndTime().toString().substring(11))
 					.selectedDays(mentos.getSelectedDays())
 					.region(mentos.getRegionGroup()+" "+mentos.getRegionSubgroup())
-					.price(mentos.getPrice()).build();
+					.price(mentos.getPrice())
+					.createdAt(mentos.getCreatedAt().toString()).build();
 			
 			result.add(dto);
 		}

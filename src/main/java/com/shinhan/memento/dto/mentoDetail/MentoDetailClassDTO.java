@@ -19,4 +19,5 @@ public class MentoDetailClassDTO {
 	private String selectedDays;
 	private String region; // regionGroup + regionSubgroup
 	private int price;
+	private String createdAt;
 }
