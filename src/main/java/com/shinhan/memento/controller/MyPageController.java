@@ -1,39 +1,17 @@
 package com.shinhan.memento.controller;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
 import javax.servlet.http.HttpServletRequest;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
-
-import com.shinhan.memento.common.exception.MemberException;
-import com.shinhan.memento.common.response.BaseResponse;
-import com.shinhan.memento.common.response.status.BaseExceptionResponseStatus;
-import com.shinhan.memento.dto.MypageKeepgoingHistoryDTO;
-import com.shinhan.memento.model.BaseStatus;
-import com.shinhan.memento.model.Member;
-import com.shinhan.memento.model.UserType;
 import com.shinhan.memento.service.MemberKeepgoingService;
 import com.shinhan.memento.service.MemberService;
-
 import lombok.extern.slf4j.Slf4j;
 
 @Controller
 @Slf4j
 @RequestMapping("/mypage")
 public class MyPageController {
-	@Autowired
-	MemberKeepgoingService memberKeepgoingService;
-
-	@Autowired
-	MemberService memberService;
 
 	@RequestMapping("/page1")
 	public String myPageView1(HttpServletRequest request) {
@@ -215,22 +193,5 @@ public class MyPageController {
 			request.setAttribute("initialPage", "/memento/mypage/mento-test"); // 실제 경로 지정
 			return "mypage/mypage-main"; // 전체 레이아웃에서 내부에서 AJAX 호출
 		}
-	}
-
-	/**
-	 * 마이페이지(킵고잉 이용내역 조회)
-	 */
-	@GetMapping("/history/keepgoing")
-	public BaseResponse<List<MypageKeepgoingHistoryDTO>> showKeepgoingHistoryByMemberId(@RequestParam int memberId) {
-		log.info("[MypageController.showKeepgoingHistory]");
-		// mentoId 로 들어온 식별자값이 db에서 유효한 사용자인지 검증
-		Map<String, Object> memberCheckParams = new HashMap<>();
-		memberCheckParams.put("memberId", memberId);
-		memberCheckParams.put("userType", String.valueOf(UserType.MENTO));
-		Member member = memberService.findMemberByIdAndUserType(memberCheckParams);
-		if (member == null) {
-			throw new MemberException(BaseExceptionResponseStatus.CANNOT_FOUND_MEMBER);
-		}
-		return new BaseResponse<>(memberKeepgoingService.showKeepgoingHistoryByMemberId(memberId));
 	}
 }

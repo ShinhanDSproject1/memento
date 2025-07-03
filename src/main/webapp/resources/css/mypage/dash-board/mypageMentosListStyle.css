@@ -17,13 +17,15 @@ a {
 
 .page-container {
 	flex: 1;
-	padding: 40px;
 	box-sizing: border-box;
 }
 
 /* ==========================================================================
    My Mentors Section
    ========================================================================== */
+.my-mentors{
+	padding:40px;
+}
 
 .my-mentors__wrapper {
 	max-width: 1440px;
@@ -96,6 +98,10 @@ a {
 }
 
 .mentor-card__title {
+	display: -webkit-box;
+	-webkit-line-clamp: 2;
+	-webkit-box-orient: vertical;
+	overflow: hidden;
 	color: #005197;
 	font-family: 'Inter', sans-serif;
 	font-weight: 500;
@@ -261,4 +267,11 @@ a {
   flex-shrink: 0;
   height: 0px;
   position: relative;
+}
+
+.mento-type{Add commentMore actions
+	font-size:10px;
+	color:white;
+	border-radius:5px;
+	background-color:#000000;
 }

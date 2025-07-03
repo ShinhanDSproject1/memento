@@ -4,18 +4,42 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.shinhan.memento.mapper.MemberMapper">
-	<select id="findMemberById" parameterType="int" resultType="com.shinhan.memento.model.Member">
+	<resultMap id="memberResultMap"
+		type="com.shinhan.memento.model.Member">
+		<id property="memberId" column="member_id" />
+		<result property="matchTypeId" column="match_type_id" />
+		<result property="profileImg" column="profile_img" />
+		<result property="email" column="email" />
+		<result property="nickname" column="nickname" />
+		<result property="phoneNumber" column="phone_number" />
+		<result property="userType" column="user_type" />
+		<result property="point" column="point" />
+		<result property="introduceMento" column="introduce_mento" />
+		<result property="score" column="score" />
+		<result property="regionGroup" column="region_group" />
+		<result property="regionSubgroup" column="region_subgroup" />
+		<result property="regionDetail" column="region_detail" />
+		<result property="createdAt" column="created_at" />
+		<result property="updatedAt" column="updated_at" />
+		<result property="status" column="status" />
+	</resultMap>
+
+	<select id="findMemberById" parameterType="int"
+		resultMap="memberResultMap">
 		select *
 		from member
 		where member_id=#{memberId}
-		and status='ACTIVE'
+		and
+		status='ACTIVE'
 	</select>
-	
-	<select id="findMemberByIdAndUserType" parameterType="Map" resultType="com.shinhan.memento.model.Member">
+
+	<select id="findMemberByIdAndUserType" parameterType="Map"
+		resultMap="memberResultMap">
 		select *
 		from member
 		where member_id=#{memberId}
-		and user_type=#{userType}
+		and
+		user_type=#{userType}
 		and status='ACTIVE'
 	</select>
 </mapper>

@@ -2,14 +2,15 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <c:set var="cpath" value="${pageContext.servletContext.contextPath}" />	
 
-<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/mypage/dash-board/mypageMatchupListStyle.css" />
-
+<link rel="stylesheet" href="${cpath}/resources/css/mypage/dash-board/mypageMatchupListStyle.css" />
+<script
+	src="${cpath}/resources/js/mypage/dash-board/mypagematchuplist.js"></script>
 <div class="page-container">
 	<section class="matchup-list">
 		<div class="matchup-list__container">
 			<h2 class="matchup-list__title">나의 매치업 목록</h2>
 
-			<div class="matchup-list__cards">
+			<div id="mypage-matchup-list" class="matchup-list__cards">
 				<!-- Card 1: In Progress, Leader -->
 				<article class="matchup-card">
 					<div class="matchup-card__content">
