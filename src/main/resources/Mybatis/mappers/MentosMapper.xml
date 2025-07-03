@@ -48,8 +48,8 @@
 		region_detail,
 		content, price, times, created_at,
 		updated_at, status,
-		match_type_first, match_type_second,
-		match_type_third
+		match_type_id_first, match_type_id_second,
+		match_type_id_third
 		) VALUES (
 		seq_mentos_id.nextval, #{categoryId},
 		#{languageId}, #{mentoId}, #{title}, #{simpleContent},
@@ -106,10 +106,9 @@
 		</if>
 		<if test="matchTypeId != null">
 			AND (
-			match_type_first = #{matchTypeId}
-			OR match_type_second
-			= #{matchTypeId}
-			OR match_type_third = #{matchTypeId}
+			match_type_id_first = #{matchTypeId}
+			OR match_type_id_second = #{matchTypeId}
+			OR match_type_id_third = #{matchTypeId}
 			)
 		</if>
 		<if test="categoryId != null">
