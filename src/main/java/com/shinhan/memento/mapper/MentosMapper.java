@@ -1,6 +1,7 @@
 package com.shinhan.memento.mapper;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
@@ -29,4 +30,6 @@ public interface MentosMapper {
 			@Param("offset") int offset);
 	
 	int countNowMember(int mentosId);
+
+	List<Mentos> showMentosListByMentoId(Map<String, Object> mentosParams);
 }

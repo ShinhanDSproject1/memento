@@ -30,9 +30,9 @@
 		<result property="createdAt" column="created_at" />
 		<result property="updatedAt" column="updated_at" />
 		<result property="status" column="status" />
-		<result property="matchTypeIdFirst" column="match_type_first" />
-		<result property="matchTypeIdSecond" column="match_type_second" />
-		<result property="matchTypeIdThird" column="match_type_third" />
+		<result property="matchTypeIdFirst" column="match_type_id_first" />
+		<result property="matchTypeIdSecond" column="match_type_id_second" />
+		<result property="matchTypeIdThird" column="match_type_id_third" />
 	</resultMap>
 
 
@@ -98,7 +98,8 @@
 		SELECT inner_query.*, ROWNUM AS rnum
 		FROM (
 		SELECT *
-		FROM mentos
+		FROM
+		mentos
 		WHERE 1=1
 		<if test="regionGroup != null and regionGroup != ''">
 			AND region_group = #{regionGroup}
@@ -106,7 +107,8 @@
 		<if test="matchTypeId != null">
 			AND (
 			match_type_first = #{matchTypeId}
-			OR match_type_second = #{matchTypeId}
+			OR match_type_second
+			= #{matchTypeId}
 			OR match_type_third = #{matchTypeId}
 			)
 		</if>
@@ -119,7 +121,8 @@
 		AND status = 'ACTIVE'
 		ORDER BY created_at DESC
 		) inner_query
-		WHERE ROWNUM &lt;= #{offset} +15
+		WHERE ROWNUM
+		&lt;= #{offset} +15
 		)
 		WHERE rnum &gt; #{offset}
 	</select>
@@ -131,6 +134,22 @@
 		where mentos_id=#{mentosId}
 		and
 		status='ACTIVE'
+	</select>
+
+	<select id="showMentosListByMentoId" parameterType="map"
+		resultMap="mentosResultMap">
+		SELECT *
+		FROM (
+		SELECT *
+		FROM mentos
+		WHERE mento_id = #{mentoId}
+		<if test="createdAt != null">
+			AND created_at &lt; #{createdAt}
+		</if>
+		AND status != 'DELETE'
+		ORDER BY created_at DESC
+		)
+		WHERE ROWNUM &lt;= 12
 	</select>
 </mapper>
 
