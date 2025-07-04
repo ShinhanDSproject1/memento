@@ -390,4 +390,57 @@ public class MentosService {
 		
 		return dto;
 	}
+
+	public boolean updateMentos(int mentosId, CreateMentosDTO createMentosDto, MultipartFile imageFile) {
+		log.info("[MentosService.updateMentos]");
+		Date startDay = Date.valueOf(createMentosDto.getStartDay());
+		Date endDay = Date.valueOf(createMentosDto.getEndDay());
+		Timestamp startTime = Timestamp
+				.valueOf(LocalDateTime.of(LocalDate.of(2000, 1, 1), LocalTime.parse(createMentosDto.getStartTime())));
+		Timestamp endTime = Timestamp
+				.valueOf(LocalDateTime.of(LocalDate.of(2000, 1, 1), LocalTime.parse(createMentosDto.getEndTime())));
+
+		// 이미지 저장 처리
+		String imageUrl = null;
+		if (imageFile != null && !imageFile.isEmpty() ) {
+			try {
+				File dir = new File(uploadDir);
+				if (!dir.exists()) {
+					dir.mkdirs();
+				}
+
+				// 확장자 추출 + 고유 파일명 생성
+				String ext = getFileExtension(imageFile.getOriginalFilename());
+				String savedFileName = UUID.randomUUID().toString() + (ext != null ? "." + ext : "");
+				File destFile = new File(dir, savedFileName);
+				Files.copy(imageFile.getInputStream(), destFile.toPath(), StandardCopyOption.REPLACE_EXISTING);
+
+				// 웹에서 접근 가능한 경로로 구성 (리소스 경로 기준)
+				imageUrl = "/resources/uploadImage/" + savedFileName;
+				log.info("이미지 저장 완료: {}", imageUrl);
+			} catch (IOException e) {
+				log.error("이미지 업로드 실패", e);
+				return false;
+			}
+		}
+
+		// DB 업데이트용 DTO 생성
+		CreateMentosDBDTO dbDTO = CreateMentosDBDTO.builder().categoryId(createMentosDto.getCategoryId())
+				.content(createMentosDto.getContent()).endDay(endDay).startDay(startDay).endTime(endTime)
+				.startTime(startTime).image(imageUrl) // URL 경로 저장
+				.languageId(createMentosDto.getLanguageId()).matchTypeFirst(createMentosDto.getMatchTypeFirst())
+				.matchTypeSecond(createMentosDto.getMatchTypeSecond()).matchTypeThird(createMentosDto.getMatchTypeThird())
+				.maxMember(createMentosDto.getMaxMember()).minMember(createMentosDto.getMinMember()).price(createMentosDto.getPrice())
+				.mentoId(createMentosDto.getMentoId()).title(createMentosDto.getTitle())
+				.simpleContent(createMentosDto.getSimpleContent()).selectedDays(createMentosDto.getSelectedDays())
+				.times(createMentosDto.getTimes()).regionDetail(createMentosDto.getRegionDetail())
+				.regionGroup(createMentosDto.getRegionGroup()).regionSubgroup(createMentosDto.getRegionSubgroup()).build();
+
+		
+		Map<String, Object> mentosUpdateParams = new HashMap<>();
+		mentosUpdateParams.put("CreateMentosDBDTO", dbDTO);
+		mentosUpdateParams.put("mentosId", mentosId);
+		int result = mentosMapper.updateMentos(mentosUpdateParams);
+		return result == 1;
+	}
 }
