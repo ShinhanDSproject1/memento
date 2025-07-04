@@ -35,6 +35,7 @@ import com.shinhan.memento.dto.mentos.GetMentosDTO;
 import com.shinhan.memento.dto.mentos.GetMentosDetailDTO;
 import com.shinhan.memento.dto.mentos.GetMentosDetailDTO.GetSimilarMentosListDTO;
 import com.shinhan.memento.dto.mentos.JoinMentosDTO;
+import com.shinhan.memento.dto.mentos.ShowMentosDetailForEditDTO;
 import com.shinhan.memento.mapper.CartMapper;
 import com.shinhan.memento.mapper.CategoryMapper;
 import com.shinhan.memento.mapper.LanguageMapper;
@@ -357,6 +358,36 @@ public class MentosService {
 				.userType(mento.getUserType().toString()).matchTypeName(matchTypeName)
 				.similarMentosList(similarMentosList).isFavorite(isFavorite).build();
 
+		return dto;
+	}
+
+	public ShowMentosDetailForEditDTO showMentosDetailForEdit(int mentosId, int memberId) {
+		log.info("[MentosService.showMentosDetailForEdit]");
+		Mentos mentos = mentosMapper.checkValidMentosById(mentosId);
+		
+		ShowMentosDetailForEditDTO dto = ShowMentosDetailForEditDTO.builder()
+				.title(mentos.getTitle())
+				.simpleContent(mentos.getSimpleContent())
+				.image(mentos.getImage())
+				.minMember(mentos.getMinMember())
+				.maxMember(mentos.getMaxMember())
+				.startDay(mentos.getStartDay())
+				.endDay(mentos.getEndDay())
+				.startTime(mentos.getStartTime())
+				.endTime(mentos.getEndTime())
+				.selectedDays(mentos.getSelectedDays())
+				.price(mentos.getPrice())
+				.times(mentos.getPrice())
+				.categoryId(mentos.getCategoryId())
+				.languageId(mentos.getLanguageId())
+				.regionGroup(mentos.getRegionGroup())
+				.regionSubgroup(mentos.getRegionSubgroup())
+				.regionDetail(mentos.getRegionDetail())
+				.content(mentos.getContent())
+				.matchTypeFirst(mentos.getMatchTypeIdFirst())
+				.matchTypeSecond(mentos.getMatchTypeIdSecond())
+				.matchTypeThird(mentos.getMatchTypeIdThird()).build();
+		
 		return dto;
 	}
 }

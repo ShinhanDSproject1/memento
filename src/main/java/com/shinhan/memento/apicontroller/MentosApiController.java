@@ -24,6 +24,7 @@ import com.shinhan.memento.dto.mentos.CreateMentosDTO;
 import com.shinhan.memento.dto.mentos.GetMentosDTO;
 import com.shinhan.memento.dto.mentos.GetMentosDetailDTO;
 import com.shinhan.memento.dto.mentos.JoinMentosDTO;
+import com.shinhan.memento.dto.mentos.ShowMentosDetailForEditDTO;
 import com.shinhan.memento.model.Member;
 import com.shinhan.memento.model.MemberMentos;
 import com.shinhan.memento.model.Mentos;
@@ -68,6 +69,15 @@ public class MentosApiController {
 		return new BaseResponse<>(null);
 	}
 
+	/**
+	 * 멘토스 수정할 때 기존 필드 보여주기 위한 api
+	 */
+	@GetMapping("/detail/edit")
+	public BaseResponse<ShowMentosDetailForEditDTO> showMentosDetailForEdit(@RequestParam int mentosId, @RequestParam int memberId){
+		log.info("[MentosApiController.showMentosDetailForEdit]");
+		return new BaseResponse<>(mentosService.showMentosDetailForEdit(mentosId, memberId));
+	}
+	
 	/**
 	 * 멘토스 참여하기(신청하기)
 	 */
