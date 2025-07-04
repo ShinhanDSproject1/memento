@@ -1,5 +1,6 @@
 $(() => {
     const orderId = sessionStorage.getItem('detailOrderId');
+    const refundBtn = document.getElementById('refundBtn');
     console.log(orderId)
     if (!orderId) {
         console.error('주문 ID를 찾을 수 없습니다.');
@@ -10,6 +11,41 @@ $(() => {
 
     // 3. orderId가 있으면 RestController에 데이터 요청 함수를 호출합니다.
     fetchOrderDetail(orderId);
+
+    refundBtn.addEventListener('click', async function (e) {
+        const formData = new FormData();
+        formData.append("orderId", orderId);
+
+        const updateUrl = '/memento/api/mypage/refund';
+
+        try {
+            const response = await fetch(updateUrl, {
+                method: 'PUT',
+                body: formData
+            });
+
+            // response.ok는 HTTP 상태 코드가 200-299 범위에 있는지 확인합니다.
+            if (response.ok) {
+                // 서버의 응답 본문을 JSON 형태로 파싱하여 result 변수에 저장합니다.
+                // 만약 서버가 JSON이 아닌 일반 텍스트를 반환한다면 await response.text()를 사용합니다.
+                const result = await response.json();
+                console.log('환불 요청 성공:', result);
+                alert('환불 처리가 완료되었습니다.');
+                // 성공 후 페이지 새로고침 또는 다른 UI 처리
+                location.reload();
+            } else {
+                // 요청이 실패했을 경우 (예: 4xx, 5xx 에러)
+                // 서버가 보낸 에러 메시지를 확인하여 디버깅에 활용합니다.
+                const errorResult = await response.json(); // 서버가 에러 정보를 JSON으로 보낸다고 가정
+                console.error('환불 요청 실패:', errorResult);
+                alert(`환불 처리에 실패했습니다: ${errorResult.message || '서버 오류'}`);
+            }
+        } catch (error) {
+            // 네트워크 문제 등으로 fetch 자체가 실패했을 경우
+            console.error('네트워크 또는 스크립트 오류:', error);
+            alert('요청 중 오류가 발생했습니다. 네트워크 연결을 확인해 주세요.');
+        }
+    });
 })
 
 async function fetchOrderDetail(orderId) {
@@ -248,6 +284,7 @@ async function fetchOrderDetail(orderId) {
 
         let status = 0
         const refundBtn = document.getElementById('refundBtn')
+        const userBalance = parseInt(document.getElementById('userBalance').textContent, 10)
         paymentDetail.forEach(payment => {
 
             if (payment.payType == 'REFUND') {
@@ -264,6 +301,12 @@ async function fetchOrderDetail(orderId) {
                 const mentosStartDay = new Date(payment.mentosStartDay)
                 let today = new Date()
                 if (today.getTime() > mentosStartDay.getTime()) {
+                    status = 1
+                    console.log('status update')
+                }
+            }
+            if (payment.payType == 'CHARGE') {
+                if (payment.amount > userBalance) {
                     status = 1
                     console.log('status update')
                 }

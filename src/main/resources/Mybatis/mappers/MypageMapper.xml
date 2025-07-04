@@ -95,7 +95,7 @@
 			left join language lan on m.language_id = lan.language_id
 			left join member leader on m.leader_id = leader.member_id
 			left join member mento on m.mento_id = mento.member_id
-		where mm.member_id = #{memberId} and m.status != 'delete'
+		where mm.member_id = #{memberId} and m.status != 'DELETE'
 	</select>
 	
 	<select id="selectMyMentosListById" parameterType="int" resultType="map">
@@ -117,8 +117,8 @@
 		left join member mem on m.mento_id = mem.member_id
 		left join review r on mm.mentos_id = r.mentos_id
 		where mm.member_id = #{memberId}
-		and m.status != 'delete'
-		and mm.status != 'delete'
+		and m.status != 'DELETE'
+		and mm.status != 'DELETE'
 	</select>
 
 	<select id="selectMyPaymentListById" parameterType="int" resultType="map">
@@ -138,7 +138,7 @@
 	LEFT JOIN mentos mentos ON p.mentos_id = mentos.mentos_id
 	LEFT JOIN keepgoing keep ON p.keepgoing_id = keep.keepgoing_id
 	where p.member_id = #{memberId}
-	and p.status != 'delete'
+	and p.status != 'DELETE'
 	</select>
 	
 	<select id="selectPaymentDetail" parameterType ="String" resultType="map">
@@ -168,7 +168,7 @@
 		left join mentos mentos on p.mentos_id = mentos.mentos_id
 		left join keepgoing keep on p.keepgoing_id = keep.keepgoing_id
 		where p.order_id = #{_parameter}
-		and p.status != 'delete'
+		and p.status != 'DELETE'
 	</select>
 
 <select id="selectMatchTypebyName" parameterType="com.shinhan.memento.model.SparkTestType" resultType="int">
@@ -204,6 +204,45 @@
 		update member
 		set NICKNAME = #{nickname}, PHONE_NUMBER = #{phoneNumber}, INTRODUCE = #{introduce}, REGION_GROUP = #{regionGroup} , REGION_SUBGROUP = #{regionSubGroup}, REGION_DETAIL = #{regionDetail}, PROFILE_IMAGE_URL = #{profileImageUrl}
 		where member_id = #{memberId}
+	</update>
+	
+	<select id ="refundSelectData" resultType="map">
+	select
+		p.order_id as orderId,
+		p.amount as amount,
+		p.pay_type as payType,
+		p.matchup_id as matchupId,
+		match.price as matchupPrice,
+		p.mentos_id as mentosId,
+		mentos.price as mentosPrice,
+		p.keepgoing_id as keepgoingId,
+		keep.price as keepgoingPrice,
+		ub.BALANCE as userBalance,
+		m.POINT as memberPoint
+		from payment p
+		left join USERBALANCE ub on p.member_id = ub.member_id
+		left join member m on p.member_id = m.member_id
+		left join matchup match on p.matchup_id = match.matchup_id
+		left join mentos mentos on p.mentos_id = mentos.mentos_id
+		left join keepgoing keep on p.keepgoing_id = keep.keepgoing_id
+		where p.member_id = #{memberId} and p.order_id = #{orderId} and p.status != 'DELETE'
+	</select>
+	
+	<update id="updateUserBalance">
+		update
+		USERBALANCE 
+		set balance = #{resultBalance}
+		where member_id = #{memberId}
+		and status = 'ACTIVE'
+	</update>
+	
+	<update id="updatePaymentByRefund">
+		update
+		payment
+		set pay_type = 'REFUND',
+		pay_at = sysdate
+		where order_id = #{orderId}
+		and status != 'DELETE'
 	</update>
 
 </mapper>

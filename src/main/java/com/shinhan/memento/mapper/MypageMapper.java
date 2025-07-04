@@ -15,4 +15,7 @@ public interface MypageMapper {
 	public abstract int updateMyTypeByMemberId(@Param("matchTypeId") int matchTypeId, @Param("memberId") int memberId);
 	public abstract List<Map<String, Object>> selectMyProfileInfo(Integer memberId);
 	public abstract int updateProfileInfo(MyProfileDBUpdateDTO dto);
+	public abstract List<Map<String, Object>> refundSelectData(@Param("memberId") Integer memberId, @Param("orderId")String orderId);
+	public abstract int updateUserBalance(@Param("resultBalance") Integer resultBalance, @Param("memberId") Integer memberId);
+	public abstract int updatePaymentByRefund(@Param("orderId") String orderId);
 }
