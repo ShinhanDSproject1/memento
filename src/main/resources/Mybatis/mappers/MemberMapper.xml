@@ -8,7 +8,7 @@
 		type="com.shinhan.memento.model.Member">
 		<id property="memberId" column="member_id" />
 		<result property="matchTypeId" column="match_type_id" />
-		<result property="profileImg" column="profile_img" />
+		<result property="profileImg" column="profile_image_url" />
 		<result property="email" column="email" />
 		<result property="nickname" column="nickname" />
 		<result property="phoneNumber" column="phone_number" />
