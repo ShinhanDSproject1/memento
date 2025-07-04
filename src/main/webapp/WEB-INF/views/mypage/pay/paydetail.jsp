@@ -47,8 +47,7 @@
 							alt="돌아가기 배경" class="action-button__background"> <span
 							class="action-button__text">돌아가기</span>
 					</button>
-					<button class="action-button"
-						onclick="location.href='${cpath}/mypage/page5'">
+					<button class="action-button" id="refundBtn">
 						<img
 							src="${cpath}/resources/images/mypage/pay/pay-detail/rectangle-3052.svg"
 							alt="환불 신청하기 배경" class="action-button__background"> <span

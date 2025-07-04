@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -24,6 +25,7 @@ import com.shinhan.memento.dto.ConfirmCashRequestDTO;
 import com.shinhan.memento.dto.ConfirmCashResponseDTO;
 import com.shinhan.memento.dto.MyMatchupListResponseDTO;
 import com.shinhan.memento.dto.MyMentosListResponseDTO;
+import com.shinhan.memento.dto.MyPageSideBarResponseDTO;
 import com.shinhan.memento.dto.MyProfileInfoResponseDTO;
 import com.shinhan.memento.dto.MyProfileUpdateRequestDTO;
 import com.shinhan.memento.dto.MyPaymentListResponseDTO;
@@ -99,7 +101,7 @@ public class MyPageApiController {
 		return new BaseResponse<>(profileInfoDTO);
 	}
 	
-	@PostMapping(value = "/profile-update")
+	@PutMapping(value = "/profile-update")
 	public BaseResponse<Boolean> updateMyProfile(HttpSession session, @RequestParam(value = "imageFile", required = false) MultipartFile imageFile ,@ModelAttribute MyProfileUpdateRequestDTO dto){
 		Member loginUser = (Member) session.getAttribute("loginUser");
 		if (loginUser == null) throw new MypageException(BaseExceptionResponseStatus.NEED_LOGIN);
@@ -157,5 +159,26 @@ public class MyPageApiController {
 		
 		return new BaseResponse<>(paymentDetailList);
 
+	}
+	
+	@PutMapping(value = "/refund")
+	public BaseResponse<Boolean> updateRefund(HttpSession session, @RequestParam String orderId){
+		Member loginUser = (Member) session.getAttribute("loginUser");
+		if (loginUser == null) throw new MypageException(BaseExceptionResponseStatus.NEED_LOGIN);
+		Integer memberId = loginUser.getMemberId();
+		System.out.println(orderId);
+		
+		Boolean result = myPageService.refundAction(memberId, orderId);
+		
+		return new BaseResponse<Boolean>(result);
+	}
+	
+	@GetMapping(value = "/sidebar-info",  produces = "application/json")
+	public BaseResponse<MyPageSideBarResponseDTO> selectMySideBarInfo(HttpSession session){
+		Member loginUser = (Member) session.getAttribute("loginUser");
+		if (loginUser == null) throw new MypageException(BaseExceptionResponseStatus.NEED_LOGIN);
+		Integer memberId = loginUser.getMemberId();
+		MyPageSideBarResponseDTO dto = myPageService.selectMySideBarInfo(memberId);
+		return new BaseResponse<MyPageSideBarResponseDTO>(dto);
 	}
 }

@@ -54,4 +54,14 @@
 	        mm.matchup_id = #{matchupId}
 	        AND mm.status = 'ACTIVE'
 	</select>
+	
+	<!-- 매치업 참여 취소 -->
+	<update id="cancelJoinMatchupBy2id">
+		update 
+		member_matchup 
+		set status = 'DELETE'
+		where member_id = #{memberId}
+		and matchup_id = #{matchupId}
+		and status != 'DELETE'
+	</update>
 </mapper>
