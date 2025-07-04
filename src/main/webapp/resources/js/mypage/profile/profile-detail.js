@@ -3,7 +3,6 @@ $(() => {
     const profileForm = document.getElementById('profileForm');
 
     profileForm.addEventListener('submit', async function (e) {
-        e.preventDefault
         const formData = new FormData();
         formData.append('nickname', document.getElementById('nickname').value)
         formData.append('interestNames', document.getElementById('interestNames').value)
@@ -11,17 +10,17 @@ $(() => {
         formData.append('phone', document.getElementById('phone').value)
         formData.append('introduction', document.getElementById('introduction').value)
         const imgFile = document.getElementById('profile-img').files[0]
-        let originalProfileUrl = document.getElementById('original-profile-img-url').value()
+        let originalProfileUrl = document.getElementById('original-profile-img-url').value
         if (imgFile) {
             formData.append('imageFile', imgFile)
             originalProfileUrl = ''
         }
-        formData.append("originalProfileUrl" ,originalProfileUrl)
+        formData.append("originalProfileUrl", originalProfileUrl)
 
         const updateUrl = '/memento/api/mypage/profile-update';
         try {
             const response = await fetch(updateUrl, {
-                method: 'POST',
+                method: 'PUT',
                 body: formData
             })
             if (response.ok) {
@@ -36,7 +35,6 @@ $(() => {
 
     })
     profileForm.addEventListener('reset', async function (e) {
-        e.preventDefault
         fetchProfileData()
     })
 
@@ -90,7 +88,10 @@ $(() => {
 
             } else {
                 interestList.forEach(element => {
-                    intersetNameValue += '#' + element + " "
+                    if (element != "") {
+                        intersetNameValue += '#' + element + " "
+                    }
+
                 });
                 interestNames.value = intersetNameValue.trim()
             }

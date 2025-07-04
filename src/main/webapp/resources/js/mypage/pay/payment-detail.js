@@ -47,7 +47,7 @@ async function fetchOrderDetail(orderId) {
         const totalProductCount = counts.matchup + counts.mentos + counts.keepgoing;
 
         let orderInfo = {};
-        const isCancelled = paymentDetail.some(item => item.status === 'INACTIVE');
+        const isCancelled = paymentDetail.some(item => item.status === 'INACTIVE' || item.payType === 'REFUND');
         const productTypesPresent = Object.values(counts).filter(count => count > 0).length;
 
         if (isCancelled) {
@@ -212,7 +212,7 @@ async function fetchOrderDetail(orderId) {
             }
         });
         const totalPay = document.getElementById('totalPay')
-        if (paymentDetail[0].payType == 'CHARGE' || paymentDetail[0].payType == 'REFUND') {
+        if (totalProductCount == 0) {
             totalPay.textContent = `₩${(paymentDetail[0].amount / 1.05).toLocaleString()}`
         } else {
             totalPay.textContent = `₩${(price - point).toLocaleString()}`
@@ -246,7 +246,42 @@ async function fetchOrderDetail(orderId) {
         payAt.textContent = paytime
         payType.textContent = payTypeText
 
+        let status = 0
+        const refundBtn = document.getElementById('refundBtn')
+        paymentDetail.forEach(payment => {
+
+            if (payment.payType == 'REFUND') {
+                status = 1
+                console.log('status update')
+            }
+
+            if (payment.matchupCount >= 1) {
+                status = 1
+                console.log('status update')
+            }
+
+            if (payment.mentosStartDay != null && payment.mentosStartDay != '') {
+                const mentosStartDay = new Date(payment.mentosStartDay)
+                let today = new Date()
+                if (today.getTime() > mentosStartDay.getTime()) {
+                    status = 1
+                    console.log('status update')
+                }
+            }
+        })
+        console.log(status)
+        hideRefundBtn(status)
+
     } catch (error) {
         console.error('상세 내역 로딩 실패:', error);
+    }
+
+    function hideRefundBtn(status) {
+        const refundBtn = document.getElementById('refundBtn')
+        if (status == 1) {
+            refundBtn.style.display = 'none'
+        } else {
+            refundBtn.style.display = 'block'
+        }
     }
 }

@@ -25,7 +25,7 @@
 				<div class="user-assets">
 					<div class="asset-item">
 						<span class="asset-label cash-label">Cash :</span>
-						<span class="asset-value">53,000</span>
+						<span id="userBalance" class="asset-value">53,000</span>
 					</div>
 					<div class="asset-item">
 						<span class="asset-label point-label">Point :</span>

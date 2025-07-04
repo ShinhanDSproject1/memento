@@ -179,6 +179,7 @@ public class MyPageService {
 		result.stream().forEach(data -> {
 			MyPaymentListResponseDTO dto = MyPaymentListResponseDTO.builder().orderId((String) data.get("ORDERID"))
 					.amount(((BigDecimal) data.get("AMOUNT")).intValue())
+					.payType((String)data.get("PAYTYPE"))
 					.matchupId(((BigDecimal) data.get("MATCHUPID")).intValue())
 					.mentosId(((BigDecimal) data.get("MENTOSID")).intValue())
 					.keepgoingId(((BigDecimal) data.get("KEEPGOINGID")).intValue())
@@ -392,17 +393,25 @@ public class MyPageService {
 
 		result.stream().forEach(data -> {
 			Timestamp payAtTimestamp = (Timestamp) data.get("PAYAT");
+			Timestamp mentosStartDay = (Timestamp) data.get("MENTOSSTARTDAY");
 			String payAtFormatted = null;
+			String startDayFormatted = null;
 			if (payAtTimestamp != null) {
 				// Convert Timestamp to Date and then format to String
 				payAtFormatted = formatter.format(new Date(payAtTimestamp.getTime()));
 			}
+			if (mentosStartDay != null) {
+				// Convert Timestamp to Date and then format to String
+				startDayFormatted = formatter.format(new Date(mentosStartDay.getTime()));
+			}
+			
 
 			PaymentDetailResponseDTO dto = PaymentDetailResponseDTO.builder().orderId((String) data.get("ORDERID"))
 					.amount(((BigDecimal) data.get("AMOUNT")).intValue())
 					.matchupId(((BigDecimal) data.get("MATCHUPID")).intValue())
 					.matchupTitle(((BigDecimal) data.get("MATCHUPID")).intValue() == 0 ? null
 							: (String) data.get("MATCHUPTITLE"))
+					.matchupCount(data.get("MATCHUPCOUNT") == null ? 0 : ((BigDecimal)data.get("MATCHUPCOUNT")).intValue())
 					.matchupPrice(
 							data.get("MATCHUPPRICE") == null ? 0 : ((BigDecimal) data.get("MATCHUPPRICE")).intValue())
 					.memberProfileImageUrl((String) data.get("MEMBERPROFILEIMAGEURL"))
@@ -410,6 +419,7 @@ public class MyPageService {
 					.mentosTitle(((BigDecimal) data.get("MENTOSID")).intValue() == 0 ? null
 							: (String) data.get("MENTOSTITLE"))
 					.mentosImage((String) data.get("MENTOSIMAGE"))
+					.mentosStartDay(startDayFormatted)
 					.mentosPrice(
 							data.get("MENTOSPRICE") == null ? 0 : ((BigDecimal) data.get("MENTOSPRICE")).intValue())
 					.keepgoingId(((BigDecimal) data.get("KEEPGOINGID")).intValue())
