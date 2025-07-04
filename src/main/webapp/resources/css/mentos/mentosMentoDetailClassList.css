@@ -1,0 +1,540 @@
+＋＋:root {
+	
+}
+
+:root, [data--mode="mode-1"] { --1: #00bba8; --2: #0070d1; --1: #a6abbd;
+	--2: #414656; --3: #c73c60; --4: #ff7493;
+	
+}
+
+.div, .div * {
+	box-sizing: border-box;
+}
+
+.div {
+	background: #ffffff;
+	height: 2000px;
+	position: relative;
+	overflow: hidden;
+}
+
+body {
+	padding-top: 50px;
+	overflow-x: hidden;
+}
+
+html, body {
+	margin: 0;
+	padding: 0;
+	width: 100%;
+}
+
+#mentosCardContainer {
+	display: grid;
+  grid-template-columns: repeat(3, 1fr);  /* 한 줄에 3개 고정 */
+  gap: 1.5rem;
+  width: 100%;
+}
+
+/* 헤더 뺴고 전체 프레임 */
+.sidebar-main {
+	display: flex;
+	flex-direction: row;
+	min-height: calc(100vh - 100px); /* 헤더 높이 제외 */
+	width: 100%;
+	box-sizing: border-box;
+	padding-top: 120px;
+}
+
+.sidebar {
+	width: 240px; /* 고정 너비 */
+	flex-shrink: 0;
+}
+
+.frame-3774 {
+	margin-left: 240px; /* sidebar와 겹치지 않게 */
+	padding: 80px 24px 24px 24px; /* header + 기본 여백 */
+	flex: 1;
+	box-sizing: border-box;
+	width: auto;
+	max-width: 100%;
+}
+
+.container {
+	flex: 1;
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+	justify-content: flex-start;
+	width: 100%;
+	max-width: 100vw;
+	padding: 50px 24px 24px 24px; /* header 공간 + 여백 */
+	box-sizing: border-box;
+}
+
+/* 뭔지 모르겠음-> 원래 class 카드 전체 크레임이었음  */
+.frame-3786 {
+	display: flex;
+	flex-direction: row;
+	gap: 0px;
+	align-items: center;
+	justify-content: flex-start;
+	position: relative;
+}
+
+.frame-3773 {
+	display: flex;
+	flex-direction: column;
+	gap: 13px;
+	align-items: flex-start;
+	justify-content: flex-start;
+	flex-shrink: 0;
+	width: 100%; /* ✅ 바꿔야 함 */
+	position: relative;
+	box-sizing: border-box;
+}
+
+.div7 {
+	color: #000000;
+	text-align: left;
+	font-family: "Inter-SemiBold", sans-serif;
+	font-size: 32px;
+	line-height: 150%;
+	letter-spacing: -0.011000000000000001em;
+	font-weight: 600;
+	position: relative;
+	align-self: stretch;
+}
+
+.line-50 {
+	margin-top: -1px;
+	border-style: solid;
+	border-color: #a6abbd;
+	border-width: 1px 0 0 0;
+	align-self: stretch;
+	flex-shrink: 0;
+	height: 0px;
+	position: relative;
+	transform-origin: 0 0;
+	transform: rotate(0deg) scale(1, 1);
+}
+
+/*카드 전체 프레임  */
+.frame-36442 {
+ padding: 2rem;
+  box-sizing: border-box;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  position: relative;
+}
+
+.frame-3680 {
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+	gap: 1.5rem;
+	padding-top: 10px;
+	width: 100%;
+	box-sizing: border-box;
+}
+
+.mentos-class-cardview {
+	 width: 100%;
+  box-sizing: border-box;
+}
+
+/*class 카드 전체 프레임  */
+.mentos-class {
+	box-sizing: border-box;
+	background: linear-gradient(0deg, rgba(255, 255, 255, 1) 66%,
+		rgba(246, 252, 255, 1) 100%);
+	border-radius: 1.2rem;
+	border: 1.5px solid #e7eaf3;
+	padding: 1.5rem 1rem;
+	display: flex;
+	flex-direction: row;
+	gap: 0.8rem;
+	align-items: center;
+	justify-content: flex-start;
+	width: 100%;
+	height: auto;
+	box-shadow: 0 0.3vw 1vw rgba(0, 0, 0, 0.08);
+	transition: box-shadow 0.18s, transform 0.18s, border 0.18s;
+}
+
+}
+/*class 카드 글씨체 전체  */
+.mentos-text {
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+	justify-content: center;
+	flex-shrink: 0;
+	height: 22vh;
+	position: relative;
+	flex: 1;
+	gap: 0.4rem;
+}
+/* 디데이 및 확정인원 */
+.frame-37862 {
+	display: flex;
+	flex-direction: row;
+	gap: 0.4rem;
+	align-items: center;
+	justify-content: flex-start;
+	flex-shrink: 0;
+	width: 100%;
+	max-width: 100%;
+	height: auto;
+	position: relative;
+	margin-bottom: 0.5rem;
+	font-size: 0.75rem;
+	line-height: 1.2;
+}
+
+.frame-413, .frame-414 {
+	display: flex;
+	gap: 0.2rem;
+	font-size: 0.7rem;
+	align-items: center;
+	justify-content: center;
+	padding: 0 6px;
+	height: 22px;
+	border-radius: 100px;
+	width: auto; /* ✅ 여기 포인트 */
+	flex-shrink: 0;
+	padding-left: 20px;
+	padding-right: 20px;
+}
+/* 디데이 */
+.frame-413 {
+	background: rgba(206, 224, 69, 0.88);
+}
+/* 디데이&확정인원 글자 */
+.d {
+	color: #ffffff;
+	text-align: center;
+	font-family: "Inter-Medium", sans-serif;
+	font-size: 10px;
+	line-height: 150%;
+	letter-spacing: -0.023em;
+	font-weight: 500;
+	height: 22px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+/* 확정인원 */
+.frame-414 {
+	background: rgba(47, 204, 117, 0.88);
+}
+/* class 제목 */
+.aws {
+	color: #000000;
+	text-align: left;
+	font-family: "D2Coding-Bold", sans-serif;
+	font-size: 1rem;
+	line-height: 1.5;
+	font-weight: 500;
+	margin-bottom: 0.5rem;
+	width: 100%;
+	height: auto;
+	position: static;
+}
+
+/* 멘토이름, 날짜, 시간 장소, 가격 */
+.frame-406 {
+	padding: 0px 0px 11px 0px;
+	display: flex;
+	flex-direction: column;
+	gap: 3px;
+	align-items: flex-start;
+	justify-content: flex-start;
+	flex-shrink: 0;
+	width: 100%;
+	height: fit-content;
+	position: relative;
+}
+
+/* 멘토이름 전체 프레임 */
+.frame-407 {
+	display: flex;
+	flex-direction: row;
+	gap: 6px;
+	align-items: center;
+	justify-content: flex-start;
+	flex-shrink: 0;
+	position: relative;
+}
+
+/* 멘토이름, 날짜,시간,장소 텍스트 */
+.text {
+	color: #000000;
+	text-align: left;
+	font-family: "D2Coding-Regular", sans-serif;
+	font-size: 12px;
+	line-height: 150%;
+	letter-spacing: -0.011000000000000001em;
+	font-weight: 400;
+	position: relative;
+}
+
+.user-user {
+	flex-shrink: 0;
+	width: 16px;
+	height: 16.44px;
+	position: relative;
+	overflow: visible;
+}
+/* mento 프레임 */
+.group-371 {
+	align-items: center;
+	position: relative;
+	flex-shrink: 0;
+	width: 36px;
+	height: 12.04px;
+	position: static;
+}
+
+/* mento 모양 */
+.mento {
+	background: rgba(0, 112, 209, 0.73);
+	border-radius: 5px;
+	height: 18px; /* 더 크거나 작게 조정 가능 */
+	padding: 0 8px; /* 좌우 여백만 줌, width는 제거 */
+	color: #fff;
+	text-align: center;
+	font-family: "D2Coding-Regular", sans-serif;
+	font-size: 9px;
+	font-weight: 500;
+	line-height: 18px; /* 세로 중앙 맞춤 */
+	letter-spacing: -0.011em;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	white-space: nowrap; /* 줄바꿈 방지 */
+	position: relative;
+}
+/*날짜 전체 프레임 */
+.frame-408 {
+	display: flex;
+	flex-direction: row;
+	gap: 1px;
+	align-items: center;
+	justify-content: flex-start;
+	flex-shrink: 0;
+	position: relative;
+}
+/* 날짜 이미지  */
+.icon-time-calendar {
+	top: 0.5px;
+	overflow: visible;
+	flex-shrink: 0;
+	width: 13px;
+	height: 12px;
+	position: relative;
+}
+
+.icon-time-calendar {
+	height: auto;
+	position: absolute;
+	left: 1.08px;
+	top: 0.5px;
+	overflow: visible;
+}
+
+/* 시간 전체 프레임 */
+.frame-409 {
+	display: flex;
+	flex-direction: row;
+	gap: 1px;
+	align-items: center;
+	justify-content: flex-start;
+	flex-shrink: 0;
+	position: relative;
+}
+
+/* 시간 이미지 */
+.icon-time-clock-outlined {
+	top: 0px;
+	flex-shrink: 0;
+	width: 13px;
+	height: 12px;
+	position: relative;
+	overflow: hidden;
+}
+
+.icon-time-clock-outlined {
+	height: auto;
+	position: absolute;
+	left: 0.54px;
+	top: 0.5px;
+	overflow: visible;
+}
+/*장소 전체 프레임*/
+.frame-410 {
+	display: flex;
+	flex-direction: row;
+	gap: 5px;
+	align-items: center;
+	justify-content: flex-start;
+	flex-shrink: 0;
+	position: relative;
+}
+
+/*장소 이미지*/
+.icon-maps-map-pin {
+	top: 0px;
+	flex-shrink: 0;
+	width: 13px;
+	height: 12px;
+	position: relative;
+	overflow: hidden;
+}
+
+.icon-maps-map-pin {
+	height: auto;
+	position: absolute;
+	left: 1.08px;
+	top: 0px;
+	overflow: visible;
+}
+
+.frame-408, .frame-409, .frame-410 {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	gap: 0.2rem; /* ✅ 아이콘과 텍스트 간격 */
+}
+
+/* 공통 아이콘 패딩용 클래스 생성 */
+.frame-408 img, .frame-409 img, .frame-410 img {
+	width: 16px;
+	height: 16px;
+	margin-right: 0.4rem; /* ✅ 텍스트와의 간격 */
+	position: relative;
+}
+
+/* 가격 프레임 */
+.frame-3659 {
+	display: flex;
+	flex-direction: column;
+	gap: 0px;
+	width: 100%;
+	height: 100%;
+	overflow: hidden;
+}
+/* 가격 텍스트 */
+._45-000 {
+	color: #000000;
+	text-align: left;
+	font-family: "AbhayaLibreExtraBold-Regular", sans-serif;
+	font-size: 20px;
+	line-height: 150%;
+	letter-spacing: -0.023em;
+	font-weight: 400;
+	position: relative;
+}
+/* 멘토스 이미지  */
+.image {
+	width: 8rem; /* 적당히 작게 (원하면 6~10rem 사이 조절) */
+	height: 10rem;
+	border-radius: 1rem;
+	border: 2px solid #a6abbd;
+	object-fit: cover;
+	box-shadow: 0 0.2rem 0.6rem rgba(0, 0, 0, 0.15);
+	margin-left: auto; /* ✅ 오른쪽 정렬 */
+	align-self: center; /* ✅ 수직 중앙 정렬 */
+	display: block;
+}
+
+.rectangle-106 {
+	border-radius: 20px;
+	border-style: solid;
+	border-color: #a6abbd;
+	border-width: 3px;
+	width: 244.49px;
+	height: 304.38px;
+	position: absolute;
+	left: 0px;
+	top: 0.81px;
+	transform-origin: 0 0;
+	transform: rotate(-0.009deg) scale(1, 1);
+	aspect-ratio: 244.49/304.38;
+}
+
+.frame-338 {
+	display: flex;
+	flex-direction: row;
+	gap: 64px;
+	align-items: center;
+	justify-content: flex-start;
+	align-self: stretch;
+	flex-shrink: 0;
+	height: 306px;
+	position: relative;
+}
+
+.frame-339 {
+	display: flex;
+	flex-direction: row;
+	gap: 64px;
+	align-items: center;
+	justify-content: flex-start;
+	align-self: stretch;
+	flex-shrink: 0;
+	height: 306px;
+	position: relative;
+}
+
+.frame-340 {
+	display: flex;
+	flex-direction: row;
+	gap: 64px;
+	align-items: center;
+	justify-content: flex-start;
+	align-self: stretch;
+	flex-shrink: 0;
+	height: 306px;
+	position: relative;
+}
+
+.mentos-list-link {
+	color: #b0b0b0; /* 평소엔 연한 회색 */
+	font-size: 1.5vw; /* 또는 24px */
+	font-family: "Inter-Medium", sans-serif;
+	background: transparent;
+	border-radius: 0.4vw;
+	padding: 0.4vw 1vw;
+	cursor: pointer;
+	transition: color 0.15s, background 0.15s, font-weight 0.15s;
+	font-weight: 400;
+	display: inline-block;
+	user-select: none;
+}
+
+/* 마우스 올리면 색 진하게 + 커서 손가락 */
+.mentos-list-link:hover {
+	color: #25356d; /* 진한 남색 or 원하는 진한색 */
+	font-weight: 700;
+	cursor: pointer;
+}
+
+/* 클릭시(누르고 있을 때) */
+.mentos-list-link:active {
+	color: #153090;
+	background: #d0e4ff;
+}
+
+.frame-3786, .frame-3786 * {
+	box-sizing: border-box;
+}
+
+.frame-3786 {
+	display: flex;
+	flex-direction: row;
+	gap: 0px;
+	align-items: center;
+	justify-content: flex-start;
+	position: relative;
+}

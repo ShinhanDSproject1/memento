@@ -19,7 +19,7 @@
 <link
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
 	rel="stylesheet" />
-<script src="${cpath}/resources/css/mentosInsert.js"></script>
+<script src="${cpath}/resources/css/mentos/mentosInsert.js"></script>
 <body>
 	<div class="container">
 		<div class="mentos-make-page">
