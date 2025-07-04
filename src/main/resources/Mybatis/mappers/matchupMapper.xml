@@ -396,6 +396,9 @@
          <if test="selectedDays != null and selectedDays != ''">
             selected_days = #{selectedDays},
          </if>
+         <if test="hasMento != null">
+		    has_mento = #{hasMento},
+		</if>
          updated_at = sysdate
       </set>
       WHERE matchup_id = #{matchupId}
