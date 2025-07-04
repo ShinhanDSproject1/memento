@@ -1,10 +1,5 @@
-// 1. cpath 오류 수정: JSP에서 선언한 전역 변수 CPATH를 사용
-// 2. 예외 처리 추가: 데이터가 부족해도 오류가 나지 않도록 방어 코드 추가
-// 3. 리팩토링: 멘토/멘티 렌더링 함수를 하나로 통합
-
 document.addEventListener('DOMContentLoaded', function() {
     
-    // JSP에서 선언해준 전역 변수 CPATH를 사용합니다.
     const apiBaseUrl = `${CPATH}/api`;
 
     Promise.all([
@@ -23,7 +18,6 @@ document.addEventListener('DOMContentLoaded', function() {
         const mentiList = mentiData.result || [];
         const languageList = languageData.result || [];
 
-        // 리팩토링된 함수를 호출합니다.
         renderUserRanking('mentor', '⭐', mentorList);
         renderUserRanking('menti', '🔥', mentiList);
         renderLanguageRanking(languageList);
@@ -55,10 +49,14 @@ function renderUserRanking(type, icon, data) {
         
         const imageUrl = user.profileImage && (user.profileImage.startsWith('http') || user.profileImage.startsWith('https'))
             ? user.profileImage
-            : `${CPATH}/resources/images/profile/${user.profileImage || 'default-profile.png'}`;
+            : `${CPATH}/resources/images/main1/${user.profileImage || 'logo.png'}`;
+        
+        const onclickAttr = type === 'mentor' 
+            ? `onclick="location.href='${CPATH}/member/detail/${user.memberId}'"` 
+            : '';
         
         return `
-            <div class="podium-place ${rankClass}" onclick="location.href='${CPATH}/member/detail/${user.memberId}'">
+            <div class="podium-place ${rankClass}" ${onclickAttr}>
                 <div class="winner-info">
                     <div class="winner-avatar">
                         <img src="${imageUrl}" alt="${user.nickname}">
@@ -80,10 +78,14 @@ function renderUserRanking(type, icon, data) {
         
         const imageUrl = user.profileImage && (user.profileImage.startsWith('http') || user.profileImage.startsWith('https'))
             ? user.profileImage
-            : `${CPATH}/resources/images/profile/${user.profileImage || 'default-profile.png'}`;
+            : `${CPATH}/resources/images/main1/${user.profileImage || 'logo.png'}`;
         
+        const onclickAttr = type === 'mentor' 
+            ? `onclick="location.href='${CPATH}/member/detail/${user.memberId}'"` 
+            : '';
+            
         return `
-            <div class="ranking-item" onclick="location.href='${CPATH}/member/detail/${user.memberId}'">
+            <div class="ranking-item" ${onclickAttr}>
                 <div class="rank-number">${index + 4}</div>
                 <div class="participant-info">
                     <div class="participant-avatar">
@@ -98,8 +100,6 @@ function renderUserRanking(type, icon, data) {
     tableBodyEl.innerHTML = tableHtml;
 }
 
-
-// 언어 랭킹을 그리는 함수 (클릭 이벤트 추가)
 function renderLanguageRanking(data) {
     const podiumEl = document.getElementById('languagePodium');
     const tableBodyEl = document.getElementById('languageTableBody');
@@ -113,20 +113,21 @@ function renderLanguageRanking(data) {
         const rank = index + 1;
         const rankClass = ['first', 'second', 'third'][rank - 1];
         const medal = ['🥇', '🥈', '🥉'][rank - 1];
+
+        const imageUrl = lang.languageImage && (lang.languageImage.startsWith('http') || lang.languageImage.startsWith('https'))
+            ? lang.languageImage
+            : `${CPATH}/resources/images/main1/${lang.languageImage || 'logo.png'}`;
         
         return `
-            <div class="podium-place ${rankClass}" onclick="location.href='${CPATH}/mentos/search?keyword=${lang.languageName}'">
+            <div class="podium-place ${rankClass}">
                 <div class="winner-info">
-                    <div class="winner-avatar">
-                        <img src="${CPATH}/resources/images/language/${lang.languageName.toLowerCase()}.png" alt="${lang.languageName}" class="language-icon">
-                    </div>
+                    <div class="winner-avatar"><img src="${imageUrl}" alt="${lang.languageName}" class="language-icon"></div>
                     <div class="winner-name">${lang.languageName}</div>
                     <div class="winner-rating">❤️ ${lang.totalCount}</div>
                 </div>
                 <div class="medal">${medal}</div>
                 <div class="podium-base ${rankClass}">${rank}</div>
-            </div>
-        `;
+            </div>`;
     }).join('');
     podiumEl.innerHTML = podiumHtml;
     
@@ -134,18 +135,19 @@ function renderLanguageRanking(data) {
     let tableHtml = tableData.map((lang, index) => {
         if (!lang) return '';
         
+        const imageUrl = lang.languageImage && (lang.languageImage.startsWith('http') || lang.languageImage.startsWith('https'))
+            ? lang.languageImage
+            : `${CPATH}/resources/images/main1/${lang.languageImage || 'logo.png'}`;
+
         return `
-            <div class="ranking-item" onclick="location.href='${CPATH}/mentos/search?keyword=${lang.languageName}'">
+            <div class="ranking-item">
                 <div class="rank-number">${index + 4}</div>
                 <div class="participant-info">
-                    <div class="participant-avatar">
-                        <img src="${CPATH}/resources/images/language/${lang.languageName.toLowerCase()}.png" alt="${lang.languageName}" class="language-icon">
-                    </div>
+                    <div class="participant-avatar"><img src="${imageUrl}" alt="${lang.languageName}" class="language-icon"></div>
                     <div class="participant-name">${lang.languageName}</div>
                 </div>
                 <div class="rating">❤️ ${lang.totalCount}</div>
-            </div>
-        `;
+            </div>`;
     }).join('');
     tableBodyEl.innerHTML = tableHtml;
 }

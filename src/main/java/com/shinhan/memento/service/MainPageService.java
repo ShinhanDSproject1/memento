@@ -23,8 +23,8 @@ public class MainPageService {
         counts.put("totalActiveCount", mainPageMapper.selectTotalActiveCount());
         counts.put("totalMatchupCount", mainPageMapper.selectTotalMatchupCount());
         
-        counts.put("partnerCount", 100); // 예시 고정값
-        counts.put("visitorCount", 2500); // 예시 고정값
+        counts.put("partnerCount", 133); // 예시 고정값
+        counts.put("visitorCount", 2512); // 예시 고정값
         
         return counts;
     }
