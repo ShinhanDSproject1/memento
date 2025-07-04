@@ -18,6 +18,7 @@ import com.shinhan.memento.model.Mentos;
 public interface MentosMapper {
 
 	int createMentos(CreateMentosDBDTO dto);
+	void deleteMentos(int mentosId);
 
 	List<LanguageDTO> getAllLanguages();
 

@@ -171,4 +171,19 @@ public class MentosApiController {
 
 		return new BaseResponse<>(mentosService.showMentosDetail(mentos,member));
 	}
+	
+	/**
+	 * 멘토스 삭제하기 
+	 */
+	@PatchMapping("/delete")
+	public BaseResponse<Void> deleteMentos(@RequestParam int mentosId){
+		log.info("[MentosApiController.deleteMentos]");
+		
+		Mentos mentos = mentosService.checkValidMentosById(mentosId);
+		if(mentos==null) {
+			throw new MentosException(BaseExceptionResponseStatus.CANNOT_FOUND_MENTOS);
+		}
+		mentosService.deleteMentos(mentosId);
+		return new BaseResponse<>(null);
+	}
 }

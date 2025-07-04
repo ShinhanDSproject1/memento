@@ -359,4 +359,10 @@ public class MentosService {
 
 		return dto;
 	}
+
+	@Transactional
+	public void deleteMentos(int mentosId) {
+		log.info("[MentosService.deleteMentos]");
+		mentosMapper.deleteMentos(mentosId);
+	}
 }

@@ -176,5 +176,11 @@
 	  	)
 	  	where rownum &lt; =3
   	</select>
+  	
+  	<update id="deleteMentos" parameterType="int">
+  		update mentos
+  		set status='DELETE', updated_at=sysdate
+  		where mentos_id=#{mentosId}
+  	</update>
 </mapper>
 
