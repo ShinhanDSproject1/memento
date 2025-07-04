@@ -32,7 +32,7 @@
 <!-- 3. 취소 팝업 -->
 <jsp:include page="/WEB-INF/views/mentos/cancelPopup.jsp" />
 <!-- 4. 만들기 팝업 -->
-<jsp:include page="/WEB-INF/views/mentos/submitPopup.jsp" />
+<jsp:include page="/WEB-INF/views/mentos/updatePopup.jsp" />
 </head>
 <body data-mentos-id="${mentosId}"
 	data-member-id="${sessionScope.loginUser.memberId}">
@@ -251,7 +251,7 @@
 				<div class="mentos-make-buttons">
 					<label for="cancelPopup" class="mentos-leader-cancel-btn">
 						<div class="d-2-r-18-blue">취소하기</div>
-					</label> <label for="updatePopup" class="mentos-leader-make-btn">
+					</label> <label for="updatePopup" class="mentos-leader-update-btn">
 						<div class="d-2-r-18-white">수정하기</div>
 					</label>
 				</div>

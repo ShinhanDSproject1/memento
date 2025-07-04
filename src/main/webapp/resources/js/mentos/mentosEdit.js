@@ -3,6 +3,9 @@ $(document).ready(function () {
 	const $days = $(".dayofweek .day");
 	const $selectedDaysInput = $("#selectedDaysInput");
 	let selectedDays = [];
+	
+	const mentosId = $("body").data("mentos-id");
+	const memberId = $("body").data("member-id");
 
 	$days.on("click", function (e) {
 		e.preventDefault();
@@ -103,19 +106,24 @@ $(document).ready(function () {
 		$(".type-dropdown").addClass("hidden");
 	});
 
-	// 7. 만들기 버튼 → 모달 + 이동
-	$(".mentos-leader-make-btn").on("click", function (e) {
+	// 7. 수정하기 버튼 → 모달 + 이동
+	$(".mentos-leader-update-btn").on("click", function (e) {
 		e.preventDefault();
 	
 		// 스마트에디터 동기화
 		if (typeof oEditors !== "undefined" && oEditors.length > 0) {
 			oEditors.getById["editorTxt"].exec("UPDATE_CONTENTS_FIELD", []);
 		}
+		const fullAddress = $("#roadAddress").val().trim();
+		const spaceIndex = fullAddress.indexOf(" ");
+		
+		const regionGroup = spaceIndex !== -1 ? fullAddress.substring(0, spaceIndex) : fullAddress;
+		const regionSubgroup = spaceIndex !== -1 ? fullAddress.substring(spaceIndex + 1).trim() : "";
 		
 		const data = {
 		  title: $("#title").val(),
 		  simpleContent: $("#simpleContent").val(),
-		  mentoId: mentoId,
+		  mentoId: memberId,
 		  minMember: Number($("#minMember").val()),
 		  maxMember: Number($("#maxMember").val()),
 		  startDay: $("#startDateInput").val(),
@@ -127,8 +135,8 @@ $(document).ready(function () {
 		  times: Number($("#sessionCountValue").val()),
 		  categoryId: Number($("#categoryValue").val()),
 		  languageId: Number($("#languageValue").val()),
-		  regionGroup: $("#roadAddress").val().split(" ")[0] || "지역 없음",
-		  regionSubgroup: $("#roadAddress").val().split(" ")[1] || "",
+		  regionGroup: regionGroup,
+		  regionSubgroup: regionSubgroup,
 		  regionDetail: $("#detailAddress").val(),
 		  content: $("#editorTxt").val(),
 		  matchTypeFirst: Number($(".preferred-type-value1").val()),
@@ -146,8 +154,8 @@ $(document).ready(function () {
 	
 		// 서버로 POST 요청
 		$.ajax({
-			url: "http://localhost:9999/memento/mentos",
-			type: "POST",
+			url: "http://localhost:9999/memento/mentos/edit?mentosId=${mentosId}",
+			type: "PATCH",
 			data: formData,
 			processData: false,
 			contentType: false,
@@ -159,7 +167,7 @@ $(document).ready(function () {
 			    // ✅ 확인 버튼 눌렀을 때 다시 숨기고 이동
 			    modal.querySelector(".confirm-btn").addEventListener("click", function () {
 			        modal.classList.add("hidden");
-			        window.location.href = "/mentos/full";
+			        window.location.href = "/memento/mentos/full";
 			    });
 			},
 			error: function (xhr) {
@@ -200,9 +208,6 @@ $(document).ready(function () {
 	  // hidden input에도 저장
 	  $("#selectedDaysInput").val(dayString);
 	}
-	
-	const mentosId = $("body").data("mentos-id");
-	const memberId = $("body").data("member-id");
 	
 	// 처음 호출해왔을 때 데이터 뽑아주기
 	  $.ajax({
