@@ -33,7 +33,7 @@
 	</select>
 	
 	<!-- 매치업 비활성화 -->
-	<update id="inactivateMemberMatchupById" parameterType="int"> 
+	<update id="deleteMemberMatchupById" parameterType="int"> 
 		UPDATE
 			MEMBER_MATCHUP 
 		SET status = 'INACTIVE' 

@@ -103,9 +103,6 @@ public class MatchupService {
 
 		if (matchupDetail == null) {
 			throw new IllegalArgumentException("매치업을 찾을 수 없습니다. id: " + id);
-		} else {
-			int currentMemberCount = matchUpDAO.getActiveMemberCount(matchupDetail.getMatchupId()); /* 현재 신청 인원 */
-			matchupDetail.setMatchupCount(currentMemberCount);
 		}
 
 		if (loginMemberId != null) {
@@ -239,9 +236,9 @@ public class MatchupService {
 
 	/* 매치업 삭제 */
 	@Transactional // 한꺼번에 처리 위해 (1. 매치업 테이블에서 해당 매치업 삭제, 2. 멤버 매치업 테이블에서 관련 내역 삭제)
-	public int inactivateMatchup(int matchupId, int leaderId) {
-		memberMatchUpDAO.inactivateMemberMatchupById(matchupId);
-		int result = matchUpDAO.inactivateMatchupByIdAndLeader(matchupId, leaderId);
+	public int deleteMatchup(int matchupId, int leaderId) {
+		memberMatchUpDAO.deleteMemberMatchupById(matchupId);
+		int result = matchUpDAO.deleteMatchupByIdAndLeader(matchupId, leaderId);
 
 		return result;
 	}

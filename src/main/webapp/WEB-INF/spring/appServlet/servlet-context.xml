@@ -12,8 +12,28 @@
 	
 	<!-- Enables the Spring MVC @Controller programming model -->
 	<mvc:annotation-driven />
-
 	
+	<!-- 로그인 인터셉터 처리 -->
+	<mvc:interceptors>
+	    <mvc:interceptor>
+	        <mvc:mapping path="/**"/>
+	        
+	        <mvc:exclude-mapping path="/"/>
+	        <mvc:exclude-mapping path="/matchup/matchupList"/>
+	        <mvc:exclude-mapping path="/mentos/full"/>
+	        <mvc:exclude-mapping path="/keepgoing/keepgoinglist.do"/>
+	        
+	        <mvc:exclude-mapping path="/mainpage/**"/>
+	        
+	        <mvc:exclude-mapping path="/join/**"/>
+	        <mvc:exclude-mapping path="/auth/**"/>
+	        
+	        <mvc:exclude-mapping path="/api/**"/>
+	        <mvc:exclude-mapping path="/resources/**"/>
+	        
+	        <beans:bean class="com.shinhan.memento.interceptor.LoginCheckInterceptor" />
+	    </mvc:interceptor>
+	</mvc:interceptors>
 
 	<!-- Handles HTTP GET requests for /resources/** by efficiently serving up static resources in the ${webappRoot}/resources directory -->
 	<resources mapping="/resources/**" location="/resources/" />
