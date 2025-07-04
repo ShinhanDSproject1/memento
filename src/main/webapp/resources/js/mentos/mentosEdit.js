@@ -108,75 +108,72 @@ $(document).ready(function () {
 
 	// 7. 수정하기 버튼 → 모달 + 이동
 	$(".mentos-leader-update-btn").on("click", function (e) {
-		e.preventDefault();
+	    e.preventDefault();
 	
-		// 스마트에디터 동기화
-		if (typeof oEditors !== "undefined" && oEditors.length > 0) {
-			oEditors.getById["editorTxt"].exec("UPDATE_CONTENTS_FIELD", []);
-		}
-		const fullAddress = $("#roadAddress").val().trim();
-		const spaceIndex = fullAddress.indexOf(" ");
-		
-		const regionGroup = spaceIndex !== -1 ? fullAddress.substring(0, spaceIndex) : fullAddress;
-		const regionSubgroup = spaceIndex !== -1 ? fullAddress.substring(spaceIndex + 1).trim() : "";
-		
-		const data = {
-		  title: $("#title").val(),
-		  simpleContent: $("#simpleContent").val(),
-		  mentoId: memberId,
-		  minMember: Number($("#minMember").val()),
-		  maxMember: Number($("#maxMember").val()),
-		  startDay: $("#startDateInput").val(),
-		  endDay: $("#endDateInput").val(),
-		  startTime: $("#startTimeInput").val(),
-		  endTime: $("#endTimeInput").val(),
-		  selectedDays: $("#selectedDaysInput").val(),
-		  price: Number($("#price").val()),
-		  times: Number($("#sessionCountValue").val()),
-		  categoryId: Number($("#categoryValue").val()),
-		  languageId: Number($("#languageValue").val()),
-		  regionGroup: regionGroup,
-		  regionSubgroup: regionSubgroup,
-		  regionDetail: $("#detailAddress").val(),
-		  content: $("#editorTxt").val(),
-		  matchTypeFirst: Number($(".preferred-type-value1").val()),
-		  matchTypeSecond: Number($(".preferred-type-value2").val()),
-		  matchTypeThird: Number($(".preferred-type-value3").val())
-		};
-		
-		const formData = new FormData();
-		const file = $("#logoFile")[0].files[0];
-		if (file) formData.append("image", file);
-		
-		formData.append("data", new Blob([JSON.stringify(data)], { type: "application/json" }));
-
-		console.log("보낼 데이터:", data);
+	    if (typeof oEditors !== "undefined" && oEditors.length > 0) {
+	        oEditors.getById["editorTxt"].exec("UPDATE_CONTENTS_FIELD", []);
+	    }
 	
-		// 서버로 POST 요청
-		$.ajax({
-			url: "http://localhost:9999/memento/mentos/edit?mentosId=${mentosId}",
-			type: "PATCH",
-			data: formData,
-			processData: false,
-			contentType: false,
-			success: function (response) {
-			   // ✅ 'hidden' 클래스 제거해서 보이게 하기
-			   const modal = document.querySelector("#submitLayer");
-			   modal.classList.remove("hidden");
-			
-			    // ✅ 확인 버튼 눌렀을 때 다시 숨기고 이동
-			    modal.querySelector(".confirm-btn").addEventListener("click", function () {
-			        modal.classList.add("hidden");
-			        window.location.href = "/memento/mentos/full";
-			    });
-			},
-			error: function (xhr) {
-				console.error("에러 발생:", xhr.responseText);
-				alert("생성 실패 😢");
-			}
-		});
+	    const fullAddress = $("#roadAddress").val().trim();
+	    const spaceIndex = fullAddress.indexOf(" ");
+	
+	    const regionGroup = spaceIndex !== -1 ? fullAddress.substring(0, spaceIndex) : fullAddress;
+	    const regionSubgroup = spaceIndex !== -1 ? fullAddress.substring(spaceIndex + 1).trim() : "";
+	
+	    const data = {
+	        title: $("#title").val(),
+	        simpleContent: $("#simpleContent").val(),
+	        mentoId: memberId,
+	        minMember: Number($("#minMember").val()),
+	        maxMember: Number($("#maxMember").val()),
+	        startDay: $("#startDateInput").val(),
+	        endDay: $("#endDateInput").val(),
+	        startTime: $("#startTimeInput").val(),
+	        endTime: $("#endTimeInput").val(),
+	        selectedDays: $("#selectedDaysInput").val(),
+	        price: Number($("#price").val()),
+	        times: Number($("#sessionCountValue").val()),
+	        categoryId: Number($("#categoryValue").val()),
+	        languageId: Number($("#languageValue").val()),
+	        regionGroup: regionGroup,
+	        regionSubgroup: regionSubgroup,
+	        regionDetail: $("#detailAddress").val(),
+	        content: $("#editorTxt").val(),
+	        matchTypeFirst: Number($(".preferred-type-value1").val()),
+	        matchTypeSecond: Number($(".preferred-type-value2").val()),
+	        matchTypeThird: Number($(".preferred-type-value3").val())
+	    };
+	
+	    const formData = new FormData();
+	    const file = $("#logoFile")[0].files[0];
+	    if (file) formData.append("image", file);
+	
+	    formData.append("data", new Blob([JSON.stringify(data)], { type: "application/json" }));
+	
+	    const mentosId = $("body").data("mentos-id");
+	
+	    $.ajax({
+	        url: `http://localhost:9999/memento/mentos/edit?mentosId=${mentosId}`,
+	        type: "PATCH",
+	        data: formData,
+	        processData: false,
+	        contentType: false,
+	        success: function (response) {
+	            const modal = document.querySelector("#submitLayer");
+	            modal.classList.remove("hidden");
+	
+	            modal.querySelector(".confirm-btn").addEventListener("click", function () {
+	                modal.classList.add("hidden");
+	                window.location.href = "/memento/mentos/full";
+	            });
+	        },
+	        error: function (xhr) {
+	            console.error("에러 발생:", xhr.responseText);
+	            alert("수정 실패 😢");
+	        }
+	    });
 	});
-
+	
 	// 8. 취소 버튼 → 모달 + 이동
 	$(".mentos-leader-cancel-btn").on("click", function (e) {
 		 // ✅ 'hidden' 클래스 제거해서 보이게 하기
