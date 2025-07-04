@@ -7,7 +7,7 @@
 			<img src="${pageContext.request.contextPath}/resources/images/delete-icon.svg" width="36" />
 		</div>
 		<div class="modal-title">정말로 삭제하시겠어요?</div>
-		<div class="modal-buttons" style="justify-content: space-between;">
+		<div class="modal-buttons">
 			<button class="cancel-btn" onclick="hideDeleteConfirmModal()">취소</button>
 			
 			<button class="confirm-btn" onclick="handleConfirmDelete()">확인</button>

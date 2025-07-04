@@ -128,24 +128,24 @@
 
 					</div>
 					<div class="section-box profile-box">
+						<div class="profile-group">
 						<c:choose>
 							<%-- 애초에 멘토가 없는 매치업 --%>
 							<c:when test="${!matchupDetail.hasMento}">
 								<div class="profile-title">멘토가 없는 매치업이에요!</div>
 								<a href="#" class="profile-link"><img class="profile-img"
-									src="${cpath}/resources/images/logo.png" alt="기본 프로필" /></a>
+									src="${cpath}/resources/images/memento-logo.png" alt="기본 프로필" /></a>
 							</c:when>
 
 							<%-- 멘토가 있는 매치업 --%>
 							<c:otherwise>
 								<%-- 멘토가 선정되었는지, 모집 중인지 확인 --%>
 								<c:choose>
-									<c:when
-										test="${matchupDetail.mentoId != null && matchupDetail.mentoId > 0}">
+									<c:when test="${matchupDetail.mentoId != null && matchupDetail.mentoId > 0}">
 										<div class="profile-title">멘토가 선정되었어요!</div>
 										<a href="/user/${matchupDetail.mentoId}" class="profile-link"><img
 											class="profile-img"
-											src="${not empty matchupDetail.mentoProfileImageUrl ? matchupDetail.mentoProfileImageUrl : cpath.concat('/resources/images/member-icon.png')}"
+											src="${not empty matchupDetail.mentoProfileImageUrl ? matchupDetail.mentoProfileImageUrl : cpath.concat('/resources/images/memento-logo.png')}"
 											alt="멘토 프로필" /></a>
 										<div class="profile-nickname">${matchupDetail.mentoNickname}</div>
 									</c:when>
@@ -157,12 +157,14 @@
 								</c:choose>
 							</c:otherwise>
 						</c:choose>
+					</div>
 						<div class="divider"></div>
+						<div class="profile-group">
 						<div class="profile-title">매치업을 주선한 방장이에요</div>
 						<div class="profile-circle-wrapper">
 							<a href="${cpath}/user/${matchupDetail.leaderId}"
 								class="profile-link"> <img class="profile-img"
-								src="${not empty matchupDetail.leaderProfileImageUrl ? matchupDetail.leaderProfileImageUrl : cpath.concat('/resources/images/member-icon.png')}"
+								src="${not empty matchupDetail.leaderProfileImageUrl ? matchupDetail.leaderProfileImageUrl : cpath.concat('/resources/images/memento-logo.png')}"
 								alt="방장 프로필" />
 							</a>
 						</div>
@@ -170,10 +172,10 @@
 					</div>
 				</div>
 			</div>
+			</div>
 
 			<%-- 하단 비슷한 매치업 카드 --%>
 			<div class="bottom-area">
-				<div class="divider"></div>
 				<h3 class="section-title">비슷한 다른 매치업 둘러보기</h3>
 				<div class="card-list-container">
 					<c:forEach var="matchup" items="${similarList}">

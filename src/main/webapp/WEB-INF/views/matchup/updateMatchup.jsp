@@ -8,14 +8,14 @@
 <meta charset="UTF-8">
 <title>me:mento</title>
 <link rel="stylesheet" href="${cpath}/resources/css/createMatchup.css">
-<link rel="stylesheet" href="${cpath}/resources/css/vars.css">
 <script
     src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script src="${cpath}/resources/smarteditor2/js/service/HuskyEZCreator.js" charset="utf-8"></script>
 </head>
 <body>
+	<%@ include file="../common/logout_header.jsp"%>
     <jsp:include page="/WEB-INF/views/matchup/updateConfirmModal.jsp" />
-
+<div class="container">
     <div class="create-matchup-container">
         <div class="top-area">
             <div class="div">어떤 항목을 수정할까요?</div>
@@ -166,6 +166,7 @@
             <div class="div10">수정하기</div>
         </button>
     </div>
+</div>
     
     <script>
         window.matchupDetail = {
