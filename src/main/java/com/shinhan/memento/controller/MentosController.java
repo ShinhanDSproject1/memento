@@ -6,10 +6,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.shinhan.memento.dto.CategoryDTO;
 import com.shinhan.memento.dto.LanguageDTO;
 import com.shinhan.memento.dto.MatchTypeDTO;
+import com.shinhan.memento.model.Mentos;
 import com.shinhan.memento.service.MentosService;
 
 @Controller
@@ -42,7 +44,17 @@ public class MentosController {
 	}
 
 	@RequestMapping("/edit")
-	public String mentosEdit() {
+	public String mentosEdit(@RequestParam int mentosId, Model model) {
+		
+		
+		List<LanguageDTO> languages = mentosService.getAllLanguages();
+		List<CategoryDTO> categories = mentosService.getAllCategories();
+		List<MatchTypeDTO> matchTypes = mentosService.getAllMatchTypes();
+		
+//		model.addAttribute("mentos", mentos);
+		model.addAttribute("languages", languages);
+		model.addAttribute("categories", categories);
+		model.addAttribute("matchTypes", matchTypes);
 		return "mentos/mentosEdit";
 	}
 
