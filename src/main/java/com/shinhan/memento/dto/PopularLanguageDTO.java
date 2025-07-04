@@ -11,8 +11,9 @@ import lombok.NoArgsConstructor;
 @Data
 @Builder
 public class PopularLanguageDTO {
-	// id 값 수정 완료
+	private int languageId;
     private String languageName;
+    private String languageImage;
     private int totalCount;
     
 }
