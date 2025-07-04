@@ -377,7 +377,7 @@ public class MentosService {
 				.endTime(mentos.getEndTime())
 				.selectedDays(mentos.getSelectedDays())
 				.price(mentos.getPrice())
-				.times(mentos.getPrice())
+				.times(mentos.getTimes())
 				.categoryId(mentos.getCategoryId())
 				.languageId(mentos.getLanguageId())
 				.regionGroup(mentos.getRegionGroup())
