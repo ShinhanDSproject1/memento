@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
 <c:set var="cpath" value="${pageContext.servletContext.contextPath}" />
 <c:set var="mentoId" value="${sessionScope.loginUser.memberId}" />
@@ -16,6 +15,7 @@
 	crossorigin="anonymous"></script>
 <script
 	src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+
 <link
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
 	rel="stylesheet"
@@ -23,7 +23,6 @@
 	crossorigin="anonymous">
 <link rel="stylesheet"
 	href="${cpath}/resources/css/mainpage/notificationModal.css">
-
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>멘토스 수정하기</title>
 <link rel="stylesheet"
@@ -34,17 +33,11 @@
 <jsp:include page="/WEB-INF/views/mentos/cancelPopup.jsp" />
 <!-- 4. 만들기 팝업 -->
 <jsp:include page="/WEB-INF/views/mentos/submitPopup.jsp" />
-<fmt:formatDate value="${mentos.startTime}" pattern="HH:mm"
-	var="startTimeOnly" />
-<fmt:formatDate value="${mentos.endTime}" pattern="HH:mm"
-	var="endTimeOnly" />
 </head>
-<body>
+<body data-mentos-id="${mentosId}"
+	data-member-id="${sessionScope.loginUser.memberId}">
 	<%@ include file="../common/logout_header.jsp"%>
 	<%@ include file="../mainpage/notificationModal.jsp"%>
-	<script>
-		const mentoId = "${mentoId}";
-	</script>
 	<section class="container">
 		<div class="page-title">멘토스 수정하기</div>
 		<form action="${cpath}/mentos/create" method="post">
@@ -54,14 +47,14 @@
 						<label class="title">제목</label>
 						<div class="textarea-border">
 							<textarea id="title" name="title" rows="1"
-								placeholder="영어, 한글, 숫자 사용가능(30자 이내)">${mentos.title }</textarea>
+								placeholder="영어, 한글, 숫자 사용가능(30자 이내)"></textarea>
 						</div>
 					</div>
 					<div class="content-line">
 						<label class="title">간단 소개글</label>
 						<div class="textarea-border">
 							<textarea id="simpleContent" name="simpleContent" rows="1"
-								placeholder="영어, 한글, 숫자 사용가능(100자 이내)">${mentos.simpleContent }</textarea>
+								placeholder="영어, 한글, 숫자 사용가능(100자 이내)"></textarea>
 						</div>
 					</div>
 					<div class="flexrow content-line flexgap-20">
@@ -69,14 +62,14 @@
 							<div class="title">최소 수강인원</div>
 							<div class="main-selection-border">
 								<input type="number" id="minMember" name="minMember" min="1"
-									class="number-input" value="${mentos.minMember }" />
+									class="number-input" />
 							</div>
 						</div>
 						<div class="main-selection">
 							<div class="title">최대 수강 인원</div>
 							<div class="day-main-selection-border">
 								<input type="number" id="maxMember" name="maxMember" min="1"
-									class="number-input" value="${mentos.maxMember }" />
+									class="number-input" />
 							</div>
 						</div>
 					</div>
@@ -85,14 +78,14 @@
 							<div class="title">시작일</div>
 							<div class="day-main-selection-border">
 								<input type="date" id="startDateInput" name="startDate"
-									class="date-input" value="${mentos.startDay }" />
+									class="date-input" />
 							</div>
 						</div>
 						<div class="main-selection">
 							<div class="title">마감일</div>
 							<div class="day-main-selection-border">
 								<input type="date" id="endDateInput" name="endDate"
-									class="date-input" value="${mentos.endDay }" />
+									class="date-input" />
 							</div>
 						</div>
 					</div>
@@ -103,14 +96,14 @@
 							<div class="title">시작시간</div>
 							<div class="main-selection-border">
 								<input type="time" id="startTimeInput" name="startTime"
-									class="time-input" value="${startTimeOnly }" />
+									class="time-input" />
 							</div>
 						</div>
 						<div class="main-selection">
 							<div class="title">종료시간</div>
 							<div class="main-selection-border">
 								<input type="time" id="endTimeInput" name="endTime"
-									class="time-input" value="${endTimeOnly}" />
+									class="time-input" />
 							</div>
 						</div>
 					</div>
@@ -292,8 +285,8 @@
 			</script>
 		</form>
 	</section>
-	<script src="${cpath}/resources/js/mentosCreate.js"></script>
-	<script src="${cpath}/js/notification.js"></script>
+	<script src="${cpath}/resources/js/mentos/mentosEdit.js"></script>
+	<script src="${cpath}/resources/js/notification.js"></script>
 	<script src="${cpath}/resources/js/header.js"></script>
 </body>
 
