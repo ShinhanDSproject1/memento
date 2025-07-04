@@ -13,7 +13,7 @@ import lombok.Getter;
 @Builder
 @Getter
 public class GetMentosDetailDTO {
-	
+	private int mentosId;
 	private String title;
 	private String simpleContent;
 	private String image;

@@ -343,7 +343,7 @@ public class MentosService {
 			similarMentosList.add(result);
 		}
 
-		GetMentosDetailDTO dto = GetMentosDetailDTO.builder().title(mentos.getTitle())
+		GetMentosDetailDTO dto = GetMentosDetailDTO.builder().mentosId(mentos.getMentosId()).title(mentos.getTitle())
 				.simpleContent(mentos.getSimpleContent()).image(mentos.getImage()).currentMemberCnt(0)
 				.maxMember(mentos.getMaxMember()).startDay(mentos.getStartDay().toString())
 				.endDay(mentos.getEndDay().toString()).startTime(mentos.getStartTime().toString().substring(11))
