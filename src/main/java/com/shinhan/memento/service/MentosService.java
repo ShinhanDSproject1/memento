@@ -23,6 +23,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.shinhan.memento.common.exception.MemberException;
+import com.shinhan.memento.common.exception.MentosException;
 import com.shinhan.memento.common.response.status.BaseExceptionResponseStatus;
 import com.shinhan.memento.dto.CategoryDTO;
 import com.shinhan.memento.dto.LanguageDTO;
@@ -31,12 +32,13 @@ import com.shinhan.memento.dto.mentoDetail.MentoDetailClassDTO;
 import com.shinhan.memento.dto.mentos.CreateMentosDBDTO;
 import com.shinhan.memento.dto.mentos.CreateMentosDTO;
 import com.shinhan.memento.dto.mentos.GetMentosDTO;
+import com.shinhan.memento.dto.mentos.GetMentosDetailDTO;
+import com.shinhan.memento.dto.mentos.GetMentosDetailDTO.GetSimilarMentosListDTO;
 import com.shinhan.memento.dto.mentos.JoinMentosDTO;
 import com.shinhan.memento.mapper.CartMapper;
 import com.shinhan.memento.mapper.CategoryMapper;
 import com.shinhan.memento.mapper.LanguageMapper;
 import com.shinhan.memento.mapper.MatchTypeMapper;
-import com.shinhan.memento.mapper.MemberMapper;
 import com.shinhan.memento.mapper.MemberMentosMapper;
 import com.shinhan.memento.mapper.MentosMapper;
 import com.shinhan.memento.model.Member;
@@ -238,15 +240,15 @@ public class MentosService {
 
 		return result;
 	}
-	
+
 	/**
 	 * 멘토 상세보기 페이지(홈화면)
 	 */
-	public List<Mentos> showInProgressMentosList(int memberId){
+	public List<Mentos> showInProgressMentosList(int memberId) {
 		log.info("[MentoService.showInProgressMentosList]");
-		
+
 		return mentosMapper.showInProgressMentosList(memberId);
-}
+	}
 
 	/**
 	 * 멘토 상세조회(진행한 멘토스내역 보기)
@@ -257,31 +259,104 @@ public class MentosService {
 		mentosParams.put("mentoId", mentoId);
 		mentosParams.put("lastCreatedAt", lastCreatedAt);
 		List<Mentos> mentosList = mentosMapper.showMentosListByMentoId(mentosParams);
-		
+
 		List<MentoDetailClassDTO> result = new ArrayList<>();
-		
-		for(Mentos mentos : mentosList) {
+
+		for (Mentos mentos : mentosList) {
 			Member member = memberService.findMemberById(mentos.getMentoId());
-			if(member==null) {
+			if (member == null) {
 				throw new MemberException(BaseExceptionResponseStatus.CANNOT_FOUND_MENTO);
 			}
-			
-			MentoDetailClassDTO dto = MentoDetailClassDTO.builder()
-					.mentosImg(mentos.getImage())
-					.title(mentos.getTitle())
-					.mentoName(member.getNickname())
-					.userType(member.getUserType().toString())
-					.startDay(mentos.getStartDay().toString())
-					.endDay(mentos.getEndDay().toString())
+
+			MentoDetailClassDTO dto = MentoDetailClassDTO.builder().mentosImg(mentos.getImage())
+					.title(mentos.getTitle()).mentoName(member.getNickname()).userType(member.getUserType().toString())
+					.startDay(mentos.getStartDay().toString()).endDay(mentos.getEndDay().toString())
 					.startTime(mentos.getStartTime().toString().substring(11))
-					.endTime(mentos.getEndTime().toString().substring(11))
-					.selectedDays(mentos.getSelectedDays())
-					.region(mentos.getRegionGroup()+" "+mentos.getRegionSubgroup())
-					.price(mentos.getPrice())
+					.endTime(mentos.getEndTime().toString().substring(11)).selectedDays(mentos.getSelectedDays())
+					.region(mentos.getRegionGroup() + " " + mentos.getRegionSubgroup()).price(mentos.getPrice())
 					.createdAt(mentos.getCreatedAt().toString()).build();
-			
+
 			result.add(dto);
 		}
 		return result;
+	}
+
+	/**
+	 * 멘토스 상세보기
+	 */
+	public GetMentosDetailDTO showMentosDetail(Mentos mentos, Member member) {
+		log.info("[MentosService.showmentosDetail]");
+
+		// 멘토 정보 받아오기
+		Member mento = memberService.findMemberById(mentos.getMentoId());
+		if (mento == null) {
+			throw new MentosException(BaseExceptionResponseStatus.CANNOT_FOUND_MENTOS);
+		}
+
+		String matchTypeNameFirst = matchTypeMapper.findMatchTypeById(mentos.getMatchTypeIdFirst());
+		String matchTypeNameSecond = matchTypeMapper.findMatchTypeById(mentos.getMatchTypeIdSecond());
+		String matchTypeNameThird = matchTypeMapper.findMatchTypeById(mentos.getMatchTypeIdThird());
+		String matchTypeName = matchTypeMapper.findMatchTypeById(mento.getMatchTypeId());
+
+		String categoryName = categoryMapper.findCategoryById(mentos.getCategoryId());
+		String languageName = languageMapper.findLanguageById(mentos.getCategoryId());
+
+		Map<String, Object> cartParams = new HashMap<>();
+		cartParams.put("mentosId", mentos.getMentosId());
+		cartParams.put("memberId", member.getMemberId());
+
+		boolean isFavorite = cartMapper.checkFavorite(cartParams) == 1 ? true : false;
+
+		// 비슷한 멘토스 찾기 => 언어랑 카테고리, 리전그룹이 같은 애들로 찾기
+		Map<String, Object> similarParams = new HashMap<>();
+		similarParams.put("languageId", mentos.getLanguageId());
+		similarParams.put("categoryId", mentos.getCategoryId());
+		similarParams.put("regionGroup", mentos.getRegionGroup());
+		similarParams.put("mentosId", mentos.getMentosId());
+		List<Mentos> similarList = mentosMapper.findSimilarMentosList(similarParams);
+
+		List<GetSimilarMentosListDTO> similarMentosList = new ArrayList<>();
+
+		for (Mentos similar : similarList) {
+			Member similarMento = memberService.findMemberById(similar.getMentoId());
+			String similarCategoryName = categoryMapper.findCategoryById(similar.getCategoryId());
+			String similarLanguageName = languageMapper.findLanguageById(similar.getCategoryId());
+
+			// 현재 참여인원 세어오기 (확정까지 몇명)
+			int nowMemberCnt = mentosMapper.countNowMember(similar.getMentosId());
+			int remainSeatCnt = mentos.getMinMember() - nowMemberCnt;
+			String remainSeat;
+			if (remainSeatCnt <= 0) {
+				remainSeat = "확정";
+			} else {
+				remainSeat = "확정까지 " + remainSeatCnt + "명";
+			}
+			GetSimilarMentosListDTO result = GetSimilarMentosListDTO.builder().mentosId(similar.getMentosId())
+					.title(similar.getTitle()).mentoName(similarMento.getNickname())
+					.userType(similarMento.getUserType().toString()).startDay(similar.getStartDay().toString())
+					.endDay(similar.getEndDay().toString()).startTime(similar.getStartTime().toString().substring(11))
+					.endTime(similar.getEndTime().toString().substring(11)).selectedDay(similar.getSelectedDays())
+					.price(similar.getPrice()).image(similar.getImage()).simpleContent(similar.getSimpleContent())
+					.categoryName(similarCategoryName).languageName(similarLanguageName).remainSeat(remainSeat)
+					.regionSubGroup(similar.getRegionSubgroup()).build();
+			
+			similarMentosList.add(result);
+		}
+
+		GetMentosDetailDTO dto = GetMentosDetailDTO.builder().mentosId(mentos.getMentosId()).title(mentos.getTitle())
+				.simpleContent(mentos.getSimpleContent()).image(mentos.getImage()).currentMemberCnt(0)
+				.maxMember(mentos.getMaxMember()).startDay(mentos.getStartDay().toString())
+				.endDay(mentos.getEndDay().toString()).startTime(mentos.getStartTime().toString().substring(11))
+				.endTime(mentos.getEndTime().toString().substring(11)).selectedDays(mentos.getSelectedDays())
+				.price(mentos.getPrice()).times(mentos.getTimes() + "회").categoryName(categoryName)
+				.languageName(languageName)
+				.place(mentos.getRegionGroup() + " " + mentos.getRegionSubgroup() + " " + mentos.getRegionDetail())
+				.content(mentos.getContent()).matchTypeNameFirst(matchTypeNameFirst)
+				.matchTypeNameSecond(matchTypeNameSecond).matchTypeNameThird(matchTypeNameThird)
+				.mentoProfile(mento.getProfileImg()).mentoName(mento.getNickname())
+				.userType(mento.getUserType().toString()).matchTypeName(matchTypeName)
+				.similarMentosList(similarMentosList).isFavorite(isFavorite).build();
+
+		return dto;
 	}
 }

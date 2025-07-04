@@ -11,6 +11,7 @@ import com.shinhan.memento.dto.LanguageDTO;
 import com.shinhan.memento.dto.MatchTypeDTO;
 import com.shinhan.memento.dto.mentoDetail.MentoDetailClassDTO;
 import com.shinhan.memento.dto.mentos.CreateMentosDBDTO;
+import com.shinhan.memento.dto.mentos.GetMentosDetailDTO.GetSimilarMentosListDTO;
 import com.shinhan.memento.model.Mentos;
 
 @Mapper
@@ -34,4 +35,6 @@ public interface MentosMapper {
 	List<Mentos> showInProgressMentosList(int mentoId);
 
 	List<Mentos> showMentosListByMentoId(Map<String, Object> mentosParams);
+
+	List<Mentos> findSimilarMentosList(Map<String, Object> similarParams);
 }
