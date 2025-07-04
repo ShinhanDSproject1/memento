@@ -228,7 +228,7 @@
 		where p.member_id = #{memberId} and p.order_id = #{orderId} and p.status != 'DELETE'
 	</select>
 	
-	<update id="updateUserBalance">
+	<update id="updateUserBalanceByRefund">
 		update
 		USERBALANCE 
 		set balance = #{resultBalance}

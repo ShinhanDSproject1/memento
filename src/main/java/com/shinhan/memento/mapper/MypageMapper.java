@@ -16,6 +16,6 @@ public interface MypageMapper {
 	public abstract List<Map<String, Object>> selectMyProfileInfo(Integer memberId);
 	public abstract int updateProfileInfo(MyProfileDBUpdateDTO dto);
 	public abstract List<Map<String, Object>> refundSelectData(@Param("memberId") Integer memberId, @Param("orderId")String orderId);
-	public abstract int updateUserBalance(@Param("resultBalance") Integer resultBalance, @Param("memberId") Integer memberId);
+	public abstract int updateUserBalanceByRefund(@Param("resultBalance") Integer resultBalance, @Param("memberId") Integer memberId);
 	public abstract int updatePaymentByRefund(@Param("orderId") String orderId);
 }

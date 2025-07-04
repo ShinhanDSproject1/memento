@@ -13,6 +13,7 @@ $(() => {
     fetchOrderDetail(orderId);
 
     refundBtn.addEventListener('click', async function (e) {
+        // FormData 만드는 부분은 동일
         const formData = new FormData();
         formData.append("orderId", orderId);
 
@@ -24,24 +25,27 @@ $(() => {
                 body: formData
             });
 
-            // response.ok는 HTTP 상태 코드가 200-299 범위에 있는지 확인합니다.
+            // response.ok는 HTTP 상태 코드가 200번대인지 확인합니다.
             if (response.ok) {
-                // 서버의 응답 본문을 JSON 형태로 파싱하여 result 변수에 저장합니다.
-                // 만약 서버가 JSON이 아닌 일반 텍스트를 반환한다면 await response.text()를 사용합니다.
+                // ★★★★★ 이 부분이 핵심 ★★★★★
+                // response.json()을 호출해 서버가 보낸 실제 데이터를 읽어와서 'result' 변수에 저장합니다.
+                // 서버가 JSON이 아닌 단순 텍스트를 보낸다면 await response.text()를 사용합니다.
                 const result = await response.json();
-                console.log('환불 요청 성공:', result);
-                alert('환불 처리가 완료되었습니다.');
-                // 성공 후 페이지 새로고침 또는 다른 UI 처리
-                location.reload();
-            } else {
-                // 요청이 실패했을 경우 (예: 4xx, 5xx 에러)
+
+                console.log('성공:', result);
+                alert('환불 처리가 성공적으로 완료되었습니다.'); // 사용자에게 성공 피드백
+                location.reload(); // 성공 후, 페이지를 새로고침하여 변경사항을 반영
+            }
+            else {
+                // 요청 실패 시 (4xx, 5xx 에러)
                 // 서버가 보낸 에러 메시지를 확인하여 디버깅에 활용합니다.
-                const errorResult = await response.json(); // 서버가 에러 정보를 JSON으로 보낸다고 가정
+                const errorResult = await response.json().catch(() => response.text()); // JSON 파싱 실패 시 텍스트로 읽음
                 console.error('환불 요청 실패:', errorResult);
-                alert(`환불 처리에 실패했습니다: ${errorResult.message || '서버 오류'}`);
+                // 사용자에게 실패 피드백 (서버가 보낸 메시지가 있다면 보여줌)
+                alert('환불 처리에 실패했습니다. \n사유: ' + (errorResult.message || errorResult));
             }
         } catch (error) {
-            // 네트워크 문제 등으로 fetch 자체가 실패했을 경우
+            // 네트워크 연결 문제 등 fetch 자체가 실패한 경우
             console.error('네트워크 또는 스크립트 오류:', error);
             alert('요청 중 오류가 발생했습니다. 네트워크 연결을 확인해 주세요.');
         }
@@ -284,7 +288,11 @@ async function fetchOrderDetail(orderId) {
 
         let status = 0
         const refundBtn = document.getElementById('refundBtn')
-        const userBalance = parseInt(document.getElementById('userBalance').textContent, 10)
+        const userBalanceText = document.getElementById('userBalance').textContent
+        let userBalance = userBalanceText.split(',')
+        let userBalanceValue = "";
+        userBalance.forEach(text => { userBalanceValue += text })
+        let userBalanceInt = parseInt(userBalanceValue, 10)
         paymentDetail.forEach(payment => {
 
             if (payment.payType == 'REFUND') {
@@ -306,7 +314,8 @@ async function fetchOrderDetail(orderId) {
                 }
             }
             if (payment.payType == 'CHARGE') {
-                if (payment.amount > userBalance) {
+                console.log(userBalanceInt)
+                if (payment.amount > userBalanceInt) {
                     status = 1
                     console.log('status update')
                 }

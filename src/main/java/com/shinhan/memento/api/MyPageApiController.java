@@ -160,14 +160,14 @@ public class MyPageApiController {
 
 	}
 	
-	@PutMapping(value = "/refund", produces = "application/json")
+	@PutMapping(value = "/refund")
 	public BaseResponse<Boolean> updateRefund(HttpSession session, @RequestParam String orderId){
 		Member loginUser = (Member) session.getAttribute("loginUser");
 		if (loginUser == null) throw new MypageException(BaseExceptionResponseStatus.NEED_LOGIN);
 		Integer memberId = loginUser.getMemberId();
 		System.out.println(orderId);
 		
-		Boolean result = false;
+		Boolean result = myPageService.refundAction(memberId, orderId);
 		
 		return new BaseResponse<Boolean>(result);
 	}

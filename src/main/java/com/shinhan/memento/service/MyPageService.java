@@ -19,6 +19,7 @@ import java.util.Set;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
+import org.apache.ibatis.jdbc.Null;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
@@ -449,14 +450,15 @@ public class MyPageService {
 	}
 
 	@Transactional
-	public Boolean refundAction(Integer memberId, String orderId) {
-		Boolean result = true;
+	public boolean refundAction(Integer memberId, String orderId) {
+		boolean result = true;
 		// 주문 번호로 킵고잉 아이디, 멘토스 아이디, 매치업 아이디, 충전
 		List<Map<String, Object>> refundDataMap = mypageMapper.refundSelectData(memberId, orderId);
 		List<RefundRequestDTO> refundDataList = new ArrayList<RefundRequestDTO>();
 
 		refundDataMap.stream().forEach(data -> {
 			RefundRequestDTO dto = RefundRequestDTO.builder().orderId((String) data.get("ORDERID"))
+					.amount(data.get("AMOUNT") == null ? 0 : ((BigDecimal)data.get("AMOUNT")).intValue())
 					.payType((String) data.get("PAYTYPE"))
 					.matchupId(data.get("MATCHUPID") == null ? 0 : ((BigDecimal) data.get("MATCHUPID")).intValue())
 					.matchupPrice(
@@ -478,28 +480,33 @@ public class MyPageService {
 		});
 		RefundRequestDTO shareDataDTO = refundDataList.get(0);
 		Integer initBalance = shareDataDTO.getUserBalance();
+		Integer amount = shareDataDTO.getAmount();
 		String payType = shareDataDTO.getPayType();
 
 		//CHARGE or USE or REFUND -> REFUND의 경우 버튼이 존재하지 않음
-
+		System.out.println(payType);
 
 		if(payType.equalsIgnoreCase("REFUND")) {
 			return false;
-		}
-		
-		if(payType.equalsIgnoreCase("CHARGE")) {
-			if(initBalance < shareDataDTO.getAmount()) {
+		}else if(payType.equalsIgnoreCase("CHARGE")) {
+			System.out.println(initBalance);
+			System.out.println(amount);
+			if(initBalance < amount) {
 				return false;
 			}else {
-				initBalance -= shareDataDTO.getAmount();
+				System.out.println("어");
+				initBalance -= amount;
 			}
 		}else {
 			//루프 돌면서 금액 계산 및 탈퇴
+			System.out.println("디");
 			for (RefundRequestDTO refund : refundDataList) {
 				if (refund.getMatchupId() != 0) {
 					//매치업 취소
+					System.out.println("가");
 					JoinMatchupDTO jmatchDto = new JoinMatchupDTO(refund.getMatchupId(), memberId);
 					int jmatchCancel = sqlSession.update(matchupNamespace+"cancelJoinMatchupBy2id",jmatchDto);
+					System.out.println(jmatchCancel);
 					if(jmatchCancel > 0) {
 						initBalance += refund.getMatchupPrice();
 					}else {
@@ -509,9 +516,11 @@ public class MyPageService {
 				}
 				if (refund.getMentosId() != 0) {
 					// 멘토스 취소
+					System.out.println("문");
 					JoinMentosDTO jmentosDto = new JoinMentosDTO(refund.getMentosId(), memberId);
 					MemberMentos mm =  memberMentosService.checkValidMemberMentos(jmentosDto);
 					int jmentosCancel = memberMentosService.cancelJoinMentos(mm.getMemberMentosId());
+					System.out.println(jmentosCancel);
 					if(jmentosCancel > 0) {
 						initBalance += refund.getMentosPrice();
 					}else {
@@ -521,8 +530,10 @@ public class MyPageService {
 				}
 				if (refund.getKeepgoingId() != 0) {
 					//킵고잉 탈퇴
+					System.out.println("제");
 					JoinKeepgoingDTO jkeepDto = new JoinKeepgoingDTO(refund.getKeepgoingId(), memberId);
 					int jkeepcancel = sqlSession.update(keepNamespace+"cancelMemberKeepgoingBy2id", jkeepDto);
+					System.out.println(jkeepcancel);
 					if(jkeepcancel > 0) {
 						initBalance += refund.getKeepgoingPrice();
 					}else {
@@ -533,15 +544,18 @@ public class MyPageService {
 		}
 		
 		//user balance update
+		System.out.println("야");
 		Integer resultBalance = initBalance;
-		int balanceUpdateResult = mypageMapper.updateUserBalance(resultBalance, memberId);
-		
+		System.out.println(resultBalance);
+		int balanceUpdateResult = mypageMapper.updateUserBalanceByRefund(resultBalance, memberId);
+		System.out.println(balanceUpdateResult);
 		if(balanceUpdateResult <= 0) {
 			return false;
 		}
-		
-		// 주문 테이블 update -> 주문번호
+		System.out.println("?");
+		// payment update -> 주문번호
 		int paymentUpateRefundResult = mypageMapper.updatePaymentByRefund(orderId);
+		System.out.println(paymentUpateRefundResult);
 		if(paymentUpateRefundResult <= 0) {
 			return false;
 		}
