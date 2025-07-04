@@ -41,6 +41,7 @@ import com.shinhan.memento.dto.JoinKeepgoingDTO;
 import com.shinhan.memento.dto.JoinMatchupDTO;
 import com.shinhan.memento.dto.MyMatchupListResponseDTO;
 import com.shinhan.memento.dto.MyMentosListResponseDTO;
+import com.shinhan.memento.dto.MyPageSideBarResponseDTO;
 import com.shinhan.memento.dto.MyPaymentListResponseDTO;
 import com.shinhan.memento.dto.MyProfileDBUpdateDTO;
 import com.shinhan.memento.dto.MyProfileInfoResponseDTO;
@@ -561,6 +562,11 @@ public class MyPageService {
 		}
 		
 		return result;
+	}
+	
+	public MyPageSideBarResponseDTO selectMySideBarInfo(Integer memberId) {
+		MyPageSideBarResponseDTO dto = mypageMapper.selectMySideBarInfo(memberId);
+		return dto;
 	}
 
 }

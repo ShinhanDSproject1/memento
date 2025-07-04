@@ -11,7 +11,7 @@
 		<a href="${cpath}/mypage/page2">
 			<div class="profile-card">
 				<div class="profile-avatar-wrapper">
-					<img class="avatar-image"
+					<img id="profileImg" class="avatar-image"
 						src="${cpath}/resources/images/sidebar/avatar-default0.svg" />
 					<div class="edit-profile-button-wrapper">
 						<a class="edit-profile-link" href="${cpath}/mypage/page2">
@@ -20,8 +20,8 @@
 						</a>
 					</div>
 				</div>
-				<div class="user-nickname">코딩하는 뭉뭉이</div>
-				<div class="user-role">mento</div>
+				<div id="userNickname" class="user-nickname">코딩하는 뭉뭉이</div>
+				<div id="userType" class="user-role">mento</div>
 				<div class="user-assets">
 					<div class="asset-item">
 						<span class="asset-label cash-label">Cash :</span>
@@ -29,7 +29,7 @@
 					</div>
 					<div class="asset-item">
 						<span class="asset-label point-label">Point :</span>
-						<span class="asset-value">530 P</span>
+						<span id="userPoint" class="asset-value">530 P</span>
 					</div>
 				</div>
 			</div>

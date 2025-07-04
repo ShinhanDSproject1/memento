@@ -25,6 +25,7 @@ import com.shinhan.memento.dto.ConfirmCashRequestDTO;
 import com.shinhan.memento.dto.ConfirmCashResponseDTO;
 import com.shinhan.memento.dto.MyMatchupListResponseDTO;
 import com.shinhan.memento.dto.MyMentosListResponseDTO;
+import com.shinhan.memento.dto.MyPageSideBarResponseDTO;
 import com.shinhan.memento.dto.MyProfileInfoResponseDTO;
 import com.shinhan.memento.dto.MyProfileUpdateRequestDTO;
 import com.shinhan.memento.dto.MyPaymentListResponseDTO;
@@ -170,5 +171,14 @@ public class MyPageApiController {
 		Boolean result = myPageService.refundAction(memberId, orderId);
 		
 		return new BaseResponse<Boolean>(result);
+	}
+	
+	@GetMapping(value = "/sidebar-info",  produces = "application/json")
+	public BaseResponse<MyPageSideBarResponseDTO> selectMySideBarInfo(HttpSession session){
+		Member loginUser = (Member) session.getAttribute("loginUser");
+		if (loginUser == null) throw new MypageException(BaseExceptionResponseStatus.NEED_LOGIN);
+		Integer memberId = loginUser.getMemberId();
+		MyPageSideBarResponseDTO dto = myPageService.selectMySideBarInfo(memberId);
+		return new BaseResponse<MyPageSideBarResponseDTO>(dto);
 	}
 }
