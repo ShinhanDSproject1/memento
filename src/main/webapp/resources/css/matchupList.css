@@ -3,14 +3,14 @@
 }
 
 body {
-  padding-top: 120px; 
+  padding-top: 120px;
   
 }
 html, body {
   margin: 0 auto;
   padding: 0;
   height: 100%;
-  width:1700px;
+  width:100%;
 }
 
 html, body, *, *::before, *::after {
@@ -29,7 +29,7 @@ html, body, *, *::before, *::after {
 /*   overflow-y: hidden; */
 overflow: visible !important;
    padding-top: 50px; 
-    width:1700px;
+    width:100%;
 }
 
 .header-fixed {
@@ -50,10 +50,11 @@ overflow: visible !important;
     display: flex;
     flex-direction: column;
     align-items: center; /* 자식 요소들을 수평 중앙 정렬 */
-    width: 100%;
+    width: calc(100vw - 400px);
     max-width: 1400px; /* 콘텐츠의 최대 너비를 지정하여 화면이 너무 커도 보기 좋게 함 */
     margin: 0 auto;
-    padding: 0 20px; /* 좌우 여백 */
+     min-width: 400px;
+    padding: 0 20px;
 }
 
 .frame-390 {
@@ -290,24 +291,27 @@ button.group-389:hover {
     width: 100%;
     /* [수정] 열의 최소/최대 크기를 지정하고, 간격을 좀 더 유연하게 조절 */
     grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
-    gap: 40px; /* 카드 사이의 간격 */
+    gap: 30px; /* 카드 사이의 간격 */
     margin-top: 30px;
+    gap: 30px 50px;
 }
 
 
 .matchup-cardview {
-	width: 100%; /* 너무 좁지 않게! */
-	min-width: initial;
-	padding: 10px 24px;
-	margin-bottom: 40px;
-	box-sizing: border-box;
-	position: relative;
-	display: flex;
-	flex-direction: column;
-	gap: 12px;
-	min-height: 220px;
-	align-items: center;
-	justify-content: center;
+width: 100%; 
+min-width: initial;
+padding: 10px 24px;
+margin-bottom: 40px;
+box-sizing: border-box;
+position: relative;
+display: flex;
+flex-direction: column;
+gap: 12px;
+min-height: 220px;
+align-items: center;
+justify-content: center;
+cursor: pointer; 
+transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .rectangle-48 {
@@ -318,11 +322,17 @@ button.group-389:hover {
 	border-color: #a6abbd;
 	border-width: 1px;
 	width: 409px;
-	height: 247.35px;
+	height: 245px;
 	position: absolute;
 	left: 0px;
 	top: 0px;
 	cusor :pointer;
+	 transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.matchup-cardview:hover {
+transform: translateY(-5px); /* 전체 카드를 위로 살짝 이동 /
+box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1); / 그림자 효과 */
 }
 
 .matchup-cardview,
@@ -583,7 +593,8 @@ button.group-389:hover {
 	align-self: stretch;
 	flex-shrink: 0;
 	position: relative;
-	margin-top: 100px;
+	margin-top: 70px;
+	cursor: pointer;
 }
 
 .page-back-btn {
@@ -611,7 +622,7 @@ button.group-389:hover {
 }
 
 .page-li-btn-seleted-page {
-	background: #86bdec;
+	background: #52a2e6;
 	border-radius: 5px;
 	border-style: solid;
 	border-color: #7dbbf1;
@@ -738,8 +749,10 @@ button.group-389:hover {
 .filter-select {
   border: none;
   padding: 8px;
-  border-radius: 4px;
+/*   border-radius: 4px; */
   min-width: 120px;
+  color : #565353;
+   outline: none;
 }
 
 .search-btn {
@@ -749,4 +762,64 @@ button.group-389:hover {
   color: white;
   border-radius: 4px;
   cursor: pointer;
+}
+
+
+/* --- 반응형 웹을 위한 미디어 쿼리 --- */
+
+/* 태블릿 사이즈 (768px 이하) */
+@media (max-width: 768px) {
+    body {
+        padding-top: 100px;
+    }
+    .header-fixed {
+        height: 100px;
+    }
+    .frame-390 {
+        flex-direction: column; /* 세로로 쌓기 */
+        align-items: flex-start; /* 왼쪽 정렬 */
+    }
+    button.group-389 {
+        width: 100%; /* 버튼 너비 꽉 채우기 */
+    }
+/*     .frame-3694 {
+        gap: 20px; 카드 간격 줄이기
+    } */
+}
+
+/* 모바일 사이즈 (480px 이하) */
+@media (max-width: 480px) {
+    body {
+        padding-top: 80px;
+    }
+    .header-fixed {
+        height: 80px;
+    }
+    .content-wrap, .frame-3657 {
+        padding: 0 15px; /* 좌우 여백 줄이기 */
+    }
+    .keepgoing-filter-and-make, .detail-select {
+        width: 100%;
+        justify-content: center; /* 필터 가운데 정렬 */
+    }
+    .matchup-cardview {
+        padding: 15px;
+        height: auto; /* 카드 높이 자동 조절 */
+    }
+    .div5 {
+        font-size: 14px;
+        text-align: center;
+        width: 100%;
+    }
+    ._1 { /* 프로필 이미지 */
+        position: static; /* absolute 해제 */
+        width: 50px;
+        height: 50px;
+        margin-top: 10px;
+        align-self: center; /* 가운데 정렬 */
+    }
+    .pagemove-list {
+        margin-top: 50px;
+        flex-wrap: wrap; /* 페이지 버튼 줄바꿈 */
+    }
 }
