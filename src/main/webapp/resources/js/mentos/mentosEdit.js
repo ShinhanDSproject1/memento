@@ -226,8 +226,10 @@ $(document).ready(function () {
 
 			const labelText = $(`#sessionCountDropdown li[data-value='${data.times}']`).text();
 			$("#selectedSessionCount").text(labelText);
-		 
+			
+		 	$("#categoryValue").val(data.categoryId);
 		 	$('#selectedCategory').text($(`#categoryDropdown li[data-value='${data.categoryId}']`).text());
+		 	$("#languageValue").val(data.languageId);
 		 	$('#selectedLanguage').text($(`#languageDropdown li[data-value='${data.languageId}']`).text());
 		 	
 		 	$('#price').val(data.price);
