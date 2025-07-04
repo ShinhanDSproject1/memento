@@ -283,8 +283,8 @@
 			</script>
 		</form>
 	</section>
-	<script src="${cpath}/resources/js/mentosCreate.js"></script>
-	<script src="${cpath}/js/notification.js"></script>
+	<script src="${cpath}/resources/js/mentos/mentosCreate.js"></script>
+	<script src="${cpath}/resources/js/notification.js"></script>
 <script src="${cpath}/resources/js/header.js"></script>
 </body>
 

@@ -35,6 +35,7 @@ import com.shinhan.memento.dto.mentos.GetMentosDTO;
 import com.shinhan.memento.dto.mentos.GetMentosDetailDTO;
 import com.shinhan.memento.dto.mentos.GetMentosDetailDTO.GetSimilarMentosListDTO;
 import com.shinhan.memento.dto.mentos.JoinMentosDTO;
+import com.shinhan.memento.dto.mentos.ShowMentosDetailForEditDTO;
 import com.shinhan.memento.mapper.CartMapper;
 import com.shinhan.memento.mapper.CategoryMapper;
 import com.shinhan.memento.mapper.LanguageMapper;
@@ -358,5 +359,88 @@ public class MentosService {
 				.similarMentosList(similarMentosList).isFavorite(isFavorite).build();
 
 		return dto;
+	}
+
+	public ShowMentosDetailForEditDTO showMentosDetailForEdit(int mentosId, int memberId) {
+		log.info("[MentosService.showMentosDetailForEdit]");
+		Mentos mentos = mentosMapper.checkValidMentosById(mentosId);
+		
+		ShowMentosDetailForEditDTO dto = ShowMentosDetailForEditDTO.builder()
+				.title(mentos.getTitle())
+				.simpleContent(mentos.getSimpleContent())
+				.image(mentos.getImage())
+				.minMember(mentos.getMinMember())
+				.maxMember(mentos.getMaxMember())
+				.startDay(mentos.getStartDay())
+				.endDay(mentos.getEndDay())
+				.startTime(mentos.getStartTime())
+				.endTime(mentos.getEndTime())
+				.selectedDays(mentos.getSelectedDays())
+				.price(mentos.getPrice())
+				.times(mentos.getTimes())
+				.categoryId(mentos.getCategoryId())
+				.languageId(mentos.getLanguageId())
+				.regionGroup(mentos.getRegionGroup())
+				.regionSubgroup(mentos.getRegionSubgroup())
+				.regionDetail(mentos.getRegionDetail())
+				.content(mentos.getContent())
+				.matchTypeFirst(mentos.getMatchTypeIdFirst())
+				.matchTypeSecond(mentos.getMatchTypeIdSecond())
+				.matchTypeThird(mentos.getMatchTypeIdThird()).build();
+		
+		return dto;
+	}
+
+	public boolean updateMentos(int mentosId, CreateMentosDTO createMentosDto, MultipartFile imageFile) {
+		log.info("[MentosService.updateMentos]");
+		Date startDay = Date.valueOf(createMentosDto.getStartDay());
+		Date endDay = Date.valueOf(createMentosDto.getEndDay());
+		Timestamp startTime = Timestamp
+				.valueOf(LocalDateTime.of(LocalDate.of(2000, 1, 1), LocalTime.parse(createMentosDto.getStartTime())));
+		Timestamp endTime = Timestamp
+				.valueOf(LocalDateTime.of(LocalDate.of(2000, 1, 1), LocalTime.parse(createMentosDto.getEndTime())));
+
+		// 이미지 저장 처리
+		String imageUrl = null;
+		if (imageFile != null && !imageFile.isEmpty() ) {
+			try {
+				File dir = new File(uploadDir);
+				if (!dir.exists()) {
+					dir.mkdirs();
+				}
+
+				// 확장자 추출 + 고유 파일명 생성
+				String ext = getFileExtension(imageFile.getOriginalFilename());
+				String savedFileName = UUID.randomUUID().toString() + (ext != null ? "." + ext : "");
+				File destFile = new File(dir, savedFileName);
+				Files.copy(imageFile.getInputStream(), destFile.toPath(), StandardCopyOption.REPLACE_EXISTING);
+
+				// 웹에서 접근 가능한 경로로 구성 (리소스 경로 기준)
+				imageUrl = "/resources/uploadImage/" + savedFileName;
+				log.info("이미지 저장 완료: {}", imageUrl);
+			} catch (IOException e) {
+				log.error("이미지 업로드 실패", e);
+				return false;
+			}
+		}
+
+		// DB 업데이트용 DTO 생성
+		CreateMentosDBDTO dbDTO = CreateMentosDBDTO.builder().categoryId(createMentosDto.getCategoryId())
+				.content(createMentosDto.getContent()).endDay(endDay).startDay(startDay).endTime(endTime)
+				.startTime(startTime).image(imageUrl) // URL 경로 저장
+				.languageId(createMentosDto.getLanguageId()).matchTypeFirst(createMentosDto.getMatchTypeFirst())
+				.matchTypeSecond(createMentosDto.getMatchTypeSecond()).matchTypeThird(createMentosDto.getMatchTypeThird())
+				.maxMember(createMentosDto.getMaxMember()).minMember(createMentosDto.getMinMember()).price(createMentosDto.getPrice())
+				.mentoId(createMentosDto.getMentoId()).title(createMentosDto.getTitle())
+				.simpleContent(createMentosDto.getSimpleContent()).selectedDays(createMentosDto.getSelectedDays())
+				.times(createMentosDto.getTimes()).regionDetail(createMentosDto.getRegionDetail())
+				.regionGroup(createMentosDto.getRegionGroup()).regionSubgroup(createMentosDto.getRegionSubgroup()).build();
+
+		
+		Map<String, Object> mentosUpdateParams = new HashMap<>();
+		mentosUpdateParams.put("CreateMentosDBDTO", dbDTO);
+		mentosUpdateParams.put("mentosId", mentosId);
+		int result = mentosMapper.updateMentos(mentosUpdateParams);
+		return result == 1;
 	}
 }

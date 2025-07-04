@@ -877,6 +877,20 @@ input[type="time"] {
 	width: 100%
 }
 
+.mentos-leader-update-btn {
+	background: #0069f8;
+	border-radius: 10px;
+	padding: 42px 46px 42px 46px;
+	display: flex;
+	flex-direction: column;
+	gap: 10px;
+	align-items: center;
+	justify-content: center;
+	height: 60px;
+	position: relative;
+	width: 100%
+}
+
 .d-2-r-18-white {
 	color: #ffffff;
 	text-align: left;
