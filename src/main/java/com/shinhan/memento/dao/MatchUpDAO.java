@@ -96,11 +96,11 @@ public class MatchUpDAO {
    }
    
    /* 매치업 삭제하기 (방장만이 갖고 있는 권한) */
-   public int inactivateMatchupByIdAndLeader(int matchupId, int leaderId) {
+   public int deleteMatchupByIdAndLeader(int matchupId, int leaderId) {
       Map<String, Object> params = new HashMap<>();
        params.put("matchupId", matchupId);
        params.put("leaderId", leaderId);
-       return sqlSession.delete(namespace + "inactivateMatchupByIdAndLeader", params);
+       return sqlSession.delete(namespace + "deleteMatchupByIdAndLeader", params);
    }
    
    /* 특정 매치업에 멘토 신청하기 (멘토 기준) */ 

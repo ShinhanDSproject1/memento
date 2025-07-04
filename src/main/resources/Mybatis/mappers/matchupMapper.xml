@@ -108,10 +108,11 @@
 	                m.price, 
 	                m.title, 
 	                m.has_mento,
-	                (SELECT COUNT(*) 
+	                m.matchup_count
+<!-- 	                (SELECT COUNT(*) 
 	                 FROM member_matchup mm 
 	                 WHERE mm.matchup_id = m.matchup_id 
-	                 AND mm.status = 'ACTIVE') AS matchup_count
+	                 AND mm.status = 'ACTIVE') AS matchup_count -->
 	            FROM matchup m
 	            LEFT JOIN category c ON m.category_id = c.category_id
 	            LEFT JOIN language l ON m.language_id = l.language_id
@@ -159,7 +160,8 @@
 	        m.end_day, 
 	        m.start_time, 
 	        m.end_time, 
-	        m.count, 
+	        m.count,
+	        m.matchup_count, 
 	        m.min_member, 
 	        m.max_member, 
 	        m.price, 
@@ -317,15 +319,15 @@
        )
    </insert>
 
-   <update id="inactivateMemberMatchupById" parameterType="int">
+   <update id="deleteMemberMatchupById" parameterType="int">
       UPDATE
       MEMBER_MATCHUP
-      SET status = 'INACTIVE'
+      SET status = 'DELETE'
       WHERE MATCHUP_ID = #{matchupId}
    </update>
-   <update id="inactivateMatchupByIdAndLeader" parameterType="map">
+   <update id="deleteMatchupByIdAndLeader" parameterType="map">
       UPDATE MATCHUP
-      SET status = 'INACTIVE',
+      SET status = 'DELETE',
       updated_at = sysdate
       WHERE
       MATCHUP_ID = #{matchupId}

@@ -45,7 +45,7 @@
 				alt="검색" />
 		</button>
 	</form>
-	<div class="login-button" id="loginBtn" style="cursor: pointer;">
+	<div class="login-button" style="cursor: pointer;" onclick="location.href='${cpath}/mainpage/logout'">
 		<div class="login-text">로그아웃</div>
 	</div>
 	<img class="vuesax-linear-coin" src="${cpath}/resources/images/header/vuesax-linear-coin0.svg" />

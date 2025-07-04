@@ -21,8 +21,8 @@ public class MemberMatchUpDAO {
 	String namespace = "com.shinhan.memento.dao.MemberMatchUpDAO.";
 
 	/* 삭제된 매치업에 신청 혹은 참여중인 멤버 데이터 삭제하기 */
-	public int inactivateMemberMatchupById(int matchupId) {
-		return sqlSession.delete(namespace + "inactivateMemberMatchupById", matchupId);
+	public int deleteMemberMatchupById(int matchupId) {
+		return sqlSession.delete(namespace + "deleteMemberMatchupById", matchupId);
 
 	}
 	/* 매치업에 멘티로 신청 */

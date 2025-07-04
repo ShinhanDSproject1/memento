@@ -33,7 +33,14 @@
 <body>
 	<div class="layout-wrapper" id="layoutWrapper">
 		<div class="left"></div>
-		<%@ include file="../common/logout_header.jsp"%>
+		<c:choose>
+			<c:when test="${not empty sessionScope.loginUser}">
+				<%@ include file="../common/logout_header.jsp"%>
+			</c:when>
+			<c:otherwise>
+				<%@ include file="../common/login_header.jsp"%>
+			</c:otherwise>
+		</c:choose>
 		<div class="page-container">
 			<%@ include file="notificationModal.jsp"%>
 			<div id="loginModal"
@@ -44,7 +51,7 @@
 			<div id="modalBackdrop"
 				style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.5); z-index: 999;"
 				onclick="closeModal()"></div>
-			<script src="${pageContext.request.contextPath}/js/notification.js"></script>
+			<script src="${pageContext.request.contextPath}/resources/js/notification.js"></script>
 
 			<!-- 슬라이드 배너 영역 -->
 			<div class="slider-wrapper">
@@ -72,7 +79,7 @@
 						</div>
 						<c:forEach var="banner" items="${bannerList}">
 							<div class="page-1-com-12">
-								<div class="spring-content" onclick="location.href='${cpath}/mentos/detail?mentosid='+ ${banner.mentosId}">
+								<div class="spring-content" onclick="location.href='${cpath}/mentos/detail?mentosid=${banner.mentosId}&memberId=${loginId}'">
 									<div class="spring-text">
 										<div class="spring-title">${banner.title}</div>
 										<div class="spring-info">
@@ -256,8 +263,3 @@
 	<div class="footer-bottom text-center">© 2025 MENTORMENTEE LAB.
 		ALL RIGHTS RESERVED.</div>
 </footer>
-
-<!-- 슬라이더 JavaScript -->
-<script
-	src="${pageContext.request.contextPath}/resources/js/mainslider.js"></script>
-</html>
