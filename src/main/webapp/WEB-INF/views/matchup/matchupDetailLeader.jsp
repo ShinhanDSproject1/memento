@@ -180,7 +180,7 @@
 													기다리고 있어요</div>
 												<a href="#" class="profile-link"> <img
 													id="mento-profile-img" class="profile-img"
-													src="${cpath}/resources/images/logo.png" alt="기본 프로필" />
+													src="${cpath}/resources/images/memento-logo.png" alt="기본 프로필" />
 												</a>
 												<div class="profile-nickname" id="mento-nickname"></div>
 											</c:otherwise>

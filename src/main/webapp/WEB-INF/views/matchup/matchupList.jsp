@@ -29,7 +29,7 @@
                  <div class="detail-select">
                      <div class="detail-select-li">
                          <select name="regionGroup" class="filter-select" onchange="applyFilters()">
-                             <option value="">-- 지역 (전체) --</option>
+                             <option value="">   지역 (전체)   </option>
                          <c:forEach var="region" items="${regionGroups}">
                             <option value="${region}" ${param.regionGroup == region ? 'selected' : ''}>${region}</option>
                          </c:forEach>
@@ -37,7 +37,7 @@
                      </div>
                      <div class="detail-select-li2">
                          <select name="categoryId" class="filter-select" onchange="applyFilters()">
-                             <option value="">-- 학습유형 (전체) --</option>
+                             <option value="">   학습유형 (전체)   </option>
                              <c:forEach var="cat" items="${categories}">
                             <option value="${cat.categoryId}" ${param.categoryId == cat.categoryId ? 'selected' : ''}>${cat.categoryName}</option>
                          </c:forEach>
@@ -45,7 +45,7 @@
                      </div>
                      <div class="detail-select-li">
                           <select name="selectedDays" class="filter-select" onchange="applyFilters()">
-                             <option value="">-- 요일 (전체) --</option>
+                             <option value="">   요일 (전체)   </option>
                              <option value="MON" ${param.selectedDays == 'MON' ? 'selected' : ''}>월요일</option>
                              <option value="TUE" ${param.selectedDays == 'TUE' ? 'selected' : ''}>화요일</option>
                              <option value="WED" ${param.selectedDays == 'WED' ? 'selected' : ''}>수요일</option>
@@ -57,7 +57,7 @@
                      </div>
                      <div class="detail-select-li">
                          <select name="languageId" class="filter-select" onchange="applyFilters()">
-                             <option value="">-- 언어 (전체) --</option>
+                             <option value="">   언어 (전체)   </option>
                              <c:forEach var="lang" items="${languages}">
                             <option value="${lang.languageId}" ${param.languageId == lang.languageId ? 'selected' : ''}>${lang.languageName}</option>
                          </c:forEach>
@@ -73,7 +73,6 @@
             <c:forEach var="matchup" items="${matchupList}">
                <div class="matchup-cardview" onclick="location.href='${cpath}/matchup/matchupDetail?id=${matchup.matchupId}'">
                   <div class="rectangle-48"></div>
-                  <!-- <div class="rectangle-210"></div> -->
                   <div class="div3">${matchup.regionGroup}</div>
                   <div class="icon-time-04">
                      <img class="icon-time-clock-outlined"
@@ -154,7 +153,6 @@
    </div>
    </div>
 </div>
-<%--  <jsp:include page="../mainpage/notificationModal.jsp" /> --%>
    
 <script>
    const cpath = '${cpath}';
