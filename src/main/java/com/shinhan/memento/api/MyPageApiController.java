@@ -159,7 +159,7 @@ public class MyPageApiController {
 		return new BaseResponse<>(paymentDetailList);
 	}
 	
-	@GetMapping(value="/dashboard-select", produces = "application/json")
+	@GetMapping(value="/dashboard-data", produces = "application/json")
 	public BaseResponse<MyDashboardResponseDTO> selectMyDashboardData(HttpSession session){
 		Member loginUser = (Member) session.getAttribute("loginUser");
 		if (loginUser == null) throw new MypageException(BaseExceptionResponseStatus.NEED_LOGIN);

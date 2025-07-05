@@ -12,7 +12,7 @@
 				<h2 class="dash-card__title">Match Up</h2>
 			</header>
 			<div class="dash-card__body">
-				<ul class="dash-list">
+				<ul id="dashMyMatchupList" class="dash-list">
 					<li class="dash-list__item">
 						<img src="${cpath}/resources/images/mypage/dash-board/avatar-man-010.svg" alt="Avatar" class="dash-list__avatar">
 						<div class="dash-list__details">
@@ -70,7 +70,7 @@
 				<h2 class="dash-card__title">Mentos</h2>
 			</header>
 			<div class="dash-card__body">
-				<ul class="dash-list">
+				<ul id="dashMyMentosList" class="dash-list">
 					<li class="dash-list__item">
 						<img src="${cpath}/resources/images/mypage/dash-board/avatar-man-010.svg" alt="Avatar" class="dash-list__avatar">
 						<div class="dash-list__details">

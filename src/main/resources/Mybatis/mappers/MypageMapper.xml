@@ -209,7 +209,7 @@
 			select
 				leader.member_id as leaderId,
 				leader.profile_image_url as leaderProfileImageUrl,
-				match.title as title,,
+				match.title as title,
 				match.count as totalCount,
 				match.matchup_count as currentCount,
 				match.status as matchStatus,

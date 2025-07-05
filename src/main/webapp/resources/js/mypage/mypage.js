@@ -53,4 +53,15 @@ window.onpopstate = function () {
   });
 };
 
-
+function imgUrl(imgtag, srcUrl) {
+  if (srcUrl) {
+    if (srcUrl[0] == '/') {
+      imgtag.src = '/mememto' + srcUrl
+    } else {
+      imgtag.src = srcUrl
+    }
+  } else {
+    imgtag.src = '/memento/resources/images/logo.png'
+    imgtag.style.background = 'white';
+  }
+}
