@@ -22,6 +22,7 @@ import com.shinhan.memento.common.response.BaseResponse;
 import com.shinhan.memento.common.response.status.BaseExceptionResponseStatus;
 import com.shinhan.memento.dto.ConfirmCashRequestDTO;
 import com.shinhan.memento.dto.ConfirmCashResponseDTO;
+import com.shinhan.memento.dto.MyDashboardResponseDTO;
 import com.shinhan.memento.dto.MyMatchupListResponseDTO;
 import com.shinhan.memento.dto.MyMentosListResponseDTO;
 import com.shinhan.memento.dto.MyProfileInfoResponseDTO;
@@ -156,6 +157,16 @@ public class MyPageApiController {
 		List<PaymentDetailResponseDTO> paymentDetailList = myPageService.selectPaymentDetail(orderId);
 		
 		return new BaseResponse<>(paymentDetailList);
-
+	}
+	
+	@GetMapping(value="/dashboard-select", produces = "application/json")
+	public BaseResponse<MyDashboardResponseDTO> selectMyDashboardData(HttpSession session){
+		Member loginUser = (Member) session.getAttribute("loginUser");
+		if (loginUser == null) throw new MypageException(BaseExceptionResponseStatus.NEED_LOGIN);
+		Integer memberId = loginUser.getMemberId();
+		
+		MyDashboardResponseDTO dashboardResponseDTO = myPageService.selectDataByDashboard(memberId);
+		
+		return new BaseResponse<MyDashboardResponseDTO>(dashboardResponseDTO);
 	}
 }

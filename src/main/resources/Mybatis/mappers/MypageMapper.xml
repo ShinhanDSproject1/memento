@@ -241,5 +241,14 @@
 		    )
 		WHERE ROWNUM <![CDATA[<=]]> 3
 	</select>
+	
+	<select id="myMatchTypeByDashboard" parameterType="int" resultType="com.shinhan.memento.dto.MyMatchTypeByDashboardResponseDTO">
+		select 
+			mt.MATCH_TYPE_NAME as matchTypeName,
+			mt.MATCH_TYPE_IMG as matchTypeImg
+		from member m
+			left join match_type mt on m.match_type_id = mt.MATCH_TYPE_ID
+		where m.member_id = #{memberId}
+	</select>
 
 </mapper>

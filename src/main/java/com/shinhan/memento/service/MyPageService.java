@@ -36,8 +36,10 @@ import com.shinhan.memento.dao.MyPageDAO;
 import com.shinhan.memento.dto.ConfirmCashRequestDTO;
 import com.shinhan.memento.dto.ConfirmCashResponseDTO;
 import com.shinhan.memento.dto.InterestDTO;
+import com.shinhan.memento.dto.MyDashboardResponseDTO;
 import com.shinhan.memento.dto.MyJoinMatchupByDashboardResponseDTO;
 import com.shinhan.memento.dto.MyJoinMentosByDashboardResponseDTO;
+import com.shinhan.memento.dto.MyMatchTypeByDashboardResponseDTO;
 import com.shinhan.memento.dto.MyMatchupListResponseDTO;
 import com.shinhan.memento.dto.MyMentosListResponseDTO;
 import com.shinhan.memento.dto.MyPaymentListResponseDTO;
@@ -429,7 +431,7 @@ public class MyPageService {
 		return selectPaymentDetailList;
 	}
 	
-	public void selectDataByDashboard(Integer memberId) {
+	public MyDashboardResponseDTO selectDataByDashboard(Integer memberId) {
 		//매치업	
 		List<Map<String, Object>> matchUpData = mypageMapper.myJoinMatchupByDashboard(memberId);
 		List<MyJoinMatchupByDashboardResponseDTO> myMatchupDTOList = new ArrayList<>();
@@ -466,7 +468,15 @@ public class MyPageService {
 		});
 		
 		//matchType 스파크
+		MyMatchTypeByDashboardResponseDTO myMatchTypeData = mypageMapper.myMatchTypeByDashboard(memberId);
+	
+		MyDashboardResponseDTO dashboardData = MyDashboardResponseDTO.builder()
+				.myMatchupDashboardList(myMatchupDTOList)
+				.myMentosDashboardList(myMentosDTOList)
+				.myMatchTypeData(myMatchTypeData)
+				.build();
 		
+		return dashboardData;
 	}
 	
 
