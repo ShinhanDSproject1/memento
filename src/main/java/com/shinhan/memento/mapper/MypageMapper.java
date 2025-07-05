@@ -15,4 +15,6 @@ public interface MypageMapper {
 	public abstract int updateMyTypeByMemberId(@Param("matchTypeId") int matchTypeId, @Param("memberId") int memberId);
 	public abstract List<Map<String, Object>> selectMyProfileInfo(Integer memberId);
 	public abstract int updateProfileInfo(MyProfileDBUpdateDTO dto);
+	public abstract List<Map<String, Object>> myJoinMatchupByDashboard(@Param("memberId") Integer memberId);
+	public abstract List<Map<String, Object>> myJoinMentosByDashboard(@Param("memberId") Integer memberId);
 }

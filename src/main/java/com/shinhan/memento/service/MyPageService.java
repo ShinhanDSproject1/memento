@@ -36,6 +36,8 @@ import com.shinhan.memento.dao.MyPageDAO;
 import com.shinhan.memento.dto.ConfirmCashRequestDTO;
 import com.shinhan.memento.dto.ConfirmCashResponseDTO;
 import com.shinhan.memento.dto.InterestDTO;
+import com.shinhan.memento.dto.MyJoinMatchupByDashboardResponseDTO;
+import com.shinhan.memento.dto.MyJoinMentosByDashboardResponseDTO;
 import com.shinhan.memento.dto.MyMatchupListResponseDTO;
 import com.shinhan.memento.dto.MyMentosListResponseDTO;
 import com.shinhan.memento.dto.MyPaymentListResponseDTO;
@@ -426,5 +428,46 @@ public class MyPageService {
 
 		return selectPaymentDetailList;
 	}
+	
+	public void selectDataByDashboard(Integer memberId) {
+		//매치업	
+		List<Map<String, Object>> matchUpData = mypageMapper.myJoinMatchupByDashboard(memberId);
+		List<MyJoinMatchupByDashboardResponseDTO> myMatchupDTOList = new ArrayList<>();
+		
+		matchUpData.stream().forEach(data -> {
+			String role = ((BigDecimal)data.get("LEADERID")).intValue() == memberId ? "Leader":"follower";
+			MyJoinMatchupByDashboardResponseDTO dto = MyJoinMatchupByDashboardResponseDTO.builder()
+					.leaderProfileImageUrl((String)data.get("LEADERPROFILEIMAGEURL"))
+					.title((String)data.get("TITLE"))
+					.role(role)
+					.totalCount(((BigDecimal)data.get("TOTALCOUNT")).intValue())
+					.currentCount(((BigDecimal)data.get("CURRENTCOUNT")).intValue())
+					.matchStatus((String)data.get("MATCHSTATUS"))
+					.hasMento((Boolean)data.get("hasMento"))
+					.build();
+			
+			myMatchupDTOList.add(dto);
+		});
+		
+		//멘토스
+		List<Map<String, Object>> mentosData = mypageMapper.myJoinMentosByDashboard(memberId);
+		List<MyJoinMentosByDashboardResponseDTO> myMentosDTOList = new ArrayList<>();
+		
+		mentosData.stream().forEach(data -> {
+			String mentoNickname = ((BigDecimal)data.get("MENTOID")).intValue() == memberId ? "Mentor": (String)data.get("MENTONICKNAME");
+			MyJoinMentosByDashboardResponseDTO dto = MyJoinMentosByDashboardResponseDTO.builder()
+					.mentosTitle((String)data.get("MENTOSTITLE"))
+					.mentosImage((String)data.get("MENTOSIMAGE"))
+					.mentoNickname(mentoNickname)
+					.mentosStatus((String)data.get("MENTOSSTATUS"))
+					.build();
+			
+			myMentosDTOList.add(dto);
+		});
+		
+		//matchType 스파크
+		
+	}
+	
 
 }
