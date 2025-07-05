@@ -144,7 +144,7 @@ public class MatchupController {
    public BaseResponse<String> deleteMatchup(@RequestParam("matchupId") int matchupId,
                                              @RequestParam("leaderId") int leaderId) {
        try {
-           int result = matchupService.inactivateMatchup(matchupId, leaderId);
+           int result = matchupService.deleteMatchup(matchupId, leaderId);
 
            if (result > 0) {
                return new BaseResponse<>(BaseExceptionResponseStatus.SUCCESS, result + "건이 비활성화되었습니다.");
@@ -213,9 +213,16 @@ public class MatchupController {
    /* 매치업 신규 작성하기 */
    @PostMapping("/postCreateMatchup")
    @ResponseBody
-   public BaseResponse<String> createMatchup(@RequestBody MatchupCreateDTO dto) {
-       System.out.println("Received DTO via JSON: " + dto);
-       try {
+   public BaseResponse<String> createMatchup(@RequestBody MatchupCreateDTO dto, HttpSession session) {
+	   try {
+           Member loginUser = (Member) session.getAttribute("loginUser");
+
+           if (loginUser == null) {
+               return new BaseResponse<>(BaseExceptionResponseStatus.FAILURE, "매치업을 생성하려면 로그인이 필요합니다.");
+           }
+
+           dto.setLeaderId(loginUser.getMemberId());
+
            int result = matchupService.createMatchup(dto);
            if (result > 0) {
                return new BaseResponse<>(BaseExceptionResponseStatus.SUCCESS, "매치업이 성공적으로 생성되었습니다.");
