@@ -1,4 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <c:set var="cpath" value="${pageContext.servletContext.contextPath}" />
 <!DOCTYPE html>
@@ -14,7 +15,7 @@
 </head>
 <link
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
-	rel="stylesheet"/>
+	rel="stylesheet" />
 
 
 <body>
@@ -65,7 +66,7 @@
 							<div class="two-button">
 								<label class="class-apply-btn-wrap">
 									<div class="class-apply-btn"
-										onclick="location.href='${cpath}/mentos/edit'">수정하기</div>
+										onclick="location.href='${cpath}/mentos/edit?mentosId=${mentos.mentosId}'">수정하기</div>
 								</label>
 								<!-- 1. 체크박스 -->
 								<input type="checkbox" id="popupTrigger" style="display: none;" />
