@@ -6,7 +6,7 @@ $(document).ready(() => {
   loadMoreData();
 
   $(window).on('scroll', function () {
-    if ($(window).scrollTop() + $(window).height() >= $(document).height() - 100) {
+    if ($(window).scrollTop() + $(window).height() >= $(document).height() - 900) {
       loadMoreData();
     }
   });
@@ -26,7 +26,7 @@ function loadMoreData() {
     method: "GET",
     data: {
       mentoId: getMentoId(),
-      lastCreatedAt: lastCreatedAt 
+      lastCreatedAt: null 
     },
 
     dataType: "json",

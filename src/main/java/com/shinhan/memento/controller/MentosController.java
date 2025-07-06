@@ -24,6 +24,7 @@ import com.shinhan.memento.service.MemberService;
 import com.shinhan.memento.service.MentosService;
 
 import lombok.extern.slf4j.Slf4j;
+
 @Slf4j
 @Controller
 @RequestMapping("/mentos")
@@ -31,7 +32,7 @@ public class MentosController {
 
 	@Autowired
 	MentosService mentosService;
-	
+
 	@Autowired
 	MemberService memberService;
 
@@ -45,6 +46,9 @@ public class MentosController {
 		return "mentos/mentosDetail";
 	}
 
+	/*
+	 * 멘토스 생성하기
+	 */
 	@RequestMapping("/create")
 	public String mentosInsert(Model model) {
 		List<LanguageDTO> languages = mentosService.getAllLanguages();
@@ -67,17 +71,24 @@ public class MentosController {
 		return "mentos/mentosMentoDetail";
 	}
 
+	/*
+	 * 멘토 페이지-멘토스 리뷰보기
+	 */
 	@RequestMapping("/mentodetailreview")
-	public String mentosMentoDetailReview() {
-		return "mentos/mentosMentoDetailReview";
+	public String mentosMentoDetailReview(@RequestParam("mentoId") int mentoId, Model model) {
+		log.info("[MentoDetailViewController.showMentoDetailClassListPage]");
+		model.addAttribute("mentoId", mentoId);  
+	    return "mentos/mentosMentoDetailReview";
 	}
 
+	/*
+	 * 멘토 페이지-진행한 멘토스 리스트
+	 */
 	@RequestMapping("/mentodetaillist")
 	public String showMentoDetailClassListPage(@RequestParam("mentoId") int mentoId, Model model) {
 		log.info("[MentoDetailViewController.showMentoDetailClassListPage]");
-
-		model.addAttribute("memberId", mentoId);
-		return "mentos/mentosMentoDetailClassList"; // → JSP 페이지 경로
+		model.addAttribute("mentoId", mentoId);
+		return "mentos/mentosMentoDetailClassList";
 	}
 
 }

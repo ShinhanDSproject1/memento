@@ -8,6 +8,8 @@
 </script>
 <link rel="stylesheet"
 	href="${cpath}/resources/css/mentos/MentosSidebar.css" />
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+	<script	src="${pageContext.request.contextPath}/resources/js/mentos/mentosSidebar.js"></script>
 <aside class="sidebar">
 	<div class="profile-section">
 		<div class="profile-card">
@@ -38,20 +40,20 @@
 			</div>
 		</div>
 	</div>
-	<nav class="sidebar-nav">
-		<ul class="nav-menu">
-			<li class="nav-item">
-				<button data-url="${cpath}/memento/mentos/mentodetail"
-					class="page-link">홈</button>
-			</li>
-			<li class="nav-item">
-				<button data-url="${cpath}/memento/mentos/mentodetailclasslist"
-					class="page-link">진행한 멘토스 내역</button>
-			</li>
-			<li class="nav-item">
-				<button data-url="${cpath}/memento/mentos/mentodetailreview"
-					class="page-link">리뷰</button>
-			</li>
-		</ul>
-	</nav>
+	<ul class="nav-menu">
+		<li class="nav-item">
+			<button type="button"  class="page-link dynamic-link"
+				data-url-template="${cpath}/mentos/mentodetail?mentoId=">홈</button>
+		</li>
+		<li class="nav-item">
+			<button type="button" class="page-link dynamic-link"
+				data-url-template="${cpath}/mentos/mentodetaillist?mentoId=">진행한
+				멘토스 내역</button>
+		</li>
+		<li class="nav-item">
+			<button type="button" class="page-link dynamic-link"
+				data-url-template="${cpath}/mentos/mentodetailreview?mentoId=">리뷰</button>
+		</li>
+	</ul>
+
 </aside>
