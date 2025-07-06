@@ -9,6 +9,7 @@ import lombok.Getter;
 public class MyPaymentListResponseDTO {
 	private String orderId;
 	private Integer amount;
+	private String payType;
 	private Integer matchupId;
 	private Integer mentosId;
 	private Integer keepgoingId;
