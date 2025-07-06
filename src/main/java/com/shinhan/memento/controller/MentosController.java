@@ -40,8 +40,6 @@ public class MentosController {
 	@Autowired
 	MemberService memberService;
 
-	@Autowired
-	MemberService memberService;
 
 	@RequestMapping("/full")
 	public String mentosAllView() {
