@@ -117,7 +117,6 @@ $(document).ready(function () {
 		const regionGroup = spaceIndex !== -1 ? fullAddress.substring(0, spaceIndex) : fullAddress;
 		const regionSubgroup = spaceIndex !== -1 ? fullAddress.substring(spaceIndex + 1).trim() : "";
 		
-		
 		const data = {
 		  title: $("#title").val(),
 		  simpleContent: $("#simpleContent").val(),
