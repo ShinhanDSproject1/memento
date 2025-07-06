@@ -343,7 +343,8 @@ body {
 
 /* --- ✨ [수정된 부분 시작] --- */
 
-/* 네모난 상자를 투명하게 만들어 원형 디자인만 보이도록 합니다. */
+/* --- ✨ [수정/추가할 CSS 시작] --- */
+
 .type-item-box {
 	border: none;
 	background-color: transparent;
@@ -355,42 +356,45 @@ body {
 	justify-content: center;
 }
 
-/* 원형 디자인을 새롭게 정의합니다. */
 .type-circle {
-	width: 160px;
-	height: 160px;
-	border-radius: 50%;
-	background-color:#F5FFFF;
-	border: 1px #F5FFFF;
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-	justify-content: center;
-	gap: 8px; /* 아이콘과 텍스트 사이 간격 */
-	flex-shrink: 0;
+    width: 160px;
+    height: 160px;
+    border-radius: 50%;
+    background-color: #F5FFFF;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid #d0f0f7;
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.08);
+    gap: 10px; /* 이미지와 텍스트 사이 간격 */
+    padding: 10px; /* 내용물이 원 밖으로 나가지 않도록 여백 추가 */
+    text-align: center;
 }
 
-/* 아이콘과 텍스트의 위치를 flexbox에 맞게 조정합니다. */
-.ellipse-icon {
-	width: 45px;
-	height: 45px;
-	position: static;
-	transform: none;
+/* 새로 추가한 캐릭터 이미지 스타일 */
+.type-image {
+    width: 80px;  /* 이미지 크기는 필요에 맞게 조정하세요 */
+    height: 80px; /* 이미지 크기는 필요에 맞게 조정하세요 */
+    object-fit: contain; /* 이미지가 찌그러지지 않게 비율 유지 */
+}
+
+/* 해당하는 타입이 없을 때 보여줄 기본 이모지 스타일 */
+.type-emoji {
+    font-size: 40px; /* 이모지 크기 */
+    line-height: 1;
 }
 
 .type-text {
 	color: #333333;
-	text-align: center;
 	font-family: "Inter-Medium", sans-serif;
 	font-size: 16px;
 	font-weight: 500;
-	position: static;
-	width: auto;
-	max-width: 120px;
-	word-break: keep-all;
+	word-break: keep-all; /* 단어가 잘리지 않게 함 */
 	line-height: 1.4;
 }
 
+/* --- ✨ [수정/추가할 CSS 끝] --- */
 /* --- ✨ [수정된 부분 끝] --- */
 
 .middle-area-right {
@@ -934,12 +938,15 @@ body {
     font-weight: 500;
     color: #333;
     text-align: left;
+    
+    
 }	
 .section-title {
-	font-size: 18px;
+	font-size: 24px;
     font-weight: 700;
+    margin-bottom: 20px;
+    display: block;
     color: #333;
-    text-align: left;
 }
 
 .frame-3770 {
