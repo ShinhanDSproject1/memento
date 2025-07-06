@@ -37,4 +37,6 @@ public interface MentosMapper {
 	List<Mentos> showMentosListByMentoId(Map<String, Object> mentosParams);
 
 	List<Mentos> findSimilarMentosList(Map<String, Object> similarParams);
+	
+	int checkPermission(Map<String, Object> checkParams);
 }

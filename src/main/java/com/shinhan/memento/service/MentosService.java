@@ -339,7 +339,7 @@ public class MentosService {
 					.price(similar.getPrice()).image(similar.getImage()).simpleContent(similar.getSimpleContent())
 					.categoryName(similarCategoryName).languageName(similarLanguageName).remainSeat(remainSeat)
 					.regionSubGroup(similar.getRegionSubgroup()).build();
-			
+
 			similarMentosList.add(result);
 		}
 
@@ -358,5 +358,18 @@ public class MentosService {
 				.similarMentosList(similarMentosList).isFavorite(isFavorite).build();
 
 		return dto;
+	}
+
+	/**
+	 * 프론트 페이지 리다이렉트를 위해서 해당 멘토스에 대한 접속 유저의 권한 확인
+	 */
+	public boolean checkPermission(Member member, int mentosId) {
+		log.info("[MentosService.checkPermission]");
+		// usertype 확인할 필요없음! 어차피 컨트롤러에서 확인해서 멘토인애들만 보냄
+		Map<String, Object> checkParams = new HashMap<>();
+		checkParams.put("memberId", member.getMemberId());
+		checkParams.put("mentosId", mentosId);
+
+		return mentosMapper.checkPermission(checkParams) == 1 ? true : false;
 	}
 }

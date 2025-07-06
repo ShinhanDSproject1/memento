@@ -176,5 +176,15 @@
 	  	)
 	  	where rownum &lt; =3
   	</select>
+  	
+  	<select id="checkPermission" parameterType="map" resultType="Integer">
+  		select *
+  		from mentos
+  		where mentos_id=#{mentosId}
+  		and mento_id=#{memberId}
+  		and status='ACTIVE'
+  	</select>
+  	
+  	
 </mapper>
 
