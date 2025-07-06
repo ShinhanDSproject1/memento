@@ -32,7 +32,7 @@ $(() => {
 
 				// 멘토링 이미지
 				const img = document.createElement('img');
-				imgUrl(img, matchup.mentos.mentosImg)
+				imgUrl(img, mentos.mentosImg)
 				img.alt = mentos.mentosTitle;
 				img.className = 'mentor-card__image';
 

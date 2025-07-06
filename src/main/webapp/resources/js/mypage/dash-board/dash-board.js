@@ -32,11 +32,91 @@ $(document).ready(function () {
         itemLi.className = 'dash-list__item'
         const matchupImg = document.createElement('img')
         imgUrl(matchupImg, item.leaderProfileImageUrl)
+        const myMatchupDetails = document.createElement('div')
+        myMatchupDetails.className = 'dash-list__details'
+        const myMatchupTitle = document.createElement('span')
+        myMatchupTitle.className = 'dash-list__title-text'
+        myMatchupTitle.textContent = `${item.title}`
+        const myMatchupMeta = document.createElement('div')
+        myMatchupMeta.className = 'dash-list__meta'
+        const calendarIcon = document.createElement('img')
+        calendarIcon.src = '/memento/resources/images/mypage/dash-board/icon-time-calendar-010.svg'
+        calendarIcon.alt = 'Calendar'
+        calendarIcon.className = "dash-list__icon"
+        const myMatchupCountList = document.createElement('span')
+        let myMatchupStatus
+        if (item.matchStatus == 'ACTIVE') {
+          myMatchupStatus = '진행 중'
+        }
+        else {
+          myMatchupStatus = '수료'
+        }
+        myMatchupCountList.className = 'dash-list__meta-text'
+        myMatchupCountList.textContent = `${item.currentCount} / ${item.totalCount}회 ` + myMatchupStatus
 
+        const roleSpan = document.createElement('span')
+        roleSpan.className = 'dash-list__status'
+        roleSpan.textContent = `(${item.role})`
+
+        const hasMentoIcon = document.createElement('img')
+        hasMentoIcon.src = item.hasMento == true ? '/memento/resources/images/mypage/dash-board/yes-mento.svg' : '/memento/resources/images/mypage/dash-board/no-mento.svg'
+        hasMentoIcon.alt = item.hasMento == true ? 'Yes Mento' : 'No Mento'
+
+        myMatchupMeta.append(calendarIcon, myMatchupCountList)
+        myMatchupDetails.append(myMatchupTitle, myMatchupMeta)
+        itemLi.append(matchupImg, myMatchupDetails, roleSpan, hasMentoIcon)
+        dashMyMatchupList.appendChild(itemLi)
       });
 
       const dashMyMentosList = document.getElementById('dashMyMentosList')
       dashMyMentosList.innerHTML = ''
+      dashboardData.myMentosDashboardList.forEach(item => {
+        const myMentosItem = document.createElement('li')
+        myMentosItem.className = 'dash-list__item'
+        const myMentosImg = document.createElement('img')
+        myMentosImg.className = 'dash-list__avatar'
+        imgUrl(myMentosImg, item.mentosImage)
+        const myMentosDetails = document.createElement('div')
+        myMentosDetails.className = 'dash-list__details'
+        const myMentosTitleSpan = document.createElement('span')
+        myMentosTitleSpan.className = 'dash-list__title-text'
+        myMentosTitleSpan.textContent = `${item.mentosTitle}`
+        const myMentosMeta = document.createElement('div')
+        myMentosMeta.className = 'dash-list__meta'
+        const isMento = document.createElement('img')
+        isMento.className = 'dash-list__icon"'
+        isMento.src = item.mentoNickname == 'Mentor' ? '/memento/resources/images/dash-board/icon-fill-type-439.svg' : '/memento/resources/images/mypage/dash-board/icon-maps-compass0.svg'
+        isMento.alt = item.mentoNickname == 'Mentor' ? 'Mentor Icon' : 'Mentor'
+        const mentoNickname = document.createElement('span')
+        const statusSpan = document.createElement('span')
+        mentoNickname.className = 'dash-list__meta-text'
+        if (item.mentoNickname == 'Mentor') {
+          mentoNickname.className += 'dash-list__meta-text--mentor'
+          mentoNickname.textContent = 'Mentor'
+          if (item.mentosStatus) {
+            statusSpan.className = 'dash-list__status dash-list__status--in-progress'
+            statusSpan.textContent = '현재 진행중'
+          } else {
+            statusSpan.textContent = '종료'
+          }
+        }
+        else {
+          mentoNickname.textContent = `${item.mentoNickname}`
+          if (item.mentosStatus) {
+            statusSpan.className = 'dash-list__status dash-list__status--enrolled'
+            statusSpan.textContent = '수강중'
+          } else {
+            statusSpan.textContent = '수료'
+          }
+        }
+        myMentosMeta.append(isMento, mentoNickname)
+        myMentosDetails.append(myMentosTitleSpan, myMentosMeta)
+        myMentosItem.append(myMentosImg, myMentosDetails, statusSpan)
+        dashMyMentosList.appendChild(myMentosItem)
+      })
+
+      const myStudyTypeName = document.getElementById('myStudyTypeName')
+      myStudyTypeName.textContent = `${dashboardData.myMatchTypeData.matchTypeName}`
 
     } catch (error) {
       console.log(error)

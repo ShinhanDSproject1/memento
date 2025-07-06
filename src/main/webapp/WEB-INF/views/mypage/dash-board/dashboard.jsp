@@ -163,7 +163,7 @@
 				<h2 class="dash-card__title">Spark Test</h2>
 			</header>
 			<div class="dash-card__body dash-card__body--centered">
-				<h3 class="spark-test__title">목표러 코취치</h3>
+				<h3 id="myStudyTypeName" class="spark-test__title">목표러 코취치</h3>
 				<p class="spark-test__subtitle">(목표지향 개발자)</p>
 			</div>
 		</article>

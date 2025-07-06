@@ -60,6 +60,7 @@ import com.shinhan.memento.model.PayType;
 import com.shinhan.memento.model.Payment;
 import com.shinhan.memento.model.Payment_Step;
 import com.shinhan.memento.model.SparkTestType;
+
 import org.springframework.beans.factory.annotation.Value;
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
@@ -438,6 +439,15 @@ public class MyPageService {
 		
 		matchUpData.stream().forEach(data -> {
 			String role = ((BigDecimal)data.get("LEADERID")).intValue() == memberId ? "Leader":"follower";
+			Boolean hasmento = false;
+			Object hasMentoValue = data.get("HASMENTO");
+
+			// 값이 null이 아니고, 숫자(Number) 타입인지 확인합니다.
+			if (hasMentoValue instanceof Number) {
+			    // Number 타입의 값을 int로 변환하여 1과 같은지 비교합니다.
+			    // 1이면 true, 그 외의 숫자(0 등)는 false가 됩니다.
+			    hasmento = ((Number) hasMentoValue).intValue() == 1;
+			}
 			MyJoinMatchupByDashboardResponseDTO dto = MyJoinMatchupByDashboardResponseDTO.builder()
 					.leaderProfileImageUrl((String)data.get("LEADERPROFILEIMAGEURL"))
 					.title((String)data.get("TITLE"))
@@ -445,7 +455,7 @@ public class MyPageService {
 					.totalCount(((BigDecimal)data.get("TOTALCOUNT")).intValue())
 					.currentCount(((BigDecimal)data.get("CURRENTCOUNT")).intValue())
 					.matchStatus((String)data.get("MATCHSTATUS"))
-					.hasMento((Boolean)data.get("hasMento"))
+					.hasMento(hasmento)
 					.build();
 			
 			myMatchupDTOList.add(dto);

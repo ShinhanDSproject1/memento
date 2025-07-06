@@ -56,7 +56,7 @@ window.onpopstate = function () {
 function imgUrl(imgtag, srcUrl) {
   if (srcUrl) {
     if (srcUrl[0] == '/') {
-      imgtag.src = '/mememto' + srcUrl
+      imgtag.src = '/mememto' + `${srcUrl}`
     } else {
       imgtag.src = srcUrl
     }

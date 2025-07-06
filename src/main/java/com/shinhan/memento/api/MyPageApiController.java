@@ -163,8 +163,8 @@ public class MyPageApiController {
 	public BaseResponse<MyDashboardResponseDTO> selectMyDashboardData(HttpSession session){
 		Member loginUser = (Member) session.getAttribute("loginUser");
 		if (loginUser == null) throw new MypageException(BaseExceptionResponseStatus.NEED_LOGIN);
-		Integer memberId = loginUser.getMemberId();
-		
+		//Integer memberId = loginUser.getMemberId();
+		Integer memberId = 2;
 		MyDashboardResponseDTO dashboardResponseDTO = myPageService.selectDataByDashboard(memberId);
 		
 		return new BaseResponse<MyDashboardResponseDTO>(dashboardResponseDTO);
