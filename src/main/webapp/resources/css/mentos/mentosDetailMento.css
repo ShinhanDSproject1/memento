@@ -4,6 +4,7 @@ body {
 	font-family: "Noto Sans", sans-serif;
 	padding-bottom: 30px;
 }
+
 html, body {
 	margin: 0;
 	padding: 0;
@@ -297,6 +298,9 @@ html, body {
 	align-items: center;
 	justify-content: center;
 	box-sizing: border-box;
+	font-family: "D2Coding-Bold", sans-serif;
+	text-align: center;
+	font-size: 1vw; 
 }
 
 .partner-name {
@@ -304,7 +308,6 @@ html, body {
 	font-size: 1vw; /* 반응형 글씨 */
 	font-family: "D2Coding-Bold", sans-serif;
 	font-weight: 500;
-	text-align: center;
 	line-height: 1.35;
 	letter-spacing: -0.03vw;
 	word-break: keep-all;
@@ -416,7 +419,6 @@ html, body {
 .location-label {
 	font-size: 1vw;
 	font-family: "D2Coding-Bold", sans-serif;
-	padding: 6vw;
 }
 
 .class-mentor-section {
@@ -747,9 +749,17 @@ keyframes heart-pop { 0% {
 
 
 
+
+
+
+
 %
 {
 transform
+
+
+
+
 
 
 
@@ -799,7 +809,15 @@ transform
 
 
 
+
+
+
+
 scale
+
+
+
+
 
 
 
@@ -847,7 +865,15 @@ scale
 
 
 
+
+
+
+
 1
+
+
+
+
 
 
 
@@ -895,7 +921,15 @@ scale
 
 
 
+
+
+
+
 )
+
+
+
+
 
 
 
@@ -944,6 +978,10 @@ opacity
 
 
 
+
+
+
+
 :
 
 
@@ -969,7 +1007,15 @@ opacity
 
 
 
+
+
+
+
 1
+
+
+
+
 
 
 
@@ -1019,9 +1065,17 @@ opacity
 
 
 
+
+
+
+
 %
 {
 transform
+
+
+
+
 
 
 
@@ -1071,6 +1125,10 @@ transform
 
 
 
+
+
+
+
 scale
 
 
@@ -1094,7 +1152,15 @@ scale
 
 
 
+
+
+
+
 (
+
+
+
+
 
 
 
@@ -1144,7 +1210,15 @@ scale
 
 
 
+
+
+
+
 )
+
+
+
+
 
 
 
@@ -1193,6 +1267,10 @@ opacity
 
 
 
+
+
+
+
 :
 
 
@@ -1218,7 +1296,15 @@ opacity
 
 
 
+
+
+
+
 1
+
+
+
+
 
 
 
@@ -2151,7 +2237,7 @@ opacity
 	margin-bottom: 20px;
 }
 
-.modal-title {
+.custom-modal-title {
 	font-size: 20px;
 	font-weight: 700;
 	margin-bottom: 30px;
@@ -2183,4 +2269,126 @@ opacity
 .confirm-btn {
 	background-color: #e85757;
 	color: white;
+}
+
+.similar-mentos-wrapper {
+  margin-top: 40px;
+  padding: 0 20px;
+}
+
+.similar-mentos-wrapper .section-title {
+  font-size: 20px;
+  font-weight: 600;
+  margin-bottom: 20px;
+  color: #222;
+  margin-left :70px;
+}
+
+/* 카드 리스트 영역: 가로 정렬, 줄바꿈 허용 */
+.mentos-card-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: flex-start;
+}
+
+/* 각 카드 */
+.mentos-card {
+  width: 280px;
+  border: 1px solid #e0e0e0;
+  border-radius: 12px;
+  overflow: hidden;
+  background-color: #fff;
+  cursor: pointer;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.06);
+  transition: transform 0.2s ease;
+}
+
+.mentos-card:hover {
+  transform: translateY(-4px);
+}
+
+/* 카드 상단 이미지 */
+.mentos-card .mentos-image {
+  width: 100%;
+  height: 160px;
+  object-fit: cover;
+}
+
+/* 콘텐츠 영역 */
+.mentos-card .mentos-content {
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.mentos-title {
+  font-size: 16px;
+  font-weight: bold;
+  color: #333;
+}
+
+.mentos-mento-info {
+  font-size: 14px;
+  color: #666;
+}
+
+.user-type {
+  margin-left: 6px;
+  color: #888;
+  font-size: 13px;
+}
+
+.mentos-schedule {
+  font-size: 13px;
+  color: #555;
+  line-height: 1.4;
+}
+
+.mentos-tags {
+  margin-top: 6px;
+}
+
+.mentos-tags .tag {
+  display: inline-block;
+  background: #f2f2f2;
+  color: #444;
+  border-radius: 12px;
+  padding: 2px 8px;
+  font-size: 12px;
+  margin-right: 5px;
+}
+
+.mentos-summary {
+  font-size: 13px;
+  color: #444;
+}
+
+.mentos-bottom {
+  margin-top: 10px;
+  display: flex;
+  justify-content: space-between;
+  font-size: 14px;
+  font-weight: bold;
+  color: #2c3e50;
+}
+
+.mentos-bottom .price {
+  color: #0069f8;
+}
+
+.mentos-bottom .remain-seat {
+  color: #c0392b;
+}
+@media (max-width: 768px) {
+  .mentos-card-list {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .mentos-card {
+    width: 100%;
+    max-width: 400px;
+  }
 }

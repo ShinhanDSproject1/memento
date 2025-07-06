@@ -6,7 +6,7 @@
 		<div style="text-align: center;">
 			<img src="${pageContext.request.contextPath}/resources/images/delete-icon.svg" width="36" />
 		</div>
-		<div class="modal-title">정말로 삭제하시겠어요?</div>
+		<div class="custom-modal-title">정말로 삭제하시겠어요?</div>
 		<div class="modal-buttons">
 			<button class="cancel-btn" onclick="hideDeleteConfirmModal()">취소</button>
 			

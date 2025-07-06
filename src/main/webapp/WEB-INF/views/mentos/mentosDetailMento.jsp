@@ -17,6 +17,8 @@
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
 	rel="stylesheet" />
 <jsp:include page="/WEB-INF/views/mentos/deletePopup.jsp" />
+<script type="text/javascript"
+	src="//dapi.kakao.com/v2/maps/sdk.js?appkey=508d0978b8a40544a729f282b6187bd0&libraries=services&autoload=false"></script>
 <body>
 	<%@ include file="../common/logout_header.jsp"%>
 	<%@ include file="../mainpage/notificationModal.jsp"%>
@@ -77,57 +79,29 @@
 				<div class="class-detail-content">
 					<!-- 태그/주제 영역 -->
 					<div class="class-meta-section">
-
 						<!-- 강의 소개/개요 -->
-						<div class="class-summary-section">
-							<div class="class-summary-text">
-								<span class="summary-main"> 입문자를 위해 준비한<br /> [데브옵스 ·
-									인프라, 백엔드] 강의입니다.
-								</span>
-							</div>
-							<!-- 커리큘럼 소개 -->
-							<div class="class-curriculum">
-								<div class="class-list-title">🔥이런 걸 배울 수 있어요</div>
-								<ul class="class-list">
-									<li>EC2를 활용한 백엔드 API 서버 배포</li>
-									<li>Route53을 활용한 도메인 연결</li>
-									<li>ELB를 활용한 HTTPS 적용</li>
-									<li>RDS를 활용한 데이터베이스 연결</li>
-									<li>S3를 활용한 파일 및 이미지 업로드</li>
-									<li>S3, CloudFront를 활용한 웹 페이지 배포</li>
-								</ul>
-							</div>
-							<div class="class-curriculum">
-								<div class="class-list-title">✨ 강의를 만들면서 신경 쓴 4가지 Point</div>
-								<ul class="class-list">
-									<li>비전공자도 이해할 수 있도록 AWS를 쉽게 설명하려고 했다.</li>
-									<li>실무에 바로 쓸 수 있는 실전 위주 강의를 만들려고 했다.</li>
-									<li>현업에서 자주 사용하는 AWS 서비스만 선별해서 목차를 구성했다.</li>
-									<li>AWS의 전체 구조와 아키텍처 이해도를 포함하여 설명한다.</li>
-								</ul>
-							</div>
-						</div>
+						<div class="class-summary-section"></div>
 						<!-- 함께하고 싶은 유형 -->
 						<div class="class-partner-section">
 							<div class="class-list-title">✋이런 분들과 함께하고 싶어요</div>
 							<div class="partner-list">
 								<div class="partner-card">
 									<div class="partner-circle">
-										<div class="partner-name">
+										<div class="partner-name1">
 											🔥<br />코드폭탄<br />해피빈
 										</div>
 									</div>
 								</div>
 								<div class="partner-card">
 									<div class="partner-circle">
-										<div class="partner-name">
+										<div class="partner-name2">
 											🔥<br />코드폭탄<br />해피빈
 										</div>
 									</div>
 								</div>
 								<div class="partner-card">
 									<div class="partner-circle">
-										<div class="partner-name">
+										<div class="partner-name3">
 											🔥<br />코드폭탄<br />해피빈
 										</div>
 									</div>
@@ -149,11 +123,14 @@
 									<div class="location-address">서울 마포구 월드컵북로2길 57 1층</div>
 								</div>
 								<div class="mentos-class-image-frame">
-									<div class="location-label"></div>
+									<div class="location-label">
+										<div id="mentosMap" style="width: 100%; height: 200px;"></div>
+									</div>
 								</div>
 							</div>
+							<!--누르면 멘토 상세페이지로 이동 -->
 							<div class="class-mentor-section"
-								onclick="location.href='${cpath}/detail'"
+								onclick="location.href='${cpath}/mentos/mentodetail?mentoId='"
 								style="cursor: pointer;">
 
 								<div class="mentor-profile">
@@ -163,18 +140,13 @@
 								<div class="mentor-info-box">
 									<div class="mentor-info-main">
 										<div class="mentor-name">정진</div>
-										<div class="mentor-role">
-											<div class="mentor-role-label">mento</div>
-										</div>
+										<div class="mentor-role-label">mento</div>
 									</div>
 									<div class="mentor-type">🧩 계획왕 컴정이</div>
 									<div class="mentor-rating-section">
-										<div class="mentor-rating-label">
-											<span>별점</span>
-										</div>
-										<div class="vote">
-											<!-- 별 아이콘들 여기! -->
-											<span>★</span><span>★</span><span>★</span><span>★</span><span>☆</span>
+										<div class="mentor-rating-label">별점</div>
+										<div class="vote" data-rating="${mentos.avgRating}">
+											<!-- JS로 동적으로 별을 채울 예정 -->
 										</div>
 									</div>
 								</div>
@@ -183,292 +155,10 @@
 					</div>
 				</div>
 			</div>
-			<div class="div15">비슷한 다른 멘토스 둘러보기</div>
-			<div class="frame-407">
-				<div class="mentos-all-class-row">
-					<div class="mentos-class-cardview mentos-hover-guide"
-						onclick="location.href='${cpath}memento/mentos/detail'">
-						<div class="mentos-class">
-							<div class="mentos-text">
-								<div class="frame-37862">
-									<div class="frame-413">
-										<div class="d">D-</div>
-										<div class="d">2</div>
-									</div>
-									<div class="frame-414">
-										<div class="d">확정까지</div>
-										<div class="d">3</div>
-										<div class="d">명</div>
-									</div>
-								</div>
-								<div class="aws">비전공자도 이해할 수 있는 AWS 입문/실전</div>
-								<div class="frame-406">
-
-									<div class="frame-407">
-										<img class="user-user"
-											src="${pageContext.request.contextPath}/resources/images/mentosFull/mento.svg" />
-										<div class="text">김코딩</div>
-										<div class="group-371">
-											<div class="pre-mento">pre-mento</div>
-										</div>
-									</div>
-									<div class="frame-408">
-										<img class="icon-time-calendar"
-											src="${pageContext.request.contextPath}/resources/images/mentosFull/day.svg" />
-										<div class="text">2025/06/23</div>
-										<div class="text">-</div>
-										<div class="text">2025/06/23</div>
-									</div>
-									<div class="frame-409">
-										<img class="icon-time-clock-outlined"
-											src="${pageContext.request.contextPath}/resources/images/mentosFull/time.svg" />
-										<div class="text">15시-17시(화)</div>
-									</div>
-									<div class="frame-410">
-										<img class="icon-maps-map-pin"
-											src="${pageContext.request.contextPath}/resources/images/mentosFull/maps.svg" />
-										<div class="text">역삼</div>
-									</div>
-									<div class="frame-3659">
-										<div class="_45-000">무료</div>
-									</div>
-								</div>
-							</div>
-							<img class="image"
-								src="${pageContext.request.contextPath}/resources/images/mentosFull/class4.png" />
-
-
-							<div class="mentos-hover-popup">
-								<div class="hover-inner">
-									<div class="hover-title">
-										비전공자도 이해할 수 있는<br />입문/실전
-									</div>
-									<div class="hover-desc">초보자도 쉽게 따라올 수 있게, 실무 중심으로 강의해요!</div>
-									<div class="hover-tags">
-										<span class="hover-tag">#AWS</span> <span class="hover-tag">#클라우드</span>
-									</div>
-								</div>
-							</div>
-						</div>
-
-					</div>
-
-					<div class="mentos-class-cardview mentos-hover-guide"
-						onclick="location.href='${cpath}memento/mentos/detail'">
-						<div class="frame-3786">
-							<div class="mentos-class">
-								<div class="mentos-text">
-									<div class="frame-37862">
-										<div class="frame-413">
-											<div class="d">D-</div>
-											<div class="d">2</div>
-										</div>
-										<div class="frame-414">
-											<div class="d">확정까지</div>
-											<div class="d">3</div>
-											<div class="d">명</div>
-										</div>
-									</div>
-									<div class="aws">비전공자도 이해할 수 있는 AWS 입문/실전</div>
-									<div class="frame-406">
-										<div class="frame-407">
-											<img class="user-user"
-												src="${pageContext.request.contextPath}/resources/images/mentosFull/mento.svg" />
-
-											<div class="div3">정진</div>
-											<div class="group-371">
-												<div class="rectangle-279"></div>
-												<div class="mento">mento</div>
-											</div>
-										</div>
-										<div class="frame-408">
-											<div class="icon-time-02">
-												<img class="icon-time-calendar"
-													src="${pageContext.request.contextPath}/resources/images/mentosFull/day.svg" />
-											</div>
-											<div class="_2025">
-												<span> <span class="_2025-span">2025</span> <span
-													class="_2025-span2"></span>
-												</span>
-											</div>
-											<div class="div3">/</div>
-											<div class="_06">06</div>
-											<div class="div3">/</div>
-											<div class="_23">23</div>
-											<div class="div3">-</div>
-											<div class="_20252">2025</div>
-											<div class="div3">/</div>
-											<div class="_06">06</div>
-											<div class="div3">/</div>
-											<div class="_30">30</div>
-										</div>
-										<div class="frame-409">
-											<div class="icon-time-04">
-												<img class="icon-time-clock-outlined"
-													src="${pageContext.request.contextPath}/resources/images/mentosFull/time.svg" />
-
-
-											</div>
-											<div class="_15">15</div>
-											<div class="div3">시</div>
-											<div class="div4">
-												<span> <span class="div-4-span">-</span> <span
-													class="div-4-span2"></span>
-												</span>
-											</div>
-											<div class="_17">
-												<span> <span class="_17-span">17</span> <span
-													class="_17-span2"></span>
-												</span>
-											</div>
-											<div class="div3">시</div>
-											<div class="div3">(</div>
-											<div class="div4">
-												<span> <span class="div-4-span">화</span> <span
-													class="div-4-span2"></span>
-												</span>
-											</div>
-											<div class="div3">)</div>
-										</div>
-										<div class="frame-410">
-											<div class="icon-maps-04">
-												<img class="icon-maps-map-pin"
-													src="${pageContext.request.contextPath}/resources/images/mentosFull/maps.svg" />
-
-											</div>
-											<div class="div3">홍대</div>
-										</div>
-										<div class="frame-3659">
-											<div class="_45-000">₩45,000</div>
-										</div>
-									</div>
-								</div>
-								<div class="frame-3778">
-									<img class="image"
-										src="${pageContext.request.contextPath}/resources/images/mentosFull/class1.png" />
-								</div>
-								<div class="mentos-hover-popup">
-									<div class="hover-inner">
-										<div class="hover-title">
-											비전공자도 이해할 수 있는<br />AWS 입문/실전
-										</div>
-										<div class="hover-desc">초보자도 쉽게 따라올 수 있게, 실무 중심으로 강의해요!</div>
-										<div class="hover-tags">
-											<span class="hover-tag">#AWS</span> <span class="hover-tag">#클라우드</span>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-					<div class="mentos-class-cardview mentos-hover-guide"
-						onclick="location.href='${cpath}memento/mentos/detail'">
-						<div class="frame-3786">
-							<div class="mentos-class">
-								<div class="mentos-text">
-									<div class="frame-37862">
-										<div class="frame-413">
-											<div class="d">D-</div>
-											<div class="d">2</div>
-										</div>
-										<div class="frame-414">
-											<div class="d">확정까지</div>
-											<div class="d">3</div>
-											<div class="d">명</div>
-										</div>
-									</div>
-									<div class="aws">비전공자도 이해할 수 있는 AWS 입문/실전</div>
-									<div class="frame-406">
-										<div class="frame-407">
-											<img class="user-user"
-												src="${pageContext.request.contextPath}/resources/images/mentosFull/mento.svg" />
-
-											<div class="div3">정진</div>
-											<div class="group-371">
-												<div class="rectangle-279"></div>
-												<div class="mento">mento</div>
-											</div>
-										</div>
-										<div class="frame-408">
-											<div class="icon-time-02">
-												<img class="icon-time-calendar"
-													src="${pageContext.request.contextPath}/resources/images/mentosFull/day.svg" />
-											</div>
-											<div class="_2025">
-												<span> <span class="_2025-span">2025</span> <span
-													class="_2025-span2"></span>
-												</span>
-											</div>
-											<div class="div3">/</div>
-											<div class="_06">06</div>
-											<div class="div3">/</div>
-											<div class="_23">23</div>
-											<div class="div3">-</div>
-											<div class="_20252">2025</div>
-											<div class="div3">/</div>
-											<div class="_06">06</div>
-											<div class="div3">/</div>
-											<div class="_30">30</div>
-										</div>
-										<div class="frame-409">
-											<div class="icon-time-04">
-												<img class="icon-time-clock-outlined"
-													src="${pageContext.request.contextPath}/resources/images/mentosFull/time.svg" />
-
-
-											</div>
-											<div class="_15">15</div>
-											<div class="div3">시</div>
-											<div class="div4">
-												<span> <span class="div-4-span">-</span> <span
-													class="div-4-span2"></span>
-												</span>
-											</div>
-											<div class="_17">
-												<span> <span class="_17-span">17</span> <span
-													class="_17-span2"></span>
-												</span>
-											</div>
-											<div class="div3">시</div>
-											<div class="div3">(</div>
-											<div class="div4">
-												<span> <span class="div-4-span">화</span> <span
-													class="div-4-span2"></span>
-												</span>
-											</div>
-											<div class="div3">)</div>
-										</div>
-										<div class="frame-410">
-											<div class="icon-maps-04">
-												<img class="icon-maps-map-pin"
-													src="${pageContext.request.contextPath}/resources/images/mentosFull/maps.svg" />
-
-											</div>
-											<div class="div3">홍대</div>
-										</div>
-										<div class="frame-3659">
-											<div class="_45-000">₩45,000</div>
-										</div>
-									</div>
-								</div>
-								<div class="frame-3778">
-									<img class="image"
-										src="${pageContext.request.contextPath}/resources/images/mentosFull/class1.png" />
-								</div>
-								<div class="mentos-hover-popup">
-									<div class="hover-inner">
-										<div class="hover-title">
-											비전공자도 이해할 수 있는<br />AWS 입문/실전
-										</div>
-										<div class="hover-desc">초보자도 쉽게 따라올 수 있게, 실무 중심으로 강의해요!</div>
-										<div class="hover-tags">
-											<span class="hover-tag">#AWS</span> <span class="hover-tag">#클라우드</span>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
+			<div class="similar-mentos-wrapper">
+				<div class="section-title">비슷한 다른 멘토스 둘러보기</div>
+				<div class="mentos-card-list" id="similarMentosListContainer">
+					<!-- 여기에 JS로 반복 렌더링 -->
 				</div>
 			</div>
 		</div>
