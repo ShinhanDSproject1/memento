@@ -6,7 +6,7 @@ $(() => {
 		const container = document.getElementById('mypage-matchup-list');
 
 		// 2. API를 호출합니다. URL은 실제 환경에 맞게 수정해야 합니다.
-		const API_URL = 'http://localhost:9999/memento/api/mypage/page6/5'; // 백엔드 API 엔드포인트 나중에 코드 합치기 
+		const API_URL = 'http://localhost:9999/memento/api/mypage/mymentos-list'; // 백엔드 API 엔드포인트 나중에 코드 합치기 
 
 		try {
 			const response = await fetch(API_URL);
