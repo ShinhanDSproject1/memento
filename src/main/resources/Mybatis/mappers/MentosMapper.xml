@@ -178,11 +178,18 @@
   	</select>
   	
   	<select id="checkPermission" parameterType="map" resultType="Integer">
-  		select *
-  		from mentos
-  		where mentos_id=#{mentosId}
-  		and mento_id=#{memberId}
-  		and status='ACTIVE'
+  		select case 
+  			when exists (
+	             select 1 
+	             from mentos 
+	             where mentos_id = #{mentosId}
+	               and mento_id = #{memberId}
+	               and status = 'ACTIVE'
+	        )
+           	then 1 
+	        else 0 
+	        end as result
+	  	from dual
   	</select>
   	
   	

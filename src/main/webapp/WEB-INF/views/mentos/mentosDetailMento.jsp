@@ -1,15 +1,15 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
-
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<c:set var="cpath" value="${pageContext.servletContext.contextPath}" />
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>me:mento</title>
 <link rel="stylesheet"
-	href="${pageContext.request.contextPath}/resources/css/mainpage/notificationModal.css">
+	href="${cpath }/resources/css/mainpage/notificationModal.css">
 <link rel="stylesheet"
-	href="${pageContext.request.contextPath}/resources/css/mentos/mentosDetailMento.css" />
+	href="${cpath}/resources/css/mentos/mentosDetailMento.css" />
 
 </head>
 <link
@@ -87,14 +87,7 @@
 										</div>
 									</div>
 								</div>
-
-
-
-
-
 							</div>
-
-
 						</div>
 					</div>
 				</div>
@@ -282,8 +275,6 @@
 
 					</div>
 
-
-
 					<div class="mentos-class-cardview mentos-hover-guide"
 						onclick="location.href='${cpath}memento/mentos/detail'">
 						<div class="frame-3786">
@@ -500,16 +491,12 @@
 							</div>
 						</div>
 					</div>
-
-
 				</div>
-
 			</div>
 		</div>
 	</div>
-	<script src="${pageContext.request.contextPath}/js/notification.js"></script>
-	<script src="${pageContext.request.contextPath}/resources/js/header.js"></script>
-	<script
-	src="${pageContext.request.contextPath}/resources/js/mentos/mentosDetail.js"></script>
+	<script src="${cpath }/resources/js/notification.js"></script>
+	<script src="${cpath}/resources/js/header.js"></script>
+	<script src="${cpath}/resources/js/mentos/mentosDetail.js"></script>
 </body>
 </html>
