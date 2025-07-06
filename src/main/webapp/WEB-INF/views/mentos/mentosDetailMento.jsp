@@ -2,6 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <c:set var="cpath" value="${pageContext.servletContext.contextPath}" />
+<c:set var="mentosId" value="${mentosId}" />
 <!DOCTYPE html>
 <html>
 <head>
@@ -11,13 +12,11 @@
 	href="${cpath }/resources/css/mainpage/notificationModal.css">
 <link rel="stylesheet"
 	href="${cpath}/resources/css/mentos/mentosDetailMento.css" />
-
 </head>
 <link
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
 	rel="stylesheet" />
-
-
+<jsp:include page="/WEB-INF/views/mentos/deletePopup.jsp" />
 <body>
 	<%@ include file="../common/logout_header.jsp"%>
 	<%@ include file="../mainpage/notificationModal.jsp"%>
@@ -29,9 +28,7 @@
 					<div class="hover-tag">#백엔드</div>
 					<div class="hover-tag">#AWS</div>
 				</div>
-				<div class="class-title-wrap">
-					<div class="class-title">비전공자도 이해할 수 있는 AWS 입문/실전</div>
-				</div>
+				<div class="class-title">비전공자도 이해할 수 있는 AWS 입문/실전</div>
 				<div class="class-description">비전공자 입장에서도 쉽게 이해할 수 있고, 실전에서 바로
 					적용 가능한 AWS 입문 강의를 만들어봤습니다!</div>
 			</div>
@@ -40,55 +37,39 @@
 					<div class="class-detail-list">
 						<div class="detail-row">
 							<div class="detail-label">모집 인원</div>
-							<div class="detail-value">1/5</div>
+							<div class="detail-value">
+								<span id="currentMemberCnt">1</span>/<span id="maxMember">5</span>
+							</div>
 						</div>
 						<div class="detail-row">
 							<div class="detail-label">참여 기간</div>
-							<div class="detail-value">06/23-06/30 15:00-17:00</div>
+							<div class="detail-value">
+								<span id="startDay">06/23</span>-<span id="endDay">06/30</span>
+								<span id="startTime">15:00</span>-<span id="endTime">17:00</span>
+							</div>
 						</div>
 						<div class="detail-row">
 							<div class="detail-label">참여 요일</div>
-							<div class="detail-value">화</div>
+							<div class="detail-value" id="selectedDays">화</div>
 						</div>
 						<div class="detail-row">
-							<div class="detail-label">멘토스횟수</div>
-							<div class="detail-value">2회</div>
+							<div class="detail-label">멘토스 횟수</div>
+							<div class="detail-value" id="times">2회</div>
 						</div>
 						<div class="detail-row">
 							<div class="detail-label">장소</div>
-							<div class="detail-value">투썸플레이스 홍대입구역점</div>
+							<div class="detail-value" id="place">투썸플레이스 홍대입구역점</div>
 						</div>
 					</div>
-					<div class="class-action-area">
-						<div class="divider-line"></div>
-						<div class="price-and-button">
-							<div class="class-price">₩70,000</div>
-							<div class="two-button">
-								<label class="class-apply-btn-wrap">
-									<div class="class-apply-btn"
-										onclick="location.href='${cpath}/mentos/edit?mentosId=${mentos.mentosId}'">수정하기</div>
-								</label>
-								<!-- 1. 체크박스 -->
-								<input type="checkbox" id="popupTrigger" style="display: none;" />
-
-								<!-- 2. 신청 버튼 (label) -->
-								<label for="popupTrigger" class="class-apply-btn-wrap">
-									<div class="class-apply-btn">삭제하기</div>
-								</label>
-
-								<div id="layer_bg">
-									<div class="rectangle-294">
-										<div class="frame-3783">
-											<div class="emoji" style="font-size: 48px;">❌</div>
-											<div class="popup-title">정말로 삭제하시겠습니까?</div>
-											<div class="popup-desc">확인 버튼을 누르면 자동으로 멘토스가 삭제 됩니다</div>
-											<div class="confirm-btn-box">
-												<label for="popupTrigger" class="confirm-btn">확인</label>
-											</div>
-										</div>
-									</div>
-								</div>
-							</div>
+					<div class="divider-line"></div>
+					<div class="price-and-button">
+						<div class="class-price" id="price">₩70,000</div>
+						<div class="two-button">
+							<div class="class-apply-btn"
+								onclick="location.href='${cpath}/mentos/edit?mentosId=${mentos.mentosId}'">수정하기</div>
+							<label for="popupTrigger" class="mentos-delete-btn">
+								<div class="class-apply-btn">삭제하기</div>
+							</label>
 						</div>
 					</div>
 				</div>
@@ -100,9 +81,8 @@
 						<!-- 강의 소개/개요 -->
 						<div class="class-summary-section">
 							<div class="class-summary-text">
-								<span> <span class="summary-main"> 입문자를 위해 준비한<br />
-										[데브옵스 · 인프라, 백엔드] 강의입니다.
-								</span>
+								<span class="summary-main"> 입문자를 위해 준비한<br /> [데브옵스 ·
+									인프라, 백엔드] 강의입니다.
 								</span>
 							</div>
 							<!-- 커리큘럼 소개 -->
@@ -206,9 +186,6 @@
 			<div class="div15">비슷한 다른 멘토스 둘러보기</div>
 			<div class="frame-407">
 				<div class="mentos-all-class-row">
-
-
-
 					<div class="mentos-class-cardview mentos-hover-guide"
 						onclick="location.href='${cpath}memento/mentos/detail'">
 						<div class="mentos-class">

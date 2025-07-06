@@ -1,20 +1,9 @@
-:root {
-	
-}
-
-[data--mode="mode-1"] { --1: #00bba8; --2: #0070d1; --1: #a6abbd; --2:
-	#414656; --3: #c73c60; --4: #ff7493;
-	
-}
-
-.div, .div * {
-	box-sizing: border-box;
-}
-
 body {
 	padding-top: 100px;
+	overflow-x: hidden;
+	font-family: "Noto Sans", sans-serif;
+	padding-bottom: 30px;
 }
-
 html, body {
 	margin: 0;
 	padding: 0;
@@ -24,58 +13,13 @@ html, body {
 .container {
 	padding-top: 100px;
 }
-.header-fixed {
-	position: fixed;
-	top: 0;
-	left: 0;
-	width: 100%;
-	height: 80px;
-	background: #fff;
-	z-index: 1000;
-}
-.div {
-	color: #ffffff;
-	text-align: center;
-	font-family: "Inter-Medium", sans-serif;
-	font-size: 10px;
-	line-height: 150%;
-	letter-spacing: -0.023em;
-	font-weight: 500;
-	position: relative;
-	width: 46px;
-	height: 15px;
-	background: #ffffff;
-	display: flex;
-	flex-direction: column;
-	gap: 10px;
-	align-items: flex-start;
-	justify-content: flex-start;
-	height: 1856px;
-	position: relative;
-	overflow: hidden;
-}
 
-.full {
-	margin: 0 auto;
-	padding: 0 2vw;
-	max-width: 1140px;
-	box-sizing: border-box;
-	background: #ffffff;
-	align-items: flex-start;
-	justify-content: flex-start;
-	height: 1856px;
-	position: relative;
-	overflow: hidden;
-}
-
-.full, .class-wrapper-frame, .class-main-frame, .class-detail-content {
+.class-wrapper-frame, .class-main-frame, .class-detail-content {
 	width: 100%;
 	max-width: 100%;
 	margin: 0 auto;
 	/* 필요하면 중앙정렬용 flex 옵션 등 추가 */
 }
-
-
 
 .class-main-info {
 	background: rgba(231, 247, 253, 0.54);
@@ -158,6 +102,7 @@ html, body {
 }
 
 .divider-line {
+	margin-top: 20px;
 	border-top: 1px solid #ddd;
 	margin-bottom: 16px;
 }
@@ -175,10 +120,6 @@ html, body {
 	color: rgba(0, 0, 0, 0.66);
 	text-align: left;
 	font-family: "AbhayaLibreExtraBold-Regular", sans-serif;
-}
-
-.class-apply-btn-wrap {
-	cursor: pointer;
 }
 
 .class-apply-btn {
@@ -230,153 +171,6 @@ html, body {
 	align-self: stretch;
 }
 
-/* 팝업 트리거 */
-#popupTrigger {
-	display: none;
-}
-
-/* 팝업 배경 */
-#layer_bg {
-	display: none;
-	position: fixed;
-	top: 0;
-	left: 0;
-	width: 100vw;
-	height: 100vh;
-	background: rgba(0, 0, 0, 0.4);
-	z-index: 999;
-}
-
-/* 팝업 박스 */
-#popup {
-	width: 300px;
-	background: #fff;
-	padding: 20px;
-	box-sizing: border-box;
-	position: absolute;
-	top: 50%;
-	left: 50%;
-	transform: translate(-50%, -50%);
-	border-radius: 12px;
-	box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-}
-
-/* 팝업 제목 */
-#popup h4 {
-	display: flex;
-	justify-content: space-between;
-	align-items: center;
-	font-size: 18px;
-	margin-bottom: 16px;
-}
-
-/* 닫기 버튼 */
-#popup h4 label {
-	cursor: pointer;
-	color: #aaa;
-	font-weight: bold;
-}
-
-/* 체크됐을 때 팝업 보여주기 */
-#popupTrigger:checked+label+#layer_bg {
-	display: block;
-}
-
-.frame-3784 {
-	display: flex;
-	flex-direction: column;
-	gap: 20px;
-	align-items: center;
-	justify-content: flex-start;
-	width: 399px;
-	position: absolute;
-	left: 111px;
-	top: 50px;
-}
-
-.frame-3783 {
-	display: flex;
-	flex-direction: column;
-	gap: 0px;
-	align-items: center;
-	justify-content: flex-start;
-	align-self: stretch;
-	flex-shrink: 0;
-	position: relative;
-}
-
-.image-62 {
-	flex-shrink: 0;
-	width: 100px;
-	height: 97px;
-	position: relative;
-	object-fit: cover;
-	aspect-ratio: 100/97;
-}
-
-.div {
-	color: #000000;
-	text-align: center;
-	font-family: "D2Coding-Bold", sans-serif;
-	font-size: 28px;
-	line-height: 150%;
-	letter-spacing: -0.023em;
-	font-weight: 500;
-	position: relative;
-	align-self: stretch;
-}
-
-.div2 {
-	color: #000000;
-	text-align: center;
-	position: relative;
-	align-self: stretch;
-}
-
-.div-2-span {
-	font-family: "D2Coding-Bold", sans-serif;
-	font-size: 14px;
-	line-height: 150%;
-	letter-spacing: -0.023em;
-	font-weight: 500;
-}
-
-.div-2-span2 {
-	font-family: "D2Coding-Bold", sans-serif;
-	font-size: 28px;
-	line-height: 150%;
-	letter-spacing: -0.023em;
-	font-weight: 500;
-}
-
-.frame-3690 {
-	display: flex;
-	flex-direction: row;
-	gap: 27px;
-	align-items: center;
-	justify-content: flex-start;
-	flex-shrink: 0;
-	position: relative;
-}
-
-.frame-3689 {
-	background: #0070d1;
-	border-radius: 10px;
-	border-style: solid;
-	border-color: #a6abbd;
-	border-width: 1px;
-	padding: 8px 23px 8px 23px;
-	display: flex;
-	flex-direction: row;
-	gap: 10px;
-	align-items: center;
-	justify-content: center;
-	flex-shrink: 0;
-	width: 200px;
-	height: 61px;
-	position: relative;
-}
-
 .div3 {
 	color: #000000;
 	text-align: left;
@@ -386,71 +180,6 @@ html, body {
 	letter-spacing: -0.011000000000000001em;
 	font-weight: 400;
 	position: relative;
-}
-
-#popupTrigger {
-	display: none;
-}
-
-/* 팝업 배경 */
-#layer_bg {
-	display: none;
-	position: fixed;
-	top: 0;
-	left: 0;
-	width: 100vw;
-	height: 100vh;
-	background: rgba(0, 0, 0, 0.4);
-	z-index: 999;
-}
-
-.rectangle-294 {
-	position: absolute;
-	z-index: 1000; /* 무조건 앞에 오도록 */
-	top: 50%;
-	left: 50%;
-	transform: translate(-50%, -50%);
-	background: #ffffff;
-	border-radius: 12px;
-	box-shadow: 0 8px 16px rgba(0, 0, 0, 0.25);
-	width: 90vw;
-	max-width: 420px;
-	padding: 32px 24px;
-}
-
-/* 버튼 박스 */
-.confirm-btn-box {
-	display: flex;
-	justify-content: center;
-	margin-top: 24px;
-	background: #0070d1;
-	color: #fff;
-	font-family: "D2Coding-Bold", sans-serif;
-	font-size: 1.5vw;
-	font-weight: 600;
-	border: none;
-	border-radius: 0.8vw;
-	padding: 1.2vh 5vw;
-	cursor: pointer;
-	transition: background 0.15s;
-}
-/* 팝업 박스 */
-#popup {
-	background: #fff;
-	padding: 20px;
-	width: 90vw;
-	max-width: 400px;
-	border-radius: 12px;
-	box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-	position: absolute;
-	top: 50%;
-	left: 50%;
-	transform: translate(-50%, -50%);
-}
-
-/* 팝업 열기 트리거 */
-#popupTrigger:checked+label+#layer_bg {
-	display: block;
 }
 
 .class-detail-content {
@@ -463,8 +192,8 @@ html, body {
 	margin: 0 auto;
 	position: relative;
 	justify-content: center;
-	height: 1000px;
 	padding-top: 20px;
+	margin-bottom: 100px;
 }
 
 .class-meta-section {
@@ -509,25 +238,6 @@ html, body {
 	position: relative;
 }
 
-.popup-title {
-	font-size: 20px;
-	font-weight: 700;
-	color: #000000;
-	text-align: center;
-	margin-top: 16px;
-	margin-bottom: 8px;
-	font-family: "D2Coding-Regular", sans-serif;
-}
-
-.popup-desc {
-	font-size: 14px;
-	font-weight: 400;
-	color: #555555;
-	text-align: center;
-	line-height: 1.5;
-	font-family: "D2Coding-Regular", sans-serif;
-}
-
 .class-summary-section {
 	display: flex;
 	flex-direction: column;
@@ -543,10 +253,6 @@ html, body {
 
 .summary-main {
 	font-size: 1vw;
-}
-
-.class-curriculum {
-	
 }
 
 .class-list-title {
@@ -809,56 +515,6 @@ html, body {
 	font-size: 18px;
 }
 
-.mentor-rating-stars {
-	display: flex;
-	flex-direction: row;
-	gap: 0.3vw;
-}
-
-.star {
-	
-}
-
-.vuesax-linear-star {
-	flex-shrink: 0;
-	width: 19.2px;
-	height: 20px;
-	position: relative;
-	overflow: visible;
-}
-
-.vuesax-linear-star2 {
-	flex-shrink: 0;
-	width: 19.2px;
-	height: 20px;
-	position: relative;
-	overflow: visible;
-}
-
-.vuesax-linear-star3 {
-	flex-shrink: 0;
-	width: 19.2px;
-	height: 20px;
-	position: relative;
-	overflow: visible;
-}
-
-.vuesax-linear-star4 {
-	flex-shrink: 0;
-	width: 19.2px;
-	height: 20px;
-	position: relative;
-	overflow: visible;
-}
-
-.vuesax-linear-star5 {
-	flex-shrink: 0;
-	width: 19.2px;
-	height: 20px;
-	position: relative;
-	overflow: visible;
-}
-
 .line-11 {
 	margin-top: -1px;
 	border-style: solid;
@@ -887,26 +543,6 @@ html, body {
 	align-items: center;
 	padding-bottom: 12px;
 	max-width: 98%;
-}
-
-.scroll-container {
-	display: flex;
-	flex-direction: row;
-	gap: clamp(16px, 30vw, 24px);
-	overflow-x: auto;
-	overflow-y: hidden; /* ✅ 세로 스크롤 제거 */
-	padding: clamp(10px, 2vh, 16px) 0;
-	scroll-snap-type: x mandatory;
-	-webkit-overflow-scrolling: touch;
-	width: 100%;
-	height: auto; /* ✅ 고정된 height 피하기 */
-	box-sizing: border-box;
-}
-
-.scroll-container>div {
-	flex: 0 0 auto;
-	width: clamp(14vw, 15vw, 17vw);
-	scroll-snap-align: start;
 }
 
 .mentos-class-cardview {
@@ -1105,9 +741,21 @@ keyframes heart-pop { 0% {
 
 
 
+
+
+
+
+
+
 %
 {
 transform
+
+
+
+
+
+
 
 
 
@@ -1145,7 +793,19 @@ transform
 
 
 
+
+
+
+
+
+
 scale
+
+
+
+
+
+
 
 
 
@@ -1181,7 +841,19 @@ scale
 
 
 
+
+
+
+
+
+
 1
+
+
+
+
+
+
 
 
 
@@ -1217,7 +889,19 @@ scale
 
 
 
+
+
+
+
+
+
 )
+
+
+
+
+
+
 
 
 
@@ -1254,6 +938,12 @@ opacity
 
 
 
+
+
+
+
+
+
 :
 
 
@@ -1273,7 +963,19 @@ opacity
 
 
 
+
+
+
+
+
+
 1
+
+
+
+
+
+
 
 
 
@@ -1311,9 +1013,21 @@ opacity
 
 
 
+
+
+
+
+
+
 %
 {
 transform
+
+
+
+
+
+
 
 
 
@@ -1351,6 +1065,12 @@ transform
 
 
 
+
+
+
+
+
+
 scale
 
 
@@ -1368,7 +1088,19 @@ scale
 
 
 
+
+
+
+
+
+
 (
+
+
+
+
+
+
 
 
 
@@ -1406,7 +1138,19 @@ scale
 
 
 
+
+
+
+
+
+
 )
+
+
+
+
+
+
 
 
 
@@ -1443,6 +1187,12 @@ opacity
 
 
 
+
+
+
+
+
+
 :
 
 
@@ -1462,7 +1212,19 @@ opacity
 
 
 
+
+
+
+
+
+
 1
+
+
+
+
+
+
 
 
 
@@ -1786,8 +1548,6 @@ opacity
 	left: 50%;
 	transform: translate(-50%, -50%);
 }
-
-
 
 .mentos-leader-cancel-btn {
 	background: #a6abbd;
@@ -2285,14 +2045,6 @@ opacity
 	justify-content: center;
 }
 
-.hover-tag {
-	background: #f3f8ff;
-	color: #5585f3;
-	border-radius: 0.6vw;
-	font-size: 0.9vw;
-	padding: 0.5vw 1.2vw;
-}
-
 @media ( max-width : 700px) {
 	.mentos-class, .mentos-hover-popup {
 		border-radius: 4vw;
@@ -2362,7 +2114,73 @@ opacity
 }
 
 .hover-tag {
+	background: #f3f8ff;
+	color: #5585f3;
 	font-size: 0.7vw;
 	border-radius: 0.4vw;
 	padding: 0.3vw 0.8vw;
+}
+
+.modal-overlay {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100vw;
+	height: 100vh;
+	background: rgba(0, 0, 0, 0.4); /* 어두운 배경 */
+	z-index: 999;
+}
+
+.custom-modal-content {
+	background: #ffffff; /* 완전한 흰 배경 */
+	border-radius: 12px;
+	padding: 40px 30px;
+	box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+	width: 90%;
+	max-width: 360px;
+	text-align: center;
+	opacity: 1; /* 완전 불투명 */
+}
+
+.modal-icon {
+	width: 48px;
+	height: 48px;
+	margin-bottom: 20px;
+}
+
+.modal-title {
+	font-size: 20px;
+	font-weight: 700;
+	margin-bottom: 30px;
+	color: #222;
+}
+
+.modal-buttons {
+	display: flex;
+	justify-content: space-between;
+	gap: 16px;
+}
+
+.modal-buttons button {
+	flex: 1;
+	padding: 14px 0;
+	font-size: 16px;
+	font-weight: bold;
+	border: none;
+	border-radius: 10px;
+	cursor: pointer;
+	transition: background-color 0.2s;
+}
+
+.cancel-btn {
+	background-color: #a6abbd;
+	color: white;
+}
+
+.confirm-btn {
+	background-color: #e85757;
+	color: white;
 }

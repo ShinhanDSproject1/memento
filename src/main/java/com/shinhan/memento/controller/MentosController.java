@@ -30,18 +30,16 @@ public class MentosController {
 	}
 
 	@RequestMapping("/detailPage")
-	public String mentosDetailView(HttpSession session,@RequestParam int mentosId) {
+	public String mentosDetailView(HttpSession session,@RequestParam int mentosId, Model model) {
 		// 로그인 하고 있는 유저가 이 멘토스에 대해 해당 멘토스를 만든 멘토라면 mentosDetailMento.jsp 를 보여주고 그게 아니라면 mentosDetailMenti.jsp 보여주기
 		Member member = (Member) session.getAttribute("loginUser");
 		
-		System.out.println("지금 로그인한 멤버 누구냐 =====> " + member.getUserType());
+		model.addAttribute("mentosId",mentosId);
 		if(!(member.getUserType().equals(UserType.MENTI)) && mentosService.checkPermission(member, mentosId)) {
 			//true 이면 이 멘토스 만든 멘토인거 
-			System.out.println("멘토다!!!!");
 			return "mentos/mentosDetailMento";
 		}
 		// 그냥 일반 유저인거
-		System.out.println("그냥 유저다???");
 		return "mentos/mentosDetailMenti";
 		
 	}
