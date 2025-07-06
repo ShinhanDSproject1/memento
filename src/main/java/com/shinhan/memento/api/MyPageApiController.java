@@ -8,12 +8,15 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 import com.shinhan.memento.common.exception.MemberException;
 import com.shinhan.memento.common.exception.MypageException;
 import com.shinhan.memento.common.response.BaseResponse;
@@ -22,6 +25,9 @@ import com.shinhan.memento.dto.ConfirmCashRequestDTO;
 import com.shinhan.memento.dto.ConfirmCashResponseDTO;
 import com.shinhan.memento.dto.MyMatchupListResponseDTO;
 import com.shinhan.memento.dto.MyMentosListResponseDTO;
+import com.shinhan.memento.dto.MyPageSideBarResponseDTO;
+import com.shinhan.memento.dto.MyProfileInfoResponseDTO;
+import com.shinhan.memento.dto.MyProfileUpdateRequestDTO;
 import com.shinhan.memento.dto.MyPaymentListResponseDTO;
 import com.shinhan.memento.dto.MypageKeepgoingHistoryDTO;
 import com.shinhan.memento.dto.PaymentDetailResponseDTO;
@@ -29,24 +35,25 @@ import com.shinhan.memento.dto.SparkTestResultRequestDTO;
 import com.shinhan.memento.dto.SparkTestResultResponseDTO;
 import com.shinhan.memento.dto.ValidateCashRequestDTO;
 import com.shinhan.memento.dto.ValidateCashResponseDTO;
-import com.shinhan.memento.model.BaseStatus;
 import com.shinhan.memento.model.Member;
 import com.shinhan.memento.model.UserType;
 import com.shinhan.memento.service.MemberKeepgoingService;
 import com.shinhan.memento.service.MemberService;
 import com.shinhan.memento.service.MyPageService;
 import lombok.extern.slf4j.Slf4j;
-import lombok.AllArgsConstructor;
 
 @Slf4j
 @RestController
-@AllArgsConstructor
 @RequestMapping("/api/mypage")
 public class MyPageApiController {
+	@Autowired
+	MyPageService myPageService;
 	
-	private final MyPageService myPageService;
-	private final MemberKeepgoingService memberKeepgoingService;
-	private final MemberService memberService;
+	@Autowired
+	MemberKeepgoingService memberKeepgoingService;
+	
+	@Autowired
+	MemberService memberService;
 	
 	@PostMapping("/spark-test-result")
 	public BaseResponse<SparkTestResultResponseDTO> sparkTestResult(@RequestBody SparkTestResultRequestDTO reqDTO,HttpSession session) {
@@ -84,6 +91,27 @@ public class MyPageApiController {
 		return new BaseResponse<>(myPageService.selectMyMentosListById(memberId));
 	}
 	
+	@GetMapping(value="/profile-info", produces = "application/json")
+	public BaseResponse<MyProfileInfoResponseDTO> selectMyProfileInfo(HttpSession session){
+		Member loginUser = (Member) session.getAttribute("loginUser");
+		if (loginUser == null) throw new MypageException(BaseExceptionResponseStatus.NEED_LOGIN);
+		int userId = loginUser.getMemberId();
+		MyProfileInfoResponseDTO profileInfoDTO = myPageService.selectMyProfileInfo(userId);
+		
+		return new BaseResponse<>(profileInfoDTO);
+	}
+	
+	@PutMapping(value = "/profile-update")
+	public BaseResponse<Boolean> updateMyProfile(HttpSession session, @RequestParam(value = "imageFile", required = false) MultipartFile imageFile ,@ModelAttribute MyProfileUpdateRequestDTO dto){
+		Member loginUser = (Member) session.getAttribute("loginUser");
+		if (loginUser == null) throw new MypageException(BaseExceptionResponseStatus.NEED_LOGIN);
+		int userId = loginUser.getMemberId();
+		
+		boolean result = myPageService.updateProfile(userId,dto,imageFile);
+
+		return new BaseResponse<Boolean>(result);
+	}
+
 	@GetMapping(value="/page6/{memberId}", produces = "application/json")
 	public BaseResponse<List<MyMatchupListResponseDTO>> selectJoinListByMemberId(
 				@PathVariable Integer memberId
@@ -130,5 +158,27 @@ public class MyPageApiController {
 		List<PaymentDetailResponseDTO> paymentDetailList = myPageService.selectPaymentDetail(orderId);
 		
 		return new BaseResponse<>(paymentDetailList);
+
+	}
+	
+	@PutMapping(value = "/refund")
+	public BaseResponse<Boolean> updateRefund(HttpSession session, @RequestParam String orderId){
+		Member loginUser = (Member) session.getAttribute("loginUser");
+		if (loginUser == null) throw new MypageException(BaseExceptionResponseStatus.NEED_LOGIN);
+		Integer memberId = loginUser.getMemberId();
+		System.out.println(orderId);
+		
+		Boolean result = myPageService.refundAction(memberId, orderId);
+		
+		return new BaseResponse<Boolean>(result);
+	}
+	
+	@GetMapping(value = "/sidebar-info",  produces = "application/json")
+	public BaseResponse<MyPageSideBarResponseDTO> selectMySideBarInfo(HttpSession session){
+		Member loginUser = (Member) session.getAttribute("loginUser");
+		if (loginUser == null) throw new MypageException(BaseExceptionResponseStatus.NEED_LOGIN);
+		Integer memberId = loginUser.getMemberId();
+		MyPageSideBarResponseDTO dto = myPageService.selectMySideBarInfo(memberId);
+		return new BaseResponse<MyPageSideBarResponseDTO>(dto);
 	}
 }

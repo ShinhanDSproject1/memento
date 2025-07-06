@@ -5,6 +5,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -20,6 +22,8 @@ import com.shinhan.memento.dto.MatchTypeDTO;
 import com.shinhan.memento.dto.mentoDetail.MentoDetailClassDTO;
 import com.shinhan.memento.model.Member;
 import com.shinhan.memento.model.UserType;
+import com.shinhan.memento.dto.mentos.GetMentosDetailDTO;
+import com.shinhan.memento.model.Mentos;
 import com.shinhan.memento.service.MemberService;
 import com.shinhan.memento.service.MentosService;
 
@@ -32,6 +36,9 @@ public class MentosController {
 
 	@Autowired
 	MentosService mentosService;
+	
+	@Autowired
+	MemberService memberService;
 
 	@Autowired
 	MemberService memberService;
@@ -62,7 +69,17 @@ public class MentosController {
 	}
 
 	@RequestMapping("/edit")
-	public String mentosEdit() {
+	public String mentosEdit(@RequestParam int mentosId, Model model, HttpSession session) {
+		
+		List<LanguageDTO> languages = mentosService.getAllLanguages();
+		List<CategoryDTO> categories = mentosService.getAllCategories();
+		List<MatchTypeDTO> matchTypes = mentosService.getAllMatchTypes();
+		
+		model.addAttribute("loginUser", session.getAttribute("loginUser"));
+		model.addAttribute("mentosId", mentosId);
+		model.addAttribute("languages", languages);
+		model.addAttribute("categories", categories);
+		model.addAttribute("matchTypes", matchTypes);
 		return "mentos/mentosEdit";
 	}
 

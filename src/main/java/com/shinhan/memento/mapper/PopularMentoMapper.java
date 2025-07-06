@@ -7,6 +7,6 @@ import org.apache.ibatis.annotations.Mapper;
 import com.shinhan.memento.dto.PopularMentorDTO;
 
 @Mapper
-public interface MentorRankingMapper {
+public interface PopularMentoMapper {
     List<PopularMentorDTO> findPopularMentors();
 }	

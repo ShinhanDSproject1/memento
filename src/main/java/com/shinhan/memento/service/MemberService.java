@@ -1,28 +1,31 @@
 package com.shinhan.memento.service;
 
-import java.util.Map;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
-import com.shinhan.memento.mapper.MemberMapper;
-import com.shinhan.memento.model.Member;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Service;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.client.RestTemplate;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.shinhan.memento.dto.mentoDetail.MentoDetailClassDTO;
+import com.shinhan.memento.dto.mentoDetail.MentoDetailHomeDTO;
+import com.shinhan.memento.mapper.MemberMapper;
 import com.shinhan.memento.model.BaseStatus;
+import com.shinhan.memento.model.Member;
+import com.shinhan.memento.model.Mentos;
 import com.shinhan.memento.model.UserType;
 import com.shinhan.memento.util.DBUtil;
 
@@ -34,6 +37,9 @@ public class MemberService {
 	
 	@Autowired
 	MemberMapper memberMapper;
+	
+	@Autowired
+	MentosService mentosService;
 	
 	public Member findMemberById(int memberId) {
 		log.info("[MemberService.findMemberById]");
@@ -164,6 +170,43 @@ public class MemberService {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+	}
+	
+	/**
+	 * 멘토 상세보기 페이지(홈화면)
+	 */
+	public MentoDetailHomeDTO showMentoDetailHome(Member member) {
+		log.info("[MemberService.showMentoDetailHome]");
+		String introduceComment = member.getIntroduceMento() == null ? "" : member.getIntroduceMento();
+		
+		// 그냥 진행 중인 최신 멘토스 딱 3개만 보여주기 
+		List<Mentos> mentosList = mentosService.showInProgressMentosList(member.getMemberId());
+		List<MentoDetailClassDTO> inProgressMentos = new ArrayList<>();
+		for(Mentos mentos : mentosList) {
+			MentoDetailClassDTO dto = MentoDetailClassDTO.builder()
+					.mentosId(mentos.getMentosId())
+					.mentosImg(mentos.getImage())
+					.title(mentos.getTitle())
+					.mentoName(member.getNickname())
+					.userType(member.getUserType().toString())
+					.startDay(mentos.getStartDay().toString())
+					.endDay(mentos.getEndDay().toString())
+					.startTime(mentos.getStartTime().toString().substring(11))
+					.endTime(mentos.getEndTime().toString().substring(11))
+					.selectedDays(mentos.getSelectedDays())
+					.region(mentos.getRegionGroup()+" "+mentos.getRegionSubgroup())
+					.price(mentos.getPrice())
+					.createdAt(mentos.getCreatedAt().toString()).build();
+			
+			inProgressMentos.add(dto);
+		}
+		
+		MentoDetailHomeDTO result = MentoDetailHomeDTO.builder()
+				.introduceComment(introduceComment)
+				.inProgressMentos(inProgressMentos)
+				.build();
+		
+		return result;
 	}
 
 }

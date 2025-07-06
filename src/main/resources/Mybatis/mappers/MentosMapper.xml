@@ -30,9 +30,12 @@
 		<result property="createdAt" column="created_at" />
 		<result property="updatedAt" column="updated_at" />
 		<result property="status" column="status" />
-		<result property="matchTypeIdFirst" column="match_type_id_first" />
-		<result property="matchTypeIdSecond" column="match_type_id_second" />
-		<result property="matchTypeIdThird" column="match_type_id_third" />
+		<result property="matchTypeIdFirst"
+			column="match_type_id_first" />
+		<result property="matchTypeIdSecond"
+			column="match_type_id_second" />
+		<result property="matchTypeIdThird"
+			column="match_type_id_third" />
 	</resultMap>
 
 
@@ -48,8 +51,8 @@
 		region_detail,
 		content, price, times, created_at,
 		updated_at, status,
-		match_type_first, match_type_second,
-		match_type_third
+		match_type_id_first, match_type_id_second,
+		match_type_id_third
 		) VALUES (
 		seq_mentos_id.nextval, #{categoryId},
 		#{languageId}, #{mentoId}, #{title}, #{simpleContent},
@@ -64,6 +67,51 @@
 		#{matchTypeFirst}, #{matchTypeSecond}, #{matchTypeThird}
 		)
 	</insert>
+
+	<update id="updateMentos" parameterType="map">
+		UPDATE mentos
+		SET
+		category_id = #{CreateMentosDBDTO.categoryId},
+		language_id = #{CreateMentosDBDTO.languageId},
+		mento_id =
+		#{CreateMentosDBDTO.mentoId},
+		title = #{CreateMentosDBDTO.title},
+		simple_content = #{CreateMentosDBDTO.simpleContent},
+		<if test="CreateMentosDBDTO.image != null">
+			image = #{CreateMentosDBDTO.image},
+		</if>
+		min_member = #{CreateMentosDBDTO.minMember},
+		max_member =
+		#{CreateMentosDBDTO.maxMember},
+		start_day =
+		#{CreateMentosDBDTO.startDay},
+		end_day = #{CreateMentosDBDTO.endDay},
+		start_time = #{CreateMentosDBDTO.startTime},
+		end_time =
+		#{CreateMentosDBDTO.endTime},
+		selected_days =
+		#{CreateMentosDBDTO.selectedDays},
+		region_group =
+		#{CreateMentosDBDTO.regionGroup},
+		region_subgroup =
+		#{CreateMentosDBDTO.regionSubgroup},
+		region_detail =
+		#{CreateMentosDBDTO.regionDetail},
+		content =
+		#{CreateMentosDBDTO.content},
+		price = #{CreateMentosDBDTO.price},
+		times
+		= #{CreateMentosDBDTO.times},
+		updated_at = SYSDATE,
+		match_type_id_first
+		= #{CreateMentosDBDTO.matchTypeFirst},
+		match_type_id_second =
+		#{CreateMentosDBDTO.matchTypeSecond},
+		match_type_id_third =
+		#{CreateMentosDBDTO.matchTypeThird}
+		WHERE mentos_id = #{mentosId}
+	</update>
+
 
 	<select id="getAllCategories"
 		resultType="com.shinhan.memento.dto.CategoryDTO">
@@ -106,10 +154,11 @@
 		</if>
 		<if test="matchTypeId != null">
 			AND (
-			match_type_first = #{matchTypeId}
-			OR match_type_second
-			= #{matchTypeId}
-			OR match_type_third = #{matchTypeId}
+			match_type_id_first = #{matchTypeId}
+			OR
+			match_type_id_second = #{matchTypeId}
+			OR match_type_id_third =
+			#{matchTypeId}
 			)
 		</if>
 		<if test="categoryId != null">
@@ -136,6 +185,20 @@
 		status='ACTIVE'
 	</select>
 
+	<select id="showInProgressMentosList" parameterType="int"
+		resultMap="mentosResultMap">
+		select *
+		from (select * from mentos
+		where mento_id=#{mentoId}
+		and start_day &lt; = sysdate
+		and end_day &gt; = sysdate
+		and
+		status='ACTIVE'
+		order by start_day desc
+		)
+		where rownum &lt; = 3
+	</select>
+
 	<select id="showMentosListByMentoId" parameterType="map"
 		resultMap="mentosResultMap">
 		SELECT *
@@ -151,5 +214,25 @@
 		)
 		WHERE ROWNUM &lt;= 12
 	</select>
+
+	<select id="findSimilarMentosList" parameterType="map"
+		resultMap="mentosResultMap">
+		select *
+		from (
+		select * from mentos
+		where
+		language_id=#{languageId}
+		and category_id=#{categoryId}
+		and
+		status='ACTIVE'
+		and region_group=#{regionGroup}
+		and
+		mentos_id!=#{mentosId}
+		order by created_at desc
+		)
+		where rownum &lt; =3
+	</select>
+
+
 </mapper>
 

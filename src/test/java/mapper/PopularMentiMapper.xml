@@ -4,20 +4,60 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.shinhan.memento.mapper.PopularMentiMapper">
-
-  <select id="findPopularMenti" resultType="com.shinhan.memento.dto.PopularMentiDTO">
-	  <![CDATA[
-	  SELECT * FROM (
-	    SELECT member_id AS memberId,
-	           nickname,
-	           profile_image_url AS profileImage,
-	           score
-	    FROM member
-	    WHERE user_type IN ('MENTI', 'AFFILIATES', 'PREMENTO')
-	    ORDER BY score DESC
-	  )
-	  WHERE ROWNUM <= 7
-	  ]]>
-  </select>
-
+    
+    <resultMap id="popularMentiMap" type="com.shinhan.memento.dto.PopularMentiDTO">
+        <result property="memberId" column="memberId"/>
+        <result property="nickname" column="nickname"/>
+        <result property="profileImage" column="profileImage"/>
+        <result property="score" column="score"/>
+    </resultMap>
+    
+    <select id="findPopularMenti" resultMap="popularMentiMap">
+    <![CDATA[
+		SELECT *
+		FROM (
+		    SELECT
+		        m.member_id AS memberId,
+		        m.nickname,
+		        m.profile_image_url AS profileImage,
+		        NVL(matchup_scores.score, 0) + NVL(mentos_scores.score, 0) + NVL(keepgoing_scores.score, 0) AS score
+		    FROM
+		        member m
+		    LEFT JOIN (
+		        SELECT
+		            member_id,
+		            SUM(CASE WHEN status = 'ACTIVE' THEN 1
+		                     WHEN status = 'INACTIVE' THEN 2
+		                     ELSE 0
+		                END) AS score
+		        FROM MEMBER_MATCHUP
+		        GROUP BY member_id
+		    ) matchup_scores ON m.member_id = matchup_scores.member_id
+		    LEFT JOIN (
+		        SELECT
+		            member_id,
+		            SUM(CASE WHEN status = 'ACTIVE' THEN 1
+		                     WHEN status = 'INACTIVE' THEN 2
+		                     ELSE 0
+		                END) AS score
+		        FROM MEMBER_MENTOS
+		        GROUP BY member_id
+		    ) mentos_scores ON m.member_id = mentos_scores.member_id
+		    LEFT JOIN (
+		        SELECT
+		            member_id,
+		            SUM(CASE WHEN status = 'ACTIVE' THEN 1
+		                     ELSE 0
+		                END) AS score
+		        FROM MEMBER_KEEPGOING
+		        GROUP BY member_id
+		    ) keepgoing_scores ON m.member_id = keepgoing_scores.member_id
+		    WHERE
+		        m.user_type IN ('MENTI', 'AFFILIATES', 'PREMENTO')
+		    ORDER BY
+		        score DESC, m.member_id ASC
+		)
+		WHERE ROWNUM <= 7
+    ]]>
+    </select>
 </mapper>
