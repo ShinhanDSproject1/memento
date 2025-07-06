@@ -18,8 +18,9 @@ import java.util.Map;
 import java.util.Set;
 import java.util.UUID;
 import java.util.stream.Collectors;
-import javax.swing.ListModel;
+
 import org.apache.ibatis.jdbc.Null;
+import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
@@ -40,29 +41,33 @@ import com.shinhan.memento.dto.MyDashboardResponseDTO;
 import com.shinhan.memento.dto.MyJoinMatchupByDashboardResponseDTO;
 import com.shinhan.memento.dto.MyJoinMentosByDashboardResponseDTO;
 import com.shinhan.memento.dto.MyMatchTypeByDashboardResponseDTO;
+import com.shinhan.memento.dto.JoinKeepgoingDTO;
+import com.shinhan.memento.dto.JoinMatchupDTO;
 import com.shinhan.memento.dto.MyMatchupListResponseDTO;
 import com.shinhan.memento.dto.MyMentosListResponseDTO;
+import com.shinhan.memento.dto.MyPageSideBarResponseDTO;
 import com.shinhan.memento.dto.MyPaymentListResponseDTO;
 import com.shinhan.memento.dto.MyProfileDBUpdateDTO;
 import com.shinhan.memento.dto.MyProfileInfoResponseDTO;
 import com.shinhan.memento.dto.MyProfileUpdateRequestDTO;
 import com.shinhan.memento.dto.PaymentDetailResponseDTO;
+import com.shinhan.memento.dto.RefundRequestDTO;
 import com.shinhan.memento.dto.SparkTestResultRequestDTO;
 import com.shinhan.memento.dto.SparkTestResultResponseDTO;
 import com.shinhan.memento.dto.ValidateCashRequestDTO;
 import com.shinhan.memento.dto.ValidateCashResponseDTO;
+import com.shinhan.memento.dto.mentos.JoinMentosDTO;
 import com.shinhan.memento.mapper.InterestMapper;
 import com.shinhan.memento.mapper.MypageMapper;
 import com.shinhan.memento.model.BaseStatus;
 import com.shinhan.memento.model.CashProduct;
-import com.shinhan.memento.model.Interest;
+import com.shinhan.memento.model.MemberMentos;
 import com.shinhan.memento.model.PayType;
 import com.shinhan.memento.model.Payment;
 import com.shinhan.memento.model.Payment_Step;
 import com.shinhan.memento.model.SparkTestType;
 
 import org.springframework.beans.factory.annotation.Value;
-import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
@@ -80,7 +85,17 @@ public class MyPageService {
 
 	@Value("${file.upload.dir}")
 	private String uploadDir;
-
+	
+	@Autowired
+	private MemberMentosService memberMentosService;
+	
+	//킵고잉 탈퇴용
+	@Autowired
+	SqlSession sqlSession;
+	String keepNamespace = "com.shinhan.memento.dao.MemberKeepgoingDAOInterface.";
+	//매치업 참여 취소
+	String matchupNamespace = "com.shinhan.memento.dao.MemberMatchUpDAO.";
+	
 	public ValidateCashResponseDTO validateCash(ValidateCashRequestDTO reqDTO, int userId) {
 		CashProduct product = myPageDAO.validateCash(reqDTO.getCashProductID());
 		String orderId = UUID.randomUUID().toString();
@@ -183,7 +198,7 @@ public class MyPageService {
 
 		result.stream().forEach(data -> {
 			MyPaymentListResponseDTO dto = MyPaymentListResponseDTO.builder().orderId((String) data.get("ORDERID"))
-					.amount(((BigDecimal) data.get("AMOUNT")).intValue())
+					.amount(((BigDecimal) data.get("AMOUNT")).intValue()).payType((String) data.get("PAYTYPE"))
 					.matchupId(((BigDecimal) data.get("MATCHUPID")).intValue())
 					.mentosId(((BigDecimal) data.get("MENTOSID")).intValue())
 					.keepgoingId(((BigDecimal) data.get("KEEPGOINGID")).intValue())
@@ -211,7 +226,7 @@ public class MyPageService {
 
 		return SparkTestResultResponseDTO.builder().result(updateTypeResult == 1 ? "success" : "fail").build();
 	}
-	
+
 	@Transactional
 	public boolean updateProfile(Integer memberId, MyProfileUpdateRequestDTO dto, MultipartFile imgFile) {
 		String imageUrl = null;
@@ -397,10 +412,16 @@ public class MyPageService {
 
 		result.stream().forEach(data -> {
 			Timestamp payAtTimestamp = (Timestamp) data.get("PAYAT");
+			Timestamp mentosStartDay = (Timestamp) data.get("MENTOSSTARTDAY");
 			String payAtFormatted = null;
+			String startDayFormatted = null;
 			if (payAtTimestamp != null) {
 				// Convert Timestamp to Date and then format to String
 				payAtFormatted = formatter.format(new Date(payAtTimestamp.getTime()));
+			}
+			if (mentosStartDay != null) {
+				// Convert Timestamp to Date and then format to String
+				startDayFormatted = formatter.format(new Date(mentosStartDay.getTime()));
 			}
 
 			PaymentDetailResponseDTO dto = PaymentDetailResponseDTO.builder().orderId((String) data.get("ORDERID"))
@@ -408,13 +429,15 @@ public class MyPageService {
 					.matchupId(((BigDecimal) data.get("MATCHUPID")).intValue())
 					.matchupTitle(((BigDecimal) data.get("MATCHUPID")).intValue() == 0 ? null
 							: (String) data.get("MATCHUPTITLE"))
+					.matchupCount(
+							data.get("MATCHUPCOUNT") == null ? 0 : ((BigDecimal) data.get("MATCHUPCOUNT")).intValue())
 					.matchupPrice(
 							data.get("MATCHUPPRICE") == null ? 0 : ((BigDecimal) data.get("MATCHUPPRICE")).intValue())
 					.memberProfileImageUrl((String) data.get("MEMBERPROFILEIMAGEURL"))
 					.mentosId(((BigDecimal) data.get("MENTOSID")).intValue())
 					.mentosTitle(((BigDecimal) data.get("MENTOSID")).intValue() == 0 ? null
 							: (String) data.get("MENTOSTITLE"))
-					.mentosImage((String) data.get("MENTOSIMAGE"))
+					.mentosImage((String) data.get("MENTOSIMAGE")).mentosStartDay(startDayFormatted)
 					.mentosPrice(
 							data.get("MENTOSPRICE") == null ? 0 : ((BigDecimal) data.get("MENTOSPRICE")).intValue())
 					.keepgoingId(((BigDecimal) data.get("KEEPGOINGID")).intValue())
@@ -489,5 +512,124 @@ public class MyPageService {
 		return dashboardData;
 	}
 	
+
+	@Transactional
+	public boolean refundAction(Integer memberId, String orderId) {
+		boolean result = true;
+		// 주문 번호로 킵고잉 아이디, 멘토스 아이디, 매치업 아이디, 충전
+		List<Map<String, Object>> refundDataMap = mypageMapper.refundSelectData(memberId, orderId);
+		List<RefundRequestDTO> refundDataList = new ArrayList<RefundRequestDTO>();
+
+		refundDataMap.stream().forEach(data -> {
+			RefundRequestDTO dto = RefundRequestDTO.builder().orderId((String) data.get("ORDERID"))
+					.amount(data.get("AMOUNT") == null ? 0 : ((BigDecimal)data.get("AMOUNT")).intValue())
+					.payType((String) data.get("PAYTYPE"))
+					.matchupId(data.get("MATCHUPID") == null ? 0 : ((BigDecimal) data.get("MATCHUPID")).intValue())
+					.matchupPrice(
+							data.get("MATCHUPPRICE") == null ? 0 : ((BigDecimal) data.get("MATCHUPPRICE")).intValue())
+					.mentosId(data.get("MENTOSID") == null ? 0 : ((BigDecimal) data.get("MENTOSID")).intValue())
+					.mentosPrice(
+							data.get("MENTOSPRICE") == null ? 0 : ((BigDecimal) data.get("MENTOSPRICE")).intValue())
+					.keepgoingId(
+							data.get("KEEPGOINGID") == null ? 0 : ((BigDecimal) data.get("KEEPGOINGID")).intValue())
+					.keepgoingPrice(data.get("KEEPGOINGPRICE") == null ? 0
+							: ((BigDecimal) data.get("KEEPGOINGPRICE")).intValue())
+					.userBalance(
+							data.get("USERBALANCE") == null ? 0 : ((BigDecimal) data.get("USERBALANCE")).intValue())
+					.memberPoint(
+							data.get("MEMBERPOINT") == null ? 0 : ((BigDecimal) data.get("MEMBERPOINT")).intValue())
+					.build();
+
+			refundDataList.add(dto);
+		});
+		RefundRequestDTO shareDataDTO = refundDataList.get(0);
+		Integer initBalance = shareDataDTO.getUserBalance();
+		Integer amount = shareDataDTO.getAmount();
+		String payType = shareDataDTO.getPayType();
+
+		//CHARGE or USE or REFUND -> REFUND의 경우 버튼이 존재하지 않음
+		System.out.println(payType);
+
+		if(payType.equalsIgnoreCase("REFUND")) {
+			return false;
+		}else if(payType.equalsIgnoreCase("CHARGE")) {
+			System.out.println(initBalance);
+			System.out.println(amount);
+			if(initBalance < amount) {
+				return false;
+			}else {
+				System.out.println("어");
+				initBalance -= amount;
+			}
+		}else {
+			//루프 돌면서 금액 계산 및 탈퇴
+			System.out.println("디");
+			for (RefundRequestDTO refund : refundDataList) {
+				if (refund.getMatchupId() != 0) {
+					//매치업 취소
+					System.out.println("가");
+					JoinMatchupDTO jmatchDto = new JoinMatchupDTO(refund.getMatchupId(), memberId);
+					int jmatchCancel = sqlSession.update(matchupNamespace+"cancelJoinMatchupBy2id",jmatchDto);
+					System.out.println(jmatchCancel);
+					if(jmatchCancel > 0) {
+						initBalance += refund.getMatchupPrice();
+					}else {
+						return false;
+					}
+					
+				}
+				if (refund.getMentosId() != 0) {
+					// 멘토스 취소
+					System.out.println("문");
+					JoinMentosDTO jmentosDto = new JoinMentosDTO(refund.getMentosId(), memberId);
+					MemberMentos mm =  memberMentosService.checkValidMemberMentos(jmentosDto);
+					int jmentosCancel = memberMentosService.cancelJoinMentos(mm.getMemberMentosId());
+					System.out.println(jmentosCancel);
+					if(jmentosCancel > 0) {
+						initBalance += refund.getMentosPrice();
+					}else {
+						return false;
+					}
+					
+				}
+				if (refund.getKeepgoingId() != 0) {
+					//킵고잉 탈퇴
+					System.out.println("제");
+					JoinKeepgoingDTO jkeepDto = new JoinKeepgoingDTO(refund.getKeepgoingId(), memberId);
+					int jkeepcancel = sqlSession.update(keepNamespace+"cancelMemberKeepgoingBy2id", jkeepDto);
+					System.out.println(jkeepcancel);
+					if(jkeepcancel > 0) {
+						initBalance += refund.getKeepgoingPrice();
+					}else {
+						return false;
+					}
+				}
+			}
+		}
+		
+		//user balance update
+		System.out.println("야");
+		Integer resultBalance = initBalance;
+		System.out.println(resultBalance);
+		int balanceUpdateResult = mypageMapper.updateUserBalanceByRefund(resultBalance, memberId);
+		System.out.println(balanceUpdateResult);
+		if(balanceUpdateResult <= 0) {
+			return false;
+		}
+		System.out.println("?");
+		// payment update -> 주문번호
+		int paymentUpateRefundResult = mypageMapper.updatePaymentByRefund(orderId);
+		System.out.println(paymentUpateRefundResult);
+		if(paymentUpateRefundResult <= 0) {
+			return false;
+		}
+		
+		return result;
+	}
+	
+	public MyPageSideBarResponseDTO selectMySideBarInfo(Integer memberId) {
+		MyPageSideBarResponseDTO dto = mypageMapper.selectMySideBarInfo(memberId);
+		return dto;
+	}
 
 }

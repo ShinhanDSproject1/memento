@@ -117,6 +117,7 @@ a {
   gap: 20px;
   border-top: 1px solid #f1f3f5;
   padding-top: 20px;
+  width : 100%;
   
 }
 
@@ -132,8 +133,9 @@ a {
   display: flex;
   justify-content: flex-end;
   flex: 1;
-  margin-left: 500px;
+  margin-left: 0;
   gap: 10px;
+  flex-shrink: 0;
 }
 .price-text {
   font-size: 28px;
@@ -150,7 +152,7 @@ a {
     transition: all 0.2s;
     width : auto;
     background-color: #53adee;
-    margin-left: 120px;
+    /* margin-left: 120px; */
 }
 .custom-btn:hover {
     filter: brightness(1.1);
@@ -349,7 +351,7 @@ a {
     display: flex;
     flex-wrap: wrap;
     align-content: space-between;
-    min-height: 250px;
+    min-height: 200px;
     transition: all 0.2s ease-in-out;
 }
 .matchup-card:hover {
@@ -396,7 +398,7 @@ a {
     background: #4dabf7;
 }
 h3.card-title {
-    font-size: 16px;
+    font-size: 20px;
     font-weight: 700;
     margin: 5px 0;
     line-height: 1.5;

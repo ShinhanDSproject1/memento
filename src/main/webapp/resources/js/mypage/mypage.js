@@ -2,6 +2,7 @@
 // DOM 로딩 후 스크린에 initial page 로드
 $(function () {
   $('#screen').load(initialPage);
+  fetchSideBarInfo()
 });
 
 // 동적 링크 클릭 처리
@@ -63,5 +64,49 @@ function imgUrl(imgtag, srcUrl) {
   } else {
     imgtag.src = '/memento/resources/images/logo.png'
     imgtag.style.background = 'white';
+  }
+}
+
+async function fetchSideBarInfo() {
+  const sideBar = document.getElementById('profile-page')
+
+  const API_URL = 'http://localhost:9999/memento/api/mypage/sidebar-info'
+
+  try {
+    const response = await fetch(API_URL)
+
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`)
+    }
+
+    const data = await response.json()
+
+    const sideBarData = data.result;
+
+    console.log(sideBarData)
+
+    const profileImg = document.getElementById('profileImg')
+    const userNicknameDiv = document.getElementById('userNickname')
+    const userBalanceSpan = document.getElementById('userBalance')
+    const userPointSpan = document.getElementById('userPoint')
+    const userTypeDiv = document.getElementById('userType')
+
+    if (sideBarData.profileImageUrl != 'null') {
+      if (sideBarData.profileImageUrl[0] == '/') {
+        profileImg.src = '/mememto' + sideBarData.profileImageUrl
+      } else {
+        profileImg.src = sideBarData.profileImageUrl
+      }
+    } else {
+      profileImg.src = '/memento/resources/images/logo.png'
+    }
+    userNicknameDiv.textContent = `${sideBarData.nickname}`
+    userBalanceSpan.textContent = `${(sideBarData.balance).toLocaleString()}`
+    userPointSpan.textContent = `${sideBarData.point}P`
+    userTypeDiv.textContent = `${sideBarData.userType}`
+
+  } catch (error) {
+    console.log(error)
+
   }
 }

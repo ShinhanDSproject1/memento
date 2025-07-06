@@ -58,7 +58,7 @@ $(() => {
 
 				// 3-2. 집계된 개수를 바탕으로 주문의 전체 성격(태그)을 결정합니다.
 				let orderInfo = {};
-				const isCancelled = items.some(item => item.paymentStatus === 'INACTIVE');
+				const isCancelled = items.some(item => item.paymentStatus === 'INACTIVE' || item.payType === 'REFUND');
 				const productTypesPresent = Object.values(counts).filter(count => count > 0).length;
 
 				if (isCancelled) {

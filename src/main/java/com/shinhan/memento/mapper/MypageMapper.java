@@ -5,7 +5,9 @@ import java.util.Map;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
+
 import com.shinhan.memento.dto.MyMatchTypeByDashboardResponseDTO;
+import com.shinhan.memento.dto.MyPageSideBarResponseDTO;
 import com.shinhan.memento.dto.MyProfileDBUpdateDTO;
 import com.shinhan.memento.model.SparkTestType;
 
@@ -20,4 +22,8 @@ public interface MypageMapper {
 	public abstract List<Map<String, Object>> myJoinMatchupByDashboard(@Param("memberId") Integer memberId);
 	public abstract List<Map<String, Object>> myJoinMentosByDashboard(@Param("memberId") Integer memberId);
 	public abstract MyMatchTypeByDashboardResponseDTO myMatchTypeByDashboard(@Param("memberId") Integer memberId);
+	public abstract List<Map<String, Object>> refundSelectData(@Param("memberId") Integer memberId, @Param("orderId")String orderId);
+	public abstract int updateUserBalanceByRefund(@Param("resultBalance") Integer resultBalance, @Param("memberId") Integer memberId);
+	public abstract int updatePaymentByRefund(@Param("orderId") String orderId);
+	public abstract MyPageSideBarResponseDTO selectMySideBarInfo(@Param("memberId") Integer memberId);
 }

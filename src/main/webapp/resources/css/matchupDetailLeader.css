@@ -126,17 +126,21 @@ body {
 }
 
 .info-grid {
-	display: grid;
-	grid-template-columns: repeat(3, 1fr);
-	gap: 20px;
-	width: 100%;
-	margin-top: 0px;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  text-align: center;
+  width: 100%;
+  padding: 0; /* 좌우 여백 없애기 */
+  margin: 0 auto; /* 중앙 정렬 */
+  box-sizing: border-box;
 }
 
 .group-item {
-	display: flex;
-	flex-direction: column;
-	gap: 8px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0;
+  margin: 0;
 }
 
 .div4, .div5, .div6 {
