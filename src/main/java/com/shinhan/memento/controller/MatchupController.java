@@ -254,7 +254,7 @@ public class MatchupController {
       model.addAttribute("regionGroups", regionGroups);
       model.addAttribute("categories", categories);
       model.addAttribute("languages", languages);
-      
+      System.out.println(response.getList());
       return "/matchup/matchupList";
    }
    
@@ -267,6 +267,7 @@ public class MatchupController {
        params.put("pagination", pagination);
        
        MatchupPagingResponseDTO<MatchupListDTO> matchups = matchupService.getMatchupList(params);
+      
        return new BaseResponse<>(matchups);
    }
    

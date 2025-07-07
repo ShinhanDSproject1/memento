@@ -54,23 +54,24 @@ public class MatchupService {
 	@Autowired
 	private com.shinhan.memento.mapper.MatchupSimilarMapper matchupSimilarMapper;
 	
-    public List<MatchupListDTO> getSimilarMatchups(MatchupDetailDTO currentMatchup) {
-        // 현재 매치업 정보가 없거나, 지역 정보가 없으면 빈 리스트를 반환.
-        if (currentMatchup == null || currentMatchup.getRegionGroup() == null) {
-            return Collections.emptyList(); 
-        }
+	// MatchupService.java
 
-        // Mapper에 전달할 파라미터를 Map에 담기.
-        Map<String, Object> params = new HashMap<>();
-        params.put("regionGroup", currentMatchup.getRegionGroup());
-        params.put("regionSubgroup", currentMatchup.getRegionSubgroup());
-        params.put("matchupId", currentMatchup.getMatchupId());
-        
-        System.out.println(">>>>> findSimilarMatchups 파라미터: " + params);
-        
-        // Mapper를 호출하여 쿼리를 실행하고 결과를 반환.
-        return matchupSimilarMapper.findSimilarMatchups(params);
-    }
+	public List<MatchupListDTO> getSimilarMatchups(MatchupDetailDTO currentMatchup) {
+	    if (currentMatchup == null) {
+	        return Collections.emptyList();
+	    }
+
+	    // [수정] Java에서 문자열을 자르는 로직을 모두 제거합니다.
+	    // DB에서 가져온 값을 그대로 전달하기만 합니다.
+	    Map<String, Object> params = new HashMap<>();
+	    params.put("regionGroup", currentMatchup.getRegionGroup());
+	    params.put("regionSubgroup", currentMatchup.getRegionSubgroup());
+	    params.put("matchupId", currentMatchup.getMatchupId());
+	    
+	    System.out.println(">>>>> 최종 파라미터 (수정 후): " + params);
+	    
+	    return matchupSimilarMapper.findSimilarMatchups(params);
+	}
 	
 	/* 매치업 조회 */
 	public MatchupPagingResponseDTO<MatchupListDTO> getMatchupList(Map<String, Object> params) {
