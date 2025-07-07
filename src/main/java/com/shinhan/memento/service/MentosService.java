@@ -364,5 +364,6 @@ public class MentosService {
 	public void deleteMentos(int mentosId) {
 		log.info("[MentosService.deleteMentos]");
 		mentosMapper.deleteMentos(mentosId);
+		memberMentosMapper.deleteMemberMentos(mentosId);
 	}
 }
