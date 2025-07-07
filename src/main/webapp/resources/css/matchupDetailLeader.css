@@ -42,27 +42,21 @@ body {
 }
 
 .top-info-category, .top-info-mento {
-	border-radius: 50px;
-	padding: 8px 15px;
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	font-family: "Inter-SemiBold", sans-serif;
-	font-size: 15px;
-	line-height: 150%;
-	letter-spacing: -0.023em;
-	font-weight: 600;
-	white-space: nowrap;
+    border-radius: 50px;
+    padding: 8px 15px;
+    font-family: "D2Coding-Bold", sans-serif;
+    font-size: 13px;
+    font-weight: 600;
+    white-space: nowrap;
 }
-
 .top-info-category {
-	background-color: #c2dbe9;
+	background-color: #e9ecef;
 	color: #757575;
 }
 
 .top-info-mento {
-	background-color: #1fa3d8;
-	color: #ffffff;
+	background-color: #4A90E2;
+	color: rgb(62 64 68);
 }
 
 .top-info-mento.completed {
@@ -168,7 +162,7 @@ body {
 .top-info-line {
 	width: 100%;
 	height: 1px;
-	background-color: #a6abbd;
+	background-color: #e2e2e2;
 	margin: 10px 0;
 }
 
@@ -631,10 +625,10 @@ body {
 .java-c2 {
 	color: rgba(0, 0, 0, 0.51);
 	text-align: center;
-	font-family: "Inter-Medium", sans-serif;
+	font-family: "D2Coding-Bold", sans-serif;
 	font-size: 10px;
 	line-height: 150%;
-	letter-spacing: -0.023em;
+	letter-spacing: -0.02em;
 	font-weight: 500;
 	white-space: nowrap;
 }
