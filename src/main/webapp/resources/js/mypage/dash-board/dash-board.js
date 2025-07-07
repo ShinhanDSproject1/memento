@@ -32,6 +32,7 @@ $(document).ready(function () {
         itemLi.className = 'dash-list__item'
         const matchupImg = document.createElement('img')
         imgUrl(matchupImg, item.leaderProfileImageUrl)
+        matchupImg.className = 'dash-list__avatar'
         const myMatchupDetails = document.createElement('div')
         myMatchupDetails.className = 'dash-list__details'
         const myMatchupTitle = document.createElement('span')
