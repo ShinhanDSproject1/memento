@@ -3,7 +3,6 @@ $(() => {
     const profileForm = document.getElementById('profileForm');
 
     profileForm.addEventListener('submit', async function (e) {
-        e.preventDefault
         const formData = new FormData();
         formData.append('nickname', document.getElementById('nickname').value)
         formData.append('interestNames', document.getElementById('interestNames').value)
@@ -11,17 +10,17 @@ $(() => {
         formData.append('phone', document.getElementById('phone').value)
         formData.append('introduction', document.getElementById('introduction').value)
         const imgFile = document.getElementById('profile-img').files[0]
-        let originalProfileUrl = document.getElementById('original-profile-img-url').value()
+        let originalProfileUrl = document.getElementById('original-profile-img-url').value
         if (imgFile) {
             formData.append('imageFile', imgFile)
             originalProfileUrl = ''
         }
-        formData.append("originalProfileUrl" ,originalProfileUrl)
+        formData.append("originalProfileUrl", originalProfileUrl)
 
         const updateUrl = '/memento/api/mypage/profile-update';
         try {
             const response = await fetch(updateUrl, {
-                method: 'POST',
+                method: 'PUT',
                 body: formData
             })
             if (response.ok) {
@@ -36,7 +35,6 @@ $(() => {
 
     })
     profileForm.addEventListener('reset', async function (e) {
-        e.preventDefault
         fetchProfileData()
     })
 
@@ -44,7 +42,7 @@ $(() => {
     async function fetchProfileData() {
         const container = document.getElementById('profile-page')
         // 2. API를 호출합니다. URL은 실제 환경에 맞게 수정해야 합니다.
-        const API_URL = 'http://localhost:9999/memento/api/mypage/profile-info'; // 백엔드 API 엔드포인트 나중에 코드 합치기 
+        const API_URL = 'http://localhost:9999/memento/api/mypage/profile-info';
 
         try {
             const response = await fetch(API_URL);
@@ -63,15 +61,7 @@ $(() => {
 
             const profileImg = document.getElementById('profile-image-input')
             profileImg.alt = '프로필 이미지'
-            if (profileData.profileImgUrl) {
-                if (profileData.profileImgUrl[0] == '/') {
-                    profileData.src = '/mememto' + profileData.profileImgUrl
-                } else {
-                    profileData.src = profileData.profileImgUrl
-                }
-            } else {
-                profileImg.src = '/memento/resources/images/logo.png'
-            }
+            imgUrl(profileImg, profileData.profileImgUrl)
             const profileImgValue = document.getElementById('original-profile-img-url')
             profileImgValue.value = `${profileData.profileImgUrl}`
 
@@ -90,7 +80,10 @@ $(() => {
 
             } else {
                 interestList.forEach(element => {
-                    intersetNameValue += '#' + element + " "
+                    if (element != "") {
+                        intersetNameValue += '#' + element + " "
+                    }
+
                 });
                 interestNames.value = intersetNameValue.trim()
             }
@@ -130,9 +123,5 @@ $(() => {
             console.error("데이터를 불러오는 중 오류 발생:", error);
             container.innerHTML = '<p>프로필 정보를 불러올 수 없습니다...</p>';
         }
-    }
-
-    function resetValue() {
-
     }
 })

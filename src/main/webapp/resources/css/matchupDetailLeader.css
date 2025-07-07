@@ -42,27 +42,21 @@ body {
 }
 
 .top-info-category, .top-info-mento {
-	border-radius: 50px;
-	padding: 8px 15px;
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	font-family: "Inter-SemiBold", sans-serif;
-	font-size: 15px;
-	line-height: 150%;
-	letter-spacing: -0.023em;
-	font-weight: 600;
-	white-space: nowrap;
+    border-radius: 50px;
+    padding: 8px 15px;
+    font-family: "D2Coding-Bold", sans-serif;
+    font-size: 13px;
+    font-weight: 600;
+    white-space: nowrap;
 }
-
 .top-info-category {
-	background-color: #c2dbe9;
+	background-color: #e9ecef;
 	color: #757575;
 }
 
 .top-info-mento {
-	background-color: #1fa3d8;
-	color: #ffffff;
+	background-color: #4A90E2;
+	color: rgb(62 64 68);
 }
 
 .top-info-mento.completed {
@@ -126,17 +120,21 @@ body {
 }
 
 .info-grid {
-	display: grid;
-	grid-template-columns: repeat(3, 1fr);
-	gap: 20px;
-	width: 100%;
-	margin-top: 0px;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  text-align: center;
+  width: 100%;
+  padding: 0; /* 좌우 여백 없애기 */
+  margin: 0 auto; /* 중앙 정렬 */
+  box-sizing: border-box;
 }
 
 .group-item {
-	display: flex;
-	flex-direction: column;
-	gap: 8px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0;
+  margin: 0;
 }
 
 .div4, .div5, .div6 {
@@ -164,7 +162,7 @@ body {
 .top-info-line {
 	width: 100%;
 	height: 1px;
-	background-color: #a6abbd;
+	background-color: #e2e2e2;
 	margin: 10px 0;
 }
 
@@ -339,7 +337,8 @@ body {
 
 /* --- ✨ [수정된 부분 시작] --- */
 
-/* 네모난 상자를 투명하게 만들어 원형 디자인만 보이도록 합니다. */
+/* --- ✨ [수정/추가할 CSS 시작] --- */
+
 .type-item-box {
 	border: none;
 	background-color: transparent;
@@ -351,42 +350,45 @@ body {
 	justify-content: center;
 }
 
-/* 원형 디자인을 새롭게 정의합니다. */
 .type-circle {
-	width: 160px;
-	height: 160px;
-	border-radius: 50%;
-	background-color:#F5FFFF;
-	border: 1px #F5FFFF;
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-	justify-content: center;
-	gap: 8px; /* 아이콘과 텍스트 사이 간격 */
-	flex-shrink: 0;
+    width: 160px;
+    height: 160px;
+    border-radius: 50%;
+    background-color: #F5FFFF;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid #d0f0f7;
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.08);
+    gap: 10px; /* 이미지와 텍스트 사이 간격 */
+    padding: 10px; /* 내용물이 원 밖으로 나가지 않도록 여백 추가 */
+    text-align: center;
 }
 
-/* 아이콘과 텍스트의 위치를 flexbox에 맞게 조정합니다. */
-.ellipse-icon {
-	width: 45px;
-	height: 45px;
-	position: static;
-	transform: none;
+/* 새로 추가한 캐릭터 이미지 스타일 */
+.type-image {
+    width: 80px;  /* 이미지 크기는 필요에 맞게 조정하세요 */
+    height: 80px; /* 이미지 크기는 필요에 맞게 조정하세요 */
+    object-fit: contain; /* 이미지가 찌그러지지 않게 비율 유지 */
+}
+
+/* 해당하는 타입이 없을 때 보여줄 기본 이모지 스타일 */
+.type-emoji {
+    font-size: 40px; /* 이모지 크기 */
+    line-height: 1;
 }
 
 .type-text {
 	color: #333333;
-	text-align: center;
 	font-family: "Inter-Medium", sans-serif;
 	font-size: 16px;
 	font-weight: 500;
-	position: static;
-	width: auto;
-	max-width: 120px;
-	word-break: keep-all;
+	word-break: keep-all; /* 단어가 잘리지 않게 함 */
 	line-height: 1.4;
 }
 
+/* --- ✨ [수정/추가할 CSS 끝] --- */
 /* --- ✨ [수정된 부분 끝] --- */
 
 .middle-area-right {
@@ -623,10 +625,10 @@ body {
 .java-c2 {
 	color: rgba(0, 0, 0, 0.51);
 	text-align: center;
-	font-family: "Inter-Medium", sans-serif;
+	font-family: "D2Coding-Bold", sans-serif;
 	font-size: 10px;
 	line-height: 150%;
-	letter-spacing: -0.023em;
+	letter-spacing: -0.02em;
 	font-weight: 500;
 	white-space: nowrap;
 }
@@ -930,12 +932,15 @@ body {
     font-weight: 500;
     color: #333;
     text-align: left;
+    
+    
 }	
 .section-title {
-	font-size: 18px;
+	font-size: 24px;
     font-weight: 700;
+    margin-bottom: 20px;
+    display: block;
     color: #333;
-    text-align: left;
 }
 
 .frame-3770 {

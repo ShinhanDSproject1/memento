@@ -20,7 +20,6 @@ body {
 	background: #fff;
 	box-sizing: border-box;
 	width: 100vw;
-	overflow-x: hidden;
 }
 
 /* 슬라이더 스타일 */
@@ -352,48 +351,7 @@ rotate(
 	color: #00b39e;
 }
 
-/* 푸터 */
-footer {
-	background-color: #FAFDFF;
-	color: #555;
-	padding: 40px 20px 20px;
-	font-size: 14px;
-	line-height: 1.6;
-}
 
-footer a {
-	color: #1a73e8;
-	text-decoration: none;
-	margin-right: 15px;
-	transition: color 0.3s ease;
-}
-
-footer a:hover {
-	color: #0c47b7;
-	text-decoration: underline;
-}
-
-.footer-links {
-	display: flex;
-	flex-wrap: wrap;
-	gap: 10px;
-	margin-top: 10px;
-}
-
-.footer-info strong {
-	font-weight: 700;
-	font-size: 16px;
-	color: #222;
-}
-
-.footer-bottom {
-	margin-top: 30px;
-	font-size: 13px;
-	color: #777;
-	border-top: 1px solid #ccc;
-	padding-top: 15px;
-	text-align: center;
-}
 
 /* 반응형 */
 @media ( max-width : 768px) {
@@ -512,7 +470,6 @@ footer a:hover {
     position: relative;
 }
 
-/* 배경 장식 요소 */
 .home-page-3::before {
     content: '';
     position: absolute;
@@ -782,7 +739,6 @@ body {
 	background: #fff;
 	box-sizing: border-box;
 	width: 100vw;
-	overflow-x: hidden;
 	z-index: 999;
 }
 
@@ -920,6 +876,7 @@ body {
 	text-align: center;
 	margin-top: 0px;
 	margin-bottom: 40px;
+	white-space: nowrap;
 }
 
 .medal {
@@ -1055,65 +1012,50 @@ body {
 	/* ========================================
    4. FOOTER SECTION
    ======================================== */
-	footer {
-		background-color: #FAFDFF;
-		color: #555;
-		padding: 40px 20px 20px;
-		font-family: 'D2Coding', monospace;
-		font-size: 14px;
-		line-height: 1.6;
-		width: 100vw;
-	}
-	footer a {
-		color: #1a73e8;
-		text-decoration: none;
-		margin-right: 15px;
-		transition: color 0.3s ease;
-	}
-	footer a:hover {
-		color: #0c47b7;
-		text-decoration: underline;
-	}
-	.footer-links {
-		display: flex;
-		flex-wrap: wrap;
-		gap: 10px;
-		margin-top: 10px;
-	}
-	.footer-link {
-		color: #1a73e8;
-		text-decoration: none;
-		transition: color 0.3s ease;
-	}
-	.footer-info strong {
-		font-weight: 700;
-		font-size: 16px;
-		color: #222;
-	}
-	.footer-info .business-link {
-		font-size: 13px;
-		color: #3b82f6;
-	}
-	.footer-contact {
-		font-size: 14px;
-		color: #444;
-	}
-	.footer-bottom {
-		margin-top: 30px;
-		font-size: 13px;
-		color: #777;
-		border-top: 1px solid #ccc;
-		padding-top: 15px;
-	}
 
-	/* 하단 Footer */
-	footer { width:100vw;
-		margin-left: calc(-1 * ( 100vw - 100%)/2);
-		padding: 40px 20px;
-		box-sizing: border-box;
-	}
-	footer a {
-		margin-right: 10px;
-		font-size: 13px;
-	}
+footer {
+    background-color: #FAFDFF;
+    color: #555;
+    font-family: 'D2Coding', monospace;
+    font-size: 14px;
+    line-height: 1.6;
+    box-sizing: border-box;
+    padding: 40px 20px 20px;
+
+    width: 100vw;
+    margin-left: calc(-50vw + 50%);
+}
+
+footer a {
+    color: #1a73e8;
+    text-decoration: none;
+    margin-right: 15px;
+    transition: color 0.3s ease;
+}
+
+footer a:hover {
+    color: #0c47b7;
+    text-decoration: underline;
+}
+
+.footer-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.footer-info strong {
+    font-weight: 700;
+    font-size: 16px;
+    color: #222;
+}
+
+.footer-bottom {
+    margin-top: 30px;
+    font-size: 13px;
+    color: #777;
+    border-top: 1px solid #ccc;
+    padding-top: 15px;
+    text-align: center;
 }

@@ -26,15 +26,26 @@
 <link rel="stylesheet"
 	href="${cpath}/resources/css/mypage/mypageVars.css" />
 <link rel="stylesheet" href="${cpath}/resources/css/sidebar/sidebar.css" />
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/mainpage/notificationModal.css">
 </head>
 <body>
+<%@ include file="../mainpage/notificationModal.jsp"%>
 	<div class="layout-wrapper">
-		<%@ include file="../common/login_header.jsp"%>
+	   <c:choose>
+			<c:when test="${not empty sessionScope.loginUser}">
+				<%@ include file="../common/logout_header.jsp"%>
+			</c:when>
+			<c:otherwise>
+				<%@ include file="../common/login_header.jsp"%>
+			</c:otherwise>
+		</c:choose>
 		<div class="main-content-wrapper">
 			<%@ include file="../sidebar/sidebar.jsp"%>
 			<div id="screen" class="screen page-container"></div>
 		</div>
 	</div>
 	<script src="https://js.tosspayments.com/v2/standard"></script>
+	<script src="${pageContext.request.contextPath}/resources/js/header.js"></script>
+	<script src="${pageContext.request.contextPath}/resources/js/notification.js"></script>
 </body>
 </html>

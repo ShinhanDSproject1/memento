@@ -26,6 +26,7 @@ public enum BaseExceptionResponseStatus implements ResponseStatus {
 	CANNOT_DElETE_MENTOS(4002, HttpStatus.BAD_REQUEST.value(), "멘토스를 삭제할 수 없습니다. "),
 	CANNOT_JOIN_MENTOS(4003, HttpStatus.BAD_REQUEST.value(), "멘토스 참여에 실패했습니다."),
 	CANNOT_FOUND_MENTOS(4004, HttpStatus.BAD_REQUEST.value(), "해당 멘토스를 찾을 수 없습니다."),
+	CANNOT_UPDATE_MENTOS(4005, HttpStatus.BAD_REQUEST.value(), "멘토스를 업데이트할 수 없습니다."),
 	/**
 	 * 5000 : keepgoing 관련
 	 */
@@ -34,7 +35,8 @@ public enum BaseExceptionResponseStatus implements ResponseStatus {
 	 * 6000 : mypage 관련
 	 */
 	NEED_LOGIN(6000, HttpStatus.UNAUTHORIZED.value(), "로그인이 필요합니다."),
-
+	CANNOT_INSERT_MENTOTEST_HISTORY(6001, HttpStatus.BAD_REQUEST.value(), "멘토테스트 기록 실패"),
+	CANNOT_UPDATE_MEMBER_USERTYPE(6002, HttpStatus.BAD_REQUEST.value(), "멤버 유저타입 업데이트 실패"),
 	/**
 	 * 7000 : 결제 관련?
 	 */

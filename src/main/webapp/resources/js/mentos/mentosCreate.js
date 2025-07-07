@@ -111,6 +111,11 @@ $(document).ready(function () {
 		if (typeof oEditors !== "undefined" && oEditors.length > 0) {
 			oEditors.getById["editorTxt"].exec("UPDATE_CONTENTS_FIELD", []);
 		}
+		const fullAddress = $("#roadAddress").val().trim();
+		const spaceIndex = fullAddress.indexOf(" ");
+		
+		const regionGroup = spaceIndex !== -1 ? fullAddress.substring(0, spaceIndex) : fullAddress;
+		const regionSubgroup = spaceIndex !== -1 ? fullAddress.substring(spaceIndex + 1).trim() : "";
 		
 		const data = {
 		  title: $("#title").val(),
@@ -127,8 +132,8 @@ $(document).ready(function () {
 		  times: Number($("#sessionCountValue").val()),
 		  categoryId: Number($("#categoryValue").val()),
 		  languageId: Number($("#languageValue").val()),
-		  regionGroup: $("#roadAddress").val().split(" ")[0] || "지역 없음",
-		  regionSubgroup: $("#roadAddress").val().split(" ")[1] || "",
+		  regionGroup: regionGroup,
+		  regionSubgroup: regionSubgroup,
 		  regionDetail: $("#detailAddress").val(),
 		  content: $("#editorTxt").val(),
 		  matchTypeFirst: Number($(".preferred-type-value1").val()),

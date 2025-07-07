@@ -18,7 +18,7 @@ import com.shinhan.memento.model.Mentos;
 public interface MentosMapper {
 
 	int createMentos(CreateMentosDBDTO dto);
-
+	int updateMentos(Map<String, Object> mentosUpdateParams);
 	List<LanguageDTO> getAllLanguages();
 
 	List<CategoryDTO> getAllCategories();
@@ -39,4 +39,5 @@ public interface MentosMapper {
 	List<Mentos> findSimilarMentosList(Map<String, Object> similarParams);
 	
 	int checkPermission(Map<String, Object> checkParams);
+
 }

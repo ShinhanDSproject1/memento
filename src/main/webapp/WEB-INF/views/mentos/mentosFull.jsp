@@ -18,7 +18,7 @@
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
 	rel="stylesheet" />
 <script
-	src="${pageContext.request.contextPath}/resources/js/mentosFull.js"></script>
+	src="${pageContext.request.contextPath}/resources/js/mentos/mentosFull.js"></script>
 <body>
 
 	<div class="container">
