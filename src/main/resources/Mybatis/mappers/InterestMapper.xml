@@ -27,8 +27,8 @@
 		(
 			SEQ_MEMBER_INTEREST_ID.nextval,
 			#{memberId}, 
-			(SELECT interest_id []
-			FROM INTEREST []
+			(SELECT interest_id
+			FROM INTEREST
 			WHERE UPPER(interest_name) = UPPER(#{interestName})),
 			'ACTIVE'	
 		)
