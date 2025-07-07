@@ -361,6 +361,13 @@ public class MentosService {
 		return dto;
 	}
 
+	@Transactional
+	public void deleteMentos(int mentosId) {
+		log.info("[MentosService.deleteMentos]");
+		mentosMapper.deleteMentos(mentosId);
+		memberMentosMapper.deleteMemberMentos(mentosId);
+	}
+	
 	/**
 	 * 프론트 페이지 리다이렉트를 위해서 해당 멘토스에 대한 접속 유저의 권한 확인
 	 */
