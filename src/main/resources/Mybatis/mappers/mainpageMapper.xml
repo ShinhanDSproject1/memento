@@ -35,7 +35,7 @@
 	            m.start_time
 	        FROM MENTOS m
 	        LEFT JOIN member mm ON m.mento_id = mm.member_id
-	        WHERE m.status != 'DELETE'
+	        WHERE m.status = 'ACTIVE'
 	        ORDER BY m.start_time DESC
 	    )
 	    WHERE ROWNUM &lt;= 2 

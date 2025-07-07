@@ -150,8 +150,7 @@
 		select *
 		from mentos
 		where mentos_id=#{mentosId}
-		and
-		status='ACTIVE'
+		and status='ACTIVE'
 	</select>
 
 	<select id="showMentosList" resultMap="mentosResultMap">

@@ -79,7 +79,7 @@
 						</div>
 						<c:forEach var="banner" items="${bannerList}">
 							<div class="page-1-com-12">
-								<div class="spring-content" onclick="location.href='${cpath}/mentos/detail?mentosid=${banner.mentosId}&memberId=${loginId}'">
+								<div class="spring-content" onclick="location.href='${cpath}/mentos/detailPage?mentosId=${banner.mentosId}'">
 									<div class="spring-text">
 										<div class="spring-title">${banner.title}</div>
 										<div class="spring-info">
