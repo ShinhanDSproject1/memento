@@ -22,7 +22,7 @@
 	        <mvc:exclude-mapping path="/matchup/matchupList"/>
 	        <mvc:exclude-mapping path="/mentos/full"/>
 	        <mvc:exclude-mapping path="/keepgoing/keepgoinglist.do"/>
-	        
+	        <mvc:exclude-mapping path="/matchup/getMatchupList"/>
 	        <mvc:exclude-mapping path="/mainpage/**"/>
 	        
 	        <mvc:exclude-mapping path="/join/**"/>
