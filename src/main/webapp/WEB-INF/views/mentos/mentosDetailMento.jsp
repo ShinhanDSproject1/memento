@@ -2,7 +2,6 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <c:set var="cpath" value="${pageContext.servletContext.contextPath}" />
-<c:set var="mentosId" value="${mentosId}" />
 <!DOCTYPE html>
 <html>
 <head>
@@ -17,18 +16,20 @@
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
 	rel="stylesheet" />
 <jsp:include page="/WEB-INF/views/mentos/deletePopup.jsp" />
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script type="text/javascript"
 	src="//dapi.kakao.com/v2/maps/sdk.js?appkey=508d0978b8a40544a729f282b6187bd0&libraries=services&autoload=false"></script>
-<body>
+<body data-mentos-id="${mentosId}"
+	data-member-id="${sessionScope.loginUser.memberId}"
+	data-cpath="${cpath}">
 	<%@ include file="../common/logout_header.jsp"%>
 	<%@ include file="../mainpage/notificationModal.jsp"%>
-
 	<div class="container">
 		<div class="class-wrapper-frame">
 			<div class="class-main-info">
 				<div class="frame-429">
-					<div class="hover-tag">#백엔드</div>
-					<div class="hover-tag">#AWS</div>
+					<div class="hover-tag category">#백엔드</div>
+					<div class="hover-tag language">#AWS</div>
 				</div>
 				<div class="class-title">비전공자도 이해할 수 있는 AWS 입문/실전</div>
 				<div class="class-description">비전공자 입장에서도 쉽게 이해할 수 있고, 실전에서 바로
@@ -157,8 +158,76 @@
 			</div>
 			<div class="similar-mentos-wrapper">
 				<div class="section-title">비슷한 다른 멘토스 둘러보기</div>
-				<div class="mentos-card-list" id="similarMentosListContainer">
-					<!-- 여기에 JS로 반복 렌더링 -->
+				<div class="mentos-all-class-row">
+					<!-- 템플릿용 (JS에서 clone 후 데이터만 채워넣음) -->
+					<div id="mentosCardTemplate"
+						class="mentos-class-cardview mentos-hover-guide"
+						style="display: none;">
+						<div class="mentos-class">
+							<div class="mentos-text">
+								<div class="frame-37862">
+									<div class="frame-413">
+										<div class="">D-</div>
+										<div class="day-left">2</div>
+									</div>
+									<div class="frame-414">
+										<div class="remain-seat"></div>
+									</div>
+								</div>
+								<div class="aws" id="mentos-title">비전공자도 이해할 수 있는 AWS
+									입문/실전</div>
+								<div class="frame-406">
+
+									<div class="frame-407">
+										<img class="user-user"
+											src="${pageContext.request.contextPath}/resources/images/mentosFull/mento.svg" />
+										<div class="text" id="mento-name">김코딩</div>
+										<div class="group-371">
+											<div class="pre-mento">pre-mento</div>
+										</div>
+									</div>
+									<div class="frame-408">
+										<img class="icon-time-calendar"
+											src="${pageContext.request.contextPath}/resources/images/mentosFull/day.svg" />
+										<div class="text" id="startDay">2025/06/23</div>
+										<div class="text">-</div>
+										<div class="text" id="endDay">2025/06/23</div>
+									</div>
+									<div class="frame-409">
+										<img class="icon-time-clock-outlined"
+											src="${pageContext.request.contextPath}/resources/images/mentosFull/time.svg" />
+										<div class="text" id="startTime">15시</div>
+										<div class="text">-</div>
+										<div class="text" id="endTime">17시</div>
+										<div class="text" id="days">(화)</div>
+									</div>
+									<div class="frame-410">
+										<img class="icon-maps-map-pin"
+											src="${pageContext.request.contextPath}/resources/images/mentosFull/maps.svg" />
+										<div class="text" id="place">역삼</div>
+									</div>
+									<div class="frame-3659">
+										<div class="_45-000" id="price">무료</div>
+									</div>
+								</div>
+							</div>
+							<img class="image"
+								src="${pageContext.request.contextPath}/resources/images/mentosFull/class4.png" />
+							<div class="mentos-hover-popup">
+								<div class="hover-inner">
+									<div class="hover-title">
+										비전공자도 이해할 수 있는<br />입문/실전
+									</div>
+									<div class="hover-desc">초보자도 쉽게 따라올 수 있게, 실무 중심으로 강의해요!</div>
+									<div class="hover-tags">
+										<span class="hover-tag category">#AWS</span> <span class="hover-tag language">#클라우드</span>
+									</div>
+								</div>
+							</div>
+						</div>
+
+					</div>
+
 				</div>
 			</div>
 		</div>

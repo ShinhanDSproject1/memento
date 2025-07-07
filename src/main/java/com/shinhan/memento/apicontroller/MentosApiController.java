@@ -158,7 +158,6 @@ public class MentosApiController {
 	@GetMapping("/detail")
 	public BaseResponse<GetMentosDetailDTO> showMentosDetail(@RequestParam int mentosId, @RequestParam int memberId){
 		log.info("[MentosApiController.showMentoDetail]");
-		
 		Mentos mentos = mentosService.checkValidMentosById(mentosId);
 		if(mentos==null) {
 			throw new MentosException(BaseExceptionResponseStatus.CANNOT_FOUND_MENTOS);
