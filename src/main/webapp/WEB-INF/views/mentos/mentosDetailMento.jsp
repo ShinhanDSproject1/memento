@@ -156,8 +156,7 @@
 					</div>
 				</div>
 			</div>
-			<div class="similar-mentos-wrapper">
-				<div class="section-title">비슷한 다른 멘토스 둘러보기</div>
+				<div class="div15">비슷한 다른 멘토스 둘러보기</div>
 				<div class="mentos-all-class-row">
 					<!-- 템플릿용 (JS에서 clone 후 데이터만 채워넣음) -->
 					<div id="mentosCardTemplate"
@@ -225,13 +224,10 @@
 								</div>
 							</div>
 						</div>
-
 					</div>
-
 				</div>
 			</div>
 		</div>
-	</div>
 	<script src="${cpath }/resources/js/notification.js"></script>
 	<script src="${cpath}/resources/js/header.js"></script>
 	<script src="${cpath}/resources/js/mentos/mentosDetail.js"></script>

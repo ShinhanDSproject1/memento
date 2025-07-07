@@ -1,4 +1,5 @@
 document.addEventListener('DOMContentLoaded', function () {
+ console.log("DOMContentLoaded 실행됨?");
 	const mentosId = $("body").data("mentos-id");
 	const memberId = $("body").data("member-id");
 	const cpath = $('body').data('cpath');
@@ -75,7 +76,7 @@ document.addEventListener('DOMContentLoaded', function () {
 			
 			$('.vote').html(starsHTML);
 		
-			mentos.similarMentosList.forEach(item => {
+		mentos.similarMentosList.forEach(item => {
 		  const clone = template.cloneNode(true);
 		  clone.id = ''; // id 중복 방지
 		  clone.style.display = '';
@@ -231,4 +232,19 @@ document.addEventListener('DOMContentLoaded', function () {
       }
     });
   });
+  
+	const joinBtn = document.querySelector('.mentos-join-btn .class-apply-btn');
+  const joinModal = document.getElementById('joinLayer');
+
+  if (joinBtn && joinModal) {
+    joinBtn.addEventListener('click', function () {
+      joinModal.style.display = 'flex';
+    });
+  }
+
+  // 3. 취소 버튼 → 팝업 숨기기
+  window.hideJoinModal = function () {
+    joinModal.style.display = 'none';
+  };
+
 });
