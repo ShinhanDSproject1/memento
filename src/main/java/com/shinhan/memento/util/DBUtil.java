@@ -8,9 +8,9 @@ import java.sql.Statement;
 public class DBUtil {
 	public static Connection getConnection() {
 		Connection conn = null;
-
-		String url = "jdbc:oracle:thin:@localhost:1521/XE";
-		String userid = "memento", userpass = "memento";
+		//String url = "jdbc:oracle:thin:@localhost:1521/XEPDB1";
+		String url = "jdbc:oracle:thin:@61.39.114.237:1521:XE";
+	      String userid = "memento", userpass = "memento";
 		
 		try {
 			Class.forName("oracle.jdbc.driver.OracleDriver");

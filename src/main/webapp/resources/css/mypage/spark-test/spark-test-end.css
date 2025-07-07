@@ -17,7 +17,7 @@ body {
 
 /* 래퍼: 높이 자동 확장 */
 .spark-test-wrapper {
-  zoom: 0.8;
+	zoom: 0.85;
   position: relative;
   display: flex;
   flex-direction: row;

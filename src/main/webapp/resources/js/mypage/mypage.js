@@ -54,6 +54,19 @@ window.onpopstate = function () {
   });
 };
 
+function imgUrl(imgtag, srcUrl) {
+  if (srcUrl) {
+    if (srcUrl[0] == '/') {
+      imgtag.src = '/mememto' + `${srcUrl}`
+    } else {
+      imgtag.src = srcUrl
+    }
+  } else {
+    imgtag.src = '/memento/resources/images/logo.png'
+    imgtag.style.background = 'white';
+  }
+}
+
 async function fetchSideBarInfo() {
   const sideBar = document.getElementById('profile-page')
 
@@ -89,10 +102,11 @@ async function fetchSideBarInfo() {
     }
     userNicknameDiv.textContent = `${sideBarData.nickname}`
     userBalanceSpan.textContent = `${(sideBarData.balance).toLocaleString()}`
-    userPointSpan.textContent = `${sideBarData.point}P`
+    userPointSpan.textContent = `${sideBarData.point}`
     userTypeDiv.textContent = `${sideBarData.userType}`
 
   } catch (error) {
     console.log(error)
+
   }
 }

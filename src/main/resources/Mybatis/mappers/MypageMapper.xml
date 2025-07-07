@@ -186,17 +186,17 @@
 	
 	<select id="selectMyProfileInfo" parameterType="int" resultType="map">
 		select
-		m.profile_image_url as profileImgUrl,
-		m.NICKNAME as nickName,
-		m.INTRODUCE as introduce,
-		m.REGION_GROUP as regionGroup,
-		m.region_subgroup as regionSubGroup,
-		m.region_detail as regionDetail,
-		m.phone_number as phoneNumber,
-        i.interest_name as interestName
+			m.profile_image_url as profileImgUrl,
+			m.NICKNAME as nickName,
+			m.INTRODUCE as introduce,
+			m.REGION_GROUP as regionGroup,
+			m.region_subgroup as regionSubGroup,
+			m.region_detail as regionDetail,
+			m.phone_number as phoneNumber,
+	        i.interest_name as interestName
 		from member m
-		left join member_interest mi on m.member_id = mi.member_id
-		left join interest i on mi.interest_id = i.interest_id
+			left join member_interest mi on m.member_id = mi.member_id
+			left join interest i on mi.interest_id = i.interest_id
 		where m.member_id = #{memberId}
 	</select>
 	
@@ -206,6 +206,54 @@
 		where member_id = #{memberId}
 	</update>
 	
+	<select id="myJoinMatchupByDashboard" parameterType="int" resultType="map">
+		select *
+		from(
+			select
+				leader.member_id as leaderId,
+				leader.profile_image_url as leaderProfileImageUrl,
+				match.title as title,
+				match.count as totalCount,
+				match.matchup_count as currentCount,
+				match.status as matchStatus,
+				match.has_mento as hasMento
+			from member_matchup mm
+				left join matchup match on mm.matchup_id = match.matchup_id
+				left join member leader on match.leader_id = leader.member_id
+			where mm.member_id = #{memberId}
+				and mm.status !='DELETE'
+			order by totalcount desc, currentcount desc
+			)
+		WHERE ROWNUM <![CDATA[<=]]> 3
+	</select>
+	
+	<select id="myJoinMentosByDashboard" parameterType="int" resultType="map">
+		select *
+		    from (
+		        select
+		           men.title as mentosTitle,
+		           men.image as mentosImage,
+		           men.mento_id as mentoId,
+		           mento.nickname as mentoNickname,
+		           men.status as mentosStatus
+		        from member_mentos mm
+		            left join mentos men on mm.mentos_id = men.MENTOS_ID
+		            left join member mento on men.mento_id = mento.member_id
+		        where mm.member_id = #{memberId}
+		        and mm.status != 'DELETE'
+		    )
+		WHERE ROWNUM <![CDATA[<=]]> 3
+	</select>
+	
+	<select id="myMatchTypeByDashboard" parameterType="int" resultType="com.shinhan.memento.dto.MyMatchTypeByDashboardResponseDTO">
+		select 
+			mt.MATCH_TYPE_NAME as matchTypeName,
+			mt.MATCH_TYPE_IMG as matchTypeImg
+		from member m
+			left join match_type mt on m.match_type_id = mt.MATCH_TYPE_ID
+		where m.member_id = #{memberId}
+    </select>
+
 	<select id ="refundSelectData" resultType="map">
 		select
 			p.order_id as orderId,
@@ -258,6 +306,44 @@
 			left join userbalance ub on m.member_id = ub.member_id
 		where m.member_id = #{memberId} 
 			and m.status = 'ACTIVE'
+
 	</select>
 
+    <resultMap id="MentoTestHistoryMap" type="com.shinhan.memento.model.MentoTestHistory">
+        <id property="mentotestHistoryId" column="mentotest_history_id"/>
+        <result property="memberId" column="member_id"/>
+        <result property="testAt" column="test_at"/>
+    </resultMap>
+    
+<select id="selectMentoTestHistory"  resultMap="MentoTestHistoryMap">
+		SELECT
+			mentotest_history_id,
+			member_id,
+			test_at
+		FROM mentotest_history
+		WHERE member_id = #{userId}
+		  AND TO_CHAR(test_at, 'YYYY-MM-DD') = #{now}
+	</select>
+	
+	
+	<insert id="insertMentoTestHistory" parameterType="com.shinhan.memento.model.MentoTestHistory">
+	INSERT INTO mentotest_history(
+			mentotest_history_id,
+			member_id,
+			test_at,
+			status
+	)VALUES(
+			seq_mentotest_history_id.NEXTVAL,
+			#{memberId},
+			#{testAt},
+			#{status}
+	)
+	</insert>
+	
+		<update id="updateMemberUserType" parameterType="map">
+		UPDATE member
+		SET user_type = #{userType}
+		WHERE member_id = #{userId}
+	</update>
+	
 </mapper>

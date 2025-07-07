@@ -131,13 +131,26 @@
 		from match_type
 	</select>
 
+	<select id="getRegionGroups" resultType="java.util.Map">
+	    SELECT 
+	        REGION_GROUP AS "key",
+	        REGION_GROUP AS "value"
+	    FROM 
+	        MENTOS
+	    WHERE 
+	        REGION_GROUP IS NOT NULL
+	    GROUP BY 
+	        REGION_GROUP
+	    ORDER BY 
+	        REGION_GROUP ASC
+	</select>
+
 	<select id="checkValidMentosById" parameterType="int"
 		resultMap="mentosResultMap">
 		select *
 		from mentos
 		where mentos_id=#{mentosId}
-		and
-		status='ACTIVE'
+		and status='ACTIVE'
 	</select>
 
 	<select id="showMentosList" resultMap="mentosResultMap">
@@ -168,12 +181,61 @@
 			AND language_id = #{languageId}
 		</if>
 		AND status = 'ACTIVE'
+		AND price > 0  <!-- 무료 강의는 pre-mentos 항목에서 비춰질 것이므로 -->
 		ORDER BY created_at DESC
 		) inner_query
 		WHERE ROWNUM
-		&lt;= #{offset} +15
+		&lt;= #{offset} + 6
 		)
 		WHERE rnum &gt; #{offset}
+	</select>
+
+	<select id="showPreMentoList" resultMap="mentosResultMap">
+	    SELECT m.*
+	    FROM mentos m
+	    JOIN member mem ON m.mento_id = mem.member_id
+	    WHERE mem.user_type = 'PREMENTO'
+	      AND m.price = 0
+	      AND m.status = 'ACTIVE'
+	      
+	      <if test="regionGroup != null and regionGroup != ''">
+	          AND m.region_group = #{regionGroup}
+	      </if>
+	      <if test="matchTypeId != null">
+	          AND (
+	              m.match_type_id_first = #{matchTypeId}
+	              OR m.match_type_id_second = #{matchTypeId}
+	              OR m.match_type_id_third = #{matchTypeId}
+	          )
+	      </if>
+	      <if test="categoryId != null">
+	          AND m.category_id = #{categoryId}
+	      </if>
+	      <if test="languageId != null">
+	          AND m.language_id = #{languageId}
+	      </if>
+	      
+	    ORDER BY m.created_at DESC
+    </select>
+
+	<select id="getMentosListTotalCount" resultType="int">
+	    SELECT COUNT(*)
+	    FROM mentos
+	    WHERE 1=1
+	        <if test="regionGroup != null and regionGroup != ''">
+	            AND region_group = #{regionGroup}
+	        </if>
+	        <if test="matchTypeId != null">
+	            AND ( match_type_id_first = #{matchTypeId} OR match_type_id_second = #{matchTypeId} OR match_type_id_third = #{matchTypeId} )
+	        </if>
+	        <if test="categoryId != null">
+	            AND category_id = #{categoryId}
+	        </if>
+	        <if test="languageId != null">
+	            AND language_id = #{languageId}
+	        </if>
+	    AND status = 'ACTIVE'
+	    AND price > 0
 	</select>
 
 
@@ -214,23 +276,6 @@
 		WHERE ROWNUM &lt;= 12
 	</select>
 
-	<select id="findSimilarMentosList" parameterType="map"
-		resultMap="mentosResultMap">
-		select *
-		from (
-		select * from mentos
-		where
-		language_id=#{languageId}
-		and category_id=#{categoryId}
-		and
-		status='ACTIVE'
-		and region_group=#{regionGroup}
-		and
-		mentos_id!=#{mentosId}
-		order by created_at desc
-		)
-		where rownum &lt; =3
-	</select>
 
 	<select id="findMentoIdListByMentosId" parameterType="int" resultMap="mentosResultMap">
 		select *
@@ -238,6 +283,43 @@
 		where mento_id=${mentoId}
 		and status!='DELETE'
 	</select>
+
+
+	
+  	<select id="findSimilarMentosList" parameterType="map" resultMap="mentosResultMap">
+  		select * 
+  		from (
+  			select * from mentos
+	  		where language_id=#{languageId}
+	  		and category_id=#{categoryId}
+	  		and status='ACTIVE'
+	  		and region_group=#{regionGroup}
+	  		and mentos_id!=#{mentosId}
+	  		order by created_at desc
+	  	)
+	  	where rownum &lt; =3
+  	</select>
+  	
+  	<update id="deleteMentos" parameterType="int">
+  		update mentos
+  		set status='DELETE', updated_at=sysdate
+  		where mentos_id=#{mentosId}
+  	</update>
+  	
+  	<select id="checkPermission" parameterType="map" resultType="Integer">
+  		select case 
+  			when exists (
+	             select 1 
+	             from mentos 
+	             where mentos_id = #{mentosId}
+	               and mento_id = #{memberId}
+	               and status = 'ACTIVE'
+	        )
+           	then 1 
+	        else 0 
+	        end as result
+	  	from dual
+  	</select>
 
 </mapper>
 

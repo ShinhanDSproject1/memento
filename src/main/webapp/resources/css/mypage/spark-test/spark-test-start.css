@@ -17,7 +17,7 @@ body {
 
 /* 전체 Wrapper */
 .spark-test-wrapper {
-  zoom: 0.8;
+	zoom: 0.85;
   position: relative; /* 기준점 */
   height : 950px;
   display: flex;

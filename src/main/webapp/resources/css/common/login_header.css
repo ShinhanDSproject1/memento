@@ -169,3 +169,7 @@
   width: 30px;
   height: 30px;
 }
+
+.coin-icon{
+	vertical-align: initial; /* 기본값으로 되돌림 */
+}

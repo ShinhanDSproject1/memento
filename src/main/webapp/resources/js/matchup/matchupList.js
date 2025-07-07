@@ -57,7 +57,9 @@ function renderMatchups(matchups) {
                 <div class="icon-maps-04">
                     <img class="icon-maps-map-pin" src="${cpath}/resources/images/icon-map-black.svg" />
                 </div>
-                <img class="_1" src="${cpath}/resources/images/profile.svg" />
+                <img class="_1" src="${matchup.profileImageUrl || `${cpath}/resources/images/profile.svg`}" />
+
+
                 <div class="group-414">
                     <div class="rectangle-209"></div>
                     <div class="java-c">#${matchup.languageName} #${matchup.categoryName}</div>

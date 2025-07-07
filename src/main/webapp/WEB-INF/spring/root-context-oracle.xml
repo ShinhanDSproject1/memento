@@ -8,9 +8,9 @@
     <!-- Oracle DB 연결용 DataSource -->
     <bean id="dataSource" class="org.apache.commons.dbcp2.BasicDataSource" destroy-method="close">
         <property name="driverClassName" value="oracle.jdbc.OracleDriver" />
-        <property name="url" value="jdbc:oracle:thin:@localhost:1521:XE" />
+       <!--  <property name="url" value="jdbc:oracle:thin:@localhost:1521/XEPDB1" /> -->
+       <property name="url" value="jdbc:oracle:thin:@61.39.114.237:1521:XE" />
         <property name="username" value="memento" />
         <property name="password" value="memento" />
     </bean>
-
 </beans>

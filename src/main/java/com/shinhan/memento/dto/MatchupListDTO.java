@@ -37,6 +37,8 @@ public class MatchupListDTO {
     String recruit;     /* 매치업 멤버를 아직 모집중인가에 대한 여부 (모집중, 마감임박, 모집 완료)*/
     String mRecruit;    /* 멘토를 모집하는 매치업인가에 대한 여부 (멘토 모집중, 모집 완료(표시 안됨))*/
     String selectedDays;
+    String profileImageUrl;
+
     
     @JsonIgnore
     LocalDateTime startTime;
@@ -91,6 +93,13 @@ public class MatchupListDTO {
 
     public void setNewMatchup(boolean newMatchup) {
         this.newMatchup = newMatchup;
+    }
+    
+    public String getProfileImageUrl() {
+        if (profileImageUrl == null || profileImageUrl.trim().isEmpty()) {
+            return "/memento/resources/images/default-profile.svg"; // 기본 이미지
+        }
+        return profileImageUrl;
     }
     
 }

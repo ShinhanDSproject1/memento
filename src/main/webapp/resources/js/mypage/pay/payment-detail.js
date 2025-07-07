@@ -185,13 +185,7 @@ async function fetchOrderDetail(orderId) {
                     const itemPrice = document.createElement('p');
                     productDetails.append(itemName, itemPrice);
                     card.append(productImg, productDetails);
-
-                    if (item.memberProfileImageUrl) {
-                        productImg.src = item.memberProfileImageUrl.startsWith('/') ? '/memento' + item.memberProfileImageUrl : item.memberProfileImageUrl;
-                    } else {
-                        productImg.src = '/memento/resources/images/logo.png';
-                        productImg.style.background = 'white';
-                    }
+                    imgUrl(productImg, item.memberProfileImageUrl)
                     itemName.textContent = `${item.matchupTitle}`;
                     itemName.style.color = '#a8c3db'
                     itemPrice.textContent = `₩${item.matchupPrice.toLocaleString()}`;
@@ -211,13 +205,7 @@ async function fetchOrderDetail(orderId) {
                     const itemPrice = document.createElement('p');
                     productDetails.append(itemName, itemPrice);
                     card.append(productImg, productDetails);
-
-                    if (item.mentosImage) {
-                        productImg.src = item.mentosImage.startsWith('/') ? '/memento' + item.mentosImage : item.mentosImage;
-                    } else {
-                        productImg.src = '/memento/resources/images/logo.png';
-                        productImg.style.background = 'white';
-                    }
+                    imgUrl(productImg, item.mentosImage)
                     itemName.textContent = `${item.mentosTitle}`;
                     itemName.style.color = '#668985'
                     itemPrice.textContent = `₩${item.mentosPrice.toLocaleString()}`;
@@ -237,13 +225,7 @@ async function fetchOrderDetail(orderId) {
                     const itemPrice = document.createElement('p');
                     productDetails.append(itemName, itemPrice);
                     card.append(productImg, productDetails);
-
-                    if (item.keepgoingImgLogo) {
-                        productImg.src = item.keepgoingImgLogo.startsWith('/') ? '/memento' + item.keepgoingImgLogo : item.keepgoingImgLogo;
-                    } else {
-                        productImg.src = '/memento/resources/images/logo.png';
-                        productImg.style.background = 'white';
-                    }
+                    imgUrl(productImg, item.keepgoingImgLogo)
                     itemName.textContent = `${item.keepgoingName}`;
                     itemName.style.color = '#49779f'
                     itemPrice.textContent = `₩${item.keepgoingPrice.toLocaleString()}`;
@@ -253,7 +235,11 @@ async function fetchOrderDetail(orderId) {
         });
         const totalPay = document.getElementById('totalPay')
         if (totalProductCount == 0) {
-            totalPay.textContent = `₩${(paymentDetail[0].amount / 1.05).toLocaleString()}`
+            if(paymentDetail[0].amount > 30000){
+            	totalPay.textContent = `₩${(paymentDetail[0].amount / 1.1).toLocaleString()}`
+            } else{
+           		totalPay.textContent = `₩${(paymentDetail[0].amount / 1.05).toLocaleString()}`
+            }
         } else {
             totalPay.textContent = `₩${(price - point).toLocaleString()}`
         }

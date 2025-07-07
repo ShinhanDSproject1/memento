@@ -4,9 +4,11 @@
     padding: 0;
 }
 body {
-    font-family: "Inter", "D2Coding", sans-serif;
-    background-color: #f5f6f8;
-    padding-top: 80px;
+	font-family: "Inter", "D2Coding", sans-serif;
+	background-color: #f5f6f8;
+	padding-top: 120px;
+	width: 100%;
+	overflow-x: hidden;
 }
 a {
     text-decoration: none;
@@ -24,29 +26,31 @@ a {
 /* --- 페이지 전체 레이아웃 --- */
 .container {
     width: 100%;
+    padding: 0 60px;
+    max-width: 1400px;
+    margin: 0 auto;
 }
 .main-content, .main-content-wrapper {
     width: 100%;
-    max-width: 1100px;
+    max-width: 1000px;
     margin: 0 auto;
-    padding: 40px 20px;
     display: flex;
     flex-direction: column;
-    gap: 30px;
+    gap: 40px;
 }
 
 /* --- 상단 정보 영역 --- */
 .top-info {
 	background: #ffffff;
-	border: 1px solid #a6abbd;
-	border-radius: 16px;
-	box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.1);
-	width: 100%;
-	padding: 60px 80px;
-	display: flex;
-	flex-direction: column;
-	gap: 24px;
-	align-items: flex-start;
+    border: 1px solid #a6abbd;
+    border-radius: 16px;
+    box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    padding: 60px 80px;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    align-items: flex-start;
 }
 
 .info-tags {
@@ -66,10 +70,13 @@ a {
 }
 .info-tag.mento.completed {
     background: #868e96;
+    color : rgb(62 64 68);
+    font-family: "D2Coding-Bold", sans-serif;
 }
 .info-tag.category {
     background: #e9ecef;
     color: #757575;
+    font-family: "D2Coding-Bold", sans-serif;
 }
 .matchup-title {
     font-size: 32px;
@@ -78,17 +85,23 @@ a {
     margin-bottom: 20px;
 }
 .info-grid {
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
-    gap: 40px;
-    flex-wrap: wrap;
+	display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    text-align: center;
+    width: 100%;
+    padding: 0;
+    margin: 0 auto;
+    box-sizing: border-box;
 }
+
 .info-item {
-    display: flex;
-    gap: 15px;
-    align-items: baseline;
+	display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 0;
+    margin: 0;
 }
+
 .info-item-title {
 	color: #000000;
     text-align: left;
@@ -115,7 +128,7 @@ a {
   align-items: center;
   flex-wrap: nowrap;
   gap: 20px;
-  border-top: 1px solid #f1f3f5;
+  border-top: 1px solid #e2e2e2;
   padding-top: 20px;
   width : 100%;
   
@@ -138,9 +151,11 @@ a {
   flex-shrink: 0;
 }
 .price-text {
-  font-size: 28px;
-  font-weight: 700;
+	font-size: 30px;
+    white-space: nowrap;
+    margin-right: auto;
 }
+
 .custom-btn {
     padding: 10px 15px;
     border: none;
@@ -168,21 +183,21 @@ a {
     align-items: stretch;
 }
 .middle-area-left {
-    width: 66.66%;
+   flex: 1; /* 너비를 flex: 1로 변경 */
     display: flex;
     flex-direction: column;
     gap: 30px;
 }
 
 .middle-area-right {
-    width: 33.33%;
+    width: 300px; /* 너비를 300px로 고정 */
     display: flex;
     flex-direction: column;
     gap: 30px;
 }
 
 .middle-area-left .section-box {
-  min-height: 1000px;
+   min-height: 100%;
 }
 .section-box {
     background: #ffffff;
@@ -224,6 +239,8 @@ a {
     border: none;
 }
 
+/* 이런 분이 좋아요 부분*/
+
 .type-circle {
     width: 160px;
     height: 160px;
@@ -235,11 +252,22 @@ a {
     justify-content: center;
     border: 1px solid #d0f0f7;
     box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.08);
+    gap: 10px;
+    padding: 10px;
+    text-align: center;
+}
+
+
+.type-image {
+    width: 80px;
+    height: 80px;
+    object-fit: contain;
 }
 
 .circle-emoji {
-    font-size: 30px;
-    margin-bottom: 8px;
+    font-size: 40px;
+    margin-bottom: 0; 
+    line-height: 1;
 }
 
 .circle-text {
@@ -250,6 +278,8 @@ a {
     line-height: 1.4;
     word-break: keep-all;
 }
+
+/* --- ✨ [수정/추가할 CSS 끝] --- */
 
 .location-info {
     display: flex;
@@ -281,8 +311,6 @@ a {
     box-shadow: none;
 }
 
-
-/* 새로 추가한 그룹 스타일 */
 .profile-group {
     display: flex;
     flex-direction: column;
@@ -393,6 +421,7 @@ a {
     font-weight: 700;
     border-radius: 50px;
     padding: 4px 10px;
+    white-space: nowrap;
 }
 .card-badge.new {
     background: #4dabf7;

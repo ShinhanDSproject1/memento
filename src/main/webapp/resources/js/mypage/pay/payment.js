@@ -165,8 +165,6 @@ $(() => {
 				priceDivider.alt = 'price divider'
 				priceDivider.className = 'price-divider-svg'
 
-
-
 				const priceLineTotal = document.createElement('div')
 				priceLineTotal.className = 'price-line'
 
