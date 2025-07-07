@@ -292,7 +292,8 @@
 		update
 			payment
 		set pay_type = 'REFUND',
-			pay_at = sysdate
+			pay_at = sysdate,
+			status = 'INACTIVE'
 		where order_id = #{orderId}
 			and status != 'DELETE'
 	</update>
