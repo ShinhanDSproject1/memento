@@ -214,25 +214,34 @@
 		)
 		WHERE ROWNUM &lt;= 12
 	</select>
-
-	<select id="findSimilarMentosList" parameterType="map"
-		resultMap="mentosResultMap">
-		select *
-		from (
-		select * from mentos
-		where
-		language_id=#{languageId}
-		and category_id=#{categoryId}
-		and
-		status='ACTIVE'
-		and region_group=#{regionGroup}
-		and
-		mentos_id!=#{mentosId}
-		order by created_at desc
-		)
-		where rownum &lt; =3
-	</select>
-
-
+  
+  	<select id="findSimilarMentosList" parameterType="map" resultMap="mentosResultMap">
+  		select * 
+  		from (
+  			select * from mentos
+	  		where language_id=#{languageId}
+	  		and category_id=#{categoryId}
+	  		and status='ACTIVE'
+	  		and region_group=#{regionGroup}
+	  		and mentos_id!=#{mentosId}
+	  		order by created_at desc
+	  	)
+	  	where rownum &lt; =3
+  	</select>
+  	
+  	<select id="checkPermission" parameterType="map" resultType="Integer">
+  		select case 
+  			when exists (
+	             select 1 
+	             from mentos 
+	             where mentos_id = #{mentosId}
+	               and mento_id = #{memberId}
+	               and status = 'ACTIVE'
+	        )
+           	then 1 
+	        else 0 
+	        end as result
+	  	from dual
+  	</select>
 </mapper>
 

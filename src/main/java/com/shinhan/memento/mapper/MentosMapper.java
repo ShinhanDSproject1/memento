@@ -38,4 +38,6 @@ public interface MentosMapper {
 
 	List<Mentos> findSimilarMentosList(Map<String, Object> similarParams);
 	
+	int checkPermission(Map<String, Object> checkParams);
+
 }

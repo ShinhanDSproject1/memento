@@ -7,8 +7,6 @@
 <title>멘토스 상세페이지</title>
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/resources/css/mentos/mentosDetailStyle.css" />
-<link rel="stylesheet"
-	href="${pageContext.request.contextPath}/resources/css/mentos/mentosDetailVars.css" />
 </head>
 <link
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
@@ -80,8 +78,6 @@
 									</div>
 								</div>
 							</div>
-
-
 						</div>
 					</div>
 				</div>
