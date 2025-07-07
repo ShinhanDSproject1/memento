@@ -1,5 +1,4 @@
 package com.shinhan.memento.util;
-
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -7,7 +6,6 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 public class DBUtil {
-	
 	public static Connection getConnection() {
 		Connection conn = null;
 		//String url = "jdbc:oracle:thin:@localhost:1521/XEPDB1";
@@ -42,7 +40,6 @@ public class DBUtil {
 		}
 	}
 	
-	
 	public static String buildDebugSQL(String sqlTemplate, Object... params) {
 	    for (Object param : params) {
 	        String val = (param instanceof String) ? "'" + param + "'" : String.valueOf(param);
@@ -50,11 +47,4 @@ public class DBUtil {
 	    }
 	    return sqlTemplate;
 	}
-	
 }
-
-
-
-
-
-

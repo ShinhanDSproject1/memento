@@ -4,7 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.shinhan.memento.dto.JoinMentosDTO;
+import com.shinhan.memento.dto.mentos.JoinMentosDTO;
 import com.shinhan.memento.mapper.MemberMentosMapper;
 import com.shinhan.memento.model.MemberMentos;
 

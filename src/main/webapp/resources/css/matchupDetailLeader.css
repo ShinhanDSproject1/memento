@@ -126,17 +126,21 @@ body {
 }
 
 .info-grid {
-	display: grid;
-	grid-template-columns: repeat(3, 1fr);
-	gap: 20px;
-	width: 100%;
-	margin-top: 0px;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  text-align: center;
+  width: 100%;
+  padding: 0; /* 좌우 여백 없애기 */
+  margin: 0 auto; /* 중앙 정렬 */
+  box-sizing: border-box;
 }
 
 .group-item {
-	display: flex;
-	flex-direction: column;
-	gap: 8px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0;
+  margin: 0;
 }
 
 .div4, .div5, .div6 {
@@ -188,6 +192,20 @@ body {
 	flex-wrap: wrap;
 	gap: 10px;
 	justify-content: flex-end;
+}
+.profile-link {
+	background: rgba(166, 171, 189, 0);
+	/* border-radius: 50%; */
+/* 	border-style: solid;
+	border-color: rgba(0, 0, 0, 0.15);
+	border-width: 1px; */
+	padding: 10px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 180px;
+	height: 180px;
+	overflow: hidden;
 }
 
 .rectangle-299, .rectangle-298, .rectangle-300 {
@@ -253,7 +271,7 @@ body {
 }
 
 .middle-area-left .section-box {
-	min-height: 1031px;
+	min-height: 100%;
 }
 
 .section-box {
@@ -325,7 +343,8 @@ body {
 
 /* --- ✨ [수정된 부분 시작] --- */
 
-/* 네모난 상자를 투명하게 만들어 원형 디자인만 보이도록 합니다. */
+/* --- ✨ [수정/추가할 CSS 시작] --- */
+
 .type-item-box {
 	border: none;
 	background-color: transparent;
@@ -337,42 +356,45 @@ body {
 	justify-content: center;
 }
 
-/* 원형 디자인을 새롭게 정의합니다. */
 .type-circle {
-	width: 160px;
-	height: 160px;
-	border-radius: 50%;
-	background-color:#F5FFFF;
-	border: 1px #F5FFFF;
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-	justify-content: center;
-	gap: 8px; /* 아이콘과 텍스트 사이 간격 */
-	flex-shrink: 0;
+    width: 160px;
+    height: 160px;
+    border-radius: 50%;
+    background-color: #F5FFFF;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid #d0f0f7;
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.08);
+    gap: 10px; /* 이미지와 텍스트 사이 간격 */
+    padding: 10px; /* 내용물이 원 밖으로 나가지 않도록 여백 추가 */
+    text-align: center;
 }
 
-/* 아이콘과 텍스트의 위치를 flexbox에 맞게 조정합니다. */
-.ellipse-icon {
-	width: 45px;
-	height: 45px;
-	position: static;
-	transform: none;
+/* 새로 추가한 캐릭터 이미지 스타일 */
+.type-image {
+    width: 80px;  /* 이미지 크기는 필요에 맞게 조정하세요 */
+    height: 80px; /* 이미지 크기는 필요에 맞게 조정하세요 */
+    object-fit: contain; /* 이미지가 찌그러지지 않게 비율 유지 */
+}
+
+/* 해당하는 타입이 없을 때 보여줄 기본 이모지 스타일 */
+.type-emoji {
+    font-size: 40px; /* 이모지 크기 */
+    line-height: 1;
 }
 
 .type-text {
 	color: #333333;
-	text-align: center;
 	font-family: "Inter-Medium", sans-serif;
 	font-size: 16px;
 	font-weight: 500;
-	position: static;
-	width: auto;
-	max-width: 120px;
-	word-break: keep-all;
+	word-break: keep-all; /* 단어가 잘리지 않게 함 */
 	line-height: 1.4;
 }
 
+/* --- ✨ [수정/추가할 CSS 끝] --- */
 /* --- ✨ [수정된 부분 끝] --- */
 
 .middle-area-right {
@@ -464,18 +486,15 @@ body {
 }
 
 .profile-circle-wrapper {
-	background: rgba(166, 171, 189, 0);
-	border-radius: 50%;
-	border-style: solid;
-	border-color: rgba(0, 0, 0, 0.15);
-	border-width: 1px;
-	padding: 10px;
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	width: 150px;
-	height: 150px;
-	overflow: hidden;
+    background: rgba(166, 171, 189, 0);
+    /* border-radius: 50%; */
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 180px;
+    height: 180px;
+    overflow: hidden;
 }
 
 .image-47 {
@@ -483,6 +502,26 @@ body {
 	height: 100%;
 	object-fit: cover;
 	border-radius: 50%;
+	box-shadow: 0 4px 12px rgba(0, 0, 0, 0.35);
+}
+.profile-img {
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+	border-radius: 50%;
+	box-shadow: 0 4px 12px rgba(0, 0, 0, 0.35);
+}
+.profile-title, .profile-nickname{
+	color: #333;
+    text-align: center;
+    font-family: "D2Coding-Regular", sans-serif;
+    line-height: 150%;
+    letter-spacing: -0.023em;
+    font-weight: 600;
+    position: relative;
+    width: 100%;
+    font-size: 18px;
+    white-space: nowrap;
 }
 
 .line-7 {
@@ -627,16 +666,17 @@ body {
 	background: white;
 	border-radius: 12px;
 	padding: 30px 24px;
-	width: 400px;
-	box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+	box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
 	box-sizing: border-box;
+	width: 80%;
+	max-width: 320px;
+	min-width: 260px;
 	max-height: 500px;
 	overflow-y: auto;
 }
-
 .modal-title {
 	font-size: 20px;
-	font-weight: bold;
+	font-weight: 700;
 	text-align: center;
 	margin-bottom: 20px;	
 }
@@ -693,9 +733,15 @@ body {
 }
 
 .modal-buttons {
-	display: flex;
-	justify-content: right;
-	margin-top: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 24px;
+  width: 100%;
+  gap : 10%;
+}
+.no-members {
+	text-align: center;
 }
 .modal-buttons-mento {
 	display: flex;
@@ -710,6 +756,10 @@ body {
 	border-radius: 8px;
 	font-size: 14px;
 	cursor: pointer;
+	margin : 0;
+	max-width: 120px;
+	min-width: 100px;  
+	flex: 1;
 }
 .cancel-btn {
 	background-color: #aab1c3;
@@ -719,6 +769,10 @@ body {
 	border-radius: 8px;
 	font-size: 14px;
 	cursor: pointer;
+	max-width: 120px;
+	min-width: 100px;  
+	margin : 0;
+	flex: 1;
 }
 
 
@@ -884,26 +938,33 @@ body {
     font-weight: 500;
     color: #333;
     text-align: left;
+    
+    
 }	
 .section-title {
-	font-size: 18px;
+	font-size: 24px;
     font-weight: 700;
+    margin-bottom: 20px;
+    display: block;
     color: #333;
-    text-align: left;
 }
 
 .frame-3770 {
     display: flex;
     justify-content: space-between;
-    gap: 20px;
+    gap: 10px;
     width: 100%;
+}
+.card-list-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
 }
 
 .card-link {
-    width: calc((100% - 40px) / 3);
-    text-decoration: none;
-    color: inherit;
-    display: block;
+  flex: 0 0 calc((100% - 40px) / 3); /* 정확히 3개로 맞추기 */
+  max-width: calc((100% - 40px) / 3);
+  text-decoration: none;
 }
 
 .matchup-card {
@@ -912,11 +973,9 @@ body {
     border: 1px solid #e0e0e0;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
     padding: 15px;
-    /* width: 100%; */
     display: flex;
     flex-wrap: wrap;
     align-content: space-between;
-    /* min-height: 230px; */
     transition: transform 0.2s;
 }
 .matchup-card:hover {

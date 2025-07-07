@@ -1,9 +1,6 @@
-/* --- [시작] 최종 통합 CSS (모든 상세 페이지 공통) --- */
-
 /* 기본 & 초기화 */
 * {
     box-sizing: border-box;
-    margin: 0;
     padding: 0;
 }
 body {
@@ -17,22 +14,18 @@ a {
 }
 
 .section-box.profile-box {
-    min-height: 420px;         /* 높이 더 크게 */
-    padding: 40px 24px;        /* 내부 여백 증가 */
-    border: none;
-    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
-    align-items: center;
-    text-align: center;
+    display: flex;
+    flex-direction: column;
     flex-grow: 1;
-    border: 1px solid #a6abbd;
-    
+    padding: 20px;
 }
+
 
 /* --- 페이지 전체 레이아웃 --- */
 .container {
     width: 100%;
 }
-.main-content, .main-content-wrapper { /* main-content-wrapper도 main-content와 동일하게 처리 */
+.main-content, .main-content-wrapper {
     width: 100%;
     max-width: 1100px;
     margin: 0 auto;
@@ -45,15 +38,15 @@ a {
 /* --- 상단 정보 영역 --- */
 .top-info {
 	background: #ffffff;
-	border: 1px solid #a6abbd;
-	border-radius: 16px;
-	box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.1);
-	width: 100%;
-	padding: 60px 80px;
-	display: flex;
-	flex-direction: column;
-	gap: 24px;
-	align-items: flex-start;
+    border: 1px solid #a6abbd;
+    border-radius: 16px;
+    box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    padding: 60px 80px;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    align-items: flex-start;
 }
 
 .info-tags {
@@ -85,17 +78,23 @@ a {
     margin-bottom: 20px;
 }
 .info-grid {
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
-    gap: 40px;
-    flex-wrap: wrap;
+	display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    text-align: center;
+    width: 100%;
+    padding: 0;
+    margin: 0 auto;
+    box-sizing: border-box;
 }
+
 .info-item {
-    display: flex;
-    gap: 15px;
-    align-items: baseline;
+	display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 0;
+    margin: 0;
 }
+
 .info-item-title {
 	color: #000000;
     text-align: left;
@@ -118,25 +117,40 @@ a {
 }
 .price-and-buttons {
   display: flex;
-  justify-content: space-between; /* 좌우 정렬 */
+  justify-content: space-between;
   align-items: center;
-  flex-wrap: nowrap; /* 한 줄 유지 */
+  flex-wrap: nowrap;
   gap: 20px;
   border-top: 1px solid #f1f3f5;
   padding-top: 20px;
+  width : 100%;
+  
+}
+
+.divider {
+    height: 1px;
+    background-color: #e9ecef;
+    border: none;
+    flex-shrink: 0;
+    margin: 15px 0;
 }
 
 .button-group {
   display: flex;
-  justify-content: flex-end;  /* 버튼 오른쪽 정렬 */
-  flex: 1;                    /* 공간 차지해서 오른쪽으로 밀림 */
+  justify-content: flex-end;
+  flex: 1;
+  margin-left: 0;
+  gap: 10px;
+  flex-shrink: 0;
 }
 .price-text {
-  font-size: 28px;
-  font-weight: 700;
+	font-size: 30px;
+    white-space: nowrap;
+    margin-right: auto;
 }
+
 .custom-btn {
-    padding: 10px 20px;
+    padding: 10px 15px;
     border: none;
     border-radius: 8px;
     font-size: 14px;
@@ -145,8 +159,8 @@ a {
     cursor: pointer;
     transition: all 0.2s;
     width : auto;
-    background-color: #4dabf7;
-    margin-left: 650px;
+    background-color: #53adee;
+    /* margin-left: 120px; */
 }
 .custom-btn:hover {
     filter: brightness(1.1);
@@ -162,21 +176,21 @@ a {
     align-items: stretch;
 }
 .middle-area-left {
-    width: 66.66%;  /* 2/3 */
+    width: 66.66%;
     display: flex;
     flex-direction: column;
     gap: 30px;
 }
 
 .middle-area-right {
-    width: 33.33%;  /* 1/3 */
+    width: 33.33%;
     display: flex;
     flex-direction: column;
     gap: 30px;
 }
 
 .middle-area-left .section-box {
-  min-height: 1000px; /* ← 원하는 세로 높이로 조정 */
+  min-height: 1000px;
 }
 .section-box {
     background: #ffffff;
@@ -218,6 +232,8 @@ a {
     border: none;
 }
 
+/* 이런 분이 좋아요 부분*/
+
 .type-circle {
     width: 160px;
     height: 160px;
@@ -229,11 +245,22 @@ a {
     justify-content: center;
     border: 1px solid #d0f0f7;
     box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.08);
+    gap: 10px;
+    padding: 10px;
+    text-align: center;
+}
+
+
+.type-image {
+    width: 80px;
+    height: 80px;
+    object-fit: contain;
 }
 
 .circle-emoji {
-    font-size: 30px;
-    margin-bottom: 8px;
+    font-size: 40px;
+    margin-bottom: 0; 
+    line-height: 1;
 }
 
 .circle-text {
@@ -245,34 +272,62 @@ a {
     word-break: keep-all;
 }
 
+/* --- ✨ [수정/추가할 CSS 끝] --- */
+
 .location-info {
     display: flex;
+    flex-direction: column;
     align-items: center;
-    justify-content: center;
-    gap: 8px;
-    font-size: 26px;
-    font-weight: 500;
+    gap: 5px;
+    color: #333333;
+    text-align: center;
     font-family: "D2Coding-Bold", sans-serif;
-    margin-bottom: 15px;
+    font-size: 20px;
+    line-height: 150%;
+    letter-spacing: -0.023em;
+    font-weight: 500;
+    position: relative;
 }
-
+#pin-icon {
+    width: 24px;
+    height: 24px;
+    flex-shrink: 0;
+    position: relative;
+    overflow: visible;
+}
 .map-placeholder {
+	margin-top: 20px;
     background: linear-gradient(180deg, #F5FFFF 0%, #E6F8FA 100%);
     border-radius: 10px;
     width: 100%;
     height: 180px;
     box-shadow: none;
 }
-.profile-box {
+
+.profile-group {
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: center;
     gap: 15px;
-    flex-grow: 1;
+    flex-grow: 1; 
+}
+
+.profile-circle-wrapper {
+    width: 180px;
+    height: 180px;
 }
 .profile-title {
+    color: #333;
+    text-align: center;
+    font-family: "D2Coding-Regular", sans-serif;
+    line-height: 150%;
+    letter-spacing: -0.023em;
     font-weight: 600;
-    font-size: 15px;
+    position: relative;
+    width: 100%;
+    font-size: 18px;
+    white-space: nowrap;
 }
 
 .profile-title,
@@ -281,20 +336,14 @@ a {
 }
 
 .profile-img {
-    width: 100px;
-    height: 100px;
+    width: 180px;
+    height: 180px;
     border-radius: 50%;
     object-fit: cover;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.35);
 }
 .profile-nickname {
     font-weight: 600;
-}
-.divider {
-    width: 100%;
-    height: 1px;
-    background-color: #e9ecef;
-    border: none;
-    margin: 20px 0;
 }
 
 
@@ -323,7 +372,7 @@ a {
     display: flex;
     flex-wrap: wrap;
     align-content: space-between;
-    min-height: 250px;
+    min-height: 200px;
     transition: all 0.2s ease-in-out;
 }
 .matchup-card:hover {
@@ -370,7 +419,7 @@ a {
     background: #4dabf7;
 }
 h3.card-title {
-    font-size: 16px;
+    font-size: 20px;
     font-weight: 700;
     margin: 5px 0;
     line-height: 1.5;
@@ -420,6 +469,7 @@ h3.card-title {
     color: #339af0;
 }
 
+
 /* --- 반응형 레이아웃 --- */
 @media (max-width: 992px) {
     .middle-area {
@@ -436,4 +486,6 @@ h3.card-title {
         flex-direction: column;
         align-items: flex-start;
     }
+    
+   
 }

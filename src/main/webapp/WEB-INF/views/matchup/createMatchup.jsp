@@ -8,9 +8,10 @@
 <meta charset="UTF-8">
 <title>me:mento</title>
 <link rel="stylesheet" href="${cpath}/resources/css/createMatchup.css">
-<link rel="stylesheet" href="${cpath}/resources/css/vars.css">
+
 <script
     src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+    <script src="${cpath}/resources/smarteditor2/js/service/HuskyEZCreator.js" charset="utf-8"></script>
 </head>
 <body>
 	<%@ include file="../common/logout_header.jsp"%>
@@ -31,15 +32,15 @@
 	            </div>
 	        </div>
 	
-	        <div class="content-area">
-	            <div class="form-label-wrapper">
-	                <div class="form-label">소개글</div>
-	            </div>
-	            <div class="input-container textarea-container">
-	                <div id="matchupContent" class="editable-title" contenteditable="true" data-placeholder="활동 중심으로 소개해주세요. 소개를 잘 작성한 매치업은 2배 많은 인원이 가입해요!"></div>
-	                <input type="hidden" id="matchupContentHidden" name="matchupContent" value="">
-	            </div>
-	        </div>
+			<div class="content-area">
+			  <div class="form-label-wrapper">
+			    <div class="form-label">소개글</div>
+			  </div>
+			  <div class="input-container textarea-container">
+			     <textarea id="matchupContent" name="matchupContent">
+			    </textarea>
+			  </div>
+			</div>
 	
 	        <div class="address-area-wrapper">
 	            <div class="form-label-wrapper">
@@ -184,5 +185,16 @@
    window.cpath = '${cpath}';
 </script>    
 <script src="${cpath}/resources/js/matchup/createMatchup.js"></script>
+
+<script type="text/javascript">
+  var oEditors = [];
+
+  nhn.husky.EZCreator.createInIFrame({
+    oAppRef: oEditors,
+    elPlaceHolder: "matchupContent",  // textarea id
+    sSkinURI: cpath + "/resources/smarteditor2/SmartEditor2Skin.html",
+    fCreator: "createSEditor2"
+  });
+</script>
 </body>
 </html>

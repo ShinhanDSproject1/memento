@@ -53,7 +53,123 @@
 		SET balance = balance + #{amount}, updated_at = #{updatedAt}
 		WHERE member_id = #{userId}
 	</update>
+	
+	<resultMap id="myMatchupResultMap" type="myMatchupListDTO">
+        <result property="matchupId"       column="matchup_id"/>
+        <result property="leaderImg"       column="leader_img"/>
+        <result property="matchupTitle"    column="matchup_title"/>
+        <result property="regionSubgroup"  column="region_subgroup"/>
+        <result property="category"        column="category"/>
+        <result property="language"        column="language"/>
+        <result property="startTime"       column="start_time"/>
+        <result property="endTime"         column="end_time"/>
+        <result property="selectedDays"    column="selected_days"/>
+        <result property="hasMento"        column="has_mento"/>
+        <result property="mentoNickname"   column="mento_nickname"/>
+        <result property="count"           column="count"/>
+        <result property="matchupCount"    column="matchup_count"/>
+        <result property="role"            column="role"/>
+        <result property="status"          column="status"/>
+    </resultMap>
+	
+	<select id="selectMyMatchUpList" parameterType="int" resultMap="myMatchupResultMap">
+		select
+			mm.matchup_id as matchup_id, 
+			leader.PROFILE_IMAGE_URL as leader_img, 
+			m.title as matchup_title, 
+			m.region_subgroup as region_subgroup,
+			cat.category_name as category,
+			lan.language_name as language, 	
+			m.start_time as start_time, 		
+			m.end_time as end_time,
+			m.selected_days as selected_days, 
+			m.has_mento as has_mento,
+			mento.nickname as mento_nickname,
+			m.count as count, 
+			m.matchup_count as matchup_count,
+			CASE WHEN m.leader_id = mm.member_id THEN '팀장'ELSE '팀원'END AS role,
+			m.status as status
+		from member_matchup mm
+			join matchup m on mm.matchup_id = m.matchup_id
+			left join category cat on m.category_id = cat.category_id
+			left join language lan on m.language_id = lan.language_id
+			left join member leader on m.leader_id = leader.member_id
+			left join member mento on m.mento_id = mento.member_id
+		where mm.member_id = #{memberId} and m.status != 'DELETE'
+	</select>
+	
+	<select id="selectMyMentosListById" parameterType="int" resultType="map">
+		select 
+		mm.mentos_id AS mentosId,
+		m.image AS mentosImg,
+		m.title AS mentosTitle,
+		m.region_subgroup AS regionSubgroup,
+		m.start_time AS startTime,
+		m.end_time AS endTime,
+		m.selected_days AS selectedDays,
+		mem.nickname AS mentoNickname,
+		mem.user_type AS mentoUserType,
+		m.status AS status,
+		r.review_id as reviewId,
+		r.status AS reviewStatus
+		from member_mentos mm
+		join mentos m on mm.mentos_id = m.mentos_id
+		left join member mem on m.mento_id = mem.member_id
+		left join review r on mm.mentos_id = r.mentos_id
+		where mm.member_id = #{memberId}
+		and m.status != 'DELETE'
+		and mm.status != 'DELETE'
+	</select>
 
+	<select id="selectMyPaymentListById" parameterType="int" resultType="map">
+	select 
+	p.order_id as orderId,
+	p.amount as amount,
+	p.pay_type as payType,
+	p.matchup_id as matchupId,
+	p.mentos_id as mentosId,
+	p.keepgoing_id as keepgoingId,
+	p.status as paymentStatus,
+	match.title as matchupTitle,
+	mentos.title as mentosTitle,
+	keep.name as keepgoingName
+	from payment p
+	LEFT JOIN matchup match ON p.matchup_id = match.matchup_id
+	LEFT JOIN mentos mentos ON p.mentos_id = mentos.mentos_id
+	LEFT JOIN keepgoing keep ON p.keepgoing_id = keep.keepgoing_id
+	where p.member_id = #{memberId}
+	and p.status != 'DELETE'
+	</select>
+	
+	<select id="selectPaymentDetail" parameterType ="String" resultType="map">
+		select
+		p.order_id as orderId,
+		p.amount as amount,
+		p.matchup_id as matchupId,
+		match.title as matchupTitle,
+		match.price as matchupPrice,
+		match.matchup_count as matchupCount,
+		m.profile_image_url as memberProfileImageUrl,
+		p.mentos_id as mentosId,
+		mentos.title as mentosTitle,
+		mentos.image as mentosImage,
+		mentos.START_DAY as mentosStartDay,
+		mentos.price as mentosPrice,
+		p.keepgoing_id as keepgoingId,
+		keep.name as keepgoingName,
+		keep.IMG_LOGO as keepgoingImgLogo,
+		keep.price as keepgoingPrice,
+		p.pay_at as payAt,
+		p.pay_type as payType,
+		p.status as status
+		from payment p
+		left join matchup match on p.matchup_id = match.matchup_id
+		left join member m on match.leader_id = m.member_id
+		left join mentos mentos on p.mentos_id = mentos.mentos_id
+		left join keepgoing keep on p.keepgoing_id = keep.keepgoing_id
+		where p.order_id = #{_parameter}
+		and p.status != 'DELETE'
+	</select>
 
 <select id="selectMatchTypebyName" parameterType="com.shinhan.memento.model.SparkTestType" resultType="int">
 		SELECT
@@ -63,10 +179,86 @@
 	</select>
 	
 	<update id="updateMyTypeByMemberId">
-    UPDATE member
-    SET match_type_id = #{matchTypeId}
-    WHERE member_id = #{memberId}
-</update>
+	    UPDATE member
+	    SET match_type_id = #{matchTypeId}
+	    WHERE member_id = #{memberId}
+	</update>
+	
+	<select id="selectMyProfileInfo" parameterType="int" resultType="map">
+		select
+		m.profile_image_url as profileImgUrl,
+		m.NICKNAME as nickName,
+		m.INTRODUCE as introduce,
+		m.REGION_GROUP as regionGroup,
+		m.region_subgroup as regionSubGroup,
+		m.region_detail as regionDetail,
+		m.phone_number as phoneNumber,
+        i.interest_name as interestName
+		from member m
+		left join member_interest mi on m.member_id = mi.member_id
+		left join interest i on mi.interest_id = i.interest_id
+		where m.member_id = #{memberId}
+	</select>
+	
+	<update id="updateProfileInfo" parameterType="com.shinhan.memento.dto.MyProfileDBUpdateDTO">
+		update member
+		set NICKNAME = #{nickname}, PHONE_NUMBER = #{phoneNumber}, INTRODUCE = #{introduce}, REGION_GROUP = #{regionGroup} , REGION_SUBGROUP = #{regionSubGroup}, REGION_DETAIL = #{regionDetail}, PROFILE_IMAGE_URL = #{profileImageUrl}
+		where member_id = #{memberId}
+	</update>
+	
+	<select id ="refundSelectData" resultType="map">
+		select
+			p.order_id as orderId,
+			p.amount as amount,
+			p.pay_type as payType,
+			p.matchup_id as matchupId,
+			match.price as matchupPrice,
+			p.mentos_id as mentosId,
+			mentos.price as mentosPrice,
+			p.keepgoing_id as keepgoingId,
+			keep.price as keepgoingPrice,
+			ub.BALANCE as userBalance,
+			m.POINT as memberPoint
+		from payment p
+			left join USERBALANCE ub on p.member_id = ub.member_id
+			left join member m on p.member_id = m.member_id
+			left join matchup match on p.matchup_id = match.matchup_id
+			left join mentos mentos on p.mentos_id = mentos.mentos_id
+			left join keepgoing keep on p.keepgoing_id = keep.keepgoing_id
+		where p.member_id = #{memberId} 
+		and p.order_id = #{orderId} 
+		and p.status != 'DELETE'
+	</select>
+	
+	<update id="updateUserBalanceByRefund">
+		update
+			USERBALANCE 
+		set balance = #{resultBalance}
+		where member_id = #{memberId}
+			and status = 'ACTIVE'
+	</update>
+	
+	<update id="updatePaymentByRefund">
+		update
+			payment
+		set pay_type = 'REFUND',
+			pay_at = sysdate
+		where order_id = #{orderId}
+			and status != 'DELETE'
+	</update>
+	
+	<select id="selectMySideBarInfo" parameterType="int" resultType="com.shinhan.memento.dto.MyPageSideBarResponseDTO">
+		select
+			m.profile_image_url as profileImageUrl,
+			m.nickname as nickname,
+			m.user_type as userType,
+			m.point as point,
+			ub.balance as balance
+		from member m
+			left join userbalance ub on m.member_id = ub.member_id
+		where m.member_id = #{memberId} 
+			and m.status = 'ACTIVE'
+	</select>
 
     <resultMap id="MentoTestHistoryMap" type="com.shinhan.memento.model.MentoTestHistory">
         <id property="mentotestHistoryId" column="mentotest_history_id"/>

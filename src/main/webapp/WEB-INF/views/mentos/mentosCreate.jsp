@@ -268,11 +268,23 @@
 							},
 							fCreator : "createSEditor2"
 						});
+
+				// SmartEditor 내용과 함께 폼 제출을 처리하는 새로운 함수
+				function submitMentosForm() {
+					// 이 줄은 SmartEditor에게 'editorTxt' textarea로 내용을 다시 쓰라고 지시합니다.
+					oEditors.getById["editorTxt"].exec("UPDATE_CONTENTS_FIELD", []);
+
+					// 이제 프로그래밍 방식으로 폼을 제출할 수 있습니다.
+					// 폼에 대한 참조를 가져와야 합니다. 폼에 ID가 없다면 ID를 부여하거나,
+					// 페이지에 폼이 하나뿐이라면 태그 이름으로 선택할 수 있습니다.
+					// 예를 들어, <form> 태그에 id="mentosCreateForm"을 추가했다면:
+					document.querySelector('form').submit(); // 또는 document.getElementById('mentosCreateForm').submit();
+				}
 			</script>
 		</form>
 	</section>
-	<script src="${cpath}/resources/js/mentosCreate.js"></script>
-	<script src="${cpath}/js/notification.js"></script>
+	<script src="${cpath}/resources/js/mentos/mentosCreate.js"></script>
+	<script src="${cpath}/resources/js/notification.js"></script>
 <script src="${cpath}/resources/js/header.js"></script>
 </body>
 
