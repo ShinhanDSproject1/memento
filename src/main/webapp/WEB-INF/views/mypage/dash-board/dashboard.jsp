@@ -164,7 +164,7 @@
 			</header>
 			<div class="dash-card__body dash-card__body--centered">
 				<h3 id="myStudyTypeName" class="spark-test__title">목표러 코취치</h3>
-				<p class="spark-test__subtitle">(목표지향 개발자)</p>
+				<img id="myStudyTypeIcon" src = "${cpath}/resources/images/mypage/spark-test/coachChee-icon.png">
 			</div>
 		</article>
 	</div>

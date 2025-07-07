@@ -95,7 +95,9 @@
 			left join language lan on m.language_id = lan.language_id
 			left join member leader on m.leader_id = leader.member_id
 			left join member mento on m.mento_id = mento.member_id
-		where mm.member_id = #{memberId} and m.status != 'DELETE'
+		where mm.member_id = #{memberId} 
+		and m.status != 'DELETE'
+		and mm.status != 'DELETE'
 	</select>
 	
 	<select id="selectMyMentosListById" parameterType="int" resultType="map">
