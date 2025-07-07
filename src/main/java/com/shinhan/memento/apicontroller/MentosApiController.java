@@ -20,9 +20,13 @@ import com.shinhan.memento.common.exception.MemberMentosException;
 import com.shinhan.memento.common.exception.MentosException;
 import com.shinhan.memento.common.response.BaseResponse;
 import com.shinhan.memento.common.response.status.BaseExceptionResponseStatus;
+import com.shinhan.memento.dto.CategoryDTO;
+import com.shinhan.memento.dto.LanguageDTO;
+import com.shinhan.memento.dto.MatchTypeDTO;
 import com.shinhan.memento.dto.mentos.CreateMentosDTO;
 import com.shinhan.memento.dto.mentos.GetMentosDTO;
 import com.shinhan.memento.dto.mentos.GetMentosDetailDTO;
+import com.shinhan.memento.dto.mentos.GetMentosListResponseDTO;
 import com.shinhan.memento.dto.mentos.JoinMentosDTO;
 import com.shinhan.memento.dto.mentos.ShowMentosDetailForEditDTO;
 import com.shinhan.memento.model.Member;
@@ -133,14 +137,61 @@ public class MentosApiController {
 	 * 멘토스 메인페이지 리스트 조회
 	 */
 	@GetMapping("")
-	public BaseResponse<List<GetMentosDTO>> showMentosList(@RequestParam(required = false) String regionGroup,
-			@RequestParam(required = false) Integer matchTypeId, @RequestParam(required = false) Integer categoryId,
-			@RequestParam(required = false) Integer languageId, @RequestParam(defaultValue = "1") int page) {
-
-		log.info("[MentosApiController.showMentosList]");
-		return new BaseResponse<>(mentosService.showMentosList(regionGroup, matchTypeId, categoryId, languageId, page));
+	public BaseResponse<GetMentosListResponseDTO> showMentosList(
+	        @RequestParam(required = false) String regionGroup,
+	        @RequestParam(required = false) Integer matchTypeId, 
+	        @RequestParam(required = false) Integer categoryId,
+	        @RequestParam(required = false) Integer languageId, 
+	        @RequestParam(defaultValue = "1") int page) {
+	    
+	    log.info("[MentosApiController.showMentosList]");
+	    return new BaseResponse<>(mentosService.showMentosList(regionGroup, matchTypeId, categoryId, languageId, page));
 	}
 
+    /**
+     * PREMENTO 유저가 작성한 무료 강의 목록 조회
+     */
+	@GetMapping("/premento-list")
+	public BaseResponse<List<GetMentosDTO>> showPreMentoList(
+	        @RequestParam(required = false) String regionGroup,
+	        @RequestParam(required = false) Integer matchTypeId, 
+	        @RequestParam(required = false) Integer categoryId,
+	        @RequestParam(required = false) Integer languageId) {
+	    return new BaseResponse<>(mentosService.showPreMentoList(regionGroup, matchTypeId, categoryId, languageId));
+	}
+	
+    /**
+     * 필터링을 위한 지역 그룹 목록 조회
+     */
+    @GetMapping("/filters/regions")
+    public BaseResponse<List<Map<String, String>>> getRegionsForFilter() {
+        return new BaseResponse<>(mentosService.getRegionGroups());
+    }
+	
+    /**
+     * 필터링을 위한 카테고리 목록 조회
+     */
+    @GetMapping("/filters/categories")
+    public BaseResponse<List<CategoryDTO>> getCategoriesForFilter() {
+        return new BaseResponse<>(mentosService.getAllCategories());
+    }
+
+    /**
+     * 필터링을 위한 언어 목록 조회
+     */
+    @GetMapping("/filters/languages")
+    public BaseResponse<List<LanguageDTO>> getLanguagesForFilter() {
+        return new BaseResponse<>(mentosService.getAllLanguages());
+    }
+
+    /**
+     * 필터링을 위한 학습유형 목록 조회
+     */
+    @GetMapping("/filters/match-types")
+    public BaseResponse<List<MatchTypeDTO>> getMatchTypesForFilter() {
+        return new BaseResponse<>(mentosService.getAllMatchTypes());
+    }
+	
 	/**
 	 * 멘토스 참여 취소하기(신청 취소)
 	 */
@@ -205,7 +256,6 @@ public class MentosApiController {
 		if (!result) {
 			throw new MentosException(BaseExceptionResponseStatus.CANNOT_UPDATE_MENTOS);
 		}
-
 		return new BaseResponse<>(null);
 	}
 
