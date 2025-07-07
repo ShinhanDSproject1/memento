@@ -25,6 +25,7 @@ import com.shinhan.memento.dto.mentos.CreateMentosDTO;
 import com.shinhan.memento.dto.mentos.GetMentosDTO;
 import com.shinhan.memento.dto.mentos.GetMentosDetailDTO;
 import com.shinhan.memento.dto.mentos.JoinMentosDTO;
+import com.shinhan.memento.dto.mentos.ShowMentosDetailForEditDTO;
 import com.shinhan.memento.model.Member;
 import com.shinhan.memento.model.MemberMentos;
 import com.shinhan.memento.model.Mentos;
@@ -67,6 +68,16 @@ public class MentosApiController {
 			throw new MentosException(BaseExceptionResponseStatus.CANNOT_CREATE_MENTOS);
 		}
 		return new BaseResponse<>(null);
+	}
+
+	/**
+	 * 멘토스 수정할 때 기존 필드 보여주기 위한 api
+	 */
+	@GetMapping("/detail/edit")
+	public BaseResponse<ShowMentosDetailForEditDTO> showMentosDetailForEdit(@RequestParam int mentosId,
+			@RequestParam int memberId) {
+		log.info("[MentosApiController.showMentosDetailForEdit]");
+		return new BaseResponse<>(mentosService.showMentosDetailForEdit(mentosId, memberId));
 	}
 
 	/**
@@ -157,20 +168,19 @@ public class MentosApiController {
 	 * 멘토스 상세보기
 	 */
 	@GetMapping("/detail")
-	public BaseResponse<GetMentosDetailDTO> showMentosDetail(@RequestParam int mentosId, @RequestParam int memberId){
+	public BaseResponse<GetMentosDetailDTO> showMentosDetail(@RequestParam int mentosId, @RequestParam int memberId) {
 		log.info("[MentosApiController.showMentoDetail]");
-		
 		Mentos mentos = mentosService.checkValidMentosById(mentosId);
-		if(mentos==null) {
+		if (mentos == null) {
 			throw new MentosException(BaseExceptionResponseStatus.CANNOT_FOUND_MENTOS);
 		}
-		
+
 		Member member = checkValidMemberById(memberId);
 		if (member == null) {
 			throw new MemberException(BaseExceptionResponseStatus.CANNOT_FOUND_MEMBER);
 		}
 
-		return new BaseResponse<>(mentosService.showMentosDetail(mentos,member));
+		return new BaseResponse<>(mentosService.showMentosDetail(mentos, member));
 	}
 	
 	/**
@@ -188,4 +198,32 @@ public class MentosApiController {
 		mentosService.deleteMentos(mentosId);
 		return new BaseResponse<>(null);
 	}
+
+	/**
+	 * 멘토스 수정하기
+	 */
+	@PatchMapping("/edit")
+	public BaseResponse<Void> updateMentos(@RequestParam int mentosId, @RequestPart("data") CreateMentosDTO createMentosDto,
+			@RequestPart(value = "image", required = false) MultipartFile imageFile) {
+		log.info("[MentosApiController.updateMentos]");
+
+		Member member = checkValidMemberByIdAndUserType(createMentosDto.getMentoId(), UserType.MENTO);
+		if (member == null) {
+			throw new MemberException(BaseExceptionResponseStatus.CANNOT_FOUND_MENTO);
+		}
+
+		Mentos mentos = checkValidMentosById(mentosId);
+		if (mentos == null) {
+			throw new MentosException(BaseExceptionResponseStatus.CANNOT_FOUND_MENTOS);
+		}
+
+		boolean result = mentosService.updateMentos(mentosId, createMentosDto, imageFile);
+
+		if (!result) {
+			throw new MentosException(BaseExceptionResponseStatus.CANNOT_UPDATE_MENTOS);
+		}
+
+		return new BaseResponse<>(null);
+	}
+
 }

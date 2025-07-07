@@ -13,10 +13,12 @@ public class PaymentDetailResponseDTO {
 	private Integer matchupId;
 	private String matchupTitle;
 	private Integer matchupPrice;
+	private Integer matchupCount;
 	private String memberProfileImageUrl;
 	private Integer mentosId;
 	private String mentosTitle;
 	private String mentosImage;
+	private String mentosStartDay;
 	private Integer mentosPrice;
 	private Integer keepgoingId;
 	private String keepgoingName;

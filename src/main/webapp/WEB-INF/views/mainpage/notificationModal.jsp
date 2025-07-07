@@ -7,7 +7,6 @@
     </div>
 
     <div class="d-2-b-12-black2">오늘 받은 알림</div>
-    <img class="more" src="${pageContext.request.contextPath}/resources/images/more0.svg" />
 
     <!-- 첫 번째 알림 카드 -->
     <div class="rectangle-306"></div>
@@ -42,7 +41,6 @@
         킵고잉 전환 투표를 진행해 주세요!
       </div>
     </div>
-    <img class="more2" src="${pageContext.request.contextPath}/resources/images/more1.svg" />
 
     <!-- 지난 알림 구분선 -->
     <div class="d-2-b-12-black3">지난 알림</div>
@@ -62,5 +60,4 @@
         팀원들에게 인사말을 남겨주세요.
       </div>
     </div>
-    <img class="more3" src="${pageContext.request.contextPath}/resources/images/more2.svg" />
 </div>

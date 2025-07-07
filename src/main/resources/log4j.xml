@@ -32,6 +32,47 @@
 		<level value="info" />
 	</logger>
 
+	<logger name="com.shinhan.memento">
+		<level value="info" />
+	</logger>
+	
+	<logger name="org.springframework.core">
+		<level value="info" />
+	</logger>
+	
+	<logger name="org.springframework.beans">
+		<level value="info" />
+	</logger>
+	
+	<logger name="org.springframework.context">
+		<level value="info" />
+	</logger>
+
+	<logger name="org.springframework.web">
+		<level value="info" />
+	</logger>
+
+	<logger name="jdbc.sqlonly">
+		<level value="DEBUG" />
+	</logger>
+	<logger name="jdbc.sqltiming">
+		<level value="DEBUG" />
+	</logger>
+	<logger name="jdbc.resultsettable">
+		<level value="DEBUG" />
+	</logger>
+	<logger name="jdbc.audit">
+		<level value="DEBUG" />
+	</logger>
+	<logger name="jdbc.resultset">
+		<level value="DEBUG" />
+	</logger>
+	<logger name="jdbc.connection">
+		<level value="DEBUG" />
+	</logger>
+	<logger name="com.shinhan.memento.mapper.MypageMapper">
+		<level value="DEBUG" />
+	</logger>
 	<!-- Root Logger -->
 	<root>
 		<priority value="warn" />

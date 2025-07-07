@@ -4,13 +4,15 @@ import java.io.File;
 import java.io.IOException;
 import java.math.BigDecimal;
 import java.nio.charset.StandardCharsets;
+import java.sql.Date;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.nio.file.Files;
 import java.nio.file.StandardCopyOption;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Base64;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -18,8 +20,9 @@ import java.util.Map;
 import java.util.Set;
 import java.util.UUID;
 import java.util.stream.Collectors;
-import javax.swing.ListModel;
+
 import org.apache.ibatis.jdbc.Null;
+import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
@@ -35,29 +38,46 @@ import com.shinhan.memento.common.response.status.BaseExceptionResponseStatus;
 import com.shinhan.memento.dao.MyPageDAO;
 import com.shinhan.memento.dto.ConfirmCashRequestDTO;
 import com.shinhan.memento.dto.ConfirmCashResponseDTO;
+import com.shinhan.memento.dto.MentoProblemDTO;
+import com.shinhan.memento.dto.MentoTestAnswerDTO;
+import com.shinhan.memento.dto.MentoTestCheckExpirationResponseDTO;
+import com.shinhan.memento.dto.MentoTestResultResponseDTO;
+import com.shinhan.memento.dto.MentoTestStartResponseDTO;
 import com.shinhan.memento.dto.InterestDTO;
+import com.shinhan.memento.dto.MyDashboardResponseDTO;
+import com.shinhan.memento.dto.MyJoinMatchupByDashboardResponseDTO;
+import com.shinhan.memento.dto.MyJoinMentosByDashboardResponseDTO;
+import com.shinhan.memento.dto.MyMatchTypeByDashboardResponseDTO;
+import com.shinhan.memento.dto.JoinKeepgoingDTO;
+import com.shinhan.memento.dto.JoinMatchupDTO;
 import com.shinhan.memento.dto.MyMatchupListResponseDTO;
 import com.shinhan.memento.dto.MyMentosListResponseDTO;
+import com.shinhan.memento.dto.MyPageSideBarResponseDTO;
 import com.shinhan.memento.dto.MyPaymentListResponseDTO;
 import com.shinhan.memento.dto.MyProfileDBUpdateDTO;
 import com.shinhan.memento.dto.MyProfileInfoResponseDTO;
 import com.shinhan.memento.dto.MyProfileUpdateRequestDTO;
 import com.shinhan.memento.dto.PaymentDetailResponseDTO;
+import com.shinhan.memento.dto.RefundRequestDTO;
 import com.shinhan.memento.dto.SparkTestResultRequestDTO;
 import com.shinhan.memento.dto.SparkTestResultResponseDTO;
 import com.shinhan.memento.dto.ValidateCashRequestDTO;
 import com.shinhan.memento.dto.ValidateCashResponseDTO;
+import com.shinhan.memento.dto.mentos.JoinMentosDTO;
 import com.shinhan.memento.mapper.InterestMapper;
 import com.shinhan.memento.mapper.MypageMapper;
 import com.shinhan.memento.model.BaseStatus;
 import com.shinhan.memento.model.CashProduct;
-import com.shinhan.memento.model.Interest;
+import com.shinhan.memento.model.MentoTestHistory;
+import com.shinhan.memento.model.MemberMentos;
 import com.shinhan.memento.model.PayType;
 import com.shinhan.memento.model.Payment;
 import com.shinhan.memento.model.Payment_Step;
 import com.shinhan.memento.model.SparkTestType;
+import com.shinhan.memento.util.MentoTestProblemBook;
+import com.shinhan.memento.util.MentoTestWebSocketHandler;
+
 import org.springframework.beans.factory.annotation.Value;
-import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
@@ -75,7 +95,20 @@ public class MyPageService {
 
 	@Value("${file.upload.dir}")
 	private String uploadDir;
-
+	
+	@Autowired
+	private MemberMentosService memberMentosService;
+	
+	//킵고잉 탈퇴용
+	@Autowired
+	SqlSession sqlSession;
+	String keepNamespace = "com.shinhan.memento.dao.MemberKeepgoingDAOInterface.";
+	//매치업 참여 취소
+	String matchupNamespace = "com.shinhan.memento.dao.MemberMatchUpDAO.";
+	
+	@Autowired
+	private MentoTestWebSocketHandler mentoTestWebSocketHandler;
+	
 	public ValidateCashResponseDTO validateCash(ValidateCashRequestDTO reqDTO, int userId) {
 		CashProduct product = myPageDAO.validateCash(reqDTO.getCashProductID());
 		String orderId = UUID.randomUUID().toString();
@@ -178,7 +211,7 @@ public class MyPageService {
 
 		result.stream().forEach(data -> {
 			MyPaymentListResponseDTO dto = MyPaymentListResponseDTO.builder().orderId((String) data.get("ORDERID"))
-					.amount(((BigDecimal) data.get("AMOUNT")).intValue())
+					.amount(((BigDecimal) data.get("AMOUNT")).intValue()).payType((String) data.get("PAYTYPE"))
 					.matchupId(((BigDecimal) data.get("MATCHUPID")).intValue())
 					.mentosId(((BigDecimal) data.get("MENTOSID")).intValue())
 					.keepgoingId(((BigDecimal) data.get("KEEPGOINGID")).intValue())
@@ -206,7 +239,7 @@ public class MyPageService {
 
 		return SparkTestResultResponseDTO.builder().result(updateTypeResult == 1 ? "success" : "fail").build();
 	}
-	
+
 	@Transactional
 	public boolean updateProfile(Integer memberId, MyProfileUpdateRequestDTO dto, MultipartFile imgFile) {
 		String imageUrl = null;
@@ -253,7 +286,6 @@ public class MyPageService {
 				regionDetail.trim();
 			}
 		}
-
 		MyProfileDBUpdateDTO myProfileDBUpdateDTO = MyProfileDBUpdateDTO.builder().memberId(memberId)
 				.nickname(dto.getNickname()).phoneNumber(dto.getPhone()).introduce(dto.getIntroduction())
 				.regionGroup(regeionGroup == "" ? null : regeionGroup)
@@ -354,6 +386,95 @@ public class MyPageService {
 
 		return result == 1;
 	}
+		
+	/*멘토 테스트 만료 체크*/
+	public MentoTestCheckExpirationResponseDTO checkExpiration(int userId) {
+			log.info("[checkExpiration]");
+			String expiration = "";	
+			LocalDate now = LocalDate.now();
+			Date sqlDate = Date.valueOf(now);
+			
+			log.info("[checkExpiration - selecthistory]");
+			MentoTestHistory history = mypageMapper.selectMentoTestHistory(userId, now.toString());
+			
+			if(history==null) {
+				history = MentoTestHistory.builder()
+				.memberId(userId)
+				.testAt(sqlDate)
+				.status(BaseStatus.ACTIVE)
+				.build();
+				
+				log.info("[checkExpiration - inserthistory]");
+				int result = mypageMapper.insertMentoTestHistory(history);
+				if(result < 1 ) {
+					throw new MypageException(BaseExceptionResponseStatus.CANNOT_INSERT_MENTOTEST_HISTORY);
+				}
+				
+				expiration = "success";
+			}
+			else { 
+				expiration = "fail";
+			}
+			return MentoTestCheckExpirationResponseDTO.builder()
+					.expiration(expiration)
+					.build();
+		}
+		
+	/* 멘토 테스트 시작 */ 
+	public MentoTestStartResponseDTO testing(int userId) {
+			
+			/*util MentoTestProblemBook에서 15문제 추출*/
+			List<MentoProblemDTO> problems = MentoTestProblemBook.getRandomProblems(15);
+			LocalDateTime now = LocalDateTime.now();
+			mentoTestWebSocketHandler.startAutoSubmitTimer(userId, 15 * 60 * 1000L);
+			
+			return MentoTestStartResponseDTO.builder()
+					.problems(problems)
+					.startTime(now)
+					.build();
+		}
+
+	/* 멘토 테스트 결과 */
+	public MentoTestResultResponseDTO gradeMentoTest(int userId, List<MentoTestAnswerDTO> answers) {
+			Map<Integer, Integer> correctMap = MentoTestProblemBook.getANSWER_MAP();
+			int correctCount = 0;
+			int total = answers.size();
+		    List<Integer> correctIds = new ArrayList<>();
+		    
+		    log.info("[gradeMentoTest] userId: {}, 제출 문제 수: {}", userId, answers.size());
+		    
+		    for (MentoTestAnswerDTO answer : answers) {
+		        int problemId = answer.getProblemId();
+		        int answerIndex = answer.getAnswerIndex();
+
+		        // 정답 비교 (미응답 -1 은 무시)
+		        Integer correctIndex = correctMap.get(problemId);
+		        if (correctIndex != null && answerIndex == correctIndex) {
+		            correctCount++;
+		            correctIds.add(problemId);
+		        }
+		    }
+
+		    int score = (int) ((double) correctCount / total * 100);
+		    boolean passed = score >= 80;
+
+		    if (passed) {
+		        int update = mypageMapper.updateMemberUserType(userId, "PREMENTO");
+		        if (update < 1) {
+		            throw new MypageException(BaseExceptionResponseStatus.CANNOT_UPDATE_MEMBER_USERTYPE);
+		        }
+		    }
+		    	
+		    return MentoTestResultResponseDTO.builder()
+		            .score(score)
+		            .totalProblems(total)
+		            .correctCount(correctCount)
+		            .correctProblemIds(correctIds)
+		            .passed(passed)
+		            .build();
+		}
+
+
 
 	public MyProfileInfoResponseDTO selectMyProfileInfo(Integer memberId) {
 		List<Map<String, Object>> result = mypageMapper.selectMyProfileInfo(memberId);
@@ -392,10 +513,16 @@ public class MyPageService {
 
 		result.stream().forEach(data -> {
 			Timestamp payAtTimestamp = (Timestamp) data.get("PAYAT");
+			Timestamp mentosStartDay = (Timestamp) data.get("MENTOSSTARTDAY");
 			String payAtFormatted = null;
+			String startDayFormatted = null;
 			if (payAtTimestamp != null) {
 				// Convert Timestamp to Date and then format to String
 				payAtFormatted = formatter.format(new Date(payAtTimestamp.getTime()));
+			}
+			if (mentosStartDay != null) {
+				// Convert Timestamp to Date and then format to String
+				startDayFormatted = formatter.format(new Date(mentosStartDay.getTime()));
 			}
 
 			PaymentDetailResponseDTO dto = PaymentDetailResponseDTO.builder().orderId((String) data.get("ORDERID"))
@@ -403,13 +530,15 @@ public class MyPageService {
 					.matchupId(((BigDecimal) data.get("MATCHUPID")).intValue())
 					.matchupTitle(((BigDecimal) data.get("MATCHUPID")).intValue() == 0 ? null
 							: (String) data.get("MATCHUPTITLE"))
+					.matchupCount(
+							data.get("MATCHUPCOUNT") == null ? 0 : ((BigDecimal) data.get("MATCHUPCOUNT")).intValue())
 					.matchupPrice(
 							data.get("MATCHUPPRICE") == null ? 0 : ((BigDecimal) data.get("MATCHUPPRICE")).intValue())
 					.memberProfileImageUrl((String) data.get("MEMBERPROFILEIMAGEURL"))
 					.mentosId(((BigDecimal) data.get("MENTOSID")).intValue())
 					.mentosTitle(((BigDecimal) data.get("MENTOSID")).intValue() == 0 ? null
 							: (String) data.get("MENTOSTITLE"))
-					.mentosImage((String) data.get("MENTOSIMAGE"))
+					.mentosImage((String) data.get("MENTOSIMAGE")).mentosStartDay(startDayFormatted)
 					.mentosPrice(
 							data.get("MENTOSPRICE") == null ? 0 : ((BigDecimal) data.get("MENTOSPRICE")).intValue())
 					.keepgoingId(((BigDecimal) data.get("KEEPGOINGID")).intValue())
@@ -425,6 +554,183 @@ public class MyPageService {
 		});
 
 		return selectPaymentDetailList;
+	}
+	
+	public MyDashboardResponseDTO selectDataByDashboard(Integer memberId) {
+		//매치업	
+		List<Map<String, Object>> matchUpData = mypageMapper.myJoinMatchupByDashboard(memberId);
+		List<MyJoinMatchupByDashboardResponseDTO> myMatchupDTOList = new ArrayList<>();
+		
+		matchUpData.stream().forEach(data -> {
+			String role = ((BigDecimal)data.get("LEADERID")).intValue() == memberId ? "Leader":"follower";
+			Boolean hasmento = false;
+			Object hasMentoValue = data.get("HASMENTO");
+
+			// 값이 null이 아니고, 숫자(Number) 타입인지 확인합니다.
+			if (hasMentoValue instanceof Number) {
+			    // Number 타입의 값을 int로 변환하여 1과 같은지 비교합니다.
+			    // 1이면 true, 그 외의 숫자(0 등)는 false가 됩니다.
+			    hasmento = ((Number) hasMentoValue).intValue() == 1;
+			}
+			MyJoinMatchupByDashboardResponseDTO dto = MyJoinMatchupByDashboardResponseDTO.builder()
+					.leaderProfileImageUrl((String)data.get("LEADERPROFILEIMAGEURL"))
+					.title((String)data.get("TITLE"))
+					.role(role)
+					.totalCount(((BigDecimal)data.get("TOTALCOUNT")).intValue())
+					.currentCount(((BigDecimal)data.get("CURRENTCOUNT")).intValue())
+					.matchStatus((String)data.get("MATCHSTATUS"))
+					.hasMento(hasmento)
+					.build();
+			
+			myMatchupDTOList.add(dto);
+		});
+		
+		//멘토스
+		List<Map<String, Object>> mentosData = mypageMapper.myJoinMentosByDashboard(memberId);
+		List<MyJoinMentosByDashboardResponseDTO> myMentosDTOList = new ArrayList<>();
+		
+		mentosData.stream().forEach(data -> {
+			String mentoNickname = ((BigDecimal)data.get("MENTOID")).intValue() == memberId ? "Mentor": (String)data.get("MENTONICKNAME");
+			MyJoinMentosByDashboardResponseDTO dto = MyJoinMentosByDashboardResponseDTO.builder()
+					.mentosTitle((String)data.get("MENTOSTITLE"))
+					.mentosImage((String)data.get("MENTOSIMAGE"))
+					.mentoNickname(mentoNickname)
+					.mentosStatus((String)data.get("MENTOSSTATUS"))
+					.build();
+			
+			myMentosDTOList.add(dto);
+		});
+		
+		//matchType 스파크
+		MyMatchTypeByDashboardResponseDTO myMatchTypeData = mypageMapper.myMatchTypeByDashboard(memberId);
+	
+		MyDashboardResponseDTO dashboardData = MyDashboardResponseDTO.builder()
+				.myMatchupDashboardList(myMatchupDTOList)
+				.myMentosDashboardList(myMentosDTOList)
+				.myMatchTypeData(myMatchTypeData)
+				.build();
+		
+		return dashboardData;
+	}
+	
+
+	@Transactional
+	public boolean refundAction(Integer memberId, String orderId) {
+		boolean result = true;
+		// 주문 번호로 킵고잉 아이디, 멘토스 아이디, 매치업 아이디, 충전
+		List<Map<String, Object>> refundDataMap = mypageMapper.refundSelectData(memberId, orderId);
+		List<RefundRequestDTO> refundDataList = new ArrayList<RefundRequestDTO>();
+
+		refundDataMap.stream().forEach(data -> {
+			RefundRequestDTO dto = RefundRequestDTO.builder().orderId((String) data.get("ORDERID"))
+					.amount(data.get("AMOUNT") == null ? 0 : ((BigDecimal)data.get("AMOUNT")).intValue())
+					.payType((String) data.get("PAYTYPE"))
+					.matchupId(data.get("MATCHUPID") == null ? 0 : ((BigDecimal) data.get("MATCHUPID")).intValue())
+					.matchupPrice(
+							data.get("MATCHUPPRICE") == null ? 0 : ((BigDecimal) data.get("MATCHUPPRICE")).intValue())
+					.mentosId(data.get("MENTOSID") == null ? 0 : ((BigDecimal) data.get("MENTOSID")).intValue())
+					.mentosPrice(
+							data.get("MENTOSPRICE") == null ? 0 : ((BigDecimal) data.get("MENTOSPRICE")).intValue())
+					.keepgoingId(
+							data.get("KEEPGOINGID") == null ? 0 : ((BigDecimal) data.get("KEEPGOINGID")).intValue())
+					.keepgoingPrice(data.get("KEEPGOINGPRICE") == null ? 0
+							: ((BigDecimal) data.get("KEEPGOINGPRICE")).intValue())
+					.userBalance(
+							data.get("USERBALANCE") == null ? 0 : ((BigDecimal) data.get("USERBALANCE")).intValue())
+					.memberPoint(
+							data.get("MEMBERPOINT") == null ? 0 : ((BigDecimal) data.get("MEMBERPOINT")).intValue())
+					.build();
+
+			refundDataList.add(dto);
+		});
+		RefundRequestDTO shareDataDTO = refundDataList.get(0);
+		Integer initBalance = shareDataDTO.getUserBalance();
+		Integer amount = shareDataDTO.getAmount();
+		String payType = shareDataDTO.getPayType();
+
+		//CHARGE or USE or REFUND -> REFUND의 경우 버튼이 존재하지 않음
+		System.out.println(payType);
+
+		if(payType.equalsIgnoreCase("REFUND")) {
+			return false;
+		}else if(payType.equalsIgnoreCase("CHARGE")) {
+			System.out.println(initBalance);
+			System.out.println(amount);
+			if(initBalance < amount) {
+				return false;
+			}else {
+				System.out.println("어");
+				initBalance -= amount;
+			}
+		}else {
+			//루프 돌면서 금액 계산 및 탈퇴
+			System.out.println("디");
+			for (RefundRequestDTO refund : refundDataList) {
+				if (refund.getMatchupId() != 0) {
+					//매치업 취소
+					System.out.println("가");
+					JoinMatchupDTO jmatchDto = new JoinMatchupDTO(refund.getMatchupId(), memberId);
+					int jmatchCancel = sqlSession.update(matchupNamespace+"cancelJoinMatchupBy2id",jmatchDto);
+					System.out.println(jmatchCancel);
+					if(jmatchCancel > 0) {
+						initBalance += refund.getMatchupPrice();
+					}else {
+						return false;
+					}
+					
+				}
+				if (refund.getMentosId() != 0) {
+					// 멘토스 취소
+					System.out.println("문");
+					JoinMentosDTO jmentosDto = new JoinMentosDTO(refund.getMentosId(), memberId);
+					MemberMentos mm =  memberMentosService.checkValidMemberMentos(jmentosDto);
+					int jmentosCancel = memberMentosService.cancelJoinMentos(mm.getMemberMentosId());
+					System.out.println(jmentosCancel);
+					if(jmentosCancel > 0) {
+						initBalance += refund.getMentosPrice();
+					}else {
+						return false;
+					}
+					
+				}
+				if (refund.getKeepgoingId() != 0) {
+					//킵고잉 탈퇴
+					System.out.println("제");
+					JoinKeepgoingDTO jkeepDto = new JoinKeepgoingDTO(refund.getKeepgoingId(), memberId);
+					int jkeepcancel = sqlSession.update(keepNamespace+"cancelMemberKeepgoingBy2id", jkeepDto);
+					System.out.println(jkeepcancel);
+					if(jkeepcancel > 0) {
+						initBalance += refund.getKeepgoingPrice();
+					}else {
+						return false;
+					}
+				}
+			}
+		}
+		
+		//user balance update
+		System.out.println("야");
+		Integer resultBalance = initBalance;
+		System.out.println(resultBalance);
+		int balanceUpdateResult = mypageMapper.updateUserBalanceByRefund(resultBalance, memberId);
+		System.out.println(balanceUpdateResult);
+		if(balanceUpdateResult <= 0) {
+			return false;
+		}
+		System.out.println("?");
+		// payment update -> 주문번호
+		int paymentUpateRefundResult = mypageMapper.updatePaymentByRefund(orderId);
+		System.out.println(paymentUpateRefundResult);
+		if(paymentUpateRefundResult <= 0) {
+			return false;
+		}
+		
+		return result;
+	}
+	
+	public MyPageSideBarResponseDTO selectMySideBarInfo(Integer memberId) {
+		MyPageSideBarResponseDTO dto = mypageMapper.selectMySideBarInfo(memberId);
+		return dto;
 	}
 
 }

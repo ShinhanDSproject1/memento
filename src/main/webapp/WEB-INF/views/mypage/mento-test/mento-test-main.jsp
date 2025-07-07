@@ -6,18 +6,18 @@
 <link rel="stylesheet"
 	href="${cpath}/resources/css/mypage/mento-test/mento-test-main.css" />
 
-		<div class="mento-test-container">
-			<div class="frame-3706">
-				<div class="frame-3705"></div>
-				<img class="photoroom-1" src="${ImgPath}/background.png" />
-				<div class="div_mento">멘토 자격시험</div>
-				<img class="_2-1" src="${ImgPath}/test.png" />
-				<div class="rectangle-311"></div>
-				<div class="rectangle-312"></div>
-				<button
-					data-url="${cpath}/mypage/mento-test/mento-test-description"
-					class="div2_mento page-link">
-					시험보기
-				</button>
-			</div>
+<div class="mento-test-main">
+	<div class="mento-test-image-wrapper">
+		<%-- <img class="mento-test-background-img" src="${ImgPath}/background.png" /> --%>
+		<div class="mento-test-title-wrapper">
+			<span class="mento-title-emph">mento</span> 
+			<span class="mento-title-text">자격시험</span>
 		</div>
+	</div>
+	<img class="mento-test-character-img" src="${ImgPath}/test.png" />
+
+	<div class="mento-test-button-wrapper">
+		<button data-url="${cpath}/mypage/mento-test/mento-test-description"
+			class="mento-test-button page-link">시험보기</button>
+	</div>
+</div>
