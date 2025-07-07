@@ -37,6 +37,10 @@ import com.shinhan.memento.dao.MyPageDAO;
 import com.shinhan.memento.dto.ConfirmCashRequestDTO;
 import com.shinhan.memento.dto.ConfirmCashResponseDTO;
 import com.shinhan.memento.dto.InterestDTO;
+import com.shinhan.memento.dto.MyDashboardResponseDTO;
+import com.shinhan.memento.dto.MyJoinMatchupByDashboardResponseDTO;
+import com.shinhan.memento.dto.MyJoinMentosByDashboardResponseDTO;
+import com.shinhan.memento.dto.MyMatchTypeByDashboardResponseDTO;
 import com.shinhan.memento.dto.JoinKeepgoingDTO;
 import com.shinhan.memento.dto.JoinMatchupDTO;
 import com.shinhan.memento.dto.MyMatchupListResponseDTO;
@@ -62,6 +66,7 @@ import com.shinhan.memento.model.PayType;
 import com.shinhan.memento.model.Payment;
 import com.shinhan.memento.model.Payment_Step;
 import com.shinhan.memento.model.SparkTestType;
+
 import org.springframework.beans.factory.annotation.Value;
 import lombok.extern.slf4j.Slf4j;
 
@@ -449,6 +454,64 @@ public class MyPageService {
 
 		return selectPaymentDetailList;
 	}
+	
+	public MyDashboardResponseDTO selectDataByDashboard(Integer memberId) {
+		//매치업	
+		List<Map<String, Object>> matchUpData = mypageMapper.myJoinMatchupByDashboard(memberId);
+		List<MyJoinMatchupByDashboardResponseDTO> myMatchupDTOList = new ArrayList<>();
+		
+		matchUpData.stream().forEach(data -> {
+			String role = ((BigDecimal)data.get("LEADERID")).intValue() == memberId ? "Leader":"follower";
+			Boolean hasmento = false;
+			Object hasMentoValue = data.get("HASMENTO");
+
+			// 값이 null이 아니고, 숫자(Number) 타입인지 확인합니다.
+			if (hasMentoValue instanceof Number) {
+			    // Number 타입의 값을 int로 변환하여 1과 같은지 비교합니다.
+			    // 1이면 true, 그 외의 숫자(0 등)는 false가 됩니다.
+			    hasmento = ((Number) hasMentoValue).intValue() == 1;
+			}
+			MyJoinMatchupByDashboardResponseDTO dto = MyJoinMatchupByDashboardResponseDTO.builder()
+					.leaderProfileImageUrl((String)data.get("LEADERPROFILEIMAGEURL"))
+					.title((String)data.get("TITLE"))
+					.role(role)
+					.totalCount(((BigDecimal)data.get("TOTALCOUNT")).intValue())
+					.currentCount(((BigDecimal)data.get("CURRENTCOUNT")).intValue())
+					.matchStatus((String)data.get("MATCHSTATUS"))
+					.hasMento(hasmento)
+					.build();
+			
+			myMatchupDTOList.add(dto);
+		});
+		
+		//멘토스
+		List<Map<String, Object>> mentosData = mypageMapper.myJoinMentosByDashboard(memberId);
+		List<MyJoinMentosByDashboardResponseDTO> myMentosDTOList = new ArrayList<>();
+		
+		mentosData.stream().forEach(data -> {
+			String mentoNickname = ((BigDecimal)data.get("MENTOID")).intValue() == memberId ? "Mentor": (String)data.get("MENTONICKNAME");
+			MyJoinMentosByDashboardResponseDTO dto = MyJoinMentosByDashboardResponseDTO.builder()
+					.mentosTitle((String)data.get("MENTOSTITLE"))
+					.mentosImage((String)data.get("MENTOSIMAGE"))
+					.mentoNickname(mentoNickname)
+					.mentosStatus((String)data.get("MENTOSSTATUS"))
+					.build();
+			
+			myMentosDTOList.add(dto);
+		});
+		
+		//matchType 스파크
+		MyMatchTypeByDashboardResponseDTO myMatchTypeData = mypageMapper.myMatchTypeByDashboard(memberId);
+	
+		MyDashboardResponseDTO dashboardData = MyDashboardResponseDTO.builder()
+				.myMatchupDashboardList(myMatchupDTOList)
+				.myMentosDashboardList(myMentosDTOList)
+				.myMatchTypeData(myMatchTypeData)
+				.build();
+		
+		return dashboardData;
+	}
+	
 
 	@Transactional
 	public boolean refundAction(Integer memberId, String orderId) {
