@@ -4,13 +4,15 @@ import java.io.File;
 import java.io.IOException;
 import java.math.BigDecimal;
 import java.nio.charset.StandardCharsets;
+import java.sql.Date;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.nio.file.Files;
 import java.nio.file.StandardCopyOption;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Base64;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -36,6 +38,11 @@ import com.shinhan.memento.common.response.status.BaseExceptionResponseStatus;
 import com.shinhan.memento.dao.MyPageDAO;
 import com.shinhan.memento.dto.ConfirmCashRequestDTO;
 import com.shinhan.memento.dto.ConfirmCashResponseDTO;
+import com.shinhan.memento.dto.MentoProblemDTO;
+import com.shinhan.memento.dto.MentoTestAnswerDTO;
+import com.shinhan.memento.dto.MentoTestCheckExpirationResponseDTO;
+import com.shinhan.memento.dto.MentoTestResultResponseDTO;
+import com.shinhan.memento.dto.MentoTestStartResponseDTO;
 import com.shinhan.memento.dto.InterestDTO;
 import com.shinhan.memento.dto.MyDashboardResponseDTO;
 import com.shinhan.memento.dto.MyJoinMatchupByDashboardResponseDTO;
@@ -61,11 +68,14 @@ import com.shinhan.memento.mapper.InterestMapper;
 import com.shinhan.memento.mapper.MypageMapper;
 import com.shinhan.memento.model.BaseStatus;
 import com.shinhan.memento.model.CashProduct;
+import com.shinhan.memento.model.MentoTestHistory;
 import com.shinhan.memento.model.MemberMentos;
 import com.shinhan.memento.model.PayType;
 import com.shinhan.memento.model.Payment;
 import com.shinhan.memento.model.Payment_Step;
 import com.shinhan.memento.model.SparkTestType;
+import com.shinhan.memento.util.MentoTestProblemBook;
+import com.shinhan.memento.util.MentoTestWebSocketHandler;
 
 import org.springframework.beans.factory.annotation.Value;
 import lombok.extern.slf4j.Slf4j;
@@ -95,6 +105,9 @@ public class MyPageService {
 	String keepNamespace = "com.shinhan.memento.dao.MemberKeepgoingDAOInterface.";
 	//매치업 참여 취소
 	String matchupNamespace = "com.shinhan.memento.dao.MemberMatchUpDAO.";
+	
+	@Autowired
+	private MentoTestWebSocketHandler mentoTestWebSocketHandler;
 	
 	public ValidateCashResponseDTO validateCash(ValidateCashRequestDTO reqDTO, int userId) {
 		CashProduct product = myPageDAO.validateCash(reqDTO.getCashProductID());
@@ -273,7 +286,6 @@ public class MyPageService {
 				regionDetail.trim();
 			}
 		}
-
 		MyProfileDBUpdateDTO myProfileDBUpdateDTO = MyProfileDBUpdateDTO.builder().memberId(memberId)
 				.nickname(dto.getNickname()).phoneNumber(dto.getPhone()).introduce(dto.getIntroduction())
 				.regionGroup(regeionGroup == "" ? null : regeionGroup)
@@ -374,6 +386,95 @@ public class MyPageService {
 
 		return result == 1;
 	}
+		
+	/*멘토 테스트 만료 체크*/
+	public MentoTestCheckExpirationResponseDTO checkExpiration(int userId) {
+			log.info("[checkExpiration]");
+			String expiration = "";	
+			LocalDate now = LocalDate.now();
+			Date sqlDate = Date.valueOf(now);
+			
+			log.info("[checkExpiration - selecthistory]");
+			MentoTestHistory history = mypageMapper.selectMentoTestHistory(userId, now.toString());
+			
+			if(history==null) {
+				history = MentoTestHistory.builder()
+				.memberId(userId)
+				.testAt(sqlDate)
+				.status(BaseStatus.ACTIVE)
+				.build();
+				
+				log.info("[checkExpiration - inserthistory]");
+				int result = mypageMapper.insertMentoTestHistory(history);
+				if(result < 1 ) {
+					throw new MypageException(BaseExceptionResponseStatus.CANNOT_INSERT_MENTOTEST_HISTORY);
+				}
+				
+				expiration = "success";
+			}
+			else { 
+				expiration = "fail";
+			}
+			return MentoTestCheckExpirationResponseDTO.builder()
+					.expiration(expiration)
+					.build();
+		}
+		
+	/* 멘토 테스트 시작 */ 
+	public MentoTestStartResponseDTO testing(int userId) {
+			
+			/*util MentoTestProblemBook에서 15문제 추출*/
+			List<MentoProblemDTO> problems = MentoTestProblemBook.getRandomProblems(15);
+			LocalDateTime now = LocalDateTime.now();
+			mentoTestWebSocketHandler.startAutoSubmitTimer(userId, 15 * 60 * 1000L);
+			
+			return MentoTestStartResponseDTO.builder()
+					.problems(problems)
+					.startTime(now)
+					.build();
+		}
+
+	/* 멘토 테스트 결과 */
+	public MentoTestResultResponseDTO gradeMentoTest(int userId, List<MentoTestAnswerDTO> answers) {
+			Map<Integer, Integer> correctMap = MentoTestProblemBook.getANSWER_MAP();
+			int correctCount = 0;
+			int total = answers.size();
+		    List<Integer> correctIds = new ArrayList<>();
+		    
+		    log.info("[gradeMentoTest] userId: {}, 제출 문제 수: {}", userId, answers.size());
+		    
+		    for (MentoTestAnswerDTO answer : answers) {
+		        int problemId = answer.getProblemId();
+		        int answerIndex = answer.getAnswerIndex();
+
+		        // 정답 비교 (미응답 -1 은 무시)
+		        Integer correctIndex = correctMap.get(problemId);
+		        if (correctIndex != null && answerIndex == correctIndex) {
+		            correctCount++;
+		            correctIds.add(problemId);
+		        }
+		    }
+
+		    int score = (int) ((double) correctCount / total * 100);
+		    boolean passed = score >= 80;
+
+		    if (passed) {
+		        int update = mypageMapper.updateMemberUserType(userId, "PREMENTO");
+		        if (update < 1) {
+		            throw new MypageException(BaseExceptionResponseStatus.CANNOT_UPDATE_MEMBER_USERTYPE);
+		        }
+		    }
+		    	
+		    return MentoTestResultResponseDTO.builder()
+		            .score(score)
+		            .totalProblems(total)
+		            .correctCount(correctCount)
+		            .correctProblemIds(correctIds)
+		            .passed(passed)
+		            .build();
+		}
+
+
 
 	public MyProfileInfoResponseDTO selectMyProfileInfo(Integer memberId) {
 		List<Map<String, Object>> result = mypageMapper.selectMyProfileInfo(memberId);

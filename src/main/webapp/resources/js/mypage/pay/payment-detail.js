@@ -235,7 +235,11 @@ async function fetchOrderDetail(orderId) {
         });
         const totalPay = document.getElementById('totalPay')
         if (totalProductCount == 0) {
-            totalPay.textContent = `₩${(paymentDetail[0].amount / 1.05).toLocaleString()}`
+            if(paymentDetail[0].amount > 30000){
+            	totalPay.textContent = `₩${(paymentDetail[0].amount / 1.1).toLocaleString()}`
+            } else{
+           		totalPay.textContent = `₩${(paymentDetail[0].amount / 1.05).toLocaleString()}`
+            }
         } else {
             totalPay.textContent = `₩${(price - point).toLocaleString()}`
         }

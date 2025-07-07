@@ -23,6 +23,10 @@ import com.shinhan.memento.common.response.BaseResponse;
 import com.shinhan.memento.common.response.status.BaseExceptionResponseStatus;
 import com.shinhan.memento.dto.ConfirmCashRequestDTO;
 import com.shinhan.memento.dto.ConfirmCashResponseDTO;
+import com.shinhan.memento.dto.MentoTestCheckExpirationResponseDTO;
+import com.shinhan.memento.dto.MentoTestResultRequestDTO;
+import com.shinhan.memento.dto.MentoTestResultResponseDTO;
+import com.shinhan.memento.dto.MentoTestStartResponseDTO;
 import com.shinhan.memento.dto.MyDashboardResponseDTO;
 import com.shinhan.memento.dto.MyMatchupListResponseDTO;
 import com.shinhan.memento.dto.MyMentosListResponseDTO;
@@ -107,10 +111,41 @@ public class MyPageApiController {
 	public BaseResponse<Boolean> updateMyProfile(HttpSession session, @RequestParam(value = "imageFile", required = false) MultipartFile imageFile ,@ModelAttribute MyProfileUpdateRequestDTO dto){
 		Member loginUser = (Member) session.getAttribute("loginUser");
 		Integer memberId = loginCheck(loginUser);
-		
 		boolean result = myPageService.updateProfile(memberId,dto,imageFile);
 
 		return new BaseResponse<Boolean>(result);
+	}
+
+	@PostMapping("/mento-test-check-expiration")
+	public BaseResponse<MentoTestCheckExpirationResponseDTO> checkExpiration(HttpSession session){
+		Member loginUser = (Member) session.getAttribute("loginUser");
+		if (loginUser == null) throw new MypageException(BaseExceptionResponseStatus.NEED_LOGIN);
+		int userId = loginUser.getMemberId();
+		
+		MentoTestCheckExpirationResponseDTO resDTO = myPageService.checkExpiration(userId);
+		return new BaseResponse<>(resDTO);
+	}
+	
+	@PostMapping("/mento-test-start")
+	public BaseResponse<MentoTestStartResponseDTO> startTest(HttpSession session){
+		Member loginUser = (Member) session.getAttribute("loginUser");
+		if (loginUser == null) throw new MypageException(BaseExceptionResponseStatus.NEED_LOGIN);
+		int userId = loginUser.getMemberId();
+		
+		
+		MentoTestStartResponseDTO resDTO = myPageService.testing(userId);
+		return new BaseResponse<>(resDTO);
+	}
+	
+	@PostMapping("/mento-test-result")
+	public BaseResponse<MentoTestResultResponseDTO> result(@RequestBody MentoTestResultRequestDTO reqDTO, HttpSession session){
+		Member loginUser = (Member) session.getAttribute("loginUser");
+		if (loginUser == null) throw new MypageException(BaseExceptionResponseStatus.NEED_LOGIN);
+		int userId = loginUser.getMemberId();
+		
+		MentoTestResultResponseDTO resDTO = myPageService.gradeMentoTest(userId, reqDTO.getAnswers());
+		session.setAttribute("mentoTestResult", resDTO);
+		return new BaseResponse<>(resDTO);
 	}
 
 	@GetMapping(value="/mymatchup-list", produces = "application/json")
