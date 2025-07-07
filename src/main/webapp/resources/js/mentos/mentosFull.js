@@ -145,7 +145,7 @@ function createMentosCardHTML(mentos) {
     const priceText = mentos.price === 0 ? '무료' : `₩${mentos.price.toLocaleString()}`;
     const priceClass = mentos.price === 0 ? 'price-free' : '';
     return `
-        <div class="mentos-class-cardview mentos-hover-guide" onclick="location.href='${cpath}/mentos/detail?mentosId=${mentos.mentosId}'">
+        <div class="mentos-class-cardview mentos-hover-guide" onclick="location.href='${cpath}/mentos/detailPage?mentosId=${mentos.mentosId}'">
             <div class="mentos-class">
                 <div class="mentos-text">
                     <div class="frame-37862"><div class="frame-413"><div class="d">D-</div><div class="d">${mentos.daysBetween}</div></div><div class="frame-414"><div class="d">${mentos.remainMemberCnt}</div></div></div>

@@ -43,9 +43,6 @@
 	<div class="container">
 		<div class="full-detail-select">
 			<div class="detail-select">
-				<div class="filter-item" data-filter-type="sortBy"
-					data-filter-value="latest">멘토스오픈 순</div>
-
 				<div id="region-filter-container" class="filter-dropdown"></div>
 				<div id="matchType-filter-container" class="filter-dropdown"></div>
 				<div id="category-filter-container" class="filter-dropdown"></div>
