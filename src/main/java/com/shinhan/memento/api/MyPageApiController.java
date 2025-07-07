@@ -27,6 +27,7 @@ import com.shinhan.memento.dto.MentoTestCheckExpirationResponseDTO;
 import com.shinhan.memento.dto.MentoTestResultRequestDTO;
 import com.shinhan.memento.dto.MentoTestResultResponseDTO;
 import com.shinhan.memento.dto.MentoTestStartResponseDTO;
+import com.shinhan.memento.dto.MyDashboardResponseDTO;
 import com.shinhan.memento.dto.MyMatchupListResponseDTO;
 import com.shinhan.memento.dto.MyMentosListResponseDTO;
 import com.shinhan.memento.dto.MyPageSideBarResponseDTO;
@@ -44,6 +45,7 @@ import com.shinhan.memento.model.UserType;
 import com.shinhan.memento.service.MemberKeepgoingService;
 import com.shinhan.memento.service.MemberService;
 import com.shinhan.memento.service.MyPageService;
+
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
@@ -62,8 +64,7 @@ public class MyPageApiController {
 	@PostMapping("/spark-test-result")
 	public BaseResponse<SparkTestResultResponseDTO> sparkTestResult(@RequestBody SparkTestResultRequestDTO reqDTO,HttpSession session) {
 		Member loginUser = (Member) session.getAttribute("loginUser");
-		if (loginUser == null) throw new MypageException(BaseExceptionResponseStatus.NEED_LOGIN);
-		int userId = loginUser.getMemberId();
+		int userId = loginCheck(loginUser);
 		
 		SparkTestResultResponseDTO resDTO = myPageService.updateSparkType(reqDTO, userId);
 		return new BaseResponse<>(resDTO);
@@ -72,8 +73,7 @@ public class MyPageApiController {
 	@PostMapping("/validate-cash")
     public BaseResponse<ValidateCashResponseDTO> validateCash(@RequestBody ValidateCashRequestDTO reqDTO,HttpSession session) {
 		Member loginUser = (Member) session.getAttribute("loginUser");
-		if (loginUser == null) throw new MypageException(BaseExceptionResponseStatus.NEED_LOGIN);
-		int userId = loginUser.getMemberId();
+		int userId = loginCheck(loginUser);
 
 		ValidateCashResponseDTO resDTO = myPageService.validateCash(reqDTO, userId);
         return new BaseResponse<>(resDTO);
@@ -82,25 +82,27 @@ public class MyPageApiController {
 	@PostMapping("/confirm-cash")
 	public BaseResponse<ConfirmCashResponseDTO> confirmCash(@RequestBody ConfirmCashRequestDTO reqDTO, HttpSession session){
 		Member loginUser = (Member) session.getAttribute("loginUser");
-		if (loginUser == null) throw new MypageException(BaseExceptionResponseStatus.NEED_LOGIN);
-		int userId = loginUser.getMemberId();
+		int userId = loginCheck(loginUser);
 		
 		ConfirmCashResponseDTO resDTO = myPageService.confirmCash(reqDTO,userId);
         return new BaseResponse<>(resDTO);
 	}
 
 	
-	@GetMapping("/page7")
-	public BaseResponse<List<MyMentosListResponseDTO>> selectMyMentosListById(@RequestParam Integer memberId){
-		return new BaseResponse<>(myPageService.selectMyMentosListById(memberId));
+	@GetMapping(value="/mymentos-list", produces = "application/json")
+	public BaseResponse<List<MyMentosListResponseDTO>> selectMyMentosListById(HttpSession session){
+		Member loginUser = (Member) session.getAttribute("loginUser");
+		Integer memberId = loginCheck(loginUser);
+		List<MyMentosListResponseDTO> myMentosList = myPageService.selectMyMentosListById(memberId);
+		
+		return new BaseResponse<>(myMentosList);
 	}
 	
 	@GetMapping(value="/profile-info", produces = "application/json")
 	public BaseResponse<MyProfileInfoResponseDTO> selectMyProfileInfo(HttpSession session){
 		Member loginUser = (Member) session.getAttribute("loginUser");
-		if (loginUser == null) throw new MypageException(BaseExceptionResponseStatus.NEED_LOGIN);
-		int userId = loginUser.getMemberId();
-		MyProfileInfoResponseDTO profileInfoDTO = myPageService.selectMyProfileInfo(userId);
+		Integer memberId = loginCheck(loginUser);
+		MyProfileInfoResponseDTO profileInfoDTO = myPageService.selectMyProfileInfo(memberId);
 		
 		return new BaseResponse<>(profileInfoDTO);
 	}
@@ -108,10 +110,9 @@ public class MyPageApiController {
 	@PutMapping(value = "/profile-update")
 	public BaseResponse<Boolean> updateMyProfile(HttpSession session, @RequestParam(value = "imageFile", required = false) MultipartFile imageFile ,@ModelAttribute MyProfileUpdateRequestDTO dto){
 		Member loginUser = (Member) session.getAttribute("loginUser");
-		if (loginUser == null) throw new MypageException(BaseExceptionResponseStatus.NEED_LOGIN);
-		int userId = loginUser.getMemberId();
-		
-		boolean result = myPageService.updateProfile(userId,dto,imageFile);
+		Integer memberId = loginCheck(loginUser);
+		boolean result = myPageService.updateProfile(memberId,dto,imageFile);
+
 		return new BaseResponse<Boolean>(result);
 	}
 
@@ -147,11 +148,12 @@ public class MyPageApiController {
 		return new BaseResponse<>(resDTO);
 	}
 
-	@GetMapping(value="/page6/{memberId}", produces = "application/json")
-	public BaseResponse<List<MyMatchupListResponseDTO>> selectJoinListByMemberId(
-				@PathVariable Integer memberId
-			){
+	@GetMapping(value="/mymatchup-list", produces = "application/json")
+	public BaseResponse<List<MyMatchupListResponseDTO>> selectJoinListByMemberId(HttpSession session){
+		Member loginUser = (Member) session.getAttribute("loginUser");
+		Integer memberId = loginCheck(loginUser);
 		List<MyMatchupListResponseDTO> memberMatchUpList = myPageService.selectJoinListByMemberId(memberId);
+		
 		if(memberMatchUpList.size() == 0) {
 			return new BaseResponse<>(null);
 		}
@@ -179,8 +181,7 @@ public class MyPageApiController {
 	@GetMapping(value="/paymentlist", produces = "application/json")
 	public BaseResponse<List<MyPaymentListResponseDTO>> selectMyPaymentList(HttpSession session){
 		Member loginUser = (Member) session.getAttribute("loginUser");
-		if (loginUser == null) throw new MypageException(BaseExceptionResponseStatus.NEED_LOGIN);
-		int userId = loginUser.getMemberId();
+		int userId = loginCheck(loginUser);
 		List<MyPaymentListResponseDTO> myPaymentList = myPageService.selectMyPaymentListById(userId);
 		
 		return new BaseResponse<>(myPaymentList);
@@ -193,7 +194,21 @@ public class MyPageApiController {
 		List<PaymentDetailResponseDTO> paymentDetailList = myPageService.selectPaymentDetail(orderId);
 		
 		return new BaseResponse<>(paymentDetailList);
-
+	}
+	
+	@GetMapping(value="/dashboard-data", produces = "application/json")
+	public BaseResponse<MyDashboardResponseDTO> selectMyDashboardData(HttpSession session){
+		Member loginUser = (Member) session.getAttribute("loginUser");
+		Integer memberId = loginCheck(loginUser);
+		
+		MyDashboardResponseDTO dashboardResponseDTO = myPageService.selectDataByDashboard(memberId);
+		
+		return new BaseResponse<MyDashboardResponseDTO>(dashboardResponseDTO);
+	}
+	
+	public Integer loginCheck(Member loginUser) {
+		if (loginUser == null) throw new MypageException(BaseExceptionResponseStatus.NEED_LOGIN);
+		return loginUser.getMemberId();
 	}
 	
 	@PutMapping(value = "/refund")

@@ -42,7 +42,7 @@ $(() => {
     async function fetchProfileData() {
         const container = document.getElementById('profile-page')
         // 2. API를 호출합니다. URL은 실제 환경에 맞게 수정해야 합니다.
-        const API_URL = 'http://localhost:9999/memento/api/mypage/profile-info'; // 백엔드 API 엔드포인트 나중에 코드 합치기 
+        const API_URL = 'http://localhost:9999/memento/api/mypage/profile-info';
 
         try {
             const response = await fetch(API_URL);
@@ -61,15 +61,7 @@ $(() => {
 
             const profileImg = document.getElementById('profile-image-input')
             profileImg.alt = '프로필 이미지'
-            if (profileData.profileImgUrl) {
-                if (profileData.profileImgUrl[0] == '/') {
-                    profileData.src = '/mememto' + profileData.profileImgUrl
-                } else {
-                    profileData.src = profileData.profileImgUrl
-                }
-            } else {
-                profileImg.src = '/memento/resources/images/logo.png'
-            }
+            imgUrl(profileImg, profileData.profileImgUrl)
             const profileImgValue = document.getElementById('original-profile-img-url')
             profileImgValue.value = `${profileData.profileImgUrl}`
 

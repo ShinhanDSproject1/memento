@@ -22,8 +22,12 @@ public interface InterestMapper {
     
  // 3. 특정 회원의 모든 관심사 (interest_id) 조회
     @Select("SELECT mi.INTEREST_ID, i.INTEREST_NAME " +
-            "FROM member_interest mi left JOIN INTEREST i ON mi.INTEREST_ID = i.INTEREST_ID " +
-            "WHERE mi.member_id = #{memberId}")
+            "FROM member_interest mi "+ 
+    		"left JOIN INTEREST i ON mi.INTEREST_ID = i.INTEREST_ID " +
+            "WHERE mi.member_id = #{memberId}" +
+            "and mi.status = 'ACTIVE'"+ 
+            "and i.status = 'ACTIVE'"
+    		)
     List<InterestDTO> getMemberInterestsByMemberId(@Param("memberId") Integer memberId);
 
     // 4. 회원 관심사 추가 (member_interest 테이블에 삽입)
