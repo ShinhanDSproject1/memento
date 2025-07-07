@@ -102,7 +102,7 @@ async function fetchSideBarInfo() {
     }
     userNicknameDiv.textContent = `${sideBarData.nickname}`
     userBalanceSpan.textContent = `${(sideBarData.balance).toLocaleString()}`
-    userPointSpan.textContent = `${sideBarData.point}P`
+    userPointSpan.textContent = `${sideBarData.point}`
     userTypeDiv.textContent = `${sideBarData.userType}`
 
   } catch (error) {

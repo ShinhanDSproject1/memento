@@ -1,3 +1,7 @@
+body{
+   
+}
+
 .page-container {
   margin: 0 auto;
   box-sizing: border-box;
@@ -28,7 +32,7 @@ body {
   font-family: 'Inter', 'D2Coding', sans-serif;
   margin: 0;
   padding: 0;
-  background-color: #ffffff;
+  background-color: #f0faff;
   /* style_1 from root node 298:17270 */
   display: block;
   justify-content: center;
@@ -140,6 +144,7 @@ body {
   /* From Figma rectangles */
   display: flex;
   align-items: center;
+  background: #fff;
 }
 
 .form-input-text {
@@ -167,6 +172,7 @@ body {
   /* From 298:17326 */
   height: 120px;
   box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+  background: #fff;
   /* From 298:17326 */
 }
 
@@ -265,6 +271,27 @@ body {
     min-height: 44px;
     padding: 12px 15px;
   }
+}
+
+.profile-row-section{
+    background: #fff;
+	border-radius: 12px;
+	border: 1px solid rgba(0, 0, 0, 0.2);
+	box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+	margin: 10px auto;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: 32px;
+	position: relative;
+	margin: 10px auto;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: 32px;
+	position: relative;
+	height: 1046px;
+	width: 1200px;
 }
 
 /* CSS from section:profile-page */

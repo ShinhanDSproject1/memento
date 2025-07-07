@@ -48,7 +48,8 @@
 	<div class="login-button" style="cursor: pointer;" onclick="location.href='${cpath}/mainpage/logout'">
 		<div class="login-text">로그아웃</div>
 	</div>
-	<img class="vuesax-linear-coin" src="${cpath}/resources/images/header/vuesax-linear-coin0.svg" />
+	<a class= "vuesax-linear-coin" href= "${cpath}/mypage/cash-recharge">
+	<img class = "coin-icon" src="${cpath}/resources/images/header/vuesax-linear-coin0.svg" /></a>
 	<img id="notification-icon" class="icon-alert-notification-bell-new" src="${cpath}/resources/images/header/icon-alert-notification-bell-new0.svg" style="cursor: pointer;" />
 	
 

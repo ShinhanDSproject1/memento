@@ -29,7 +29,7 @@
 					</div>
 					<div class="asset-item">
 						<span class="asset-label point-label">Point :</span>
-						<span id="userPoint" class="asset-value">530 P</span>
+						<span id="userPoint" class="asset-value">530 </span>
 					</div>
 				</div>
 			</div>
