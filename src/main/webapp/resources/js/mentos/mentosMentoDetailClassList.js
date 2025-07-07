@@ -67,11 +67,19 @@ console.log("카드 붙일 위치:", $("#mentosCardContainer").length);
                 <div class="text">${item.mentoName}</div>
                 <div class="group-371"><div class="mento">${item.userType}</div></div>
               </div>
-              <div class="frame-408">📅<div class="text">${item.startDay}~${item.endDay}</div>
+             <div class="frame-408">
+                <img class="icon-time-calendar" src="/memento/resources/images/mentosFull/day.svg" />
+                <div class="text">${item.startDay}</div>
+                <div class="text">-</div>
+                <div class="text">${item.endDay}</div>
               </div>
-              <div class="frame-409">⏰<div class="text">${item.startTime} - ${item.endTime} (${item.selectedDays})</div>
+              <div class="frame-409">
+                <img class="icon-time-clock-outlined" src="/memento/resources/images/mentosFull/time.svg" />
+                <div class="text">${item.startTime} - ${item.endTime} (${item.selectedDays})</div>
               </div>
-              <div class="frame-410">📍<div class="text">${item.region}</div>
+              <div class="frame-410">
+                <img class="icon-maps-map-pin" src="/memento/resources/images/mentosFull/maps.svg" />
+                <div class="text">${item.region}</div>
               </div>
               <div class="frame-3659">
                 <div class="_45-000">₩${Number(item.price).toLocaleString()}</div>

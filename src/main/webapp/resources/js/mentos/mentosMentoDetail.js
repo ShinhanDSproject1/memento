@@ -48,12 +48,23 @@ function renderMentosCards(mentosList) {
                 <img class="user-user" src="/memento/resources/images/mentosFull/mento.svg" />
                 <div class="text">${mentos.mentoName}</div>
                 <div class="group-371">
-                  <div class="mento">mento</div>
+                  <div class="mento">${mentos.mentoType}</div>
                 </div>
               </div>
-              <div class="frame-408">📅 <div class="text">${mentos.startDay} ~ ${mentos.endDay}</div></div>
-              <div class="frame-409">⏰ <div class="text">${mentos.startTime} - ${mentos.endTime} (${mentos.selectedDays})</div></div>
-              <div class="frame-410">📍 <div class="text">${mentos.location}</div></div>
+              <div class="frame-408">
+                <img class="icon-time-calendar" src="/memento/resources/images/mentosFull/day.svg" />
+                <div class="text">${mentos.startDay}</div>
+                <div class="text">-</div>
+                <div class="text">${mentos.endDay}</div>
+              </div>
+              <div class="frame-409">
+                <img class="icon-time-clock-outlined" src="/memento/resources/images/mentosFull/time.svg" />
+                <div class="text">${mentos.startTime} - ${mentos.endTime} (${mentos.selectedDays})</div>
+              </div>
+              <div class="frame-410">
+                <img class="icon-maps-map-pin" src="/memento/resources/images/mentosFull/maps.svg" />
+                <div class="text">${mentos.region}</div>
+              </div>
               <div class="frame-3659">
                 <div class="_45-000">₩${Number(mentos.price).toLocaleString()}</div>
               </div>
