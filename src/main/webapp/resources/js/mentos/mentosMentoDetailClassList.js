@@ -53,12 +53,12 @@ console.log("카드 추가 중:", list);
 console.log("카드 붙일 위치:", $("#mentosCardContainer").length);
   $.each(list, function (_, item) {
     const card = `
-      <div class="mentos-class-cardview mentos-hover-guide" onclick="location.href='/memento/mentos/detail?mentosId=${item.mentosId}'">
+      <div class="mentos-class-cardview mentos-hover-guide" onclick="location.href='/memento/mentos/detailPage?mentosId=${item.mentosId}'">
         <div class="mentos-class">
           <div class="mentos-text">
             <div class="frame-37862">
-              <div class="frame-413"><div class="d">D-</div><div class="d">2</div></div>
-              <div class="frame-414"><div class="d">확정까지</div><div class="d">3</div><div class="d">명</div></div>
+              <div class="frame-413"><div class="d">D-</div><div class="d">0</div></div>
+              <div class="frame-414"><div class="d">확정된 클래스</div></div>
             </div>
             <div class="aws">${item.title}</div>
             <div class="frame-406">
@@ -67,19 +67,11 @@ console.log("카드 붙일 위치:", $("#mentosCardContainer").length);
                 <div class="text">${item.mentoName}</div>
                 <div class="group-371"><div class="mento">${item.userType}</div></div>
               </div>
-              <div class="frame-408">
-                <img class="icon-time-calendar" src="/memento/resources/images/mentosFull/day.svg" />
-                <div class="text">${item.startDay}</div>
-                <div class="text">-</div>
-                <div class="text">${item.endDay}</div>
+              <div class="frame-408">📅<div class="text">${item.startDay}~${item.endDay}</div>
               </div>
-              <div class="frame-409">
-                <img class="icon-time-clock-outlined" src="/memento/resources/images/mentosFull/time.svg" />
-                <div class="text">${item.startTime} - ${item.endTime} (${item.selectedDays})</div>
+              <div class="frame-409">⏰<div class="text">${item.startTime} - ${item.endTime} (${item.selectedDays})</div>
               </div>
-              <div class="frame-410">
-                <img class="icon-maps-map-pin" src="/memento/resources/images/mentosFull/maps.svg" />
-                <div class="text">${item.region}</div>
+              <div class="frame-410">📍<div class="text">${item.region}</div>
               </div>
               <div class="frame-3659">
                 <div class="_45-000">₩${Number(item.price).toLocaleString()}</div>

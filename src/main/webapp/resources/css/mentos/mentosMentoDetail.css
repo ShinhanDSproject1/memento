@@ -1,4 +1,4 @@
-＋＋:root {
+:root {
 	
 }
 
@@ -13,7 +13,7 @@
 
 .div {
 	background: #ffffff;
-	height: 2000px;
+	height: 1294px;
 	position: relative;
 	overflow: hidden;
 }
@@ -29,47 +29,119 @@ html, body {
 	width: 100%;
 }
 
-#mentosCardContainer {
-	display: grid;
-  grid-template-columns: repeat(3, 1fr);  /* 한 줄에 3개 고정 */
-  gap: 1.5rem;
-  width: 100%;
+.container {
+	width: 100%;
+	margin: 0 auto;
+	padding: 40px 20px;
+	box-sizing: border-box;
+	flex: 1;
+	display: flex;
+	flex-direction: column;
+	gap: 24px;
+	gap: 40px;
+	max-width: 1200px;
 }
 
-/* 헤더 뺴고 전체 프레임 */
-.sidebar-main {
+/*전체 제목 묶음 */
+.frame-3639 {
+	flex-shrink: 0;
+	width: 491px;
+	height: 500.55px;
+	position: relative;
 	display: flex;
-	flex-direction: row;
-	min-height: calc(100vh - 100px); /* 헤더 높이 제외 */
+	flex-direction: column;
+	gap: 12px;
+	width: 100%;
+}
+
+.div7 {
+	color: #000000;
+	text-align: left;
+	font-family: "Inter-SemiBold", sans-serif;
+	font-size: 32px;
+	line-height: 150%;
+	letter-spacing: -0.011000000000000001em;
+	font-weight: 600;
+	position: relative;
+	align-self: stretch;
+}
+
+.line-50 {
+	margin-top: -1px;
+	border-style: solid;
+	border-color: #a6abbd;
+	border-width: 1px 0 0 0;
+	align-self: stretch;
+	flex-shrink: 0;
+	height: 0px;
+	position: relative;
+	transform-origin: 0 0;
+	transform: rotate(0deg) scale(1, 1);
+}
+
+.div1 {
+	display: flex;
+	flex-direction: row; /* 좌우 배치 */
+	align-items: flex-start;
 	width: 100%;
 	box-sizing: border-box;
 	padding-top: 120px;
 }
 
-.sidebar {
-	width: 240px; /* 고정 너비 */
+.scroll-container {
+	display: flex;
+	gap: 16px;
+	overflow-x: auto;
+	padding-bottom: 8px;
+	scroll-snap-type: x mandatory; /* 선택 사항 */
+}
+
+.frame-408 {
+	display: flex;
+	flex-direction: row;
+	gap: 1px;
+	align-items: center;
+	justify-content: flex-start;
 	flex-shrink: 0;
+	position: relative;
 }
 
-.frame-3774 {
-	margin-left: 240px; /* sidebar와 겹치지 않게 */
-	padding: 80px 24px 24px 24px; /* header + 기본 여백 */
-	flex: 1;
-	box-sizing: border-box;
-	width: auto;
-	max-width: 100%;
+.mentos-all-class-row {
+	display: flex;
+	flex-direction: row;
+	gap: 15px;
+	align-items: center;
+	padding-bottom: 12px;
+	max-width: 98%;
+	flex-wrap: wrap;
+	gap: 20px;
+	justify-content: flex-start;
+	align-items: stretch;
 }
 
-.container {
-	flex: 1;
+.mentos-class-cardview {
+	width: calc(33.333% - 20px);
+	scroll-snap-align: start;
 	display: flex;
 	flex-direction: column;
-	align-items: flex-start;
-	justify-content: flex-start;
-	width: 100%;
-	max-width: 100vw;
-	padding: 50px 24px 24px 24px; /* header 공간 + 여백 */
+	align-items: center;
+	justify-content: center;
+	border-radius: 10px;
+	overflow: hidden;
+	position: relative;
+	font-size: clamp(0.75rem, 1vw, 0.95rem); /* ✅ 내부 글자 반응형 */
 	box-sizing: border-box;
+	overflow: visible;
+	height: auto; /* ✅ 콘텐츠만큼 자동으로 높이 늘어남 */
+}
+
+.mento-pr {
+	font-size: 18px; /* 글씨 크기 키움 */
+	font-weight: 500; /* 살짝 굵게 */
+	line-height: 1.8; /* 줄 간격 넓게 */
+	white-space: pre-line; /* 문단 줄바꿈 유지 (개행문자 반영됨) */
+	font-family: 'Noto Sans KR', sans-serif; /* 깔끔한 한글 글꼴 */
+	color: #212529;
 }
 
 /* 뭔지 모르겠음-> 원래 class 카드 전체 크레임이었음  */
@@ -121,12 +193,12 @@ html, body {
 
 /*카드 전체 프레임  */
 .frame-36442 {
- padding: 2rem;
-  box-sizing: border-box;
-  width: 100%;
-  max-width: 1200px;
-  margin: 0 auto;
-  position: relative;
+	padding: 2rem;
+	box-sizing: border-box;
+	width: 100%;
+	max-width: 1200px;
+	margin: 0 auto;
+	position: relative;
 }
 
 .frame-3680 {
@@ -139,8 +211,8 @@ html, body {
 }
 
 .mentos-class-cardview {
-	 width: 100%;
-  box-sizing: border-box;
+	width: 100%;
+	box-sizing: border-box;
 }
 
 /*class 카드 전체 프레임  */
@@ -242,6 +314,11 @@ html, body {
 	position: static;
 }
 
+.div4 {
+	font-size: 20px;
+	font-weight: 700;
+}
+
 /* 멘토이름, 날짜, 시간 장소, 가격 */
 .frame-406 {
 	padding: 0px 0px 11px 0px;
@@ -334,7 +411,6 @@ html, body {
 	height: 12px;
 	position: relative;
 }
-
 
 /* 시간 전체 프레임 */
 .frame-409 {
@@ -475,9 +551,8 @@ html, body {
 
 .frame-340 {
 	display: flex;
-	flex-direction: row;
-	gap: 64px;
-	align-items: center;
+	flex-direction: column;
+	gap: 15px;
 	justify-content: flex-start;
 	align-self: stretch;
 	flex-shrink: 0;
@@ -485,42 +560,126 @@ html, body {
 	position: relative;
 }
 
-.mentos-list-link {
-	color: #b0b0b0; /* 평소엔 연한 회색 */
-	font-size: 1.5vw; /* 또는 24px */
-	font-family: "Inter-Medium", sans-serif;
-	background: transparent;
-	border-radius: 0.4vw;
-	padding: 0.4vw 1vw;
-	cursor: pointer;
-	transition: color 0.15s, background 0.15s, font-weight 0.15s;
-	font-weight: 400;
-	display: inline-block;
-	user-select: none;
-}
-
-/* 마우스 올리면 색 진하게 + 커서 손가락 */
-.mentos-list-link:hover {
-	color: #25356d; /* 진한 남색 or 원하는 진한색 */
-	font-weight: 700;
-	cursor: pointer;
-}
-
-/* 클릭시(누르고 있을 때) */
-.mentos-list-link:active {
-	color: #153090;
-	background: #d0e4ff;
-}
-
-.frame-3786, .frame-3786 * {
-	box-sizing: border-box;
-}
-
-.frame-3786 {
+/* 멘토스 팝업 */
+.mentos-hover-popup {
+	pointer-events: none;
+	opacity: 0;
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
 	display: flex;
-	flex-direction: row;
-	gap: 0px;
 	align-items: center;
-	justify-content: flex-start;
-	position: relative;
+	justify-content: center;
+	background: rgba(255, 255, 255, 0.6);
+	backdrop-filter: blur(5px);
+	border-radius: 2vw;
+	transition: opacity 0.18s;
+	z-index: 99;
+}
+
+.hover-inner {
+	background: #fff;
+	border-radius: 1vw;
+	box-shadow: 0 0.3vw 1vw rgba(0, 0, 0, 0.14);
+	padding: 2vw 2vw;
+	text-align: center;
+	min-width: 20vw;
+	max-width: 40vw;
+}
+
+.hover-title {
+	font-size: 1.3vw;
+	font-weight: 700;
+	color: #22314e;
+	margin-bottom: 0.8vw;
+}
+
+.hover-desc {
+	font-size: 1vw;
+	color: #456;
+	margin-bottom: 1vw;
+}
+
+.hover-tags {
+	display: flex;
+	gap: 0.8vw;
+	justify-content: center;
+}
+
+@media ( max-width : 700px) {
+	.mentos-class, .mentos-hover-popup {
+		border-radius: 4vw;
+	}
+	.hover-inner {
+		border-radius: 2vw;
+		padding: 6vw 3vw;
+		min-width: 60vw;
+		max-width: 90vw;
+	}
+	.hover-title {
+		font-size: 4vw;
+	}
+	.hover-desc {
+		font-size: 3vw;
+	}
+	.hover-tag {
+		font-size: 2vw;
+		border-radius: 2vw;
+		padding: 1vw 3vw;
+	}
+}
+/* 안내문구 팝업 */
+.mentos-hover-popup {
+	pointer-events: auto;
+	opacity: 0;
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	background: rgba(255, 255, 255, 0.6);
+	backdrop-filter: blur(5px);
+	border-radius: 2vw;
+	transition: opacity 0.18s;
+	z-index: 99;
+}
+
+.mentos-class:hover .mentos-hover-popup {
+	opacity: 1;
+}
+
+.hover-inner {
+	background: #fff;
+	border-radius: 1vw;
+	box-shadow: 0 0.3vw 1vw rgba(0, 0, 0, 0.14);
+	padding: 2vw 2vw;
+	text-align: center;
+	min-width: 16vw;
+	max-width: 22vw;
+}
+
+.hover-title {
+	font-size: 1vw;
+	font-weight: 700;
+	color: #22314e;
+	margin-bottom: 0.6vw;
+}
+
+.hover-desc {
+	font-size: 0.8vw;
+	color: #456;
+	margin-bottom: 0.8vw;
+}
+
+.hover-tag {
+	background: #f3f8ff;
+	color: #5585f3;
+	font-size: 0.7vw;
+	border-radius: 0.4vw;
+	padding: 0.3vw 0.8vw;
 }

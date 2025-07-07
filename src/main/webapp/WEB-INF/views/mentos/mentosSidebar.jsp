@@ -35,7 +35,7 @@
 					<span> 수강평수 <br /></span> <span>300</span>
 				</div>
 				<div class="_5-0">
-					<span> 강의평점 <br /></span> <span>5.0</span>
+					<span> 강의평점 <br /></span> <span>4.5</span>
 				</div>
 			</div>
 		</div>
