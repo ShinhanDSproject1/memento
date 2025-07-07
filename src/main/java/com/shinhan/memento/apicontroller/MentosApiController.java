@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RequestPart;
@@ -25,6 +26,7 @@ import com.shinhan.memento.dto.CategoryDTO;
 import com.shinhan.memento.dto.LanguageDTO;
 import com.shinhan.memento.dto.MatchTypeDTO;
 import com.shinhan.memento.dto.mentos.CreateMentosDTO;
+import com.shinhan.memento.dto.mentos.CreateMentosIdempotencyDTO;
 import com.shinhan.memento.dto.mentos.GetMentosDTO;
 import com.shinhan.memento.dto.mentos.GetMentosDetailDTO;
 import com.shinhan.memento.dto.mentos.GetMentosListResponseDTO;
@@ -34,6 +36,7 @@ import com.shinhan.memento.model.Member;
 import com.shinhan.memento.model.MemberMentos;
 import com.shinhan.memento.model.Mentos;
 import com.shinhan.memento.model.UserType;
+import com.shinhan.memento.service.IdempotencyService;
 import com.shinhan.memento.service.MemberMentosService;
 import com.shinhan.memento.service.MemberService;
 import com.shinhan.memento.service.MentosService;
@@ -46,31 +49,50 @@ import lombok.extern.slf4j.Slf4j;
 public class MentosApiController {
 
 	@Autowired
-	private MentosService mentosService;
+	MentosService mentosService;
 
 	@Autowired
-	private MemberService memberService;
+	MemberService memberService;
 
 	@Autowired
-	private MemberMentosService memberMentosService;
+	MemberMentosService memberMentosService;
+	
+	@Autowired
+	IdempotencyService idempotencyService;
 
 	/**
-	 * 멘토스 생성
+	 * 멘토스 생성 : 멱등키 적용 
 	 */
 	@PostMapping("")
-	public BaseResponse<Void> createmento(@RequestPart("data") CreateMentosDTO dto,
-			@RequestPart(value = "image", required = false) MultipartFile imageFile) {
+	public BaseResponse<String> createmento(@RequestPart("data") CreateMentosDTO dto,
+			@RequestPart(value = "image", required = false) MultipartFile imageFile, @RequestHeader(value = "Idempotency-Key", required = false) String idemKey) {
 		log.info("[MentosController.createMento]");
 
+		if(idemKey == null || idemKey.isEmpty()) {
+			// 프론트에서 멱등키 요청이 같이 안오면 생성을 못하도록 예외처리 
+			throw new MentosException(BaseExceptionResponseStatus.CANNOT_CREATE_MENTOS);
+		}
+		
+		 // 멱등키 중복 체크
+	    if (idempotencyService.isDuplicate(idemKey)) {
+	    	String cachedResponse = idempotencyService.getSavedResponse(idemKey);
+	        return new BaseResponse<>(cachedResponse);// 이전 응답 그대로 반환
+	    }
+		
 		Member member = checkValidMemberByIdAndUserType(dto.getMentoId(), UserType.MENTO);
 		if (member == null) {
 			throw new MemberException(BaseExceptionResponseStatus.CANNOT_FOUND_MENTO);
 		}
-
-		boolean result = mentosService.createMentos(dto, imageFile);
-		if (!result) {
-			throw new MentosException(BaseExceptionResponseStatus.CANNOT_CREATE_MENTOS);
-		}
+		int mentosId;
+		
+		try {
+	        mentosId = mentosService.createMentos(dto, imageFile);
+	    } catch (Exception e) {
+	        throw new MentosException(BaseExceptionResponseStatus.CANNOT_CREATE_MENTOS);
+	    }
+		
+		idempotencyService.saveKey(idemKey, String.valueOf(mentosId));
+		
 		return new BaseResponse<>(null);
 	}
 

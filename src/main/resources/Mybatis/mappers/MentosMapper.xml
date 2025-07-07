@@ -38,9 +38,8 @@
 			column="match_type_id_third" />
 	</resultMap>
 
-
 	<insert id="createMentos"
-		parameterType="com.shinhan.memento.dto.mentos.CreateMentosDBDTO">
+		parameterType="com.shinhan.memento.dto.mentos.CreateMentosDBDTO" useGeneratedKeys="true" keyProperty="mentosId">
 		INSERT INTO mentos (
 		mentos_id, category_id, language_id,
 		mento_id, title, simple_content,

@@ -86,7 +86,7 @@ public class MentosService {
 	 * 멘토스 생성
 	 */
 	@Transactional
-	public boolean createMentos(CreateMentosDTO requestDto, MultipartFile imageFile) {
+	public int createMentos(CreateMentosDTO requestDto, MultipartFile imageFile) {
 		log.info("[MentosService.createMentos]");
 
 		// 날짜 및 시간 변환
@@ -117,7 +117,7 @@ public class MentosService {
 				log.info("이미지 저장 완료: {}", imageUrl);
 			} catch (IOException e) {
 				log.error("이미지 업로드 실패", e);
-				return false;
+				return 0; // 여기 보완해야함 
 			}
 		}
 
@@ -134,7 +134,7 @@ public class MentosService {
 				.regionGroup(requestDto.getRegionGroup()).regionSubgroup(requestDto.getRegionSubgroup()).build();
 
 		int result = mentosMapper.createMentos(dbDTO);
-		return result == 1;
+		return result;
 	}
 
 	private String getFileExtension(String fileName) {
