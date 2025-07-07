@@ -108,7 +108,7 @@ document.addEventListener('DOMContentLoaded', function () {
 			clone.querySelector('.language').textContent = `#${item.languageName}`;
 		
 		  // 클릭 시 상세 페이지로 이동
-		  clone.setAttribute('onclick', `location.href='${cpath}/memento/mentos/detail?mentosId=${item.mentosId}'`);
+		  clone.setAttribute('onclick', `location.href='${cpath}/mentos/detailPage?mentosId=${item.mentosId}'`);
 		
 		  container.appendChild(clone);
 		});
