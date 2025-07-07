@@ -95,25 +95,58 @@
 						<div class="section-content">${matchupDetail.content}</div>
 						<h3 class="section-title">✋ 이런 분과 함께하고 싶어요</h3>
 						<div class="type-circle-wrapper">
-							<div class="type-item">
-								<div class="type-circle">
-									<div class="circle-emoji">🔥</div>
-									<div class="circle-text">${matchupDetail.matchTypeFirstName}</div>
-								</div>
-							</div>
-							<div class="type-item">
-								<div class="type-circle">
-									<div class="circle-emoji">🎯</div>
-									<div class="circle-text">${matchupDetail.matchTypeSecondName}</div>
-								</div>
-								<!--  -->
-							</div>
-							<div class="type-item">
-								<div class="type-circle">
-									<div class="circle-emoji">🤝</div>
-									<div class="circle-text">${matchupDetail.matchTypeThirdName}</div>
-								</div>
-							</div>
+						
+						    <%-- 첫 번째 항목 --%>
+						    <div class="type-item">
+						        <div class="type-circle">
+						            <c:set var="typeName" value="${matchupDetail.matchTypeFirstName}" />
+						            <c:choose>
+							                <c:when test="${typeName == '타닥냥'}"><img src="${cpath}/resources/images/mypage/spark-test/tadakNyang-icon.png" alt="타닥냥" class="type-image"></c:when>
+							                <c:when test="${typeName == '코취치'}"><img src="${cpath}/resources/images/mypage/spark-test/coachChee-icon.png" alt="코취치" class="type-image"></c:when>
+							                <c:when test="${typeName == '깃요미'}"><img src="${cpath}/resources/images/mypage/spark-test/gitYomi-icon.png" alt="깃요미" class="type-image"></c:when>
+							                <c:when test="${typeName == '컴정이'}"><img src="${cpath}/resources/images/mypage/spark-test/comZung-icon.png" alt="컴정이" class="type-image"></c:when>
+							                <c:when test="${typeName == '해피빈'}"><img src="${cpath}/resources/images/mypage/spark-test/happyBeen-icon.png" alt="해피빈" class="type-image"></c:when>
+							                <c:when test="${typeName == '슬로우곰'}"><img src="${cpath}/resources/images/mypage/spark-test/slowGom-icon.png" alt="슬로우곰" class="type-image"></c:when>
+						                <c:otherwise><div class="circle-emoji">🔥</div></c:otherwise>
+						            </c:choose>
+						            <div class="circle-text">${typeName}</div>
+						        </div>
+						    </div>
+						
+						    <%-- 두 번째 항목 --%>
+						    <div class="type-item">
+						        <div class="type-circle">
+						            <c:set var="typeName" value="${matchupDetail.matchTypeSecondName}" />
+						            <c:choose>
+							                <c:when test="${typeName == '타닥냥'}"><img src="${cpath}/resources/images/mypage/spark-test/tadakNyang-icon.png" alt="타닥냥" class="type-image"></c:when>
+							                <c:when test="${typeName == '코취치'}"><img src="${cpath}/resources/images/mypage/spark-test/coachChee-icon.png" alt="코취치" class="type-image"></c:when>
+							                <c:when test="${typeName == '깃요미'}"><img src="${cpath}/resources/images/mypage/spark-test/gitYomi-icon.png" alt="깃요미" class="type-image"></c:when>
+							                <c:when test="${typeName == '컴정이'}"><img src="${cpath}/resources/images/mypage/spark-test/comZung-icon.png" alt="컴정이" class="type-image"></c:when>
+							                <c:when test="${typeName == '해피빈'}"><img src="${cpath}/resources/images/mypage/spark-test/happyBeen-icon.png" alt="해피빈" class="type-image"></c:when>
+							                <c:when test="${typeName == '슬로우곰'}"><img src="${cpath}/resources/images/mypage/spark-test/slowGom-icon.png" alt="슬로우곰" class="type-image"></c:when>
+						                <c:otherwise><div class="circle-emoji">🎯</div></c:otherwise>
+						            </c:choose>
+						            <div class="circle-text">${typeName}</div>
+						        </div>
+						    </div>
+						
+						    <%-- 세 번째 항목 --%>
+						    <div class="type-item">
+						        <div class="type-circle">
+						            <c:set var="typeName" value="${matchupDetail.matchTypeThirdName}" />
+						            <c:choose>
+							                <c:when test="${typeName == '타닥냥'}"><img src="${cpath}/resources/images/mypage/spark-test/tadakNyang-icon.png" alt="타닥냥" class="type-image"></c:when>
+							                <c:when test="${typeName == '코취치'}"><img src="${cpath}/resources/images/mypage/spark-test/coachChee-icon.png" alt="코취치" class="type-image"></c:when>
+							                <c:when test="${typeName == '깃요미'}"><img src="${cpath}/resources/images/mypage/spark-test/gitYomi-icon.png" alt="깃요미" class="type-image"></c:when>
+							                <c:when test="${typeName == '컴정이'}"><img src="${cpath}/resources/images/mypage/spark-test/comZung-icon.png" alt="컴정이" class="type-image"></c:when>
+							                <c:when test="${typeName == '해피빈'}"><img src="${cpath}/resources/images/mypage/spark-test/happyBeen-icon.png" alt="해피빈" class="type-image"></c:when>
+							                <c:when test="${typeName == '슬로우곰'}"><img src="${cpath}/resources/images/mypage/spark-test/slowGom-icon.png" alt="슬로우곰" class="type-image"></c:when>
+						                <c:otherwise><div class="circle-emoji">🤝</div></c:otherwise>
+						            </c:choose>
+						            <div class="circle-text">${typeName}</div>
+						        </div>
+						    </div>
+						
 						</div>
 					</div>
 				</div>
@@ -152,7 +185,7 @@
 									<c:otherwise>
 										<div class="profile-title">멘토를 기다리고 있어요</div>
 										<a href="#" class="profile-link"><img class="profile-img"
-											src="${cpath}/resources/images/logo.png" alt="기본 프로필" /></a>
+											src="${cpath}/resources/images/memento-logo.png" alt="기본 프로필" /></a>
 									</c:otherwise>
 								</c:choose>
 							</c:otherwise>
