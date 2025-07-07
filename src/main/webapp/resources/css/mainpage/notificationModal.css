@@ -1,5 +1,9 @@
 /* 알림 카드 구조 적용 + 기존 디자인 그대로 유지 */
 
+* {
+  box-sizing: border-box;
+}
+
 .notify-frame,
 .notify-frame * {
   box-sizing: border-box;
