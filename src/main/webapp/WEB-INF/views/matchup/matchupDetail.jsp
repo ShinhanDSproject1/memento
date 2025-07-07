@@ -269,6 +269,7 @@
 	
 	<script>
       const loggedInMemberId = "${sessionScope.loginUser.memberId}";
+      const loggedInUserType = "${sessionScope.loginUser.userType}"
       const cpath = "${cpath}";
       const maxMember = ${matchupDetail.maxMember};
    
@@ -279,12 +280,17 @@
               mentoApplyBtn.addEventListener('click', function() {
                   
                   if (!loggedInMemberId) {
-                      alert('로그인이 필요한 기능입니다.');
+                      alert('로그인이 필요한 기능이에요.');
 
                       return;
                   }
 
-                  if (!confirm('멘토로 신청하시겠습니까?')) {
+                  if (loggedInUserType !== 'MENTO') {
+                	    alert('멘토만 신청할 수 있어요!');
+                	    return; 
+                	}
+                  
+                  if (!confirm('멘토로 신청하시겠어요?')) {
                       return;
                   }
 
@@ -326,12 +332,12 @@
               applyMentiBtn.addEventListener('click', function() {
                   // 1. 로그인 여부 확인
                   if (!loggedInMemberId) {
-                      alert('로그인이 필요한 기능입니다.');
+                      alert('로그인이 필요한 기능이에요.');
                       return;
                   }
 
                   // 2. 신청 의사 확인
-                  if (!confirm('해당 매치업에 참여 신청하시겠습니까?')) {
+                  if (!confirm('해당 매치업에 참여 신청하시겠어요?')) {
                       return;
                   }
 

@@ -25,6 +25,15 @@
 		WHERE mk.member_id = #{memberId}
 		and k.status = 'ACTIVE' or k.status='INACTIVE'
 	</select>
+	
+	<update id="cancelMemberKeepgoingBy2id">
+		update
+		MEMBER_KEEPGOING
+		set status = 'INACTIVE'
+		where member_id = #{memberId}
+		and keepgoing_id = #{keepgoingId}
+		and status != 'delete'
+	</update>
 
 
 </mapper>

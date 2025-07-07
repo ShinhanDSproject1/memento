@@ -4,7 +4,12 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.shinhan.memento.mapper.InterestMapper">
 	<select id="getInterestByName" parameterType="string" resultType="com.shinhan.memento.dto.InterestDTO">
-	 	SELECT interest_id as interestId, interest_name as interestName FROM INTEREST WHERE UPPER(interest_name) = UPPER(#{interestName})
+	 	SELECT 
+	 	interest_id as interestId, 
+	 	interest_name as interestName 
+	 	FROM INTEREST 
+	 	WHERE UPPER(interest_name) = UPPER(#{interestName})
+	 	and status = 'ACTIVE'
 	</select>
 	
 	<insert id="insertInterest" parameterType="string">
@@ -12,17 +17,20 @@
 		USING (SELECT #{interestName} AS interest_name FROM DUAL) d
 		ON (UPPER(i.interest_name) = UPPER(d.interest_name))
 		WHEN NOT MATCHED THEN
-		INSERT (interest_id, interest_name)
-		VALUES (SEQ_INTEREST_ID.NEXTVAL, d.interest_name)
+		INSERT (interest_id, interest_name, status)
+		VALUES (SEQ_INTEREST_ID.NEXTVAL, d.interest_name, 'ACTIVE')
 	</insert>
 	
 	<insert id="insertMemberInterestByName">
-		insert into member_interest(MEMBER_INTEREST_ID, MEMBER_ID, INTEREST_ID)
+		insert into member_interest(MEMBER_INTEREST_ID, MEMBER_ID, INTEREST_ID, status)
 		values 
 		(
 			SEQ_MEMBER_INTEREST_ID.nextval,
 			#{memberId}, 
-			(SELECT interest_id FROM INTEREST WHERE UPPER(interest_name) = UPPER(#{interestName}))
+			(SELECT interest_id []
+			FROM INTEREST []
+			WHERE UPPER(interest_name) = UPPER(#{interestName})),
+			'ACTIVE'	
 		)
 	</insert>
 </mapper>

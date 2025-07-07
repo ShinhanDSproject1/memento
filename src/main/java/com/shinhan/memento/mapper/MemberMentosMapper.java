@@ -11,4 +11,6 @@ public interface MemberMentosMapper {
 	int joinMentos(JoinMentosDTO joinMentosDTO);
 	MemberMentos findMemberMentosById(JoinMentosDTO joinMentosDTO);
 	int cancelJoinMentos(int memberMentosId);
+	void deleteMemberMentos(int mentosId);
+
 }

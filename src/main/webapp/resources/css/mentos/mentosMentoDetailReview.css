@@ -1,0 +1,159 @@
+:root {
+	
+}
+
+:root, [data--mode="mode-1"] { --1: #00bba8; --2: #0070d1; --1: #a6abbd;
+	--2: #414656; --3: #c73c60; --4: #ff7493;
+	
+}
+
+.div, .div * {
+	box-sizing: border-box;
+}
+
+.div {
+	background: #ffffff;
+	height: 1166px;
+	position: relative;
+	overflow: hidden;
+}
+
+body {
+	padding-top: 100px;
+	overflow-x: hidden;
+}
+
+html, body {
+	margin: 0;
+	padding: 0;
+	width: 100%;
+}
+
+.container-sidebar {
+	padding-top: 120px;
+	display: flex;
+	align-items: flex-start;
+	display: flex;
+	align-items: flex-start;
+	gap: 24px;
+}
+
+.container {
+	padding: 50px 0 0 30px; /* 기존 100px → 0px 으로 수정 */
+	margin-left: 240px;
+}
+
+.frame-342 {
+	display: flex;
+	flex-direction: column;
+	gap: 0px;
+	align-items: flex-start;
+	justify-content: flex-start;
+	flex-shrink: 0;
+	width: 982px;
+	position: relative;
+}
+
+.div4 {
+	color: #000000;
+	text-align: left;
+	font-family: "Inter-SemiBold", sans-serif;
+	font-size: 32px;
+	line-height: 150%;
+	letter-spacing: -0.011000000000000001em;
+	font-weight: 600;
+	position: relative;
+	align-self: stretch;
+	border-bottom-style: solid;
+	border-color: #a6abbd;
+	border-width: 0px 0px 1px 0px;
+}
+.reviewContainer{
+	text-align: center;
+}
+
+
+.review-table {
+	border-style: solid;
+	border-color: #a6abbd;
+	border-width: 0px 0px 1px 0px;
+	padding: 15px 0px 16px 0px;
+	display: flex;
+	flex-direction: row;
+	gap: 16px;
+	align-items: center;
+	justify-content: flex-start;
+	align-self: stretch;
+	flex-shrink: 0;
+	/* height: 131px; */
+	position: relative;
+}
+
+.image {
+	border-radius: 20px;
+	border-style: solid;
+	border-color: #a6abbd;
+	border-width: 3px;
+	flex-shrink: 0;
+	width: 97.39px;
+	height: 68.03px;
+	position: relative;
+	box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+	object-fit: cover;
+}
+
+.group-344 {
+	flex-shrink: 0;
+	width: 540.62px;
+	height: 77.94px;
+	position: static;
+}
+
+.vote {
+	
+}
+
+.text {
+	color: #909294;
+	text-align: left;
+	font-family: "Inter-Medium", sans-serif;
+	font-size: 12px;
+	line-height: 150%;
+	letter-spacing: -0.011000000000000001em;
+	font-weight: 500;
+	position: absolute;
+	left: 218.78px;
+	top: 26.03px;
+	width: 193px;
+	height: 35px;
+}
+
+.title {
+	color: #909294;
+	text-align: left;
+	font-family: "Inter-Medium", sans-serif;
+	font-size: 12px;
+	line-height: 150%;
+	letter-spacing: -0.011000000000000001em;
+	font-weight: 500;
+	position: absolute;
+	left: 113.78px;
+	top: 43.03px;
+	width: 218.63px;
+	height: 17.49px;
+}
+
+.review {
+	color: #000000;
+	text-align: left;
+	font-family: "Inter-Medium", sans-serif;
+	font-size: 13px;
+	line-height: 150%;
+	letter-spacing: -0.011000000000000001em;
+	font-weight: 500;
+	position: absolute;
+	left: 113.39px;
+	top: 60.23px;
+	width: 540.62px;
+	height: 43.74px;
+}
