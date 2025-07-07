@@ -185,21 +185,23 @@ async function handleApproveMento() {
 async function handleConfirmDelete() {
     const matchupId = matchupDetail.matchupId;
     const leaderId = matchupDetail.leaderId;
-    const params = new URLSearchParams();
-    params.append('matchupId', matchupId);
-    params.append('leaderId', leaderId);
 
     hideDeleteConfirmModal();
 
     try {
         const response = await fetch(cpath + '/matchup/deleteMatchup', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-            body: params
+            method: 'PATCH',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                matchupId: matchupId,
+                leaderId: leaderId
+            })
         });
         const result = await response.json();
 
-        if (result.code == 1000) { 
+        if (result.code == 1000) {
             showDeleteCompleteModal();
         } else {
             alert(result.message || '매치업 삭제에 실패했습니다.');

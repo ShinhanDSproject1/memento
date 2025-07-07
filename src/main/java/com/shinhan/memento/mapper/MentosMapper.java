@@ -26,6 +26,8 @@ public interface MentosMapper {
 	List<CategoryDTO> getAllCategories();
 
 	List<MatchTypeDTO> getAllMatchTypes();
+	
+	List<Map<String, String>> getRegionGroups();
 
 	Mentos checkValidMentosById(int mentosId);
 
@@ -33,13 +35,18 @@ public interface MentosMapper {
 			@Param("categoryId") Integer categoryId, @Param("languageId") Integer languageId,
 			@Param("offset") int offset);
 	
+	List<Mentos> showPreMentoList(@Param("regionGroup") String regionGroup, @Param("matchTypeId") Integer matchTypeId,
+	        @Param("categoryId") Integer categoryId, @Param("languageId") Integer languageId);
+	
 	int countNowMember(int mentosId);
 	List<Mentos> showInProgressMentosList(int mentoId);
 
 	List<Mentos> showMentosListByMentoId(Map<String, Object> mentosParams);
 
 	List<Mentos> findSimilarMentosList(Map<String, Object> similarParams);
-	
+
 	int checkPermission(Map<String, Object> checkParams);
 
+	int getMentosListTotalCount(@Param("regionGroup") String regionGroup, @Param("matchTypeId") Integer matchTypeId,
+			@Param("categoryId") Integer categoryId, @Param("languageId") Integer languageId);
 }

@@ -29,6 +29,21 @@
 	margin: 0px;
 	padding: 0px;
 }
+
+.container {
+	top: 80px;
+	overflow: visible !important;
+	padding-top: 50px;
+	width: 100%;
+}
+
+.header-fixed {
+	top:0; left:0; right:0;
+	height:60px;
+	background:#fff;
+	z-index:1000;
+}
+
 /*1.  선택조회  */
 .full-detail-select {
 	display: flex;
@@ -39,7 +54,7 @@
 	max-width: 100%; /* 부모 .div 안에서 꽉 채우도록 */
 	position: relative;
 	flex-shrink: 1;
-	padding-bottom: 3vw;;
+	padding-bottom: 1vw;;
 	box-sizing: border-box;
 }
 
@@ -112,11 +127,13 @@
 /* 멘토스 전체 화면 1번줄 */
 .mentos-all-class-row {
 	display: flex;
+	flex-wrap: wrap;
 	flex-direction: row;
 	gap: 15px;
 	align-items: center;
+	justify-content: center;
 	padding-bottom: 12px;
-	max-width: 98%;
+	width: 100%;
 }
 /* 멘토스 전체 화면 2,3 번줄 */
 .mentos-all-class-row1 {
@@ -237,197 +254,19 @@
 }
 
 /* 클릭 애니메이션 */
-@
-keyframes heart-pop { 0% {
-	transform: scale(0.5);
-	opacity: 0.3;
-}
-
-80
-
-
-
-
-
-
-
-
-%
-{
-transform
-
-
-
-
-
-
-
-
-:
-
-
-
-
-
-
-
-
-scale
-
-
-
-
-
-
-(
-
-
-
-
-
-
-
-
-1
-
-
-
-
-
-
-.12
-
-
-
-
-
-
-
-
-)
-
-
-
-
-
-
-;
-opacity
-
-
-
-
-
-
-
-
-:
-
-
-
-
-
-
-
-
-1
-
-
-
-
-
-
-;
-}
-100
-
-
-
-
-
-
-
-
-%
-{
-transform
-
-
-
-
-
-
-
-
-:
-
-
-
-
-
-
-
-
-scale
-
-
-
-
-
-
-(
-
-
-
-
-
-
-
-
-1
-
-
-
-
-
-
-
-
-)
-
-
-
-
-
-
-;
-opacity
-
-
-
-
-
-
-
-
-:
-
-
-
-
-
-
-
-
-1
-
-
-
-
-
-
-;
-}
+@keyframes heart-pop {
+	0% {
+		transform: scale(0.5);
+		opacity: 0.3;
+	}
+	80% {
+		transform: scale(1.12);
+		opacity: 1;
+	}
+	100% {
+		transform: scale(1);
+		opacity: 1;
+	}
 }
 
 /* 숨김 처리: 빨간 하트는 liked 없으면 보이지 않음 */
@@ -435,8 +274,6 @@ opacity
 	content: none;
 }
 
-}
-/* 뭔지 모르겠음-> 원래 class 카드 전체 크레임이었음  */
 .frame-3786 {
 	display: flex;
 	flex-direction: row;
@@ -547,7 +384,7 @@ opacity
 	font-family: "D2Coding-Bold", sans-serif;
 	font-size: 16px;
 	line-height: 150%;
-	letter-spacing: -0.011000000000000001em;
+	letter-spacing: -0.011em;
 	font-weight: 700;
 	position: relative;
 	width: 214px;
@@ -584,7 +421,7 @@ opacity
 	font-family: "D2Coding-Regular", sans-serif;
 	font-size: 12px;
 	line-height: 150%;
-	letter-spacing: -0.011000000000000001em;
+	letter-spacing: -0.011em;
 	font-weight: 400;
 	position: relative;
 }
@@ -602,7 +439,6 @@ opacity
 	border-radius: 5px;
 	width: 36px;
 	height: 12px;
-	position: absolute;
 	left: 52px;
 	top: 3.02px;
 }
@@ -614,10 +450,9 @@ opacity
 	font-family: "Inter-Medium", sans-serif;
 	font-size: 8px;
 	line-height: 150%;
-	letter-spacing: -0.011000000000000001em;
+	letter-spacing: -0.011em;
 	font-weight: 500;
 	position: absolute;
-	left: calc(50% - -8px);
 	top: 50%;
 	translate: 0 -50%;
 	width: 36px;
@@ -664,7 +499,7 @@ opacity
 	flex-shrink: 0;
 	width: 13px;
 	height: 12px;
-	position: relative;	
+	position: relative;
 }
 /*장소 전체 프레임*/
 .frame-410 {
@@ -758,89 +593,6 @@ opacity
 	z-index: 99;
 }
 
-.
-.mentos-hover-popup {
-	opacity: 1;
-}
-
-.hover-inner {
-	background: #fff;
-	border-radius: 1vw;
-	box-shadow: 0 0.3vw 1vw rgba(0, 0, 0, 0.14);
-	padding: 2vw 2vw;
-	text-align: center;
-	min-width: 20vw;
-	max-width: 40vw;
-}
-
-.hover-title {
-	font-size: 1.3vw;
-	font-weight: 700;
-	color: #22314e;
-	margin-bottom: 0.8vw;
-}
-
-.hover-desc {
-	font-size: 1vw;
-	color: #456;
-	margin-bottom: 1vw;
-}
-
-.hover-tags {
-	display: flex;
-	gap: 0.8vw;
-	justify-content: center;
-}
-
-.hover-tag {
-	background: #f3f8ff;
-	color: #5585f3;
-	border-radius: 0.6vw;
-	font-size: 0.9vw;
-	padding: 0.5vw 1.2vw;
-}
-
-@media ( max-width : 700px) {
-	.mentos-class, .mentos-hover-popup {
-		border-radius: 4vw;
-	}
-	.hover-inner {
-		border-radius: 2vw;
-		padding: 6vw 3vw;
-		min-width: 60vw;
-		max-width: 90vw;
-	}
-	.hover-title {
-		font-size: 4vw;
-	}
-	.hover-desc {
-		font-size: 3vw;
-	}
-	.hover-tag {
-		font-size: 2vw;
-		border-radius: 2vw;
-		padding: 1vw 3vw;
-	}
-}
-/* 안내문구 팝업 */
-.mentos-hover-popup {
-	pointer-events: none;
-	opacity: 0;
-	position: absolute;
-	top: 0;
-	left: 0;
-	width: 100%;
-	height: 100%;
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	background: rgba(255, 255, 255, 0.6);
-	backdrop-filter: blur(5px);
-	border-radius: 2vw;
-	transition: opacity 0.18s;
-	z-index: 99;
-}
-
 .mentos-class:hover .mentos-hover-popup {
 	opacity: 1;
 }
@@ -882,7 +634,7 @@ opacity
 	padding: 0.5vw 1.2vw;
 }
 
-@media ( max-width : 700px) {
+@media (max-width : 700px) {
 	.mentos-class, .mentos-hover-popup {
 		border-radius: 4vw;
 	}
@@ -903,4 +655,154 @@ opacity
 		border-radius: 2vw;
 		padding: 1vw 3vw;
 	}
+}
+
+/* 필터 관련 */
+.filter-item {
+    cursor: pointer;
+    padding: 8px 12px;
+    border-radius: 16px;
+    border: 1px solid #ddd;
+    font-size: 14px;
+    margin-right: 8px;
+    transition: background-color 0.2s, color 0.2s, border-color 0.2s;
+}
+.filter-item.active {
+    background-color: #007bff;
+    color: white;
+    border-color: #007bff;
+}
+
+/* 드롭다운 컨테이너 */
+.filter-dropdown {
+    position: relative;
+    display: inline-block;
+    margin-right: 8px;
+}
+
+/* 드롭다운 버튼 */
+.filter-dropdown .filter-main-btn {
+    cursor: pointer;
+    padding: 8px 12px;
+    border-radius: 16px;
+    border: 1px solid #ddd;
+    font-size: 14px;
+    background-color: white;
+}
+.filter-dropdown .filter-main-btn.active {
+    background-color: #007bff;
+    color: white;
+    border-color: #007bff;
+}
+
+
+/* 드롭다운 내용 (숨김 기본) */
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+    border-radius: 4px;
+    padding: 5px 0;
+}
+
+/* 드롭다운 링크 */
+.dropdown-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+    font-size: 14px;
+}
+
+/* 링크에 마우스 올렸을 때 */
+.dropdown-content a:hover {
+    background-color: #f1f1f1;
+}
+
+/* 드롭다운을 보이게 함 */
+.filter-dropdown:hover .dropdown-content {
+    display: block;
+}
+
+/* PREMENTO 목록을 위한 가로 스크롤 컨테이너 스타일 */
+.premento-row-container {
+    display: flex;
+    flex-direction: row;
+    gap: 15px;
+    align-items: center;
+    padding-bottom: 12px;
+    max-width: 98%;
+    width: 98%; /* ✅ 컨테이너가 수축하지 않도록 너비를 명시적으로 설정 */
+    box-sizing: border-box; /* ✅ 패딩을 너비 계산에 포함시켜 레이아웃 안정성 확보 */
+    /* --- 가로 스크롤을 위한 핵심 변경 --- */
+    overflow-x: auto;   /* 내용이 넘치면 가로 스크롤바 표시 */
+    flex-wrap: nowrap;  /* 절대 줄바꿈하지 않음 */
+}
+
+/* 스크롤 컨테이너 안의 각 카드 스타일 */
+.premento-row-container .mentos-class-cardview {
+    width: 32.5%;
+    flex-shrink: 0; /* 카드가 작아지지 않도록 함 */
+}
+
+/* --- 반응형 설정 --- */
+/* 화면 너비가 1200px 이하일 때, 카드 2개가 보이도록 설정 */
+@media (max-width: 1200px) {
+    .premento-row-container .mentos-class-cardview {
+        width: calc((100% - 15px) / 2);
+    }
+}
+
+/* 화면 너비가 768px 이하일 때 (모바일 등), 카드 1개가 거의 꽉 차게 보이도록 설정 */
+@media (max-width: 768px) {
+    .premento-row-container .mentos-class-cardview {
+        width: 85%;
+    }
+}
+
+/* 무료 강의 가격 스타일 */
+._45-000.price-free {
+    color: #E53E3E; /* 빨간색 계열 */
+    font-weight: 700;
+}
+
+
+div.page-btn {
+	display: flex !important;
+	align-items: center !important;
+	justify-content: center !important;
+	width: 36px !important;
+	height: 36px !important;
+	font-size: 14px !important;
+	font-weight: 500 !important;
+	color: #333 !important;
+	background-color: #fff !important;
+	border: 1px solid #ddd !important;
+	border-radius: 50% !important;
+	cursor: pointer !important;
+	transition: all 0.2s !important;
+}
+
+div.page-btn:hover {
+	background-color: #f0f0f0 !important;
+}
+
+div.page-btn.active {
+	background-color: #007aff !important;
+	color: #fff !important;
+	border-color: #007aff !important;
+	font-weight: 600 !important;
+}
+
+/* 페이지네이션 컨테이너 스타일 */
+.pagination-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    padding: 40px 0;
+    width: 100%;
 }
