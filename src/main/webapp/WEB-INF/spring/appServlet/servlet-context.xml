@@ -13,7 +13,7 @@
 	<!-- Enables the Spring MVC @Controller programming model -->
 	<mvc:annotation-driven />
 	
-	<!-- 로그인 인터셉터 처리 -->
+	<!-- 로그인 인터셉터 처리! -->
 	<mvc:interceptors>
 	    <mvc:interceptor>
 	        <mvc:mapping path="/**"/>
@@ -21,7 +21,7 @@
 	        <mvc:exclude-mapping path="/"/>
 	        <mvc:exclude-mapping path="/matchup/matchupList"/>
 	        <mvc:exclude-mapping path="/keepgoing/keepgoinglist.do"/>
-	        
+	        <mvc:exclude-mapping path="/matchup/getMatchupList"/>
 	        <mvc:exclude-mapping path="/mainpage/**"/>
 	        
 	        <mvc:exclude-mapping path="/join/**"/>
