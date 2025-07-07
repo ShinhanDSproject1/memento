@@ -38,5 +38,12 @@
 			set status='DELETE', updated_at=sysdate
 			where member_mentos_id=#{memberMentosId} and status='ACTIVE'
 		</update>
+		
+		<select id="countStudentCntByMentosId" parameterType="int" resultType="Integer">
+			select count(*)
+			from member_mentos
+			where mentos_id=${mentosId}
+			and status != 'DELETE'
+		</select>
 
 </mapper>

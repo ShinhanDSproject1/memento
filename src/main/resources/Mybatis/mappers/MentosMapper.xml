@@ -232,6 +232,12 @@
 		where rownum &lt; =3
 	</select>
 
+	<select id="findMentoIdListByMentosId" parameterType="int" resultMap="mentosResultMap">
+		select *
+		from mentos
+		where mento_id=${mentoId}
+		and status!='DELETE'
+	</select>
 
 </mapper>
 

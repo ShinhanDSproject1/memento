@@ -11,4 +11,6 @@ import com.shinhan.memento.model.Review;
 public interface ReviewMapper {
 
 	List<Review> getReviewsByMentoIdAfter(Map<String, Object> reviewParams);
+
+	int countReviewCntByMentoId(int mentoId);
 }

@@ -11,4 +11,5 @@ public interface MemberMentosMapper {
 	int joinMentos(JoinMentosDTO joinMentosDTO);
 	MemberMentos findMemberMentosById(JoinMentosDTO joinMentosDTO);
 	int cancelJoinMentos(int memberMentosId);
+	int countStudentCntByMentosId(int mentosId);
 }

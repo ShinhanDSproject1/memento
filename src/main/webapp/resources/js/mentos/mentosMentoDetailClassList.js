@@ -1,15 +1,5 @@
-// mentosMentoDetailClassList.js
-let isLoading = false;
-let lastCreatedAt = null;
-
 $(document).ready(() => {
-  loadMoreData();
-
-  $(window).on('scroll', function () {
-    if ($(window).scrollTop() + $(window).height() >= $(document).height() - 900) {
-      loadMoreData();
-    }
-  });
+  loadData(); // 한 번만 호출
 });
 
 function getMentoId() {
@@ -17,40 +7,34 @@ function getMentoId() {
   return params.get("mentoId") || 0;
 }
 
-function loadMoreData() {
-  if (isLoading) return;
-  isLoading = true;
-
+function loadData() {
   $.ajax({
     url: "/memento/mentodetail/classlist",
     method: "GET",
     data: {
       mentoId: getMentoId(),
-      lastCreatedAt: null 
+      lastCreatedAt: null
     },
-
     dataType: "json",
     success: function (res) {
-    console.log("응답 데이터:", res);
-     if (res.code === 1000 && res.result.length > 0) {
-  renderMentosCards(res.result);
-  lastCreatedAt = res.result[res.result.length - 1].createdAt;
-} else {
-  console.log("데이터 없음 또는 실패");
-}
-      isLoading = false;
+      console.log("응답 데이터:", res);
+      if (res.code === 1000 && res.result.length > 0) {
+        renderMentosCards(res.result);
+      } else {
+        console.log("데이터 없음 또는 실패");
+      }
     },
     error: function () {
       alert("데이터 로딩 실패");
-      isLoading = false;
     }
   });
 }
 
 function renderMentosCards(list) {
   const $container = $("#mentosCardContainer");
-console.log("카드 추가 중:", list);
-console.log("카드 붙일 위치:", $("#mentosCardContainer").length);
+  console.log("카드 추가 중:", list);
+  console.log("카드 붙일 위치:", $("#mentosCardContainer").length);
+
   $.each(list, function (_, item) {
     const card = `
       <div class="mentos-class-cardview mentos-hover-guide" onclick="location.href='/memento/mentos/detailPage?mentosId=${item.mentosId}'">
@@ -58,7 +42,7 @@ console.log("카드 붙일 위치:", $("#mentosCardContainer").length);
           <div class="mentos-text">
             <div class="frame-37862">
               <div class="frame-413"><div class="d">D-</div><div class="d">0</div></div>
-              <div class="frame-414"><div class="d">확정된 클래스</div></div>
+              <div class="frame-414"><div class="d">확정</div></div>
             </div>
             <div class="aws">${item.title}</div>
             <div class="frame-406">
@@ -67,7 +51,7 @@ console.log("카드 붙일 위치:", $("#mentosCardContainer").length);
                 <div class="text">${item.mentoName}</div>
                 <div class="group-371"><div class="mento">${item.userType}</div></div>
               </div>
-             <div class="frame-408">
+              <div class="frame-408">
                 <img class="icon-time-calendar" src="/memento/resources/images/mentosFull/day.svg" />
                 <div class="text">${item.startDay}</div>
                 <div class="text">-</div>

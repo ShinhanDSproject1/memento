@@ -63,7 +63,7 @@ function renderMentosCards(mentosList) {
               </div>
               <div class="frame-410">
                 <img class="icon-maps-map-pin" src="/memento/resources/images/mentosFull/maps.svg" />
-                <div class="text">${mentos.region}</div>
+                <div class="text">${mentos.location}</div>
               </div>
               <div class="frame-3659">
                 <div class="_45-000">₩${Number(mentos.price).toLocaleString()}</div>
