@@ -24,6 +24,8 @@
       <result property="regionGroup" column="region_group" />
       <result property="startTime" column="start_time" />
       <result property="endTime" column="end_time" />
+     <result property="profileImageUrl" column="leader_profile_image_url" />
+     
    </resultMap>
 
 	<resultMap id="matchupDetailResultMap"
@@ -86,7 +88,7 @@
 	    SELECT 
 	        matchup_id, category_id, category_name, language_id, mento_id, 
 	        language_name, selected_days, region_group, start_day, end_day, 
-	        start_time, end_time, max_member, price, title, has_mento, matchup_count
+	        start_time, end_time, max_member, price, title, has_mento, matchup_count,leader_profile_image_url
 	    FROM (
 	        SELECT 
 	            t.*, ROWNUM AS rnum
@@ -97,6 +99,7 @@
 	                c.category_name,
 	                m.language_id,
 	                m.mento_id, 
+	                
 	                l.language_name,
 	                m.selected_days, 
 	                m.region_group, 
@@ -108,7 +111,8 @@
 	                m.price, 
 	                m.title, 
 	                m.has_mento,
-	                m.matchup_count
+	                m.matchup_count,
+	                u.profile_image_url AS leader_profile_image_url
 <!-- 	                (SELECT COUNT(*) 
 	                 FROM member_matchup mm 
 	                 WHERE mm.matchup_id = m.matchup_id 
@@ -116,6 +120,8 @@
 	            FROM matchup m
 	            LEFT JOIN category c ON m.category_id = c.category_id
 	            LEFT JOIN language l ON m.language_id = l.language_id
+	            
+	            LEFT JOIN member u ON m.leader_id = u.member_id
 	            <where>
 	                m.status = 'ACTIVE'
 	                <if test="pagination.regionGroup != null and pagination.regionGroup != ''"> AND m.region_group LIKE CONCAT(#{pagination.regionGroup}, '%') </if>

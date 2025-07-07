@@ -137,7 +137,15 @@
 									<img class="icon-maps-map-pin"
 										src="${cpath}/resources/images/icon-map-black.svg" />
 								</div>
-								<img class="_1" src="${cpath}/resources/images/profile.svg" />
+								<c:choose>
+								  <c:when test="${not empty matchup.profileImageUrl}">
+								    <img class="_1" src="${matchup.profileImageUrl}" />
+								  </c:when>
+								  <c:otherwise>
+								    <img class="_1" src="${cpath}/resources/images/default-profile.svg" />
+								  </c:otherwise>
+								</c:choose>
+
 								<div class="group-414">
 									<div class="java-c">#${matchup.languageName}
 										#${matchup.categoryName}</div>
@@ -217,6 +225,6 @@
 
 	<script src="${cpath}/resources/js/matchup/matchupList.js"></script>
 	<script src="${pageContext.request.contextPath}/resources/js/header.js"></script>
-	<script src="${pageContext.request.contextPath}/js/notification.js"></script>
+	<script src="${cpath}/resources/js/notification.js"></script>
 </body>
 </html>
