@@ -4,9 +4,11 @@
     padding: 0;
 }
 body {
-    font-family: "Inter", "D2Coding", sans-serif;
-    background-color: #f5f6f8;
-    padding-top: 80px;
+	font-family: "Inter", "D2Coding", sans-serif;
+	background-color: #f5f6f8;
+	padding-top: 120px;
+	width: 100%;
+	overflow-x: hidden;
 }
 a {
     text-decoration: none;
@@ -24,15 +26,17 @@ a {
 /* --- 페이지 전체 레이아웃 --- */
 .container {
     width: 100%;
+    padding: 0 60px;
+    max-width: 1400px;
+    margin: 0 auto;
 }
 .main-content, .main-content-wrapper {
     width: 100%;
-    max-width: 1100px;
+    max-width: 1000px;
     margin: 0 auto;
-    padding: 40px 20px;
     display: flex;
     flex-direction: column;
-    gap: 30px;
+    gap: 40px;
 }
 
 /* --- 상단 정보 영역 --- */
@@ -66,10 +70,13 @@ a {
 }
 .info-tag.mento.completed {
     background: #868e96;
+    color : rgb(62 64 68);
+    font-family: "D2Coding-Bold", sans-serif;
 }
 .info-tag.category {
     background: #e9ecef;
     color: #757575;
+    font-family: "D2Coding-Bold", sans-serif;
 }
 .matchup-title {
     font-size: 32px;
@@ -121,7 +128,7 @@ a {
   align-items: center;
   flex-wrap: nowrap;
   gap: 20px;
-  border-top: 1px solid #f1f3f5;
+  border-top: 1px solid #e2e2e2;
   padding-top: 20px;
   width : 100%;
   
@@ -176,21 +183,21 @@ a {
     align-items: stretch;
 }
 .middle-area-left {
-    width: 66.66%;
+   flex: 1; /* 너비를 flex: 1로 변경 */
     display: flex;
     flex-direction: column;
     gap: 30px;
 }
 
 .middle-area-right {
-    width: 33.33%;
+    width: 300px; /* 너비를 300px로 고정 */
     display: flex;
     flex-direction: column;
     gap: 30px;
 }
 
 .middle-area-left .section-box {
-  min-height: 1000px;
+   min-height: 100%;
 }
 .section-box {
     background: #ffffff;
