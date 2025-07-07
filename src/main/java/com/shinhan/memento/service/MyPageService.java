@@ -13,7 +13,6 @@ import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Base64;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -283,94 +282,6 @@ public class MyPageService {
 				regionDetail.trim();
 			}
 		}
-
-		/*멘토 테스트 만료 체크*/
-		public MentoTestCheckExpirationResponseDTO checkExpiration(int userId) {
-			log.info("[checkExpiration]");
-			String expiration = "";	
-			LocalDate now = LocalDate.now();
-			Date sqlDate = Date.valueOf(now);
-			
-			log.info("[checkExpiration - selecthistory]");
-			MentoTestHistory history = mypageMapper.selectMentoTestHistory(userId, now.toString());
-			
-			if(history==null) {
-				history = MentoTestHistory.builder()
-				.memberId(userId)
-				.testAt(sqlDate)
-				.status(BaseStatus.ACTIVE)
-				.build();
-				
-				log.info("[checkExpiration - inserthistory]");
-				int result = mypageMapper.insertMentoTestHistory(history);
-				if(result < 1 ) {
-					throw new MypageException(BaseExceptionResponseStatus.CANNOT_INSERT_MENTOTEST_HISTORY);
-				}
-				
-				expiration = "success";
-			}
-			else { 
-				expiration = "fail";
-			}
-			return MentoTestCheckExpirationResponseDTO.builder()
-					.expiration(expiration)
-					.build();
-		}
-		
-		/* 멘토 테스트 시작 */ 
-		public MentoTestStartResponseDTO testing(int userId) {
-			
-			/*util MentoTestProblemBook에서 15문제 추출*/
-			List<MentoProblemDTO> problems = MentoTestProblemBook.getRandomProblems(15);
-			LocalDateTime now = LocalDateTime.now();
-			mentoTestWebSocketHandler.startAutoSubmitTimer(userId, 15 * 60 * 1000L);
-			
-			return MentoTestStartResponseDTO.builder()
-					.problems(problems)
-					.startTime(now)
-					.build();
-		}
-
-		/* 멘토 테스트 결과 */
-		public MentoTestResultResponseDTO gradeMentoTest(int userId, List<MentoTestAnswerDTO> answers) {
-			Map<Integer, Integer> correctMap = MentoTestProblemBook.getANSWER_MAP();
-			int correctCount = 0;
-			int total = answers.size();
-		    List<Integer> correctIds = new ArrayList<>();
-		    
-		    log.info("[gradeMentoTest] userId: {}, 제출 문제 수: {}", userId, answers.size());
-		    
-		    for (MentoTestAnswerDTO answer : answers) {
-		        int problemId = answer.getProblemId();
-		        int answerIndex = answer.getAnswerIndex();
-
-		        // 정답 비교 (미응답 -1 은 무시)
-		        Integer correctIndex = correctMap.get(problemId);
-		        if (correctIndex != null && answerIndex == correctIndex) {
-		            correctCount++;
-		            correctIds.add(problemId);
-		        }
-		    }
-
-		    int score = (int) ((double) correctCount / total * 100);
-		    boolean passed = score >= 80;
-
-		    if (passed) {
-		        int update = mypageMapper.updateMemberUserType(userId, "PREMENTO");
-		        if (update < 1) {
-		            throw new MypageException(BaseExceptionResponseStatus.CANNOT_UPDATE_MEMBER_USERTYPE);
-		        }
-		    }
-		    	
-		    return MentoTestResultResponseDTO.builder()
-		            .score(score)
-		            .totalProblems(total)
-		            .correctCount(correctCount)
-		            .correctProblemIds(correctIds)
-		            .passed(passed)
-		            .build();
-		}
-
 		MyProfileDBUpdateDTO myProfileDBUpdateDTO = MyProfileDBUpdateDTO.builder().memberId(memberId)
 				.nickname(dto.getNickname()).phoneNumber(dto.getPhone()).introduce(dto.getIntroduction())
 				.regionGroup(regeionGroup == "" ? null : regeionGroup)
@@ -471,6 +382,95 @@ public class MyPageService {
 
 		return result == 1;
 	}
+		
+	/*멘토 테스트 만료 체크*/
+	public MentoTestCheckExpirationResponseDTO checkExpiration(int userId) {
+			log.info("[checkExpiration]");
+			String expiration = "";	
+			LocalDate now = LocalDate.now();
+			Date sqlDate = Date.valueOf(now);
+			
+			log.info("[checkExpiration - selecthistory]");
+			MentoTestHistory history = mypageMapper.selectMentoTestHistory(userId, now.toString());
+			
+			if(history==null) {
+				history = MentoTestHistory.builder()
+				.memberId(userId)
+				.testAt(sqlDate)
+				.status(BaseStatus.ACTIVE)
+				.build();
+				
+				log.info("[checkExpiration - inserthistory]");
+				int result = mypageMapper.insertMentoTestHistory(history);
+				if(result < 1 ) {
+					throw new MypageException(BaseExceptionResponseStatus.CANNOT_INSERT_MENTOTEST_HISTORY);
+				}
+				
+				expiration = "success";
+			}
+			else { 
+				expiration = "fail";
+			}
+			return MentoTestCheckExpirationResponseDTO.builder()
+					.expiration(expiration)
+					.build();
+		}
+		
+	/* 멘토 테스트 시작 */ 
+	public MentoTestStartResponseDTO testing(int userId) {
+			
+			/*util MentoTestProblemBook에서 15문제 추출*/
+			List<MentoProblemDTO> problems = MentoTestProblemBook.getRandomProblems(15);
+			LocalDateTime now = LocalDateTime.now();
+			mentoTestWebSocketHandler.startAutoSubmitTimer(userId, 15 * 60 * 1000L);
+			
+			return MentoTestStartResponseDTO.builder()
+					.problems(problems)
+					.startTime(now)
+					.build();
+		}
+
+	/* 멘토 테스트 결과 */
+	public MentoTestResultResponseDTO gradeMentoTest(int userId, List<MentoTestAnswerDTO> answers) {
+			Map<Integer, Integer> correctMap = MentoTestProblemBook.getANSWER_MAP();
+			int correctCount = 0;
+			int total = answers.size();
+		    List<Integer> correctIds = new ArrayList<>();
+		    
+		    log.info("[gradeMentoTest] userId: {}, 제출 문제 수: {}", userId, answers.size());
+		    
+		    for (MentoTestAnswerDTO answer : answers) {
+		        int problemId = answer.getProblemId();
+		        int answerIndex = answer.getAnswerIndex();
+
+		        // 정답 비교 (미응답 -1 은 무시)
+		        Integer correctIndex = correctMap.get(problemId);
+		        if (correctIndex != null && answerIndex == correctIndex) {
+		            correctCount++;
+		            correctIds.add(problemId);
+		        }
+		    }
+
+		    int score = (int) ((double) correctCount / total * 100);
+		    boolean passed = score >= 80;
+
+		    if (passed) {
+		        int update = mypageMapper.updateMemberUserType(userId, "PREMENTO");
+		        if (update < 1) {
+		            throw new MypageException(BaseExceptionResponseStatus.CANNOT_UPDATE_MEMBER_USERTYPE);
+		        }
+		    }
+		    	
+		    return MentoTestResultResponseDTO.builder()
+		            .score(score)
+		            .totalProblems(total)
+		            .correctCount(correctCount)
+		            .correctProblemIds(correctIds)
+		            .passed(passed)
+		            .build();
+		}
+
+
 
 	public MyProfileInfoResponseDTO selectMyProfileInfo(Integer memberId) {
 		List<Map<String, Object>> result = mypageMapper.selectMyProfileInfo(memberId);

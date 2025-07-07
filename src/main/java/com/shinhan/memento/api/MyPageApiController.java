@@ -145,7 +145,7 @@ public class MyPageApiController {
 		MentoTestResultResponseDTO resDTO = myPageService.gradeMentoTest(userId, reqDTO.getAnswers());
 		session.setAttribute("mentoTestResult", resDTO);
 		return new BaseResponse<>(resDTO);
-		
+	}
 
 	@GetMapping(value="/page6/{memberId}", produces = "application/json")
 	public BaseResponse<List<MyMatchupListResponseDTO>> selectJoinListByMemberId(
