@@ -70,7 +70,7 @@
 						<div class="class-price" id="price">₩70,000</div>
 						<div class="two-button">
 							<div class="class-apply-btn"
-								onclick="location.href='${cpath}/mentos/edit?mentosId=${mentos.mentosId}'">수정하기</div>
+								onclick="location.href='${cpath}/mentos/editPage?mentosId=${mentosId}'">수정하기</div>
 							<label for="popupTrigger" class="mentos-delete-btn">
 								<div class="class-apply-btn">삭제하기</div>
 							</label>
