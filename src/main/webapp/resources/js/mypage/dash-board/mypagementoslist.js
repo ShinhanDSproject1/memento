@@ -78,7 +78,7 @@ $(() => {
 				// 활동 지역
 				const region = document.createElement('span');
 				region.className = 'mentor-card__location';
-				region.textContent = `${mentos.regionSubgroup}`;
+				region.textContent = `${mentos.regionGroup} ${mentos.regionSubgroup}`;
 
 				//status
 				const statusGroup = document.createElement('div');
@@ -116,7 +116,7 @@ $(() => {
 				nickname.className = 'mentor-card__mentor-name';
 				nickname.textContent = `${mentos.mentoNickname}`;
 
-				//멘토 이미지
+				//멘토 마이크 이미지
 				const mentoImg = document.createElement('img');
 				mentoImg.className = 'mentor-card__mentor-icon';
 				mentoImg.src = '/memento/' + 'resources/images/mypage/dash-board/mentos-list/vuesax-linear-microphone0.svg';

@@ -11,6 +11,7 @@ public class MyMatchupListResponseDTO {
 	private Integer matchupId;
 	private String leaderImg;
 	private String matchupTitle;
+	private String regionGroup;
 	private String regionSubgroup;
 	private String category;
 	private String language;

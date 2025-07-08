@@ -88,6 +88,7 @@ public class MyPageDAO implements MyPageDAOInterface{
 			.mentosId(((BigDecimal)data.get("MENTOSID")).intValue())
 			.mentosImg((String)data.get("MENTOSIMG"))
 			.mentosTitle((String)data.get("MENTOSTITLE"))
+			.regionGroup((String)data.get("REGIONGROUP"))
 			.regionSubgroup((String)data.get("REGIONSUBGROUP"))
 			.startTime(startRaw)
 			.endTime(endRaw)

@@ -50,7 +50,7 @@ $(() => {
 				//category, language
 				const tagValue = document.createElement('span')
 				tagValue.className = 'tag'
-				tagValue.textContent = `${matchup.category} ${matchup.language}`
+				tagValue.textContent = `#${matchup.category} #${matchup.language}`
 
 				//count
 				const sessionCount = document.createElement('span')
@@ -130,7 +130,7 @@ $(() => {
 				//region
 				const region = document.createElement('span')
 				region.className = 'matchup-card__location'
-				region.textContent = `${matchup.regionSubgroup}`
+				region.textContent = `${matchup.regionGroup} ${matchup.regionSubgroup}`
 
 				//role
 				const role = document.createElement('span')

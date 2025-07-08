@@ -58,6 +58,7 @@
         <result property="matchupId"       column="matchup_id"/>
         <result property="leaderImg"       column="leader_img"/>
         <result property="matchupTitle"    column="matchup_title"/>
+        <result property="regionGroup"  column="region_group"/>
         <result property="regionSubgroup"  column="region_subgroup"/>
         <result property="category"        column="category"/>
         <result property="language"        column="language"/>
@@ -77,6 +78,7 @@
 			mm.matchup_id as matchup_id, 
 			leader.PROFILE_IMAGE_URL as leader_img, 
 			m.title as matchup_title, 
+			m.region_group as region_group,
 			m.region_subgroup as region_subgroup,
 			cat.category_name as category,
 			lan.language_name as language, 	
@@ -105,6 +107,7 @@
 		mm.mentos_id AS mentosId,
 		m.image AS mentosImg,
 		m.title AS mentosTitle,
+		m.region_group AS regionGroup,
 		m.region_subgroup AS regionSubgroup,
 		m.start_time AS startTime,
 		m.end_time AS endTime,
