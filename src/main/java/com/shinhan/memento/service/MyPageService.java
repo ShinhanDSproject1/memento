@@ -577,7 +577,7 @@ public class MyPageService {
 					.title((String)data.get("TITLE"))
 					.role(role)
 					.totalCount(((BigDecimal)data.get("TOTALCOUNT")).intValue())
-					.currentCount(((BigDecimal)data.get("CURRENTCOUNT")).intValue())
+					.currentCount(0)
 					.matchStatus((String)data.get("MATCHSTATUS"))
 					.hasMento(hasmento)
 					.build();
@@ -649,29 +649,22 @@ public class MyPageService {
 		String payType = shareDataDTO.getPayType();
 
 		//CHARGE or USE or REFUND -> REFUND의 경우 버튼이 존재하지 않음
-		System.out.println(payType);
 
 		if(payType.equalsIgnoreCase("REFUND")) {
 			return false;
 		}else if(payType.equalsIgnoreCase("CHARGE")) {
-			System.out.println(initBalance);
-			System.out.println(amount);
 			if(initBalance < amount) {
 				return false;
 			}else {
-				System.out.println("어");
 				initBalance -= amount;
 			}
 		}else {
 			//루프 돌면서 금액 계산 및 탈퇴
-			System.out.println("디");
 			for (RefundRequestDTO refund : refundDataList) {
 				if (refund.getMatchupId() != 0) {
 					//매치업 취소
-					System.out.println("가");
 					JoinMatchupDTO jmatchDto = new JoinMatchupDTO(refund.getMatchupId(), memberId);
 					int jmatchCancel = sqlSession.update(matchupNamespace+"cancelJoinMatchupBy2id",jmatchDto);
-					System.out.println(jmatchCancel);
 					if(jmatchCancel > 0) {
 						initBalance += refund.getMatchupPrice();
 					}else {
@@ -681,11 +674,9 @@ public class MyPageService {
 				}
 				if (refund.getMentosId() != 0) {
 					// 멘토스 취소
-					System.out.println("문");
 					JoinMentosDTO jmentosDto = new JoinMentosDTO(refund.getMentosId(), memberId);
 					MemberMentos mm =  memberMentosService.checkValidMemberMentos(jmentosDto);
 					int jmentosCancel = memberMentosService.cancelJoinMentos(mm.getMemberMentosId());
-					System.out.println(jmentosCancel);
 					if(jmentosCancel > 0) {
 						initBalance += refund.getMentosPrice();
 					}else {
@@ -695,10 +686,8 @@ public class MyPageService {
 				}
 				if (refund.getKeepgoingId() != 0) {
 					//킵고잉 탈퇴
-					System.out.println("제");
 					JoinKeepgoingDTO jkeepDto = new JoinKeepgoingDTO(refund.getKeepgoingId(), memberId);
 					int jkeepcancel = sqlSession.update(keepNamespace+"cancelMemberKeepgoingBy2id", jkeepDto);
-					System.out.println(jkeepcancel);
 					if(jkeepcancel > 0) {
 						initBalance += refund.getKeepgoingPrice();
 					}else {
@@ -709,18 +698,13 @@ public class MyPageService {
 		}
 		
 		//user balance update
-		System.out.println("야");
 		Integer resultBalance = initBalance;
-		System.out.println(resultBalance);
 		int balanceUpdateResult = mypageMapper.updateUserBalanceByRefund(resultBalance, memberId);
-		System.out.println(balanceUpdateResult);
 		if(balanceUpdateResult <= 0) {
 			return false;
 		}
-		System.out.println("?");
 		// payment update -> 주문번호
 		int paymentUpateRefundResult = mypageMapper.updatePaymentByRefund(orderId);
-		System.out.println(paymentUpateRefundResult);
 		if(paymentUpateRefundResult <= 0) {
 			return false;
 		}
