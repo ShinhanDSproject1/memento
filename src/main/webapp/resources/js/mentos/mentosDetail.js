@@ -160,7 +160,8 @@ document.addEventListener('DOMContentLoaded', function () {
   // 2. 삭제 버튼 클릭 시 → 팝업 표시
   const deleteBtn = document.querySelector('.mentos-delete-btn .class-apply-btn');
   const deleteModal = document.getElementById('delete-confirm-modal');
-
+  const deleteConformModal = document.getElementById('delete-complete-modal');
+  
   if (deleteBtn && deleteModal) {
     deleteBtn.addEventListener('click', function () {
       deleteModal.style.display = 'flex';
@@ -171,27 +172,35 @@ document.addEventListener('DOMContentLoaded', function () {
   window.hideDeleteConfirmModal = function () {
     deleteModal.style.display = 'none';
   };
+  
+  window.hideDeleteCompleteModalAndRedirect = function(){
+  	deleteConformModal.style.display = 'none';
+  	window.location.href = '/memento/mentos/full';
+  }
+  
 
   // 4. 확인 버튼 → 삭제 API 호출 후 이동
   window.handleConfirmDelete = function () {
-    const mentosId = '${mentos.mentosId}'; // JSTL에서 전달받은 멘토스 ID
+	
+	  fetch(`/memento/mentos/delete?mentosId=${mentosId}`, {
+	    method: 'PATCH',
+	    headers: {
+	      'Content-Type': 'application/json'
+	    }
+	  })
+	    .then(response => {
+	      if (response.ok) {
+	      	deleteConformModal.style.display='flex';
+	      } else {
+	        throw new Error('삭제 실패');
+	      }
+	    })
+	    .catch(error => {
+	      alert('삭제 중 오류가 발생했습니다: ' + error.message);
+	      deleteModal.style.display = 'none';
+	    });
+	};
 
-    fetch(`/memento/mentos/delete?mentosId=${mentosId}`, {
-      method: 'GET',
-    })
-      .then(response => {
-        if (response.ok) {
-          alert('삭제가 완료되었습니다.');
-          window.location.href = '/mentos/full';
-        } else {
-          throw new Error('삭제 실패');
-        }
-      })
-      .catch(error => {
-        alert('삭제 중 오류가 발생했습니다: ' + error.message);
-        deleteModal.style.display = 'none';
-      });
-  };
 
   // ✅ 5. Kakao 지도 API 로드 및 표시
   kakao.maps.load(function () {

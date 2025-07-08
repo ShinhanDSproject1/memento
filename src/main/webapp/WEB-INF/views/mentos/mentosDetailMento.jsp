@@ -24,6 +24,7 @@
 	data-cpath="${cpath}">
 	<%@ include file="../common/logout_header.jsp"%>
 	<%@ include file="../mainpage/notificationModal.jsp"%>
+	<%@ include file="../mentos/deleteModal.jsp"%>
 	<div class="container">
 		<div class="class-wrapper-frame">
 			<div class="class-main-info">
