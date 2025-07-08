@@ -17,24 +17,36 @@
 	</properties>
 	<dependencies>
 		<dependency>
+			<groupId>io.lettuce</groupId>
+			<artifactId>lettuce-core</artifactId>
+			<version>6.2.6.RELEASE</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.data</groupId>
+			<artifactId>spring-data-redis</artifactId>
+			<version>2.6.6</version> <!-- Spring 5.3.x 호환 버전 -->
+		</dependency>
+
+		<dependency>
 			<groupId>com.fasterxml.jackson.datatype</groupId>
 			<artifactId>jackson-datatype-jsr310</artifactId>
 			<version>${jackson.version}</version>
 		</dependency>
 
-			<!-- WebSocket -->
-			<dependency>
-			  <groupId>org.springframework</groupId>
-			  <artifactId>spring-websocket</artifactId>
-			  <version>5.3.30</version>
-			</dependency>
-			
-			<!-- STOMP 메시징 -->
-			<dependency>
-			  <groupId>org.springframework</groupId>
-			  <artifactId>spring-messaging</artifactId>
-			  <version>5.3.30</version>
-			</dependency>
+		<!-- WebSocket -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-websocket</artifactId>
+			<version>5.3.30</version>
+		</dependency>
+
+		<!-- STOMP 메시징 -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-messaging</artifactId>
+			<version>5.3.30</version>
+		</dependency>
 
 		<!-- SQL 문 로그 남기기를 위해 추가 -->
 		<dependency>
@@ -66,19 +78,6 @@
 			<groupId>com.fasterxml.jackson.core</groupId>
 			<artifactId>jackson-databind</artifactId>
 			<version>${jackson.version}</version>
-		</dependency>
-
-		<dependency>
-			<groupId>com.fasterxml.jackson.datatype</groupId>
-			<artifactId>jackson-datatype-jsr310</artifactId>
-			<version>2.18.3</version>
-		</dependency>
-
-		<!-- LocalDate, LocalDateTime 처리를 위한 라이브러리 -->
-		<dependency>
-			<groupId>com.fasterxml.jackson.datatype</groupId>
-			<artifactId>jackson-datatype-jsr310</artifactId>
-			<version>2.18.3</version>
 		</dependency>
 
 		<!-- https://mvnrepository.com/artifact/org.springframework/spring-jdbc -->
@@ -133,7 +132,7 @@
 			<artifactId>spring-webmvc</artifactId>
 			<version>${org.springframework-version}</version>
 		</dependency>
-		
+
 		<!-- AspectJ -->
 		<dependency>
 			<groupId>org.aspectj</groupId>
