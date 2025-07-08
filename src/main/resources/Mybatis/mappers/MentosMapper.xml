@@ -39,7 +39,14 @@
 	</resultMap>
 
 	<insert id="createMentos"
-		parameterType="com.shinhan.memento.dto.mentos.CreateMentosDBDTO" useGeneratedKeys="true" keyProperty="mentosId">
+		parameterType="com.shinhan.memento.dto.mentos.CreateMentosDBDTO">
+
+		<!-- 시퀀스에서 mentos_id 미리 조회해서 DTO에 세팅 -->
+		<selectKey keyProperty="mentosId" order="BEFORE"
+			resultType="int">
+			SELECT seq_mentos_id.nextval FROM dual
+		</selectKey>
+
 		INSERT INTO mentos (
 		mentos_id, category_id, language_id,
 		mento_id, title, simple_content,
@@ -53,19 +60,19 @@
 		match_type_id_first, match_type_id_second,
 		match_type_id_third
 		) VALUES (
-		seq_mentos_id.nextval, #{categoryId},
+		#{mentosId}, #{categoryId},
 		#{languageId}, #{mentoId}, #{title}, #{simpleContent},
-		#{image},
-		#{minMember}, #{maxMember}, #{startDay}, #{endDay},
-		#{startTime},
-		#{endTime}, #{selectedDays}, #{regionGroup},
+		#{image}, #{minMember}, #{maxMember},
+		#{startDay}, #{endDay},
+		#{startTime}, #{endTime}, #{selectedDays}, #{regionGroup},
 		#{regionSubgroup},
 		#{regionDetail},
-		#{content}, #{price}, #{times}, sysdate, null,
-		'ACTIVE',
+		#{content}, #{price}, #{times}, sysdate,
+		null, 'ACTIVE',
 		#{matchTypeFirst}, #{matchTypeSecond}, #{matchTypeThird}
 		)
 	</insert>
+
 
 	<update id="updateMentos" parameterType="map">
 		UPDATE mentos
@@ -131,17 +138,17 @@
 	</select>
 
 	<select id="getRegionGroups" resultType="java.util.Map">
-	    SELECT 
-	        REGION_GROUP AS "key",
-	        REGION_GROUP AS "value"
-	    FROM 
-	        MENTOS
-	    WHERE 
-	        REGION_GROUP IS NOT NULL
-	    GROUP BY 
-	        REGION_GROUP
-	    ORDER BY 
-	        REGION_GROUP ASC
+		SELECT
+		REGION_GROUP AS "key",
+		REGION_GROUP AS "value"
+		FROM
+		MENTOS
+		WHERE
+		REGION_GROUP IS NOT NULL
+		GROUP BY
+		REGION_GROUP
+		ORDER BY
+		REGION_GROUP ASC
 	</select>
 
 	<select id="checkValidMentosById" parameterType="int"
@@ -191,51 +198,52 @@
 	</select>
 
 	<select id="showPreMentoList" resultMap="mentosResultMap">
-	    SELECT m.*
-	    FROM mentos m
-	    JOIN member mem ON m.mento_id = mem.member_id
-	    WHERE mem.user_type = 'PREMENTO'
-	      AND m.price = 0
-	      AND m.status = 'ACTIVE'
-	      
-	      <if test="regionGroup != null and regionGroup != ''">
-	          AND m.region_group = #{regionGroup}
-	      </if>
-	      <if test="matchTypeId != null">
-	          AND (
-	              m.match_type_id_first = #{matchTypeId}
-	              OR m.match_type_id_second = #{matchTypeId}
-	              OR m.match_type_id_third = #{matchTypeId}
-	          )
-	      </if>
-	      <if test="categoryId != null">
-	          AND m.category_id = #{categoryId}
-	      </if>
-	      <if test="languageId != null">
-	          AND m.language_id = #{languageId}
-	      </if>
-	      
-	    ORDER BY m.created_at DESC
-    </select>
+		SELECT m.*
+		FROM mentos m
+		JOIN member mem ON m.mento_id = mem.member_id
+		WHERE mem.user_type = 'PREMENTO'
+		AND m.price = 0
+		AND m.status = 'ACTIVE'
+
+		<if test="regionGroup != null and regionGroup != ''">
+			AND m.region_group = #{regionGroup}
+		</if>
+		<if test="matchTypeId != null">
+			AND (
+			m.match_type_id_first = #{matchTypeId}
+			OR m.match_type_id_second = #{matchTypeId}
+			OR m.match_type_id_third = #{matchTypeId}
+			)
+		</if>
+		<if test="categoryId != null">
+			AND m.category_id = #{categoryId}
+		</if>
+		<if test="languageId != null">
+			AND m.language_id = #{languageId}
+		</if>
+
+		ORDER BY m.created_at DESC
+	</select>
 
 	<select id="getMentosListTotalCount" resultType="int">
-	    SELECT COUNT(*)
-	    FROM mentos
-	    WHERE 1=1
-	        <if test="regionGroup != null and regionGroup != ''">
-	            AND region_group = #{regionGroup}
-	        </if>
-	        <if test="matchTypeId != null">
-	            AND ( match_type_id_first = #{matchTypeId} OR match_type_id_second = #{matchTypeId} OR match_type_id_third = #{matchTypeId} )
-	        </if>
-	        <if test="categoryId != null">
-	            AND category_id = #{categoryId}
-	        </if>
-	        <if test="languageId != null">
-	            AND language_id = #{languageId}
-	        </if>
-	    AND status = 'ACTIVE'
-	    AND price > 0
+		SELECT COUNT(*)
+		FROM mentos
+		WHERE 1=1
+		<if test="regionGroup != null and regionGroup != ''">
+			AND region_group = #{regionGroup}
+		</if>
+		<if test="matchTypeId != null">
+			AND ( match_type_id_first = #{matchTypeId} OR match_type_id_second =
+			#{matchTypeId} OR match_type_id_third = #{matchTypeId} )
+		</if>
+		<if test="categoryId != null">
+			AND category_id = #{categoryId}
+		</if>
+		<if test="languageId != null">
+			AND language_id = #{languageId}
+		</if>
+		AND status = 'ACTIVE'
+		AND price > 0
 	</select>
 
 
@@ -276,40 +284,42 @@
 		)
 		WHERE ROWNUM &lt;= 12
 	</select>
-	
-  	<select id="findSimilarMentosList" parameterType="map" resultMap="mentosResultMap">
-  		select * 
-  		from (
-  			select * from mentos
-	  		where language_id=#{languageId}
-	  		and category_id=#{categoryId}
-	  		and status='ACTIVE'
-	  		and region_group=#{regionGroup}
-	  		and mentos_id!=#{mentosId}
-	  		order by created_at desc
-	  	)
-	  	where rownum &lt; =3
-  	</select>
-  	
-  	<update id="deleteMentos" parameterType="int">
-  		update mentos
-  		set status='DELETE', updated_at=sysdate
-  		where mentos_id=#{mentosId}
-  	</update>
-  	
-  	<select id="checkPermission" parameterType="map" resultType="Integer">
-  		select case 
-  			when exists (
-	             select 1 
-	             from mentos 
-	             where mentos_id = #{mentosId}
-	               and mento_id = #{memberId}
-	               and status = 'ACTIVE'
-	        )
-           	then 1 
-	        else 0 
-	        end as result
-	  	from dual
-  	</select>
+
+	<select id="findSimilarMentosList" parameterType="map"
+		resultMap="mentosResultMap">
+		select *
+		from (
+		select * from mentos
+		where language_id=#{languageId}
+		and category_id=#{categoryId}
+		and status='ACTIVE'
+		and region_group=#{regionGroup}
+		and mentos_id!=#{mentosId}
+		order by created_at desc
+		)
+		where rownum &lt; =3
+	</select>
+
+	<update id="deleteMentos" parameterType="int">
+		update mentos
+		set status='DELETE', updated_at=sysdate
+		where mentos_id=#{mentosId}
+	</update>
+
+	<select id="checkPermission" parameterType="map"
+		resultType="Integer">
+		select case
+		when exists (
+		select 1
+		from mentos
+		where mentos_id = #{mentosId}
+		and mento_id = #{memberId}
+		and status = 'ACTIVE'
+		)
+		then 1
+		else 0
+		end as result
+		from dual
+	</select>
 </mapper>
 
