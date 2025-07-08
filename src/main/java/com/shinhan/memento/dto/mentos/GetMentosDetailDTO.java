@@ -37,7 +37,7 @@ public class GetMentosDetailDTO {
 	private String matchTypeNameFirst;
 	private String matchTypeNameSecond;
 	private String matchTypeNameThird;
-
+	private int mentoId;
 	private String mentoProfile;
 	private String mentoName;
 	private String userType; 

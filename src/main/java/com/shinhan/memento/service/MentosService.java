@@ -106,7 +106,7 @@ public class MentosService {
 				log.info("S3 업로드 완료: {}", imageUrl);
 			} catch (IOException e) {
 				log.error("S3 이미지 업로드 실패", e);
-				return false;
+				return 0;
 			}
 		}
 
@@ -424,7 +424,7 @@ public class MentosService {
 				.matchTypeNameSecond(matchTypeNameSecond).matchTypeNameThird(matchTypeNameThird)
 				.mentoProfile(mento.getProfileImg()).mentoName(mento.getNickname())
 				.userType(mento.getUserType().toString()).matchTypeName(matchTypeName)
-				.similarMentosList(similarMentosList).isFavorite(isFavorite).build();
+				.similarMentosList(similarMentosList).isFavorite(isFavorite).mentoId(mento.getMemberId()).build();
 
 		return dto;
 	}
