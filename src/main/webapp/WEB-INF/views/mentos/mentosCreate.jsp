@@ -63,14 +63,14 @@
 							<div class="title">최소 수강인원</div>
 							<div class="main-selection-border">
 								<input type="number" id="minMember" name="minMember" min="1"
-									class="number-input" />
+									class="number-input" value = "1"/>
 							</div>
 						</div>
 						<div class="main-selection">
 							<div class="title">최대 수강 인원</div>
 							<div class="day-main-selection-border">
 								<input type="number" id="maxMember" name="maxMember" min="1"
-									class="number-input" />
+									class="number-input" value = "10"/>
 							</div>
 						</div>
 					</div>
