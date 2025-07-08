@@ -257,7 +257,8 @@ transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .matchup-cardview:hover {
-	transform: translateY(-4px);
+  transform: translateY(-8px);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
 .rectangle-48:hover {
