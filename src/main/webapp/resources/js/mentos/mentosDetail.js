@@ -94,7 +94,7 @@ document.addEventListener('DOMContentLoaded', function () {
 	        $('#startTime').text(mentos.startTime);
 			$('#endTime').text(mentos.endTime);
 
-			$('.mentos-class-image').attr('src',`${cpath}/resources/uploadImage/${mentos.image}`);
+			$('.mentos-class-image').attr('src',`${mentos.image}`);
 			$('.location-address').text(mentos.place);
 			const rawDays = mentos.selectedDays;
 			const selectedCodes = rawDays.split(',');
@@ -106,7 +106,7 @@ document.addEventListener('DOMContentLoaded', function () {
 			$('#times').text(mentos.times);
 			$('#place').text(mentos.place);
 			$('#price').text('₩'+mentos.price);
-			$('.class-summary-section').text(mentos.content); 
+			$('.class-summary-section').html(mentos.content); 
 			$('.partner-name1').text(mentos.matchTypeNameFirst);
 			$('.partner-name2').text(mentos.matchTypeNameSecond);
 			$('.partner-name3').text(mentos.matchTypeNameThird);

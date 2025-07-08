@@ -122,6 +122,7 @@ html, body {
 }
 
 .class-apply-btn {
+	border: none;
 	background-color: #0076f9;
 	color: #fff;
 	padding: 12px 16px;
