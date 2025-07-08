@@ -14,17 +14,21 @@
 
 <link rel="stylesheet"
 	href="${cpath}/resources/css/matchupDetailLeader.css">
-<link rel="stylesheet" href="${cpath}/resources/css/vars.css">
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath}/resources/css/mainpage/notificationModal.css">
+
 </head>
 <body>
+
 	<%@ include file="../common/logout_header.jsp"%>
+	<%@ include file="../mainpage/notificationModal.jsp"%>
 
 	<div class="container">
 		<jsp:include page="/WEB-INF/views/matchup/memberListModal.jsp" />
 		<jsp:include page="/WEB-INF/views/matchup/mentoListModal.jsp" />
 		<jsp:include page="/WEB-INF/views/matchup/deleteConfirmModal.jsp" />
 		<jsp:include page="/WEB-INF/views/matchup/deleteModal.jsp" />
-
+<script src="${pageContext.request.contextPath}/resources/js/notification.js"></script>
 		<div class="main-content-wrapper">
 			<div class="main-content">
 				<div class="top-info-area">
@@ -182,8 +186,8 @@
 									<%-- 애초에 멘토가 없는 매치업 --%>
 									<c:when test="${!matchupDetail.hasMento}">
 										<div class="profile-title">멘토가 없는 매치업이에요!</div>
-										<a href="#" class="profile-link"><img class="profile-img"
-											src="${cpath}/resources/images/memento-logo.png" alt="기본 프로필" /></a>
+										<img class="profile-img"
+											src="${cpath}/resources/images/memento-logo.png" alt="기본 프로필" />
 									</c:when>
 
 									<%-- 멘토가 있는 매치업 --%>
@@ -205,10 +209,10 @@
 											<c:otherwise>
 												<div class="profile-title" id="mento-status-text">멘토를
 													기다리고 있어요</div>
-												<a href="#" class="profile-link"> <img
+												<img
 													id="mento-profile-img" class="profile-img"
 													src="${cpath}/resources/images/memento-logo.png" alt="기본 프로필" />
-												</a>
+											
 												<div class="profile-nickname" id="mento-nickname"></div>
 											</c:otherwise>
 										</c:choose>
@@ -355,5 +359,6 @@
 	 
 	<script
 		src="${cpath}/resources/js/matchup/matchupDetailLeader.js?v=<%= new java.util.Date().getTime() %>"></script>
+		<script src="${cpath}/resources/js/notification.js"></script>
 </body>
 </html>
