@@ -188,7 +188,7 @@ function renderUserRanking(type, icon, data) {
         const medal = ['🥇', '🥈', '🥉'][rank - 1];
         const imageUrl = user.profileImage && (user.profileImage.startsWith('http') || user.profileImage.startsWith('https'))
             ? user.profileImage : `${CPATH}/resources/images/profile/${user.profileImage || 'default-profile.png'}`;
-        const onclickAttr = type === 'mentor' ? `onclick="location.href='${CPATH}/member/detail/${user.memberId}'"` : '';
+        const onclickAttr = type === 'mentor' ? `onclick="location.href='${CPATH}/mentos/mentodetail?mentoId=${user.memberId}'"` : '';
         return `
             <div class="podium-place ${rankClass}" ${onclickAttr}>
                 <div class="winner-info">
@@ -206,7 +206,7 @@ function renderUserRanking(type, icon, data) {
         if (!user) return '';
         const imageUrl = user.profileImage && (user.profileImage.startsWith('http') || user.profileImage.startsWith('https'))
             ? user.profileImage : `${CPATH}/resources/images/profile/${user.profileImage || 'default-profile.png'}`;
-        const onclickAttr = type === 'mentor' ? `onclick="location.href='${CPATH}/member/detail/${user.memberId}'"` : '';
+        const onclickAttr = type === 'mentor' ? `onclick="location.href='${CPATH}/mentos/mentodetail?mentoId=${user.memberId}'"` : '';
         return `
             <div class="ranking-item" ${onclickAttr}>
                 <div class="rank-number">${index + 4}</div>
