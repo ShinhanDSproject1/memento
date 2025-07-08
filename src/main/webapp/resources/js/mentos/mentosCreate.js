@@ -169,7 +169,7 @@ $(document).ready(function () {
 				modal.classList.remove("hidden");
 				modal.querySelector(".confirm-btn").addEventListener("click", function () {
 					modal.classList.add("hidden");
-					window.location.href = "/mentos/full";
+					window.location.href = "/memento/mentos/full";
 				});
 			},
 			error: function (xhr) {

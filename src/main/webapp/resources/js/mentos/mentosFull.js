@@ -161,7 +161,7 @@ function createMentosCardHTML(mentos) {
     const priceClass = mentos.price === 0 ? 'price-free' : '';
     const imageFileName = mentos.mentosImg;
     const imageUrl = imageFileName 
-        ? `${cpath}/resources/uploadImage/${imageFileName}` 
+        ? `${imageFileName}` 
         : `${cpath}/resources/images/mentosFull/class_default.png`;
 
     return `

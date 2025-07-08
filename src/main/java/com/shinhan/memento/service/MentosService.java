@@ -211,7 +211,7 @@ public class MentosService {
 	        long daysBetween = ChronoUnit.DAYS.between(today, startDate);
 
 	        // 남은 모집 인원 계산
-	        int nowMemberCnt = mentosMapper.countNowMember(mentos.getMentosId());
+	        int nowMemberCnt = memberMentosMapper.countNowMember(mentos.getMentosId());
 	        int remainMemberCnt = mentos.getMinMember() - nowMemberCnt;
 	        String remainMemberStr;
 	        if (remainMemberCnt <= 0) {

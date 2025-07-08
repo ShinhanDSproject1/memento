@@ -49,9 +49,11 @@
 
 		INSERT INTO mentos (
 		mentos_id, category_id, language_id,
-		mento_id, title, simple_content,
+		mento_id,
+		title, simple_content,
 		image, min_member, max_member,
-		start_day, end_day,
+		start_day,
+		end_day,
 		start_time, end_time, selected_days, region_group,
 		region_subgroup,
 		region_detail,
@@ -62,13 +64,16 @@
 		) VALUES (
 		#{mentosId}, #{categoryId},
 		#{languageId}, #{mentoId}, #{title}, #{simpleContent},
-		#{image}, #{minMember}, #{maxMember},
+		#{image},
+		#{minMember}, #{maxMember},
 		#{startDay}, #{endDay},
-		#{startTime}, #{endTime}, #{selectedDays}, #{regionGroup},
+		#{startTime},
+		#{endTime}, #{selectedDays}, #{regionGroup},
 		#{regionSubgroup},
 		#{regionDetail},
 		#{content}, #{price}, #{times}, sysdate,
-		null, 'ACTIVE',
+		null,
+		'ACTIVE',
 		#{matchTypeFirst}, #{matchTypeSecond}, #{matchTypeThird}
 		)
 	</insert>
@@ -139,7 +144,8 @@
 
 	<select id="getRegionGroups" resultType="java.util.Map">
 		SELECT
-		REGION_GROUP AS "key",
+		REGION_GROUP AS
+		"key",
 		REGION_GROUP AS "value"
 		FROM
 		MENTOS
@@ -156,7 +162,8 @@
 		select *
 		from mentos
 		where mentos_id=#{mentosId}
-		and status='ACTIVE'
+		and
+		status='ACTIVE'
 	</select>
 
 	<select id="showMentosList" resultMap="mentosResultMap">
@@ -164,35 +171,33 @@
 		FROM (
 		SELECT inner_query.*, ROWNUM AS rnum
 		FROM (
-		SELECT *
-		FROM
-		mentos
-		WHERE 1=1
+		SELECT m.*
+		FROM mentos m
+		INNER JOIN member mem ON m.mento_id = mem.member_id
+		WHERE mem.user_type = 'MENTO'
+		and m.status = 'ACTIVE'
 		<if test="regionGroup != null and regionGroup != ''">
-			AND region_group = #{regionGroup}
+			AND m.region_group = #{regionGroup}
 		</if>
 		<if test="matchTypeId != null">
 			AND (
-			match_type_id_first = #{matchTypeId}
-			OR
-			match_type_id_second = #{matchTypeId}
-			OR match_type_id_third =
-			#{matchTypeId}
+			m.match_type_id_first = #{matchTypeId}
+			OR m.match_type_id_second = #{matchTypeId}
+			OR m.match_type_id_third = #{matchTypeId}
 			)
 		</if>
 		<if test="categoryId != null">
-			AND category_id = #{categoryId}
+			AND m.category_id = #{categoryId}
 		</if>
 		<if test="languageId != null">
-			AND language_id = #{languageId}
+			AND m.language_id = #{languageId}
 		</if>
-		AND status = 'ACTIVE'
-		ORDER BY created_at DESC
+		ORDER BY m.created_at DESC
 		) inner_query
-		WHERE ROWNUM
-		&lt;= #{offset} + 6
+		WHERE ROWNUM &lt;= #{offset} + 6
 		)
 		WHERE rnum &gt; #{offset}
+
 	</select>
 
 	<select id="showPreMentoList" resultMap="mentosResultMap">
@@ -209,8 +214,10 @@
 		<if test="matchTypeId != null">
 			AND (
 			m.match_type_id_first = #{matchTypeId}
-			OR m.match_type_id_second = #{matchTypeId}
-			OR m.match_type_id_third = #{matchTypeId}
+			OR
+			m.match_type_id_second = #{matchTypeId}
+			OR m.match_type_id_third =
+			#{matchTypeId}
 			)
 		</if>
 		<if test="categoryId != null">
@@ -231,8 +238,10 @@
 			AND region_group = #{regionGroup}
 		</if>
 		<if test="matchTypeId != null">
-			AND ( match_type_id_first = #{matchTypeId} OR match_type_id_second =
-			#{matchTypeId} OR match_type_id_third = #{matchTypeId} )
+			AND ( match_type_id_first = #{matchTypeId} OR
+			match_type_id_second =
+			#{matchTypeId} OR match_type_id_third =
+			#{matchTypeId} )
 		</if>
 		<if test="categoryId != null">
 			AND category_id = #{categoryId}
@@ -246,14 +255,14 @@
 
 	<select id="showInProgressMentosList" parameterType="int"
 		resultMap="mentosResultMap">
-		 SELECT *
-  FROM (
-    SELECT *
-    FROM mentos
-    WHERE mento_id = #{mentoId}
-      AND status = 'ACTIVE'
-    ORDER BY start_day DESC
-  )
+		SELECT *
+		FROM (
+		SELECT *
+		FROM mentos
+		WHERE mento_id = #{mentoId}
+		AND status = 'ACTIVE'
+		ORDER BY start_day DESC
+		)
 		where rownum &lt; = 3
 	</select>
 
@@ -278,11 +287,14 @@
 		select *
 		from (
 		select * from mentos
-		where language_id=#{languageId}
+		where
+		language_id=#{languageId}
 		and category_id=#{categoryId}
-		and status='ACTIVE'
+		and
+		status='ACTIVE'
 		and region_group=#{regionGroup}
-		and mentos_id!=#{mentosId}
+		and
+		mentos_id!=#{mentosId}
 		order by created_at desc
 		)
 		where rownum &lt; =3
@@ -290,7 +302,8 @@
 
 	<update id="deleteMentos" parameterType="int">
 		update mentos
-		set status='DELETE', updated_at=sysdate
+		set
+		status='DELETE', updated_at=sysdate
 		where mentos_id=#{mentosId}
 	</update>
 
@@ -300,7 +313,8 @@
 		when exists (
 		select 1
 		from mentos
-		where mentos_id = #{mentosId}
+		where mentos_id
+		= #{mentosId}
 		and mento_id = #{memberId}
 		and status = 'ACTIVE'
 		)
@@ -310,12 +324,14 @@
 		from dual
 	</select>
 
-	<select id="findMentoIdListByMentosId" parameterType="int" resultMap="mentosResultMap">
+	<select id="findMentoIdListByMentosId" parameterType="int"
+		resultMap="mentosResultMap">
 		select *
 		from mentos
 		where mento_id=${mentoId}
-		and status!='DELETE'
+		and
+		status!='DELETE'
 	</select>
-  
+
 </mapper>
 
