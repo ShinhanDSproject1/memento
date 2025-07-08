@@ -33,4 +33,6 @@ public interface MypageMapper {
 	public abstract int updateUserBalanceByRefund(@Param("resultBalance") Integer resultBalance, @Param("memberId") Integer memberId);
 	public abstract int updatePaymentByRefund(@Param("orderId") String orderId);
 	public abstract MyPageSideBarResponseDTO selectMySideBarInfo(@Param("memberId") Integer memberId);
+	public abstract List<Map<String, Object>> selectMyCreateMatchUpList(@Param("memberId") Integer memberId);
+	public abstract List<Map<String, Object>> myCreateMatchupByDashboard(@Param("memberId") Integer memberId);
 }
