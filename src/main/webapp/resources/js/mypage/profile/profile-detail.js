@@ -11,11 +11,11 @@ $(() => {
         formData.append('introduction', document.getElementById('introduction').value)
         const imgFile = document.getElementById('profile-img').files[0]
         let originalProfileUrl = document.getElementById('original-profile-img-url').value
-        if (imgFile) {
-            formData.append('imageFile', imgFile)
-            originalProfileUrl = ''
-        }
-        formData.append("originalProfileUrl", originalProfileUrl)
+        //if (imgFile) {
+           // formData.append('imageFile', imgFile)
+            //originalProfileUrl = ''
+        //}
+        //formData.append("originalProfileUrl", originalProfileUrl)
 
         const updateUrl = '/memento/api/mypage/profile-update';
         try {
@@ -35,7 +35,15 @@ $(() => {
 
     })
     profileForm.addEventListener('reset', async function (e) {
-        fetchProfileData()
+        // ✅ 'hidden' 클래스 제거해서 보이게 하기
+			   const modal = document.querySelector("#cancelLayer");
+			   modal.classList.remove("hidden");
+			
+			    // ✅ 확인 버튼 눌렀을 때 다시 숨기고 이동
+			    modal.querySelector(".confirm-btn").addEventListener("click", function () {
+			        modal.classList.add("hidden");
+			        fetchProfileData()
+			    });
     })
 
 

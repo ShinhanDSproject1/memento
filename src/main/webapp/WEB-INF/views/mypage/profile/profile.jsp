@@ -5,6 +5,12 @@
 
 <link rel="stylesheet" href="${cpath}/resources/css/mypage/profile/mypageProfileStyle.css" />
 <script src = "${cpath}/resources/js/mypage/profile/profile-detail.js"></script>
+
+<!-- 취소 팝업 -->
+<jsp:include page="/WEB-INF/views/mentos/cancelPopup.jsp" />
+<!-- 수정 팝업 -->
+<jsp:include page="/WEB-INF/views/mentos/updatePopup.jsp" />
+
 <div class="page-container">
 	<section id="profile-page" class="profile-row-section">
 		<main class="profile-edit-card">
