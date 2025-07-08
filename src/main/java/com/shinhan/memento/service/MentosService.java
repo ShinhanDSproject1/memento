@@ -337,7 +337,7 @@ public class MentosService {
 				throw new MemberException(BaseExceptionResponseStatus.CANNOT_FOUND_MENTO);
 			}
 
-			MentoDetailClassDTO dto = MentoDetailClassDTO.builder().mentosImg(mentos.getImage())
+			MentoDetailClassDTO dto = MentoDetailClassDTO.builder().mentosId(mentos.getMentosId()).mentosImg(mentos.getImage())
 					.title(mentos.getTitle()).mentoName(member.getNickname()).userType(member.getUserType().toString())
 					.startDay(mentos.getStartDay().toString()).endDay(mentos.getEndDay().toString())
 					.startTime(mentos.getStartTime().toString().substring(11))
