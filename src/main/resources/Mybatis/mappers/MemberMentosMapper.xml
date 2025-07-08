@@ -10,6 +10,7 @@
 		<id property="memberMentosId" column="member_mentos_id" />
 		<result property="mentosId" column="mentos_id" />
 		<result property="memberId" column="member_id" />
+		<result property="isComplete" column="is_complete"/>
 		<result property="createdAt" column="created_at" />
 		<result property="updatedAt" column="updated_at" />
 		<result property="status" column="status" />
@@ -18,7 +19,7 @@
 	<insert id="joinMentos"
 		parameterType="com.shinhan.memento.dto.mentos.JoinMentosDTO">
 		insert into member_mentos(member_mentos_id, mentos_id, member_id,
-		is_compeleted, created_at, updated_at, status)
+		is_complete, created_at, updated_at, status)
 		values(seq_member_mentos_id.nextval, #{mentosId}, #{memberId}, 0,
 		sysdate, null, 'ACTIVE')
 	</insert>
@@ -52,4 +53,19 @@
 		where mentos_id=#{mentosId}
 	</update>
 
+	<select id="checkJoinedOrNotById" parameterType="map"
+		resultType="Integer">
+		select count(*)
+		from member_mentos
+		where mentos_id=#{mentosId}
+		and member_id=#{memberId}
+		and status='ACTIVE'
+	</select>
+	
+	<select id="countNowMember" parameterType="int" resultType="int">
+		select count(*)
+		from member_mentos
+		where mentos_id=#{mentosId}
+		and status='ACTIVE'
+	</select>
 </mapper>

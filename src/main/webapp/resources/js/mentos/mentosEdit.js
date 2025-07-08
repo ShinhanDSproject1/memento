@@ -183,7 +183,7 @@ $(document).ready(function () {
 			    // ✅ 확인 버튼 눌렀을 때 다시 숨기고 이동
 			    modal.querySelector(".confirm-btn").addEventListener("click", function () {
 			        modal.classList.add("hidden");
-			        window.location.href = "/mentos/full";
+			        window.location.href = "/memento/mentos/full";
 			    });
 	});
 	

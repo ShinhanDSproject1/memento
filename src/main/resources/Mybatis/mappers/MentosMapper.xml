@@ -244,15 +244,6 @@
 		AND price > 0
 	</select>
 
-
-	<select id="countNowMember" parameterType="int" resultType="int">
-		select count(*)
-		from mentos
-		where mentos_id=#{mentosId}
-		and
-		status='ACTIVE'
-	</select>
-
 	<select id="showInProgressMentosList" parameterType="int"
 		resultMap="mentosResultMap">
 		 SELECT *

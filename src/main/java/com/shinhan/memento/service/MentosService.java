@@ -283,7 +283,7 @@ public class MentosService {
 			LocalDate startDate = mentos.getStartDay().toLocalDate();
 			long daysBetween = ChronoUnit.DAYS.between(today, startDate);
 
-			int nowMemberCnt = mentosMapper.countNowMember(mentos.getMentosId());
+			int nowMemberCnt = memberMentosMapper.countNowMember(mentos.getMentosId());
 			int remainMemberCnt = mentos.getMinMember() - nowMemberCnt;
 			String remainMemberStr;
 			if (remainMemberCnt <= 0) {
@@ -369,12 +369,14 @@ public class MentosService {
 
 		String categoryName = categoryMapper.findCategoryById(mentos.getCategoryId());
 		String languageName = languageMapper.findLanguageById(mentos.getCategoryId());
-
+		
+		int nowMember = memberMentosMapper.countNowMember(mentos.getMentosId());
 		Map<String, Object> cartParams = new HashMap<>();
 		cartParams.put("mentosId", mentos.getMentosId());
 		cartParams.put("memberId", member.getMemberId());
 
 		boolean isFavorite = cartMapper.checkFavorite(cartParams) == 1 ? true : false;
+		boolean joinOrNot = memberMentosMapper.checkJoinedOrNotById(cartParams) == 1 ? true : false;
 
 		// 비슷한 멘토스 찾기 => 언어랑 카테고리, 리전그룹이 같은 애들로 찾기
 		Map<String, Object> similarParams = new HashMap<>();
@@ -392,7 +394,7 @@ public class MentosService {
 			String similarLanguageName = languageMapper.findLanguageById(similar.getCategoryId());
 
 			// 현재 참여인원 세어오기 (확정까지 몇명)
-			int nowMemberCnt = mentosMapper.countNowMember(similar.getMentosId());
+			int nowMemberCnt = memberMentosMapper.countNowMember(similar.getMentosId());
 			int remainSeatCnt = mentos.getMinMember() - nowMemberCnt;
 			String remainSeat;
 			if (remainSeatCnt <= 0) {
@@ -419,12 +421,13 @@ public class MentosService {
 				.endTime(mentos.getEndTime().toString().substring(11)).selectedDays(mentos.getSelectedDays())
 				.price(mentos.getPrice()).times(mentos.getTimes() + "회").categoryName(categoryName)
 				.languageName(languageName)
+				.currentMemberCnt(nowMember)
 				.place(mentos.getRegionGroup() + " " + mentos.getRegionSubgroup() + " " + mentos.getRegionDetail())
 				.content(mentos.getContent()).matchTypeNameFirst(matchTypeNameFirst)
 				.matchTypeNameSecond(matchTypeNameSecond).matchTypeNameThird(matchTypeNameThird)
 				.mentoProfile(mento.getProfileImg()).mentoName(mento.getNickname())
 				.userType(mento.getUserType().toString()).matchTypeName(matchTypeName)
-				.similarMentosList(similarMentosList).isFavorite(isFavorite).mentoId(mento.getMemberId()).build();
+				.similarMentosList(similarMentosList).isFavorite(isFavorite).mentoId(mento.getMemberId()).joinOrNot(joinOrNot).build();
 
 		return dto;
 	}

@@ -74,9 +74,11 @@
 								<div class="action-frame">
 									<button class="like-heart-btn" type="button"></button>
 								</div>
-								<label for="popupTrigger" class="mentos-join-btn">
-									<div class="class-apply-btn">신청하기</div>
-								</label>
+								<div class="mentos-join-btn">
+									<button class="class-apply-btn"
+										${joinOrNot ? 'disabled' : ''}>
+										${joinOrNot ? '신청 완료' : '신청하기'}</button>
+								</div>
 							</div>
 						</div>
 					</div>

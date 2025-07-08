@@ -77,7 +77,7 @@ public class MentosController {
 		return "mentos/mentosCreate";
 	}
 
-	@RequestMapping("/edit")
+	@RequestMapping("/editPage")
 	public String mentosEdit(@RequestParam int mentosId, Model model, HttpSession session) {
 
 		List<LanguageDTO> languages = mentosService.getAllLanguages();
