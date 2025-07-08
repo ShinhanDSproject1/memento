@@ -200,9 +200,8 @@
 									<div id="mentosMap" class="location-label">장소</div>
 								</div>
 							</div>
-							<div class="class-mentor-section"
-								onclick="location.href='${cpath}/memento/mentos/mentodetail'"
-								style="cursor: pointer;">
+							<!--누르면 멘토 상세페이지로 이동 -->
+							<div class="class-mentor-section" style="cursor: pointer;">
 
 								<div class="mentor-profile">
 									<img class="mentor-image"

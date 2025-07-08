@@ -59,6 +59,9 @@ document.addEventListener('DOMContentLoaded', function () {
 	    .map(code => dayMap[code])
 	    .join(', ');
 	}
+	function goToMentoDetail(mentoId) {
+    location.href = '${cpath}/mentos/mentodetail?mentoId=' + mentoId;
+  }
 	
 	$.ajax({
 	    url: `/memento/mentos/detail?mentosId=${mentosId}&memberId=${memberId}`,
@@ -66,6 +69,16 @@ document.addEventListener('DOMContentLoaded', function () {
 	    success: function (data) {
 	      if (data.code === 1000) {
 	        const mentos = data.result;
+	        document.querySelector('.class-mentor-section')?.addEventListener('click', function () {
+      if (!mentos.mentoId) {
+        alert('멘토 ID가 없습니다.');
+        return;
+      }
+      location.href = `${cpath}/mentos/mentodetail?mentoId=${mentos.mentoId}`;
+    });
+	        
+	        
+	        mentoId = mentos.mentoId;
 	        const template = document.getElementById('mentosCardTemplate');
 			const container = document.querySelector('.mentos-all-class-row'); // 카드들이 들어가는 곳
 	
@@ -73,14 +86,14 @@ document.addEventListener('DOMContentLoaded', function () {
 	        $('.category').text(`#${mentos.categoryName}`);
 			$('.language').text(`#${mentos.languageName}`);
 	        $('.class-title').text(mentos.title);
-			$('.class-description').text(mentos.simpleContent);
+	        $('.class-description').text(mentos.simpleContent);
 	        $('#currentMemberCnt').text(mentos.currentMemberCnt);
 	        $('#startDay').text(mentos.startDay);
 	        $('#endDay').text(mentos.endDay);
 	        $('#startTime').text(mentos.startTime);
 			$('#endTime').text(mentos.endTime);
 
-			$('.mentos-class-image').attr('src',`${mentos.image}`);
+			$('.mentos-class-image').attr('src',`${cpath}/resources/uploadImage/${mentos.image}`);
 			$('.location-address').text(mentos.place);
 			const rawDays = mentos.selectedDays;
 			const selectedCodes = rawDays.split(',');
@@ -92,7 +105,7 @@ document.addEventListener('DOMContentLoaded', function () {
 			$('#times').text(mentos.times);
 			$('#place').text(mentos.place);
 			$('#price').text('₩'+mentos.price);
-			$('.class-summary-section').html(mentos.content); 
+			$('.class-summary-section').text(mentos.content); 
 			$('.partner-name1').text(mentos.matchTypeNameFirst);
 			$('.partner-name2').text(mentos.matchTypeNameSecond);
 			$('.partner-name3').text(mentos.matchTypeNameThird);
