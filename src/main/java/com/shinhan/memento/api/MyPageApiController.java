@@ -35,6 +35,7 @@ import com.shinhan.memento.dto.MyProfileInfoResponseDTO;
 import com.shinhan.memento.dto.MyProfileUpdateRequestDTO;
 import com.shinhan.memento.dto.MyPaymentListResponseDTO;
 import com.shinhan.memento.dto.MypageKeepgoingHistoryDTO;
+import com.shinhan.memento.dto.MypageMatchupListDTO;
 import com.shinhan.memento.dto.PaymentDetailResponseDTO;
 import com.shinhan.memento.dto.SparkTestResultRequestDTO;
 import com.shinhan.memento.dto.SparkTestResultResponseDTO;
@@ -149,12 +150,12 @@ public class MyPageApiController {
 	}
 
 	@GetMapping(value="/mymatchup-list", produces = "application/json")
-	public BaseResponse<List<MyMatchupListResponseDTO>> selectJoinListByMemberId(HttpSession session){
+	public BaseResponse<MypageMatchupListDTO> selectJoinListByMemberId(HttpSession session){
 		Member loginUser = (Member) session.getAttribute("loginUser");
 		Integer memberId = loginCheck(loginUser);
-		List<MyMatchupListResponseDTO> memberMatchUpList = myPageService.selectJoinListByMemberId(memberId);
+		MypageMatchupListDTO memberMatchUpList = myPageService.selectJoinMatchupListByMemberId(memberId);
 		
-		if(memberMatchUpList.size() == 0) {
+		if(memberMatchUpList == null) {
 			return new BaseResponse<>(null);
 		}
 		
