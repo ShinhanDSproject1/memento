@@ -249,15 +249,14 @@
 
 	<select id="showInProgressMentosList" parameterType="int"
 		resultMap="mentosResultMap">
-		select *
-		from (select * from mentos
-		where mento_id=#{mentoId}
-		and start_day &lt; = sysdate
-		and end_day &gt; = sysdate
-		and
-		status='ACTIVE'
-		order by start_day desc
-		)
+		 SELECT *
+  FROM (
+    SELECT *
+    FROM mentos
+    WHERE mento_id = #{mentoId}
+      AND status = 'ACTIVE'
+    ORDER BY start_day DESC
+  )
 		where rownum &lt; = 3
 	</select>
 
@@ -276,6 +275,16 @@
 		)
 		WHERE ROWNUM &lt;= 12
 	</select>
+
+
+	<select id="findMentoIdListByMentosId" parameterType="int" resultMap="mentosResultMap">
+		select *
+		from mentos
+		where mento_id=${mentoId}
+		and status!='DELETE'
+	</select>
+
+
 	
   	<select id="findSimilarMentosList" parameterType="map" resultMap="mentosResultMap">
   		select * 
@@ -311,5 +320,6 @@
 	        end as result
 	  	from dual
   	</select>
+
 </mapper>
 

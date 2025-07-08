@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper	namespace="com.shinhan.memento.mapper.MentosSidebarMapper">
+	<select id="selectMentoName" parameterType="int"
+		resultType="string">
+		SELECT nickname FROM member WHERE member_id = #{mentoId}
+	</select>
+	
+	<select id="selectUserType" parameterType="int"
+		resultType="string">
+		SELECT user_type FROM member WHERE member_id = #{mentoId}
+	</select>
+	
+	<select id="selectReviewCount" parameterType="int"
+		resultType="int">
+		SELECT NVL(COUNT(*), 0)
+		FROM review r
+		JOIN mentos m ON
+		r.mentos_id = m.mentos_id
+		WHERE m.mento_id = #{mentoId}
+	</select>
+	
+	<select id="selectAvgScore" parameterType="int"
+		resultType="double">
+		SELECT NVL(ROUND(AVG(score),1),0)
+		FROM review r
+		JOIN mentos m
+		ON r.mentos_id = m.mentos_id
+		WHERE m.mento_id = #{mentoId}
+	</select>
+	
+	<select id="selectProfileImageUrl" parameterType="int"
+		resultType="string">
+		SELECT profile_image_url FROM member WHERE member_id =
+		#{mentoId}
+	</select>
+	
+</mapper>

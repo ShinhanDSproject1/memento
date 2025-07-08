@@ -44,8 +44,9 @@ public interface MentosMapper {
 	List<Mentos> showMentosListByMentoId(Map<String, Object> mentosParams);
 
 	List<Mentos> findSimilarMentosList(Map<String, Object> similarParams);
+	List<Mentos> findMentoIdListByMentosId(int mentoId);
 
-	int checkPermission(Map<String, Object> checkParams);
+  int checkPermission(Map<String, Object> checkParams);
 
 	int getMentosListTotalCount(@Param("regionGroup") String regionGroup, @Param("matchTypeId") Integer matchTypeId,
 			@Param("categoryId") Integer categoryId, @Param("languageId") Integer languageId);
