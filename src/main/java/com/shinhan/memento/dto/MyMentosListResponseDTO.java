@@ -13,6 +13,7 @@ public class MyMentosListResponseDTO {
 	private Integer mentosId;
 	private String mentosImg;
 	private String mentosTitle;
+	private String regionGroup;
 	private String regionSubgroup;
 	private String startTime;
 	private String endTime;

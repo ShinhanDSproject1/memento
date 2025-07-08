@@ -27,6 +27,48 @@ $(document).ready(function () {
       const dashMyMatchupList = document.getElementById('dashMyMatchupList')
       dashMyMatchupList.innerHTML = ''
 
+      dashboardData.myCreateMatchupDashboardList.forEach(item => {
+        const itemLi = document.createElement('li')
+        itemLi.className = 'dash-list__item'
+        const matchupImg = document.createElement('img')
+        imgUrl(matchupImg, item.leaderProfileImageUrl)
+        matchupImg.className = 'dash-list__avatar'
+        const myMatchupDetails = document.createElement('div')
+        myMatchupDetails.className = 'dash-list__details'
+        const myMatchupTitle = document.createElement('span')
+        myMatchupTitle.className = 'dash-list__title-text'
+        myMatchupTitle.textContent = `${item.title}`
+        const myMatchupMeta = document.createElement('div')
+        myMatchupMeta.className = 'dash-list__meta'
+        const calendarIcon = document.createElement('img')
+        calendarIcon.src = '/memento/resources/images/mypage/dash-board/icon-time-calendar-010.svg'
+        calendarIcon.alt = 'Calendar'
+        calendarIcon.className = "dash-list__icon"
+        const myMatchupCountList = document.createElement('span')
+        let myMatchupStatus
+        if (item.matchStatus == 'ACTIVE') {
+          myMatchupStatus = '진행 중'
+        }
+        else {
+          myMatchupStatus = '수료'
+        }
+        myMatchupCountList.className = 'dash-list__meta-text'
+        myMatchupCountList.textContent = `${item.currentCount} / ${item.totalCount}회 ` + myMatchupStatus
+
+        const roleSpan = document.createElement('span')
+        roleSpan.className = 'dash-list__status'
+        roleSpan.textContent = `(${item.role})`
+
+        const hasMentoIcon = document.createElement('img')
+        hasMentoIcon.src = item.hasMento == true ? '/memento/resources/images/mypage/dash-board/yes-mento.svg' : '/memento/resources/images/mypage/dash-board/no-mento.svg'
+        hasMentoIcon.alt = item.hasMento == true ? 'Yes Mento' : 'No Mento'
+
+        myMatchupMeta.append(calendarIcon, myMatchupCountList)
+        myMatchupDetails.append(myMatchupTitle, myMatchupMeta)
+        itemLi.append(matchupImg, myMatchupDetails, roleSpan, hasMentoIcon)
+        dashMyMatchupList.appendChild(itemLi)
+      });
+
       dashboardData.myMatchupDashboardList.forEach(item => {
         const itemLi = document.createElement('li')
         itemLi.className = 'dash-list__item'
@@ -118,6 +160,9 @@ $(document).ready(function () {
 
       const myStudyTypeName = document.getElementById('myStudyTypeName')
       myStudyTypeName.textContent = `${dashboardData.myMatchTypeData.matchTypeName}`
+      const myStudyTypeIcon = document.getElementById('myStudyTypeIcon')
+      myStudyTypeIcon.src = '/memento' + `${dashboardData.myMatchTypeData.matchTypeImg}`
+      myStudyTypeIcon.alt = 'sparkTest Icon'
 
     } catch (error) {
       console.log(error)

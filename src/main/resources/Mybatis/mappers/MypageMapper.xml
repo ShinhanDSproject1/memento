@@ -58,6 +58,7 @@
         <result property="matchupId"       column="matchup_id"/>
         <result property="leaderImg"       column="leader_img"/>
         <result property="matchupTitle"    column="matchup_title"/>
+        <result property="regionGroup"  column="region_group"/>
         <result property="regionSubgroup"  column="region_subgroup"/>
         <result property="category"        column="category"/>
         <result property="language"        column="language"/>
@@ -77,6 +78,7 @@
 			mm.matchup_id as matchup_id, 
 			leader.PROFILE_IMAGE_URL as leader_img, 
 			m.title as matchup_title, 
+			m.region_group as region_group,
 			m.region_subgroup as region_subgroup,
 			cat.category_name as category,
 			lan.language_name as language, 	
@@ -95,7 +97,36 @@
 			left join language lan on m.language_id = lan.language_id
 			left join member leader on m.leader_id = leader.member_id
 			left join member mento on m.mento_id = mento.member_id
-		where mm.member_id = #{memberId} and m.status != 'DELETE'
+		where mm.member_id = #{memberId} 
+		and m.status != 'DELETE'
+		and mm.status != 'DELETE'
+	</select>
+	
+	<select id="selectMyCreateMatchUpList" parameterType="int" resultType="map">
+		select
+			m.matchup_id as matchupId, 
+			leader.PROFILE_IMAGE_URL as leaderImg, 
+			m.title as matchupTitle, 
+			m.region_group as regionGroup,
+			m.region_subgroup as regionSubgroup,
+			cat.category_name as category,
+			lan.language_name as language, 	
+			m.start_time as startTime, 		
+			m.end_time as endTime,
+			m.selected_days as selectedDays, 
+			m.has_mento as hasMento,
+			mento.nickname as mentoNickname,
+			m.count as count, 
+			m.matchup_count as matchupCount,
+			CASE WHEN m.leader_id = leader.member_id THEN '팀장'ELSE '팀원'END AS role,
+			m.status as status
+		from matchup m
+			left join category cat on m.category_id = cat.category_id
+			left join language lan on m.language_id = lan.language_id
+			left join member leader on m.leader_id = leader.member_id
+			left join member mento on m.mento_id = mento.member_id
+		where leader.member_id = #{memberId}
+		and m.status != 'DELETE'
 	</select>
 	
 	<select id="selectMyMentosListById" parameterType="int" resultType="map">
@@ -103,6 +134,7 @@
 		mm.mentos_id AS mentosId,
 		m.image AS mentosImg,
 		m.title AS mentosTitle,
+		m.region_group AS regionGroup,
 		m.region_subgroup AS regionSubgroup,
 		m.start_time AS startTime,
 		m.end_time AS endTime,
@@ -139,6 +171,7 @@
 	LEFT JOIN keepgoing keep ON p.keepgoing_id = keep.keepgoing_id
 	where p.member_id = #{memberId}
 	and p.status != 'DELETE'
+	and p.step = 'SUCCESS'
 	</select>
 	
 	<select id="selectPaymentDetail" parameterType ="String" resultType="map">
@@ -202,7 +235,7 @@
 	
 	<update id="updateProfileInfo" parameterType="com.shinhan.memento.dto.MyProfileDBUpdateDTO">
 		update member
-		set NICKNAME = #{nickname}, PHONE_NUMBER = #{phoneNumber}, INTRODUCE = #{introduce}, REGION_GROUP = #{regionGroup} , REGION_SUBGROUP = #{regionSubGroup}, REGION_DETAIL = #{regionDetail}, PROFILE_IMAGE_URL = #{profileImageUrl}
+		set NICKNAME = #{nickname}, PHONE_NUMBER = #{phoneNumber}, INTRODUCE = #{introduce}, REGION_GROUP = #{regionGroup} , REGION_SUBGROUP = #{regionSubGroup}, REGION_DETAIL = #{regionDetail}
 		where member_id = #{memberId}
 	</update>
 	
@@ -224,7 +257,25 @@
 				and mm.status !='DELETE'
 			order by totalcount desc, currentcount desc
 			)
-		WHERE ROWNUM <![CDATA[<=]]> 3
+		WHERE ROWNUM <![CDATA[<=]]> 2
+	</select>
+	<select id="myCreateMatchupByDashboard" parameterType="int" resultType="map">
+		select *
+		from(
+			select
+				leader.member_id as leaderId,
+				leader.profile_image_url as leaderProfileImageUrl,
+				match.title as title,
+				match.count as totalCount,
+				match.matchup_count as currentCount,
+				match.status as matchStatus,
+				match.has_mento as hasMento
+			from matchup match
+				left join member leader on match.leader_id = leader.member_id
+			where match.leader_id = #{memberId}
+				and match.status !='DELETE'
+			)
+		WHERE ROWNUM <![CDATA[<=]]> 1
 	</select>
 	
 	<select id="myJoinMentosByDashboard" parameterType="int" resultType="map">
@@ -290,7 +341,8 @@
 		update
 			payment
 		set pay_type = 'REFUND',
-			pay_at = sysdate
+			pay_at = sysdate,
+			status = 'INACTIVE'
 		where order_id = #{orderId}
 			and status != 'DELETE'
 	</update>

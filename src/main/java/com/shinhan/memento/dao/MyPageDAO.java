@@ -88,6 +88,7 @@ public class MyPageDAO implements MyPageDAOInterface{
 			.mentosId(((BigDecimal)data.get("MENTOSID")).intValue())
 			.mentosImg((String)data.get("MENTOSIMG"))
 			.mentosTitle((String)data.get("MENTOSTITLE"))
+			.regionGroup((String)data.get("REGIONGROUP"))
 			.regionSubgroup((String)data.get("REGIONSUBGROUP"))
 			.startTime(startRaw)
 			.endTime(endRaw)
@@ -126,6 +127,7 @@ public class MyPageDAO implements MyPageDAOInterface{
                 String endFormatted = LocalTime.parse(endRaw.substring(11, 16)).format(DateTimeFormatter.ofPattern("HH:mm"));
                 dto.setEndTime(endFormatted);     // setter를 사용해 포맷된 값으로 덮어씁니다.
             }
+            dto.setMatchupCount(0);
         }
 
         return memberMatchUPList;

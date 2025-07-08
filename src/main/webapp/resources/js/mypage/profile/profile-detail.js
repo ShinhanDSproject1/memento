@@ -3,6 +3,7 @@ $(() => {
     const profileForm = document.getElementById('profileForm');
 
     profileForm.addEventListener('submit', async function (e) {
+        e.preventDefault();
         const formData = new FormData();
         formData.append('nickname', document.getElementById('nickname').value)
         formData.append('interestNames', document.getElementById('interestNames').value)
@@ -11,11 +12,11 @@ $(() => {
         formData.append('introduction', document.getElementById('introduction').value)
         const imgFile = document.getElementById('profile-img').files[0]
         let originalProfileUrl = document.getElementById('original-profile-img-url').value
-        if (imgFile) {
-            formData.append('imageFile', imgFile)
-            originalProfileUrl = ''
-        }
-        formData.append("originalProfileUrl", originalProfileUrl)
+        //if (imgFile) {
+        // formData.append('imageFile', imgFile)
+        //originalProfileUrl = ''
+        //}
+        //formData.append("originalProfileUrl", originalProfileUrl)
 
         const updateUrl = '/memento/api/mypage/profile-update';
         try {
@@ -23,11 +24,20 @@ $(() => {
                 method: 'PUT',
                 body: formData
             })
+
             if (response.ok) {
-                console.log('성공:', result);
+                const modal = document.querySelector("#submitLayer")
+                const modalText = document.getElementById('updateText')
+                modalText.textContent = '프로필 수정이 완료되었어요!'
+                modal.classList.remove("hidden")
+                modal.querySelector(".confirm-btn").addEventListener("click", function () {
+                    modal.classList.add("hidden")
+                    fetchProfileData()
+                });
             }
             else {
-                console.log(result)
+                console.error("에러 발생");
+                alert("수정 실패 😢");
             }
         } catch (error) {
             console.log(error)
@@ -35,7 +45,15 @@ $(() => {
 
     })
     profileForm.addEventListener('reset', async function (e) {
-        fetchProfileData()
+        // ✅ 'hidden' 클래스 제거해서 보이게 하기
+        const modal = document.querySelector("#cancelLayer");
+        modal.classList.remove("hidden");
+
+        // ✅ 확인 버튼 눌렀을 때 다시 숨기고 이동
+        modal.querySelector(".confirm-btn").addEventListener("click", function () {
+            modal.classList.add("hidden");
+            fetchProfileData()
+        });
     })
 
 
@@ -115,7 +133,7 @@ $(() => {
                     introduction.value = profileData.introduce
                 }
             } else {
-                introduction.placeholder = '아직 소개 정보가 등록되지 않았습니다. \n소개 정보가 없을 시 서비스 참여에 약간의 불편함이 생길 수도 있습니다...'
+                introduction.placeholder = '아직 소개 정보가 등록되지 않았습니다.'
 
             }
 

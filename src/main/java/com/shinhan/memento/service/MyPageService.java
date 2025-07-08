@@ -7,6 +7,8 @@ import java.nio.charset.StandardCharsets;
 import java.sql.Date;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.nio.file.Files;
 import java.nio.file.StandardCopyOption;
 import java.sql.Timestamp;
@@ -48,6 +50,7 @@ import com.shinhan.memento.dto.MyDashboardResponseDTO;
 import com.shinhan.memento.dto.MyJoinMatchupByDashboardResponseDTO;
 import com.shinhan.memento.dto.MyJoinMentosByDashboardResponseDTO;
 import com.shinhan.memento.dto.MyMatchTypeByDashboardResponseDTO;
+import com.shinhan.memento.dto.MyMatchupCreateListResponseDTO;
 import com.shinhan.memento.dto.JoinKeepgoingDTO;
 import com.shinhan.memento.dto.JoinMatchupDTO;
 import com.shinhan.memento.dto.MyMatchupListResponseDTO;
@@ -57,6 +60,7 @@ import com.shinhan.memento.dto.MyPaymentListResponseDTO;
 import com.shinhan.memento.dto.MyProfileDBUpdateDTO;
 import com.shinhan.memento.dto.MyProfileInfoResponseDTO;
 import com.shinhan.memento.dto.MyProfileUpdateRequestDTO;
+import com.shinhan.memento.dto.MypageMatchupListDTO;
 import com.shinhan.memento.dto.PaymentDetailResponseDTO;
 import com.shinhan.memento.dto.RefundRequestDTO;
 import com.shinhan.memento.dto.SparkTestResultRequestDTO;
@@ -201,8 +205,58 @@ public class MyPageService {
 		return myPageDAO.selectMyMentosListById(memberId);
 	}
 
-	public List<MyMatchupListResponseDTO> selectJoinListByMemberId(Integer memberId) {
-		return myPageDAO.selectJoinListByMemberId(memberId);
+	public MypageMatchupListDTO selectJoinMatchupListByMemberId(Integer memberId) {
+		List<MyMatchupListResponseDTO> myMatchupList = myPageDAO.selectJoinListByMemberId(memberId);
+		
+		List<Map<String, Object>> result = mypageMapper.selectMyCreateMatchUpList(memberId);
+		List<MyMatchupCreateListResponseDTO> selectMyCreateMatchupList = new ArrayList<MyMatchupCreateListResponseDTO>();
+		
+		result.stream().forEach(data -> {
+			 	String startRaw = data.get("STARTTIME").toString(); // rawData.get("STARTTIME") 대신 사용
+	            String endRaw = data.get("ENDTIME").toString();     // rawData.get("ENDTIME") 대신 사용
+	            Boolean hasmento = false;
+				Object hasMentoValue = data.get("HASMENTO");
+
+				// 값이 null이 아니고, 숫자(Number) 타입인지 확인합니다.
+				if (hasMentoValue instanceof Number) {
+				    // Number 타입의 값을 int로 변환하여 1과 같은지 비교합니다.
+				    // 1이면 true, 그 외의 숫자(0 등)는 false가 됩니다.
+				    hasmento = ((Number) hasMentoValue).intValue() == 1;
+				}
+	            if (startRaw != null && startRaw.length() >= 16) {
+			    	startRaw = LocalTime.parse(startRaw.substring(11, 16)).format(DateTimeFormatter.ofPattern("HH:mm"));
+	            }
+			    if (endRaw != null && endRaw.length() >= 16) {
+			    	endRaw = LocalTime.parse(endRaw.substring(11, 16)).format(DateTimeFormatter.ofPattern("HH:mm"));
+	            }
+			
+			MyMatchupCreateListResponseDTO dto = MyMatchupCreateListResponseDTO.builder()
+					.matchupId(((BigDecimal)data.get("MATCHUPID")).intValue())
+					.leaderImg((String)data.get("LEADERIMG"))
+					.matchupTitle((String)data.get("MATCHUPTITLE"))
+					.regionGroup((String)data.get("REGIONGROUP"))
+					.regionSubgroup((String)data.get("REGIONSUBGROUP"))
+					.category((String)data.get("CATEGORY"))
+					.language((String)data.get("LANGUAGE"))
+					.startTime(startRaw)
+					.endTime(endRaw)
+					.selectedDays((String)data.get("SELECTEDDAYS"))
+					.hasMento(hasmento)
+					.mentoNickname((String)data.get("MENTONICKNAME"))
+					.count(((BigDecimal)data.get("COUNT")).intValue())
+					.matchupCount(0)
+					.role((String)data.get("ROLE"))
+					.status((String)data.get("STATUS"))
+					
+					.build();
+			selectMyCreateMatchupList.add(dto);
+		});
+		
+		MypageMatchupListDTO returnDto = MypageMatchupListDTO.builder()
+				.myMatchupList(myMatchupList)
+				.mymatchupCreateList(selectMyCreateMatchupList)
+				.build();
+		return returnDto;
 	}
 
 	public List<MyPaymentListResponseDTO> selectMyPaymentListById(Integer memberId) {
@@ -577,13 +631,40 @@ public class MyPageService {
 					.title((String)data.get("TITLE"))
 					.role(role)
 					.totalCount(((BigDecimal)data.get("TOTALCOUNT")).intValue())
-					.currentCount(((BigDecimal)data.get("CURRENTCOUNT")).intValue())
+					.currentCount(0)
 					.matchStatus((String)data.get("MATCHSTATUS"))
 					.hasMento(hasmento)
 					.build();
 			
 			myMatchupDTOList.add(dto);
 		});
+		
+		// 내가 만든 매치업
+		List<Map<String, Object>> createMatchupData = mypageMapper.myCreateMatchupByDashboard(memberId);
+		List<MyJoinMatchupByDashboardResponseDTO> createMatchupDtoList = new ArrayList<>();
+		createMatchupData.stream().forEach(data -> {
+			Boolean hasmento = false;
+			Object hasMentoValue = data.get("HASMENTO");
+
+			// 값이 null이 아니고, 숫자(Number) 타입인지 확인합니다.
+			if (hasMentoValue instanceof Number) {
+			    // Number 타입의 값을 int로 변환하여 1과 같은지 비교합니다.
+			    // 1이면 true, 그 외의 숫자(0 등)는 false가 됩니다.
+			    hasmento = ((Number) hasMentoValue).intValue() == 1;
+			}
+			MyJoinMatchupByDashboardResponseDTO dto = MyJoinMatchupByDashboardResponseDTO.builder()
+					.leaderProfileImageUrl((String)data.get("LEADERPROFILEIMAGEURL"))
+					.title((String)data.get("TITLE"))
+					.role("Leader")
+					.totalCount(((BigDecimal)data.get("TOTALCOUNT")).intValue())
+					.currentCount(0)
+					.matchStatus((String)data.get("MATCHSTATUS"))
+					.hasMento(hasmento)
+					.build();
+			
+			createMatchupDtoList.add(dto);
+		});
+		
 		
 		//멘토스
 		List<Map<String, Object>> mentosData = mypageMapper.myJoinMentosByDashboard(memberId);
@@ -605,6 +686,7 @@ public class MyPageService {
 		MyMatchTypeByDashboardResponseDTO myMatchTypeData = mypageMapper.myMatchTypeByDashboard(memberId);
 	
 		MyDashboardResponseDTO dashboardData = MyDashboardResponseDTO.builder()
+				.myCreateMatchupDashboardList(createMatchupDtoList)
 				.myMatchupDashboardList(myMatchupDTOList)
 				.myMentosDashboardList(myMentosDTOList)
 				.myMatchTypeData(myMatchTypeData)
@@ -649,29 +731,22 @@ public class MyPageService {
 		String payType = shareDataDTO.getPayType();
 
 		//CHARGE or USE or REFUND -> REFUND의 경우 버튼이 존재하지 않음
-		System.out.println(payType);
 
 		if(payType.equalsIgnoreCase("REFUND")) {
 			return false;
 		}else if(payType.equalsIgnoreCase("CHARGE")) {
-			System.out.println(initBalance);
-			System.out.println(amount);
 			if(initBalance < amount) {
 				return false;
 			}else {
-				System.out.println("어");
 				initBalance -= amount;
 			}
 		}else {
 			//루프 돌면서 금액 계산 및 탈퇴
-			System.out.println("디");
 			for (RefundRequestDTO refund : refundDataList) {
 				if (refund.getMatchupId() != 0) {
 					//매치업 취소
-					System.out.println("가");
 					JoinMatchupDTO jmatchDto = new JoinMatchupDTO(refund.getMatchupId(), memberId);
 					int jmatchCancel = sqlSession.update(matchupNamespace+"cancelJoinMatchupBy2id",jmatchDto);
-					System.out.println(jmatchCancel);
 					if(jmatchCancel > 0) {
 						initBalance += refund.getMatchupPrice();
 					}else {
@@ -681,11 +756,9 @@ public class MyPageService {
 				}
 				if (refund.getMentosId() != 0) {
 					// 멘토스 취소
-					System.out.println("문");
 					JoinMentosDTO jmentosDto = new JoinMentosDTO(refund.getMentosId(), memberId);
 					MemberMentos mm =  memberMentosService.checkValidMemberMentos(jmentosDto);
 					int jmentosCancel = memberMentosService.cancelJoinMentos(mm.getMemberMentosId());
-					System.out.println(jmentosCancel);
 					if(jmentosCancel > 0) {
 						initBalance += refund.getMentosPrice();
 					}else {
@@ -695,10 +768,8 @@ public class MyPageService {
 				}
 				if (refund.getKeepgoingId() != 0) {
 					//킵고잉 탈퇴
-					System.out.println("제");
 					JoinKeepgoingDTO jkeepDto = new JoinKeepgoingDTO(refund.getKeepgoingId(), memberId);
 					int jkeepcancel = sqlSession.update(keepNamespace+"cancelMemberKeepgoingBy2id", jkeepDto);
-					System.out.println(jkeepcancel);
 					if(jkeepcancel > 0) {
 						initBalance += refund.getKeepgoingPrice();
 					}else {
@@ -709,18 +780,13 @@ public class MyPageService {
 		}
 		
 		//user balance update
-		System.out.println("야");
 		Integer resultBalance = initBalance;
-		System.out.println(resultBalance);
 		int balanceUpdateResult = mypageMapper.updateUserBalanceByRefund(resultBalance, memberId);
-		System.out.println(balanceUpdateResult);
 		if(balanceUpdateResult <= 0) {
 			return false;
 		}
-		System.out.println("?");
 		// payment update -> 주문번호
 		int paymentUpateRefundResult = mypageMapper.updatePaymentByRefund(orderId);
-		System.out.println(paymentUpateRefundResult);
 		if(paymentUpateRefundResult <= 0) {
 			return false;
 		}

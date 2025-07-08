@@ -1,3 +1,42 @@
+// ✅ 1. 지도를 그리는 함수를 분리하여 정의
+function initMap(address) {
+    // 카카오맵 SDK가 로드되지 않았다면 실행되지 않음
+    if (typeof kakao === 'undefined' || !kakao.maps) {
+        console.error("Kakao Maps SDK가 로드되지 않았습니다.");
+        return;
+    }
+
+    kakao.maps.load(function () {
+        const mapContainer = document.getElementById('mentosMap'); 
+        
+        if (!mapContainer || !address || address.trim() === '') {
+            console.warn("지도 컨테이너를 찾을 수 없거나 주소 정보가 없습니다.");
+            if(mapContainer) mapContainer.innerHTML = '<div style="text-align:center; padding-top: 70px; color: #888;">주소 정보가 없습니다.</div>';
+            return;
+        }
+
+        const geocoder = new kakao.maps.services.Geocoder();
+
+        // 주소로 좌표 검색
+        geocoder.addressSearch(address, function (result, status) {
+            if (status === kakao.maps.services.Status.OK) {
+                const coords = new kakao.maps.LatLng(result[0].y, result[0].x);
+                const map = new kakao.maps.Map(mapContainer, {
+                    center: coords,
+                    level: 3,
+                });
+                new kakao.maps.Marker({
+                    map: map,
+                    position: coords,
+                });
+            } else {
+                console.warn('지도 주소 검색 실패:', status);
+                mapContainer.innerHTML = '<div style="text-align:center; padding-top: 70px; color: #888;">지도를 불러올 수 없습니다.</div>';
+            }
+        });
+    });
+}
+
 document.addEventListener('DOMContentLoaded', function () {
  console.log("DOMContentLoaded 실행됨?");
 	const mentosId = $("body").data("mentos-id");
@@ -20,6 +59,9 @@ document.addEventListener('DOMContentLoaded', function () {
 	    .map(code => dayMap[code])
 	    .join(', ');
 	}
+	function goToMentoDetail(mentoId) {
+    location.href = '${cpath}/mentos/mentodetail?mentoId=' + mentoId;
+  }
 	
 	$.ajax({
 	    url: `/memento/mentos/detail?mentosId=${mentosId}&memberId=${memberId}`,
@@ -27,6 +69,16 @@ document.addEventListener('DOMContentLoaded', function () {
 	    success: function (data) {
 	      if (data.code === 1000) {
 	        const mentos = data.result;
+	        document.querySelector('.class-mentor-section')?.addEventListener('click', function () {
+      if (!mentos.mentoId) {
+        alert('멘토 ID가 없습니다.');
+        return;
+      }
+      location.href = `${cpath}/mentos/mentodetail?mentoId=${mentos.mentoId}`;
+    });
+	        
+	        
+	        mentoId = mentos.mentoId;
 	        const template = document.getElementById('mentosCardTemplate');
 			const container = document.querySelector('.mentos-all-class-row'); // 카드들이 들어가는 곳
 	
@@ -34,14 +86,14 @@ document.addEventListener('DOMContentLoaded', function () {
 	        $('.category').text(`#${mentos.categoryName}`);
 			$('.language').text(`#${mentos.languageName}`);
 	        $('.class-title').text(mentos.title);
-			$('.class-description').text(mentos.simpleContent);
+	        $('.class-description').text(mentos.simpleContent);
 	        $('#currentMemberCnt').text(mentos.currentMemberCnt);
 	        $('#startDay').text(mentos.startDay);
 	        $('#endDay').text(mentos.endDay);
 	        $('#startTime').text(mentos.startTime);
 			$('#endTime').text(mentos.endTime);
 
-			$('.mentos-class-image').attr('src',`${mentos.image}`);
+			$('.mentos-class-image').attr('src',`${cpath}/resources/uploadImage/${mentos.image}`);
 			$('.location-address').text(mentos.place);
 			const rawDays = mentos.selectedDays;
 			const selectedCodes = rawDays.split(',');
@@ -53,7 +105,7 @@ document.addEventListener('DOMContentLoaded', function () {
 			$('#times').text(mentos.times);
 			$('#place').text(mentos.place);
 			$('#price').text('₩'+mentos.price);
-			$('.class-summary-section').html(mentos.content); 
+			$('.class-summary-section').text(mentos.content); 
 			$('.partner-name1').text(mentos.matchTypeNameFirst);
 			$('.partner-name2').text(mentos.matchTypeNameSecond);
 			$('.partner-name3').text(mentos.matchTypeNameThird);
@@ -76,7 +128,9 @@ document.addEventListener('DOMContentLoaded', function () {
 			
 			$('.vote').html(starsHTML);
 		
-		mentos.similarMentosList.forEach(item => {
+		  initMap(mentos.place); // 지도 생성 함수 호출
+		
+		  mentos.similarMentosList.forEach(item => {
 		  const clone = template.cloneNode(true);
 		  clone.id = ''; // id 중복 방지
 		  clone.style.display = '';
@@ -202,45 +256,6 @@ document.addEventListener('DOMContentLoaded', function () {
 	};
 
 
-  // ✅ 5. Kakao 지도 API 로드 및 표시
-  kakao.maps.load(function () {
-    const addressElement = document.querySelector('.location-address');
-    const mapContainer = document.getElementById('mentosMap');
-
-    if (!addressElement || !mapContainer) {
-      console.warn("주소 요소 또는 지도 요소가 없습니다.");
-      return;
-    }
-
-    const address = addressElement.textContent.trim();
-
-    if (!address) {
-      console.warn("주소가 비어 있습니다.");
-      mapContainer.innerHTML = '<div style="text-align:center; color:#888;">주소 정보가 없습니다.</div>';
-      return;
-    }
-
-    const geocoder = new kakao.maps.services.Geocoder();
-
-    geocoder.addressSearch(address, function (result, status) {
-      if (status === kakao.maps.services.Status.OK) {
-        const coords = new kakao.maps.LatLng(result[0].y, result[0].x);
-
-        const map = new kakao.maps.Map(mapContainer, {
-          center: coords,
-          level: 3,
-        });
-
-        const marker = new kakao.maps.Marker({
-          map: map,
-          position: coords,
-        });
-      } else {
-        console.warn('지도 주소 검색 실패:', status);
-        mapContainer.innerHTML = '<div style="text-align:center; color:#888;">지도를 불러올 수 없습니다.</div>';
-      }
-    });
-  });
   
    const joinBtn = document.querySelector('.mentos-join-btn .class-apply-btn');
   const joinModal = document.getElementById('joinLayer');

@@ -187,7 +187,6 @@
 			AND language_id = #{languageId}
 		</if>
 		AND status = 'ACTIVE'
-		AND price > 0  <!-- 무료 강의는 pre-mentos 항목에서 비춰질 것이므로 -->
 		ORDER BY created_at DESC
 		) inner_query
 		WHERE ROWNUM

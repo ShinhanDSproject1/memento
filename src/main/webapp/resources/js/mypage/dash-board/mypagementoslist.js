@@ -2,7 +2,7 @@ $(() => {
 	fetchMentoringData();
 	async function fetchMentoringData() {
 		// 1. 데이터를 표시할 HTML 컨테이너를 가져옵니다.
-		const container = $('#my-mentos-list');
+		const container = document.getElementById('my-mentos-list');
 
 		// 2. API를 호출합니다. URL은 실제 환경에 맞게 수정해야 합니다.
 		const API_URL = 'http://localhost:9999/memento/api/mypage/mymentos-list'; // 백엔드 API 엔드포인트
@@ -78,7 +78,7 @@ $(() => {
 				// 활동 지역
 				const region = document.createElement('span');
 				region.className = 'mentor-card__location';
-				region.textContent = `${mentos.regionSubgroup}`;
+				region.textContent = `${mentos.regionGroup} ${mentos.regionSubgroup}`;
 
 				//status
 				const statusGroup = document.createElement('div');
@@ -116,7 +116,7 @@ $(() => {
 				nickname.className = 'mentor-card__mentor-name';
 				nickname.textContent = `${mentos.mentoNickname}`;
 
-				//멘토 이미지
+				//멘토 마이크 이미지
 				const mentoImg = document.createElement('img');
 				mentoImg.className = 'mentor-card__mentor-icon';
 				mentoImg.src = '/memento/' + 'resources/images/mypage/dash-board/mentos-list/vuesax-linear-microphone0.svg';

@@ -1,7 +1,6 @@
 body {
 	padding-top: 100px;
 	overflow-x: hidden;
-	font-family: "Noto Sans", sans-serif;
 	padding-bottom: 30px;
 }
 
@@ -44,7 +43,6 @@ html, body {
 
 .class-main-frame {
 	width: 100%;
-	max-width: 650px;
 	box-sizing: border-box;
 	padding: 19px 170px 19px 170px;
 	display: flex;
@@ -70,7 +68,7 @@ html, body {
 	align-items: flex-start;
 	justify-content: flex-start;
 	flex-shrink: 0;
-	width: 700px;
+	width: 100%;
 	height: auto;
 	position: relative;
 	box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
@@ -207,6 +205,7 @@ html, body {
 	flex-direction: column;
 	gap: 2.5vw;
 	min-width: 35vw;
+	height: 825px;
 }
 
 .frame-429 {
@@ -401,13 +400,6 @@ html, body {
 	position: relative;
 }
 
-.mentos-class-image {
-	width: 100%;
-	height: auto; /* 👈 이게 핵심! 이미지 비율 유지, 부모 가로폭에 맞춤 */
-	object-fit: cover;
-	box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-	display: block;
-}
 
 .location-address {
 	font-size: 1vw;
@@ -540,11 +532,14 @@ html, body {
 
 .mentos-all-class-row {
 	display: flex;
-	flex-direction: row;
-	gap: 15px;
-	align-items: center;
-	padding-bottom: 12px;
-	max-width: 98%;
+    flex-direction: row;
+    gap: 15px;
+    align-items: center;
+    padding-bottom: 12px;
+    max-width: 98%;
+    zoom: 0.8;
+    justify-content: center;
+	
 }
 
 .mentos-class-cardview {
@@ -847,13 +842,13 @@ html, body {
 	position: relative;
 	align-self: stretch;
 	height: 3vw; /* 45px → 3vw (약 1500px 기준) */
+	left: 135px;
 }
 
 .mentos-class-image {
 	width: 100%;
-	height: auto; /* 👈 이게 핵심! 이미지 비율 유지, 부모 가로폭에 맞춤 */
+	height: 220px;
 	object-fit: cover;
-	box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 	display: block;
 }
 

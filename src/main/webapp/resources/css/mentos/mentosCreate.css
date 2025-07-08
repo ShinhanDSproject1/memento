@@ -76,7 +76,7 @@ ul {
 	display: flex;
 	align-items: center;
 	width: 100%;
-	border: 1px solid #ccc;
+	border: 1px solid #a6abbd;
 	border-radius: 4px;
 	padding: 8px 12px;
 	box-sizing: border-box;
@@ -106,13 +106,13 @@ ul {
 }
 /*선택상자 프레임(그 외) */
 .main-selection .main-selection-border {
-	border: 1px solid #ccc;
+	border: 1px solid #a6abbd;
 	padding: 4px 6px;
 	border-radius: 10px;
 }
 
 .day-main-selection-border {
-	border: 1px solid #ccc;
+	border: 1px solid #a6abbd;
 	padding: 4px 6px;
 	border-radius: 10px;
 }
@@ -128,6 +128,7 @@ ul {
 	outline: none;
 	background: transparent;
 	text-align: right;
+	text-align: center;
 }
 /* 시작일,마감일 선택 창  */
 .date-input {
@@ -138,6 +139,7 @@ ul {
 	color: #333;
 	outline: none;
 	cursor: pointer;
+	text-align: center;
 }
 /*시작시간,마감시간 선택 창 */
 .time-input {
@@ -208,7 +210,7 @@ ul {
 	display: flex;
 	flex-direction: row;
 	justify-content: center;
-	border: 1px solid #ccc;
+	border: 1px solid #a6abbd;
 	border-radius: 5px;
 	margin: 0px;
 	align-items: stretch;
@@ -256,7 +258,7 @@ ul {
 	height: 100%;
 	padding: 4px 12px;
 	border-radius: 10px;
-	border: 1px solid #ccc;
+	border: 1px solid #a6abbd;
 }
 
 .last-select-border select {
@@ -279,7 +281,7 @@ ul {
 	justify-content: center;
 	align-items: center;
 	white-space: nowrap;
-	border: 1px solid #ccc;
+	border: 1px solid #a6abbd;
 	border-radius: 20px;
 	font-size: 14px;
 	padding: 10px 20px;
@@ -375,7 +377,7 @@ form {
 input[type="time"] {
 	padding: 7px;
 	text-align: center;
-	border: 1px solid #ccc;
+	border: 1px solid #a6abbd;
 	border-radius: 10px;
 }
 
@@ -552,7 +554,7 @@ input[type="time"] {
 }
 
 .postal-code-btn {
-	flex: 1;
+	flex: 0 0 150px;
 	min-width: 0;
 	height: 55px;
 	padding: 12px 0;
@@ -795,6 +797,7 @@ input[type="time"] {
 	border-radius: 6px;
 	font-weight: 600;
 	cursor: pointer;
+	border: none;
 }
 
 /* 각각 팝업 조건일 때 보여줌 */
@@ -1024,18 +1027,6 @@ input[type="time"] {
 	width: 100%;
 }
 
-.postal-code {
-	flex: 2;
-	min-width: 0;
-	height: 55px;
-	padding: 12px 21px;
-	background: #ffffff;
-	border: 1px solid #a6abbd;
-	border-radius: 10px;
-	display: flex;
-	align-items: center;
-}
-
 .div4 {
 	color: #dadada;
 	text-align: left;
@@ -1049,20 +1040,6 @@ input[type="time"] {
 	display: flex;
 	align-items: center;
 	justify-content: flex-start;
-}
-
-.postal-code-btn {
-	flex: 1;
-	min-width: 0;
-	height: 55px;
-	padding: 12px 0;
-	background: #0070d1;
-	border: 1px solid #a6abbd;
-	border-radius: 10px;
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	color: white;
 }
 
 .postal-code-btn:hover {

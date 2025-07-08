@@ -38,8 +38,7 @@
 		select *
 		from member
 		where member_id=#{memberId}
-		and
-		user_type=#{userType}
+		and user_type!= 'AFFILIATES'
 		and status='ACTIVE'
 	</select>
 </mapper>
