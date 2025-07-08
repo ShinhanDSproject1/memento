@@ -20,7 +20,7 @@
   <div class="frame-6">
     <a href="${cpath}/matchup/matchupList" class="match-up"><div class="sub-title">매치업</div></a>
     <a href="${cpath}/mentos/full" class="mentos"><div class="sub-title">멘토스</div></a>
-    <a href="${cpath}/keepgoing/keepgoinglist.do" class="keepgoing"><div class="sub-title">킵고잉</div></a>
+    <a href="${cpath}/mainpage/already" class="keepgoing"><div class="sub-title">킵고잉</div></a>
     <a href="${cpath}/mainpage/already" class="abovar"><div class="sub-title">어부바</div></a>
     <a href="${cpath}/mainpage/already" class="QRCoding"><div class="sub-title">큐알코딩</div></a>
   </div>

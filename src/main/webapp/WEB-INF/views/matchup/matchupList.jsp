@@ -13,13 +13,14 @@
 <link rel="stylesheet" href="${cpath}/resources/css/matchupList.css">
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/resources/css/mainpage/notificationModal.css">
-
+	
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/resources/css/mainpage/login.css">
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/resources/css/mainpage/notificationModal.css">
 </head>
 <body>
+
 	<div class="header-fixed">
 		<c:choose>
 			<c:when test="${not empty sessionScope.loginUser}">
@@ -210,6 +211,13 @@
 			</div>
 		</div>
 	</div>
+
+	<script src="${pageContext.request.contextPath}/resources/js/header.js"></script>
+	<script>
+	    const CPATH = "${cpath}";
+	</script>
+	<script src="${pageContext.request.contextPath}/resources/js/mainpage.js"></script>
+</body>
 
 	<script>
    const cpath = '${cpath}';

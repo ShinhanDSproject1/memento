@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RequestPart;
@@ -35,7 +34,6 @@ import com.shinhan.memento.model.Member;
 import com.shinhan.memento.model.MemberMentos;
 import com.shinhan.memento.model.Mentos;
 import com.shinhan.memento.model.UserType;
-import com.shinhan.memento.service.IdempotencyService;
 import com.shinhan.memento.service.MemberMentosService;
 import com.shinhan.memento.service.MemberService;
 import com.shinhan.memento.service.MentosService;
@@ -48,53 +46,31 @@ import lombok.extern.slf4j.Slf4j;
 public class MentosApiController {
 
 	@Autowired
-	MentosService mentosService;
+	private MentosService mentosService;
 
 	@Autowired
-	MemberService memberService;
+	private MemberService memberService;
 
 	@Autowired
-	MemberMentosService memberMentosService;
+	private MemberMentosService memberMentosService;
 
-	@Autowired
-	IdempotencyService idempotencyService;
-  
 	/**
-	 * 멘토스 생성 : 멱등키 적용
+	 * 멘토스 생성
 	 */
 	@PostMapping("")
-	public BaseResponse<String> createmento(@RequestPart("data") CreateMentosDTO dto,
-			@RequestPart(value = "image", required = false) MultipartFile imageFile,
-			@RequestHeader(value = "Idempotency-Key", required = false) String idemKey) {
+	public BaseResponse<Void> createmento(@RequestPart("data") CreateMentosDTO dto,
+			@RequestPart(value = "image", required = false) MultipartFile imageFile) {
 		log.info("[MentosController.createMento]");
-		log.info("멘토스 생성 요청: {}", dto);
-		if (idemKey == null || idemKey.isEmpty()) {
-			// 프론트에서 멱등키 요청이 같이 안오면 생성을 못하도록 예외처리
-			throw new MentosException(BaseExceptionResponseStatus.CANNOT_CREATE_MENTOS);
-		}
-
-		// 멱등키 중복 체크
-		if (idempotencyService.isDuplicate(idemKey)) {
-			log.info("멱등키 중복으로 들어왔다!!!!!!!");
-			String cachedResponse = idempotencyService.getSavedResponse(idemKey);
-			return new BaseResponse<>(cachedResponse);// 이전 응답 그대로 반환
-		}
 
 		Member member = checkValidMemberByIdAndUserType(dto.getMentoId(), UserType.MENTO);
 		if (member == null) {
 			throw new MemberException(BaseExceptionResponseStatus.CANNOT_FOUND_MENTO);
 		}
-		int mentosId;
 
-		try {
-			mentosId = mentosService.createMentos(dto, imageFile);
-		} catch (Exception e) {
-			log.error("멘토스 생성 중 예외 발생", e); // 예외 로그 출력
+		boolean result = mentosService.createMentos(dto, imageFile);
+		if (!result) {
 			throw new MentosException(BaseExceptionResponseStatus.CANNOT_CREATE_MENTOS);
 		}
-
-		idempotencyService.saveKey(idemKey, String.valueOf(mentosId));
-
 		return new BaseResponse<>(null);
 	}
 
@@ -162,56 +138,61 @@ public class MentosApiController {
 	 * 멘토스 메인페이지 리스트 조회
 	 */
 	@GetMapping("")
-	public BaseResponse<GetMentosListResponseDTO> showMentosList(@RequestParam(required = false) String regionGroup,
-			@RequestParam(required = false) Integer matchTypeId, @RequestParam(required = false) Integer categoryId,
-			@RequestParam(required = false) Integer languageId, @RequestParam(defaultValue = "1") int page) {
-
-		log.info("[MentosApiController.showMentosList]");
-		return new BaseResponse<>(mentosService.showMentosList(regionGroup, matchTypeId, categoryId, languageId, page));
+	public BaseResponse<GetMentosListResponseDTO> showMentosList(
+	        @RequestParam(required = false) String regionGroup,
+	        @RequestParam(required = false) Integer matchTypeId, 
+	        @RequestParam(required = false) Integer categoryId,
+	        @RequestParam(required = false) Integer languageId, 
+	        @RequestParam(defaultValue = "1") int page) {
+	    
+	    log.info("[MentosApiController.showMentosList]");
+	    return new BaseResponse<>(mentosService.showMentosList(regionGroup, matchTypeId, categoryId, languageId, page));
 	}
 
-	/**
-	 * PREMENTO 유저가 작성한 무료 강의 목록 조회
-	 */
+    /**
+     * PREMENTO 유저가 작성한 무료 강의 목록 조회
+     */
 	@GetMapping("/premento-list")
-	public BaseResponse<List<GetMentosDTO>> showPreMentoList(@RequestParam(required = false) String regionGroup,
-			@RequestParam(required = false) Integer matchTypeId, @RequestParam(required = false) Integer categoryId,
-			@RequestParam(required = false) Integer languageId) {
-		return new BaseResponse<>(mentosService.showPreMentoList(regionGroup, matchTypeId, categoryId, languageId));
+	public BaseResponse<List<GetMentosDTO>> showPreMentoList(
+	        @RequestParam(required = false) String regionGroup,
+	        @RequestParam(required = false) Integer matchTypeId, 
+	        @RequestParam(required = false) Integer categoryId,
+	        @RequestParam(required = false) Integer languageId) {
+	    return new BaseResponse<>(mentosService.showPreMentoList(regionGroup, matchTypeId, categoryId, languageId));
 	}
+	
+    /**
+     * 필터링을 위한 지역 그룹 목록 조회
+     */
+    @GetMapping("/filters/regions")
+    public BaseResponse<List<Map<String, String>>> getRegionsForFilter() {
+        return new BaseResponse<>(mentosService.getRegionGroups());
+    }
+	
+    /**
+     * 필터링을 위한 카테고리 목록 조회
+     */
+    @GetMapping("/filters/categories")
+    public BaseResponse<List<CategoryDTO>> getCategoriesForFilter() {
+        return new BaseResponse<>(mentosService.getAllCategories());
+    }
 
-	/**
-	 * 필터링을 위한 지역 그룹 목록 조회
-	 */
-	@GetMapping("/filters/regions")
-	public BaseResponse<List<Map<String, String>>> getRegionsForFilter() {
-		return new BaseResponse<>(mentosService.getRegionGroups());
-	}
+    /**
+     * 필터링을 위한 언어 목록 조회
+     */
+    @GetMapping("/filters/languages")
+    public BaseResponse<List<LanguageDTO>> getLanguagesForFilter() {
+        return new BaseResponse<>(mentosService.getAllLanguages());
+    }
 
-	/**
-	 * 필터링을 위한 카테고리 목록 조회
-	 */
-	@GetMapping("/filters/categories")
-	public BaseResponse<List<CategoryDTO>> getCategoriesForFilter() {
-		return new BaseResponse<>(mentosService.getAllCategories());
-	}
-
-	/**
-	 * 필터링을 위한 언어 목록 조회
-	 */
-	@GetMapping("/filters/languages")
-	public BaseResponse<List<LanguageDTO>> getLanguagesForFilter() {
-		return new BaseResponse<>(mentosService.getAllLanguages());
-	}
-
-	/**
-	 * 필터링을 위한 학습유형 목록 조회
-	 */
-	@GetMapping("/filters/match-types")
-	public BaseResponse<List<MatchTypeDTO>> getMatchTypesForFilter() {
-		return new BaseResponse<>(mentosService.getAllMatchTypes());
-	}
-
+    /**
+     * 필터링을 위한 학습유형 목록 조회
+     */
+    @GetMapping("/filters/match-types")
+    public BaseResponse<List<MatchTypeDTO>> getMatchTypesForFilter() {
+        return new BaseResponse<>(mentosService.getAllMatchTypes());
+    }
+	
 	/**
 	 * 멘토스 참여 취소하기(신청 취소)
 	 */
@@ -252,17 +233,17 @@ public class MentosApiController {
 
 		return new BaseResponse<>(mentosService.showMentosDetail(mentos, member));
 	}
-
+	
 	/**
-	 * 멘토스 삭제하기
+	 * 멘토스 삭제하기 
 	 */
 	@PatchMapping("/delete")
 	@ResponseBody
-	public BaseResponse<Void> deleteMentos(@RequestParam int mentosId) {
+	public BaseResponse<Void> deleteMentos(@RequestParam int mentosId){
 		log.info("[MentosApiController.deleteMentos]");
-
+		
 		Mentos mentos = mentosService.checkValidMentosById(mentosId);
-		if (mentos == null) {
+		if(mentos==null) {
 			throw new MentosException(BaseExceptionResponseStatus.CANNOT_FOUND_MENTOS);
 		}
 		mentosService.deleteMentos(mentosId);
@@ -273,8 +254,7 @@ public class MentosApiController {
 	 * 멘토스 수정하기
 	 */
 	@PatchMapping("/edit")
-	public BaseResponse<Void> updateMentos(@RequestParam int mentosId,
-			@RequestPart("data") CreateMentosDTO createMentosDto,
+	public BaseResponse<Void> updateMentos(@RequestParam int mentosId, @RequestPart("data") CreateMentosDTO createMentosDto,
 			@RequestPart(value = "image", required = false) MultipartFile imageFile) {
 		log.info("[MentosApiController.updateMentos]");
 

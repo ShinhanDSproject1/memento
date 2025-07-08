@@ -1,14 +1,5 @@
-let isLoading = false;
-let lastCreatedAt = null;
-
 $(document).ready(() => {
-  loadMoreReviews();
-
-  $(window).on('scroll', function () {
-    if ($(window).scrollTop() + $(window).height() >= $(document).height() - 900) {
-      loadMoreReviews();
-    }
-  });
+  loadReviews(); // 한 번만 호출
 });
 
 function getMentoId() {
@@ -23,35 +14,22 @@ function formatDateTime(input) {
          `${pad(date.getHours())}:${pad(date.getMinutes())}:${pad(date.getSeconds())}`;
 }
 
-function loadMoreReviews() {
-  if (isLoading) return;
-  isLoading = true;
-
-  const formattedCreatedAt = lastCreatedAt ? formatDateTime(lastCreatedAt) : null;
- 
-
+function loadReviews() {
   $.ajax({
     url: "/memento/mentodetail/review",
     method: "GET",
     data: {
       mentoId: getMentoId(),
-      lastCreatedAt: null // formattedCreatedAt
+      lastCreatedAt: null // 한 번만 불러오기
     },
     dataType: "json",
     success: function (res) {
-   
-
       if (res.code === 1000 && res.result.length > 0) {
         renderReviewCards(res.result);
-        // 마지막 createdAt 값 업데이트 (가공 전 원본 사용)
-        lastCreatedAt = res.result[res.result.length - 1].createdAt;
       }
-
-      isLoading = false;
     },
     error: function () {
       alert("리뷰 데이터를 불러오는 데 실패했습니다.");
-      isLoading = false;
     },
   });
 }

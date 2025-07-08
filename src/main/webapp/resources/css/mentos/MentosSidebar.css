@@ -52,6 +52,25 @@
 	box-shadow: 0 2px 8px rgba(80, 100, 150, 0.08);
 }
 
+.profileImage {
+	width: 80px; /* 기본값: 부모가 220px일 때 적당한 사이즈 */
+	height: 80px;
+	max-width: 100%; /* 부모보다 커지지 않음 */
+	aspect-ratio: 1/1; /* 항상 정사각형 */
+	border-radius: 50%; /* 원형 */
+	border: 2.5px solid #e8f3ff;
+	object-fit: cover;
+	background: #f8fafc;
+	display: block;
+}
+
+@media ( max-width : 400px) {
+	.avatar-image, .profileImage {
+		width: 60px;
+		height: 60px;
+	}
+}
+
 .profile-card {
 	width: 100%;
 	display: flex;
@@ -62,11 +81,32 @@
 }
 
 .profile-avatar-wrapper {
-	width: 90px;
-	height: 90px;
+	 width: 100px;
+    height: 100px;
 	margin-bottom: 8px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	overflow: hidden;
+	border-radius: 100%;   /* ✅ 동그라미로 만듦 */
+	box-shadow: 0 2px 8px rgba(80, 100, 150, 0.10);
 }
 
+.profileImage, .avatar-image {
+	width: 100%;
+	height: 100%;
+	border-radius: 50%;
+	border: 2.5px solid #e8f3ff;
+	object-fit: cover;
+	background: #f8fafc;
+	display: block;
+}
+#sidebar-area {
+    display: flex;
+    flex-direction: column;
+    align-items: center;   /* 가로축(센터) 정렬 */
+    width: 100%;
+}
 .avatar-image {
 	width: 90px;
 	height: 90px;
@@ -97,7 +137,7 @@
 }
 
 .mento-sidebar {
-	color: #ffffff;
+	color: #ddddd;
 	text-align: center;
 	font-family: "Inter-Medium", sans-serif;
 	font-size: 16px;
@@ -236,9 +276,3 @@
 	transform-origin: 0 0;
 	transform: rotate(0deg) scale(1, 1);
 }
-
-
-
-
-
-

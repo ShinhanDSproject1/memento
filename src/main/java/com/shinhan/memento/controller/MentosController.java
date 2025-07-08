@@ -38,10 +38,9 @@ public class MentosController {
 
 	@Autowired
 	MentosService mentosService;
-	
+
 	@Autowired
 	MemberService memberService;
-
 
 	@RequestMapping("/full")
 	public String mentosAllView() {
@@ -80,11 +79,11 @@ public class MentosController {
 
 	@RequestMapping("/edit")
 	public String mentosEdit(@RequestParam int mentosId, Model model, HttpSession session) {
-		
+
 		List<LanguageDTO> languages = mentosService.getAllLanguages();
 		List<CategoryDTO> categories = mentosService.getAllCategories();
 		List<MatchTypeDTO> matchTypes = mentosService.getAllMatchTypes();
-		
+
 		model.addAttribute("loginUser", session.getAttribute("loginUser"));
 		model.addAttribute("mentosId", mentosId);
 		model.addAttribute("languages", languages);
@@ -93,8 +92,12 @@ public class MentosController {
 		return "mentos/mentosEdit";
 	}
 
+	/*
+	 * 멘토 페이지-홈 (소개글)
+	 */
 	@RequestMapping("/mentodetail")
-	public String mentosMentoDetail() {
+	public String mentosMentoDetail(@RequestParam("mentoId") int mentoId, Model model) {
+		model.addAttribute("mentoId", mentoId);
 		return "mentos/mentosMentoDetail";
 	}
 
@@ -104,8 +107,8 @@ public class MentosController {
 	@RequestMapping("/mentodetailreview")
 	public String mentosMentoDetailReview(@RequestParam("mentoId") int mentoId, Model model) {
 		log.info("[MentoDetailViewController.showMentoDetailClassListPage]");
-		model.addAttribute("mentoId", mentoId);  
-	    return "mentos/mentosMentoDetailReview";
+		model.addAttribute("mentoId", mentoId);
+		return "mentos/mentosMentoDetailReview";
 	}
 
 	/*
