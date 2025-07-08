@@ -14,7 +14,10 @@
 <script
 	src="${pageContext.request.contextPath}/resources/js/mentos/mentosDetail.js"></script>
 
-<body>
+<body 
+    data-mentos-id="${mentosId}" 
+    data-member-id="${sessionScope.loginUser.memberId}"
+    data-cpath="${pageContext.request.contextPath}">
 	<div class="container">
 		<div class="class-header-bg"></div>
 		<div class="full">
@@ -194,7 +197,7 @@
 									<div class="location-address">서울 마포구 월드컵북로2길 57 1층</div>
 								</div>
 								<div class="class-mentor-section">
-									<div class="location-label">장소</div>
+									<div id="mentosMap" class="location-label">장소</div>
 								</div>
 							</div>
 							<div class="class-mentor-section"

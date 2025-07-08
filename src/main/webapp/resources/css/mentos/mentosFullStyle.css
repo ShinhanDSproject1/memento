@@ -428,40 +428,19 @@
 	font-weight: 400;
 	position: relative;
 }
-/* mento 프레임 */
-.group-371 {
-	flex-shrink: 0;
-	width: 36px;
-	height: 12.04px;
-	position: static;
-}
 
-/* mento 모양 */
-.rectangle-279 {
-	background: rgba(0, 112, 209, 0.73);
-	border-radius: 5px;
-	width: 36px;
-	height: 12px;
-	left: 52px;
-	top: 3.02px;
-}
-
-/* mento */
-.mento {
-	color: #ffffff;
-	text-align: center;
-	font-family: "Inter-Medium", sans-serif;
-	font-size: 8px;
-	line-height: 150%;
-	letter-spacing: -0.011em;
-	font-weight: 500;
-	position: absolute;
-	top: 50%;
-	translate: 0 -50%;
-	width: 36px;
-	display: flex;
-	align-items: center;
-	justify-content: center;
+.mento-badge {
+    display: inline-block; /* 텍스트 길이에 맞춰 크기가 자동으로 조절되도록 설정 */
+    background: rgba(0, 112, 209, 0.73);
+    color: #ffffff;
+    padding: 2px 8px; /* 텍스트 주변의 상하좌우 여백 */
+    border-radius: 5px;
+    font-size: 8px;
+    font-weight: 500;
+    font-family: "Inter-Medium", sans-serif;
+    line-height: 1.5; /* 텍스트 줄 높이 */
+    text-align: center;
+    vertical-align: middle; /* 멘토 이름과 세로 정렬을 맞춤 */
 }
 
 /*날짜 전체 프레임 */

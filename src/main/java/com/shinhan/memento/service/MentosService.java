@@ -106,7 +106,7 @@ public class MentosService {
 				log.info("S3 업로드 완료: {}", imageUrl);
 			} catch (IOException e) {
 				log.error("S3 이미지 업로드 실패", e);
-				return false;
+				return 0;
 			}
 		}
 
@@ -242,7 +242,7 @@ public class MentosService {
 	                .categoryName(categoryMapper.findCategoryById(mentos.getCategoryId()))
 	                .languageName(languageMapper.findLanguageById(mentos.getLanguageId()))
 	                .mentoName(member.getNickname())
-	                .mentoType(matchTypeMapper.findMatchTypeById(member.getMatchTypeId()))
+	                .mentoType(member.getUserType().toString())
 	                .startDay(mentos.getStartDay().toString())
 	                .endDay(mentos.getEndDay().toString())
 	                .startTime(mentos.getStartTime().toString().substring(11, 16))
@@ -298,7 +298,7 @@ public class MentosService {
 					.categoryName(categoryMapper.findCategoryById(mentos.getCategoryId()))
 					.languageName(languageMapper.findLanguageById(mentos.getLanguageId()))
 					.mentoName(member.getNickname())
-					.mentoType(matchTypeMapper.findMatchTypeById(member.getMatchTypeId()))
+					.mentoType(member.getUserType().toString())
 					.startDay(mentos.getStartDay().toString()).endDay(mentos.getEndDay().toString())
 					.startTime(mentos.getStartTime().toString().substring(11, 16))
 					.endTime(mentos.getEndTime().toString().substring(11, 16)).location(mentos.getRegionGroup())

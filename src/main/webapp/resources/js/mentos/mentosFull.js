@@ -170,12 +170,30 @@ function createMentosCardHTML(mentos) {
                 <div class="mentos-text">
                     <div class="frame-37862"><div class="frame-413"><div class="d">D-</div><div class="d">${mentos.daysBetween}</div></div><div class="frame-414"><div class="d">${mentos.remainMemberCnt}</div></div></div>
                     <div class="aws">${mentos.title}</div>
+                    
                     <div class="frame-406">
-                        <div class="frame-407"><img class="user-user" src="${cpath}/resources/images/mentosFull/mento.svg" /><div class="text">${mentos.mentoName}</div><div class="group-371"><div class="rectangle-279"></div><div class="mento">${mentos.mentoType}</div></div></div>
-                        <div class="frame-408"><img class="icon-time-calendar" src="${cpath}/resources/images/mentosFull/day.svg" /><div class="text">${mentos.startDay.substring(0, 10)}</div><div class="text">-</div><div class="text">${mentos.endDay.substring(0, 10)}</div></div>
-                        <div class="frame-409"><img class="icon-time-clock-outlined" src="${cpath}/resources/images/mentosFull/time.svg" /><div class="text">${mentos.startTime} - ${mentos.endTime}</div></div>
-                        <div class="frame-410"><img class="icon-maps-map-pin" src="${cpath}/resources/images/mentosFull/maps.svg" /><div class="text">${mentos.location}</div></div>
-                        <div class="frame-3659"><div class="_45-000 ${priceClass}">${priceText}</div></div>
+						<div class="frame-407">
+						    <img class="user-user" src="${cpath}/resources/images/mentosFull/mento.svg" />
+						    <div class="text">${mentos.mentoName}</div>
+						    <div class="mento-badge">${mentos.mentoType}</div>
+						</div>
+                        <div class="frame-408">
+                            <img class="icon-time-calendar" src="${cpath}/resources/images/mentosFull/day.svg" />
+                            <div class="text">${mentos.startDay.substring(0, 10)}</div>
+                            <div class="text">-</div>
+                            <div class="text">${mentos.endDay.substring(0, 10)}</div>
+                        </div>
+                        <div class="frame-409">
+                            <img class="icon-time-clock-outlined" src="${cpath}/resources/images/mentosFull/time.svg" />
+                            <div class="text">${mentos.startTime} - ${mentos.endTime}</div>
+                        </div>
+                        <div class="frame-410">
+                            <img class="icon-maps-map-pin" src="${cpath}/resources/images/mentosFull/maps.svg" />
+                            <div class="text">${mentos.location}</div>
+                        </div>
+                        <div class="frame-3659">
+                            <div class="_45-000 ${priceClass}">${priceText}</div>
+                        </div>
                     </div>
                 </div>
                 <div class="frame-3778">
