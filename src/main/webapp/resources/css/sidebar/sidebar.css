@@ -1,5 +1,7 @@
+@import url('https://fonts.googleapis.com/css2?family=Fredericka+the+Great&family=Inter:wght@400;500;600;700&display=swap');
+
 body {
-  font-family: "D2Coding", "Inter", sans-serif;
+  font-family: "D2Coding", "Inter", sans-serif !important;
   background-color: #f0faff;
 }
 

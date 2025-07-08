@@ -299,6 +299,7 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
+  margin-bottom:5vh;
   /* Title top, buttons lower to match Figma y-coords */
 }
 

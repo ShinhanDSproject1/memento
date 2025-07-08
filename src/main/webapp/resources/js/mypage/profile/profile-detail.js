@@ -115,7 +115,7 @@ $(() => {
                     introduction.value = profileData.introduce
                 }
             } else {
-                introduction.placeholder = '아직 소개 정보가 등록되지 않았습니다. \n소개 정보가 없을 시 서비스 참여에 약간의 불편함이 생길 수도 있습니다...'
+                introduction.placeholder = '아직 소개 정보가 등록되지 않았습니다.'
 
             }
 

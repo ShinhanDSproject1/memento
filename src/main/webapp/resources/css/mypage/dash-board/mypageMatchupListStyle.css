@@ -26,7 +26,9 @@ a {
 a:hover {
 	color: var(--a-black) !important;
 }
-
+.main-content-wrapper{
+	background-color: #f0faff;
+}
 
 
 /* ==========================================================================

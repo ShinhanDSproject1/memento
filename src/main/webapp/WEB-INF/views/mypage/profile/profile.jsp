@@ -17,7 +17,7 @@
 						<button type="submit" class="btn btn-save">저장</button>
 					</div>
 				</header>
-				<div class="form-row form-row-image">
+				<div class="form-row form-row-image" style="display:none">
 					<label for="profile-image-input" class="form-label">이미지</label>
 					<div class="form-value">
 						<div class="avatar-container">
