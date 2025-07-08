@@ -47,6 +47,7 @@ import com.shinhan.memento.mapper.MemberMentosMapper;
 import com.shinhan.memento.mapper.MentosMapper;
 import com.shinhan.memento.model.Member;
 import com.shinhan.memento.model.Mentos;
+import com.shinhan.memento.util.S3Uploader;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -70,6 +71,8 @@ public class MentosService {
 	MemberService memberService;
 	@Autowired
 	ServletContext servletContext;
+	@Autowired
+	S3Uploader s3Uploader;
 
 	@Value("${file.upload.dir}")
 	private String uploadDir;
@@ -99,24 +102,10 @@ public class MentosService {
 		String imageUrl = null;
 		if (imageFile != null && !imageFile.isEmpty()) {
 			try {
-				// 실제 경로 동적으로 추출
-				String realPath = servletContext.getRealPath("/resources/uploadImage");
-				File dir = new File(realPath);
-				if (!dir.exists()) {
-					dir.mkdirs();
-				}
-
-				// 확장자 추출 + 고유 파일명 생성
-				String ext = getFileExtension(imageFile.getOriginalFilename());
-				String savedFileName = UUID.randomUUID().toString() + (ext != null ? "." + ext : "");
-				File destFile = new File(dir, savedFileName);
-				Files.copy(imageFile.getInputStream(), destFile.toPath(), StandardCopyOption.REPLACE_EXISTING);
-
-				// 클라이언트에서 접근할 수 있는 URL 경로 저장
-				imageUrl = "/resources/uploadImage/" + savedFileName;
-				log.info("이미지 저장 완료: {}", imageUrl);
+				imageUrl = s3Uploader.upload(imageFile);
+				log.info("S3 업로드 완료: {}", imageUrl);
 			} catch (IOException e) {
-				log.error("이미지 업로드 실패", e);
+				log.error("S3 이미지 업로드 실패", e);
 				return false;
 			}
 		}
