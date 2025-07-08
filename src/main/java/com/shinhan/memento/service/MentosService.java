@@ -87,7 +87,7 @@ public class MentosService {
 	 * 멘토스 생성
 	 */
 	@Transactional
-	public boolean createMentos(CreateMentosDTO requestDto, MultipartFile imageFile) {
+	public int createMentos(CreateMentosDTO requestDto, MultipartFile imageFile) {
 		log.info("[MentosService.createMentos]");
 
 		// 날짜 및 시간 변환
@@ -123,7 +123,7 @@ public class MentosService {
 				.regionSubgroup(requestDto.getRegionSubgroup()).build();
 
 		int result = mentosMapper.createMentos(dbDTO);
-		return result == 1;
+		return result;
 	}
 
 	private String getFileExtension(String fileName) {

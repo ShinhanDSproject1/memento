@@ -6,12 +6,14 @@ import java.sql.Timestamp;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
+import lombok.Setter;
 
 @Getter
 @AllArgsConstructor
 @Builder
+@Setter
 public class CreateMentosDBDTO {
-
+	private int mentosId;
 	private String title;
 	private String simpleContent; // 간단 소개글 
 	private String image;
