@@ -129,14 +129,15 @@
 }
 /* 멘토스 전체 화면 1번줄 */
 .mentos-all-class-row {
-	display: flex;
-	flex-wrap: wrap;
-	flex-direction: row;
-	gap: 15px;
-	align-items: center;
-	padding-bottom: 12px;
-	width: 100%;
-	justify-content: flex-start;
+    display: grid;
+    flex-wrap: wrap;
+    flex-direction: row;
+    gap: 15px;
+    align-items: center;
+    padding-bottom: 12px;
+    width: 100%;
+    justify-content: flex-start;
+    grid-template-columns: repeat(3, 1fr);
 }
 /* 멘토스 전체 화면 2,3 번줄 */
 .mentos-all-class-row1 {
