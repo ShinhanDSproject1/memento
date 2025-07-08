@@ -244,7 +244,7 @@ public class MyPageService {
 					.hasMento(hasmento)
 					.mentoNickname((String)data.get("MENTONICKNAME"))
 					.count(((BigDecimal)data.get("COUNT")).intValue())
-					.matchupCount(((BigDecimal)data.get("MATCHUPCOUNT")).intValue())
+					.matchupCount(0)
 					.role((String)data.get("ROLE"))
 					.status((String)data.get("STATUS"))
 					
