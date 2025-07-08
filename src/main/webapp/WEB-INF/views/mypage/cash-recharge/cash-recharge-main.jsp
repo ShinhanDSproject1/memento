@@ -61,14 +61,14 @@
         </div>
         <div class="balance-amount">0원</div>
         <div class="cash-recharge-divider"></div>
-        <div class="balance-details">
+        <!-- <div class="balance-details">
             <div>현재 보유 me캐시: <span class="amount">0원</span></div>
             <div>5000원</div>
             <div>5250원</div>
             <div>250원</div>
             <div class="info">충전 금액, 추가 적립, 이벤트, 총 me캐시</div>
             <div class="cash-recharge-divider"></div>
-        </div>
+        </div> -->
     </section>
 
 

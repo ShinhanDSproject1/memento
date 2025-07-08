@@ -42,7 +42,7 @@ $(() => {
 
 				// 제목 a tag
 				const titleAtag = document.createElement('a');
-				titleAtag.href = '/memento/' + '/mentos/detail/mentosId=' + mentos.mentosId;
+				titleAtag.href = '/memento/' + 'mentos/detailPage?mentosId=' + mentos.mentosId;
 
 				// 멘토링 제목
 				const title = document.createElement('h2');

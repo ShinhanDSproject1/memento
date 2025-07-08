@@ -83,6 +83,7 @@ document.addEventListener('DOMContentLoaded', function () {
 			const container = document.querySelector('.mentos-all-class-row'); // 카드들이 들어가는 곳
 	
 	        // DOM에 데이터 뿌리기
+	        console.log(mentos.languageName)
 	        $('.category').text(`#${mentos.categoryName}`);
 			$('.language').text(`#${mentos.languageName}`);
 	        $('.class-title').text(mentos.title);

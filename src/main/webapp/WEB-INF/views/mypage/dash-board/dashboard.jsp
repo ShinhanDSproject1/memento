@@ -133,7 +133,7 @@
 							</div>
 							<span class="dash-list__meta-text">화, 목 (19:00~21:00)</span>
 						</div>
-						<a href="#" class="btn btn--chat">채팅하기</a>
+						<!-- <a href="#" class="btn btn--chat">채팅하기</a> -->
 					</li>
 					<li class="dash-list__item">
 						<div class="dash-list__details">
@@ -146,12 +146,12 @@
 							</div>
 							<span class="dash-list__meta-text">화, 목 (19:00~21:00)</span>
 						</div>
-						<a href="#" class="btn btn--chat">채팅하기</a>
+						<!-- <a href="#" class="btn btn--chat">채팅하기</a> -->
 					</li>
 				</ul>
 			</div>
 			<footer class="dash-card__footer">
-				<a href="${cpath}/mypage/page8" class="dash-card__footer-link">
+				<a href="${cpath}/mainpage/already" class="dash-card__footer-link">
 					킵고잉 목록
 					<img src="${cpath}/resources/images/mypage/dash-board/vuesax-linear-logout1.svg" alt="Arrow">
 				</a>
@@ -205,21 +205,21 @@
 							<span class="dash-list__title-text">리엑트 한큐에 배우기</span>
 							<span class="wishlist__price">(20,000)</span>
 						</div>
-						<a href="#"><img src="${cpath}/resources/images/mypage/dash-board/login1.svg" alt="Action icon" class="wishlist__action-icon"></a>
+						<%-- <a href="#"><img src="${cpath}/resources/images/mypage/dash-board/login1.svg" alt="Action icon" class="wishlist__action-icon"></a> --%>
 					</li>
 					<li class="dash-list__item">
 						<div class="dash-list__details">
 							<span class="dash-list__title-text">Git을 활용한 프로젝트 생성해보기</span>
 							<span class="wishlist__price wishlist__price--free">(Free)</span>
 						</div>
-						<a href="#"><img src="${cpath}/resources/images/mypage/dash-board/login1.svg" alt="Action icon" class="wishlist__action-icon"></a>
+						<%-- <a href="#"><img src="${cpath}/resources/images/mypage/dash-board/login1.svg" alt="Action icon" class="wishlist__action-icon"></a> --%>
 					</li>
 					<li class="dash-list__item">
 						<div class="dash-list__details">
 							<span class="dash-list__title-text">Figma 어렵지 않아요</span>
 							<span class="wishlist__price">(35,000)</span>
 						</div>
-						<a href="#"><img src="${cpath}/resources/images/mypage/dash-board/login1.svg" alt="Action icon" class="wishlist__action-icon"></a>
+						<%-- <a href="#"><img src="${cpath}/resources/images/mypage/dash-board/login1.svg" alt="Action icon" class="wishlist__action-icon"></a> --%>
 					</li>
 				</ul>
 			</div>

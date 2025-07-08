@@ -368,7 +368,7 @@ public class MentosService {
 		String matchTypeName = matchTypeMapper.findMatchTypeById(mento.getMatchTypeId());
 
 		String categoryName = categoryMapper.findCategoryById(mentos.getCategoryId());
-		String languageName = languageMapper.findLanguageById(mentos.getCategoryId());
+		String languageName = languageMapper.findLanguageById(mentos.getLanguageId());
 		
 		int nowMember = memberMentosMapper.countNowMember(mentos.getMentosId());
 		Map<String, Object> cartParams = new HashMap<>();
