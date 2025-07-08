@@ -141,6 +141,7 @@
 	LEFT JOIN keepgoing keep ON p.keepgoing_id = keep.keepgoing_id
 	where p.member_id = #{memberId}
 	and p.status != 'DELETE'
+	and p.step = 'SUCCESS'
 	</select>
 	
 	<select id="selectPaymentDetail" parameterType ="String" resultType="map">
