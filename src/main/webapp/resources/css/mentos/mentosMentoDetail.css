@@ -94,6 +94,7 @@ html, body {
 	overflow-x: auto;
 	padding-bottom: 8px;
 	scroll-snap-type: x mandatory; /* 선택 사항 */
+	flex: 1 1 0;
 }
 
 .frame-408 {
