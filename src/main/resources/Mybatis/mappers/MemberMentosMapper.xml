@@ -53,4 +53,19 @@
 		where mentos_id=#{mentosId}
 	</update>
 
+	<select id="checkJoinedOrNotById" parameterType="map"
+		resultType="Integer">
+		select count(*)
+		from member_mentos
+		where mentos_id=#{mentosId}
+		and member_id=#{memberId}
+		and status='ACTIVE'
+	</select>
+	
+	<select id="countNowMember" parameterType="int" resultType="int">
+		select count(*)
+		from member_mentos
+		where mentos_id=#{mentosId}
+		and status='ACTIVE'
+	</select>
 </mapper>

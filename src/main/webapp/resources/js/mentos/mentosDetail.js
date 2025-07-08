@@ -242,18 +242,38 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   });
   
-	const joinBtn = document.querySelector('.mentos-join-btn .class-apply-btn');
+   const joinBtn = document.querySelector('.mentos-join-btn .class-apply-btn');
   const joinModal = document.getElementById('joinLayer');
-
-  if (joinBtn && joinModal) {
-    joinBtn.addEventListener('click', function () {
-      joinModal.style.display = 'flex';
-    });
-  }
-
-  // 3. 취소 버튼 → 팝업 숨기기
-  window.hideJoinModal = function () {
-    joinModal.style.display = 'none';
-  };
+  
+	if (joinBtn && joinModal) {
+		  joinBtn.addEventListener('click', function () {
+		    fetch(`/memento/mentos/join`, {
+		      method: 'POST',
+		      headers: {
+		        'Content-Type': 'application/json'
+		      },
+		      body: JSON.stringify({
+		        mentosId: mentosId,
+		        memberId: memberId
+		      })
+		    })
+		    .then(response => {
+		      if (response.ok) {
+		        joinModal.style.display = 'flex';
+		      } else {
+		        return response.json().then(data => {
+		          throw new Error(data.message || '신청 실패');
+		        });
+		      }
+		    })
+		    .catch(error => {
+		      alert('참여 신청 중 오류가 발생했습니다: ' + error.message);
+		    });
+		  });
+		}
+		
+		window.hideJoinModal = function () {
+		  joinModal.style.display = 'none';
+		};
 
 });

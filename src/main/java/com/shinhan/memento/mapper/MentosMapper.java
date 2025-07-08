@@ -38,7 +38,6 @@ public interface MentosMapper {
 	List<Mentos> showPreMentoList(@Param("regionGroup") String regionGroup, @Param("matchTypeId") Integer matchTypeId,
 	        @Param("categoryId") Integer categoryId, @Param("languageId") Integer languageId);
 	
-	int countNowMember(int mentosId);
 	List<Mentos> showInProgressMentosList(int mentoId);
 
 	List<Mentos> showMentosListByMentoId(Map<String, Object> mentosParams);
@@ -46,8 +45,11 @@ public interface MentosMapper {
 	List<Mentos> findSimilarMentosList(Map<String, Object> similarParams);
 	List<Mentos> findMentoIdListByMentosId(int mentoId);
 
-  int checkPermission(Map<String, Object> checkParams);
+    int checkPermission(Map<String, Object> checkParams);
 
 	int getMentosListTotalCount(@Param("regionGroup") String regionGroup, @Param("matchTypeId") Integer matchTypeId,
 			@Param("categoryId") Integer categoryId, @Param("languageId") Integer languageId);
+	
+	int countNowMember(int mentosId);
+
 }

@@ -1,5 +1,7 @@
 package com.shinhan.memento.mapper;
 
+import java.util.Map;
+
 import org.apache.ibatis.annotations.Mapper;
 
 import com.shinhan.memento.dto.mentos.JoinMentosDTO;
@@ -13,4 +15,7 @@ public interface MemberMentosMapper {
 	int cancelJoinMentos(int memberMentosId);
 	int countStudentCntByMentosId(int mentosId);
 	void deleteMemberMentos(int mentosId);
+	Integer checkJoinedOrNotById(Map<String, Object> cartParams);
+	int countNowMember(int mentosId);
+
 }

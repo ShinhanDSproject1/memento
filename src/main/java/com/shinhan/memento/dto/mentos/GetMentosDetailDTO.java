@@ -51,6 +51,9 @@ public class GetMentosDetailDTO {
 
 	@JsonProperty("isFavorite")
 	private boolean isFavorite; //찜했는지 안했는지 
+	
+	private boolean joinOrNot; // 참여했는지 안했는지 
+	
 
 
 	private List<GetSimilarMentosListDTO> similarMentosList;
