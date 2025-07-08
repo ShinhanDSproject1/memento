@@ -35,6 +35,32 @@ body {
    Order Details Page
    ========================================================================== */
 
+/* 확인 버튼 */
+.confirm-btn {
+	display: inline-block;
+	margin-top: 20px;
+	padding: 10px 20px;
+	background: #0069f8;
+	color: white;
+	border-radius: 6px;
+	font-weight: 600;
+	cursor: pointer;
+	border: none;
+}
+.modal { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(0, 0, 0, 0.5); display: flex; justify-content: center; align-items: center; z-index: 999; }
+.modal.hidden { display: none; }
+.modal-content { background: white; padding: 30px 40px; border-radius: 12px; text-align: center; box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2); 
+	display: flex;
+  flex-direction: column;
+  align-items: center; /* 가로 가운데 정렬 */
+  width: 100%;
+  max-width: 400px;  /* 너비 제한 */
+  box-sizing: border-box;}
+.modal-image { width: 80px; margin-bottom: 20px; }
+.modal-text { font-size: 20px; margin-bottom: 25px; font-weight: bold; }
+.modal-close-btn { padding: 10px 25px; background-color: #3f51b5; color: white; border: none; border-radius: 6px; font-size: 16px;}
+
+
 .order-details {
 	width: 100%;
 	background-color: #ffffff;

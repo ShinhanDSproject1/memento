@@ -31,10 +31,17 @@ $(() => {
                 // response.json()을 호출해 서버가 보낸 실제 데이터를 읽어와서 'result' 변수에 저장합니다.
                 // 서버가 JSON이 아닌 단순 텍스트를 보낸다면 await response.text()를 사용합니다.
                 const result = await response.json();
+                
+                const modal = document.querySelector("#submitLayer")
+                const modalText = document.getElementById('updateText')
+                modalText.textContent = '환불이 완료되었어요!'
+                modal.classList.remove("hidden")
+                
+                modal.querySelector(".confirm-btn").addEventListener("click", function () {
+                    modal.classList.add("hidden")
+                    location.reload(); 
+                });
 
-                console.log('성공:', result);
-                alert('환불 처리가 성공적으로 완료되었습니다.'); // 사용자에게 성공 피드백
-                location.reload(); // 성공 후, 페이지를 새로고침하여 변경사항을 반영
             }
             else {
                 // 요청 실패 시 (4xx, 5xx 에러)

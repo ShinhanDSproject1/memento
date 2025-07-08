@@ -3,6 +3,7 @@ $(() => {
     const profileForm = document.getElementById('profileForm');
 
     profileForm.addEventListener('submit', async function (e) {
+        e.preventDefault();
         const formData = new FormData();
         formData.append('nickname', document.getElementById('nickname').value)
         formData.append('interestNames', document.getElementById('interestNames').value)
@@ -12,8 +13,8 @@ $(() => {
         const imgFile = document.getElementById('profile-img').files[0]
         let originalProfileUrl = document.getElementById('original-profile-img-url').value
         //if (imgFile) {
-           // formData.append('imageFile', imgFile)
-            //originalProfileUrl = ''
+        // formData.append('imageFile', imgFile)
+        //originalProfileUrl = ''
         //}
         //formData.append("originalProfileUrl", originalProfileUrl)
 
@@ -23,11 +24,20 @@ $(() => {
                 method: 'PUT',
                 body: formData
             })
+
             if (response.ok) {
-                console.log('성공:', result);
+                const modal = document.querySelector("#submitLayer")
+                const modalText = document.getElementById('updateText')
+                modalText.textContent = '프로필 수정이 완료되었어요!'
+                modal.classList.remove("hidden")
+                modal.querySelector(".confirm-btn").addEventListener("click", function () {
+                    modal.classList.add("hidden")
+                    fetchProfileData()
+                });
             }
             else {
-                console.log(result)
+                console.error("에러 발생");
+                alert("수정 실패 😢");
             }
         } catch (error) {
             console.log(error)
@@ -36,14 +46,14 @@ $(() => {
     })
     profileForm.addEventListener('reset', async function (e) {
         // ✅ 'hidden' 클래스 제거해서 보이게 하기
-			   const modal = document.querySelector("#cancelLayer");
-			   modal.classList.remove("hidden");
-			
-			    // ✅ 확인 버튼 눌렀을 때 다시 숨기고 이동
-			    modal.querySelector(".confirm-btn").addEventListener("click", function () {
-			        modal.classList.add("hidden");
-			        fetchProfileData()
-			    });
+        const modal = document.querySelector("#cancelLayer");
+        modal.classList.remove("hidden");
+
+        // ✅ 확인 버튼 눌렀을 때 다시 숨기고 이동
+        modal.querySelector(".confirm-btn").addEventListener("click", function () {
+            modal.classList.add("hidden");
+            fetchProfileData()
+        });
     })
 
 

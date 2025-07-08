@@ -7,9 +7,9 @@
 <script src = "${cpath}/resources/js/mypage/profile/profile-detail.js"></script>
 
 <!-- 취소 팝업 -->
-<jsp:include page="/WEB-INF/views/mentos/cancelPopup.jsp" />
+<jsp:include page="/WEB-INF/views/mypage/popup/cancelPopup.jsp" />
 <!-- 수정 팝업 -->
-<jsp:include page="/WEB-INF/views/mentos/updatePopup.jsp" />
+<jsp:include page="/WEB-INF/views/mypage/popup/updatePopup.jsp" />
 
 <div class="page-container">
 	<section id="profile-page" class="profile-row-section">
