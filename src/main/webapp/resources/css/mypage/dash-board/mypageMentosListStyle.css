@@ -14,6 +14,9 @@ a {
 	text-decoration: none !important;
 	cursor: pointer !important;
 }
+.main-content-wrapper{
+	background-color: #f0faff;
+}
 
 .page-container {
 	flex: 1;

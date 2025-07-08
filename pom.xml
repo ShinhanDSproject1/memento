@@ -51,19 +51,19 @@
 			<version>${jackson.version}</version>
 		</dependency>
 
-		<!-- WebSocket -->
-		<dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring-websocket</artifactId>
-			<version>5.3.30</version>
-		</dependency>
-
-		<!-- STOMP 메시징 -->
-		<dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring-messaging</artifactId>
-			<version>5.3.30</version>
-		</dependency>
+			<!-- WebSocket -->
+			<dependency>
+			  <groupId>org.springframework</groupId>
+			  <artifactId>spring-websocket</artifactId>
+			  <version>${org.springframework-version}</version>
+			</dependency>
+			
+			<!-- STOMP 메시징 -->
+			<dependency>
+			  <groupId>org.springframework</groupId>
+			  <artifactId>spring-messaging</artifactId>
+			  <version>${org.springframework-version}</version>
+			</dependency>
 
 		<!-- SQL 문 로그 남기기를 위해 추가 -->
 		<dependency>

@@ -13,12 +13,11 @@
 				<div class="profile-avatar-wrapper">
 					<img id="profileImg" class="avatar-image"
 						src="${cpath}/resources/images/sidebar/avatar-default0.svg" />
-					<div class="edit-profile-button-wrapper">
+					
 						<a class="edit-profile-link" href="${cpath}/mypage/page2">
-							<img class="edit-profile-icon"
-							src="${cpath}/resources/images/sidebar/vuesax-linear-export0.svg" />
+							
 						</a>
-					</div>
+					
 				</div>
 				<div id="userNickname" class="user-nickname">코딩하는 뭉뭉이</div>
 				<div id="userType" class="user-role">mento</div>

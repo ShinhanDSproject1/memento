@@ -4,7 +4,8 @@
 <c:set var="cpath" value="${pageContext.servletContext.contextPath}" />
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/resources/css/mypage/pay/mypagePayDetailStyle.css" />
-
+<!-- 수정 팝업 -->
+<jsp:include page="/WEB-INF/views/mypage/popup/updatePopup.jsp" />
 <div class="page-container">
 	<section class="order-details">
 		<header class="order-details__header">

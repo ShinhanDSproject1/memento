@@ -5,6 +5,12 @@
 
 <link rel="stylesheet" href="${cpath}/resources/css/mypage/profile/mypageProfileStyle.css" />
 <script src = "${cpath}/resources/js/mypage/profile/profile-detail.js"></script>
+
+<!-- 취소 팝업 -->
+<jsp:include page="/WEB-INF/views/mypage/popup/cancelPopup.jsp" />
+<!-- 수정 팝업 -->
+<jsp:include page="/WEB-INF/views/mypage/popup/updatePopup.jsp" />
+
 <div class="page-container">
 	<section id="profile-page" class="profile-row-section">
 		<main class="profile-edit-card">
@@ -17,7 +23,7 @@
 						<button type="submit" class="btn btn-save">저장</button>
 					</div>
 				</header>
-				<div class="form-row form-row-image">
+				<div class="form-row form-row-image" style="display:none">
 					<label for="profile-image-input" class="form-label">이미지</label>
 					<div class="form-value">
 						<div class="avatar-container">

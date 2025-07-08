@@ -95,7 +95,9 @@
 			left join language lan on m.language_id = lan.language_id
 			left join member leader on m.leader_id = leader.member_id
 			left join member mento on m.mento_id = mento.member_id
-		where mm.member_id = #{memberId} and m.status != 'DELETE'
+		where mm.member_id = #{memberId} 
+		and m.status != 'DELETE'
+		and mm.status != 'DELETE'
 	</select>
 	
 	<select id="selectMyMentosListById" parameterType="int" resultType="map">
@@ -139,6 +141,7 @@
 	LEFT JOIN keepgoing keep ON p.keepgoing_id = keep.keepgoing_id
 	where p.member_id = #{memberId}
 	and p.status != 'DELETE'
+	and p.step = 'SUCCESS'
 	</select>
 	
 	<select id="selectPaymentDetail" parameterType ="String" resultType="map">
@@ -202,7 +205,7 @@
 	
 	<update id="updateProfileInfo" parameterType="com.shinhan.memento.dto.MyProfileDBUpdateDTO">
 		update member
-		set NICKNAME = #{nickname}, PHONE_NUMBER = #{phoneNumber}, INTRODUCE = #{introduce}, REGION_GROUP = #{regionGroup} , REGION_SUBGROUP = #{regionSubGroup}, REGION_DETAIL = #{regionDetail}, PROFILE_IMAGE_URL = #{profileImageUrl}
+		set NICKNAME = #{nickname}, PHONE_NUMBER = #{phoneNumber}, INTRODUCE = #{introduce}, REGION_GROUP = #{regionGroup} , REGION_SUBGROUP = #{regionSubGroup}, REGION_DETAIL = #{regionDetail}
 		where member_id = #{memberId}
 	</update>
 	
@@ -290,7 +293,8 @@
 		update
 			payment
 		set pay_type = 'REFUND',
-			pay_at = sysdate
+			pay_at = sysdate,
+			status = 'INACTIVE'
 		where order_id = #{orderId}
 			and status != 'DELETE'
 	</update>

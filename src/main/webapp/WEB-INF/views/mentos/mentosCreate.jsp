@@ -63,14 +63,14 @@
 							<div class="title">최소 수강인원</div>
 							<div class="main-selection-border">
 								<input type="number" id="minMember" name="minMember" min="1"
-									class="number-input" />
+									class="number-input" placeholder = "1"/>
 							</div>
 						</div>
 						<div class="main-selection">
 							<div class="title">최대 수강 인원</div>
 							<div class="day-main-selection-border">
 								<input type="number" id="maxMember" name="maxMember" min="1"
-									class="number-input" />
+									class="number-input" placeholder = "10"/>
 							</div>
 						</div>
 					</div>
@@ -192,7 +192,7 @@
 					<label for="title">가격</label>
 					<div class="last-select-border">
 						<input id="price" name="price" type="number" placeholder="무료"
-							step="100">
+							step="100" min="0">
 					</div>
 				</div>
 			</div>
@@ -229,12 +229,9 @@
 									<img class="dropdown-icon"
 										src="${cpath}/resources/images/icon-down.svg" alt="화살표" />
 									<ul class="type-dropdown hidden">
-										<li data-value="1">활발한 개발자</li>
-										<li data-value="2">조용한 몰입형 개발자</li>
-										<li data-value="3">창의적 실험가 개발자</li>
-										<li data-value="4">구조화 좋아하는 개발자</li>
-										<li data-value="5">느긋한 꾸준형 개발자</li>
-										<li data-value="6">목표지향 개발자</li>
+										<c:forEach var="type" items="${matchTypes}">
+						        			<li data-value="${type.matchTypeId}">${type.matchTypeName}</li>
+						    			</c:forEach>
 									</ul>
 									<input type="hidden" name="preferredTypes"
 										class="preferred-type-value${i}" />

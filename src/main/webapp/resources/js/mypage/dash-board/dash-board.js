@@ -118,6 +118,9 @@ $(document).ready(function () {
 
       const myStudyTypeName = document.getElementById('myStudyTypeName')
       myStudyTypeName.textContent = `${dashboardData.myMatchTypeData.matchTypeName}`
+      const myStudyTypeIcon = document.getElementById('myStudyTypeIcon')
+      myStudyTypeIcon.src = '/memento'+`${dashboardData.myMatchTypeData.matchTypeImg}`
+      myStudyTypeIcon.alt = 'sparkTest Icon' 
 
     } catch (error) {
       console.log(error)
