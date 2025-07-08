@@ -192,7 +192,7 @@
 					<label for="title">가격</label>
 					<div class="last-select-border">
 						<input id="price" name="price" type="number" placeholder="무료"
-							step="100">
+							step="100" min="0">
 					</div>
 				</div>
 			</div>
