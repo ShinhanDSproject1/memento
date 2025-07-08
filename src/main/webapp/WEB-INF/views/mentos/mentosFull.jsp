@@ -13,6 +13,8 @@
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/resources/css/mentos/mentosFullVars.css" />
 <link rel="stylesheet"
+	href="${pageContext.request.contextPath}/resources/css/mainpage/notificationModal.css">
+<link rel="stylesheet"
 	href="${pageContext.request.contextPath}/resources/css/mainpage/login.css">	
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
@@ -42,12 +44,8 @@
 	</div>
 	<div class="container">
 		<div class="full-detail-select">
-			<div class="detail-select">
-				<div id="region-filter-container" class="filter-dropdown"></div>
-				<div id="matchType-filter-container" class="filter-dropdown"></div>
-				<div id="category-filter-container" class="filter-dropdown"></div>
-				<div id="language-filter-container" class="filter-dropdown"></div>
-			</div>
+		    <div class="detail-select">
+		        </div>
 
 			<button class="mentos-create-button"
 				onclick="location.href='${cpath}/mentos/create'">멘토스 생성하기</button>

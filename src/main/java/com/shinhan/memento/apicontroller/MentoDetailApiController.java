@@ -18,10 +18,12 @@ import com.shinhan.memento.common.response.status.BaseExceptionResponseStatus;
 import com.shinhan.memento.dto.mentoDetail.MentoDetailClassDTO;
 import com.shinhan.memento.dto.mentoDetail.MentoDetailHomeDTO;
 import com.shinhan.memento.dto.mentoDetail.MentoDetailReviewDTO;
+import com.shinhan.memento.dto.mentos.MentosSidebarDTO;
 import com.shinhan.memento.model.Member;
 import com.shinhan.memento.model.UserType;
 import com.shinhan.memento.service.MemberService;
 import com.shinhan.memento.service.MentosService;
+import com.shinhan.memento.service.MentosSidebarService;
 import com.shinhan.memento.service.ReviewService;
 
 import lombok.extern.slf4j.Slf4j;
@@ -30,6 +32,7 @@ import lombok.extern.slf4j.Slf4j;
 @RestController
 @RequestMapping("/mentodetail")
 public class MentoDetailApiController {
+	
 	@Autowired
 	MemberService memberService;
 
@@ -38,8 +41,11 @@ public class MentoDetailApiController {
 
 	@Autowired
 	ReviewService reviewService;
+	
+	@Autowired
+	MentosSidebarService mentosSidebarService;
 
-	@GetMapping("")
+	@GetMapping("/home")
 	public BaseResponse<MentoDetailHomeDTO> showMentoDetailHome(@RequestParam int mentoId) {
 		log.info("[MentoDetailApiController.showmentoDetailHome]");
 
@@ -51,9 +57,18 @@ public class MentoDetailApiController {
 		if (member == null) {
 			throw new MemberException(BaseExceptionResponseStatus.CANNOT_FOUND_MENTO);
 		}
-
+			
 		return new BaseResponse<>(memberService.showMentoDetailHome(member));
+	}
 
+	// 사이드 바
+	@GetMapping("/sidebar")
+	public BaseResponse<MentosSidebarDTO> sidebar(@RequestParam("mentoId") int mentoId) {
+		MentosSidebarDTO data = mentosSidebarService.getSidebarInfo(mentoId);
+		if (data == null) {
+			throw new MemberException(BaseExceptionResponseStatus.CANNOT_FOUND_MENTO);
+		}
+		return new BaseResponse<>(data); // 이게 정석!
 	}
 
 	/**

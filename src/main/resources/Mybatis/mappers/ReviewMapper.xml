@@ -32,5 +32,12 @@
 		)
 		WHERE ROWNUM &lt; 10
 	</select>
+	
+	<select id="countReviewCntByMentoId" parameterType="int" resultType="Integer">
+		select count(*)
+		from review
+		where mento_id=${mentoId}
+		and status!='INACTIVE'
+	</select>
 
 </mapper>

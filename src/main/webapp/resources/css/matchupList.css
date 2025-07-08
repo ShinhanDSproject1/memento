@@ -240,8 +240,7 @@ transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .rectangle-48 {
-	background: linear-gradient(180deg, rgba(175, 214, 249, 0.04) 0%,
-		rgba(255, 255, 255, 0.04) 100%);
+	background: linear-gradient(0deg, rgba(255, 255, 255, 1) 66.00000262260437%, rgba(246, 252, 255, 1) 100%);
 	border-radius: 30px;
 	border-style: solid;
 	border-color: #e0e0e0;
@@ -258,7 +257,8 @@ transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .matchup-cardview:hover {
-	transform: translateY(-4px);
+  transform: translateY(-8px);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
 .rectangle-48:hover {

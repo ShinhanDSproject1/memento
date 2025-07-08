@@ -69,7 +69,7 @@
 	width: 100%;
 }
 
-.detail-select-li {
+/* .detail-select-li {
 	border-radius: 20px;
 	border-style: solid;
 	border-color: #ced4da;
@@ -83,7 +83,7 @@
 	flex-shrink: 0;
 	position: relative;
 	overflow: hidden;
-}
+} */
 
 .detail-select-li-text {
 	display: flex;
@@ -97,19 +97,22 @@
 
 /* 2. 멘토스 생성버튼 */
 .mentos-create-button {
-	background: rgba(255, 255, 255, 0.36);
-	border-radius: 10px;
-	border-style: solid;
-	border-color: #d9d9d9;
-	border-width: 1px;
-	padding: 10px 20px 10px 20px;
-	display: flex;
-	flex-direction: row;
-	gap: 10px;
-	align-items: center;
-	justify-content: center;
-	flex-shrink: 0;
-	position: relative;
+    all: unset;
+    box-sizing: border-box;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 210px;
+    height: 48px;
+    border-radius: 10px;
+    background-color: #0070d1;
+    color: #fff;
+    font-weight: 500;
+    font-size: 15px;
+    cursor: pointer;
+    flex-shrink: 0;
+    transition: background-color 0.2s ease;
+    margin-left: 20%;
 }
 
 /* 3.멘토스 전체 class */
@@ -131,9 +134,9 @@
 	flex-direction: row;
 	gap: 15px;
 	align-items: center;
-	justify-content: center;
 	padding-bottom: 12px;
 	width: 100%;
+	justify-content: flex-start;
 }
 /* 멘토스 전체 화면 2,3 번줄 */
 .mentos-all-class-row1 {
@@ -301,7 +304,6 @@
 	width: 100%;
 	height: 100%;
 	position: relative;
-	box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
 	transition: box-shadow 0.18s, transform 0.18s, border 0.18s;
 	overflow: visible;
 	justify-content: flex-start;
@@ -657,74 +659,82 @@
 	}
 }
 
-/* 필터 관련 */
-.filter-item {
-    cursor: pointer;
-    padding: 8px 12px;
-    border-radius: 16px;
-    border: 1px solid #ddd;
-    font-size: 14px;
-    margin-right: 8px;
-    transition: background-color 0.2s, color 0.2s, border-color 0.2s;
-}
-.filter-item.active {
-    background-color: #007bff;
-    color: white;
-    border-color: #007bff;
+* 1. 선택조회 컨테이너 */
+.full-detail-select {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: space-between;
+	width: 100%;
+	padding-bottom: 20px;
+	box-sizing: border-box;
 }
 
-/* 드롭다운 컨테이너 */
-.filter-dropdown {
-    position: relative;
-    display: inline-block;
-    margin-right: 8px;
+/* 2. 필터 그룹 (매치업 CSS 기반) */
+.detail-select {
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap; /* 창 크기가 작아지면 줄바꿈 허용 */
+	gap: 16px; /* 필터 간 간격 */
+	align-items: center;
+	justify-content: flex-start; /* 왼쪽 정렬 */
+	width: 100%;
 }
 
-/* 드롭다운 버튼 */
-.filter-dropdown .filter-main-btn {
-    cursor: pointer;
-    padding: 8px 12px;
-    border-radius: 16px;
-    border: 1px solid #ddd;
-    font-size: 14px;
-    background-color: white;
-}
-.filter-dropdown .filter-main-btn.active {
-    background-color: #007bff;
-    color: white;
-    border-color: #007bff;
+/* 3. 개별 필터 아이템 (매치업 CSS 기반) */
+.detail-select-li {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	position: relative;
 }
 
+/* 4. Select Box 스타일 (매치업 CSS 기반) */
+.filter-select {
+	appearance: none;
+	-webkit-appearance: none;
+	-moz-appearance: none;
 
-/* 드롭다운 내용 (숨김 기본) */
-.dropdown-content {
-    display: none;
-    position: absolute;
-    background-color: #f9f9f9;
-    min-width: 160px;
-    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-    z-index: 1;
-    border-radius: 4px;
-    padding: 5px 0;
+	padding: 10px 30px 10px 15px; /* 오른쪽 화살표 공간 확보 */
+	font-size: 14px;
+	font-family: 'Inter', sans-serif;
+	color: #333;
+	background-color: #fff;
+	min-width: 160px;
+
+	text-align: left;
+	border: 1px solid #ced4da;
+	border-radius: 12px;
+
+	box-shadow: none !important;
+	outline: none !important;
+	background-clip: padding-box;
+
+	/* 드롭다운 화살표 아이콘 */
+	background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='%23666' viewBox='0 0 24 24'%3E%3Cpath d='M7 10l5 5 5-5'/%3E%3C/svg%3E");
+	background-repeat: no-repeat;
+	background-position: right 12px center;
+	background-size: 18px;
+	cursor: pointer;
+	transition: border-color 0.2s, background-color 0.2s;
 }
 
-/* 드롭다운 링크 */
-.dropdown-content a {
-    color: black;
-    padding: 12px 16px;
-    text-decoration: none;
-    display: block;
-    font-size: 14px;
+.filter-select option {
+  text-align: center;
 }
 
-/* 링크에 마우스 올렸을 때 */
-.dropdown-content a:hover {
-    background-color: #f1f1f1;
+.filter-select:last-child {
+  margin-right: 0;
 }
 
-/* 드롭다운을 보이게 함 */
-.filter-dropdown:hover .dropdown-content {
-    display: block;
+.filter-select:hover {
+  background-color: #f4f4f4;
+}
+
+.filter-select:focus {
+  outline: none;
+  border-color: #ced4da;
+  box-shadow: none;
 }
 
 /* PREMENTO 목록을 위한 가로 스크롤 컨테이너 스타일 */
@@ -733,13 +743,14 @@
     flex-direction: row;
     gap: 15px;
     align-items: center;
-    padding-bottom: 12px;
+    /* 위아래 여백을 24px로 늘려 높이 확보 */
+    padding-top: 24px;
+    padding-bottom: 24px;
     max-width: 98%;
-    width: 98%; /* ✅ 컨테이너가 수축하지 않도록 너비를 명시적으로 설정 */
-    box-sizing: border-box; /* ✅ 패딩을 너비 계산에 포함시켜 레이아웃 안정성 확보 */
-    /* --- 가로 스크롤을 위한 핵심 변경 --- */
-    overflow-x: auto;   /* 내용이 넘치면 가로 스크롤바 표시 */
-    flex-wrap: nowrap;  /* 절대 줄바꿈하지 않음 */
+    width: 98%;
+    box-sizing: border-box;
+    overflow-x: auto;
+    flex-wrap: nowrap;
 }
 
 /* 스크롤 컨테이너 안의 각 카드 스타일 */
@@ -770,39 +781,79 @@
 }
 
 
-div.page-btn {
-	display: flex !important;
-	align-items: center !important;
-	justify-content: center !important;
-	width: 36px !important;
-	height: 36px !important;
-	font-size: 14px !important;
-	font-weight: 500 !important;
-	color: #333 !important;
-	background-color: #fff !important;
-	border: 1px solid #ddd !important;
-	border-radius: 50% !important;
-	cursor: pointer !important;
-	transition: all 0.2s !important;
-}
-
-div.page-btn:hover {
-	background-color: #f0f0f0 !important;
-}
-
-div.page-btn.active {
-	background-color: #007aff !important;
-	color: #fff !important;
-	border-color: #007aff !important;
-	font-weight: 600 !important;
-}
-
-/* 페이지네이션 컨테이너 스타일 */
-.pagination-container {
+/* 페이지네이션 전체 컨테이너 */
+#pagination-container {
     display: flex;
-    justify-content: center;
+    flex-direction: row; /* 버튼들을 가로로 정렬하는 핵심 속성 */
+    gap: 10px;
     align-items: center;
-    gap: 8px;
-    padding: 40px 0;
+    justify-content: center;
+    padding: 40px 0; /* 위아래 여백 */
     width: 100%;
+}
+
+/* 이전/다음 화살표 버튼 */
+.page-back-btn, .page-after-btn {
+    border-radius: 5px;
+    border: 1px solid #acacac;
+    padding: 4px;
+    display: flex; /* 내부 아이콘 정렬을 위해 flex 사용 */
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+.page-back-btn:hover, .page-after-btn:hover {
+    background-color: #f0f0f0;
+}
+
+/* 화살표 이미지 크기 */
+.vuesax-linear-arrow-left,
+.vuesax-linear-arrow-right {
+    width: 24px;
+    height: 24px;
+}
+
+/* 숫자 페이지 버튼 (비활성 상태) */
+.page-li-btn {
+    border-radius: 5px;
+    border: 1px solid #acacac;
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+.page-li-btn:hover {
+    background-color: #f0f0f0;
+}
+
+/* 숫자 페이지 버튼 (활성 상태) */
+.page-li-btn-seleted-page {
+    background: #2384d5;
+    border-radius: 5px;
+    border: 1px solid #7dbbf1;
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 2px 2px 4px 0px rgba(0, 0, 0, 0.25);
+}
+
+/* 페이지 숫자 텍스트 (비활성) */
+.d-2-r-12-black {
+    color: #000000;
+    font-family: "D2Coding-Regular", sans-serif;
+    font-size: 12px;
+}
+
+/* 페이지 숫자 텍스트 (활성) */
+.d-2-b-12-white {
+    color: #ffffff;
+    font-family: "D2Coding-Bold", sans-serif;
+    font-size: 12px;
+    font-weight: 700;
 }

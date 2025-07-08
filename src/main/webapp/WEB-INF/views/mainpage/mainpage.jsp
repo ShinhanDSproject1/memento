@@ -98,7 +98,7 @@
 									</div>
 									<c:if test="${banner.image != null}">
 										<img
-											src="${cpath}/resources/images/mentosDetail/${banner.image}"
+											src="${cpath}/resources/uploadImage/${banner.image}"
 											class="spring-image" alt="멘토 이미지">
 									</c:if>
 									<c:if test="${banner.image == null}">
@@ -245,15 +245,15 @@
 	<div class="row mb-4">
 		<div class="col-md-3 mb-3">
 			<div class="footer-links mt-2">
-				<a href="#" class="footer-link">개인정보처리방침</a> <a href="#"
-					class="footer-link">이용약관</a>
+				<span>개인정보처리방침</span> <span>
+					이용약관</span>
 			</div>
 		</div>
 		<div class="col-md-5 footer-info">
 			<strong>(주)me:mento</strong><br> 대표자: 김신한<br> 사업자번호:
-			123-45-67890 <a href="#" class="business-link">사업자 정보 확인</a><br>
-			통신판매업: 2025-서울마포-0001<br> 개인정보보호책임자: 신한DS<br> 이메일:
-			info@mentormentee.com
+			123-45-67890 <span style="text-decoration: underline;">사업자 정보 확인</span><br>
+			통신판매업: 2025-서울마포-0001<br> 개인정보보호책임자: 신한DS<br> E-mail:
+			shinhanDS@memento.com
 		</div>
 		<div class="col-md-4 footer-contact">
 			전화번호: 070-1234-5678<br> 주소: 서울특별시 중구 남대문로10길 29<br> 고객센터:

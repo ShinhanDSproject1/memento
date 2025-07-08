@@ -54,7 +54,7 @@ html, body {
 	position: relative;
 }
 
-.div4 {
+.div7 {
 	color: #000000;
 	text-align: left;
 	font-family: "Inter-SemiBold", sans-serif;
@@ -64,9 +64,19 @@ html, body {
 	font-weight: 600;
 	position: relative;
 	align-self: stretch;
-	border-bottom-style: solid;
+}
+
+.line-50 {
+	margin-top: -1px;
+	border-style: solid;
 	border-color: #a6abbd;
-	border-width: 0px 0px 1px 0px;
+	border-width: 1px 0 0 0;
+	align-self: stretch;
+	flex-shrink: 0;
+	height: 0px;
+	position: relative;
+	transform-origin: 0 0;
+	transform: rotate(0deg) scale(1, 1);
 }
 .reviewContainer{
 	text-align: center;

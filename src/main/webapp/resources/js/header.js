@@ -1,7 +1,16 @@
 document.addEventListener("DOMContentLoaded", () => {
   const loginBtn = document.getElementById("loginBtn");
-  console.log("🔍 loginBtn:", loginBtn); // ← 여기에 null 나오면 바인딩 안 된 거야
+  console.log("🔍 loginBtn:", loginBtn);
 });
+
+
+
+// ===================== 검색바 엔터 쳐도 페이지 전환 X =====================
+  $(document).ready(function () {
+    $('.search-bar').on('submit', function (e) {
+      e.preventDefault(); // 기본 동작(페이지 이동) 막기
+    });
+  });
 
 
 // ===================== 로그인 모달 =====================
