@@ -639,6 +639,33 @@ public class MyPageService {
 			myMatchupDTOList.add(dto);
 		});
 		
+		// 내가 만든 매치업
+		List<Map<String, Object>> createMatchupData = mypageMapper.myCreateMatchupByDashboard(memberId);
+		List<MyJoinMatchupByDashboardResponseDTO> createMatchupDtoList = new ArrayList<>();
+		createMatchupData.stream().forEach(data -> {
+			Boolean hasmento = false;
+			Object hasMentoValue = data.get("HASMENTO");
+
+			// 값이 null이 아니고, 숫자(Number) 타입인지 확인합니다.
+			if (hasMentoValue instanceof Number) {
+			    // Number 타입의 값을 int로 변환하여 1과 같은지 비교합니다.
+			    // 1이면 true, 그 외의 숫자(0 등)는 false가 됩니다.
+			    hasmento = ((Number) hasMentoValue).intValue() == 1;
+			}
+			MyJoinMatchupByDashboardResponseDTO dto = MyJoinMatchupByDashboardResponseDTO.builder()
+					.leaderProfileImageUrl((String)data.get("LEADERPROFILEIMAGEURL"))
+					.title((String)data.get("TITLE"))
+					.role("Leader")
+					.totalCount(((BigDecimal)data.get("TOTALCOUNT")).intValue())
+					.currentCount(0)
+					.matchStatus((String)data.get("MATCHSTATUS"))
+					.hasMento(hasmento)
+					.build();
+			
+			createMatchupDtoList.add(dto);
+		});
+		
+		
 		//멘토스
 		List<Map<String, Object>> mentosData = mypageMapper.myJoinMentosByDashboard(memberId);
 		List<MyJoinMentosByDashboardResponseDTO> myMentosDTOList = new ArrayList<>();
@@ -659,6 +686,7 @@ public class MyPageService {
 		MyMatchTypeByDashboardResponseDTO myMatchTypeData = mypageMapper.myMatchTypeByDashboard(memberId);
 	
 		MyDashboardResponseDTO dashboardData = MyDashboardResponseDTO.builder()
+				.myCreateMatchupDashboardList(createMatchupDtoList)
 				.myMatchupDashboardList(myMatchupDTOList)
 				.myMentosDashboardList(myMentosDTOList)
 				.myMatchTypeData(myMatchTypeData)

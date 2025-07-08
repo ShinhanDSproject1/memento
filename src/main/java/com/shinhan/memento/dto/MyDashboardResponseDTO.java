@@ -12,6 +12,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class MyDashboardResponseDTO {
+	private List<MyJoinMatchupByDashboardResponseDTO> myCreateMatchupDashboardList;
 	private List<MyJoinMatchupByDashboardResponseDTO> myMatchupDashboardList;
 	private List<MyJoinMentosByDashboardResponseDTO> myMentosDashboardList;
 	private MyMatchTypeByDashboardResponseDTO myMatchTypeData;

@@ -257,7 +257,25 @@
 				and mm.status !='DELETE'
 			order by totalcount desc, currentcount desc
 			)
-		WHERE ROWNUM <![CDATA[<=]]> 3
+		WHERE ROWNUM <![CDATA[<=]]> 2
+	</select>
+	<select id="myCreateMatchupByDashboard" parameterType="int" resultType="map">
+		select *
+		from(
+			select
+				leader.member_id as leaderId,
+				leader.profile_image_url as leaderProfileImageUrl,
+				match.title as title,
+				match.count as totalCount,
+				match.matchup_count as currentCount,
+				match.status as matchStatus,
+				match.has_mento as hasMento
+			from matchup match
+				left join member leader on match.leader_id = leader.member_id
+			where match.leader_id = #{memberId}
+				and match.status !='DELETE'
+			)
+		WHERE ROWNUM <![CDATA[<=]]> 1
 	</select>
 	
 	<select id="myJoinMentosByDashboard" parameterType="int" resultType="map">
