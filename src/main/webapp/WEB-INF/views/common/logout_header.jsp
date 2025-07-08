@@ -24,7 +24,7 @@
 		<a href="${cpath}/mentos/full" class="mentos">
 			<div class="sub-title">멘토스</div>
 		</a> 
-		<a href="${cpath}/keepgoing/keepgoinglist.do" class="keepgoing">
+		<a href="${cpath}/mainpage/already" class="keepgoing">
 			<div class="sub-title">킵고잉</div>
 		</a>
 		<a href="${cpath}/mainpage/already" class="abovar">

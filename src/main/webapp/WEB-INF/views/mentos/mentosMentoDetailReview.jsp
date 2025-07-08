@@ -26,10 +26,9 @@
 		<%@ include file="../mentos/mentosSidebar.jsp"%>
 
 		<div class="container">
-			<div class="frame-342">
-				<div class="div4">수강평</div>
-				<div id="reviewContainer"></div>
-			</div>
+			<div class="div7">수강평</div>
+			<div class="line-50"></div>
+			<div id="reviewContainer"></div>
 		</div>
 	</div>
 </body>

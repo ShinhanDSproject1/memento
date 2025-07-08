@@ -34,7 +34,7 @@ document.addEventListener('DOMContentLoaded', function () {
 	        $('.category').text(`#${mentos.categoryName}`);
 			$('.language').text(`#${mentos.languageName}`);
 	        $('.class-title').text(mentos.title);
-	        $('.class-description').text(mentos.simpleContent);
+			$('.class-description').text(mentos.simpleContent);
 	        $('#currentMemberCnt').text(mentos.currentMemberCnt);
 	        $('#startDay').text(mentos.startDay);
 	        $('#endDay').text(mentos.endDay);
@@ -53,7 +53,7 @@ document.addEventListener('DOMContentLoaded', function () {
 			$('#times').text(mentos.times);
 			$('#place').text(mentos.place);
 			$('#price').text('₩'+mentos.price);
-			$('.class-summary-section').text(mentos.content); 
+			$('.class-summary-section').html(mentos.content); 
 			$('.partner-name1').text(mentos.matchTypeNameFirst);
 			$('.partner-name2').text(mentos.matchTypeNameSecond);
 			$('.partner-name3').text(mentos.matchTypeNameThird);

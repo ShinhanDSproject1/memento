@@ -166,8 +166,8 @@
 							<%-- 애초에 멘토가 없는 매치업 --%>
 							<c:when test="${!matchupDetail.hasMento}">
 								<div class="profile-title">멘토가 없는 매치업이에요!</div>
-								<a href="#" class="profile-link"><img class="profile-img"
-									src="${cpath}/resources/images/memento-logo.png" alt="기본 프로필" /></a>
+								<img class="profile-img"
+									src="${cpath}/resources/images/memento-logo.png" alt="기본 프로필" />
 							</c:when>
 
 							<%-- 멘토가 있는 매치업 --%>
@@ -176,16 +176,16 @@
 								<c:choose>
 									<c:when test="${matchupDetail.mentoId != null && matchupDetail.mentoId > 0}">
 										<div class="profile-title">멘토가 선정되었어요!</div>
-										<a href="/user/${matchupDetail.mentoId}" class="profile-link"><img
+										<img
 											class="profile-img"
 											src="${not empty matchupDetail.mentoProfileImageUrl ? matchupDetail.mentoProfileImageUrl : cpath.concat('/resources/images/memento-logo.png')}"
-											alt="멘토 프로필" /></a>
+											alt="멘토 프로필" />
 										<div class="profile-nickname">${matchupDetail.mentoNickname}</div>
 									</c:when>
 									<c:otherwise>
 										<div class="profile-title">멘토를 기다리고 있어요</div>
-										<a href="#" class="profile-link"><img class="profile-img"
-											src="${cpath}/resources/images/memento-logo.png" alt="기본 프로필" /></a>
+										<img class="profile-img"
+											src="${cpath}/resources/images/memento-logo.png" alt="기본 프로필" />
 									</c:otherwise>
 								</c:choose>
 							</c:otherwise>
@@ -195,11 +195,9 @@
 						<div class="profile-group">
 						<div class="profile-title">매치업을 주선한 방장이에요</div>
 						<div class="profile-circle-wrapper">
-							<a href="${cpath}/user/${matchupDetail.leaderId}"
-								class="profile-link"> <img class="profile-img"
-								src="${not empty matchupDetail.leaderProfileImageUrl ? matchupDetail.leaderProfileImageUrl : cpath.concat('/resources/images/memento-logo.png')}"
-								alt="방장 프로필" />
-							</a>
+						<img class="profile-img"
+						     src="${not empty matchupDetail.leaderProfileImageUrl ? matchupDetail.leaderProfileImageUrl : cpath.concat('/resources/images/memento-logo.png')}"
+						     alt="방장 프로필" />
 						</div>
 						<div class="profile-nickname">${matchupDetail.leaderNickname}</div>
 					</div>

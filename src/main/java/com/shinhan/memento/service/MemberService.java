@@ -3,6 +3,8 @@ package com.shinhan.memento.service;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -22,7 +24,9 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.shinhan.memento.dto.mentoDetail.MentoDetailClassDTO;
 import com.shinhan.memento.dto.mentoDetail.MentoDetailHomeDTO;
+import com.shinhan.memento.dto.mentos.GetMentosDTO;
 import com.shinhan.memento.mapper.MemberMapper;
+import com.shinhan.memento.mapper.MentosMapper;
 import com.shinhan.memento.model.BaseStatus;
 import com.shinhan.memento.model.Member;
 import com.shinhan.memento.model.Mentos;
@@ -40,6 +44,9 @@ public class MemberService {
 	
 	@Autowired
 	MentosService mentosService;
+	
+	@Autowired
+	MentosMapper mentosMapper;
 	
 	public Member findMemberById(int memberId) {
 		log.info("[MemberService.findMemberById]");
@@ -177,26 +184,41 @@ public class MemberService {
 	 */
 	public MentoDetailHomeDTO showMentoDetailHome(Member member) {
 		log.info("[MemberService.showMentoDetailHome]");
+		System.out.println("member 왜 널이냐" + member.getIntroduceMento());
 		String introduceComment = member.getIntroduceMento() == null ? "" : member.getIntroduceMento();
 		
 		// 그냥 진행 중인 최신 멘토스 딱 3개만 보여주기 
 		List<Mentos> mentosList = mentosService.showInProgressMentosList(member.getMemberId());
-		List<MentoDetailClassDTO> inProgressMentos = new ArrayList<>();
+		List<GetMentosDTO> inProgressMentos = new ArrayList<>();
 		for(Mentos mentos : mentosList) {
-			MentoDetailClassDTO dto = MentoDetailClassDTO.builder()
+			LocalDate today = LocalDate.now();
+			LocalDate startDate = mentos.getStartDay().toLocalDate();
+			long daysBetween = ChronoUnit.DAYS.between(today, startDate);
+			
+			int nowMemberCnt = mentosMapper.countNowMember(mentos.getMentosId());
+			int remainMemberCnt = mentos.getMinMember() - nowMemberCnt;
+			String remainMemberStr = "";
+			if (remainMemberCnt <= 0) {
+				remainMemberStr = "확정";
+			} else {
+				remainMemberStr = "확정까지 " + remainMemberCnt + "명";
+			}
+			
+			GetMentosDTO dto = GetMentosDTO.builder()
 					.mentosId(mentos.getMentosId())
+					.daysBetween(daysBetween)
+					.remainMemberCnt(remainMemberStr)
 					.mentosImg(mentos.getImage())
 					.title(mentos.getTitle())
 					.mentoName(member.getNickname())
-					.userType(member.getUserType().toString())
+					.mentoType(member.getUserType().toString())
 					.startDay(mentos.getStartDay().toString())
 					.endDay(mentos.getEndDay().toString())
 					.startTime(mentos.getStartTime().toString().substring(11))
 					.endTime(mentos.getEndTime().toString().substring(11))
-					.selectedDays(mentos.getSelectedDays())
-					.region(mentos.getRegionGroup()+" "+mentos.getRegionSubgroup())
+					.location(mentos.getRegionGroup()+" "+mentos.getRegionSubgroup())
 					.price(mentos.getPrice())
-					.createdAt(mentos.getCreatedAt().toString()).build();
+					.build();
 			
 			inProgressMentos.add(dto);
 		}

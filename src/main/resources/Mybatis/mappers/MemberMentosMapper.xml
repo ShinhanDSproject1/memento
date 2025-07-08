@@ -33,6 +33,13 @@
 		and status='ACTIVE'
 	</select>
 
+		<select id="countStudentCntByMentosId" parameterType="int" resultType="Integer">
+			select count(*)
+			from member_mentos
+			where mentos_id=${mentosId}
+			and status != 'DELETE'
+		</select>
+
 	<update id="cancelJoinMentos" parameterType="int">
 		update member_mentos
 		set status='DELETE', updated_at=sysdate
