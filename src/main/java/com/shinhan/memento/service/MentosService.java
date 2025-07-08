@@ -16,6 +16,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
+import javax.servlet.ServletContext;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -54,24 +56,20 @@ public class MentosService {
 
 	@Autowired
 	MentosMapper mentosMapper;
-
 	@Autowired
 	MemberMentosMapper memberMentosMapper;
-
 	@Autowired
 	LanguageMapper languageMapper;
-
 	@Autowired
 	CategoryMapper categoryMapper;
-
 	@Autowired
 	MatchTypeMapper matchTypeMapper;
-
 	@Autowired
 	CartMapper cartMapper;
-
 	@Autowired
 	MemberService memberService;
+	@Autowired
+	ServletContext servletContext;
 
 	@Value("${file.upload.dir}")
 	private String uploadDir;
@@ -101,7 +99,9 @@ public class MentosService {
 		String imageUrl = null;
 		if (imageFile != null && !imageFile.isEmpty()) {
 			try {
-				File dir = new File(uploadDir);
+				// 실제 경로 동적으로 추출
+				String realPath = servletContext.getRealPath("/resources/uploadImage");
+				File dir = new File(realPath);
 				if (!dir.exists()) {
 					dir.mkdirs();
 				}
@@ -112,7 +112,7 @@ public class MentosService {
 				File destFile = new File(dir, savedFileName);
 				Files.copy(imageFile.getInputStream(), destFile.toPath(), StandardCopyOption.REPLACE_EXISTING);
 
-				// 웹에서 접근 가능한 경로로 구성 (리소스 경로 기준)
+				// 클라이언트에서 접근할 수 있는 URL 경로 저장
 				imageUrl = "/resources/uploadImage/" + savedFileName;
 				log.info("이미지 저장 완료: {}", imageUrl);
 			} catch (IOException e) {
@@ -124,14 +124,14 @@ public class MentosService {
 		// DB 저장용 DTO 생성
 		CreateMentosDBDTO dbDTO = CreateMentosDBDTO.builder().categoryId(requestDto.getCategoryId())
 				.content(requestDto.getContent()).endDay(endDay).startDay(startDay).endTime(endTime)
-				.startTime(startTime).image(imageUrl) // URL 경로 저장
-				.languageId(requestDto.getLanguageId()).matchTypeFirst(requestDto.getMatchTypeFirst())
-				.matchTypeSecond(requestDto.getMatchTypeSecond()).matchTypeThird(requestDto.getMatchTypeThird())
-				.maxMember(requestDto.getMaxMember()).minMember(requestDto.getMinMember()).price(requestDto.getPrice())
-				.mentoId(requestDto.getMentoId()).title(requestDto.getTitle())
-				.simpleContent(requestDto.getSimpleContent()).selectedDays(requestDto.getSelectedDays())
-				.times(requestDto.getTimes()).regionDetail(requestDto.getRegionDetail())
-				.regionGroup(requestDto.getRegionGroup()).regionSubgroup(requestDto.getRegionSubgroup()).build();
+				.startTime(startTime).image(imageUrl).languageId(requestDto.getLanguageId())
+				.matchTypeFirst(requestDto.getMatchTypeFirst()).matchTypeSecond(requestDto.getMatchTypeSecond())
+				.matchTypeThird(requestDto.getMatchTypeThird()).maxMember(requestDto.getMaxMember())
+				.minMember(requestDto.getMinMember()).price(requestDto.getPrice()).mentoId(requestDto.getMentoId())
+				.title(requestDto.getTitle()).simpleContent(requestDto.getSimpleContent())
+				.selectedDays(requestDto.getSelectedDays()).times(requestDto.getTimes())
+				.regionDetail(requestDto.getRegionDetail()).regionGroup(requestDto.getRegionGroup())
+				.regionSubgroup(requestDto.getRegionSubgroup()).build();
 
 		int result = mentosMapper.createMentos(dbDTO);
 		return result == 1;
@@ -155,9 +155,9 @@ public class MentosService {
 	public List<MatchTypeDTO> getAllMatchTypes() {
 		return mentosMapper.getAllMatchTypes();
 	}
-	
+
 	public List<Map<String, String>> getRegionGroups() {
-	    return mentosMapper.getRegionGroups(); 
+		return mentosMapper.getRegionGroups();
 	}
 
 	/**
@@ -173,99 +173,84 @@ public class MentosService {
 	 * 멘토스 리스트 불러오기(필터링까지)
 	 */
 	public GetMentosListResponseDTO showMentosList(String regionGroup, Integer matchTypeId, Integer categoryId,
-	        Integer languageId, int page) {
-	    log.info("[MentosService.showMentosList] page: {}", page);
+			Integer languageId, int page) {
+		log.info("[MentosService.showMentosList] page: {}", page);
 
-	    // --- 1. 페이지 정보 계산 ---
-	    int pageSize = 6; // 한 페이지에 보여줄 개수
-	    int pageBlockSize = 5; // 페이지네이션에 보여줄 페이지 번호 개수
-	    
-	    // 필터 조건에 맞는 전체 게시글 수 조회
-	    int totalCount = mentosMapper.getMentosListTotalCount(regionGroup, matchTypeId, categoryId, languageId);
-	    int totalPageCount = (int) Math.ceil((double) totalCount / pageSize);
+		// --- 1. 페이지 정보 계산 ---
+		int pageSize = 6; // 한 페이지에 보여줄 개수
+		int pageBlockSize = 5; // 페이지네이션에 보여줄 페이지 번호 개수
 
-	    // 페이지네이션 블록의 시작과 끝 페이지 번호 계산
-	    int startPage = ((page - 1) / pageBlockSize) * pageBlockSize + 1;
-	    int endPage = Math.min(startPage + pageBlockSize - 1, totalPageCount);
+		// 필터 조건에 맞는 전체 게시글 수 조회
+		int totalCount = mentosMapper.getMentosListTotalCount(regionGroup, matchTypeId, categoryId, languageId);
+		int totalPageCount = (int) Math.ceil((double) totalCount / pageSize);
 
-	    // 이전/다음 버튼 표시 여부
-	    boolean hasPrev = startPage > 1;
-	    boolean hasNext = endPage < totalPageCount;
+		// 페이지네이션 블록의 시작과 끝 페이지 번호 계산
+		int startPage = ((page - 1) / pageBlockSize) * pageBlockSize + 1;
+		int endPage = Math.min(startPage + pageBlockSize - 1, totalPageCount);
 
-	    // 최종 페이지 정보 객체 생성
-	    GetMentosListResponseDTO.PaginationInfo paginationInfo = GetMentosListResponseDTO.PaginationInfo.builder()
-	            .currentPage(page)
-	            .totalPageCount(totalPageCount)
-	            .startPage(startPage)
-	            .endPage(endPage)
-	            .hasPrev(hasPrev)
-	            .hasNext(hasNext)
-	            .build();
+		// 이전/다음 버튼 표시 여부
+		boolean hasPrev = startPage > 1;
+		boolean hasNext = endPage < totalPageCount;
 
-	    // --- 2. 해당 페이지 목록 조회 ---
-	    int offset = (page - 1) * pageSize;
-	    List<Mentos> mentosListFromDb = mentosMapper.showMentosList(regionGroup, matchTypeId, categoryId, languageId, offset);
-	    List<GetMentosDTO> mentosDtoList = new ArrayList<>();
+		// 최종 페이지 정보 객체 생성
+		GetMentosListResponseDTO.PaginationInfo paginationInfo = GetMentosListResponseDTO.PaginationInfo.builder()
+				.currentPage(page).totalPageCount(totalPageCount).startPage(startPage).endPage(endPage).hasPrev(hasPrev)
+				.hasNext(hasNext).build();
 
-	    // --- 3. DTO 변환 (이전 로직과 동일) ---
-	    for (Mentos mentos : mentosListFromDb) {
-	        Member member = memberService.findMemberById(mentos.getMentoId());
-	        
-	        // D-day 계산
-	        LocalDate today = LocalDate.now();
-	        LocalDate startDate = mentos.getStartDay().toLocalDate();
-	        long daysBetween = ChronoUnit.DAYS.between(today, startDate);
+		// --- 2. 해당 페이지 목록 조회 ---
+		int offset = (page - 1) * pageSize;
+		List<Mentos> mentosListFromDb = mentosMapper.showMentosList(regionGroup, matchTypeId, categoryId, languageId,
+				offset);
+		List<GetMentosDTO> mentosDtoList = new ArrayList<>();
 
-	        // 남은 모집 인원 계산
-	        int nowMemberCnt = mentosMapper.countNowMember(mentos.getMentosId());
-	        int remainMemberCnt = mentos.getMinMember() - nowMemberCnt;
-	        String remainMemberStr;
-	        if (remainMemberCnt <= 0) {
-	            remainMemberStr = "확정";
-	        } else {
-	            remainMemberStr = "확정까지 " + remainMemberCnt + "명";
-	        }
-	        
-	        // 찜 여부 확인 (세션에 로그인 유저가 있을 경우)
-	        // 이 부분은 로그인 정보가 필요하므로, 일단 false로 처리하거나 실제 로그인 memberId를 가져와야 합니다.
-	        // 여기서는 예시로 memberId 1을 기준으로 처리합니다. 실제 구현 시 세션에서 가져온 memberId를 사용해야 합니다.
-	        boolean isFavorite = false;
-	        Map<String, Object> favoriteParams = new HashMap<>();
-	        favoriteParams.put("mentosId", mentos.getMentosId());
-	        favoriteParams.put("memberId", 1); // TODO: 세션에서 실제 로그인된 사용자 ID 가져오기
-	        Integer favoriteResult = cartMapper.checkFavorite(favoriteParams);
-	        if (favoriteResult != null && favoriteResult > 0) {
-	        	isFavorite = true;
-	        }
+		// --- 3. DTO 변환 (이전 로직과 동일) ---
+		for (Mentos mentos : mentosListFromDb) {
+			Member member = memberService.findMemberById(mentos.getMentoId());
 
-	        GetMentosDTO mentosForMap = GetMentosDTO.builder()
-	                .mentosId(mentos.getMentosId())
-	                .daysBetween(daysBetween)
-	                .remainMemberCnt(remainMemberStr) // 최종 수정된 필드명
-	                .mentosImg(mentos.getImage())
-	                .title(mentos.getTitle())
-	                .subTitle(mentos.getSimpleContent())
-	                .categoryName(categoryMapper.findCategoryById(mentos.getCategoryId()))
-	                .languageName(languageMapper.findLanguageById(mentos.getLanguageId()))
-	                .mentoName(member.getNickname())
-	                .mentoType(matchTypeMapper.findMatchTypeById(member.getMatchTypeId()))
-	                .startDay(mentos.getStartDay().toString())
-	                .endDay(mentos.getEndDay().toString())
-	                .startTime(mentos.getStartTime().toString().substring(11, 16))
-	                .endTime(mentos.getEndTime().toString().substring(11, 16))
-	                .location(mentos.getRegionGroup())
-	                .price(mentos.getPrice())
-	                .isFavorite(isFavorite)
-	                .build();
+			// D-day 계산
+			LocalDate today = LocalDate.now();
+			LocalDate startDate = mentos.getStartDay().toLocalDate();
+			long daysBetween = ChronoUnit.DAYS.between(today, startDate);
 
-	        mentosDtoList.add(mentosForMap);
-	    }
+			// 남은 모집 인원 계산
+			int nowMemberCnt = mentosMapper.countNowMember(mentos.getMentosId());
+			int remainMemberCnt = mentos.getMinMember() - nowMemberCnt;
+			String remainMemberStr;
+			if (remainMemberCnt <= 0) {
+				remainMemberStr = "확정";
+			} else {
+				remainMemberStr = "확정까지 " + remainMemberCnt + "명";
+			}
 
-	    // --- 4. 최종 결과 반환 ---
-	    return GetMentosListResponseDTO.builder()
-	            .mentosList(mentosDtoList)
-	            .paginationInfo(paginationInfo)
-	            .build();
+			// 찜 여부 확인 (세션에 로그인 유저가 있을 경우)
+			// 이 부분은 로그인 정보가 필요하므로, 일단 false로 처리하거나 실제 로그인 memberId를 가져와야 합니다.
+			// 여기서는 예시로 memberId 1을 기준으로 처리합니다. 실제 구현 시 세션에서 가져온 memberId를 사용해야 합니다.
+			boolean isFavorite = false;
+			Map<String, Object> favoriteParams = new HashMap<>();
+			favoriteParams.put("mentosId", mentos.getMentosId());
+			favoriteParams.put("memberId", 1); // TODO: 세션에서 실제 로그인된 사용자 ID 가져오기
+			Integer favoriteResult = cartMapper.checkFavorite(favoriteParams);
+			if (favoriteResult != null && favoriteResult > 0) {
+				isFavorite = true;
+			}
+
+			GetMentosDTO mentosForMap = GetMentosDTO.builder().mentosId(mentos.getMentosId()).daysBetween(daysBetween)
+					.remainMemberCnt(remainMemberStr) // 최종 수정된 필드명
+					.mentosImg(mentos.getImage()).title(mentos.getTitle()).subTitle(mentos.getSimpleContent())
+					.categoryName(categoryMapper.findCategoryById(mentos.getCategoryId()))
+					.languageName(languageMapper.findLanguageById(mentos.getLanguageId()))
+					.mentoName(member.getNickname())
+					.mentoType(matchTypeMapper.findMatchTypeById(member.getMatchTypeId()))
+					.startDay(mentos.getStartDay().toString()).endDay(mentos.getEndDay().toString())
+					.startTime(mentos.getStartTime().toString().substring(11, 16))
+					.endTime(mentos.getEndTime().toString().substring(11, 16)).location(mentos.getRegionGroup())
+					.price(mentos.getPrice()).isFavorite(isFavorite).build();
+
+			mentosDtoList.add(mentosForMap);
+		}
+
+		// --- 4. 최종 결과 반환 ---
+		return GetMentosListResponseDTO.builder().mentosList(mentosDtoList).paginationInfo(paginationInfo).build();
 	}
 
 	// MentosService.java 파일 하단에 추가
@@ -274,54 +259,48 @@ public class MentosService {
 	 * PREMENTO가 작성한 무료 강의 목록 불러오기
 	 */
 	public List<GetMentosDTO> showPreMentoList(String regionGroup, Integer matchTypeId, Integer categoryId,
-	        Integer languageId) {
-	    log.info("[MentosService.showPreMentoList]");
-	    
-	    List<Mentos> preMentoMentosList = mentosMapper.showPreMentoList(regionGroup, matchTypeId, categoryId, languageId);
-	    
-	    List<GetMentosDTO> result = new ArrayList<>();
+			Integer languageId) {
+		log.info("[MentosService.showPreMentoList]");
 
-	    for (Mentos mentos : preMentoMentosList) {
-	        Member member = memberService.findMemberById(mentos.getMentoId());
-	        
-	        LocalDate today = LocalDate.now();
-	        LocalDate startDate = mentos.getStartDay().toLocalDate();
-	        long daysBetween = ChronoUnit.DAYS.between(today, startDate);
+		List<Mentos> preMentoMentosList = mentosMapper.showPreMentoList(regionGroup, matchTypeId, categoryId,
+				languageId);
 
-	        int nowMemberCnt = mentosMapper.countNowMember(mentos.getMentosId());
-	        int remainMemberCnt = mentos.getMinMember() - nowMemberCnt;
-	        String remainMemberStr;
-	        if (remainMemberCnt <= 0) {
-	            remainMemberStr = "확정";
-	        } else {
-	            remainMemberStr = "확정까지 " + remainMemberCnt + "명";
-	        }
-	        
-	        GetMentosDTO mentosForMap = GetMentosDTO.builder()
-	                .mentosId(mentos.getMentosId())
-	                .daysBetween(daysBetween)
-	                .remainMemberCnt(remainMemberStr) 
-	                .mentosImg(mentos.getImage())
-	                .title(mentos.getTitle())
-	                .subTitle(mentos.getSimpleContent())
-	                .categoryName(categoryMapper.findCategoryById(mentos.getCategoryId()))
-	                .languageName(languageMapper.findLanguageById(mentos.getLanguageId()))
-	                .mentoName(member.getNickname())
-	                .mentoType(matchTypeMapper.findMatchTypeById(member.getMatchTypeId()))
-	                .startDay(mentos.getStartDay().toString())
-	                .endDay(mentos.getEndDay().toString())
-	                .startTime(mentos.getStartTime().toString().substring(11, 16))
-	                .endTime(mentos.getEndTime().toString().substring(11, 16))
-	                .location(mentos.getRegionGroup())
-	                .price(mentos.getPrice())
-	                .isFavorite(false) // 찜 기능은 로그인 사용자 기준이므로, 여기서는 기본값 처리
-	                .build();
+		List<GetMentosDTO> result = new ArrayList<>();
 
-	        result.add(mentosForMap);
-	    }
-	    return result;
+		for (Mentos mentos : preMentoMentosList) {
+			Member member = memberService.findMemberById(mentos.getMentoId());
+
+			LocalDate today = LocalDate.now();
+			LocalDate startDate = mentos.getStartDay().toLocalDate();
+			long daysBetween = ChronoUnit.DAYS.between(today, startDate);
+
+			int nowMemberCnt = mentosMapper.countNowMember(mentos.getMentosId());
+			int remainMemberCnt = mentos.getMinMember() - nowMemberCnt;
+			String remainMemberStr;
+			if (remainMemberCnt <= 0) {
+				remainMemberStr = "확정";
+			} else {
+				remainMemberStr = "확정까지 " + remainMemberCnt + "명";
+			}
+
+			GetMentosDTO mentosForMap = GetMentosDTO.builder().mentosId(mentos.getMentosId()).daysBetween(daysBetween)
+					.remainMemberCnt(remainMemberStr).mentosImg(mentos.getImage()).title(mentos.getTitle())
+					.subTitle(mentos.getSimpleContent())
+					.categoryName(categoryMapper.findCategoryById(mentos.getCategoryId()))
+					.languageName(languageMapper.findLanguageById(mentos.getLanguageId()))
+					.mentoName(member.getNickname())
+					.mentoType(matchTypeMapper.findMatchTypeById(member.getMatchTypeId()))
+					.startDay(mentos.getStartDay().toString()).endDay(mentos.getEndDay().toString())
+					.startTime(mentos.getStartTime().toString().substring(11, 16))
+					.endTime(mentos.getEndTime().toString().substring(11, 16)).location(mentos.getRegionGroup())
+					.price(mentos.getPrice()).isFavorite(false) // 찜 기능은 로그인 사용자 기준이므로, 여기서는 기본값 처리
+					.build();
+
+			result.add(mentosForMap);
+		}
+		return result;
 	}
-	
+
 	/**
 	 * 멘토 상세보기 페이지(홈화면)
 	 */
@@ -330,7 +309,6 @@ public class MentosService {
 
 		return mentosMapper.showInProgressMentosList(memberId);
 	}
-
 
 	/**
 	 * 멘토 상세조회(진행한 멘토스내역 보기)
@@ -448,7 +426,7 @@ public class MentosService {
 		mentosMapper.deleteMentos(mentosId);
 		memberMentosMapper.deleteMemberMentos(mentosId);
 	}
-	
+
 	/**
 	 * 프론트 페이지 리다이렉트를 위해서 해당 멘토스에 대한 접속 유저의 권한 확인
 	 */
@@ -460,35 +438,22 @@ public class MentosService {
 		checkParams.put("mentosId", mentosId);
 
 		return mentosMapper.checkPermission(checkParams) == 1 ? true : false;
-}
+	}
 
 	public ShowMentosDetailForEditDTO showMentosDetailForEdit(int mentosId, int memberId) {
 		log.info("[MentosService.showMentosDetailForEdit]");
 		Mentos mentos = mentosMapper.checkValidMentosById(mentosId);
-		
-		ShowMentosDetailForEditDTO dto = ShowMentosDetailForEditDTO.builder()
-				.title(mentos.getTitle())
-				.simpleContent(mentos.getSimpleContent())
-				.image(mentos.getImage())
-				.minMember(mentos.getMinMember())
-				.maxMember(mentos.getMaxMember())
-				.startDay(mentos.getStartDay())
-				.endDay(mentos.getEndDay())
-				.startTime(mentos.getStartTime())
-				.endTime(mentos.getEndTime())
-				.selectedDays(mentos.getSelectedDays())
-				.price(mentos.getPrice())
-				.times(mentos.getTimes())
-				.categoryId(mentos.getCategoryId())
-				.languageId(mentos.getLanguageId())
-				.regionGroup(mentos.getRegionGroup())
-				.regionSubgroup(mentos.getRegionSubgroup())
-				.regionDetail(mentos.getRegionDetail())
-				.content(mentos.getContent())
-				.matchTypeFirst(mentos.getMatchTypeIdFirst())
-				.matchTypeSecond(mentos.getMatchTypeIdSecond())
-				.matchTypeThird(mentos.getMatchTypeIdThird()).build();
-		
+
+		ShowMentosDetailForEditDTO dto = ShowMentosDetailForEditDTO.builder().title(mentos.getTitle())
+				.simpleContent(mentos.getSimpleContent()).image(mentos.getImage()).minMember(mentos.getMinMember())
+				.maxMember(mentos.getMaxMember()).startDay(mentos.getStartDay()).endDay(mentos.getEndDay())
+				.startTime(mentos.getStartTime()).endTime(mentos.getEndTime()).selectedDays(mentos.getSelectedDays())
+				.price(mentos.getPrice()).times(mentos.getTimes()).categoryId(mentos.getCategoryId())
+				.languageId(mentos.getLanguageId()).regionGroup(mentos.getRegionGroup())
+				.regionSubgroup(mentos.getRegionSubgroup()).regionDetail(mentos.getRegionDetail())
+				.content(mentos.getContent()).matchTypeFirst(mentos.getMatchTypeIdFirst())
+				.matchTypeSecond(mentos.getMatchTypeIdSecond()).matchTypeThird(mentos.getMatchTypeIdThird()).build();
+
 		return dto;
 	}
 
@@ -503,7 +468,7 @@ public class MentosService {
 
 		// 이미지 저장 처리
 		String imageUrl = null;
-		if (imageFile != null && !imageFile.isEmpty() ) {
+		if (imageFile != null && !imageFile.isEmpty()) {
 			try {
 				File dir = new File(uploadDir);
 				if (!dir.exists()) {
@@ -530,14 +495,15 @@ public class MentosService {
 				.content(createMentosDto.getContent()).endDay(endDay).startDay(startDay).endTime(endTime)
 				.startTime(startTime).image(imageUrl) // URL 경로 저장
 				.languageId(createMentosDto.getLanguageId()).matchTypeFirst(createMentosDto.getMatchTypeFirst())
-				.matchTypeSecond(createMentosDto.getMatchTypeSecond()).matchTypeThird(createMentosDto.getMatchTypeThird())
-				.maxMember(createMentosDto.getMaxMember()).minMember(createMentosDto.getMinMember()).price(createMentosDto.getPrice())
+				.matchTypeSecond(createMentosDto.getMatchTypeSecond())
+				.matchTypeThird(createMentosDto.getMatchTypeThird()).maxMember(createMentosDto.getMaxMember())
+				.minMember(createMentosDto.getMinMember()).price(createMentosDto.getPrice())
 				.mentoId(createMentosDto.getMentoId()).title(createMentosDto.getTitle())
 				.simpleContent(createMentosDto.getSimpleContent()).selectedDays(createMentosDto.getSelectedDays())
 				.times(createMentosDto.getTimes()).regionDetail(createMentosDto.getRegionDetail())
-				.regionGroup(createMentosDto.getRegionGroup()).regionSubgroup(createMentosDto.getRegionSubgroup()).build();
+				.regionGroup(createMentosDto.getRegionGroup()).regionSubgroup(createMentosDto.getRegionSubgroup())
+				.build();
 
-		
 		Map<String, Object> mentosUpdateParams = new HashMap<>();
 		mentosUpdateParams.put("CreateMentosDBDTO", dbDTO);
 		mentosUpdateParams.put("mentosId", mentosId);
