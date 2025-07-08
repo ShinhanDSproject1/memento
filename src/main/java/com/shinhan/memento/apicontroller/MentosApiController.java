@@ -26,7 +26,6 @@ import com.shinhan.memento.dto.CategoryDTO;
 import com.shinhan.memento.dto.LanguageDTO;
 import com.shinhan.memento.dto.MatchTypeDTO;
 import com.shinhan.memento.dto.mentos.CreateMentosDTO;
-import com.shinhan.memento.dto.mentos.CreateMentosIdempotencyDTO;
 import com.shinhan.memento.dto.mentos.GetMentosDTO;
 import com.shinhan.memento.dto.mentos.GetMentosDetailDTO;
 import com.shinhan.memento.dto.mentos.GetMentosListResponseDTO;
@@ -73,8 +72,9 @@ public class MentosApiController {
 			throw new MentosException(BaseExceptionResponseStatus.CANNOT_CREATE_MENTOS);
 		}
 		
-		 // 멱등키 중복 체크
+		// 멱등키 중복 체크
 	    if (idempotencyService.isDuplicate(idemKey)) {
+	    	log.info("멱등키 중복으로 들어왔다!!!!!!!");
 	    	String cachedResponse = idempotencyService.getSavedResponse(idemKey);
 	        return new BaseResponse<>(cachedResponse);// 이전 응답 그대로 반환
 	    }
