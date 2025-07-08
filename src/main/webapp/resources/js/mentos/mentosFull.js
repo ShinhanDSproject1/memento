@@ -15,11 +15,11 @@ document.addEventListener('DOMContentLoaded', async () => {
 async function initializePage() {
     try {
         await loadAndRenderFilters(); 
-        initializeFilterClickEvents();
+        initializeFilterChangeEvents(); // 이벤트 핸들러를 새 함수로 교체
         
         await Promise.all([
             fetchAndRenderPreMentos(),
-            fetchAndRenderMentos(1) // 항상 1페이지부터 시작
+            fetchAndRenderMentos(1)
         ]);
         console.log("페이지 초기화 성공.");
     } catch (error) {
@@ -27,18 +27,16 @@ async function initializePage() {
     }
 }
 
-
 /**
  * 필터를 적용하여 '두 목록을 모두' 새로고침하는 함수
  */
 function applyFiltersAndReload() {
     console.log("필터 적용 및 전체 목록 새로고침을 시작합니다.");
     
-    // 두 목록을 모두 새로고침 (일반 목록은 1페이지부터)
     fetchAndRenderPreMentos().catch(err => console.error("필터링된 PREMENTO 목록 로드 실패:", err));
     fetchAndRenderMentos(1).catch(err => console.error("필터링된 일반 목록 로드 실패:", err));
     
-    updateFilterButtonsUI();
+    // updateFilterButtonsUI() 호출 제거 (더 이상 필요 없음)
 }
 
 /**
@@ -62,16 +60,16 @@ async function fetchAndRenderMentos(page = 1) {
         const paginationInfo = responseData.paginationInfo;
 
         const container = document.getElementById('mentos-list-container');
-        container.innerHTML = ''; // 페이지 이동 시 항상 기존 목록을 지움
+        container.innerHTML = ''; 
 
         if (mentosList && mentosList.length > 0) {
             mentosList.forEach(mentos => {
                 container.insertAdjacentHTML('beforeend', createMentosCardHTML(mentos));
             });
-            renderPagination(paginationInfo); // 페이지네이션 UI 렌더링
+            renderPagination(paginationInfo);
         } else {
             container.innerHTML = '<p class="no-data-message" style="width: 100%; text-align: center;">선택한 조건에 맞는 멘토스가 없습니다.</p>';
-            document.getElementById('pagination-container').innerHTML = ''; // 결과 없으면 페이지 버튼도 삭제
+            document.getElementById('pagination-container').innerHTML = '';
         }
     } catch (error) {
         console.error('멘토스 목록을 불러오는 데 실패했습니다:', error);
@@ -85,35 +83,49 @@ async function fetchAndRenderMentos(page = 1) {
 function renderPagination(paginationInfo) {
     const container = document.getElementById('pagination-container');
     if (!container) return;
-    container.innerHTML = ''; // 초기화
+    container.innerHTML = '';
 
     let paginationHtml = '';
 
-    // '이전' 버튼
+   // 이전(<) 버튼 (매치업 스타일 적용)
     if (paginationInfo.hasPrev) {
-        paginationHtml += `<div class="page-btn prev" onclick="fetchAndRenderMentos(${paginationInfo.currentPage - 1})">&lt;</div>`;
-    }
-
-    // 페이지 번호 버튼
-    for (let i = paginationInfo.startPage; i <= paginationInfo.endPage; i++) {
         paginationHtml += `
-            <div class="page-btn ${i === paginationInfo.currentPage ? 'active' : ''}" onclick="fetchAndRenderMentos(${i})">
-                ${i}
+            <div class="page-back-btn" onclick="fetchAndRenderMentos(${paginationInfo.currentPage - 1})">
+                <img class="vuesax-linear-arrow-left" src="${cpath}/resources/images/arrow-left.svg" />
             </div>
         `;
     }
 
-    // '다음' 버튼
+    // 페이지 번호 버튼 (매치업 스타일 적용)
+    for (let i = paginationInfo.startPage; i <= paginationInfo.endPage; i++) {
+        const isActive = (i === paginationInfo.currentPage);
+        const pageBtnClass = isActive ? 'page-li-btn-seleted-page' : 'page-li-btn';
+        const textClass = isActive ? 'd-2-b-12-white' : 'd-2-r-12-black';
+
+        paginationHtml += `
+            <div class="${pageBtnClass}" onclick="fetchAndRenderMentos(${i})">
+                <div class="${textClass}">${i}</div>
+            </div>
+        `;
+    }
+
+    // 다음(>) 버튼 (매치업 스타일 적용)
     if (paginationInfo.hasNext) {
-        paginationHtml += `<div class="page-btn next" onclick="fetchAndRenderMentos(${paginationInfo.currentPage + 1})">&gt;</div>`;
+        paginationHtml += `
+            <div class="page-after-btn" onclick="fetchAndRenderMentos(${paginationInfo.currentPage + 1})">
+                <img class="vuesax-linear-arrow-right" src="${cpath}/resources/images/arrow-right.svg" />
+            </div>
+        `;
     }
     
     container.innerHTML = paginationHtml;
 }
 
 
+/**
+ * PREMENTO 목록을 가져와 렌더링하는 함수
+ */
 async function fetchAndRenderPreMentos() {
-    console.log("PREMENTO 목록 로드를 시작합니다. 필터:", currentFilters);
     try {
         let requestUrl = `${cpath}/mentos/premento-list?`;
         for (const key in currentFilters) {
@@ -141,9 +153,17 @@ async function fetchAndRenderPreMentos() {
     }
 }
 
+/**
+ * 멘토스 카드 HTML을 생성하는 함수
+ */
 function createMentosCardHTML(mentos) {
     const priceText = mentos.price === 0 ? '무료' : `₩${mentos.price.toLocaleString()}`;
     const priceClass = mentos.price === 0 ? 'price-free' : '';
+    const imageFileName = mentos.mentosImg;
+    const imageUrl = imageFileName 
+        ? `${cpath}/resources/uploadImage/${imageFileName}` 
+        : `${cpath}/resources/images/mentosFull/class_default.png`;
+
     return `
         <div class="mentos-class-cardview mentos-hover-guide" onclick="location.href='${cpath}/mentos/detailPage?mentosId=${mentos.mentosId}'">
             <div class="mentos-class">
@@ -158,16 +178,20 @@ function createMentosCardHTML(mentos) {
                         <div class="frame-3659"><div class="_45-000 ${priceClass}">${priceText}</div></div>
                     </div>
                 </div>
-                <div class="frame-3778"><img class="image" src="${mentos.mentosImg ? cpath + mentos.mentosImg : cpath + '/resources/images/mentosFull/class_default.png'}" /></div>
+                <div class="frame-3778">
+                    <img class="image" src="${imageUrl}" />
+                </div>
                 <div class="mentos-hover-popup"><div class="hover-inner"><div class="hover-title">${mentos.title}</div><div class="hover-desc">${mentos.subTitle}</div><div class="hover-tags"><span class="hover-tag">#${mentos.categoryName}</span><span class="hover-tag">#${mentos.languageName}</span></div></div></div>
             </div>
         </div>
     `;
 }
 
+/**
+ * 서버에서 필터 데이터를 가져와 <select> UI를 렌더링하는 함수
+ */
 async function loadAndRenderFilters() {
     try {
-        // Promise.all에 지역(regions) API 호출 추가
         const [categoriesRes, languagesRes, matchTypesRes, regionsRes] = await Promise.all([
             fetch(`${cpath}/mentos/filters/categories`),
             fetch(`${cpath}/mentos/filters/languages`),
@@ -175,75 +199,70 @@ async function loadAndRenderFilters() {
             fetch(`${cpath}/mentos/filters/regions`)
         ]);
 
-        if (!categoriesRes.ok || !languagesRes.ok || !matchTypesRes.ok || !regionsRes.ok) {
+        if (![categoriesRes, languagesRes, matchTypesRes, regionsRes].every(res => res.ok)) {
             throw new Error("하나 이상의 필터 API 호출에 실패했습니다.");
         }
 
-        // 모든 응답에서 .result를 사용하여 실제 데이터 배열을 추출
         const categories = (await categoriesRes.json()).result;
         const languages = (await languagesRes.json()).result;
         const matchTypes = (await matchTypesRes.json()).result;
-        const regions = (await regionsRes.json()).result; // <-- .result 추가
+        const regions = (await regionsRes.json()).result;
 
-        populateDropdown('category-filter-container', '카테고리', 'categoryId', categories, 'categoryId', 'categoryName');
-        populateDropdown('language-filter-container', '언어', 'languageId', languages, 'languageId', 'languageName');
-        populateDropdown('matchType-filter-container', '학습유형', 'matchTypeId', matchTypes, 'matchTypeId', 'matchTypeName');
-        populateDropdown('region-filter-container', '지역', 'regionGroup', regions, 'key', 'value');
-
+        const filterContainer = document.querySelector('.detail-select');
+        if (!filterContainer) {
+            console.error("'.detail-select' 컨테이너를 찾을 수 없습니다.");
+            return;
+        }
+        
+        filterContainer.innerHTML = ''; // 컨테이너 초기화
+        
+        // 각 필터 HTML을 생성하여 컨테이너에 추가
+        filterContainer.insertAdjacentHTML('beforeend', createSelectFilterHTML('지역', 'regionGroup', regions, 'key', 'value'));
+        filterContainer.insertAdjacentHTML('beforeend', createSelectFilterHTML('학습유형', 'matchTypeId', matchTypes, 'matchTypeId', 'matchTypeName'));
+        filterContainer.insertAdjacentHTML('beforeend', createSelectFilterHTML('언어', 'languageId', languages, 'languageId', 'languageName'));
+        filterContainer.insertAdjacentHTML('beforeend', createSelectFilterHTML('카테고리', 'categoryId', categories, 'categoryId', 'categoryName'));
+        
     } catch (error) {
         console.error("필터 데이터 로드 또는 생성 중 오류:", error);
     }
 }
 
-function populateDropdown(containerId, buttonText, filterType, data, valueField, nameField) {
-    const container = document.getElementById(containerId);
-    if (!container) return;
-    if (!data || data.length === 0) {
-        container.style.display = 'none';
-        return;
-    }
-    const itemsHtml = data.map(item => `<a href="#" data-filter-type="${filterType}" data-filter-value="${item[valueField]}">${item[nameField]}</a>`).join('');
-    container.innerHTML = `<button class="filter-main-btn" data-default-text="${buttonText}">${buttonText}</button><div class="dropdown-content"><a href="#" data-filter-type="${filterType}" data-filter-value="">전체</a>${itemsHtml}</div>`;
+/**
+ * <select> 필터 HTML 문자열을 생성하는 헬퍼 함수
+ */
+function createSelectFilterHTML(buttonText, filterType, data, valueField, nameField) {
+    if (!data || data.length === 0) return ''; 
+
+    const optionsHtml = data.map(item => 
+        `<option value="${item[valueField]}">${item[nameField]}</option>`
+    ).join('');
+
+    return `
+        <div class="detail-select-li">
+            <select name="${filterType}" class="filter-select">
+                <option value="">${buttonText} (전체)</option>
+                ${optionsHtml}
+            </select>
+        </div>
+    `;
 }
 
-function initializeFilterClickEvents() {
+/**
+ * 필터 <select>의 'change' 이벤트를 초기화하는 함수
+ */
+function initializeFilterChangeEvents() {
     const filterContainer = document.querySelector('.detail-select');
     if (!filterContainer) return;
-    filterContainer.addEventListener('click', (e) => {
-        const target = e.target;
-        if (target.matches('.dropdown-content a, .filter-item')) {
-            e.preventDefault();
-            const filterType = target.dataset.filterType;
-            const filterValue = target.dataset.filterValue;
 
-            if (currentFilters[filterType] === filterValue || filterValue === "") {
-                currentFilters[filterType] = null;
-                const btn = target.closest('.filter-dropdown')?.querySelector('.filter-main-btn');
-                if(btn) btn.textContent = btn.dataset.defaultText;
-            } else {
-                currentFilters[filterType] = filterValue;
-                const btn = target.closest('.filter-dropdown')?.querySelector('.filter-main-btn');
-                if(btn) {
-                    if(!btn.dataset.defaultText) btn.dataset.defaultText = btn.textContent;
-                    btn.textContent = target.textContent === '전체' ? btn.dataset.defaultText : target.textContent;
-                }
-            }
+    filterContainer.addEventListener('change', (e) => {
+        const target = e.target;
+        if (target.matches('.filter-select')) {
+            const filterType = target.name;
+            const filterValue = target.value;
+
+            currentFilters[filterType] = filterValue || null;
+            
             applyFiltersAndReload();
         }
     });
-}
-
-function updateFilterButtonsUI() {
-    document.querySelectorAll('.filter-item, .filter-main-btn').forEach(btn => btn.classList.remove('active'));
-    for (const type in currentFilters) {
-        if (currentFilters[type]) {
-            const btnContainer = document.getElementById(`${type}-filter-container`);
-            if (btnContainer) {
-                btnContainer.querySelector('.filter-main-btn')?.classList.add('active');
-            } else {
-                const item = document.querySelector(`[data-filter-type="${type}"][data-filter-value="${currentFilters[type]}"]`);
-                if(item) item.classList.add('active');
-            }
-        }
-    }
 }
