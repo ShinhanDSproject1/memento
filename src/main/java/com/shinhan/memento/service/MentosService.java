@@ -106,7 +106,7 @@ public class MentosService {
 				log.info("S3 업로드 완료: {}", imageUrl);
 			} catch (IOException e) {
 				log.error("S3 이미지 업로드 실패", e);
-				return false;
+				return 0;
 			}
 		}
 
