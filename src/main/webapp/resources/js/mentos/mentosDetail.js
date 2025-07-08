@@ -16,7 +16,7 @@ function initMap(address) {
         }
 
         const geocoder = new kakao.maps.services.Geocoder();
-
+        
         // 주소로 좌표 검색
         geocoder.addressSearch(address, function (result, status) {
             if (status === kakao.maps.services.Status.OK) {
