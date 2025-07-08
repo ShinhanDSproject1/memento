@@ -119,9 +119,7 @@ $(document).ready(function () {
       const myStudyTypeName = document.getElementById('myStudyTypeName')
       myStudyTypeName.textContent = `${dashboardData.myMatchTypeData.matchTypeName}`
       const myStudyTypeIcon = document.getElementById('myStudyTypeIcon')
-      let studyIconUrl = (dashboardData.myMatchTypeData.matchTypeImg).split('.')
-      console.log(studyIconUrl)
-      myStudyTypeIcon.src = '/memento' + studyIconUrl[0] + '-icon.' + studyIconUrl[1]
+      myStudyTypeIcon.src = '/memento'+`${dashboardData.myMatchTypeData.matchTypeImg}`
       myStudyTypeIcon.alt = 'sparkTest Icon' 
 
     } catch (error) {

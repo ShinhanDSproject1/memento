@@ -162,9 +162,9 @@
 			<header class="dash-card__header">
 				<h2 class="dash-card__title">Spark Test</h2>
 			</header>
-			<div class="dash-card__body dash-card__body--centered">
+			<div class="dash-card__body dash-card__body--centered" style="flex-direction: row; gap:20px">
+				<img id="myStudyTypeIcon" src = "${cpath}/resources/images/mypage/spark-test/coachChee-icon.png">	
 				<h3 id="myStudyTypeName" class="spark-test__title">목표러 코취치</h3>
-				<img id="myStudyTypeIcon" src = "${cpath}/resources/images/mypage/spark-test/coachChee-icon.png">
 			</div>
 		</article>
 	</div>
