@@ -98,7 +98,7 @@
 									</div>
 									<c:if test="${banner.image != null}">
 										<img
-											src="${cpath}/resources/images/mentosDetail/${banner.image}"
+											src="${cpath}/resources/uploadImage/${banner.image}"
 											class="spring-image" alt="멘토 이미지">
 									</c:if>
 									<c:if test="${banner.image == null}">

@@ -41,7 +41,7 @@ document.addEventListener('DOMContentLoaded', function () {
 	        $('#startTime').text(mentos.startTime);
 			$('#endTime').text(mentos.endTime);
 
-			$('.mentos-class-image').attr('src',`${cpath}/resources/uploadImage/${mentos.image}`);
+			$('.mentos-class-image').attr('src',`${mentos.image}`);
 			$('.location-address').text(mentos.place);
 			const rawDays = mentos.selectedDays;
 			const selectedCodes = rawDays.split(',');

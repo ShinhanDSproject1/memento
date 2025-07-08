@@ -189,8 +189,8 @@ public class MentosService {
 	    int endPage = Math.min(startPage + pageBlockSize - 1, totalPageCount);
 
 	    // 이전/다음 버튼 표시 여부
-	    boolean hasPrev = startPage > 1;
-	    boolean hasNext = endPage < totalPageCount;
+	    boolean hasPrev = page > 1;
+	    boolean hasNext = page < totalPageCount;
 
 	    // 최종 페이지 정보 객체 생성
 	    GetMentosListResponseDTO.PaginationInfo paginationInfo = GetMentosListResponseDTO.PaginationInfo.builder()
@@ -210,6 +210,11 @@ public class MentosService {
 	    // --- 3. DTO 변환 (이전 로직과 동일) ---
 	    for (Mentos mentos : mentosListFromDb) {
 	        Member member = memberService.findMemberById(mentos.getMentoId());
+	        
+            if (member == null) {
+                log.warn("멘토스 ID {}에 해당하는 멘토(ID: {})를 찾을 수 없어 목록에서 제외합니다.", mentos.getMentosId(), mentos.getMentoId());
+                continue; 
+            }
 	        
 	        // D-day 계산
 	        LocalDate today = LocalDate.now();
