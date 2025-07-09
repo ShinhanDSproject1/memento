@@ -50,6 +50,7 @@ public interface MentosMapper {
 	int getMentosListTotalCount(@Param("regionGroup") String regionGroup, @Param("matchTypeId") Integer matchTypeId,
 			@Param("categoryId") Integer categoryId, @Param("languageId") Integer languageId);
 	
-	int countNowMember(int mentosId);
+	int countNowMember(@Param("mentosId") int mentosId);
+
 
 }

@@ -166,6 +166,12 @@
 		status='ACTIVE'
 	</select>
 
+	<select id="countNowMember" resultType="int" parameterType="int">
+		SELECT COUNT(*)
+		FROM member_mentos
+		WHERE mentos_id = #{mentosId}
+	</select>
+
 	<select id="showMentosList" resultMap="mentosResultMap">
 		SELECT *
 		FROM (
@@ -174,7 +180,8 @@
 		SELECT m.*
 		FROM mentos m
 		INNER JOIN member mem ON m.mento_id = mem.member_id
-		WHERE mem.user_type = 'MENTO'
+		WHERE
+		mem.user_type = 'MENTO'
 		and m.status = 'ACTIVE'
 		<if test="regionGroup != null and regionGroup != ''">
 			AND m.region_group = #{regionGroup}
@@ -182,8 +189,10 @@
 		<if test="matchTypeId != null">
 			AND (
 			m.match_type_id_first = #{matchTypeId}
-			OR m.match_type_id_second = #{matchTypeId}
-			OR m.match_type_id_third = #{matchTypeId}
+			OR
+			m.match_type_id_second = #{matchTypeId}
+			OR m.match_type_id_third =
+			#{matchTypeId}
 			)
 		</if>
 		<if test="categoryId != null">
@@ -194,7 +203,8 @@
 		</if>
 		ORDER BY m.created_at DESC
 		) inner_query
-		WHERE ROWNUM &lt;= #{offset} + 6
+		WHERE ROWNUM &lt;= #{offset} +
+		6
 		)
 		WHERE rnum &gt; #{offset}
 
