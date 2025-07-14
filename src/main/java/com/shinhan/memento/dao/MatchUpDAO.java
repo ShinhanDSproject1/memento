@@ -14,10 +14,10 @@ import com.shinhan.memento.model.WaitingMentoMatchUp;
 import com.shinhan.memento.dto.CategoryDTO;
 import com.shinhan.memento.dto.LanguageDTO;
 import com.shinhan.memento.dto.MatchTypeDTO;
-import com.shinhan.memento.dto.MatchupApplyMentoDTO;
-import com.shinhan.memento.dto.MatchupDetailDTO;
-import com.shinhan.memento.dto.MatchupListDTO;
-import com.shinhan.memento.dto.MatchupWaitingMentoDTO;
+import com.shinhan.memento.dto.matchup.MatchupApplyMentoDTO;
+import com.shinhan.memento.dto.matchup.MatchupDetailDTO;
+import com.shinhan.memento.dto.matchup.MatchupListDTO;
+import com.shinhan.memento.dto.matchup.MatchupWaitingMentoDTO;
 
 import lombok.extern.slf4j.Slf4j;
 

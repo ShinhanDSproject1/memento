@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.shinhan.memento.common.response.BaseResponse;
 import com.shinhan.memento.common.response.status.BaseExceptionResponseStatus;
-import com.shinhan.memento.dto.MainPageBannerDTO;
+import com.shinhan.memento.dto.mainpage.MainPageBannerDTO;
 import com.shinhan.memento.model.Member;
 import com.shinhan.memento.service.MainPageService;
 

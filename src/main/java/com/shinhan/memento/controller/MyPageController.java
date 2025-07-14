@@ -1,11 +1,8 @@
 package com.shinhan.memento.controller;
 
 import javax.servlet.http.HttpServletRequest;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-import com.shinhan.memento.service.MemberKeepgoingService;
-import com.shinhan.memento.service.MemberService;
 import lombok.extern.slf4j.Slf4j;
 
 @Controller

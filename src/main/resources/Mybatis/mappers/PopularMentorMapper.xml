@@ -5,7 +5,7 @@
 
 <mapper namespace="com.shinhan.memento.mapper.PopularMentoMapper">
 
-  <resultMap id="popularMentorMap" type="com.shinhan.memento.dto.PopularMentorDTO">
+  <resultMap id="popularMentorMap" type="com.shinhan.memento.dto.mainpage.PopularMentorDTO">
     <result property="memberId" column="memberId"/>
     <result property="nickname" column="nickname"/>
     <result property="profileImage" column="profileImage"/>

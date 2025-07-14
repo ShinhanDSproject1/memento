@@ -22,17 +22,17 @@ import com.shinhan.memento.model.UserType;
 import com.shinhan.memento.dto.CategoryDTO;
 import com.shinhan.memento.dto.LanguageDTO;
 import com.shinhan.memento.dto.MatchTypeDTO;
-import com.shinhan.memento.dto.MatchupApplyMentiDTO;
-import com.shinhan.memento.dto.MatchupApplyMentoDTO;
-import com.shinhan.memento.dto.MatchupCreateDTO;
-import com.shinhan.memento.dto.MatchupDetailDTO;
-import com.shinhan.memento.dto.MatchupListDTO;
-import com.shinhan.memento.dto.MatchupMemberDTO;
-import com.shinhan.memento.dto.MatchupPaginationDTO;
-import com.shinhan.memento.dto.MatchupPaginationResultDTO;
-import com.shinhan.memento.dto.MatchupPagingResponseDTO;
-import com.shinhan.memento.dto.MatchupUpdateDTO;
-import com.shinhan.memento.dto.MatchupWaitingMentoDTO;
+import com.shinhan.memento.dto.matchup.MatchupApplyMentiDTO;
+import com.shinhan.memento.dto.matchup.MatchupApplyMentoDTO;
+import com.shinhan.memento.dto.matchup.MatchupCreateDTO;
+import com.shinhan.memento.dto.matchup.MatchupDetailDTO;
+import com.shinhan.memento.dto.matchup.MatchupListDTO;
+import com.shinhan.memento.dto.matchup.MatchupMemberDTO;
+import com.shinhan.memento.dto.matchup.MatchupPaginationDTO;
+import com.shinhan.memento.dto.matchup.MatchupPaginationResultDTO;
+import com.shinhan.memento.dto.matchup.MatchupPagingResponseDTO;
+import com.shinhan.memento.dto.matchup.MatchupUpdateDTO;
+import com.shinhan.memento.dto.matchup.MatchupWaitingMentoDTO;
 import com.shinhan.memento.mapper.MemberMapper;
 
 @Service

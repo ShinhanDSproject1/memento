@@ -4,7 +4,7 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
-import com.shinhan.memento.dto.PopularMentorDTO;
+import com.shinhan.memento.dto.mainpage.PopularMentorDTO;
 import com.shinhan.memento.mapper.PopularMentoMapper;
 
 import lombok.RequiredArgsConstructor;

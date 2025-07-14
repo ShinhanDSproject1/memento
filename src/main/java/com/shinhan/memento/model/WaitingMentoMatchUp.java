@@ -2,8 +2,6 @@ package com.shinhan.memento.model;
 
 import java.sql.Date;
 
-import com.shinhan.memento.model.BaseStatus;
-
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;

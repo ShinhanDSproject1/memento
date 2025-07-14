@@ -4,7 +4,7 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
 
-import com.shinhan.memento.dto.MainPageBannerDTO;
+import com.shinhan.memento.dto.mainpage.MainPageBannerDTO;
 
 @Mapper
 public interface MainPageMapper {

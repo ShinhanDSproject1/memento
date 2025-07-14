@@ -12,7 +12,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import com.shinhan.memento.dto.MypageKeepgoingHistoryDTO;
+import com.shinhan.memento.dto.mypage.MypageKeepgoingHistoryDTO;
 
 import lombok.extern.slf4j.Slf4j;
 

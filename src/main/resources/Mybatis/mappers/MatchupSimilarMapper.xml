@@ -4,7 +4,7 @@
 
 <mapper namespace="com.shinhan.memento.mapper.MatchupSimilarMapper">
 
-    <resultMap id="similarMatchupResultMap" type="com.shinhan.memento.dto.MatchupListDTO">
+    <resultMap id="similarMatchupResultMap" type="com.shinhan.memento.dto.matchup.MatchupListDTO">
         <id property="matchupId" column="matchup_id" />
         <result property="title" column="title" />
         <result property="startDay" column="startDay" />

@@ -5,7 +5,7 @@
 
 <mapper namespace="com.shinhan.memento.mapper.PopularLanguageMapper">
 
-  <resultMap id="popularLanguageMap" type="com.shinhan.memento.dto.PopularLanguageDTO">
+  <resultMap id="popularLanguageMap" type="com.shinhan.memento.dto.mainpage.PopularLanguageDTO">
     <result property="languageId" column="languageId"/>
     <result property="languageName" column="languageName"/>
     <result property="languageImage" column="languageImage"/>

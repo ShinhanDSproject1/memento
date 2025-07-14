@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ page import="com.shinhan.memento.dto.MentoTestResultResponseDTO" %>
+<%@ page import="com.shinhan.memento.dto.mypage.MentoTestResultResponseDTO" %>
 <c:set var="cpath" value="${pageContext.servletContext.contextPath}" />
 <link rel="stylesheet" href="${cpath}/resources/css/mypage/mento-test/mento-test-result.css" />
 

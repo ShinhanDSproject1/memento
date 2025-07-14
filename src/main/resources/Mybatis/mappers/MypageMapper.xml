@@ -233,7 +233,7 @@
 		where m.member_id = #{memberId}
 	</select>
 	
-	<update id="updateProfileInfo" parameterType="com.shinhan.memento.dto.MyProfileDBUpdateDTO">
+	<update id="updateProfileInfo" parameterType="com.shinhan.memento.dto.mypage.MyProfileDBUpdateDTO">
 		update member
 		set NICKNAME = #{nickname}, PHONE_NUMBER = #{phoneNumber}, INTRODUCE = #{introduce}, REGION_GROUP = #{regionGroup} , REGION_SUBGROUP = #{regionSubGroup}, REGION_DETAIL = #{regionDetail}
 		where member_id = #{memberId}
@@ -296,7 +296,7 @@
 		WHERE ROWNUM <![CDATA[<=]]> 3
 	</select>
 	
-	<select id="myMatchTypeByDashboard" parameterType="int" resultType="com.shinhan.memento.dto.MyMatchTypeByDashboardResponseDTO">
+	<select id="myMatchTypeByDashboard" parameterType="int" resultType="com.shinhan.memento.dto.mypage.MyMatchTypeByDashboardResponseDTO">
 		select 
 			mt.MATCH_TYPE_NAME as matchTypeName,
 			mt.MATCH_TYPE_IMG as matchTypeImg
@@ -347,7 +347,7 @@
 			and status != 'DELETE'
 	</update>
 	
-	<select id="selectMySideBarInfo" parameterType="int" resultType="com.shinhan.memento.dto.MyPageSideBarResponseDTO">
+	<select id="selectMySideBarInfo" parameterType="int" resultType="com.shinhan.memento.dto.mypage.MyPageSideBarResponseDTO">
 		select
 			m.profile_image_url as profileImageUrl,
 			m.nickname as nickname,

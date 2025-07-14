@@ -1,10 +1,6 @@
 package com.shinhan.memento.model;
 
 import java.sql.Date;
-
-import com.shinhan.memento.model.BaseStatus;
-import com.shinhan.memento.model.PayType;
-
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -23,7 +19,7 @@ public class Payment {
 	private Date payAt;
 	private int amount;
 	private PayType payType;
-    private Payment_Step step;
+    private PaymentStep step;
 	private int matchupId;
 	private int mentosId;
 	private int keepgoingId;

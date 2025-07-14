@@ -6,7 +6,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import com.shinhan.memento.dto.MentoProblemDTO;
+import com.shinhan.memento.dto.mypage.MentoProblemDTO;
 
 public class MentoTestProblemBook {
 	

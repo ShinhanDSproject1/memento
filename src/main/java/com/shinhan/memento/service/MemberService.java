@@ -22,7 +22,6 @@ import org.springframework.web.client.RestTemplate;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.shinhan.memento.dto.mentoDetail.MentoDetailClassDTO;
 import com.shinhan.memento.dto.mentoDetail.MentoDetailHomeDTO;
 import com.shinhan.memento.dto.mentos.GetMentosDTO;
 import com.shinhan.memento.mapper.MemberMapper;

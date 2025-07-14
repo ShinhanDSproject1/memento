@@ -2,7 +2,8 @@ package com.shinhan.memento.service;
 
 import java.util.List;
 import org.springframework.stereotype.Service;
-import com.shinhan.memento.dto.PopularLanguageDTO;
+
+import com.shinhan.memento.dto.mainpage.PopularLanguageDTO;
 import com.shinhan.memento.mapper.PopularLanguageMapper;
 import lombok.RequiredArgsConstructor;
 

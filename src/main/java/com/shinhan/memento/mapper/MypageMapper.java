@@ -6,13 +6,10 @@ import java.util.Map;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
-
+import com.shinhan.memento.dto.mypage.MyMatchTypeByDashboardResponseDTO;
+import com.shinhan.memento.dto.mypage.MyPageSideBarResponseDTO;
+import com.shinhan.memento.dto.mypage.MyProfileDBUpdateDTO;
 import com.shinhan.memento.model.MentoTestHistory;
-
-
-import com.shinhan.memento.dto.MyMatchTypeByDashboardResponseDTO;
-import com.shinhan.memento.dto.MyPageSideBarResponseDTO;
-import com.shinhan.memento.dto.MyProfileDBUpdateDTO;
 import com.shinhan.memento.model.SparkTestType;
 
 @Mapper

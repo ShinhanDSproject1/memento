@@ -10,13 +10,12 @@ import java.util.Map;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-import com.shinhan.memento.dto.MyMatchupListResponseDTO;
-import com.shinhan.memento.dto.MyMentosListResponseDTO;
+
+import com.shinhan.memento.dto.mypage.MyMatchupListResponseDTO;
+import com.shinhan.memento.dto.mypage.MyMentosListResponseDTO;
 import com.shinhan.memento.model.CashProduct;
 import com.shinhan.memento.model.Payment;
 import lombok.extern.slf4j.Slf4j;
-import com.shinhan.memento.dto.MyMatchupListResponseDTO;
-import com.shinhan.memento.dto.MyMentosListResponseDTO;
 
 @Slf4j
 @Repository

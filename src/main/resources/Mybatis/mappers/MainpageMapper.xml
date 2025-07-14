@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.shinhan.memento.mapper.MainPageMapper">
+
+    <select id="selectTotalMentoringCount" resultType="int">
+        SELECT  
+          (SELECT COUNT(*) FROM mentos WHERE STATUS != 'DELETE') +
+          (SELECT COUNT(*) FROM matchup WHERE STATUS != 'DELETE' AND HAS_MENTO = 1)
+        FROM dual
+    </select>
+    
+    <select id="selectTotalActiveCount" resultType="int">
+        SELECT
+            (SELECT COUNT(*) FROM MEMBER_MATCHUP WHERE STATUS = 'ACTIVE') +
+            (SELECT COUNT(*) FROM MEMBER_MENTOS WHERE STATUS = 'ACTIVE') +
+            (SELECT COUNT(*) FROM MEMBER_KEEPGOING WHERE STATUS = 'ACTIVE')
+        FROM DUAL
+    </select>
+    
+    <select id="selectTotalMatchupCount" resultType="int">
+        SELECT COUNT(MATCHUP_ID) 
+        FROM MATCHUP 
+        WHERE STATUS != 'DELETE'
+    </select>
+    
+    <select id="selectMentosBannerInfo" resultType="com.shinhan.memento.dto.mainpage.MainPageBannerDTO">
+	    SELECT title, mentos_id AS mentosId, nickname, image, start_time AS startTime
+	    FROM (
+	        SELECT 
+	            m.title,
+	            m.mentos_id, 
+	            mm.nickname, 
+	            m.image, 
+	            m.start_time
+	        FROM MENTOS m
+	        LEFT JOIN member mm ON m.mento_id = mm.member_id
+	        WHERE m.status = 'ACTIVE'
+	        ORDER BY m.start_time DESC
+	    )
+	    WHERE ROWNUM &lt;= 2 
+    </select>
+    
+</mapper>

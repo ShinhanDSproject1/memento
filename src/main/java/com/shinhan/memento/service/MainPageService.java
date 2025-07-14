@@ -1,6 +1,6 @@
 package com.shinhan.memento.service;
 
-import com.shinhan.memento.dto.MainPageBannerDTO;
+import com.shinhan.memento.dto.mainpage.MainPageBannerDTO;
 import com.shinhan.memento.mapper.MainPageMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
