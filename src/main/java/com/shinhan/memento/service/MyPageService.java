@@ -581,7 +581,7 @@ public class MyPageService {
 
 		result.stream().forEach(data -> {
 			String payAtFormatted = convertTimestampObjectToStringFormatFull(data.get("PAYAT"));
-			String startDayFormatted = convertTimestampObjectToStringFormatFull(data.get("MENTOSSTARTDAY"));;
+			String startDayFormatted = convertTimestampObjectToStringFormatFull(data.get("MENTOSSTARTDAY"));
 
 			PaymentDetailResponseDTO dto = PaymentDetailResponseDTO.builder().orderId((String) data.get("ORDERID"))
 					.amount(((BigDecimal) data.get("AMOUNT")).intValue())
@@ -786,11 +786,11 @@ public class MyPageService {
 	
 	//날짜 HH:mm 형태 String으로 변경
 	private String convertTimestampObjectToStringFormatHHmm(Object timestampObject) {
-		String timeRaw = timestampObject.toString();
-		if(timeRaw == null) {
+		if(timestampObject == null) {
 			return null; //예외처리 timestamp == null
 		}
 		
+		String timeRaw = timestampObject.toString();
 		if(timeRaw.length() >= 16) {
 			return null; //예외처리 timestamp.length()가 짧아요
 		}
@@ -800,12 +800,12 @@ public class MyPageService {
 	
 	//날짜 yyyy-MM-dd HH:mm:ss 형태 String으로 변경
 	private String convertTimestampObjectToStringFormatFull(Object timestampObject) {
-		String timeRaw = timestampObject.toString();
-		if(timeRaw == null) {
+		if(timestampObject == null) {
 			return null; //예외처리 timestamp == null
 		}
 		
-		return LocalTime.parse(timeRaw).format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
+		String timeRaw = timestampObject.toString();
+		return LocalDateTime.parse(timeRaw.substring(0, 19).replaceAll(" ", "T")).format(DateTimeFormatter.ofPattern("yyyy-MM-dd hh:mm:ss"));
 	}
 	
 	private Boolean hasMentoCheck(Object hasMentoObject) {
