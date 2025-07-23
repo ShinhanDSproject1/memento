@@ -205,9 +205,6 @@ public class MyPageService {
 		List<MyMentosListResponseDTO> myMentosList = new ArrayList<>();
 
 		result.stream().forEach(data -> {
-			Object reviewStatusObj = data.get("REVIEWSTATUS");
-			String reviewStatus = (reviewStatusObj == null) ? null : (String) reviewStatusObj;
-			Integer reviewId = (data.get("REVIEWID") == null) ? null : ((BigDecimal) data.get("REVIEWID")).intValue();
 			String startTime = convertTimestampObjectToStringFormatHHmm(data.get("STARTTIME"));
 			String endTime = convertTimestampObjectToStringFormatHHmm(data.get("ENDTIME")); 
 
@@ -223,8 +220,8 @@ public class MyPageService {
 					.mentoNickname((String) data.get("MENTONICKNAME"))
 					.mentoUserType((String) data.get("MENTOUSERTYPE"))
 					.status((String) data.get("STATUS"))
-					.reviewId(reviewId)
-					.reviewStatus(reviewStatus)
+					.reviewId(((BigDecimal) data.get("REVIEWID")).intValue())
+					.reviewStatus((String)data.get("REVIEWSTATUS"))
 					.build();
 
 			myMentosList.add(dto);
