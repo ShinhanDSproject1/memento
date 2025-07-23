@@ -240,15 +240,7 @@ public class MyPageService {
 		resultMJM.stream().forEach(data -> {
 			String startTime = convertTimestampObjectToStringFormatHHmm(data.get("STARTTIME"));
 			String endTime = convertTimestampObjectToStringFormatHHmm(data.get("ENDTIME")); 
-			Boolean hasmento = false;
-			Object hasMentoValue = data.get("HASMENTO");
-
-			// 값이 null이 아니고, 숫자(Number) 타입인지 확인합니다.
-			if (hasMentoValue instanceof Number) {
-				// Number 타입의 값을 int로 변환하여 1과 같은지 비교합니다.
-				// 1이면 true, 그 외의 숫자(0 등)는 false가 됩니다.
-				hasmento = ((Number) hasMentoValue).intValue() == 1;
-			}
+			Boolean hasmento = hasMentoCheck(data.get("HASMENTO"));
 
 			MyJoinMatchupListResponseDTO dto = MyJoinMatchupListResponseDTO.builder()
 					.matchupId(((BigDecimal) data.get("MATCHUPID")).intValue())
@@ -275,15 +267,7 @@ public class MyPageService {
 		resultMCM.stream().forEach(data -> {
 			String startTime = convertTimestampObjectToStringFormatHHmm(data.get("STARTTIME"));
 			String endTime = convertTimestampObjectToStringFormatHHmm(data.get("ENDTIME"));
-			Boolean hasmento = false;
-			Object hasMentoValue = data.get("HASMENTO");
-
-			// 값이 null이 아니고, 숫자(Number) 타입인지 확인합니다.
-			if (hasMentoValue instanceof Number) {
-				// Number 타입의 값을 int로 변환하여 1과 같은지 비교합니다.
-				// 1이면 true, 그 외의 숫자(0 등)는 false가 됩니다.
-				hasmento = ((Number) hasMentoValue).intValue() == 1;
-			}
+			Boolean hasmento = hasMentoCheck(data.get("HASMENTO"));
 
 			MyCreateMatchupListResponseDTO dto = MyCreateMatchupListResponseDTO.builder()
 					.matchupId(((BigDecimal) data.get("MATCHUPID")).intValue())
@@ -647,15 +631,8 @@ public class MyPageService {
 
 		matchUpData.stream().forEach(data -> {
 			String role = ((BigDecimal) data.get("LEADERID")).intValue() == memberId ? "Leader" : "follower";
-			Boolean hasmento = false;
-			Object hasMentoValue = data.get("HASMENTO");
-
-			// 값이 null이 아니고, 숫자(Number) 타입인지 확인합니다.
-			if (hasMentoValue instanceof Number) {
-				// Number 타입의 값을 int로 변환하여 1과 같은지 비교합니다.
-				// 1이면 true, 그 외의 숫자(0 등)는 false가 됩니다.
-				hasmento = ((Number) hasMentoValue).intValue() == 1;
-			}
+			Boolean hasmento = hasMentoCheck(data.get("HASMENTO"));
+			
 			MyJoinMatchupByDashboardResponseDTO dto = MyJoinMatchupByDashboardResponseDTO.builder()
 					.leaderProfileImageUrl((String) data.get("LEADERPROFILEIMAGEURL"))
 					.title((String) data.get("TITLE"))
@@ -672,15 +649,8 @@ public class MyPageService {
 		List<Map<String, Object>> createMatchupData = mypageMapper.myCreateMatchupByDashboard(memberId);
 		List<MyJoinMatchupByDashboardResponseDTO> createMatchupDtoList = new ArrayList<>();
 		createMatchupData.stream().forEach(data -> {
-			Boolean hasmento = false;
-			Object hasMentoValue = data.get("HASMENTO");
-
-			// 값이 null이 아니고, 숫자(Number) 타입인지 확인합니다.
-			if (hasMentoValue instanceof Number) {
-				// Number 타입의 값을 int로 변환하여 1과 같은지 비교합니다.
-				// 1이면 true, 그 외의 숫자(0 등)는 false가 됩니다.
-				hasmento = ((Number) hasMentoValue).intValue() == 1;
-			}
+			Boolean hasmento = hasMentoCheck(data.get("HASMENTO"));
+			
 			MyJoinMatchupByDashboardResponseDTO dto = MyJoinMatchupByDashboardResponseDTO.builder()
 					.leaderProfileImageUrl((String) data.get("LEADERPROFILEIMAGEURL"))
 					.title((String) data.get("TITLE"))
@@ -831,6 +801,12 @@ public class MyPageService {
 		}
 		
 		return LocalTime.parse(timeRaw.substring(11, 16)).format(DateTimeFormatter.ofPattern("HH:mm"));
+	}
+	private Boolean hasMentoCheck(Object hasMentoObject) {
+		if (hasMentoObject instanceof Number) {
+			return ((Number) hasMentoObject).intValue() == 1;
+		}
+		return false;
 	}
 
 }
