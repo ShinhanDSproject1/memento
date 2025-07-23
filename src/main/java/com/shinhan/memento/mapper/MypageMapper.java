@@ -1,11 +1,9 @@
 package com.shinhan.memento.mapper;
 
-import java.sql.Date;
 import java.util.List;
 import java.util.Map;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
-
 import com.shinhan.memento.dto.mypage.MyMatchTypeByDashboardResponseDTO;
 import com.shinhan.memento.dto.mypage.MyPageSideBarResponseDTO;
 import com.shinhan.memento.dto.mypage.MyProfileDBUpdateDTO;
@@ -32,4 +30,6 @@ public interface MypageMapper {
 	public abstract MyPageSideBarResponseDTO selectMySideBarInfo(@Param("memberId") Integer memberId);
 	public abstract List<Map<String, Object>> selectMyCreateMatchUpList(@Param("memberId") Integer memberId);
 	public abstract List<Map<String, Object>> myCreateMatchupByDashboard(@Param("memberId") Integer memberId);
+	public abstract List<Map<String, Object>> selectJoinMyMatchUpList(@Param("memberId") Integer memberId);
+	public abstract List<Map<String, Object>> selectMyMentosListById(@Param("memberId") Integer memberId);
 }

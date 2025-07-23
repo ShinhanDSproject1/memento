@@ -7,7 +7,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @Builder
-public class MyMatchupCreateListResponseDTO {
+public class MyCreateMatchupListResponseDTO {
 	private Integer matchupId;
 	private String leaderImg;
 	private String matchupTitle;

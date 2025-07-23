@@ -2,7 +2,7 @@ package com.shinhan.memento.dao;
 
 import java.util.List;
 
-import com.shinhan.memento.dto.mypage.MyMatchupListResponseDTO;
+import com.shinhan.memento.dto.mypage.MyJoinMatchupListResponseDTO;
 import com.shinhan.memento.dto.mypage.MyMentosListResponseDTO;
 import com.shinhan.memento.model.Payment;
 
@@ -18,5 +18,5 @@ public interface MyPageDAOInterface {
 
 	public int updateUserBalance(int userId, int amount);
 
-	public List<MyMatchupListResponseDTO> selectJoinListByMemberId(Integer memberId);
+	public List<MyJoinMatchupListResponseDTO> selectJoinListByMemberId(Integer memberId);
 }

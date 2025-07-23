@@ -52,8 +52,8 @@ import com.shinhan.memento.dto.mypage.MyDashboardResponseDTO;
 import com.shinhan.memento.dto.mypage.MyJoinMatchupByDashboardResponseDTO;
 import com.shinhan.memento.dto.mypage.MyJoinMentosByDashboardResponseDTO;
 import com.shinhan.memento.dto.mypage.MyMatchTypeByDashboardResponseDTO;
-import com.shinhan.memento.dto.mypage.MyMatchupCreateListResponseDTO;
-import com.shinhan.memento.dto.mypage.MyMatchupListResponseDTO;
+import com.shinhan.memento.dto.mypage.MyCreateMatchupListResponseDTO;
+import com.shinhan.memento.dto.mypage.MyJoinMatchupListResponseDTO;
 import com.shinhan.memento.dto.mypage.MyMentosListResponseDTO;
 import com.shinhan.memento.dto.mypage.MyPageSideBarResponseDTO;
 import com.shinhan.memento.dto.mypage.MyPaymentListResponseDTO;
@@ -98,20 +98,20 @@ public class MyPageService {
 
 	@Value("${file.upload.dir}")
 	private String uploadDir;
-	
+
 	@Autowired
 	private MemberMentosService memberMentosService;
-	
-	//킵고잉 탈퇴용
+
+	// 킵고잉 탈퇴용
 	@Autowired
 	SqlSession sqlSession;
 	String keepNamespace = "com.shinhan.memento.dao.MemberKeepgoingDAOInterface.";
-	//매치업 참여 취소
+	// 매치업 참여 취소
 	String matchupNamespace = "com.shinhan.memento.dao.MemberMatchUpDAO.";
-	
+
 	@Autowired
 	private MentoTestWebSocketHandler mentoTestWebSocketHandler;
-	
+
 	public ValidateCashResponseDTO validateCash(ValidateCashRequestDTO reqDTO, int userId) {
 		CashProduct product = myPageDAO.validateCash(reqDTO.getCashProductID());
 		String orderId = UUID.randomUUID().toString();
@@ -201,60 +201,122 @@ public class MyPageService {
 	}
 
 	public List<MyMentosListResponseDTO> selectMyMentosListById(Integer memberId) {
-		return myPageDAO.selectMyMentosListById(memberId);
+		List<Map<String, Object>> result = mypageMapper.selectMyMentosListById(memberId);
+		List<MyMentosListResponseDTO> myMentosList = new ArrayList<>();
+
+		result.stream().forEach(data -> {
+			Object reviewStatusObj = data.get("REVIEWSTATUS");
+			String reviewStatus = (reviewStatusObj == null) ? null : (String) reviewStatusObj;
+			Integer reviewId = (data.get("REVIEWID") == null) ? null : ((BigDecimal) data.get("REVIEWID")).intValue();
+			String startRaw = data.get("STARTTIME").toString(); // rawData.get("STARTTIME") 대신 사용
+			String endRaw = data.get("ENDTIME").toString(); // rawData.get("ENDTIME") 대신 사용
+			if (startRaw != null && startRaw.length() >= 16) {
+				startRaw = LocalTime.parse(startRaw.substring(11, 16)).format(DateTimeFormatter.ofPattern("HH:mm"));
+			}
+			if (endRaw != null && endRaw.length() >= 16) {
+				endRaw = LocalTime.parse(endRaw.substring(11, 16)).format(DateTimeFormatter.ofPattern("HH:mm"));
+			}
+
+			MyMentosListResponseDTO dto = MyMentosListResponseDTO.builder()
+					.mentosId(((BigDecimal) data.get("MENTOSID")).intValue()).mentosImg((String) data.get("MENTOSIMG"))
+					.mentosTitle((String) data.get("MENTOSTITLE")).regionGroup((String) data.get("REGIONGROUP"))
+					.regionSubgroup((String) data.get("REGIONSUBGROUP")).startTime(startRaw).endTime(endRaw)
+					.selectedDays((String) data.get("SELECTEDDAYS")).mentoNickname((String) data.get("MENTONICKNAME"))
+					.mentoUserType((String) data.get("MENTOUSERTYPE")).status((String) data.get("STATUS"))
+					.reviewId(reviewId).reviewStatus(reviewStatus).build();
+
+			myMentosList.add(dto);
+		});
+
+		return myMentosList;
 	}
 
 	public MypageMatchupListDTO selectJoinMatchupListByMemberId(Integer memberId) {
-		List<MyMatchupListResponseDTO> myMatchupList = myPageDAO.selectJoinListByMemberId(memberId);
-		
-		List<Map<String, Object>> result = mypageMapper.selectMyCreateMatchUpList(memberId);
-		List<MyMatchupCreateListResponseDTO> selectMyCreateMatchupList = new ArrayList<MyMatchupCreateListResponseDTO>();
-		
-		result.stream().forEach(data -> {
-			 	String startRaw = data.get("STARTTIME").toString(); // rawData.get("STARTTIME") 대신 사용
-	            String endRaw = data.get("ENDTIME").toString();     // rawData.get("ENDTIME") 대신 사용
-	            Boolean hasmento = false;
-				Object hasMentoValue = data.get("HASMENTO");
+		List<MyJoinMatchupListResponseDTO> selectMyJoinMatchupList = new ArrayList<>();
+		List<Map<String, Object>> resultMJM = mypageMapper.selectJoinMyMatchUpList(memberId);
 
-				// 값이 null이 아니고, 숫자(Number) 타입인지 확인합니다.
-				if (hasMentoValue instanceof Number) {
-				    // Number 타입의 값을 int로 변환하여 1과 같은지 비교합니다.
-				    // 1이면 true, 그 외의 숫자(0 등)는 false가 됩니다.
-				    hasmento = ((Number) hasMentoValue).intValue() == 1;
-				}
-	            if (startRaw != null && startRaw.length() >= 16) {
-			    	startRaw = LocalTime.parse(startRaw.substring(11, 16)).format(DateTimeFormatter.ofPattern("HH:mm"));
-	            }
-			    if (endRaw != null && endRaw.length() >= 16) {
-			    	endRaw = LocalTime.parse(endRaw.substring(11, 16)).format(DateTimeFormatter.ofPattern("HH:mm"));
-	            }
-			
-			MyMatchupCreateListResponseDTO dto = MyMatchupCreateListResponseDTO.builder()
-					.matchupId(((BigDecimal)data.get("MATCHUPID")).intValue())
-					.leaderImg((String)data.get("LEADERIMG"))
-					.matchupTitle((String)data.get("MATCHUPTITLE"))
-					.regionGroup((String)data.get("REGIONGROUP"))
-					.regionSubgroup((String)data.get("REGIONSUBGROUP"))
-					.category((String)data.get("CATEGORY"))
-					.language((String)data.get("LANGUAGE"))
+		resultMJM.stream().forEach(data -> {
+			String startRaw = data.get("STARTTIME").toString(); // rawData.get("STARTTIME") 대신 사용
+			String endRaw = data.get("ENDTIME").toString(); // rawData.get("ENDTIME") 대신 사용
+			Boolean hasmento = false;
+			Object hasMentoValue = data.get("HASMENTO");
+
+			// 값이 null이 아니고, 숫자(Number) 타입인지 확인합니다.
+			if (hasMentoValue instanceof Number) {
+				// Number 타입의 값을 int로 변환하여 1과 같은지 비교합니다.
+				// 1이면 true, 그 외의 숫자(0 등)는 false가 됩니다.
+				hasmento = ((Number) hasMentoValue).intValue() == 1;
+			}
+			if (startRaw != null && startRaw.length() >= 16) {
+				startRaw = LocalTime.parse(startRaw.substring(11, 16)).format(DateTimeFormatter.ofPattern("HH:mm"));
+			}
+			if (endRaw != null && endRaw.length() >= 16) {
+				endRaw = LocalTime.parse(endRaw.substring(11, 16)).format(DateTimeFormatter.ofPattern("HH:mm"));
+			}
+
+			MyJoinMatchupListResponseDTO dto = MyJoinMatchupListResponseDTO.builder()
+					.matchupId(((BigDecimal) data.get("MATCHUPID")).intValue())
+					.leaderImg((String) data.get("LEADERIMG"))
+					.matchupTitle((String) data.get("MATCHUPTITLE"))
+					.regionGroup((String) data.get("REGIONGROUP"))
+					.regionSubgroup((String) data.get("REGIONSUBGROUP"))
+					.category((String) data.get("CATEGORY"))
+					.language((String) data.get("LANGUAGE"))
 					.startTime(startRaw)
 					.endTime(endRaw)
-					.selectedDays((String)data.get("SELECTEDDAYS"))
+					.selectedDays((String) data.get("SELECTEDDAYS"))
 					.hasMento(hasmento)
-					.mentoNickname((String)data.get("MENTONICKNAME"))
-					.count(((BigDecimal)data.get("COUNT")).intValue())
-					.matchupCount(0)
-					.role((String)data.get("ROLE"))
-					.status((String)data.get("STATUS"))
-					
-					.build();
+					.mentoNickname((String) data.get("MENTONICKNAME"))
+					.count(((BigDecimal) data.get("COUNT")).intValue())
+					.matchupCount(((BigDecimal) data.get("MATCHUPCOUNT")).intValue())
+					.status((String) data.get("STATUS")).build();
+			selectMyJoinMatchupList.add(dto);
+		});
+
+		List<Map<String, Object>> resultMCM = mypageMapper.selectMyCreateMatchUpList(memberId);
+		List<MyCreateMatchupListResponseDTO> selectMyCreateMatchupList = new ArrayList<>();
+
+		resultMCM.stream().forEach(data -> {
+			String startRaw = data.get("STARTTIME").toString(); // rawData.get("STARTTIME") 대신 사용
+			String endRaw = data.get("ENDTIME").toString(); // rawData.get("ENDTIME") 대신 사용
+			Boolean hasmento = false;
+			Object hasMentoValue = data.get("HASMENTO");
+
+			// 값이 null이 아니고, 숫자(Number) 타입인지 확인합니다.
+			if (hasMentoValue instanceof Number) {
+				// Number 타입의 값을 int로 변환하여 1과 같은지 비교합니다.
+				// 1이면 true, 그 외의 숫자(0 등)는 false가 됩니다.
+				hasmento = ((Number) hasMentoValue).intValue() == 1;
+			}
+			if (startRaw != null && startRaw.length() >= 16) {
+				startRaw = LocalTime.parse(startRaw.substring(11, 16)).format(DateTimeFormatter.ofPattern("HH:mm"));
+			}
+			if (endRaw != null && endRaw.length() >= 16) {
+				endRaw = LocalTime.parse(endRaw.substring(11, 16)).format(DateTimeFormatter.ofPattern("HH:mm"));
+			}
+
+			MyCreateMatchupListResponseDTO dto = MyCreateMatchupListResponseDTO.builder()
+					.matchupId(((BigDecimal) data.get("MATCHUPID")).intValue())
+					.leaderImg((String) data.get("LEADERIMG"))
+					.matchupTitle((String) data.get("MATCHUPTITLE"))
+					.regionGroup((String) data.get("REGIONGROUP"))
+					.regionSubgroup((String) data.get("REGIONSUBGROUP"))
+					.category((String) data.get("CATEGORY"))
+					.language((String) data.get("LANGUAGE"))
+					.startTime(startRaw)
+					.endTime(endRaw)
+					.selectedDays((String) data.get("SELECTEDDAYS"))
+					.hasMento(hasmento)
+					.mentoNickname((String) data.get("MENTONICKNAME"))
+					.count(((BigDecimal) data.get("COUNT")).intValue())
+					.matchupCount(((BigDecimal) data.get("MATCHUPCOUNT")).intValue())
+					.role((String) data.get("ROLE"))
+					.status((String) data.get("STATUS")).build();
 			selectMyCreateMatchupList.add(dto);
 		});
-		
-		MypageMatchupListDTO returnDto = MypageMatchupListDTO.builder()
-				.myMatchupList(myMatchupList)
-				.mymatchupCreateList(selectMyCreateMatchupList)
-				.build();
+
+		MypageMatchupListDTO returnDto = MypageMatchupListDTO.builder().myMatchupList(selectMyJoinMatchupList)
+				.mymatchupCreateList(selectMyCreateMatchupList).build();
 		return returnDto;
 	}
 
@@ -380,10 +442,6 @@ public class MyPageService {
 																									// 대문자로 통일
 				.collect(Collectors.toSet());
 
-		for (String input : inputInterestNameSet) {
-			System.out.println("after: " + input);
-		}
-
 		// member id로 이전 관심사들 모두 조회
 		List<InterestDTO> beforeMyInterestList = interestMapper.getMemberInterestsByMemberId(memberId);
 
@@ -396,16 +454,12 @@ public class MyPageService {
 				}
 			}
 		}
-		for (String name : beforeMyInterSet) {
-			System.out.println("before: " + name);
-		}
 
 		if (inputInterestNameSet.isEmpty()) {
 			beforeMyInterestList.stream().forEach(interest -> {
 				interestMapper.deleteMemberInterest(memberId, interest.getInterestId());
 			});
 		} else {
-			System.out.println(inputInterestNameSet.equals(beforeMyInterSet));
 			if (!inputInterestNameSet.equals(beforeMyInterSet)) {
 				// 현재 - 과거 (현재에는 있고 과거에는 없는) -> insert
 				Set<String> differenceAB = inputInterestNameSet.stream()
@@ -427,9 +481,7 @@ public class MyPageService {
 
 				// 삭제로직
 				for (String interestName : differenceBA) {
-					System.out.println(interestName);
 					InterestDTO interest = interestMapper.getInterestByName(interestName);
-					System.out.println(interest);
 					if (interest != null) {
 						interestMapper.deleteMemberInterest(memberId, interest.getInterestId());
 					}
@@ -439,95 +491,78 @@ public class MyPageService {
 
 		return result == 1;
 	}
-		
-	/*멘토 테스트 만료 체크*/
+
+	/* 멘토 테스트 만료 체크 */
 	public MentoTestCheckExpirationResponseDTO checkExpiration(int userId) {
-			log.info("[checkExpiration]");
-			String expiration = "";	
-			LocalDate now = LocalDate.now();
-			Date sqlDate = Date.valueOf(now);
-			
-			log.info("[checkExpiration - selecthistory]");
-			MentoTestHistory history = mypageMapper.selectMentoTestHistory(userId, now.toString());
-			
-			if(history==null) {
-				history = MentoTestHistory.builder()
-				.memberId(userId)
-				.testAt(sqlDate)
-				.status(BaseStatus.ACTIVE)
-				.build();
-				
-				log.info("[checkExpiration - inserthistory]");
-				int result = mypageMapper.insertMentoTestHistory(history);
-				if(result < 1 ) {
-					throw new MypageException(BaseExceptionResponseStatus.CANNOT_INSERT_MENTOTEST_HISTORY);
-				}
-				
-				expiration = "success";
+		log.info("[checkExpiration]");
+		String expiration = "";
+		LocalDate now = LocalDate.now();
+		Date sqlDate = Date.valueOf(now);
+
+		log.info("[checkExpiration - selecthistory]");
+		MentoTestHistory history = mypageMapper.selectMentoTestHistory(userId, now.toString());
+
+		if (history == null) {
+			history = MentoTestHistory.builder().memberId(userId).testAt(sqlDate).status(BaseStatus.ACTIVE).build();
+
+			log.info("[checkExpiration - inserthistory]");
+			int result = mypageMapper.insertMentoTestHistory(history);
+			if (result < 1) {
+				throw new MypageException(BaseExceptionResponseStatus.CANNOT_INSERT_MENTOTEST_HISTORY);
 			}
-			else { 
-				expiration = "fail";
-			}
-			return MentoTestCheckExpirationResponseDTO.builder()
-					.expiration(expiration)
-					.build();
+
+			expiration = "success";
+		} else {
+			expiration = "fail";
 		}
-		
-	/* 멘토 테스트 시작 */ 
+		return MentoTestCheckExpirationResponseDTO.builder().expiration(expiration).build();
+	}
+
+	/* 멘토 테스트 시작 */
 	public MentoTestStartResponseDTO testing(int userId) {
-			
-			/*util MentoTestProblemBook에서 15문제 추출*/
-			List<MentoProblemDTO> problems = MentoTestProblemBook.getRandomProblems(15);
-			LocalDateTime now = LocalDateTime.now();
-			mentoTestWebSocketHandler.startAutoSubmitTimer(userId, 15 * 60 * 1000L);
-			
-			return MentoTestStartResponseDTO.builder()
-					.problems(problems)
-					.startTime(now)
-					.build();
-		}
+
+		/* util MentoTestProblemBook에서 15문제 추출 */
+		List<MentoProblemDTO> problems = MentoTestProblemBook.getRandomProblems(15);
+		LocalDateTime now = LocalDateTime.now();
+		mentoTestWebSocketHandler.startAutoSubmitTimer(userId, 15 * 60 * 1000L);
+
+		return MentoTestStartResponseDTO.builder().problems(problems).startTime(now).build();
+	}
 
 	/* 멘토 테스트 결과 */
 	public MentoTestResultResponseDTO gradeMentoTest(int userId, List<MentoTestAnswerDTO> answers) {
-			Map<Integer, Integer> correctMap = MentoTestProblemBook.getANSWER_MAP();
-			int correctCount = 0;
-			int total = answers.size();
-		    List<Integer> correctIds = new ArrayList<>();
-		    
-		    log.info("[gradeMentoTest] userId: {}, 제출 문제 수: {}", userId, answers.size());
-		    
-		    for (MentoTestAnswerDTO answer : answers) {
-		        int problemId = answer.getProblemId();
-		        int answerIndex = answer.getAnswerIndex();
+		Map<Integer, Integer> correctMap = MentoTestProblemBook.getANSWER_MAP();
+		int correctCount = 0;
+		int total = answers.size();
+		List<Integer> correctIds = new ArrayList<>();
 
-		        // 정답 비교 (미응답 -1 은 무시)
-		        Integer correctIndex = correctMap.get(problemId);
-		        if (correctIndex != null && answerIndex == correctIndex) {
-		            correctCount++;
-		            correctIds.add(problemId);
-		        }
-		    }
+		log.info("[gradeMentoTest] userId: {}, 제출 문제 수: {}", userId, answers.size());
 
-		    int score = (int) ((double) correctCount / total * 100);
-		    boolean passed = score >= 80;
+		for (MentoTestAnswerDTO answer : answers) {
+			int problemId = answer.getProblemId();
+			int answerIndex = answer.getAnswerIndex();
 
-		    if (passed) {
-		        int update = mypageMapper.updateMemberUserType(userId, "PREMENTO");
-		        if (update < 1) {
-		            throw new MypageException(BaseExceptionResponseStatus.CANNOT_UPDATE_MEMBER_USERTYPE);
-		        }
-		    }
-		    	
-		    return MentoTestResultResponseDTO.builder()
-		            .score(score)
-		            .totalProblems(total)
-		            .correctCount(correctCount)
-		            .correctProblemIds(correctIds)
-		            .passed(passed)
-		            .build();
+			// 정답 비교 (미응답 -1 은 무시)
+			Integer correctIndex = correctMap.get(problemId);
+			if (correctIndex != null && answerIndex == correctIndex) {
+				correctCount++;
+				correctIds.add(problemId);
+			}
 		}
 
+		int score = (int) ((double) correctCount / total * 100);
+		boolean passed = score >= 80;
 
+		if (passed) {
+			int update = mypageMapper.updateMemberUserType(userId, "PREMENTO");
+			if (update < 1) {
+				throw new MypageException(BaseExceptionResponseStatus.CANNOT_UPDATE_MEMBER_USERTYPE);
+			}
+		}
+
+		return MentoTestResultResponseDTO.builder().score(score).totalProblems(total).correctCount(correctCount)
+				.correctProblemIds(correctIds).passed(passed).build();
+	}
 
 	public MyProfileInfoResponseDTO selectMyProfileInfo(Integer memberId) {
 		List<Map<String, Object>> result = mypageMapper.selectMyProfileInfo(memberId);
@@ -608,36 +643,31 @@ public class MyPageService {
 
 		return selectPaymentDetailList;
 	}
-	
+
 	public MyDashboardResponseDTO selectDataByDashboard(Integer memberId) {
-		//매치업	
+		// 매치업
 		List<Map<String, Object>> matchUpData = mypageMapper.myJoinMatchupByDashboard(memberId);
 		List<MyJoinMatchupByDashboardResponseDTO> myMatchupDTOList = new ArrayList<>();
-		
+
 		matchUpData.stream().forEach(data -> {
-			String role = ((BigDecimal)data.get("LEADERID")).intValue() == memberId ? "Leader":"follower";
+			String role = ((BigDecimal) data.get("LEADERID")).intValue() == memberId ? "Leader" : "follower";
 			Boolean hasmento = false;
 			Object hasMentoValue = data.get("HASMENTO");
 
 			// 값이 null이 아니고, 숫자(Number) 타입인지 확인합니다.
 			if (hasMentoValue instanceof Number) {
-			    // Number 타입의 값을 int로 변환하여 1과 같은지 비교합니다.
-			    // 1이면 true, 그 외의 숫자(0 등)는 false가 됩니다.
-			    hasmento = ((Number) hasMentoValue).intValue() == 1;
+				// Number 타입의 값을 int로 변환하여 1과 같은지 비교합니다.
+				// 1이면 true, 그 외의 숫자(0 등)는 false가 됩니다.
+				hasmento = ((Number) hasMentoValue).intValue() == 1;
 			}
 			MyJoinMatchupByDashboardResponseDTO dto = MyJoinMatchupByDashboardResponseDTO.builder()
-					.leaderProfileImageUrl((String)data.get("LEADERPROFILEIMAGEURL"))
-					.title((String)data.get("TITLE"))
-					.role(role)
-					.totalCount(((BigDecimal)data.get("TOTALCOUNT")).intValue())
-					.currentCount(0)
-					.matchStatus((String)data.get("MATCHSTATUS"))
-					.hasMento(hasmento)
-					.build();
-			
+					.leaderProfileImageUrl((String) data.get("LEADERPROFILEIMAGEURL")).title((String) data.get("TITLE"))
+					.role(role).totalCount(((BigDecimal) data.get("TOTALCOUNT")).intValue()).currentCount(0)
+					.matchStatus((String) data.get("MATCHSTATUS")).hasMento(hasmento).build();
+
 			myMatchupDTOList.add(dto);
 		});
-		
+
 		// 내가 만든 매치업
 		List<Map<String, Object>> createMatchupData = mypageMapper.myCreateMatchupByDashboard(memberId);
 		List<MyJoinMatchupByDashboardResponseDTO> createMatchupDtoList = new ArrayList<>();
@@ -647,53 +677,41 @@ public class MyPageService {
 
 			// 값이 null이 아니고, 숫자(Number) 타입인지 확인합니다.
 			if (hasMentoValue instanceof Number) {
-			    // Number 타입의 값을 int로 변환하여 1과 같은지 비교합니다.
-			    // 1이면 true, 그 외의 숫자(0 등)는 false가 됩니다.
-			    hasmento = ((Number) hasMentoValue).intValue() == 1;
+				// Number 타입의 값을 int로 변환하여 1과 같은지 비교합니다.
+				// 1이면 true, 그 외의 숫자(0 등)는 false가 됩니다.
+				hasmento = ((Number) hasMentoValue).intValue() == 1;
 			}
 			MyJoinMatchupByDashboardResponseDTO dto = MyJoinMatchupByDashboardResponseDTO.builder()
-					.leaderProfileImageUrl((String)data.get("LEADERPROFILEIMAGEURL"))
-					.title((String)data.get("TITLE"))
-					.role("Leader")
-					.totalCount(((BigDecimal)data.get("TOTALCOUNT")).intValue())
-					.currentCount(0)
-					.matchStatus((String)data.get("MATCHSTATUS"))
-					.hasMento(hasmento)
-					.build();
-			
+					.leaderProfileImageUrl((String) data.get("LEADERPROFILEIMAGEURL")).title((String) data.get("TITLE"))
+					.role("Leader").totalCount(((BigDecimal) data.get("TOTALCOUNT")).intValue()).currentCount(0)
+					.matchStatus((String) data.get("MATCHSTATUS")).hasMento(hasmento).build();
+
 			createMatchupDtoList.add(dto);
 		});
-		
-		
-		//멘토스
+
+		// 멘토스
 		List<Map<String, Object>> mentosData = mypageMapper.myJoinMentosByDashboard(memberId);
 		List<MyJoinMentosByDashboardResponseDTO> myMentosDTOList = new ArrayList<>();
-		
+
 		mentosData.stream().forEach(data -> {
-			String mentoNickname = ((BigDecimal)data.get("MENTOID")).intValue() == memberId ? "Mentor": (String)data.get("MENTONICKNAME");
+			String mentoNickname = ((BigDecimal) data.get("MENTOID")).intValue() == memberId ? "Mentor"
+					: (String) data.get("MENTONICKNAME");
 			MyJoinMentosByDashboardResponseDTO dto = MyJoinMentosByDashboardResponseDTO.builder()
-					.mentosTitle((String)data.get("MENTOSTITLE"))
-					.mentosImage((String)data.get("MENTOSIMAGE"))
-					.mentoNickname(mentoNickname)
-					.mentosStatus((String)data.get("MENTOSSTATUS"))
-					.build();
-			
+					.mentosTitle((String) data.get("MENTOSTITLE")).mentosImage((String) data.get("MENTOSIMAGE"))
+					.mentoNickname(mentoNickname).mentosStatus((String) data.get("MENTOSSTATUS")).build();
+
 			myMentosDTOList.add(dto);
 		});
-		
-		//matchType 스파크
+
+		// matchType 스파크
 		MyMatchTypeByDashboardResponseDTO myMatchTypeData = mypageMapper.myMatchTypeByDashboard(memberId);
-	
+
 		MyDashboardResponseDTO dashboardData = MyDashboardResponseDTO.builder()
-				.myCreateMatchupDashboardList(createMatchupDtoList)
-				.myMatchupDashboardList(myMatchupDTOList)
-				.myMentosDashboardList(myMentosDTOList)
-				.myMatchTypeData(myMatchTypeData)
-				.build();
-		
+				.myCreateMatchupDashboardList(createMatchupDtoList).myMatchupDashboardList(myMatchupDTOList)
+				.myMentosDashboardList(myMentosDTOList).myMatchTypeData(myMatchTypeData).build();
+
 		return dashboardData;
 	}
-	
 
 	@Transactional
 	public boolean refundAction(Integer memberId, String orderId) {
@@ -704,7 +722,7 @@ public class MyPageService {
 
 		refundDataMap.stream().forEach(data -> {
 			RefundRequestDTO dto = RefundRequestDTO.builder().orderId((String) data.get("ORDERID"))
-					.amount(data.get("AMOUNT") == null ? 0 : ((BigDecimal)data.get("AMOUNT")).intValue())
+					.amount(data.get("AMOUNT") == null ? 0 : ((BigDecimal) data.get("AMOUNT")).intValue())
 					.payType((String) data.get("PAYTYPE"))
 					.matchupId(data.get("MATCHUPID") == null ? 0 : ((BigDecimal) data.get("MATCHUPID")).intValue())
 					.matchupPrice(
@@ -729,70 +747,70 @@ public class MyPageService {
 		Integer amount = shareDataDTO.getAmount();
 		String payType = shareDataDTO.getPayType();
 
-		//CHARGE or USE or REFUND -> REFUND의 경우 버튼이 존재하지 않음
+		// CHARGE or USE or REFUND -> REFUND의 경우 버튼이 존재하지 않음
 
-		if(payType.equalsIgnoreCase("REFUND")) {
+		if (payType.equalsIgnoreCase("REFUND")) {
 			return false;
-		}else if(payType.equalsIgnoreCase("CHARGE")) {
-			if(initBalance < amount) {
+		} else if (payType.equalsIgnoreCase("CHARGE")) {
+			if (initBalance < amount) {
 				return false;
-			}else {
+			} else {
 				initBalance -= amount;
 			}
-		}else {
-			//루프 돌면서 금액 계산 및 탈퇴
+		} else {
+			// 루프 돌면서 금액 계산 및 탈퇴
 			for (RefundRequestDTO refund : refundDataList) {
 				if (refund.getMatchupId() != 0) {
-					//매치업 취소
+					// 매치업 취소
 					JoinMatchupDTO jmatchDto = new JoinMatchupDTO(refund.getMatchupId(), memberId);
-					int jmatchCancel = sqlSession.update(matchupNamespace+"cancelJoinMatchupBy2id",jmatchDto);
-					if(jmatchCancel > 0) {
+					int jmatchCancel = sqlSession.update(matchupNamespace + "cancelJoinMatchupBy2id", jmatchDto);
+					if (jmatchCancel > 0) {
 						initBalance += refund.getMatchupPrice();
-					}else {
+					} else {
 						return false;
 					}
-					
+
 				}
 				if (refund.getMentosId() != 0) {
 					// 멘토스 취소
 					JoinMentosDTO jmentosDto = new JoinMentosDTO(refund.getMentosId(), memberId);
-					MemberMentos mm =  memberMentosService.checkValidMemberMentos(jmentosDto);
+					MemberMentos mm = memberMentosService.checkValidMemberMentos(jmentosDto);
 					int jmentosCancel = memberMentosService.cancelJoinMentos(mm.getMemberMentosId());
-					if(jmentosCancel > 0) {
+					if (jmentosCancel > 0) {
 						initBalance += refund.getMentosPrice();
-					}else {
+					} else {
 						return false;
 					}
-					
+
 				}
 				if (refund.getKeepgoingId() != 0) {
-					//킵고잉 탈퇴
+					// 킵고잉 탈퇴
 					JoinKeepgoingDTO jkeepDto = new JoinKeepgoingDTO(refund.getKeepgoingId(), memberId);
-					int jkeepcancel = sqlSession.update(keepNamespace+"cancelMemberKeepgoingBy2id", jkeepDto);
-					if(jkeepcancel > 0) {
+					int jkeepcancel = sqlSession.update(keepNamespace + "cancelMemberKeepgoingBy2id", jkeepDto);
+					if (jkeepcancel > 0) {
 						initBalance += refund.getKeepgoingPrice();
-					}else {
+					} else {
 						return false;
 					}
 				}
 			}
 		}
-		
-		//user balance update
+
+		// user balance update
 		Integer resultBalance = initBalance;
 		int balanceUpdateResult = mypageMapper.updateUserBalanceByRefund(resultBalance, memberId);
-		if(balanceUpdateResult <= 0) {
+		if (balanceUpdateResult <= 0) {
 			return false;
 		}
 		// payment update -> 주문번호
 		int paymentUpateRefundResult = mypageMapper.updatePaymentByRefund(orderId);
-		if(paymentUpateRefundResult <= 0) {
+		if (paymentUpateRefundResult <= 0) {
 			return false;
 		}
-		
+
 		return result;
 	}
-	
+
 	public MyPageSideBarResponseDTO selectMySideBarInfo(Integer memberId) {
 		MyPageSideBarResponseDTO dto = mypageMapper.selectMySideBarInfo(memberId);
 		return dto;

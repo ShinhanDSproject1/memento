@@ -12,6 +12,6 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Builder
 public class MypageMatchupListDTO {
-	private List<MyMatchupListResponseDTO> myMatchupList;
-	private List<MyMatchupCreateListResponseDTO> mymatchupCreateList;
+	private List<MyJoinMatchupListResponseDTO> myMatchupList;
+	private List<MyCreateMatchupListResponseDTO> mymatchupCreateList;
 }

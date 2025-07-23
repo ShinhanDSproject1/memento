@@ -11,7 +11,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import com.shinhan.memento.dto.mypage.MyMatchupListResponseDTO;
+import com.shinhan.memento.dto.mypage.MyJoinMatchupListResponseDTO;
 import com.shinhan.memento.dto.mypage.MyMentosListResponseDTO;
 import com.shinhan.memento.model.CashProduct;
 import com.shinhan.memento.model.Payment;
@@ -106,12 +106,12 @@ public class MyPageDAO implements MyPageDAOInterface{
 	}
   
 	@Override
-	public List<MyMatchupListResponseDTO> selectJoinListByMemberId(Integer memberId) {
+	public List<MyJoinMatchupListResponseDTO> selectJoinListByMemberId(Integer memberId) {
 		// 1. 결과를 DTO 리스트로 직접 받습니다.
-        List<MyMatchupListResponseDTO> memberMatchUPList = sqlSession.selectList(namespace + "selectMyMatchUpList", memberId);
+        List<MyJoinMatchupListResponseDTO> memberMatchUPList = sqlSession.selectList(namespace + "selectJoinMyMatchUpList", memberId);
 
         // 2. DTO 리스트를 순회하며 시간 포맷만 수정합니다.
-        for (MyMatchupListResponseDTO dto : memberMatchUPList) {
+        for (MyJoinMatchupListResponseDTO dto : memberMatchUPList) {
             // MyBatis가 DTO에 넣어준 기존 시간 값을 getter로 가져옵니다.
             String startRaw = dto.getStartTime(); // rawData.get("STARTTIME") 대신 사용
             String endRaw = dto.getEndTime();     // rawData.get("ENDTIME") 대신 사용

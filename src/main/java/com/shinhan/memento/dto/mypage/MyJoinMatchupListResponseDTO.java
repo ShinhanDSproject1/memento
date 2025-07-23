@@ -7,7 +7,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @Builder
-public class MyMatchupListResponseDTO {
+public class MyJoinMatchupListResponseDTO {
 	private Integer matchupId;
 	private String leaderImg;
 	private String matchupTitle;
@@ -22,6 +22,5 @@ public class MyMatchupListResponseDTO {
 	private String mentoNickname;
 	private Integer count;
 	private Integer matchupCount;
-	private String role;
 	private String status;
 }

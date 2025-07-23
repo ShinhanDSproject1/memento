@@ -54,52 +54,32 @@
 		WHERE member_id = #{userId}
 	</update>
 	
-	<resultMap id="myMatchupResultMap" type="myMatchupListDTO">
-        <result property="matchupId"       column="matchup_id"/>
-        <result property="leaderImg"       column="leader_img"/>
-        <result property="matchupTitle"    column="matchup_title"/>
-        <result property="regionGroup"  column="region_group"/>
-        <result property="regionSubgroup"  column="region_subgroup"/>
-        <result property="category"        column="category"/>
-        <result property="language"        column="language"/>
-        <result property="startTime"       column="start_time"/>
-        <result property="endTime"         column="end_time"/>
-        <result property="selectedDays"    column="selected_days"/>
-        <result property="hasMento"        column="has_mento"/>
-        <result property="mentoNickname"   column="mento_nickname"/>
-        <result property="count"           column="count"/>
-        <result property="matchupCount"    column="matchup_count"/>
-        <result property="role"            column="role"/>
-        <result property="status"          column="status"/>
-    </resultMap>
-	
-	<select id="selectMyMatchUpList" parameterType="int" resultMap="myMatchupResultMap">
-		select
-			mm.matchup_id as matchup_id, 
-			leader.PROFILE_IMAGE_URL as leader_img, 
-			m.title as matchup_title, 
-			m.region_group as region_group,
-			m.region_subgroup as region_subgroup,
-			cat.category_name as category,
-			lan.language_name as language, 	
-			m.start_time as start_time, 		
-			m.end_time as end_time,
-			m.selected_days as selected_days, 
-			m.has_mento as has_mento,
-			mento.nickname as mento_nickname,
-			m.count as count, 
-			m.matchup_count as matchup_count,
-			CASE WHEN m.leader_id = mm.member_id THEN '팀장'ELSE '팀원'END AS role,
-			m.status as status
-		from member_matchup mm
-			join matchup m on mm.matchup_id = m.matchup_id
-			left join category cat on m.category_id = cat.category_id
-			left join language lan on m.language_id = lan.language_id
-			left join member leader on m.leader_id = leader.member_id
-			left join member mento on m.mento_id = mento.member_id
-		where mm.member_id = #{memberId} 
-		and m.status != 'DELETE'
-		and mm.status != 'DELETE'
+	<select id="selectJoinMyMatchUpList" parameterType="int" resultType="map">
+		SELECT
+			mm.MATCHUP_ID as matchupId, 
+			leader.PROFILE_IMAGE_URL as leaderImg, 
+			m.TITLE as matchupTitle, 
+			m.REGION_GROUP as regionGroup,
+			m.REGION_SUBGROUP as regionSubgroup,
+			cat.CATEGORY_NAME as category,
+			lan.LANGUAGE_NAME as language, 	
+			m.START_TIME as startTime, 		
+			m.END_TIME as endTime,
+			m.SELECTED_DAYS as selectedDays, 
+			m.HAS_MENTO as hasMento,
+			mento.NICKNAME as mentoNickname,
+			m.COUNT as count, 
+			m.MATCHUP_COUNT as matchupCount,
+			m.STATUS as status
+		FROM MEMBER_MATCHUP mm
+			JOIN MATCHUP m ON mm.MATCHUP_ID = m.MATCHUP_ID
+			LEFT JOIN CATEGORY cat ON m.CATEGORY_ID = cat.CATEGORY_ID
+			LEFT JOIN LANGUAGE lan ON m.LANGUAGE_ID = lan.LANGUAGE_ID
+			LEFT JOIN MEMBER leader ON m.LEADER_ID = leader.MEMBER_ID
+			LEFT JOIN MEMBER mento ON m.MENTO_ID = mento.MEMBER_ID
+		WHERE mm.MEMBER_ID = #{memberId} 
+		and m.STATUS != 'DELETE'
+		and mm.STATUS != 'DELETE'
 	</select>
 	
 	<select id="selectMyCreateMatchUpList" parameterType="int" resultType="map">
