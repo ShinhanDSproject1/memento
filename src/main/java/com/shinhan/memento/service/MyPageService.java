@@ -257,6 +257,7 @@ public class MyPageService {
 					.mentoNickname((String) data.get("MENTONICKNAME"))
 					.count(((BigDecimal) data.get("COUNT")).intValue())
 					.matchupCount(((BigDecimal) data.get("MATCHUPCOUNT")).intValue())
+					.role("팀원")
 					.status((String) data.get("STATUS")).build();
 			selectMyJoinMatchupList.add(dto);
 		});
@@ -284,7 +285,7 @@ public class MyPageService {
 					.mentoNickname((String) data.get("MENTONICKNAME"))
 					.count(((BigDecimal) data.get("COUNT")).intValue())
 					.matchupCount(((BigDecimal) data.get("MATCHUPCOUNT")).intValue())
-					.role((String) data.get("ROLE"))
+					.role("방장")
 					.status((String) data.get("STATUS")).build();
 			selectMyCreateMatchupList.add(dto);
 		});
@@ -625,18 +626,17 @@ public class MyPageService {
 	}
 
 	public MyDashboardResponseDTO selectDataByDashboard(Integer memberId) {
-		// 매치업
+		// 내가 참여한 매치업
 		List<Map<String, Object>> matchUpData = mypageMapper.myJoinMatchupByDashboard(memberId);
 		List<MyJoinMatchupByDashboardResponseDTO> myMatchupDTOList = new ArrayList<>();
 
 		matchUpData.stream().forEach(data -> {
-			String role = ((BigDecimal) data.get("LEADERID")).intValue() == memberId ? "Leader" : "follower";
 			Boolean hasmento = hasMentoCheck(data.get("HASMENTO"));
 			
 			MyJoinMatchupByDashboardResponseDTO dto = MyJoinMatchupByDashboardResponseDTO.builder()
 					.leaderProfileImageUrl((String) data.get("LEADERPROFILEIMAGEURL"))
 					.title((String) data.get("TITLE"))
-					.role(role)
+					.role("follower")
 					.totalCount(((BigDecimal) data.get("TOTALCOUNT")).intValue())
 					.currentCount(((BigDecimal) data.get("CURRENTCOUNT")).intValue())
 					.matchStatus((String) data.get("MATCHSTATUS"))

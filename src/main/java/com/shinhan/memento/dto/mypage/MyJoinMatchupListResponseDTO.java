@@ -22,5 +22,6 @@ public class MyJoinMatchupListResponseDTO {
 	private String mentoNickname;
 	private Integer count;
 	private Integer matchupCount;
+	private String role;
 	private String status;
 }
