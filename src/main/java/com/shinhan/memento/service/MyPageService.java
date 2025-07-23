@@ -208,22 +208,24 @@ public class MyPageService {
 			Object reviewStatusObj = data.get("REVIEWSTATUS");
 			String reviewStatus = (reviewStatusObj == null) ? null : (String) reviewStatusObj;
 			Integer reviewId = (data.get("REVIEWID") == null) ? null : ((BigDecimal) data.get("REVIEWID")).intValue();
-			String startRaw = data.get("STARTTIME").toString(); // rawData.get("STARTTIME") 대신 사용
-			String endRaw = data.get("ENDTIME").toString(); // rawData.get("ENDTIME") 대신 사용
-			if (startRaw != null && startRaw.length() >= 16) {
-				startRaw = LocalTime.parse(startRaw.substring(11, 16)).format(DateTimeFormatter.ofPattern("HH:mm"));
-			}
-			if (endRaw != null && endRaw.length() >= 16) {
-				endRaw = LocalTime.parse(endRaw.substring(11, 16)).format(DateTimeFormatter.ofPattern("HH:mm"));
-			}
+			String startTime = convertTimestampObjectToStringFormatHHmm(data.get("STARTTIME"));
+			String endTime = convertTimestampObjectToStringFormatHHmm(data.get("ENDTIME")); 
 
 			MyMentosListResponseDTO dto = MyMentosListResponseDTO.builder()
-					.mentosId(((BigDecimal) data.get("MENTOSID")).intValue()).mentosImg((String) data.get("MENTOSIMG"))
-					.mentosTitle((String) data.get("MENTOSTITLE")).regionGroup((String) data.get("REGIONGROUP"))
-					.regionSubgroup((String) data.get("REGIONSUBGROUP")).startTime(startRaw).endTime(endRaw)
-					.selectedDays((String) data.get("SELECTEDDAYS")).mentoNickname((String) data.get("MENTONICKNAME"))
-					.mentoUserType((String) data.get("MENTOUSERTYPE")).status((String) data.get("STATUS"))
-					.reviewId(reviewId).reviewStatus(reviewStatus).build();
+					.mentosId(((BigDecimal) data.get("MENTOSID")).intValue())
+					.mentosImg((String) data.get("MENTOSIMG"))
+					.mentosTitle((String) data.get("MENTOSTITLE"))
+					.regionGroup((String) data.get("REGIONGROUP"))
+					.regionSubgroup((String) data.get("REGIONSUBGROUP"))
+					.startTime(startTime)
+					.endTime(endTime)
+					.selectedDays((String) data.get("SELECTEDDAYS"))
+					.mentoNickname((String) data.get("MENTONICKNAME"))
+					.mentoUserType((String) data.get("MENTOUSERTYPE"))
+					.status((String) data.get("STATUS"))
+					.reviewId(reviewId)
+					.reviewStatus(reviewStatus)
+					.build();
 
 			myMentosList.add(dto);
 		});
@@ -236,8 +238,8 @@ public class MyPageService {
 		List<Map<String, Object>> resultMJM = mypageMapper.selectJoinMyMatchUpList(memberId);
 
 		resultMJM.stream().forEach(data -> {
-			String startRaw = data.get("STARTTIME").toString(); // rawData.get("STARTTIME") 대신 사용
-			String endRaw = data.get("ENDTIME").toString(); // rawData.get("ENDTIME") 대신 사용
+			String startTime = convertTimestampObjectToStringFormatHHmm(data.get("STARTTIME"));
+			String endTime = convertTimestampObjectToStringFormatHHmm(data.get("ENDTIME")); 
 			Boolean hasmento = false;
 			Object hasMentoValue = data.get("HASMENTO");
 
@@ -246,12 +248,6 @@ public class MyPageService {
 				// Number 타입의 값을 int로 변환하여 1과 같은지 비교합니다.
 				// 1이면 true, 그 외의 숫자(0 등)는 false가 됩니다.
 				hasmento = ((Number) hasMentoValue).intValue() == 1;
-			}
-			if (startRaw != null && startRaw.length() >= 16) {
-				startRaw = LocalTime.parse(startRaw.substring(11, 16)).format(DateTimeFormatter.ofPattern("HH:mm"));
-			}
-			if (endRaw != null && endRaw.length() >= 16) {
-				endRaw = LocalTime.parse(endRaw.substring(11, 16)).format(DateTimeFormatter.ofPattern("HH:mm"));
 			}
 
 			MyJoinMatchupListResponseDTO dto = MyJoinMatchupListResponseDTO.builder()
@@ -262,8 +258,8 @@ public class MyPageService {
 					.regionSubgroup((String) data.get("REGIONSUBGROUP"))
 					.category((String) data.get("CATEGORY"))
 					.language((String) data.get("LANGUAGE"))
-					.startTime(startRaw)
-					.endTime(endRaw)
+					.startTime(startTime)
+					.endTime(endTime)
 					.selectedDays((String) data.get("SELECTEDDAYS"))
 					.hasMento(hasmento)
 					.mentoNickname((String) data.get("MENTONICKNAME"))
@@ -277,8 +273,8 @@ public class MyPageService {
 		List<MyCreateMatchupListResponseDTO> selectMyCreateMatchupList = new ArrayList<>();
 
 		resultMCM.stream().forEach(data -> {
-			String startRaw = data.get("STARTTIME").toString(); // rawData.get("STARTTIME") 대신 사용
-			String endRaw = data.get("ENDTIME").toString(); // rawData.get("ENDTIME") 대신 사용
+			String startTime = convertTimestampObjectToStringFormatHHmm(data.get("STARTTIME"));
+			String endTime = convertTimestampObjectToStringFormatHHmm(data.get("ENDTIME"));
 			Boolean hasmento = false;
 			Object hasMentoValue = data.get("HASMENTO");
 
@@ -287,12 +283,6 @@ public class MyPageService {
 				// Number 타입의 값을 int로 변환하여 1과 같은지 비교합니다.
 				// 1이면 true, 그 외의 숫자(0 등)는 false가 됩니다.
 				hasmento = ((Number) hasMentoValue).intValue() == 1;
-			}
-			if (startRaw != null && startRaw.length() >= 16) {
-				startRaw = LocalTime.parse(startRaw.substring(11, 16)).format(DateTimeFormatter.ofPattern("HH:mm"));
-			}
-			if (endRaw != null && endRaw.length() >= 16) {
-				endRaw = LocalTime.parse(endRaw.substring(11, 16)).format(DateTimeFormatter.ofPattern("HH:mm"));
 			}
 
 			MyCreateMatchupListResponseDTO dto = MyCreateMatchupListResponseDTO.builder()
@@ -303,8 +293,8 @@ public class MyPageService {
 					.regionSubgroup((String) data.get("REGIONSUBGROUP"))
 					.category((String) data.get("CATEGORY"))
 					.language((String) data.get("LANGUAGE"))
-					.startTime(startRaw)
-					.endTime(endRaw)
+					.startTime(startTime)
+					.endTime(endTime)
 					.selectedDays((String) data.get("SELECTEDDAYS"))
 					.hasMento(hasmento)
 					.mentoNickname((String) data.get("MENTONICKNAME"))
@@ -326,7 +316,8 @@ public class MyPageService {
 
 		result.stream().forEach(data -> {
 			MyPaymentListResponseDTO dto = MyPaymentListResponseDTO.builder().orderId((String) data.get("ORDERID"))
-					.amount(((BigDecimal) data.get("AMOUNT")).intValue()).payType((String) data.get("PAYTYPE"))
+					.amount(((BigDecimal) data.get("AMOUNT")).intValue())
+					.payType((String) data.get("PAYTYPE"))
 					.matchupId(((BigDecimal) data.get("MATCHUPID")).intValue())
 					.mentosId(((BigDecimal) data.get("MENTOSID")).intValue())
 					.keepgoingId(((BigDecimal) data.get("KEEPGOINGID")).intValue())
@@ -580,9 +571,14 @@ public class MyPageService {
 				.map(data -> data.get("INTERESTNAME") == null ? "" : (String) data.get("INTERESTNAME"))
 				.collect(Collectors.joining(" "));
 
-		MyProfileInfoResponseDTO dto = MyProfileInfoResponseDTO.builder().profileImgUrl(profileImageUrl)
-				.nickName(nickName).introduce(introduce).location(locationInfo).phoneNumber(phoneNumber)
-				.interestName(interestNames).build();
+		MyProfileInfoResponseDTO dto = MyProfileInfoResponseDTO.builder()
+				.profileImgUrl(profileImageUrl)
+				.nickName(nickName)
+				.introduce(introduce)
+				.location(locationInfo)
+				.phoneNumber(phoneNumber)
+				.interestName(interestNames)
+				.build();
 		return dto;
 
 	}
@@ -661,9 +657,13 @@ public class MyPageService {
 				hasmento = ((Number) hasMentoValue).intValue() == 1;
 			}
 			MyJoinMatchupByDashboardResponseDTO dto = MyJoinMatchupByDashboardResponseDTO.builder()
-					.leaderProfileImageUrl((String) data.get("LEADERPROFILEIMAGEURL")).title((String) data.get("TITLE"))
-					.role(role).totalCount(((BigDecimal) data.get("TOTALCOUNT")).intValue()).currentCount(0)
-					.matchStatus((String) data.get("MATCHSTATUS")).hasMento(hasmento).build();
+					.leaderProfileImageUrl((String) data.get("LEADERPROFILEIMAGEURL"))
+					.title((String) data.get("TITLE"))
+					.role(role)
+					.totalCount(((BigDecimal) data.get("TOTALCOUNT")).intValue())
+					.currentCount(((BigDecimal) data.get("CURRENTCOUNT")).intValue())
+					.matchStatus((String) data.get("MATCHSTATUS"))
+					.hasMento(hasmento).build();
 
 			myMatchupDTOList.add(dto);
 		});
@@ -682,10 +682,12 @@ public class MyPageService {
 				hasmento = ((Number) hasMentoValue).intValue() == 1;
 			}
 			MyJoinMatchupByDashboardResponseDTO dto = MyJoinMatchupByDashboardResponseDTO.builder()
-					.leaderProfileImageUrl((String) data.get("LEADERPROFILEIMAGEURL")).title((String) data.get("TITLE"))
-					.role("Leader").totalCount(((BigDecimal) data.get("TOTALCOUNT")).intValue()).currentCount(0)
+					.leaderProfileImageUrl((String) data.get("LEADERPROFILEIMAGEURL"))
+					.title((String) data.get("TITLE"))
+					.role("Leader")
+					.totalCount(((BigDecimal) data.get("TOTALCOUNT")).intValue())
+					.currentCount(((BigDecimal) data.get("CURRENTCOUNT")).intValue())
 					.matchStatus((String) data.get("MATCHSTATUS")).hasMento(hasmento).build();
-
 			createMatchupDtoList.add(dto);
 		});
 
@@ -694,12 +696,12 @@ public class MyPageService {
 		List<MyJoinMentosByDashboardResponseDTO> myMentosDTOList = new ArrayList<>();
 
 		mentosData.stream().forEach(data -> {
-			String mentoNickname = ((BigDecimal) data.get("MENTOID")).intValue() == memberId ? "Mentor"
-					: (String) data.get("MENTONICKNAME");
 			MyJoinMentosByDashboardResponseDTO dto = MyJoinMentosByDashboardResponseDTO.builder()
-					.mentosTitle((String) data.get("MENTOSTITLE")).mentosImage((String) data.get("MENTOSIMAGE"))
-					.mentoNickname(mentoNickname).mentosStatus((String) data.get("MENTOSSTATUS")).build();
-
+					.mentosTitle((String) data.get("MENTOSTITLE"))
+					.mentosImage((String) data.get("MENTOSIMAGE"))
+					.mentoNickname((String) data.get("MENTONICKNAME"))
+					.mentosStatus((String) data.get("MENTOSSTATUS"))
+					.build();
 			myMentosDTOList.add(dto);
 		});
 
@@ -707,9 +709,11 @@ public class MyPageService {
 		MyMatchTypeByDashboardResponseDTO myMatchTypeData = mypageMapper.myMatchTypeByDashboard(memberId);
 
 		MyDashboardResponseDTO dashboardData = MyDashboardResponseDTO.builder()
-				.myCreateMatchupDashboardList(createMatchupDtoList).myMatchupDashboardList(myMatchupDTOList)
-				.myMentosDashboardList(myMentosDTOList).myMatchTypeData(myMatchTypeData).build();
-
+				.myCreateMatchupDashboardList(createMatchupDtoList)
+				.myMatchupDashboardList(myMatchupDTOList)
+				.myMentosDashboardList(myMentosDTOList)
+				.myMatchTypeData(myMatchTypeData)
+				.build();
 		return dashboardData;
 	}
 
@@ -814,6 +818,19 @@ public class MyPageService {
 	public MyPageSideBarResponseDTO selectMySideBarInfo(Integer memberId) {
 		MyPageSideBarResponseDTO dto = mypageMapper.selectMySideBarInfo(memberId);
 		return dto;
+	}
+	
+	private String convertTimestampObjectToStringFormatHHmm(Object timestampObject) {
+		String timeRaw = timestampObject.toString();
+		if(timeRaw == null) {
+			return null; //예외처리 timestamp == null
+		}
+		
+		if(timeRaw.length() >= 16) {
+			return null; //예외처리 timestamp.length()가 짧아요
+		}
+		
+		return LocalTime.parse(timeRaw.substring(11, 16)).format(DateTimeFormatter.ofPattern("HH:mm"));
 	}
 
 }
