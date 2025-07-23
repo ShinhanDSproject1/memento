@@ -290,8 +290,10 @@ public class MyPageService {
 			selectMyCreateMatchupList.add(dto);
 		});
 
-		MypageMatchupListDTO returnDto = MypageMatchupListDTO.builder().myMatchupList(selectMyJoinMatchupList)
-				.mymatchupCreateList(selectMyCreateMatchupList).build();
+		MypageMatchupListDTO returnDto = MypageMatchupListDTO.builder()
+				.myMatchupList(selectMyJoinMatchupList)
+				.mymatchupCreateList(selectMyCreateMatchupList)
+				.build();
 		return returnDto;
 	}
 
@@ -348,9 +350,7 @@ public class MyPageService {
 
 				// 웹에서 접근 가능한 경로로 구성 (리소스 경로 기준)
 				imageUrl = "/resources/uploadImage/" + savedFileName;
-				log.info("이미지 저장 완료: {}", imageUrl);
 			} catch (IOException e) {
-				log.error("이미지 업로드 실패", e);
 				return false;
 			}
 		} else {
@@ -381,7 +381,9 @@ public class MyPageService {
 				.nickname(dto.getNickname()).phoneNumber(dto.getPhone()).introduce(dto.getIntroduction())
 				.regionGroup(regeionGroup == "" ? null : regeionGroup)
 				.regionSubGroup(regionSubGroup == "" ? null : regionSubGroup)
-				.regionDetail(regionDetail == "" ? null : regionDetail).profileImageUrl(imageUrl).build();
+				.regionDetail(regionDetail == "" ? null : regionDetail)
+				.profileImageUrl(imageUrl)
+				.build();
 
 		int result = mypageMapper.updateProfileInfo(myProfileDBUpdateDTO);
 
@@ -581,18 +583,8 @@ public class MyPageService {
 		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss"); // Adjust format as needed
 
 		result.stream().forEach(data -> {
-			Timestamp payAtTimestamp = (Timestamp) data.get("PAYAT");
-			Timestamp mentosStartDay = (Timestamp) data.get("MENTOSSTARTDAY");
-			String payAtFormatted = null;
-			String startDayFormatted = null;
-			if (payAtTimestamp != null) {
-				// Convert Timestamp to Date and then format to String
-				payAtFormatted = formatter.format(new Date(payAtTimestamp.getTime()));
-			}
-			if (mentosStartDay != null) {
-				// Convert Timestamp to Date and then format to String
-				startDayFormatted = formatter.format(new Date(mentosStartDay.getTime()));
-			}
+			String payAtFormatted = convertTimestampObjectToStringFormatFull(data.get("PAYAT"));
+			String startDayFormatted = convertTimestampObjectToStringFormatFull(data.get("MENTOSSTARTDAY"));;
 
 			PaymentDetailResponseDTO dto = PaymentDetailResponseDTO.builder().orderId((String) data.get("ORDERID"))
 					.amount(((BigDecimal) data.get("AMOUNT")).intValue())
@@ -657,7 +649,10 @@ public class MyPageService {
 					.role("Leader")
 					.totalCount(((BigDecimal) data.get("TOTALCOUNT")).intValue())
 					.currentCount(((BigDecimal) data.get("CURRENTCOUNT")).intValue())
-					.matchStatus((String) data.get("MATCHSTATUS")).hasMento(hasmento).build();
+					.matchStatus((String) data.get("MATCHSTATUS"))
+					.hasMento(hasmento)
+					.build();
+			
 			createMatchupDtoList.add(dto);
 		});
 
@@ -672,6 +667,7 @@ public class MyPageService {
 					.mentoNickname((String) data.get("MENTONICKNAME"))
 					.mentosStatus((String) data.get("MENTOSSTATUS"))
 					.build();
+			
 			myMentosDTOList.add(dto);
 		});
 
@@ -684,6 +680,7 @@ public class MyPageService {
 				.myMentosDashboardList(myMentosDTOList)
 				.myMatchTypeData(myMatchTypeData)
 				.build();
+		
 		return dashboardData;
 	}
 
@@ -716,18 +713,18 @@ public class MyPageService {
 
 			refundDataList.add(dto);
 		});
-		RefundRequestDTO shareDataDTO = refundDataList.get(0);
+		
+		RefundRequestDTO shareDataDTO = refundDataList.get(0);//공통(중복) 데이터
 		Integer initBalance = shareDataDTO.getUserBalance();
 		Integer amount = shareDataDTO.getAmount();
 		String payType = shareDataDTO.getPayType();
 
 		// CHARGE or USE or REFUND -> REFUND의 경우 버튼이 존재하지 않음
-
 		if (payType.equalsIgnoreCase("REFUND")) {
 			return false;
 		} else if (payType.equalsIgnoreCase("CHARGE")) {
 			if (initBalance < amount) {
-				return false;
+				return false; // 예외처리
 			} else {
 				initBalance -= amount;
 			}
@@ -741,7 +738,7 @@ public class MyPageService {
 					if (jmatchCancel > 0) {
 						initBalance += refund.getMatchupPrice();
 					} else {
-						return false;
+						return false; // 매치업 취소 예외처리
 					}
 
 				}
@@ -753,7 +750,7 @@ public class MyPageService {
 					if (jmentosCancel > 0) {
 						initBalance += refund.getMentosPrice();
 					} else {
-						return false;
+						return false; // 멘토스 취소 예외처리
 					}
 
 				}
@@ -774,12 +771,12 @@ public class MyPageService {
 		Integer resultBalance = initBalance;
 		int balanceUpdateResult = mypageMapper.updateUserBalanceByRefund(resultBalance, memberId);
 		if (balanceUpdateResult <= 0) {
-			return false;
+			throw new MypageException(BaseExceptionResponseStatus.FAILURE, "잔액 변경 실패");
 		}
 		// payment update -> 주문번호
 		int paymentUpateRefundResult = mypageMapper.updatePaymentByRefund(orderId);
 		if (paymentUpateRefundResult <= 0) {
-			return false;
+			return false; // 예외처리 - payment update 실패
 		}
 
 		return result;
@@ -790,6 +787,7 @@ public class MyPageService {
 		return dto;
 	}
 	
+	//날짜 HH:mm 형태 String으로 변경
 	private String convertTimestampObjectToStringFormatHHmm(Object timestampObject) {
 		String timeRaw = timestampObject.toString();
 		if(timeRaw == null) {
@@ -802,6 +800,17 @@ public class MyPageService {
 		
 		return LocalTime.parse(timeRaw.substring(11, 16)).format(DateTimeFormatter.ofPattern("HH:mm"));
 	}
+	
+	//날짜 yyyy-MM-dd HH:mm:ss 형태 String으로 변경
+	private String convertTimestampObjectToStringFormatFull(Object timestampObject) {
+		String timeRaw = timestampObject.toString();
+		if(timeRaw == null) {
+			return null; //예외처리 timestamp == null
+		}
+		
+		return LocalTime.parse(timeRaw).format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
+	}
+	
 	private Boolean hasMentoCheck(Object hasMentoObject) {
 		if(hasMentoObject == null) {
 			return false; //예외처리 hasMento 값이 없어요...
