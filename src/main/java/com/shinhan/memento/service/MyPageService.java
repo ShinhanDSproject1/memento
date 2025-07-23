@@ -803,9 +803,14 @@ public class MyPageService {
 		return LocalTime.parse(timeRaw.substring(11, 16)).format(DateTimeFormatter.ofPattern("HH:mm"));
 	}
 	private Boolean hasMentoCheck(Object hasMentoObject) {
+		if(hasMentoObject == null) {
+			return false; //예외처리 hasMento 값이 없어요...
+		}
+		
 		if (hasMentoObject instanceof Number) {
 			return ((Number) hasMentoObject).intValue() == 1;
 		}
+		
 		return false;
 	}
 
