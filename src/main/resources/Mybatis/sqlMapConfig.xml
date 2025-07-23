@@ -8,8 +8,5 @@
 		<!-- null처리 -->
 		<setting name="jdbcTypeForNull" value="NULL" />
 	</settings>
-	<typeAliases>
-		<typeAlias type="com.shinhan.memento.dto.mypage.MyMatchupListResponseDTO" alias="myMatchupListDTO" />
-	</typeAliases>
 	
 </configuration>
