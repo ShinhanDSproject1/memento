@@ -12,7 +12,8 @@ import lombok.ToString;
 public class MyProfileUpdateRequestDTO {
 	private String nickname;
 	private String interestNames;
-	private String address;
+	private String roadAddress;
+	private String detailAddress;
 	private String phone;
 	private String introduction;
 	private String originalProfileUrl;

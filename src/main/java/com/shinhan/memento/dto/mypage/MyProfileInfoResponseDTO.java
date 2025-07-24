@@ -11,7 +11,8 @@ public class MyProfileInfoResponseDTO {
 	private String profileImgUrl;
 	private String nickName;
 	private String introduce;
-	private String location;
+	private String roadAddress;
+	private String detailAddress;
 	private String phoneNumber;
 	private String interestName;
 }

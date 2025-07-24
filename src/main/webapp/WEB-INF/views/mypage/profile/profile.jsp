@@ -5,6 +5,8 @@
 
 <link rel="stylesheet" href="${cpath}/resources/css/mypage/profile/mypageProfileStyle.css" />
 <script src = "${cpath}/resources/js/mypage/profile/profile-detail.js"></script>
+<script
+	src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 
 <!-- 취소 팝업 -->
 <jsp:include page="/WEB-INF/views/mypage/popup/cancelPopup.jsp" />
@@ -52,9 +54,20 @@
 				</div>
 
 				<div class="form-row">
-					<label for="address" class="form-label">주소 관리</label>
-					<div class="form-value">
-							<input type="text" class="form-input-field form-input-text" id="address"/>
+					<div class="title">도로명 주소</div>
+					<div class="address-area">
+						<div class="postal-code-area">
+							<input type="text" id="postcode" class="form-input-field form-input-text"
+								placeholder="우편번호" readonly />
+							<button type="button" class="postal-code-btn"
+								onclick="execDaumPostcode()">우편번호 찾기</button>
+						</div>
+	
+						<input type="text" id="roadAddress" class="form-input-field form-input-text"
+							placeholder="도로명 주소" readonly />
+							<input type="text"
+							id="detailAddress" name="detailAddress" class="form-input-field form-input-text"
+							placeholder="상세 주소를 입력하세요" />
 					</div>
 				</div>
 

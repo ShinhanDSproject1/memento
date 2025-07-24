@@ -358,8 +358,8 @@ public class MyPageService {
 		String regeionGroup = "";
 		String regionSubGroup = "";
 		String regionDetail = "";
-		if (dto.getAddress().trim() != "") {
-			String[] locationInfo = dto.getAddress().split(" ");
+		if (dto.getRoadAddress().trim() != "") {
+			String[] locationInfo = dto.getRoadAddress().split(" ");
 			if (locationInfo.length == 1) {
 				regeionGroup = locationInfo[0].trim();
 			} else if (locationInfo.length == 2) {
@@ -369,10 +369,17 @@ public class MyPageService {
 				regeionGroup = locationInfo[0].trim();
 				regionSubGroup = locationInfo[1].trim();
 				for (int i = 2; i < locationInfo.length; i++) {
-					regionDetail += locationInfo[i];
+					if(i != locationInfo.length) {
+						regionDetail += locationInfo[i]+" ";
+					}else {
+						regionDetail += locationInfo[i];
+					}
 				}
-				regionDetail.trim();
 			}
+		}
+		
+		if (dto.getDetailAddress().trim() != "") {
+			regionDetail += dto.getDetailAddress().trim();
 		}
 		MyProfileDBUpdateDTO myProfileDBUpdateDTO = MyProfileDBUpdateDTO.builder().memberId(memberId)
 				.nickname(dto.getNickname()).phoneNumber(dto.getPhone()).introduce(dto.getIntroduction())
@@ -549,7 +556,8 @@ public class MyPageService {
 				: (String) result.get(0).get("REGIONSUBGROUP");
 		String regionDetail = result.get(0).get("REGIONDETAIL") == null ? ""
 				: (String) result.get(0).get("REGIONDETAIL");
-		String locationInfo = regionGroup + " " + regionSubGroup + " " + regionDetail;
+		String roadAddress = regionGroup + " " + regionSubGroup;
+	    String detailAddress = regionDetail;
 		String phoneNumber = result.get(0).get("PHONENUMBER") == null ? "" : (String) result.get(0).get("PHONENUMBER");
 		String interestNames = result.stream()
 				.map(data -> data.get("INTERESTNAME") == null ? "" : (String) data.get("INTERESTNAME"))
@@ -559,7 +567,8 @@ public class MyPageService {
 				.profileImgUrl(profileImageUrl)
 				.nickName(nickName)
 				.introduce(introduce)
-				.location(locationInfo)
+				.roadAddress(roadAddress)
+				.detailAddress(detailAddress)
 				.phoneNumber(phoneNumber)
 				.interestName(interestNames)
 				.build();

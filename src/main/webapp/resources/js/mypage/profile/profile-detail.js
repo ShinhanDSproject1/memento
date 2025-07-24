@@ -1,5 +1,16 @@
 $(() => {
     fetchProfileData()
+    // 5. 다음 주소 API
+	window.execDaumPostcode = function () {
+		new daum.Postcode({
+			oncomplete: function (data) {
+				$("#postcode").val(data.zonecode);
+				$("#roadAddress").val(data.roadAddress);
+				$("#detailAddress").focus();
+				currentIdempotencyKey = null;
+			}
+		}).open();
+	};
     const profileForm = document.getElementById('profileForm');
 
     profileForm.addEventListener('submit', async function (e) {
@@ -7,7 +18,8 @@ $(() => {
         const formData = new FormData();
         formData.append('nickname', document.getElementById('nickname').value)
         formData.append('interestNames', document.getElementById('interestNames').value)
-        formData.append('address', document.getElementById('address').value)
+        formData.append('roadAddress', document.getElementById('roadAddress').value)
+        formData.append('detailAddress', document.getElementById('detailAddress').value)
         formData.append('phone', document.getElementById('phone').value)
         formData.append('introduction', document.getElementById('introduction').value)
         const imgFile = document.getElementById('profile-img').files[0]
@@ -33,7 +45,9 @@ $(() => {
                 modal.querySelector(".confirm-btn").addEventListener("click", function () {
                     modal.classList.add("hidden")
                     fetchProfileData()
+
                 });
+                window.location.reload()
             }
             else {
                 console.error("에러 발생");
@@ -75,8 +89,6 @@ $(() => {
             // 4. 실제 데이터가 담긴 `result` 배열을 가져옵니다.
             const profileData = data.result;
 
-            console.log(profileData)
-
             const profileImg = document.getElementById('profile-image-input')
             profileImg.alt = '프로필 이미지'
             imgUrl(profileImg, profileData.profileImgUrl)
@@ -106,13 +118,20 @@ $(() => {
                 interestNames.value = intersetNameValue.trim()
             }
 
-            const address = document.getElementById('address')
-            console.log(profileData.location.trim())
-
-            if (profileData.location.trim() == "") {
-                address.placeholder = '주소 정보가 없습니다'
+            const roadAddress = document.getElementById('roadAddress')
+			
+            if (profileData.roadAddress.trim() == "") {
+                roadAddress.placeholder = '주소 정보가 없습니다'
             } else {
-                address.value = `${profileData.location}`
+                roadAddress.value = `${profileData.roadAddress}`
+            }
+            
+            const detailAddress = document.getElementById('detailAddress')
+
+            if (profileData.detailAddress.trim() == "") {
+                detailAddress.placeholder = '주소 정보가 없습니다'
+            } else {  	
+                detailAddress.value = `${profileData.detailAddress}`
             }
 
             const phone = document.getElementById('phone')

@@ -33,6 +33,8 @@ $(() => {
 			// 기존에 표시되던 내용을 초기화합니다.
 			container.innerHTML = '';
 
+			console.log(groupedOrders)
+
 			// 3. 그룹화된 각 주문을 순회하며 화면에 표시할 요소를 만듭니다.
 			for (const orderId in groupedOrders) {
 				const items = groupedOrders[orderId]; // 해당 주문에 속한 모든 상품 배열
