@@ -119,7 +119,6 @@ public class MyPageService {
 	public ValidateCashResponseDTO validateCash(ValidateCashRequestDTO reqDTO, int userId) {
 		CashProduct product = myPageDAO.validateCash(reqDTO.getCashProductID());
 		String orderId = UUID.randomUUID().toString();
-		System.out.println(orderId);
 		Payment payment = Payment.builder().memberId(userId).orderId(orderId).amount(product.getAmount())
 				.step(PaymentStep.WAIT).payType(PayType.CHARGE).status(BaseStatus.ACTIVE).build();
 
@@ -424,8 +423,7 @@ public class MyPageService {
 		}
 
 		// 입력받은 관심사 이름을 Set으로 변환
-		Set<String> inputInterestNameSet = inputInterestNamesList.stream().map(String::toUpperCase) // <-- 이 부분을 추가하여
-																									// 대문자로 통일
+		Set<String> inputInterestNameSet = inputInterestNamesList.stream().map(String::toUpperCase) // 대문자로 통일
 				.collect(Collectors.toSet());
 
 		// member id로 이전 관심사들 모두 조회
@@ -786,7 +784,7 @@ public class MyPageService {
 		// payment update -> 주문번호
 		int paymentUpateRefundResult = mypageMapper.updatePaymentByRefund(orderId);
 		if (paymentUpateRefundResult <= 0) {
-			return false; // 예외처리 - payment update 실패
+			throw new MypageException(BaseExceptionResponseStatus.CANNOT_UPDATE_PAYMENT_STATUS_BY_REFUND);
 		}
 
 		return result;

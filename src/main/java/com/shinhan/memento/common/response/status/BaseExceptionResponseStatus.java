@@ -40,6 +40,7 @@ public enum BaseExceptionResponseStatus implements ResponseStatus {
 	/**
 	 * 7000 : 결제 관련?
 	 */
+	CANNOT_UPDATE_PAYMENT_STATUS_BY_REFUND(7001, HttpStatus.BAD_REQUEST.value(), "결제 상태 업데이트 실패"),
 
 	/**
 	 * 8000 : member_mentos 관련
