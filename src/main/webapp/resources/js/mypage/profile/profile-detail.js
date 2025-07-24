@@ -6,6 +6,7 @@ $(() => {
 			oncomplete: function (data) {
 				$("#postcode").val(data.zonecode);
 				$("#roadAddress").val(data.roadAddress);
+				$("#detailAddress").val("");
 				$("#detailAddress").focus();
 				currentIdempotencyKey = null;
 			}
@@ -113,7 +114,6 @@ $(() => {
                     if (element != "") {
                         intersetNameValue += '#' + element + " "
                     }
-
                 });
                 interestNames.value = intersetNameValue.trim()
             }
@@ -153,7 +153,6 @@ $(() => {
                 }
             } else {
                 introduction.placeholder = '아직 소개 정보가 등록되지 않았습니다.'
-
             }
 
         } catch (error) {

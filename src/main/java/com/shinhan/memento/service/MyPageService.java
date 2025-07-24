@@ -11,8 +11,6 @@ import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.nio.file.Files;
 import java.nio.file.StandardCopyOption;
-import java.sql.Timestamp;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Base64;
 import java.util.HashMap;
@@ -81,10 +79,13 @@ import com.shinhan.memento.util.MentoTestProblemBook;
 import com.shinhan.memento.util.MentoTestWebSocketHandler;
 
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.PropertySource;
+
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @Service
+@PropertySource("classpath:application-secret.properties")
 public class MyPageService {
 
 	@Autowired
@@ -102,6 +103,9 @@ public class MyPageService {
 	@Autowired
 	private MemberMentosService memberMentosService;
 
+	@Value("${toss.secret-key}")
+	String tossSecretKey;// 너의 시크릿키로 변경
+	
 	// 킵고잉 탈퇴용
 	@Autowired
 	SqlSession sqlSession;
@@ -166,7 +170,6 @@ public class MyPageService {
 	/* 실제 Toss API 호출 */
 	private boolean callTossPaymentsConfirmApi(ConfirmCashRequestDTO reqDTO) {
 		try {
-			String tossSecretKey = "test_gsk_docs_OaPz8L5KdmQXkzRz3y47BMw6"; // 너의 시크릿키로 변경
 			String apiUrl = "https://api.tosspayments.com/v1/payments/confirm";
 
 			// 1. HTTP Basic Auth 헤더 만들기
@@ -255,7 +258,9 @@ public class MyPageService {
 					.count(((BigDecimal) data.get("COUNT")).intValue())
 					.matchupCount(((BigDecimal) data.get("MATCHUPCOUNT")).intValue())
 					.role("팀원")
-					.status((String) data.get("STATUS")).build();
+					.status((String) data.get("STATUS"))
+					.build();
+			
 			selectMyJoinMatchupList.add(dto);
 		});
 
@@ -330,6 +335,7 @@ public class MyPageService {
 		return SparkTestResultResponseDTO.builder().result(updateTypeResult == 1 ? "success" : "fail").build();
 	}
 
+	//코드가 일단 더러워요...
 	@Transactional
 	public boolean updateProfile(Integer memberId, MyProfileUpdateRequestDTO dto, MultipartFile imgFile) {
 		String imageUrl = null;
@@ -369,18 +375,16 @@ public class MyPageService {
 				regeionGroup = locationInfo[0].trim();
 				regionSubGroup = locationInfo[1].trim();
 				for (int i = 2; i < locationInfo.length; i++) {
-					if(i != locationInfo.length) {
 						regionDetail += locationInfo[i]+" ";
-					}else {
-						regionDetail += locationInfo[i];
-					}
 				}
+				regionDetail.trim();
 			}
 		}
 		
 		if (dto.getDetailAddress().trim() != "") {
 			regionDetail += dto.getDetailAddress().trim();
 		}
+		
 		MyProfileDBUpdateDTO myProfileDBUpdateDTO = MyProfileDBUpdateDTO.builder().memberId(memberId)
 				.nickname(dto.getNickname()).phoneNumber(dto.getPhone()).introduce(dto.getIntroduction())
 				.regionGroup(regeionGroup == "" ? null : regeionGroup)
@@ -586,7 +590,6 @@ public class MyPageService {
 	public List<PaymentDetailResponseDTO> selectPaymentDetail(String orderId) {
 		List<Map<String, Object>> result = mypageMapper.selectPaymentDetail(orderId);
 		List<PaymentDetailResponseDTO> selectPaymentDetailList = new ArrayList<>();
-		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss"); // Adjust format as needed
 
 		result.stream().forEach(data -> {
 			String payAtFormatted = convertTimestampObjectToStringFormatFull(data.get("PAYAT"));
@@ -698,7 +701,8 @@ public class MyPageService {
 		List<RefundRequestDTO> refundDataList = new ArrayList<RefundRequestDTO>();
 
 		refundDataMap.stream().forEach(data -> {
-			RefundRequestDTO dto = RefundRequestDTO.builder().orderId((String) data.get("ORDERID"))
+			RefundRequestDTO dto = RefundRequestDTO.builder()
+					.orderId((String) data.get("ORDERID"))
 					.amount(data.get("AMOUNT") == null ? 0 : ((BigDecimal) data.get("AMOUNT")).intValue())
 					.payType((String) data.get("PAYTYPE"))
 					.matchupId(data.get("MATCHUPID") == null ? 0 : ((BigDecimal) data.get("MATCHUPID")).intValue())
