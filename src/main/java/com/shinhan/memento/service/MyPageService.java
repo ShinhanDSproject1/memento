@@ -806,7 +806,7 @@ public class MyPageService {
 		}
 		
 		String timeRaw = timestampObject.toString();
-		if(timeRaw.length() >= 16) {
+		if(timeRaw.length() < 16) {
 			throw new MypageException(BaseExceptionResponseStatus.CANNOT_SWITCH_TIMESTAMP_OBJECT_LENGTH_ERROR);
 		}
 		
