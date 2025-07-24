@@ -37,6 +37,9 @@ public enum BaseExceptionResponseStatus implements ResponseStatus {
 	NEED_LOGIN(6000, HttpStatus.UNAUTHORIZED.value(), "로그인이 필요합니다."),
 	CANNOT_INSERT_MENTOTEST_HISTORY(6001, HttpStatus.BAD_REQUEST.value(), "멘토테스트 기록 실패"),
 	CANNOT_UPDATE_MEMBER_USERTYPE(6002, HttpStatus.BAD_REQUEST.value(), "멤버 유저타입 업데이트 실패"),
+	CANNOT_FOUND_TIMESTAMP_OBJECT(6003, HttpStatus.BAD_REQUEST.value(), "TIMESTAMP OBJECT를 찾을 수 없습니다."),
+	CANNOT_SWITCH_TIMESTAMP_OBJECT_LENGTH_ERROR(6004, HttpStatus.BAD_REQUEST.value(), "TIMESTAMP OBJECT를 시간으로 변환하기에는 길이가 짧습니다."),
+	CANNOT_FOUND_HASMENTO_OBJECT(6005, HttpStatus.BAD_REQUEST.value(), "HASMENTO OBJECT를 찾을 수 없습니다."),
 	/**
 	 * 7000 : 결제 관련?
 	 */

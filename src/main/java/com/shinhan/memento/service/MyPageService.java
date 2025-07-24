@@ -363,6 +363,8 @@ public class MyPageService {
 		String regeionGroup = "";
 		String regionSubGroup = "";
 		String regionDetail = "";
+		
+		//여기 함수화
 		if (dto.getRoadAddress().trim() != "") {
 			String[] locationInfo = dto.getRoadAddress().split(" ");
 			if (locationInfo.length == 1) {
@@ -393,10 +395,12 @@ public class MyPageService {
 				.build();
 
 		int result = mypageMapper.updateProfileInfo(myProfileDBUpdateDTO);
-
+		//여기 예외처리 추가
+		
 		List<String> inputInterestNamesList = new ArrayList<>();
 		String interestString = dto.getInterestNames();
 
+		//여긴 js 도입하고 고쳐봐야 하나? + 예외처리 하나도 안 되어 있음
 		if (interestString != null && !interestString.trim().isEmpty()) {
 			String processedNames = interestString.replaceAll("(?i)c#", "C_SHARP"); // 임시 문자로 변경
 			String[] tags = processedNames.trim().split("\\s+");
@@ -729,10 +733,10 @@ public class MyPageService {
 
 		// CHARGE or USE or REFUND -> REFUND의 경우 버튼이 존재하지 않음
 		if (payType.equalsIgnoreCase("REFUND")) {
-			return false;
+			return false; // 예외처리(이미 환불)
 		} else if (payType.equalsIgnoreCase("CHARGE")) {
 			if (initBalance < amount) {
-				return false; // 예외처리
+				return false; // 예외처리(캐시 부족)
 			} else {
 				initBalance -= amount;
 			}
@@ -798,12 +802,12 @@ public class MyPageService {
 	//날짜 HH:mm 형태 String으로 변경
 	private String convertTimestampObjectToStringFormatHHmm(Object timestampObject) {
 		if(timestampObject == null) {
-			return null; //예외처리 timestamp == null
+			throw new MypageException(BaseExceptionResponseStatus.CANNOT_FOUND_TIMESTAMP_OBJECT);
 		}
 		
 		String timeRaw = timestampObject.toString();
 		if(timeRaw.length() >= 16) {
-			return null; //예외처리 timestamp.length()가 짧아요
+			throw new MypageException(BaseExceptionResponseStatus.CANNOT_SWITCH_TIMESTAMP_OBJECT_LENGTH_ERROR);
 		}
 		
 		return LocalTime.parse(timeRaw.substring(11, 16)).format(DateTimeFormatter.ofPattern("HH:mm"));
@@ -812,7 +816,7 @@ public class MyPageService {
 	//날짜 yyyy-MM-dd HH:mm:ss 형태 String으로 변경
 	private String convertTimestampObjectToStringFormatFull(Object timestampObject) {
 		if(timestampObject == null) {
-			return null; //예외처리 timestamp == null
+			throw new MypageException(BaseExceptionResponseStatus.CANNOT_FOUND_TIMESTAMP_OBJECT);
 		}
 		
 		String timeRaw = timestampObject.toString();
@@ -821,7 +825,7 @@ public class MyPageService {
 	
 	private Boolean hasMentoCheck(Object hasMentoObject) {
 		if(hasMentoObject == null) {
-			return false; //예외처리 hasMento 값이 없어요...
+			throw new MypageException(BaseExceptionResponseStatus.CANNOT_FOUND_HASMENTO_OBJECT);
 		}
 		
 		if (hasMentoObject instanceof Number) {
