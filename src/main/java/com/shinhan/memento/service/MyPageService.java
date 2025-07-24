@@ -820,6 +820,11 @@ public class MyPageService {
 		}
 		
 		String timeRaw = timestampObject.toString();
+		if(timeRaw.length() < 19) {
+			throw new MypageException(BaseExceptionResponseStatus.CANNOT_SWITCH_TIMESTAMP_OBJECT_LENGTH_ERROR);
+		}
+		
+		
 		return LocalDateTime.parse(timeRaw.substring(0, 19).replaceAll(" ", "T")).format(DateTimeFormatter.ofPattern("yyyy-MM-dd hh:mm:ss"));
 	}
 	
