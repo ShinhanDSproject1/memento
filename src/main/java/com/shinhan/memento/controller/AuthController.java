@@ -22,11 +22,11 @@ public class AuthController {
 	@Autowired
     MemberService memberService;
 
-    @Value("${kakao.client-id}")
-    private String clientId;
+	@Value("${KAKAO_CLIENT_ID}")
+	private String clientId;
 
-    @Value("${kakao.redirect-uri}")
-    private String redirectUri;
+	@Value("${KAKAO_REDIRECT_URI}")
+	private String redirectUri;
 
     @GetMapping("/api/auth/kakao/callback")
     public String kakaoLogin(@RequestParam("code") String code, HttpSession session) throws Exception {
