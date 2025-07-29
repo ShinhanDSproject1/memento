@@ -15,7 +15,7 @@ import com.shinhan.memento.service.MemberService;
 import lombok.RequiredArgsConstructor;
 
 @Controller
-@PropertySource("classpath:application-secret.properties")
+//@PropertySource("classpath:application-secret.properties")
 @RequiredArgsConstructor
 public class AuthController {
 
