@@ -29,6 +29,8 @@ public class MainPageController {
     public String mainPageView(Model model, HttpSession session) {
     	Member loginUser = (Member) session.getAttribute("loginUser");
     	
+    	System.out.println("TEST");
+    	
         if (loginUser != null) {
             model.addAttribute("loginId", loginUser.getMemberId());
         }
