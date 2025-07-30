@@ -158,7 +158,7 @@ CREATE TABLE review (
 	mentos_id	int		NOT NULL,
 	mento_id	int		NOT NULL,
 	review_img	varchar2(200)	NULL,
-	score		double		NOT NULL,
+	score		int		NOT NULL,
 	review_comment	varchar2(500)	NULL,
 	created_at	Date		NOT NULL,
 	updated_at	Date		NULL,
@@ -199,7 +199,7 @@ CREATE TABLE matchup (
 	min_memeber		int		NOT NULL,
 	max_member		int		NOT NULL,
 	content			varchar2(3000)	NULL,
-	has_mento		boolean		NOT NULL,
+	has_mento		int		NOT NULL,
 	price			int		NOT NULL,
 	kg_count		int		NOT NULL,
 	region_group		varchar2(100)	NOT NULL,
@@ -272,7 +272,7 @@ ALTER TABLE language ADD CONSTRAINT PK_LANGUAGE PRIMARY KEY (
 );
 
 ALTER TABLE mentotest_history ADD CONSTRAINT PK_MENTOTEST_HISTORY PRIMARY KEY (
-	metotest_history_id
+	mentotest_history_id
 );
 
 ALTER TABLE mentos ADD CONSTRAINT PK_MENTOS PRIMARY KEY (
@@ -323,7 +323,7 @@ ALTER TABLE notify ADD CONSTRAINT PK_NOTIFY PRIMARY KEY (
 	notify_id
 );
 
-ALTER TABLE matchup ADD CONSTRAINT PK_MATHCUP PRIMARY KEY (
+ALTER TABLE matchup ADD CONSTRAINT PK_MATCHUP PRIMARY KEY (
 	matchup_id
 );
 
