@@ -1,3 +1,6 @@
+CREATE USER memento IDENTIFIED BY memento;
+GRANT CONNECT, RESOURCE TO memento;
+
 CREATE TABLE waitingmento_matchup (
 	wait_mento_id	int		NOT NULL,
 	member_id	int		NOT NULL,
