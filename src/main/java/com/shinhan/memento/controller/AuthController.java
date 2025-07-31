@@ -13,10 +13,12 @@ import com.shinhan.memento.model.Member;
 import com.shinhan.memento.service.MemberService;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 
 @Controller
 //@PropertySource("classpath:application-secret.properties")
 @RequiredArgsConstructor
+@Slf4j
 public class AuthController {
 
 	@Autowired
@@ -30,9 +32,10 @@ public class AuthController {
 
     @GetMapping("/api/auth/kakao/callback")
     public String kakaoLogin(@RequestParam("code") String code, HttpSession session) throws Exception {
-    	System.out.println(clientId);
-    	System.out.println(redirectUri);
+  
+    	log.info("[AuthController.kakaoLogin]");
         Member member = memberService.kakaoLogin(code, clientId, redirectUri);
+    
         session.setAttribute("loginUser", member);
         return "redirect:/mainpage/main1";
     }

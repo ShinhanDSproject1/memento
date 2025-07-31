@@ -15,6 +15,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.http.client.SimpleClientHttpRequestFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
@@ -57,7 +58,11 @@ public class MemberService {
 	}
 	
 	public Member kakaoLogin(String code, String clientId, String redirectUri) throws Exception {
+		log.info("[MemberService.kakaoLogin]");
 		// 1. access token 요청
+		SimpleClientHttpRequestFactory factory = new SimpleClientHttpRequestFactory();
+		factory.setConnectTimeout(5000);
+		factory.setReadTimeout(5000);
 		RestTemplate rt = new RestTemplate();
 		HttpHeaders headers = new HttpHeaders();
 		headers.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
@@ -75,6 +80,7 @@ public class MemberService {
 		ObjectMapper objectMapper = new ObjectMapper();
 		JsonNode tokenJson = objectMapper.readTree(tokenResponse.getBody());
 		String accessToken = tokenJson.get("access_token").asText();
+		log.info("accessToken====>"+accessToken);
 
 		// 2. 사용자 정보 요청
 		HttpHeaders profileHeaders = new HttpHeaders();
