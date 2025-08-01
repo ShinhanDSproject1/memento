@@ -1,0 +1,41 @@
+# Save the output of this file and use kubectl create -f to import
+# it into Kubernetes.
+#
+# Created with podman-5.4.0
+apiVersion: v1
+kind: Pod
+metadata:
+  annotations:
+    io.kubernetes.cri-o.SandboxID/memento-db: e6e9e8608ecef0371aff4ebfec7815aaa8674a82e16788e297fd234783912b02
+    io.kubernetes.cri-o.SandboxID/memento-web: e6e9e8608ecef0371aff4ebfec7815aaa8674a82e16788e297fd234783912b02
+    io.podman.annotations.privileged/memento-db: "TRUE"
+    io.podman.annotations.privileged/memento-web: "TRUE"
+  creationTimestamp: "2025-08-01T06:44:01Z"
+  labels:
+    app: memento
+  name: memento
+spec:
+  containers:
+  - env:
+    - name: JAVA_OPTS
+      value: -Duser.timezone=Asia/Seoul
+    image: localhost/memento-web:0.4
+    name: memento-web
+    ports:
+    - containerPort: 9999
+      hostPort: 9999
+  - env:
+    - name: JAVA_OPTS
+      value: -Duser.timezone=Asia/Seoul
+    image: localhost/memento-db:0.1
+    name: memento-db
+    securityContext:
+      privileged: true
+      procMount: Unmasked
+    volumeMounts:
+    - mountPath: /u01/app/oracle
+      name: oracle-data-pvc
+  volumes:
+  - name: oracle-data-pvc
+    persistentVolumeClaim:
+      claimName: oracle-data
