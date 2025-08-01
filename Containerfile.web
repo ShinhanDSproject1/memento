@@ -1,0 +1,13 @@
+FROM docker.io/library/tomcat:9.0.102-jdk11
+
+MAINTAINER "CHOI GOOKHYUN<tang@dustbox.kr>"
+
+RUN rm -rf /usr/local/tomcat/webapps/
+
+ENV KAKAO_CLIENT_ID=dd889aeee45cfc71c810b8d5b41a800f
+ENV KAKAO_REDIRECT_URI=http://memento.dustbox.kr/memento/api/auth/kakao/callback
+
+EXPOSE 9999
+ADD server.xml /usr/local/tomcat/conf/server.xml
+ADD ojdbc8.jar /usr/local/tomcat/lib/
+ADD target/memento.war /usr/local/tomcat/webapps/memento.war
